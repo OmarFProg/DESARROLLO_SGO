@@ -1,0 +1,402 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+DOCUMENTO FORMAL DE DEFINICIÓN DEL ALCANCE DEL PROYECTO
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL DOCUMENTO
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase de Trabajo: FASE 2: ANÁLISIS, REFINAMIENTO Y NEGOCIACIÓN DE ALCANCE
+Documento Guía:  - instruccion.txt (REQUERIMENTACION/fase2/instruccion.txt)
+                 - ALCANCE DE UN PROYECTO.pdf (REQUERIMENTACION/fase2)
+                 - informeFase1.txt (Resultados de Elicitación)
+                 - Anteproyecto de Titulación ESPOCH (Alexander Villalva & Omar Figueroa)
+                 - plaDesarrolloRequisitos.txt (Plan de Ingeniería de Requisitos)
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Seguridad)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / Usabilidad)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Establecimiento: Óptica Vista Visión (Riobamba, Provincia de Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/REQUERIMENTACION/fase2/Alcance.txt
+                 (Espejo en DESARROLLO_SGO/fase2/Alcance.txt)
+Fecha:           Septiembre 2026 / Período Académico 2026
+Versión:         1.0 Definitiva
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. DECLARACIÓN FORMAL DEL ALCANCE (RESUMEN EJECUTIVO)
+   1.1 Enunciado Canónico del Alcance
+   1.2 Fronteras del Sistema: Lo que está DENTRO vs. FUERA del Alcance
+2. PASO 1: DEFINICIÓN DE LAS NECESIDADES DEL PROYECTO
+   2.1 ¿Por qué es necesario llevar a cabo este proyecto? (Justificación Situacional)
+   2.2 ¿Cuáles son los resultados observables que se entregarán? (Entregables Clave)
+   2.3 ¿Bajo el respeto de qué condiciones se desarrollará? (Marco Normativo y de Calidad)
+3. PASO 2: PROYECCIÓN DE LOS OBJETIVOS DEL PROYECTO
+   3.1 Objetivos del Anteproyecto de Titulación (General y Específicos)
+   3.2 Formulación y Desglose bajo la Lógica S.M.A.R.T.
+4. PASO 3: DESCRIPCIÓN DE LAS ACTIVIDADES QUE RESOLVERÁN EL PROBLEMA
+   4.1 Descomposición Funcional por Módulos del MVP
+   4.2 Mapeo de Actividades, Acciones y Requerimientos Asociados
+   4.3 Tareas Transversales de Seguridad y Calidad (S-Tags)
+5. PASO 4: ANÁLISIS DE LAS CAPACIDADES DE EJECUCIÓN
+   5.1 Experticia y Competencias del Equipo de Trabajo
+   5.2 Infraestructura, Herramientas y Stack Tecnológico Confirmado
+   5.3 Asignación de Responsabilidades y Roles
+6. PASO 5: COMPRENSIÓN DE LIMITACIONES Y GESTIÓN DE RIESGOS
+   6.1 Limitaciones Temporales y de Capacidad Operativa
+   6.2 Factores Externos y Dependencias Críticas (Exclusiones Justificadas)
+   6.3 Matriz de Riesgos y Estrategias de Mitigación
+7. CONCLUSIONES Y ARTICULACIÓN CON LA SIGUIENTE ETAPA DE FASE 2
+
+
+================================================================================
+1. DECLARACIÓN FORMAL DEL ALCANCE (RESUMEN EJECUTIVO)
+================================================================================
+
+1.1 ENUNCIADO CANÓNICO DEL ALCANCE
+El proyecto tiene como alcance el diseño, construcción, prueba y despliegue de un 
+Sistema Informático de Gestión Clínica y Comercial Optométrica (denominado SGO), 
+concebido como una aplicación web progresiva (PWA) de arquitectura modular y 
+desarrollada bajo la metodología ágil Scrum, orientada a automatizar de forma integral 
+los procesos asistenciales y administrativos del centro de salud visual Óptica Vista 
+Visión en la ciudad de Riobamba. El alcance abarca estrictamente cinco módulos 
+nucleares que constituyen el Producto Mínimo Viable (MVP): 1) Autenticación y Gestión 
+de Usuarios con control RBAC; 2) Gestión de Pacientes con prevención de duplicados y 
+soporte pediátrico; 3) Historia Clínica y Graduación con validación estricta de rangos 
+refractivos, diagnósticos CIE-10 y comparativa evolutiva inmutable; 4) Gestión de 
+Pedidos al Laboratorio Óptico Externo con control de estados y preservación de 
+confidencialidad; y 5) Gestión de Ventas y Cobros con soporte de pagos mixtos, 
+anticipos, saldos y arqueo diario de caja. El sistema garantiza la seguridad de los 
+datos de salud visual mediante la incorporación del marco Secure Scrum y la evaluación 
+rigurosa de las subcaracterísticas de Integridad, Responsabilidad (trazabilidad y 
+no repudio) y Autenticidad conforme a la norma internacional ISO/IEC 25010:2023.
+
+1.2 FRONTERAS DEL SISTEMA: LO QUE ESTÁ DENTRO VS. FUERA DEL ALCANCE
+Para blindar el proyecto contra desviaciones de alcance ("scope creep") y asegurar su 
+culminación en el plazo establecido de 16 semanas, se establecen los límites formales:
+
+A. DENTRO DEL ALCANCE (IN-SCOPE):
+- M1: Autenticación granular con tokens JWT, gestión de sesiones y 3 perfiles (Admin, 
+  Optometrista y Asistente/Vendedor).
+- M2: Registro demográfico de pacientes, algoritmo de detección de duplicados por 
+  cédula ecuatoriana, flexibilidad de admisión para menores de edad y repositorio de 
+  adjuntos clínicos digitales (PDF e imágenes).
+- M3: Formulario estandarizado de examen refractivo OD/OI (esfera, cilindro negativo, 
+  eje, adición siempre positiva, DP y alturas en mm, AV Snellen en pies, ángulos 
+  morfológicos para progresivos), diagnóstico CIE-10, emisión de recetas y certificados 
+  médicos laborales, almacenamiento inmutable (sin sobreescritura) y papelera lógica (Soft Delete).
+- M4: Digitalización de órdenes de confección a talleres ópticos externos con aislamiento 
+  de datos clínicos (LOPDP), flujo de estados (Pendiente, Taller, Recibido, Entregado) 
+  y registro de rectificaciones/garantías técnicas.
+- M5: Venta por lotes de precio para armazones, cobros transaccionales ACID con pagos 
+  mixtos y anticipos, emisión de comprobantes internos de venta/retiro y cierre diario de caja.
+- Transversal: Bitácora inmutable de auditoría (Audit Log) para todas las operaciones 
+  sensibles y evaluación de seguridad bajo ISO/IEC 25010:2023.
+
+B. FUERA DEL ALCANCE (OUT-OF-SCOPE) — CATALOGADO COMO TRABAJO FUTURO:
+- Facturación Electrónica en línea conectada al WebService del SRI (RF-FUT-01).
+- Envío automatizado de mensajes o recordatorios mediante la API oficial de WhatsApp (RF-FUT-02).
+- Migración automática masiva (ETL) de la base de datos corrupta del sistema legado (RF-FUT-03).
+- Módulo integral de agendamiento de citas médicas por calendario web interactivo (RF-FUT-04).
+- Pasarelas de pago electrónico con tarjeta de crédito en línea (Stripe / Datafast).
+- Conexión directa mediante controladores de hardware a autorrefractómetros o lensómetros físicos.
+
+
+================================================================================
+2. PASO 1: DEFINICIÓN DE LAS NECESIDADES DEL PROYECTO
+================================================================================
+
+Conforme a la metodología establecida en `ALCANCE DE UN PROYECTO.pdf`, la delimitación 
+del alcance parte del análisis profundo de tres interrogantes fundamentales:
+
+2.1 ¿POR QUÉ ES NECESARIO LLEVAR A CABO ESTE PROYECTO?
+El desarrollo del SGO surge de la necesidad imperativa de resolver los graves problemas 
+asistenciales, técnicos y de seguridad identificados en Óptica Vista Visión:
+1. Vulnerabilidad Crítica de Integridad Clínica: El sistema legado oftalmológico 
+   sobreescribía ciegamente la graduación previa del paciente al registrar un nuevo 
+   examen. Esto destruía el registro histórico de evolución miópica o astigmática, 
+   impidiendo al especialista determinar progresiones patológicas en niños y adultos.
+2. Inexistencia de Responsabilidad y Auditoría (No Repudio): La plataforma anterior no 
+   registraba qué usuario realizaba cambios, en qué momento ni bajo qué valores. 
+   Cualquier operador podía modificar diagnósticos o borrar transacciones de cobro sin 
+   dejar rastro, lo que representa una violación directa a la Ley Orgánica de Protección 
+   de Datos Personales (LOPDP Ecuador) respecto a la custodia de datos sensibles de salud.
+3. Desconexión Logística con Laboratorios Externos: La óptica no cuenta con taller 
+   propio; terceriza la manufactura con laboratorios en Quito y Guayaquil mediante notas 
+   de papel y hojas de cálculo enviadas por encomienda. Esto ocasionaba extravío de 
+   órdenes, demoras de más de 5 días hábiles y reclamos constantes de los pacientes.
+4. Fatiga Visual y Errores por Interfaz MDI Obsoleta: La aplicación anterior operaba 
+   bajo el modelo de ventanas superpuestas flotantes (MDI), provocando pérdida de foco, 
+   lentitud en consulta y errores de digitación en los valores de dioptrías.
+5. Bloqueo Operativo por Dependencia Externa: El sistema anterior vinculaba la venta 
+   directamente a la validación web del SRI; cuando el portal tributario o la conexión 
+   a internet fallaban, el consultorio quedaba paralizado sin poder cobrar ni atender.
+
+2.2 ¿CUÁLES SON LOS RESULTADOS OBSERVABLES QUE SE ESPERA ENTREGAR?
+El proyecto entregará al establecimiento y al tribunal de titulación los siguientes 
+productos verificables:
+1. Aplicación Web Progresiva (PWA): Software responsivo y rápido accesible desde equipos 
+   de escritorio y dispositivos móviles en la red local del consultorio.
+2. Base de Datos Relacional Optimizada en PostgreSQL: Esquema normalizado que garantiza 
+   integridad referencial, transacciones ACID y persistencia histórica inmutable.
+3. Motor de Validación de Refracción Optométrica: Componente clínico que valida 
+   matemáticamente rangos de esfera, cilindro negativo, eje angular y signo positivo en adición.
+4. Módulo Digital de Órdenes de Trabajo para Laboratorios: Sistema de emisión de fichas 
+   técnicas que preserva la privacidad del paciente omitiendo diagnósticos personales.
+5. Sistema de Trazabilidad y Auditoría Inmutable: Servicio de logging que captura usuario, 
+   IP, timestamp UTC, operación y diferencias de datos (valor anterior y nuevo).
+6. Documentación Técnica de Ingeniería de Software: SRS formal bajo IEEE Std 830-1998, 
+   diagramas de Casos de Uso en UML, Modelo Entidad-Relación y matriz de trazabilidad.
+
+2.3 ¿BAJO EL RESPETO DE QUÉ CONDICIONES SE DEBE DESARROLLAR?
+1. Condiciones Normativas y Legales:
+   - Ley Orgánica de Protección de Datos Personales (LOPDP): Tratamiento confidencial de 
+     datos de salud visual como categoría especial protegida.
+   - Acuerdo Ministerial No. 30-2020 del MSP: Estándares de gestión para centros de salud visual.
+2. Condiciones de Calidad del Software:
+   - ISO/IEC 25010:2023: Evaluación empírica de Seguridad en sus tres subcaracterísticas: 
+     Autenticidad (acceso seguro), Integridad (consistencia de datos) y Responsabilidad (auditoría).
+3. Condiciones Metodológicas:
+   - Scrum / Secure Scrum: Desarrollo iterativo e incremental en Sprints quincenales, 
+     gestionando los requerimientos mediante un Product Backlog con S-Tags de seguridad.
+4. Condiciones Operativas Locales:
+   - Autonomía funcional: Capacidad de operar 100% en la red de área local (LAN) del 
+     consultorio, garantizando que una eventual caída de internet no suspenda la atención.
+
+
+================================================================================
+3. PASO 2: PROYECCIÓN DE LOS OBJETIVOS DEL PROYECTO
+================================================================================
+
+Conforme a la guía `ALCANCE DE UN PROYECTO.pdf`, los objetivos deben estructurarse de 
+forma estratégica e inteligente siguiendo la lógica S.M.A.R.T.
+
+3.1 OBJETIVOS DEL ANTEPROYECTO DE TITULACIÓN (BASE INSTITUCIONAL ESPOCH)
+- Objetivo General:
+  Desarrollar un sistema informático de gestión clínica optométrica utilizando la 
+  metodología ágil Scrum, garantizando la seguridad de los datos de salud visual.
+- Objetivos Específicos:
+  1. Analizar los procesos clínicos y administrativos del sector optométrico mediante 
+     levantamiento de requerimientos funcionales y no funcionales de la óptica de estudio, 
+     para identificar las deficiencias de integridad, control de acceso y trazabilidad 
+     de datos que determinan el alcance del sistema.
+  2. Estudiar la metodología ágil Scrum mediante la revisión de literatura especializada, 
+     para conocer su estructura y aplicabilidad en el desarrollo de un sistema informático 
+     de gestión clínica optométrica seguro.
+  3. Construir un sistema de gestión clínica optométrica seguro utilizando la metodología ágil Scrum.
+  4. Evaluar el cumplimiento de los atributos de seguridad del sistema de gestión clínica 
+     optométrica, mediante la medición de las subcaracterísticas de integridad, 
+     responsabilidad y autenticidad establecidas en la norma ISO/IEC 25010:2023, con el 
+     fin de determinar el nivel de protección de los datos de salud visual gestionados.
+
+3.2 FORMULACIÓN Y DESGLOSE BAJO LA LÓGICA S.M.A.R.T.
+- S (Specific - Específico):
+  Construir e implementar el sistema SGO para Óptica Vista Visión, circunscrito a 5 módulos 
+  del MVP (Autenticación RBAC, Pacientes, Historia Clínica, Pedidos a Laboratorio y Ventas/Cobros) 
+  con validaciones clínicas estrictas e inmutabilidad de registros.
+- M (Measurable - Medible):
+  * Implementar el 100% de los 23 Requisitos Funcionales aprobados (RF-01 a RF-23).
+  * 0% de sobreescritura destructiva de refracciones clínicas.
+  * 100% de operaciones sensibles registradas con usuario, fecha, hora e IP en el log.
+  * Tiempo medio de respuesta en búsquedas y guardados inferior a 1.5 segundos.
+  * Cobertura de pruebas superior al 85% en las funciones de validación de dioptrías.
+- A (Attainable - Alcanzable):
+  El alcance es plenamente alcanzable por el equipo de 2 desarrolladores de la ESPOCH 
+  mediante un stack de alta productividad (Laravel + React + PostgreSQL), la colaboración 
+  directa del Product Owner y la deliberada exclusión de dependencias externas como el SRI.
+- R (Relevant - Relevante):
+  Resuelve una necesidad crítica de salud visual en Riobamba, elimina riesgos legales 
+  derivados de la LOPDP y establece un modelo de software clínico replicable en la provincia.
+- T (Time-based - Temporalmente Delimitado):
+  Ejecutado estrictamente en un plazo de 16 semanas, distribuyendo la fase de desarrollo 
+  en 4 Sprints quincenales (8 semanas de construcción activa) según el cronograma de titulación.
+
+
+================================================================================
+4. PASO 3: DESCRIPCIÓN DE LAS ACTIVIDADES QUE RESOLVERÁN EL PROBLEMA
+================================================================================
+
+Para cumplir a cabalidad con los 23 Requisitos Funcionales formalizados en la SRS, se 
+desglosan las actividades globales, acciones y tareas concretas:
+
+4.1 ACTIVIDADES DEL MÓDULO 1: AUTENTICACIÓN Y GESTIÓN DE USUARIOS (M1)
+- Actividad Global: Establecer el control de acceso y autenticidad del sistema.
+  * Tarea 1.1: Diseñar el modelo relacional de usuarios, roles (Administrador, Optometrista, 
+    Asistente) y privilegios en PostgreSQL.
+  * Tarea 1.2: Implementar el servicio de autenticación backend con hashing de contraseñas 
+    mediante bcrypt (costo >= 12).
+  * Tarea 1.3: Construir el mecanismo de emisión, firma y verificación de tokens JWT.
+  * Tarea 1.4: Diseñar interfaz de inicio de sesión con feedback ergonómico y manejo de 
+    bloqueo por intentos fallidos reiterados.
+  * Tarea 1.5: Configurar middlewares de expiración de sesión por inactividad y restricción 
+    de rutas según el rol asignado.
+
+4.2 ACTIVIDADES DEL MÓDULO 2: GESTIÓN DE PACIENTES (M2)
+- Actividad Global: Administrar el padrón demográfico e historial único de pacientes.
+  * Tarea 2.1: Construir interfaz de registro de datos demográficos y de filiación del paciente.
+  * Tarea 2.2: Implementar validador algorítmico de cédula de identidad de la República del Ecuador.
+  * Tarea 2.3: Diseñar el flujo flexible para pacientes menores de edad (admisión sin cédula 
+    propia o con referencia opcional de tutor).
+  * Tarea 2.4: Desarrollar componente de búsqueda predictiva / autocompletado en tiempo real 
+    para mitigar duplicidades de pacientes.
+  * Tarea 2.5: Implementar módulo seguro de almacenamiento y consulta de archivos clínicos 
+    digitales adjuntos (Pentacam, fondo de ojo, topografías en PDF/JPG/PNG).
+
+4.3 ACTIVIDADES DEL MÓDULO 3: HISTORIA CLÍNICA Y GRADUACIÓN (M3)
+- Actividad Global: Digitalizar el acto optométrico garantizando la integridad de los datos.
+  * Tarea 3.1: Desarrollar formulario clínico para registro de refracción OD y OI: Esfera, 
+    Cilindro, Eje, Adición, DIP/DNP y Alturas focales en mm.
+  * Tarea 3.2: Implementar reglas de validación en tiempo real:
+    - Autoconversión y exigencia de signo positivo (+) para el campo Adición.
+    - Notación cilíndrica negativa obligatoria (rango -0.25 a -10.00 D en pasos de 0.25).
+    - Rango angular de Eje entre 0° y 180° enteros.
+  * Tarea 3.3: Construir selector estandarizado de Agudeza Visual Snellen fraccionaria en pies (20/20, etc.).
+  * Tarea 3.4: Diseñar sección de parámetros avanzados para progresivos (horizontal, vertical, 
+    diagonal, puente, ángulo pantoscópico).
+  * Tarea 3.5: Desarrollar vista comparativa simultánea en pantalla entre la graduación anterior 
+    en uso y la nueva refracción.
+  * Tarea 3.6: Integrar catálogo parametrizable de diagnósticos visuales bajo codificación internacional CIE-10.
+  * Tarea 3.7: Implementar persistencia inmutable: cada consulta crea un nuevo registro sin sobreescritura.
+  * Tarea 3.8: Construir mecanismo de borrado lógico (Soft Delete) con respaldo para papelera clínica.
+  * Tarea 3.9: Generar plantillas de emisión e impresión para recetas médicas y certificados de aptitud laboral.
+
+4.4 ACTIVIDADES DEL MÓDULO 4: PEDIDOS AL LABORATORIO ÓPTICO (M4)
+- Actividad Global: Gestionar la tercerización de la confección de lunas con talleres externos.
+  * Tarea 4.1: Construir componente para generar órdenes de trabajo digitales para laboratorio.
+  * Tarea 4.2: Implementar filtro de confidencialidad (LOPDP): aislar parámetros técnicos 
+    de fabricación excluyendo diagnósticos personales.
+  * Tarea 4.3: Diseñar catálogo editable de materiales (resina, policarbonato, cristal) y 
+    tratamientos ópticos (antirreflejo, blue block, fotocromático, UV).
+  * Tarea 4.4: Desarrollar máquina de estados del pedido: Pendiente -> En Taller -> Recibido -> Entregado.
+  * Tarea 4.5: Diseñar módulo para control de rectificaciones y garantías por falta de adaptación clínica.
+
+4.5 ACTIVIDADES DEL MÓDULO 5: VENTAS Y COBROS (M5)
+- Actividad Global: Administrar las transacciones comerciales, cobros y arqueos de caja.
+  * Tarea 4.1: Implementar catálogo simplificado de armazones por lotes de precio uniforme.
+  * Tarea 5.2: Construir motor transaccional ACID para liquidación de ventas y cobros en base de datos.
+  * Tarea 5.3: Desarrollar soporte para modalidades de pago mixtas (efectivo + transferencia).
+  * Tarea 5.4: Gestionar cobros fraccionados: registro de anticipo en orden y saldo pendiente al retiro.
+  * Tarea 5.5: Diseñar generador de comprobantes internos de venta y notas de entrega (formatos térmico 80 mm y PDF).
+  * Tarea 5.6: Implementar módulo de justificación obligatoria para anulación de comprobantes comerciales.
+  * Tarea 5.7: Automatizar el cálculo y consolidación del arqueo y cierre diario de caja.
+
+4.6 TAREAS TRANSVERSALES DE SEGURIDAD Y CALIDAD (S-TAGS Y PRUEBAS)
+- Tarea 6.1: Crear tabla inmutable `audit_logs` con triggers o middleware en Laravel para 
+  capturar cambios críticos con timestamp UTC, usuario e IP ([S-TAG-RES-01]).
+- Tarea 6.2: Ejecutar pruebas unitarias automatizadas sobre validaciones de refracción y cédula ([S-TAG-INT-01]).
+- Tarea 6.3: Realizar pruebas de penetración y control de acceso RBAC ([S-TAG-AUTH-01]).
+- Tarea 6.4: Conducir sesiones quincenales de revisión de Sprint y demostración con el Product Owner.
+
+
+================================================================================
+5. PASO 4: ANÁLISIS DE LAS CAPACIDADES DE EJECUCIÓN
+================================================================================
+
+Conforme al análisis de capacidades exigido por la guía teórica:
+
+5.1 EXPERTICIA Y COMPETENCIAS DEL EQUIPO
+El proyecto cuenta con un equipo multidisciplinario balanceado:
+- Omar Figueroa Díaz (Investigador ESPOCH / Desarrollador Backend):
+  * Competencias: Diseño de bases de datos relacionales en PostgreSQL, desarrollo de 
+    APIs RESTful con Laravel, implementación de seguridad criptográfica y auditoría.
+- Alexander Rafael Villalva (Investigador ESPOCH / Desarrollador Frontend):
+  * Competencias: Desarrollo en React, diseño de interfaces ergonómicas y accesibles 
+    (UI/UX), aplicaciones web progresivas (PWA) y optimización de flujos de captura clínica.
+- Ing. Jorge Ariel Menéndez Verdecia (Director de Titulación / Scrum Master):
+  * Rol: Tutoría técnica, facilitación del marco Scrum, remoción de impedimentos y 
+    aseguramiento de la calidad académica.
+- Ing. Julio Roberto Santillán Castillo (Asesor Técnico):
+  * Rol: Validación de arquitectura de software, transaccionalidad y modelo metodológico.
+- Propietario / Optometrista (Óptica Vista Visión / Experto de Dominio):
+  * Rol: Validación de usabilidad clínica, verificación de notaciones y pruebas funcionales.
+
+5.2 INFRAESTRUCTURA, HERRAMIENTAS Y STACK TECNOLÓGICO CONFIRMADO
+- Lenguaje y Framework Backend: PHP 8.2+ con Laravel 10/11 (Arquitectura en capas, robusta y madura).
+- Lenguaje y Framework Frontend: JavaScript / TypeScript con React 18+ y TailwindCSS (Componentes reactivos y ligeros).
+- Motor de Base de Datos: PostgreSQL 15+ (Garantía de transacciones ACID, integridad referencial y tipos JSONB para auditoría).
+- Entorno de Ejecución Local: Servidor web en red local (LAN/WLAN) de Óptica Vista Visión.
+- Despliegue de Pruebas: Google Cloud Platform (GCP) / VPS para revisiones remotas del Product Owner y Directores.
+- Herramientas de Gestión: GitHub para control de versiones y tablero Scrum para seguimiento del Backlog.
+
+5.3 VIABILIDAD FINANCIERA Y LOGÍSTICA
+El proyecto es autofinanciado por los investigadores en el marco de titulación de la ESPOCH. 
+Al utilizar exclusivamente tecnologías de código abierto (Open Source) y no depender de 
+licencias comerciales de software propietario, la viabilidad económica está 100% garantizada.
+
+
+================================================================================
+6. PASO 5: COMPRENSIÓN DE LIMITACIONES Y GESTIÓN DE RIESGOS
+================================================================================
+
+De acuerdo con `ALCANCE DE UN PROYECTO.pdf`, el alcance solo es realista si se comprenden 
+y gestionan activamente las restricciones y los factores externos:
+
+6.1 LIMITACIONES TEMPORALES Y OPERATIVAS
+- Plazo Temporal Rígido: El proyecto debe completarse y defenderse dentro del período 
+  académico 2026 de la ESPOCH (cronograma de 16 semanas).
+- Capacidad de Ejecución Acotada: El equipo de desarrollo está conformado por 2 personas; 
+  no es viable asumir módulos secundarios o integraciones burocráticas complejas sin 
+  poner en riesgo la calidad de los módulos clínicos nucleares.
+
+6.2 FACTORES EXTERNOS Y EXCLUSIONES JUSTIFICADAS (GESTIÓN DE RIESGOS)
+Durante la elicitación y negociación de alcance se tomaron decisiones preventivas clave:
+1. Exclusión de Facturación Electrónica SRI (Riesgo Crítico de Bloqueo):
+   - Justificación: Las caídas del WebService del SRI, los cambios de ficha técnica tributaria 
+     y la necesidad de firma electrónica comercial habrían consumido semanas de desarrollo 
+     y bloqueado las pruebas de cobro. Se excluye del MVP y se transfiere a `RF-FUT-01`.
+2. Exclusión de Notificaciones por WhatsApp API (Riesgo Financiero y Operativo):
+   - Justificación: La API oficial de Meta requiere verificación empresarial en dólares y 
+     conlleva riesgo de bloqueo de línea. Se transfiere a `RF-FUT-02`.
+3. Exclusión de Migración Masiva Automatizada del Sistema Legado (Riesgo de Integridad):
+   - Justificación: La base de datos SQL Server del sistema anterior presenta registros 
+     corruptos y cédulas duplicadas. Importarlos automáticamente contaminaría la base limpia 
+     de PostgreSQL. Se adopta migración progresiva bajo demanda en consulta.
+4. Tercerización de Talleres Ópticos:
+   - Justificación: El software no controla el tiempo físico de biselado en Quito/Guayaquil 
+     (2 a 5 días). El sistema gestiona la información y los estados del pedido para mantener 
+     informado al paciente y evitar extravíos.
+
+6.3 MATRIZ DE GESTIÓN DE RIESGOS DEL ALCANCE
++-----------------------+----------+---------+-----------------------------------------+
+| RIESGO IDENTIFICADO   | PROBAB.  | IMPACTO | ESTRATEGIA DE MITIGACIÓN PREVENTIVA     |
++-----------------------+----------+---------+-----------------------------------------+
+| R1: Desviación de     | Media    | Alto    | Adherirse estrictamente a los 5 módulos |
+| alcance (Scope Creep) |          |         | del MVP aprobados en este documento.    |
++-----------------------+----------+---------+-----------------------------------------+
+| R2: Bloqueo por caídas| Baja     | Crítico | Arquitectura autónoma en red local      |
+| de conexión a internet|          |         | (LAN) que opera sin depender de la nube.|
++-----------------------+----------+---------+-----------------------------------------+
+| R3: Resistencia al    | Media    | Medio   | Diseño centrado en el usuario, interfaces|
+| cambio por usabilidad |          |         | ergonómicas y talleres de capacitación. |
++-----------------------+----------+---------+-----------------------------------------+
+| R4: Falla de          | Baja     | Crítico | Validaciones duales (frontend/backend) y|
+| validación dioptrica  |          |         | pruebas unitarias automatizadas.        |
++-----------------------+----------+---------+-----------------------------------------+
+
+
+================================================================================
+7. CONCLUSIONES Y ARTICULACIÓN CON LA SIGUIENTE ETAPA DE FASE 2
+================================================================================
+
+1. El presente documento `Alcance.txt` formaliza de manera rigurosa, transparente y 
+   consensuada las fronteras técnicas y funcionales del Sistema Informático de Gestión 
+   Clínica y Comercial Optométrica (SGO).
+2. Se ha cumplido a cabalidad con la instrucción de desarrollar los 5 pasos metodológicos 
+   de la guía `ALCANCE DE UN PROYECTO.pdf`, articulando las necesidades de Óptica Vista Visión, 
+   los objetivos del anteproyecto de titulación y las actividades que resuelven el problema.
+3. Este documento, en conjunto con `informeFase1.txt`, `Especificacion de Requisitos_01.txt` 
+   y `CasosUsoTeoria.txt`, constituye el insumo directo e inalterable para elaborar el 
+   informe final de la Fase 2 (Análisis, Refinamiento y Negociación de Alcance), el cual 
+   servirá como base contractual para la Fase 3 (Especificación y Modelado Formal de Casos de Uso).
+
+================================================================================
+FIN DEL DOCUMENTO DE DEFINICIÓN DEL ALCANCE
+================================================================================
