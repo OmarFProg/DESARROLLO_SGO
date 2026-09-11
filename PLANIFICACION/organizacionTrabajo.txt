@@ -1,0 +1,24 @@
+1. ESPECIFICACIÓN DE REQUISITOS
+             ↓
+2. CASOS DE USO
+             ↓
+   ┌─────────┼─────────────┐
+   ↓         ↓             ↓
+3. MER   4. ARQUITECTURA   5. NAVEGACIÓN
+   └─────────┼─────────────┘
+             ↓
+6. PRODUCT BACKLOG
+             ↓
+7. PRIORIZACIÓN Y PLANIFICACIÓN
+             ↓
+8. CRONOGRAMA
+             ↓
+9. DISTRIBUCIÓN DE ROLES
+             ↓
+10. ASIGNACIÓN DE TAREAS
+             ↓
+        DESARROLLO
+             ↓
+        PRUEBAS
+             ↓
+       IMPLEMENTACIÓN

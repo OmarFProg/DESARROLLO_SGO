@@ -1,0 +1,491 @@
+================================================================================
+TEORÍA Y GUÍA METODOLÓGICA DE CASOS DE USO (UML)
+APLICADA AL SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA OPTOMÉTRICA (SGO)
+================================================================================
+
+DOCUMENTO DE REFERENCIA TÉCNICA Y BASE TEÓRICA
+Fuente base teórica: Unidad II_Rq_2_CASOS_USO.pdf (Requisitos de Software - Cap. II)
+Proyecto de aplicación: Desarrollo de un sistema informático de gestión clínica optométrica 
+                        utilizando la metodología ágil Scrum, garantizando la seguridad 
+                        de los datos de salud visual (Trabajo de Titulación - ESPOCH)
+Autores del proyecto:   Figueroa Díaz Omar Santiago, Villalva Dumancela Alexander Rafael
+Tutor / Director:       Ing. Jorge Ariel Menéndez Verdecia
+Ubicación del archivo:  DESARROLLO_SGO/CASOS DE USO/CasosUsoTeoria.txt
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. DEFINICIÓN Y FUNDAMENTACIÓN DE LOS CASOS DE USO
+   1.1 ¿Qué es un Caso de Uso?
+   1.2 Principio de Caja Negra y Resultado Observable de Valor
+   1.3 Importancia y Filosofía Centrada en el Usuario
+2. NIVELES DE MODELADO: NEGOCIO VS. SISTEMA
+   2.1 Casos de Uso del Negocio (CUN) y Modelado del Flujo de Trabajo
+   2.2 Casos de Uso del Sistema (CUS): El Primer Peldaño de la Automatización
+   2.3 Mapeo CUN -> CUS en el Establecimiento Optométrico
+3. LOS ACTORES: TEORÍA Y CATÁLOGO PARA EL PROYECTO SGO
+   3.1 Concepto y Características del Actor en UML
+   3.2 Métodos de Identificación de Actores (Por Actores vs. Por Eventos)
+   3.3 Catálogo de Actores del Sistema SGO (Humanos, Externos y de Negocio)
+4. ELEMENTOS Y RELACIONES EN DIAGRAMAS DE CASOS DE USO
+   4.1 Notación Gráfica Formal
+   4.2 Comunicación (Asociación Actor - Caso de Uso)
+   4.3 Relación de Inclusión (<<include>>)
+   4.4 Relación de Extensión (<<extend>>)
+   4.5 Generalización y Herencia (Actores y Casos de Uso)
+   4.6 Matriz Comparativa Diferencial: Inclusión vs. Extensión
+5. ORGANIZACIÓN JERÁRQUICA: PAQUETES Y SUBSISTEMAS
+   5.1 Descomposición Modular según la Teoría UML
+   5.2 Estructura en 5 Subsistemas/Paquetes para el MVP del Proyecto SGO
+6. ESPECIFICACIÓN TEXTUAL Y PLANTILLA DE CASOS DE USO
+   6.1 Estructura Estándar de una Ficha de Especificación
+   6.2 Reglas de Redacción y Nivel de Abstracción
+   6.3 Plantilla Maestra Aplicada al Caso Crítico: CU-03 Registro de Refracción
+7. ARTICULACIÓN: CASOS DE USO, SCRUM, SEGURIDAD ISO/IEC 25010 Y PRUEBAS
+   7.1 Articulación Casos de Uso - Historias de Usuario (Product Backlog)
+   7.2 Integración con Secure Scrum y S-Tags (Integridad, Responsabilidad, Autenticidad)
+   7.3 Casos de Uso como Fuente Primaria de Casos de Prueba (Unitarias, Integración, Regresión)
+8. PRINCIPIOS Y REGLAS DE ORO PARA EL EQUIPO DE DESARROLLO
+
+
+================================================================================
+1. DEFINICIÓN Y FUNDAMENTACIÓN DE LOS CASOS DE USO
+================================================================================
+
+1.1 ¿QUÉ ES UN CASO DE USO?
+En la Ingeniería de Requisitos y conforme al estándar UML (Unified Modeling Language):
+- Un Caso de Uso es una técnica formal para la ELICITACIÓN y ESPECIFICACIÓN de 
+  REQUISITOS FUNCIONALES del software.
+- Representa la descripción completa de una secuencia de interacciones e intercambios 
+  de información entre el sistema y uno o más actores externos.
+- Cada caso de uso modela un diálogo estructurado orientado a cumplir un objetivo discreto 
+  y significativo para el usuario.
+
+1.2 PRINCIPIO DE CAJA NEGRA Y RESULTADO OBSERVABLE DE VALOR
+La teoría estipula dos principios arquitectónicos clave:
+1. El sistema como Caja Negra:
+   - El caso de uso describe QUÉ hace el sistema ante los estímulos del entorno, 
+     pero NUNCA especifica CÓMO lo implementa internamente (no detalla algoritmos, 
+     consultas SQL internas, estructuras de memoria ni código fuente).
+2. Resultado observable de valor:
+   - Toda ejecución de un caso de uso debe concluir entregando un resultado medible, 
+     tangible y útil para el actor que inició o participó en la interacción. Una acción 
+     que no produce un valor observable (por ejemplo, 'conectar a base de datos') NO es 
+     un caso de uso por sí misma.
+
+1.3 IMPORTANCIA Y FILOSOFÍA CENTRADA EN EL USUARIO
+- Diseño centrado en el usuario: Garantiza que el software se conciba desde la 
+  perspectiva real de las personas y roles operativos, asegurando que el producto 
+  resuelva las necesidades cotidianas del negocio.
+- Puente de comunicación interdisciplinario: Al redactarse en lenguaje natural y 
+  estructurado, permite que desarrolladores, clientes (optometristas, administradores) 
+  y evaluadores compartan un entendimiento común sin ambigüedades técnicas.
+- Base para la trazabilidad del ciclo de vida: Es el punto de partida que guía el 
+  diseño de la arquitectura, la división de módulos, la documentación y el diseño de 
+  pruebas funcionales.
+
+
+================================================================================
+2. NIVELES DE MODELADO: NEGOCIO VS. SISTEMA
+================================================================================
+
+La teoría de UML distingue claramente dos niveles de abstracción al modelar casos 
+de uso, distinción imprescindible para el proyecto SGO:
+
+2.1 CASOS DE USO DEL NEGOCIO (CUN)
+- Propósito: Modela el área de negocio del mundo real, los procesos organizacionales 
+  y los flujos de trabajo (workflows), independientemente de si los procesos están o 
+  no automatizados por un software.
+- Elementos del CUN:
+  * Actor de Negocio (Business Actor): Entidad externa a la organización que interactúa 
+    con ella (ej. el Paciente que acude a la óptica o el Laboratorio externo).
+  * Trabajador de Negocio (Business Worker): Rol interno de la empresa que ejecuta 
+    las tareas del negocio (ej. Optometrista, Asistente/Recepcionista).
+  * Actividades de Negocio, Decisiones y Swimlanes (carriles de participación que 
+    delimitan responsabilidades).
+  * Objetos de información: Fichas físicas, órdenes de papel, recibos de caja.
+
+2.2 CASOS DE USO DEL SISTEMA (CUS)
+- Propósito: Especifica el comportamiento de la aplicación informática que se va a 
+  construir (el software SGO).
+- Rol en el ciclo de vida: Es el PRIMER PELDAÑO en la conversión y traducción de las 
+  necesidades de los usuarios a un sistema automatizado.
+- Define los límites del software (System Boundary) y cómo los actores del sistema 
+  interactúan a través de interfaces visuales o servicios con las capacidades automáticas.
+
+2.3 MAPEO CUN -> CUS EN EL ESTABLECIMIENTO OPTOMÉTRICO (ÓPTICA VISTA VISIÓN)
+El flujo manual original de la óptica se transforma en casos de uso del sistema SGO:
+
++-------------------------------------+----------------------------------------+
+| PROCESO DEL NEGOCIO (CUN)           | CASOS DE USO DEL SISTEMA SGO (CUS)     |
++-------------------------------------+----------------------------------------+
+| CUN-01: Recepción y Apertura de     | -> CUS-02.1: Registrar Nuevo Paciente   |
+|         Ficha en Cuaderno Físico    | -> CUS-02.2: Buscar/Validar Paciente   |
++-------------------------------------+----------------------------------------+
+| CUN-02: Consulta Optométrica y      | -> CUS-03.1: Registrar Consulta Visual |
+|         Medición de Refracción      | -> CUS-03.2: Guardar Valores Refracción|
+|         (Anotación en papel)        | -> CUS-03.3: Emitir Receta Digital     |
++-------------------------------------+----------------------------------------+
+| CUN-03: Encargo de Lunas/Cristales  | -> CUS-04.1: Crear Orden de Laboratorio|
+|         a Taller Externo            | -> CUS-04.2: Monitorear Estado Trabajo |
++-------------------------------------+----------------------------------------+
+| CUN-04: Cobro y Entrega de Armazón/ | -> CUS-05.1: Registrar Venta y Cobro   |
+|         Lentes al Cliente           | -> CUS-05.2: Emitir Comprobante Interno|
++-------------------------------------+----------------------------------------+
+
+
+================================================================================
+3. LOS ACTORES: TEORÍA Y CATÁLOGO PARA EL PROYECTO SGO
+================================================================================
+
+3.1 CONCEPTO Y CARACTERÍSTICAS DEL ACTOR EN UML
+- Un Actor representa un ROL que un usuario, dispositivo o sistema externo asume al 
+  interactuar con el sistema.
+- Principios fundamentales sobre los actores:
+  1. Un usuario humano puede asumir más de un rol (ej. el Optometrista titular puede 
+     actuar en ocasiones como Administrador de la óptica).
+  2. Un solo actor puede participar en múltiples casos de uso.
+  3. Un caso de uso puede requerir o beneficiar a múltiples actores.
+  4. Los actores NO son necesariamente personas humanas; pueden ser subsistemas de 
+     software externos, servicios de mensajería o temporizadores del sistema.
+
+3.2 MÉTODOS DE IDENTIFICACIÓN DE ACTORES (TEORÍA DEL PDF)
+La teoría expone dos métodos sistemáticos de elicitación:
+1. Método basado en Actores:
+   - Identificar a todos los involucrados directa o indirectamente con el sistema.
+   - Determinar las responsabilidades de cada rol y listar los procesos que inician o en 
+     los que intervienen.
+2. Método basado en Eventos:
+   - Identificar los eventos externos a los que el sistema debe responder (ej. llegada 
+     de un paciente, término del biselado en el laboratorio, intento de acceso no 
+     autorizado).
+   - Vincular cada evento con el actor responsable de originarlo o recibir la respuesta.
+
+3.3 CATÁLOGO DE ACTORES PARA EL SISTEMA SGO
+Con base en el Anteproyecto y la arquitectura del SGO, se identifican los siguientes actores:
+
+A. ACTORES DEL SISTEMA (Interacción directa con la aplicación):
+1. ACT-01: Administrador / Propietario
+   - Rol: Responsable de la gestión global del centro óptico.
+   - Responsabilidades en el software: Gestión y alta de cuentas de usuario, asignación 
+     de roles y privilegios, consulta de auditoría y trazabilidad del sistema, generación 
+     de reportes consolidados y supervisión comercial.
+2. ACT-02: Optometrista (Especialista en Salud Visual)
+   - Rol: Profesional clínico encargado de la atención técnica del paciente.
+   - Responsabilidades en el software: Registro y consulta de antecedentes clínicos, 
+     anamnesis, examen refractivo (esfera, cilindro, eje, adición, agudeza visual), 
+     diagnóstico codificado CIE-10, emisión de recetas y órdenes técnicas al laboratorio.
+3. ACT-03: Recepcionista / Asistente Comercial
+   - Rol: Personal encargado de la atención al público en recepción y ventas.
+   - Responsabilidades en el software: Registro y actualización de datos de pacientes, 
+     búsqueda rápida por cédula/nombres, registro de ventas de productos (armazones, 
+     estuches, soluciones), cobro de consultas y emisión de comprobantes internos.
+
+B. ACTORES EXTERNOS (Sistemas o entidades externas conectadas):
+4. ACT-EXT-01: Laboratorio Óptico Externo
+   - Rol: Entidad externa tercerizada proveedora del biselado, tallado de lunas y 
+     tratamientos antirreflejantes.
+   - Interacción: Recibe digitalmente la orden de trabajo (datos técnicos de montaje) y 
+     actualiza o responde el estado del trabajo (En proceso, Fabricado, Enviado).
+
+C. ACTORES DEL NEGOCIO / BENEFICIARIOS PASIVOS:
+5. ACT-NEG-01: Paciente / Cliente
+   - Rol: Persona que recibe la atención visual y adquiere insumos ópticos.
+   - En el MVP del SGO no tiene credenciales de acceso directo a la plataforma, pero es 
+     el sujeto primordial de los datos clínicos y el destinatario de recetas y productos.
+
+
+================================================================================
+4. ELEMENTOS Y RELACIONES EN DIAGRAMAS DE CASOS DE USO
+================================================================================
+
+4.1 NOTACIÓN GRÁFICA FORMAL
+- Caso de Uso: Representado por una elipse horizontal con un nombre claro y conciso 
+  (verbo en infinitivo + sustantivo).
+- Actor: Representado por una figura humana estilizada ('stick figure').
+- Límite del Sistema (System Boundary): Rectángulo que encierra los casos de uso, 
+  dejando los actores fuera, demarcando el alcance del software.
+- Relaciones: Líneas continuas o segmentadas con flechas y estereotipos.
+
+4.2 COMUNICACIÓN (ASOCIACIÓN ACTOR - CASO DE USO)
+- Representación: Línea sólida continua entre el Actor y el Caso de Uso.
+- Significado: Denota la participación activa del actor en la ejecución del caso de uso.
+  Indica el canal por donde fluyen estímulos, entradas y resultados observables.
+
+4.3 RELACIÓN DE INCLUSIÓN (<<include>>)
+- Definición formal: Relación obligatoria y explícita entre dos casos de uso donde el 
+  caso de uso base INCLUYE el comportamiento del caso de uso incluido en un punto 
+  determinado de su flujo.
+- Propiedades teóricas esenciales:
+  * Obligatoriedad: El caso incluido SIEMPRE se ejecuta como parte del caso base.
+  * Reutilización de comportamiento: Se emplea cuando dos o más casos de uso comparten 
+    un subconjunto idéntico de pasos, eliminando la duplicación en la especificación.
+  * Incompletitud: El caso de uso incluido está INCOMPLETO por sí mismo; no posee 
+    sentido ni valor aislado sin el contexto del caso base.
+  * Actor compartido: Frecuentemente no posee un actor directo propio, sino que es 
+    ejecutado en beneficio del actor del caso de uso base.
+  * Abstracción del diseñador: Permite concentrarse en la lógica medular del caso base 
+    sin saturarse con detalles repetitivos.
+- Aplicación directa en el Proyecto SGO:
+  * CU-Base: 'Registrar Ficha de Refracción'  --<<include>>--> 'Validar Rangos Ópticos'
+  * CU-Base: 'Registrar Paciente'            --<<include>>--> 'Validar Cédula Ecuatoriana'
+  * Todos los CU críticos de modificación   --<<include>>--> 'Registrar Pista de Auditoría' 
+    (Vital para cumplir la subcaracterística de Responsabilidad de ISO/IEC 25010).
+
+4.4 RELACIÓN DE EXTENSIÓN (<<extend>>)
+- Definición formal: Relación condicional donde un caso de uso extiende el comportamiento 
+  de un caso de uso base en un determinado punto de extensión (Extension Point), 
+  SÓLO SI se cumple una condición previa específica.
+- Propiedades teóricas esenciales:
+  * Opcionalidad / Condicionalidad: El caso de uso base es AUTÓNOMO Y COMPLETO por sí 
+    mismo; puede culminar exitosamente sin que se ejecute la extensión.
+  * Variación sobre el comportamiento normal: Modela excepciones, flujos opcionales, 
+    bifurcaciones o servicios complementarios.
+  * Valor observable independiente: A diferencia del include, el caso extendido aporta 
+    un valor observable complementario cuando se dispara su ejecución.
+  * Desacoplamiento: Permite añadir nuevas capacidades o reglas de negocio sin modificar 
+    el caso de uso original.
+- Aplicación directa en el Proyecto SGO:
+  * CU-Base: 'Registrar Ficha de Refracción'  <--<<extend>>-- 'Alertar Progresión Refractiva Anormal'
+    (Se activa SOLO SI la variación dioptrica excede el umbral clínico).
+  * CU-Base: 'Crear Pedido de Laboratorio'   <--<<extend>>-- 'Registrar Biselado Especial/Prismas'
+    (Se activa SOLO SI la prescripción demanda tratamientos de alta complejidad).
+  * CU-Base: 'Registrar Venta y Cobro'       <--<<extend>>-- 'Aplicar Descuento Especial Autorizado'
+    (Se activa SOLO SI el administrador autoriza una rebaja comercial).
+  * CU-Base: 'Registrar Venta y Cobro'       <--<<extend>>-- 'Registrar Cobro de Anticipo / Saldo'
+    (Se activa SOLO SI el cliente no cancela el 100% al momento de la orden).
+
+4.5 GENERALIZACIÓN Y HERENCIA
+- Aplica a Actores y a Casos de Uso:
+  * Herencia de Actores: Se define un actor abstracto 'Usuario Autenticado' del cual 
+    heredan sus capacidades el 'Administrador', el 'Optometrista' y el 'Recepcionista'.
+  * Herencia de Casos de Uso: Un caso de uso especializado hereda el comportamiento y 
+    las relaciones del caso de uso genérico, agregando o refinando pasos particulares 
+    (ej. 'Registrar Examen Visual' -> heredado por 'Registrar Examen de Refracción Pediátrico').
+
+4.6 MATRIZ COMPARATIVA DIFERENCIAL: INCLUSIÓN VS. EXTENSIÓN
+
++-------------------------+-------------------------------+-------------------------------+
+| CRITERIO TEÓRICO        | INCLUSIÓN (<<include>>)       | EXTENSIÓN (<<extend>>)        |
++-------------------------+-------------------------------+-------------------------------+
+| Naturaleza de ejecución | OBLIGATORIA (Siempre ocurre)  | CONDICIONAL (Ocurre a veces)  |
++-------------------------+-------------------------------+-------------------------------+
+| Autonomía del caso base | Incompleto sin el include     | Completo por sí mismo         |
++-------------------------+-------------------------------+-------------------------------+
+| Dirección de la flecha  | Del Caso Base HACIA el        | Del Caso de Extensión HACIA   |
+| en el diagrama UML      | Caso Incluido: (Base -> Inc)  | el Caso Base: (Ext -> Base)   |
++-------------------------+-------------------------------+-------------------------------+
+| Objetivo principal      | Factorizar y reusar lógica    | Incorporar flujos opcionales, |
+|                         | común repetida                | excepciones o alternativas    |
++-------------------------+-------------------------------+-------------------------------+
+| Puntos de Extensión     | No requiere puntos explícitos | Requiere definir un           |
+|                         |                               | 'Extension Point' en el base  |
++-------------------------+-------------------------------+-------------------------------+
+| Ejemplo en SGO          | Registrar Ficha incluye       | Registrar Cobro extendido por |
+|                         | Registrar Auditoría           | Registrar Anticipo/Saldo      |
++-------------------------+-------------------------------+-------------------------------+
+
+
+================================================================================
+5. ORGANIZACIÓN JERÁRQUICA: PAQUETES Y SUBSISTEMAS
+================================================================================
+
+5.1 DESCOMPOSICIÓN MODULAR SEGÚN LA TEORÍA UML
+- La diapositiva 37 del documento teórico establece:
+  'Si el número de casos de uso es elevado, se puede organizarlos en forma de paquetes. 
+   Se forman niveles, facilitando así su comprensión. Cada paquete contiene a otros paquetes 
+   o a varios casos de uso. Si se agrupan por criterios funcionales, los paquetes pueden 
+   estereotiparse como subsistemas'.
+- Esta directriz teórica encaja de manera exacta con la delimitación de los 5 MÓDULOS DEL 
+  PRODUCTO MÍNIMO VIABLE (MVP) formulados en el Anteproyecto de Titulación.
+
+5.2 ESTRUCTURA EN 5 SUBSISTEMAS / PAQUETES PARA EL SISTEMA SGO:
+
+PAQUETE 1: <<subsystem>> Gestión de Autenticación y Seguridad
+  - CU-01: Iniciar Sesión con Rol (Admin, Optometrista, Recepcionista)
+  - CU-02: Gestionar Cuentas de Usuario y Privilegios
+  - CU-03: Cerrar Sesión y Revocar Tokens
+  - CU-04: Registrar y Consultar Logs de Auditoría del Sistema
+
+PAQUETE 2: <<subsystem>> Gestión de Pacientes
+  - CU-05: Registrar Datos Demográficos de Paciente
+  - CU-06: Buscar y Filtrar Paciente con Autocompletado
+  - CU-07: Actualizar Información de Paciente
+  - CU-08: Consultar Historial Consolidado del Paciente
+
+PAQUETE 3: <<subsystem>> Historia Clínica y Graduación Refractiva
+  - CU-09: Aperturar Consulta y Anamnesis Visual
+  - CU-10: Registrar Examen Refractivo (Esfera, Cilindro, Eje, Adición, AV)
+  - CU-11: Registrar Diagnóstico Codificado bajo Estándar CIE-10
+  - CU-12: Emitir Prescripción y Receta Óptica Digital
+  - CU-13: Consultar Evolución Cronológica de Refracciones del Paciente
+
+PAQUETE 4: <<subsystem>> Gestión de Pedidos al Laboratorio Óptico
+  - CU-14: Generar Orden de Trabajo para Taller Externo
+  - CU-15: Transmitir Ficha Técnica de Biselado y Tratamientos de Lunas
+  - CU-16: Registrar Cambio de Estado del Pedido (Pendiente, En Taller, Recibido)
+  - CU-17: Controlar Control de Calidad del Armazón y Lunas Recibidas
+
+PAQUETE 5: <<subsystem>> Gestión de Ventas y Cobros
+  - CU-18: Registrar Venta de Productos y Servicios Optométricos
+  - CU-19: Registrar Cobro (Efectivo, Transferencia, Pago Mixto)
+  - CU-20: Gestionar Anticipos y Saldos Pendientes de Entrega
+  - CU-21: Emitir Comprobante Interno de Venta / Nota de Entrega
+
+
+================================================================================
+6. ESPECIFICACIÓN TEXTUAL Y PLANTILLA DE CASOS DE USO
+================================================================================
+
+6.1 ESTRUCTURA ESTÁNDAR DE UNA FICHA DE ESPECIFICACIÓN
+Según el documento base, el diagrama UML por sí solo es insuficiente; debe acompañarse 
+de una plantilla estructurada con interacciones numeradas en lenguaje natural:
+1. Código e Identificador formal del Caso de Uso.
+2. Nombre conciso (Acción en infinitivo).
+3. Actor(es) Principal(es) y Secundario(s).
+4. Propósito / Descripción breve del valor generado.
+5. Precondiciones (Estado requerido del sistema antes de comenzar).
+6. Postcondiciones de Éxito (Garantías de almacenamiento, integridad y estado final).
+7. Flujo Básico / Secuencia Normal (Pasos alternados y numerados: Usuario / Sistema).
+8. Flujos Alternativos y Excepciones (Manejo de errores, validaciones fallidas, cancelaciones).
+9. Puntos de Extensión e Inclusiones asociadas.
+10. S-Tags y Requisitos No Funcionales Vinculados (ISO/IEC 25010: Seguridad).
+
+6.2 REGLAS DE REDACCIÓN Y NIVEL DE ABSTRACCIÓN
+- Enfoque en intenciones y compromisos: 'El usuario introduce la identificación del paciente' 
+  en lugar de 'El usuario hace clic con el ratón en la caja de texto txt_cedula'.
+- Independencia tecnológica: No describir detalles del motor de base de datos ni de librerías.
+- Numeración correlativa clara para permitir la trazabilidad hacia casos de prueba.
+
+6.3 PLANTILLA MAESTRA APLICADA AL CASO CRÍTICO DEL PROYECTO:
+--------------------------------------------------------------------------------
+CASO DE USO: CUS-10 Registrar Examen Refractivo y Prescripción Clínica
+--------------------------------------------------------------------------------
+IDENTIFICADOR:    CUS-10
+PAQUETE:          Historia Clínica y Graduación Refractiva
+ACTOR PRINCIPAL:  Optometrista (ACT-02)
+ACTORES SECUND.:  Sistema de Auditoría (ACT-EXT)
+PROPÓSITO:        Registrar con rigor clínico y validación de rangos los valores de la 
+                  refracción ocular del paciente, garantizando la integridad de la 
+                  graduación y su trazabilidad histórica.
+PRECONDICIÓN:     1. El Optometrista ha iniciado sesión válida en el sistema (CUS-01).
+                  2. Existe un paciente seleccionado con consulta activa (CUS-06).
+POSTCONDICIÓN:    1. Los valores dioptricos (esfera, cilindro, eje, adición) quedan guardados 
+                     en la base de datos asociados inalterablemente a la cédula del paciente 
+                     y al ID del optometrista responsable.
+                  2. Se genera un registro inmutable de auditoría con marca de tiempo UTC.
+
+FLUJO BÁSICO (Escenario Normal):
+1. El Optometrista accede a la pestaña de Refracción dentro de la consulta en curso.
+2. El Sistema presenta el formulario clínico estandarizado con campos para Ojo Derecho (OD) 
+   y Ojo Izquierdo (OS): Esfera, Cilindro, Eje, Adición, Distancia Pupilar (DP) y Agudeza Visual (AV).
+3. El Optometrista ingresa los parámetros optométricos obtenidos en la refracción.
+4. El Optometrista selecciona el diagnóstico visual conforme al catálogo CIE-10 (ej. H52.1 Miopía, 
+   H52.2 Astigmatismo).
+5. El Optometrista solicita guardar la refracción y generar la prescripción.
+6. El Sistema [<<include>> CUS-VALID-01: Validar Rangos Ópticos] verifica que:
+   a. La esfera se encuentre en pasos de 0.25 dentro de [-25.00 a +20.00] D.
+   b. El cilindro se encuentre en pasos de 0.25 dentro de [-10.00 a 0.00] D.
+   c. El eje angular esté comprendido entre 0° y 180° enteros.
+7. El Sistema persiste la historia clínica con firma digital/hash del usuario emisor.
+8. El Sistema [<<include>> CUS-AUDIT: Registrar Log de Auditoría] almacena la transacción.
+9. El Sistema muestra un mensaje de confirmación y habilita la impresión/emisión de la receta.
+10. El caso de uso finaliza exitosamente.
+
+FLUJOS ALTERNATIVOS Y PUNTOS DE EXTENSIÓN:
+- Flujo Alternativo 6a (Valores fuera de rango):
+  6a.1. El Sistema detecta un valor óptico incoherente o con salto no decimal válido.
+  6a.2. El Sistema resalta el campo en conflicto y notifica: 'Valor fuera de rango estándar optométrico'.
+  6a.3. El Optometrista corrige el dato y reintenta; el flujo regresa al paso 5.
+- Punto de Extensión 7a [<<extend>> CUS-ALERT: Alertar Progresión Refractiva Anormal]:
+  Condición de activación: Si la diferencia en dioptrías supera 1.50 D respecto a la última 
+  consulta registrada en el historial del paciente.
+  7a.1. El Sistema despliega una alerta preventiva destacando el incremento atípico.
+  7a.2. El Optometrista confirma expresamente la condición patológica y prosigue al paso 8.
+
+REQUISITOS DE CALIDAD ASOCIADOS (ISO/IEC 25010:2023 - Seguridad):
+- Integridad (S-TAG-INT-01): Control estricto de tipos de datos, no se permiten campos nulos en ejes.
+- Responsabilidad (S-TAG-RES-01): Pista de auditoría con ID del profesional para no repudio.
+- Autenticidad (S-TAG-AUT-01): Verificación de permisos de rol clínico antes de admitir cambios.
+--------------------------------------------------------------------------------
+
+
+================================================================================
+7. ARTICULACIÓN: CASOS DE USO, SCRUM, SEGURIDAD ISO/IEC 25010 Y PRUEBAS
+================================================================================
+
+7.1 ARTICULACIÓN CASOS DE USO - PRODUCT BACKLOG EN SCRUM
+En el contexto del proyecto de titulación que emplea Scrum:
+- Nivel de Macro-Estructura: Los Diagramas de Casos de Uso y sus Paquetes definen el 
+  alcance funcional global y la arquitectura de límites del software (System Boundary).
+- Nivel de Sprint Incremental: Cada Caso de Uso o escenario alternativo se descompone 
+  en Historias de Usuario (User Stories) para ser priorizadas en el Product Backlog.
+  * Relación: Un Caso de Uso amplio suele representar una 'Épica' (Epic); los flujos 
+    básicos y alternativos se convierten en Historias de Usuario individuales con sus 
+    respectivos Criterios de Aceptación.
+
+7.2 INTEGRACIÓN CON SECURE SCRUM Y S-TAGS (ISO/IEC 25010:2023)
+Conforme a la metodología propuesta en el Anteproyecto (Secure Scrum / Security Backlog):
+- Cada Caso de Uso incluye etiquetas de seguridad (S-Tags) en sus precondiciones, 
+  inclusiones y postcondiciones:
+  1. Subcaracterística de Autenticidad (S-Tag: AUTH):
+     * Garantizada en el caso de uso base de autenticación y requerida en las 
+       precondiciones de cada caso de uso clínico y comercial.
+  2. Subcaracterística de Integridad (S-Tag: INT):
+     * Modelada mediante casos de uso incluidos (<<include>>) para la validación de 
+       datos clínicos, rangos de refracción y llaves referenciales en la base de datos.
+  3. Subcaracterística de Responsabilidad (S-Tag: ACC / Auditability):
+     * Modelada mediante el caso de uso transversal de auditoría que se incluye 
+       (<<include>>) tras toda transacción clínica sensible, garantizando el no repudio.
+
+7.3 CASOS DE USO COMO FUENTE PRIMARIA DE CASOS DE PRUEBA
+La teoría (diapositivas 30 y 35) destaca que los casos de uso son la base natural para 
+establecer los planes de pruebas del software:
+- A nivel de Pasos del Flujo Básico:
+  * Generan directamente los Casos de Pruebas Funcionales y Pruebas de Aceptación del Usuario (UAT).
+- A nivel de Flujos Alternativos y Excepciones:
+  * Generan los Casos de Pruebas de Robustez, Límites y Pruebas Negativas (inyección, campos vacíos).
+- A nivel de Paquetes / Subsistemas:
+  * Constituyen los casos de Pruebas de Integración (validar el acoplamiento entre el paquete de 
+    Historia Clínica y el paquete de Pedidos al Laboratorio).
+- A nivel de Iteraciones Scrum (Sprints):
+  * Al modificar un paquete, los casos de uso previos proveen la batería de Pruebas de Regresión 
+    automatizadas para asegurar que los incrementos no rompan funcionalidades preexistentes.
+
+
+================================================================================
+8. PRINCIPIOS Y REGLAS DE ORO PARA EL EQUIPO DE DESARROLLO
+================================================================================
+
+Para garantizar que el modelado de Casos de Uso en el proyecto SGO cumpla con la máxima 
+calidad académica y técnica, los autores y desarrolladores deben aplicar estas directrices:
+
+1. REGLA DE ORO DE ELICITACIÓN (Diapositiva 33):
+   '¡No trate de obtener todos los detalles justo desde el principio; los obtendrá cuando 
+    los necesite! ¡Centrarse primero en los objetivos del usuario y después encontrar casos 
+    de uso que los cumplan!'
+
+2. REGLA DEL VERBO EN INFINITIVO:
+   Todo caso de uso debe nombrarse con un verbo activo en infinitivo seguido de un objeto 
+   directo específico del dominio optométrico (ej. 'Registrar Consulta', 'Generar Orden 
+   de Biselado', 'Emitir Receta', nunca 'Base de datos' o 'Pantalla de cobro').
+
+3. REGLA DEL VALOR OBSERVABLE:
+   Cada caso de uso debe entregar una unidad de valor concreta para el actor. Si la acción 
+   no tiene sentido para el usuario fuera del computador (ej. 'Encriptar contraseña'), 
+   debe tratarse como una inclusión técnica o un requisito no funcional, no como un caso de uso 
+   primario expuesto al actor.
+
+4. REGLA DE ORGANIZACIÓN MODULAR:
+   No sobrecargar un solo diagrama con más de 7-10 casos de uso. Utilizar siempre la 
+   división por Paquetes/Subsistemas alineados a los 5 módulos MVP del anteproyecto.
+
+5. REGLA DE TRAZABILIDAD BIDIRECCIONAL:
+   Todo Requisito Funcional del anteproyecto (RF) debe estar cubierto al menos por un Caso 
+   de Uso del Sistema (CUS), y todo Caso de Uso debe tener asociados sus respectivos 
+   Casos de Prueba y Criterios de Aceptación con sus correspondientes S-Tags de seguridad.
+
+================================================================================
+FIN DEL DOCUMENTO TÉCNICO
+================================================================================

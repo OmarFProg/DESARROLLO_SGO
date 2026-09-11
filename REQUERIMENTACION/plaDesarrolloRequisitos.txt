@@ -1,0 +1,446 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+PLAN POR FASES PARA EL DESARROLLO DE REQUISITOS
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+DOCUMENTO DE PLANIFICACIÓN Y GESTIÓN DE REQUISITOS
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Seguridad)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / Usabilidad)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Documentos base: - informeEntrevistasConsolidado.txt
+                 - Especificacion de Requisitos_01.txt (IEEE Std 830-1998)
+                 - Anteproyecto de Titulación ESPOCH (Alexander Villalva & Omar Figueroa)
+                 - Orden_Metodologico_Implementacion_Sistema.txt
+                 - CasosUsoTeoria.txt (UML - Técnicas de Elicitación)
+Ubicación:       DESARROLLO_SGO/REQUERIMENTACION/plaDesarrolloRequisitos.txt
+Versión:         1.0 Definitiva
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN Y OBJETIVOS DEL PLAN DE REQUISITOS
+   1.1 Propósito y Justificación
+   1.2 Alineación con el Objetivo Específico 1 del Anteproyecto
+   1.3 Alcance y Audiencia
+2. MARCO NORMATIVO Y LINEAMIENTOS TÉCNICOS DE REQUERIMENTACIÓN
+   2.1 Estándares Internacionales Aplicables (IEEE Std 830, ISO/IEC/IEEE 29148, ISO/IEC 25010)
+   2.2 Integración con Secure Scrum y S-Tags
+   2.3 Principios del Orden Metodológico de Implementación
+3. FASE 1: ELICITACIÓN Y LEVANTAMIENTO DE REQUISITOS
+   3.1 Identificación de Fuentes de Información y Stakeholders
+   3.2 Estrategia Multimétodo de Elicitación
+   3.3 Análisis Forense del Sistema Legado Oftalmológico
+   3.4 Protocolo de Registro y Consolidación de Entrevistas
+4. FASE 2: ANÁLISIS, REFINAMIENTO Y NEGOCIACIÓN DE ALCANCE
+   4.1 Delimitación del Alcance: Reducción de 17 Módulos a 5 Módulos MVP
+   4.2 Análisis de Dependencias Críticas y Gestión de Riesgos (Exclusión SRI)
+   4.3 Formalización de Reglas de Negocio y Restricciones Clínicas
+5. FASE 3: ESPECIFICACIÓN Y MODELADO FORMAL DE REQUISITOS
+   5.1 Estructuración de la Especificación de Requisitos de Software (SRS)
+   5.2 Catálogo Consolidado de Requisitos Funcionales (RF-01 a RF-23 por Módulo)
+   5.3 Especificación de Requisitos No Funcionales (Seguridad ISO/IEC 25010:2023)
+   5.4 Modelado Formal con Casos de Uso (UML): Transición CUN a CUS
+   5.5 Asignación Sistemática de S-Tags de Seguridad
+6. FASE 4: VERIFICACIÓN, VALIDACIÓN Y GESTIÓN DE CALIDAD DE REQUISITOS
+   6.1 Criterios de Calidad Formal para los Requisitos
+   6.2 Métodos de Inspección y Revisiones Técnicas Formales (FBR)
+   6.3 Matriz de Trazabilidad Bidireccional de Requisitos
+7. FASE 5: GESTIÓN DEL CAMBIO Y TRANSICIÓN AL PRODUCT BACKLOG DE SCRUM
+   7.1 Transformación de Requisitos en Historias de Usuario con Criterios de Aceptación
+   7.2 Construcción del Product Backlog Inicial y Security Backlog
+   7.3 Definición de Terminado con Seguridad (Security Definition of Done - DoD)
+   7.4 Articulación con las Etapas Posteriores (MER, Arquitectura, Sprints, Pruebas)
+8. CRONOGRAMA, MATRIZ RACI Y RESPONSABILIDADES POR FASE
+9. CONCLUSIONES Y DIRECTRICES OPERATIVAS PARA EL EQUIPO
+
+
+================================================================================
+1. INTRODUCCIÓN Y OBJETIVOS DEL PLAN DE REQUISITOS
+================================================================================
+
+1.1 PROPÓSITO Y JUSTIFICACIÓN
+El presente documento establece el plan estructurado por fases para la ingeniería 
+de requisitos del Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO).
+El éxito en el desarrollo de un software asistencial para el sector de la salud visual 
+radica en la precisión, rigor y completitud del proceso de levantamiento, análisis y 
+especificación de requerimientos, previniendo desviaciones funcionales, retrabajo 
+y vulnerabilidades en el manejo de datos de salud protegidos por la ley.
+
+1.2 ALINEACIÓN CON EL OBJETIVO ESPECÍFICO 1 DEL ANTEPROYECTO
+El Anteproyecto de Titulación aprobado por la ESPOCH estipula en su primer objetivo 
+específico:
+"Analizar los procesos clínicos y administrativos del sector optométrico mediante 
+ levantamiento de requerimientos funcionales y no funcionales de la óptica de estudio, 
+ para identificar las deficiencias de integridad, control de acceso y trazabilidad 
+ de datos que determinan el alcance del sistema."
+Este plan operacionaliza dicho objetivo mediante una metodología rigurosa y reproducible.
+
+1.3 ALCANCE Y AUDIENCIA
+El plan cubre todas las actividades de ingeniería de requisitos desde la primera 
+interacción con el cliente en la ciudad de Riobamba hasta la formalización de la 
+Especificación de Requisitos de Software (SRS) y la generación del Product Backlog 
+inicial. Está dirigido a:
+- El equipo de desarrollo (desarrolladores backend y frontend).
+- El Director de Titulación y asesor metodológico de la ESPOCH.
+- El Product Owner y personal clínico de Óptica Vista Visión.
+
+
+================================================================================
+2. MARCO NORMATIVO Y LINEAMIENTOS TÉCNICOS DE REQUERIMENTACIÓN
+================================================================================
+
+2.1 ESTÁNDARES INTERNACIONALES APLICABLES
+El proceso de desarrollo de requisitos se fundamenta técnicamente en tres pilares:
+1. IEEE Std 830-1998 (Recommended Practice for Software Requirements Specifications):
+   Proporciona la estructura canónica para la elaboración de la SRS, garantizando 
+   que los requisitos sean:
+   - Correctos: Reflejan fielmente lo solicitado por los usuarios.
+   - No ambiguos: Poseen una interpretación unívoca entre desarrolladores y usuarios.
+   - Completos: Incluyen todas las entradas, salidas, respuestas y restricciones.
+   - Consistentes: No presentan contradicciones internas entre requerimientos.
+   - Verificables: Existe un método finito y rentable para comprobar su cumplimiento.
+   - Modificables: Su estructura permite incorporar cambios sin perder coherencia.
+   - Trazables: Se conoce el origen y destino de cada requerimiento.
+2. ISO/IEC/IEEE 29148:2018 (Systems and software engineering — Life cycle processes — 
+   Requirements engineering):
+   Guía los procesos de elicitación, análisis, especificación y validación continua.
+3. ISO/IEC 25010:2023 (Systems and software Quality Requirements and Evaluation - SQuaRE):
+   Estructura la evaluación de los Requisitos No Funcionales, focalizándose en la 
+   característica de Seguridad y sus subcaracterísticas:
+   - Autenticidad: Comprobación inequívoca de la identidad de usuarios y procesos.
+   - Integridad: Protección contra la alteración no autorizada de datos refractivos.
+   - Responsabilidad: Registro inmutable de acciones para asegurar el no repudio.
+
+2.2 INTEGRACIÓN CON SECURE SCRUM Y S-TAGS
+Siguiendo la propuesta teórica de Pohl y Hof (2015), los requisitos de seguridad no 
+se formulan como anexos aislados, sino que se integran transversalmente en el proceso 
+ágil mediante etiquetas de seguridad (S-Tags):
+- [S-TAG-AUTH]: Requisitos de autenticación, gestión de tokens JWT y control RBAC.
+- [S-TAG-INT]: Requisitos de integridad referencial, validación de dioptrías y no sobreescritura.
+- [S-TAG-RES]: Requisitos de auditoría transaccional, logs inmutables y trazabilidad.
+
+2.3 PRINCIPIOS DEL ORDEN METODOLÓGICO DE IMPLEMENTACIÓN
+Conforme al documento de Orden Metodológico de la planificación, el desarrollo de 
+requisitos no es un evento aislado ni desordenado; actúa como el INSUMO FUNDACIONAL 
+del ciclo de vida:
+  REQUISITOS (SRS) -> CASOS DE USO (UML) -> MER (Base de Datos) -> ARQUITECTURA
+  -> ESQUEMA DE NAVEGACIÓN -> PRODUCT BACKLOG -> SPRINTS Y PRUEBAS.
+
+
+================================================================================
+3. FASE 1: ELICITACIÓN Y LEVANTAMIENTO DE REQUISITOS
+================================================================================
+
+La Fase 1 tiene por objetivo extraer, descubrir y recopilar las necesidades, problemas, 
+expectativas y restricciones del entorno clínico y comercial de Óptica Vista Visión.
+
+3.1 IDENTIFICACIÓN DE FUENTES DE INFORMACIÓN Y STAKEHOLDERS
+Para evitar sesgos y vacíos de información, se definen cuatro fuentes primarias:
+- Stakeholder Primario: Propietario de la óptica y Optometrista Principal (experto de dominio).
+- Stakeholder Secundario: Asistente comercial / Optometrista auxiliar (atención y ventas).
+- Artifacts & Software: Sistema legado oftalmológico MDI en uso y base de datos SQL Server.
+- Fuentes Documentales: Hojas físicas de anamnesis, recetas manuscritas, órdenes de 
+  laboratorio en papel, facturas manuales y normativa sanitaria nacional (MSP y LOPDP).
+
+3.2 ESTRATEGIA MULTIMÉTODO DE ELICITACIÓN
+Se definen cuatro técnicas concurrentes de levantamiento:
+1. Entrevistas Semi-estructuradas:
+   - Dinámica abierta para identificar el flujo de pacientes, la cadena de valor, 
+     los tiempos de consulta y los puntos de dolor operativos cotidianos.
+2. Entrevistas Estructuradas con Guion Técnico:
+   - Cuestionarios específicos para parametrizar formatos clínicos: rangos de esfera, 
+     cilindro, eje, signos permitidos, catálogos de armazones y tratamientos de lunas.
+3. Observación Directa y Análisis de Campo:
+   - Registro presencial de los pasos que sigue el paciente desde que ingresa a la 
+     óptica hasta que se le entrega el trabajo y se cobra.
+4. Talleres de Codiseño Técnico:
+   - Sesiones conjuntas entre el equipo de desarrollo (Omar Figueroa y Alexander Villalva), 
+     el Director de Proyecto (Jorge Menéndez) y el Asesor Técnico (Julio Santillán).
+
+3.3 ANÁLISIS FORENSE DEL SISTEMA LEGADO OFTALMOLÓGICO
+Actividad crítica ejecutada para identificar debilidades estructurales que el nuevo 
+sistema SGO debe resolver de raíz:
+- Evaluación de Usabilidad: La interfaz MDI (Multiple Document Interface) satura la pantalla 
+  con ventanas flotantes superpuestas que provocan pérdida de foco y cierres inesperados.
+- Evaluación de Integridad: El sistema legado sobreescribía la refracción anterior del 
+  paciente al registrar una nueva consulta, borrando la memoria evolutiva clínica.
+- Evaluación de Auditoría: Carencia absoluta de logs de eventos; imposibilidad de conocer 
+  quién modificó una graduación o quién eliminó un recibo.
+- Evaluación de Dependencias: Dependencia bloqueante de servicios web externos para cobros.
+
+3.4 PROTOCOLO DE REGISTRO Y CONSOLIDACIÓN
+Toda información elicitada se documenta de forma estandarizada en actas técnicas y 
+fichas de trabajo, culminando en la redacción del informeEntrevistasConsolidado.txt.
+
+
+================================================================================
+4. FASE 2: ANÁLISIS, REFINAMIENTO Y NEGOCIACIÓN DE ALCANCE
+================================================================================
+
+La Fase 2 procesa los hallazgos brutos de la elicitación, resolviendo conflictos de interés, 
+filtrando redundancias y delimitando estrictamente el alcance técnico viable.
+
+4.1 DELIMITACIÓN DEL ALCANCE: DE 17 PROCESOS AL MVP DE 5 MÓDULOS
+El levantamiento en el sector reveló 17 procesos funcionales teóricos. Para garantizar 
+un desarrollo riguroso en un marco temporal de 16 semanas, alta cohesión y máxima seguridad, 
+se negoció y pactó la reducción formal al Producto Mínimo Viable (MVP) compuesto por 
+CINCO MÓDULOS NUCLEARES:
+
++-----------------------------+--------------------------------------------------------+
+| MÓDULO MVP                  | ALCANCE FUNCIONAL CONSOLIDADO                          |
++-----------------------------+--------------------------------------------------------+
+| M1: Autenticación y         | Control de acceso granular RBAC (Admin, Optometrista,  |
+|     Gestión de Usuarios     | Asistente). Cierre por inactividad. Tokens JWT.        |
++-----------------------------+--------------------------------------------------------+
+| M2: Gestión de Pacientes    | Registro demográfico, detección inteligente de         |
+|                             | duplicados por cédula y búsqueda autocompletada.       |
++-----------------------------+--------------------------------------------------------+
+| M3: Historia Clínica y      | Anamnesis, refracción completa OD/OI, codificación     |
+|     Graduación              | CIE-10, emisión de recetas y certificados laborales.   |
++-----------------------------+--------------------------------------------------------+
+| M4: Pedidos al Laboratorio  | Digitalización de órdenes a talleres ópticos externos, |
+|     Óptico                  | seguimiento de estados (Pendiente/Taller/Recibido).    |
++-----------------------------+--------------------------------------------------------+
+| M5: Ventas y Cobros         | Facturación interna, gestión de anticipos y saldos     |
+|                             | pendientes, transacciones ACID para cobro seguro.      |
++-----------------------------+--------------------------------------------------------+
+
+4.2 ANÁLISIS DE DEPENDENCIAS CRÍTICAS Y GESTIÓN DE RIESGOS
+Se evaluaron y descartaron conscientemente requerimientos que ponían en riesgo el proyecto:
+- Exclusión de Facturación Electrónica SRI: Se posterga como trabajo futuro (RF-FUT-01). 
+  La dependencia directa del WebService del SRI introduce riesgos burocráticos y caídas 
+  del servicio tributario que bloquearían la operación del consultorio y los sprints ágiles.
+- Exclusión de Notificaciones Automáticas por WhatsApp API: Se posterga como RF-FUT-02 
+  debido a costos recurrentes por mensaje y riesgos de suspensión de líneas telefónicas.
+- Exclusión de Migración Masiva Automatizada del Sistema Legado: Debido a la corrupción y 
+  duplicidad de datos del sistema anterior, se adopta carga manual progresiva bajo demanda.
+
+4.3 FORMALIZACIÓN DE REGLAS DE NEGOCIO Y RESTRICCIONES CLÍNICAS
+Se extrajeron reglas imperativas que gobiernan la lógica de los requerimientos:
+- Regla RN-CLI-01 (Formato de Adición): La adición es siempre de valor positivo (+). Si el 
+  usuario ingresa un valor sin signo, el sistema lo interpreta y almacena automáticamente 
+  con signo (+).
+- Regla RN-CLI-02 (Rangos de Refracción): La esfera debe oscilar entre -25.00 y +20.00 D; 
+  el cilindro entre -10.00 y 0.00 D (notación cilíndrica negativa obligatoria); el eje entre 
+  0° y 180° enteros; pasos dióptricos de 0.25 D.
+- Regla RN-CLI-03 (Registro de Menores de Edad): No bloquear la apertura de ficha de menores 
+  por falta de cédula propia; admitir registro con identificación del tutor o código temporal.
+- Regla RN-SEG-01 (Inmutabilidad Clínica): Toda modificación o eliminación de antecedentes 
+  se realiza mediante borrado lógico (Soft Delete) y genera un log con valor previo y nuevo.
+
+
+================================================================================
+5. FASE 3: ESPECIFICACIÓN Y MODELADO FORMAL DE REQUISITOS
+================================================================================
+
+La Fase 3 traduce las necesidades negociadas en artefactos formales de ingeniería de 
+software, combinando especificación textual estandarizada y modelado gráfico UML.
+
+5.1 ESTRUCTURACIÓN DE LA SRS (IEEE STD 830-1998)
+La Especificación de Requisitos de Software se organiza conforme al índice canónico:
+1. INTRODUCCIÓN (Propósito, Alcance, Personal Involucrado, Definiciones, Referencias).
+2. DESCRIPCIÓN GENERAL (Perspectiva, Funcionalidad del MVP, Restricciones y Suposiciones).
+3. REQUISITOS ESPECÍFICOS:
+   - 3.1 Requisitos de Interfaces (UI, Hardware, Software, Comunicación).
+   - 3.2 Requisitos Funcionales Nucleares (RF-01 a RF-23).
+   - 3.3 Requisitos No Funcionales (ISO/IEC 25010:2023).
+   - 3.4 Requisitos Legales y Operativos (LOPDP Ecuador).
+4. APÉNDICES (Matriz de Trazabilidad, Catálogo de Requisitos Futuros, Glosario Optométrico).
+
+5.2 CATÁLOGO CONSOLIDADO DE REQUISITOS FUNCIONALES (RF-01 A RF-23)
+- Módulo 1 (Autenticación y Usuarios):
+  * RF-01: Control de Acceso Basado en Roles (RBAC: Admin, Optometrista, Asistente).
+  * RF-02: Gestión Segura de Sesiones y Tokens JWT con expiración automática.
+- Módulo 2 (Gestión de Pacientes):
+  * RF-03: Registro Demográfico y Filiación del Paciente.
+  * RF-04: Manejo Flexible de Fichas para Pacientes Menores de Edad.
+  * RF-05: Búsqueda Predictiva y Prevención de Cédulas Duplicadas.
+  * RF-06: Carga y Almacenamiento Seguro de Adjuntos Clínicos Digitales.
+- Módulo 3 (Historia Clínica y Graduación):
+  * RF-07: Registro de Examen Refractivo Estándar (OD y OS: Esf, Cil, Eje, Adición, DP, AV).
+  * RF-08: Aplicación Automática de Signo Positivo en Adición.
+  * RF-09: Registro Estandarizado de Agudeza Visual Fraccionaria (Escala Snellen en pies).
+  * RF-10: Captura de Parámetros Físico-Ópticos (Distancia y Altura Nasopupilar).
+  * RF-11: Parámetros Avanzados para Lentes Progresivos (Montura y Ángulo Pantoscópico).
+  * RF-12: Comparativa Evolutiva Directa con Refracción Anterior.
+  * RF-13: Registro de Anamnesis, Patologías Sistémicas y Diagnóstico CIE-10.
+  * RF-14: Emisión e Impresión de Certificados de Aptitud Visual Laboral y Recetas.
+  * RF-15: Histórico Clínico Inmutable mediante Papelera Lógica (Soft Delete).
+- Módulo 4 (Pedidos al Laboratorio Óptico):
+  * RF-16: Emisión de Órdenes de Trabajo Técnicas para Laboratorio Externo.
+  * RF-17: Catálogo Parametrizable de Materiales de Lunas y Tratamientos Ópticos.
+  * RF-18: Trazabilidad y Transición de Estados del Pedido (Pendiente/En Taller/Recibido).
+  * RF-19: Gestión de Garantías y Rectificaciones por Falla de Adaptación.
+- Módulo 5 (Ventas y Cobros):
+  * RF-20: Catálogo Simplificado de Venta por Lotes de Precio para Armazones.
+  * RF-21: Registro de Cobro Transaccional con Soporte de Pagos Mixtos y Anticipos.
+  * RF-22: Emisión de Comprobantes Internos de Venta y Notas de Retiro.
+  * RF-23: Cierre Diario de Caja y Arqueo Consolidado de Transacciones.
+
+5.3 ESPECIFICACIÓN DE REQUISITOS NO FUNCIONALES (ISO/IEC 25010:2023)
+- RNF-SEG-01 (Autenticidad): Cifrado de contraseñas mediante bcrypt (factor de trabajo >= 12) 
+  y validación de claims en tokens JWT para cada solicitud HTTP.
+- RNF-SEG-02 (Integridad): Validación de restricciones en frontend y backend (validación dual), 
+  restricciones CHECK a nivel de motor de base de datos relacional y transacciones ACID.
+- RNF-SEG-03 (Responsabilidad / No Repudio): Pistas de auditoría inmutables (Audit Log) 
+  que registran timestamp UTC, usuario, dirección IP, tipo de operación, valor anterior y nuevo.
+- RNF-REN-01 (Rendimiento): Tiempo de respuesta en búsquedas y guardados < 1.5 segundos.
+- RNF-DIS-01 (Disponibilidad): Operabilidad 99% en red local del consultorio sin depender de nube.
+
+5.4 MODELADO FORMAL CON CASOS DE USO (UML)
+De acuerdo con la teoría de CasosUsoTeoria.txt y Orden_Metodologico_Implementacion_Sistema.txt:
+1. Mapeo CUN -> CUS: Transformar cada proceso del negocio en casos de uso del software.
+2. Agrupación Jerárquica por Paquetes / Subsistemas:
+   - Paquete 1: <<subsystem>> Autenticación y Seguridad
+   - Paquete 2: <<subsystem>> Gestión de Pacientes
+   - Paquete 3: <<subsystem>> Historia Clínica y Refracción
+   - Paquete 4: <<subsystem>> Pedidos al Laboratorio
+   - Paquete 5: <<subsystem>> Ventas y Cobros
+3. Aplicación Rigurosa de Relaciones UML:
+   - Inclusión (<<include>>): Para validaciones comunes (Validar Cédula, Validar Rangos Dióptricos) 
+     y registro transversal de auditoría (Registrar Log).
+   - Extensión (<<extend>>): Para comportamientos condicionales de excepción (Alertar Progresión 
+     Atípica, Registrar Biselado Especial, Cobrar Anticipo).
+4. Fichas de Especificación Textual: Interacciones numeradas actor <-> sistema en lenguaje natural.
+
+5.5 ASIGNACIÓN SISTEMÁTICA DE S-TAGS
+Cada requerimiento formalizado en la SRS se etiqueta con su correspondiente identificador de seguridad:
+- [S-TAG-AUTH-01] a [S-TAG-AUTH-04] para requerimientos de autenticidad.
+- [S-TAG-INT-01] a [S-TAG-INT-06] para requerimientos de integridad clínica y transaccional.
+- [S-TAG-RES-01] a [S-TAG-RES-04] para requerimientos de auditoría y trazabilidad inmutable.
+
+
+================================================================================
+6. FASE 4: VERIFICACIÓN, VALIDACIÓN Y GESTIÓN DE CALIDAD DE REQUISITOS
+================================================================================
+
+La Fase 4 asegura que los requisitos especificados representen fielmente las necesidades 
+del usuario (validación) y cumplan con los atributos de calidad técnica formal (verificación).
+
+6.1 CRITERIOS DE CALIDAD FORMAL PARA LOS REQUISITOS
+Cada requisito se evalúa individual y grupalmente mediante la lista de verificación:
+- ¿Es atómico y contiene una sola exigencia comprobable?
+- ¿Evita términos vagos ("rápido", "intuitivo", "seguro") sustituyéndolos por métricas medibles?
+- ¿Presenta trazabilidad directa a una necesidad expresada en las entrevistas?
+- ¿Está asignado a un módulo específico del MVP sin invadir módulos futuros?
+
+6.2 MÉTODOS DE INSPECCIÓN Y REVISIONES TÉCNICAS FORMALES (FBR)
+Se establecen dos ciclos formales de revisión:
+1. Revisión Técnica de Pares (Peer Review):
+   - Omar Figueroa (Backend) y Alexander Villalva (Frontend) inspeccionan cruzadamente 
+     las especificaciones para verificar la coherencia entre contratos de API y pantallas UI.
+2. Revisión con el Director de Titulación y Asesor Técnico:
+   - Evaluación formal junto al Ing. Jorge Menéndez e Ing. Julio Santillán para 
+     validar el cumplimiento de los estándares ESPOCH y la factibilidad del marco Scrum.
+3. Validación con el Product Owner / Cliente:
+   - Sesión de "Walkthrough" con el Propietario de Óptica Vista Visión, leyendo las 
+     fichas de casos de uso para obtener la aprobación formal y firma del documento SRS.
+
+6.3 MATRIZ DE TRAZABILIDAD BIDIRECCIONAL DE REQUISITOS
+Se construye y mantiene la matriz que enlaza los artefactos del ciclo de vida:
+  [Fuente / Entrevista] <---> [Requisito SRS (RF/RNF)] <---> [S-Tag] <--->
+  [Caso de Uso (CUS)] <---> [Historia de Usuario (PB)] <---> [Caso de Prueba]
+Esta matriz previene requisitos "huérfanos" y garantiza que ninguna función implementada 
+carezca de justificación clínica o de negocio.
+
+
+================================================================================
+7. FASE 5: GESTIÓN DEL CAMBIO Y TRANSICIÓN AL PRODUCT BACKLOG DE SCRUM
+================================================================================
+
+La Fase 5 cierra el puente metodológico entre la Especificación de Requisitos y el 
+marco de desarrollo ágil Scrum, garantizando que los requerimientos se conviertan en 
+artefactos operativos de desarrollo.
+
+7.1 TRANSFORMACIÓN DE REQUISITOS EN HISTORIAS DE USUARIO
+Cada Caso de Uso o Requisito Funcional se descompone en Historias de Usuario bajo el formato:
+  COMO [Rol / Actor del sistema]
+  QUIERO [Acción funcional u operativa]
+  PARA [Beneficio clínico, administrativo o de seguridad]
+Acompañadas siempre de sus Criterios de Aceptación estructurados bajo la notación:
+  DADO QUE... CUANDO... ENTONCES...
+
+7.2 CONSTRUCCIÓN DEL PRODUCT BACKLOG Y SECURITY BACKLOG
+- Product Backlog: Pila unificada de trabajo priorizada según valor clínico y comercial.
+- Security Backlog: Siguiendo a Pohl y Hof (2015), los requisitos marcados con S-Tags 
+  se integran directamente en las Historias de Usuario, convirtiendo las restricciones 
+  de integridad, responsabilidad y autenticidad en ítems verificables por el equipo.
+
+7.3 DEFINICIÓN DE TERMINADO CON SEGURIDAD (SECURITY DEFINITION OF DONE - DoD)
+Ninguna Historia de Usuario se considera "Terminada" (Done) al finalizar un Sprint si no 
+cumple las siguientes condiciones técnicas:
+1. El código frontend y backend ha sido probado funcionalmente.
+2. Cumple con los criterios de aceptación específicos de la historia.
+3. Se verificaron las restricciones de integridad y validación de tipos de datos.
+4. Las operaciones críticas ejecutan el registro inmutable de auditoría (Audit Log).
+5. Las rutas y controladores cuentan con middleware de autenticación y autorización por rol.
+6. El código está integrado en la rama principal del repositorio de control de versiones.
+
+7.4 ARTICULACIÓN CON LAS ETAPAS POSTERIORES DEL ORDEN METODOLÓGICO
+Conforme a Orden_Metodologico_Implementacion_Sistema.txt, la finalización de este 
+plan de requisitos habilita de forma inmediata y secuencial:
+- El diseño del MER (Modelo Entidad-Relación) para soportar las entidades identificadas.
+- La arquitectura tecnológica en capas (React PWA + Laravel API REST + PostgreSQL).
+- El diseño del esquema de navegación y prototipado UI.
+- La planificación de Sprints y la asignación formal de tareas de desarrollo.
+
+
+================================================================================
+8. CRONOGRAMA, MATRIZ RACI Y RESPONSABILIDADES POR FASE
+================================================================================
+
+8.1 MATRIZ RACI (Responsable, Aprobador, Consultado, Informado):
++------------------------------------+-------+-------+-------+-------+-------+
+| FASE DE REQUERIMENTACIÓN           | BACK  | FRONT | PO    | DIR   | ASES  |
+|                                    | (OF)  | (AV)  | (Cli) | (JM)  | (JS)  |
++------------------------------------+-------+-------+-------+-------+-------+
+| F1: Elicitación y Entrevistas      |   R   |   R   |   A   |   I   |   C   |
+| F2: Análisis y Negociación MVP     |   R   |   R   |   A   |   C   |   C   |
+| F3: Especificación IEEE 830 y UML  |   R   |   R   |   C   |   A   |   C   |
+| F4: Verificación y Validación      |   R   |   R   |   A   |   A   |   A   |
+| F5: Transición a Product Backlog   |   R   |   R   |   A   |   C   |   C   |
++------------------------------------+-------+-------+-------+-------+-------+
+Leyenda: 
+- OF: Omar Figueroa (Backend/Seguridad)
+- AV: Alexander Villalva (Frontend/Usabilidad)
+- Cli: Product Owner / Optometrista (Óptica Vista Visión)
+- JM: Ing. Jorge Menéndez (Director Titulación / Scrum Master)
+- JS: Ing. Julio Santillán (Asesor Técnico)
+
+8.2 DISTRIBUCIÓN TEMPORAL SUGERIDA (Primeras 4 Semanas del Proyecto):
+- Semana 1: Ejecución de Fase 1 (Entrevistas, relevamiento del sistema legado y observación).
+- Semana 2: Ejecución de Fase 2 (Negociación, filtrado a 5 módulos MVP y reglas de negocio).
+- Semana 3: Ejecución de Fase 3 (Redacción formal SRS IEEE 830, Casos de Uso y S-Tags).
+- Semana 4: Ejecución de Fases 4 y 5 (Validación formal, firma de SRS y construcción del Backlog).
+
+
+================================================================================
+9. CONCLUSIONES Y DIRECTRICES OPERATIVAS PARA EL EQUIPO
+================================================================================
+
+1. El plan por fases estructurado en este documento garantiza que ningún requisito 
+   del sistema SGO sea producto de la improvisación o suposiciones no validadas.
+2. La reducción sistemática de 17 procesos sectoriales a 5 módulos nucleares garantiza 
+   la viabilidad de entrega dentro del cronograma académico de la ESPOCH, eliminando 
+   dependencias bloqueantes como la facturación electrónica SRI.
+3. La articulación de IEEE Std 830 con ISO/IEC 25010:2023 y Secure Scrum asegura que 
+   los requisitos de seguridad (autenticidad, integridad y trazabilidad) sean tratados 
+   como ciudadanos de primera clase desde la especificación hasta la Definition of Done.
+4. El orden metodológico establecido sirve como brújula técnica vinculante para las 
+   siguientes etapas de diseño de base de datos relacional, arquitectura de software 
+   y ejecución de los Sprints de construcción.
+
+================================================================================
+FIN DEL PLAN DE DESARROLLO DE REQUISITOS
+================================================================================

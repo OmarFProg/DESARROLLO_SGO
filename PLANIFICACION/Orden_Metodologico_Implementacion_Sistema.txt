@@ -1,0 +1,291 @@
+ORDEN METODOLÓGICO PARA LA IMPLEMENTACIÓN DE UN SISTEMA
+==============================================================
+
+Si lo que se busca es establecer un orden metodológico para implementar
+un sistema, los elementos no se elaboran todos al mismo tiempo. Algunos
+son insumos de análisis, otros corresponden al diseño del sistema y otros
+a la planificación y gestión del proyecto.
+
+ORDEN BASE DE ELABORACIÓN
+-------------------------
+
+1. ESPECIFICACIÓN DE REQUISITOS
+   Define qué debe hacer el sistema y cuáles son sus restricciones.
+
+   Incluye, entre otros:
+   - Requisitos funcionales.
+   - Requisitos no funcionales.
+   - Usuarios o actores.
+   - Restricciones.
+   - Reglas de negocio.
+
+   Ejemplo:
+   "El sistema debe permitir al administrador registrar empleados."
+
+2. CASOS DE USO
+   Detallan cómo los actores interactúan con las funcionalidades del
+   sistema.
+
+   Permiten identificar:
+   - Actores.
+   - Casos de uso.
+   - Relaciones entre actores y funcionalidades.
+   - Flujos principales.
+   - Flujos alternativos.
+
+   Ejemplo:
+
+   Administrador
+         |
+         v
+   Registrar empleado
+         |
+         +-- Ingresar datos
+         +-- Validar información
+         +-- Guardar empleado
+
+3. MER - MODELO ENTIDAD-RELACIÓN
+   Define la información que debe almacenar la base de datos.
+
+   A partir de los requisitos y casos de uso se identifican:
+   - Entidades.
+   - Atributos.
+   - Relaciones.
+   - Claves primarias.
+   - Claves foráneas.
+   - Cardinalidades.
+
+   Ejemplo:
+
+   EMPLEADO
+   --------
+   id_empleado
+   cedula
+   nombre
+   apellido
+   correo
+
+   relacionado con:
+
+   CARGO
+   -----
+   id_cargo
+   nombre
+
+4. DIAGRAMA DE ARQUITECTURA
+   Define cómo se organizarán técnicamente los componentes del sistema.
+
+   Puede establecer:
+   - Arquitectura MVC.
+   - Arquitectura por capas.
+   - Arquitectura cliente-servidor.
+   - Componentes.
+   - Servicios.
+   - APIs.
+   - Bases de datos.
+   - Servidores.
+   - Mecanismos de seguridad.
+
+   Ejemplo conceptual:
+
+       USUARIO
+          |
+          v
+       INTERFAZ
+          |
+          v
+      CONTROLADOR
+          |
+          v
+        MODELO
+          |
+          v
+     BASE DE DATOS
+
+5. ESQUEMA DE NAVEGACIÓN DEL SISTEMA
+   Define cómo el usuario se desplazará entre módulos, pantallas y
+   funcionalidades.
+
+   Ejemplo:
+
+   LOGIN
+     |
+     v
+   PANEL PRINCIPAL
+     +-- Usuarios
+     +-- Empleados
+     +-- Evaluaciones
+     |      +-- Crear
+     |      +-- Editar
+     |      +-- Consultar
+     +-- Reportes
+
+6. PRODUCT BACKLOG
+   Convierte los requisitos y funcionalidades en una lista priorizada
+   del trabajo que debe realizarse.
+
+   Puede contener:
+   - Historias de usuario.
+   - Funcionalidades.
+   - Tareas.
+   - Prioridad.
+   - Estimación.
+   - Estado.
+
+   Ejemplo:
+
+   PB-01  Iniciar sesión
+   PB-02  Gestionar usuarios
+   PB-03  Registrar empleados
+   PB-04  Crear evaluación
+   PB-05  Aplicar evaluación
+   PB-06  Generar reportes
+
+7. CRONOGRAMA
+   Distribuye las actividades del proyecto en el tiempo y establece
+   fechas, duración e hitos.
+
+   Ejemplo:
+
+   Actividad                  Semana
+   ----------------------------------
+   Requisitos                 1
+   Casos de uso               1-2
+   Diseño de BD               2
+   Arquitectura               2
+   Diseño de navegación       2-3
+   Desarrollo                 3-7
+   Pruebas                    6-8
+   Implementación             8
+
+8. DISTRIBUCIÓN DE ROLES
+   Define quién participa en el proyecto y qué responsabilidad general
+   tiene cada integrante.
+
+   Ejemplo:
+   - Product Owner.
+   - Scrum Master.
+   - Analista.
+   - Diseñador.
+   - Desarrollador Backend.
+   - Desarrollador Frontend.
+   - Tester.
+   - Administrador de Base de Datos.
+
+9. ASIGNACIÓN DE TAREAS
+   Asigna actividades concretas a cada integrante, considerando sus
+   roles, responsabilidades, conocimientos y la planificación.
+
+   Ejemplo:
+
+   Juan   -> Diseño de Base de Datos
+   Pedro  -> Desarrollo Backend
+   María  -> Desarrollo Frontend
+   Luis   -> Pruebas
+
+SECUENCIA GENERAL
+-----------------
+
+Una secuencia recomendada para un proyecto de desarrollo de software es:
+
+REQUISITOS
+     |
+     v
+CASOS DE USO
+     |
+     v
++----+----------------+----------------+
+|                     |                |
+v                     v                v
+MER             ARQUITECTURA     NAVEGACIÓN
+|                     |                |
++---------------------+----------------+
+                      |
+                      v
+               PRODUCT BACKLOG
+                      |
+                      v
+                PLANIFICACIÓN
+                      |
+                      v
+                  CRONOGRAMA
+                      |
+                      v
+              DISTRIBUCIÓN DE ROLES
+                      |
+                      v
+              ASIGNACIÓN DE TAREAS
+                      |
+                      v
+                  DESARROLLO
+                      |
+                      v
+                    PRUEBAS
+                      |
+                      v
+                IMPLEMENTACIÓN
+
+PRECISIÓN PARA SCRUM
+--------------------
+
+En un proyecto desarrollado bajo Scrum, el Product Backlog no
+necesariamente debe esperar a que todo el diseño esté terminado.
+
+El Product Backlog puede construirse desde las primeras etapas a partir
+de los requisitos iniciales y posteriormente refinarse de manera
+continua.
+
+Por esta razón, una representación más adecuada para Scrum sería:
+
+REQUISITOS INICIALES
+        |
+        +----------------------+
+        |                      |
+        v                      v
+CASOS DE USO             PRODUCT BACKLOG
+        |                      |
+        v                      v
+DISEÑO DEL SISTEMA <---- REFINAMIENTO
+        |                      |
+        +----------+-----------+
+                   |
+                   v
+             PLANIFICACIÓN
+                   |
+                   v
+             SPRINT / TAREAS
+                   |
+                   v
+               DESARROLLO
+                   |
+                   v
+                PRUEBAS
+                   |
+                   v
+            RETROALIMENTACIÓN
+                   |
+                   +----> REFINAMIENTO DEL BACKLOG
+
+CONCLUSIÓN
+----------
+
+Para una metodología general de desarrollo, se puede utilizar como
+secuencia base:
+
+1. Especificación de requisitos.
+2. Casos de uso.
+3. MER.
+4. Diagrama de arquitectura.
+5. Esquema de navegación.
+6. Product Backlog.
+7. Cronograma.
+8. Distribución de roles.
+9. Asignación de tareas.
+10. Desarrollo.
+11. Pruebas.
+12. Implementación.
+
+Sin embargo, en Scrum el Product Backlog es un artefacto vivo y puede
+elaborarse y refinarse desde las primeras etapas. No debe considerarse
+necesariamente como un documento que se termina una sola vez después
+del diseño.
