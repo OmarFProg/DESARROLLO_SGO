@@ -1,0 +1,180 @@
+================================================================================
+LEVANTAMIENTO DE REQUISITOS - SISTEMA WEB DE GESTIÓN CLÍNICA Y COMERCIAL
+ALINEADO A LA ARQUITECTURA MVP, ISO/IEC 25010:2023 Y SECURE SCRUM (S-TAGS)
+================================================================================
+
+1. MAPEO GENERAL CON LOS MODELOS DEL ANTEPROYECTO
+--------------------------------------------------------------------------------
+- Modelo de Negocio / Alcance MVP:
+  Delimitado estrictamente a 5 módulos nucleares:
+  * M1: Autenticación y Gestión de Usuarios
+  * M2: Gestión de Pacientes
+  * M3: Historia Clínica y Graduación
+  * M4: Pedidos al Laboratorio
+  * M5: Ventas y Cobros
+
+- Modelo de Calidad ISO/IEC 25010:2023:
+  Enfoque prioritario en tres subcaracterísticas de Seguridad:
+  * Integridad
+  * Responsabilidad (Trazabilidad)
+  * Autenticidad
+
+- Modelo de Desarrollo Seguro (Secure Scrum):
+  Requisitos de seguridad mapeados con identificadores semánticos (S-Tags)
+  para guiar los criterios de aceptación en el Product Backlog.
+
+
+2. REQUISITOS FUNCIONALES (RF) POR MÓDULO
+--------------------------------------------------------------------------------
+
+MÓDULO 1: AUTENTICACIÓN Y GESTIÓN DE USUARIOS (M1)
+- RF-01 (Control de Acceso por Roles):
+  El sistema debe restringir el acceso a módulos y datos según tres perfiles:
+  Administrador/Propietario, Optometrista y Asistente/Vendedor.
+- RF-02 (Gestión Segura de Sesiones):
+  El sistema debe gestionar sesiones activas y acotadas temporalmente con 
+  identificadores únicos basados en tokens seguros (JWT).
+
+MÓDULO 2: GESTIÓN DE PACIENTES (M2)
+- RF-03 (Registro Demográfico y Filiación):
+  El sistema debe registrar los datos básicos del paciente: nombres, apellidos,
+  cédula (opcional en menores de edad), teléfono y fecha de nacimiento.
+- RF-04 (Manejo de Menores de Edad):
+  El sistema debe permitir registrar la ficha clínica a nombre del menor sin
+  exigir de forma obligatoria los datos del representante/tutor para no trabar
+  el flujo ágil de consulta.
+- RF-05 (Búsqueda y Detección de Duplicados):
+  El sistema debe proporcionar búsqueda predictiva/autocompletado por nombre o 
+  cédula para mitigar registros duplicados.
+- RF-06 (Carga de Adjuntos Clínicos):
+  El sistema debe permitir adjuntar y asociar archivos digitales (PDFs e 
+  imágenes) a la ficha del paciente para exámenes complementarios (Pentacam,
+  fondo de ojo, topografías, etc.).
+
+MÓDULO 3: HISTORIA CLÍNICA Y GRADUACIÓN (M3)
+- RF-07 (Examen Refractivo Estándar):
+  El sistema debe capturar por cada ojo (OD y OI): Esfera (+/-), Cilindro (-), 
+  Eje (0° - 180°), Adición y Prismas.
+- RF-08 (Regla de Formato para Adición):
+  El campo Adición debe asumir por defecto el signo positivo (+) y convertir 
+  automáticamente cualquier número ingresado sin signo a positivo.
+- RF-09 (Agudeza Visual Estandarizada):
+  El sistema debe registrar la agudeza visual con y sin corrección, de lejos y 
+  de cerca, bajo la notación estándar fraccionaria en pies (ej. 20/20, 20/25, 
+  20/100).
+- RF-10 (Parámetros Físico-Ópticos Estándar):
+  El sistema debe registrar la distancia interpupilar/nasopupilar en milímetros 
+  (mm) y las alturas pupilares para el centrado de lunas.
+- RF-11 (Parámetros Avanzados para Lentes Progresivos / Alta Gama):
+  El sistema debe permitir registrar de forma opcional los parámetros físicos 
+  de montura: horizontal, diagonal, vertical, puente (en mm) y ángulos 
+  especiales (ángulo pantoscópico y ángulo panorámico en grados).
+- RF-12 (Comparativa Evolutiva y Lente Anterior):
+  El sistema debe almacenar la graduación del lente en uso anterior para 
+  contrastarla directamente con la refracción actual en la misma pantalla.
+- RF-13 (Anamnesis y Hallazgos):
+  El sistema debe incluir campos para registrar antecedentes patológicos 
+  sistémicos (diabetes, hipertensión), motivo de consulta, diagnósticos CIE-10 
+  y observaciones clínicas (párpados, segmento anterior, etc.).
+- RF-14 (Generación de Certificados Ocupacionales):
+  El sistema debe generar e imprimir directamente certificados visuales de 
+  aptitud laboral con datos del paciente, diagnóstico y recomendaciones.
+- RF-15 (Papelera de Reciclaje / Soft Delete):
+  Los registros clínicos eliminados o modificados no deben borrarse físicamente 
+  de la base de datos; deben marcarse como inactivos en una papelera de 
+  reciclaje lógica para auditoría o restauración autorizada.
+
+MÓDULO 4: PEDIDOS AL LABORATORIO ÓPTICO (M4)
+- RF-16 (Generación de Orden de Laboratorio):
+  El sistema debe emitir una orden de trabajo digital con los datos técnicos 
+  exclusivos de confección óptica, omitiendo diagnósticos o datos sensibles.
+- RF-17 (Especificaciones de Material y Tratamientos):
+  El sistema debe permitir seleccionar el tipo de foco (monofocal, bifocal, 
+  multifocal/progresivo), material (resina, policarbonato, cristal) y catálogo 
+  editable de tratamientos (antirreflejo, blue block, fotocromático, UV).
+- RF-18 (Flujo de Estados de Fabricación):
+  El sistema debe rastrear el estado del pedido a través del flujo:
+  Pendiente -> Enviado -> Recibido -> Entregado.
+- RF-19 (Gestión de Garantías y Rectificaciones):
+  El sistema debe permitir registrar ajustes de lunas devueltas por fallas 
+  técnicas o falta de adaptación mediante un selector de "Rectificación", 
+  asociado a la orden original.
+
+MÓDULO 5: VENTAS Y COBROS (M5)
+- RF-20 (Emisión de Comprobante Interno):
+  El sistema debe emitir comprobantes internos secuenciales detallando 
+  cliente, producto/servicio, anticipo, saldo y desglose de valores.
+- RF-21 (Gestión Híbrida de Inventario):
+  * Armazones/monturas (alta rotación y códigos no repetitivos): venta y 
+    control agrupado por rango de precio y material (plástico, metal, etc.).
+  * Consumibles (líquidos, accesorios, lentes de contacto): control de stock 
+    por unidades individuales.
+- RF-22 (Anulación con Reversa de Stock y Caja):
+  Al anular una venta autorizada, el sistema debe descontar automáticamente el 
+  importe de caja y retornar las unidades físicas al inventario disponible.
+- RF-23 (Cierre y Consulta de Flujo Diario):
+  El sistema debe permitir consultar en un panel consolidado las ventas del 
+  día, cobros realizados y el saldo pendiente de cobro.
+
+
+3. REQUISITOS NO FUNCIONALES (RNF) BAJO ISO/IEC 25010:2023
+--------------------------------------------------------------------------------
+- RNF-01 [S-Tag: SEC-AUT-01] (Autenticidad - RBAC):
+  El sistema debe verificar la identidad de los usuarios mediante control de 
+  acceso basado en roles (RBAC), impidiendo operaciones no autorizadas.
+- RNF-02 [S-Tag: SEC-AUT-02] (Autenticidad - Manejo de Sesiones):
+  El intercambio de peticiones cliente-servidor debe asegurarse mediante tokens 
+  JWT válidos y temporalmente restringidos.
+- RNF-03 [S-Tag: SEC-INT-01] (Integridad - Validación de Entrada):
+  El sistema debe validar en backend y frontend que los datos refractivos 
+  pertenezcan a rangos clínicos válidos (Eje: 0°-180°, Esfera/Cilindro en 
+  pasos de 0.25).
+- RNF-04 [S-Tag: SEC-INT-02] (Integridad - Consistencia Referencial):
+  El motor PostgreSQL debe asegurar integridad referencial y atomicidad (ACID) 
+  en la anulación de ventas y movimientos de inventario.
+- RNF-05 [S-Tag: SEC-INT-03] (Integridad - Temporal):
+  Los registros de refracción históricos no deben sobreescribirse; toda nueva 
+  medición debe persistir como un nuevo registro cronológico.
+- RNF-06 [S-Tag: SEC-RES-01] (Responsabilidad - Registro de Auditoría):
+  El sistema debe registrar bitácoras inmutables (Audit Log) capturando:
+  usuario_id, acción, marca_temporal_UTC y estado_anterior_vs_nuevo.
+- RNF-07 (Portabilidad y Diseño Responsivo):
+  La arquitectura web debe ser responsiva y estar optimizada para uso en PCs 
+  de escritorio y tablets dentro del consultorio.
+- RNF-08 (Rendimiento en Consultas Críticas):
+  Las consultas de búsqueda de pacientes e historiales clínicos deben responder 
+  en un tiempo medio inferior a 2 segundos en condiciones estándar de red.
+
+
+4. MATRIZ DE REQUISITOS VS. MÓDULOS Y ETIQUETAS SECURE SCRUM (S-TAGS)
+--------------------------------------------------------------------------------
+ID Requisito    | Módulo MVP          | Clasificación | S-Tag Asignado | Criterio de Verificación / Acceptance Criteria
+----------------+---------------------+---------------+----------------+------------------------------------------------
+RF-01 / RF-02   | M1: Autenticación   | Seguridad     | SEC-AUT-01     | Validación de rol y bloqueo de rutas no permitidas.
+RF-03 / RF-05   | M2: Pacientes       | Funcional     | SEC-INT-01     | Prevención de duplicados por nombre y cédula.
+RF-06           | M2: Pacientes       | Funcional     | SEC-INT-02     | Almacenamiento seguro y enlace relacional de archivos.
+RF-07 / RF-08   | M3: Historia Clínica| Funcional     | SEC-INT-01     | Formato automático de adición (+) y validación de rangos.
+RF-09 / RF-10   | M3: Historia Clínica| Funcional     | SEC-INT-01     | Registro en pies (20/XX) y DP en milímetros.
+RF-11 / RF-12   | M3: Historia Clínica| Funcional     | SEC-INT-02     | Comparativa evolutiva y parámetros de alta gama en BD.
+RF-14           | M3: Historia Clínica| Funcional     | —              | Generación directa de certificado con datos consolidados.
+RF-15           | M3: Historia Clínica| Seguridad     | SEC-INT-03 /   | Registro marcado con deleted_at y log de evento generado.
+                |                     |               | SEC-RES-01     |
+RF-16 / RF-17   | M4: Laboratorio     | Funcional     | SEC-INT-01     | Emisión de orden omitiendo datos sensibles no ópticos.
+RF-18 / RF-19   | M4: Laboratorio     | Funcional     | SEC-RES-01     | Historial de estados y registro de rectificaciones.
+RF-20           | M5: Ventas y Cobros | Funcional     | —              | Comprobante interno con numeración secuencial.
+RF-21           | M5: Ventas y Cobros | Funcional     | SEC-INT-02     | Venta agrupada por precio en armazones y por unidad en consumibles.
+RF-22           | M5: Ventas y Cobros | Funcional     | SEC-RES-01     | Retorno atómico de unidades al stock e imputación a usuario en log.
+RF-23           | M5: Ventas y Cobros | Funcional     | —              | Cuadre de caja y cálculo de saldos pendientes en tiempo real.
+
+
+5. REQUISITOS FUTUROS (FUERA DEL ALCANCE DEL MVP)
+--------------------------------------------------------------------------------
+- RF-FUT-01 (Facturación Electrónica SRI):
+  Emisión directa de comprobantes fiscales electrónicos al WebService del SRI.
+- RF-FUT-02 (Mensajería de Control Anual - WhatsApp):
+  Integración con API para el envío automático de notificaciones a pacientes 
+  al cumplirse un año de su última revisión.
+- RF-FUT-03 (Migración de Base de Datos Legada .BAK):
+  Script de extracción, transformación y carga (ETL) para importar los 3.000 
+  a 5.000 registros históricos desde los respaldos SQL existentes.
+================================================================================

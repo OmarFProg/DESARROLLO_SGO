@@ -1,0 +1,145 @@
+UML — LENGUAJE UNIFICADO DE MODELADO
+Contexto: Aplicaciones Informáticas, Diseño y Arquitectura de Software
+
+1. DEFINICIÓN
+
+UML (Unified Modeling Language) 
+    es un lenguaje gráfico estandarizado utilizado para 
+        visualizar, 
+        especificar, 
+        diseñar y 
+        documentar 
+            la estructura y el comportamiento de un sistema de software.
+
+UML no es un lenguaje de programación. 
+    Es una herramienta que permite 
+        modelar el sistema 
+            antes 
+            y durante 
+                su desarrollo.
+
+2. ¿PARA QUÉ SE USA UML?
+
+UML se utiliza principalmente para:
+
+1. Analizar 
+    los requisitos y funcionalidades del sistema.
+2. Diseñar 
+    la estructura de una aplicación.
+3. Representar 
+    la arquitectura del software.
+4. Describir 
+    el comportamiento y la interacción de los componentes.
+5. Comunicar 
+    el diseño entre 
+        desarrolladores, 
+        analistas, 
+        diseñadores 
+        y usuarios.
+6. Documentar 
+    el sistema 
+        para facilitar su mantenimiento y evolución.
+
+3. CARACTERÍSTICAS DE UML
+
+- Gráfico: utiliza diagramas, símbolos y relaciones para representar el sistema.
+- Estandarizado: define una notación común para el modelado de software.
+- Independiente del lenguaje: puede utilizarse para Java, C#, PHP, Python, etc.
+- Visual: facilita la comprensión de estructuras y procesos complejos.
+- Orientado a objetos: representa conceptos como clases, objetos, herencia, asociaciones, etc.
+- Multinivel: permite representar desde una visión general hasta detalles internos.
+- Documental: sirve como documentación técnica del sistema.
+
+4. CLASES DE DIAGRAMAS UML
+
+Los diagramas UML se pueden agrupar principalmente en diagramas estructurales y diagramas de comportamiento.
+
+4.1. DIAGRAMAS ESTRUCTURALES
+
+Representan cómo está construido el sistema.
+
+Los principales son:
+
+- Diagrama de clases.
+- Diagrama de objetos.
+- Diagrama de componentes.
+- Diagrama de despliegue.
+- Diagrama de paquetes.
+- Diagrama de estructura compuesta.
+
+4.2. DIAGRAMAS DE COMPORTAMIENTO
+
+Representan cómo funciona el sistema.
+
+Los principales son:
+
+- Diagrama de casos de uso.
+- Diagrama de secuencia.
+- Diagrama de actividad.
+- Diagrama de estados.
+- Diagrama de comunicación.
+- Diagrama de interacción.
+
+5. DIAGRAMAS UML MÁS IMPORTANTES PARA UNA APLICACIÓN INFORMÁTICA
+
+- Casos de uso: muestran qué puede hacer el usuario dentro del sistema.
+- Clases: muestran las entidades, atributos, métodos y relaciones del sistema.
+- Componentes: muestran cómo se divide y organiza la aplicación en componentes.
+- Despliegue: muestra en qué servidores, dispositivos o nodos se ejecuta el sistema.
+- Secuencia: muestra cómo interactúan los objetos o componentes durante una operación.
+- Actividades: muestran el flujo de un proceso.
+- Estados: muestran los diferentes estados de un objeto y las transiciones entre ellos.
+
+             UML
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+    ESTRUCTURA             COMPORTAMIENTO
+          │                     │
+          ↓                     ↓
+   ¿Cómo está hecho?      ¿Cómo funciona?
+          │                     │
+   ┌──────┼──────┐        ┌─────┼──────┐
+   ↓      ↓      ↓        ↓     ↓      ↓
+Clases Componentes    Casos   Secuencia Actividad
+          Despliegue  de uso
+
+
+
+6. UML Y ARQUITECTURA DE SOFTWARE
+
+En el contexto de Diseño y Arquitectura de Software, 
+UML proporciona una notación gráfica para representar diferentes perspectivas de una aplicación.
+
+Permite describir:
+
+- La estructura del sistema.
+- El comportamiento del sistema.
+- Los componentes y sus relaciones.
+- Las interacciones entre componentes.
+- La distribución física del software.
+
+Por tanto, UML no es la arquitectura en sí misma; es un lenguaje que permite modelar, representar, comunicar y documentar la arquitectura y el diseño del sistema.
+
+7. EJEMPLO APLICADO
+
+Para una aplicación de gestión de empleados se podrían utilizar:
+
+- Casos de uso: registrar empleado, actualizar empleado, consultar empleado.
+- Diagrama de clases: Empleado, Departamento, Usuario, Evaluación.
+- Diagrama de componentes: interfaz, controladores, servicios y acceso a datos.
+- Diagrama de secuencia: interacción entre usuario, aplicación y base de datos al registrar un empleado.
+- Diagrama de despliegue: computador cliente, servidor web, servidor de aplicación y servidor de base de datos.
+- Diagrama de actividades: flujo del proceso de registro de un empleado.
+
+8. IDEA PRINCIPAL
+
+UML permite representar visualmente un sistema de software antes y durante su construcción.
+
+En términos simples:
+
+UML = lenguaje para MODELAR y COMUNICAR el diseño de un sistema.
+
+Arquitectura de software = organización fundamental del sistema, sus componentes, relaciones y decisiones estructurales.
+
+UML = una de las herramientas utilizadas para representar y documentar esa arquitectura y diseño.
