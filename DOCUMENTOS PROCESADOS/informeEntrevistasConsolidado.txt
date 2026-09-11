@@ -1,0 +1,481 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO CONSOLIDADO DE ENTREVISTAS Y LEVANTAMIENTO DE REQUERIMIENTOS
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+
+Proyecto:
+Desarrollo de un sistema informático de gestión clínica optométrica utilizando la
+metodología ágil Scrum, garantizando la seguridad de los datos de salud visual.
+
+Autores / Investigadores:
+- Figueroa Díaz, Omar Santiago (C.I. 1803391968, Código: 7253)
+- Villalva Dumancela, Alexander Rafael (C.I. 0605351899, Código: 7135)
+
+Director del Trabajo de Grado / Scrum Master:
+- Ing. Menéndez Verdecia, Jorge Ariel
+
+Revisión Técnica y Asesoría Metodológica:
+- Ing. Santillán Castillo, Julio Roberto
+
+Institución Beneficiaria / Caso de Estudio:
+- Óptica Vista Visión (Riobamba, Provincia de Chimborazo, Ecuador)
+
+Fecha de Consolidación: Mayo - Junio 2026 / Vigencia Período Académico 2026
+Versión: 1.0 Definitiva Consolidada
+================================================================================
+
+1. INTRODUCCIÓN Y OBJETIVOS DE LA CONSOLIDACIÓN TÉCNICA
+--------------------------------------------------------------------------------
+El presente informe técnico constituye el instrumento formal de consolidación,
+síntesis y articulación de las sesiones de relevamiento y levantamiento de
+requerimientos realizadas durante la fase inicial del proyecto de titulación.
+El propósito central de este documento es integrar coherentemente los hallazgos
+obtenidos a partir de tres fuentes de elicitación primaria:
+
+1. Primera Entrevista Semi-estructurada con el Propietario / Optometrista de
+   la Óptica Vista Visión, enfocada en la comprensión global del negocio, los
+   flujos de atención diaria y los dolores operativos inmediatos.
+2. Análisis Técnico Demostrativo del Sistema Legado Oftalmológico, realizado
+   mediante inspección directa de la aplicación de escritorio en uso,
+   identificando su arquitectura monolítica MDI, su base de datos relacional y
+   sus limitaciones críticas de integridad y trazabilidad.
+3. Segunda Entrevista Estructurada de Profundización y Validación Técnica, con
+   participación del Product Owner (Sebastián) y los revisores técnicos de la
+   ESPOCH (Ing. Julio Santillán e Ing. Jorge Menéndez), donde se definieron
+   criterios de diseño web/PWA, transaccionalidad ACID, control RBAC y la
+   matriz de requisitos bajo ISO/IEC 25010:2023 y Secure Scrum (S-Tags).
+
+Este informe consolidado sirve de insumo vinculante y directo para la redacción
+de la Especificación de Requisitos de Software (SRS) bajo el estándar IEEE 830,
+asegurando que cada decisión técnica y funcional esté debidamente sustentada en
+las necesidades reales del establecimiento optométrico y en las directrices
+aprobadas en el Anteproyecto de Titulación.
+
+
+2. FICHA TÉCNICA Y METODOLOGÍA DE LAS SESIONES DE RELEVAMIENTO
+--------------------------------------------------------------------------------
+Para garantizar la exhaustividad y rigor del levantamiento, se aplicó una
+estrategia multimétodo combinando entrevistas cualitativas, demostraciones de
+software en vivo y talleres de diseño técnico. A continuación se sintetizan las
+sesiones ejecutadas:
+
+2.1 Sesión 1: Entrevista Semi-estructurada Inicial
+- Fecha: Primer contacto de relevamiento (Mayo 2026)
+- Participantes: Omar Figueroa, Alexander Villalva (Entrevistadores);
+  Propietario y Optometrista Principal de Óptica Vista Visión (Entrevistado).
+- Instrumento: Guion semi-estructurado de preguntas abiertas sobre operación,
+  volumen de pacientes, proveedores de lunas, facturación y catálogo de productos.
+- Enfoque: Mapeo del modelo de negocio, cadena de valor y experiencia de usuario.
+
+2.2 Sesión 2: Relevamiento Demostrativo del Sistema Legado
+- Fecha: Sesión demostrativa técnica (Mayo 2026)
+- Participantes: Equipo de desarrollo y Propietario / Oftalmólogo.
+- Instrumento: Grabación de video-demostración guiada, navegación en vivo por
+  las interfaces de la aplicación de escritorio (Multiple Document Interface),
+  revisión de estructura de tablas y archivos de respaldo SQL Server (.BAK).
+- Enfoque: Auditoría de funcionalidades existentes, identificación de fallas de
+  usabilidad, rigidez en catálogos y ausencia de trazabilidad transaccional.
+
+2.3 Sesión 3: Entrevista Estructurada de Validación Técnica y Arquitectura
+- Fecha: Sesión de profundización y cierre de requerimientos (Mayo 2026)
+- Participantes: Omar Figueroa (Backend), Alexander Villalva (Frontend),
+  Sebastián (Product Owner), Propietario de la Óptica (Stakeholder principal),
+  Ing. Julio Santillán (Asesor Técnico Web/PWA), Ing. Jorge Menéndez (Director).
+- Instrumento: Hoja de análisis técnico estructurado (ANALISIS_ENTREVISTA_2.xlsx),
+  matriz de requisitos funcionales y no funcionales, catálogo de S-Tags.
+- Enfoque: Toma de decisiones arquitectónicas (Laravel + React + PostgreSQL),
+  definición de perfiles RBAC, políticas de auditoría inmutable, transacciones
+  ACID para anulación de ventas y delimitación formal del alcance del MVP.
+
+
+3. CARACTERIZACIÓN DEL NEGOCIO Y MODELO OPERATIVO DE LA ÓPTICA
+--------------------------------------------------------------------------------
+Óptica Vista Visión es un establecimiento de salud visual primaria radicado en
+la ciudad de Riobamba, provincia de Chimborazo, con cuatro años de trayectoria en
+el mercado local. Su dinámica operativa presenta las siguientes características:
+
+- Estructura de Personal: Opera habitualmente con dos profesionales: el propietario,
+  quien ejerce labores de optometrista clínico y administrador general; y una
+  asistente/optometrista que apoya en la atención al cliente, cobranzas y ventas.
+- Volumen de Atención: Atiende un promedio de 5 a 10 pacientes diarios, con picos
+  los fines de semana y campañas visuales institucionales.
+- Portafolio de Servicios:
+  a) Evaluación refractiva y examen visual optométrico integral.
+  b) Emisión de certificados de aptitud visual laboral y escolar.
+  c) Prescripción y dispensación de lentes oftálmicos (lunas monofocales, bifocales
+     y multifocales/progresivos con diversos tratamientos ópticos).
+  d) Venta de armazones oftálmicos y gafas de sol de alta rotación.
+  e) Venta de consumibles: lentes de contacto (cosméticos y graduados), soluciones
+     multipropósito, gotas lubricantes y accesorios.
+  f) Biselado y montaje de lentes.
+- Cadena de Suministro: La óptica no dispone de un laboratorio industrial propio
+  para la talla o surcado de lunas; terceriza la manufactura con laboratorios
+  ópticos especializados (ubicados en Quito y Guayaquil), compartiendo proveedor
+  con otras ópticas locales. El tiempo de confección oscila entre 2 y 5 días hábiles.
+
+
+4. ANÁLISIS COMPARATIVO: SISTEMA LEGADO VS. SISTEMAS COMERCIALES VS. NUEVO SGO
+--------------------------------------------------------------------------------
+Durante el levantamiento se analizaron tres fuentes fundamentales para definir el
+patrón de diseño óptimo: el sistema legado en uso, plataformas comerciales de
+referencia del sector (e-Optics y OpticaPro v1.5.1), y las necesidades particulares
+levantadas en las entrevistas.
+
+4.1 Diagnóstico Crítico del Sistema Legado Oftalmológico:
+- Arquitectura y Plataforma: Aplicación de escritorio monolítica basada en el modelo
+  MDI (ventanas superpuestas). Provoca saturación visual en el usuario, errores
+  por pérdida de foco entre formularios y nula capacidad de acceso remoto desde
+  dispositivos móviles o fuera del consultorio físico.
+- Integridad Clínica Vulnerada: El sistema legado permitía la sobreescritura de los
+  registros de refracción histórica del paciente, impidiendo evaluar con certeza la
+  progresión dióptrica del paciente a lo largo del tiempo.
+- Carencia de Responsabilidad y Auditoría: No existe registro de auditoría (audit log).
+  Cualquier usuario con acceso a la máquina podía alterar registros clínicos o
+  borrar comprobantes sin que quede traza del responsable, hora o valor previo.
+- Desconexión del Laboratorio: El envío y seguimiento de pedidos a laboratorios se
+  llevaba mediante hojas de cálculo impresas en papel o archivadores manuales,
+  ocasionando demoras, pérdidas de órdenes y desconocimiento del estado del pedido.
+- Rigidez en Inventario y Facturación: Catálogos rígidos que exigían registrar cada
+  armazón individualmente cuando en la práctica se comercializan por lotes de precio;
+  y dependencia crítica del servicio web del SRI que bloqueaba la facturación local
+  ante cortes de internet o fallas del portal tributario.
+
+4.2 Mapeo de los 17 Módulos del Sector hacia los 5 Módulos Nucleares del MVP:
+Del análisis del sistema legado y plataformas comerciales se identificaron 17
+módulos funcionales teóricos del sector optométrico:
+1. Ventas Directas
+2. Cobros y Formas de Pago
+3. Facturación Electrónica SRI
+4. Proformas y Presupuestos
+5. Notas de Anulación y Crédito
+6. Graduación y Consulta Clínica
+7. Gestión de Pacientes / Clientes
+8. Inventario de Productos Físicos
+9. Apertura y Cierre de Caja
+10. Movimientos de Ingreso y Egreso
+11. Pedidos a Laboratorios Externos
+12. Cuentas por Pagar / Proveedores
+13. Transferencias Bancarias entre Cuentas
+14. Gestión de Profesionales / Optometristas
+15. Clasificación de Gastos Operativos
+16. Configuración General y Catálogos
+17. Recordatorios y Avisos al Cliente
+
+Siguiendo las directrices del Anteproyecto de Titulación aprobado por la ESPOCH,
+para garantizar viabilidad técnica en un marco ágil de 16 semanas, alta cohesión,
+máxima seguridad de datos de salud visual y eliminación de dependencias externas
+bloqueantes, se consolidaron y encapsularon estos procesos en CINCO MÓDULOS NUCLEARES
+del Producto Mínimo Viable (MVP):
+
++------------------------------------------------------------------------------+
+| MÓDULO MVP               | MÓDULOS DEL SECTOR ABSORBIDOS / ALINEACIÓN        |
++--------------------------+---------------------------------------------------+
+| M1: Autenticación y      | Mod. 14 (Profesionales), Mod. 16 (Configuración de|
+|     Gestión de Usuarios  | Usuarios y Roles RBAC). Aporta Autenticidad.      |
++--------------------------+---------------------------------------------------+
+| M2: Gestión de Pacientes | Mod. 7 (Clientes/Pacientes), Archivos Adjuntos.    |
+|                          | Aporta Integridad Demográfica y Prevención Duplic.|
++--------------------------+---------------------------------------------------+
+| M3: Historia Clínica y   | Mod. 6 (Graduación, Exámenes, Anamnesis CIE-10),  |
+|     Graduación           | Emisión de Certificados Laborales.                |
+|                          | Aporta Integridad Clínica y Trazabilidad Temporal.|
++--------------------------+---------------------------------------------------+
+| M4: Pedidos al           | Mod. 11 (Pedidos a Laboratorio), Catálogo de      |
+|     Laboratorio Óptico   | Tratamientos/Materiales, Flujo de Estados.        |
+|                          | Aporta Trazabilidad Operativa y Confidencialidad. |
++--------------------------+---------------------------------------------------+
+| M5: Ventas y Cobros      | Mod. 1 (Ventas), Mod. 2 (Cobros/Anticipos),       |
+|                          | Mod. 5 (Anulaciones), Mod. 8 (Inventario Híbrido),|
+|                          | Mod. 9 (Cierre de Caja Diario).                   |
+|                          | Aporta Integridad Transaccional ACID y Auditoría. |
++--------------------------+---------------------------------------------------+
+
+
+5. HALLAZGOS Y DECISIONES TÉCNICAS POR MÓDULO DEL MVP
+--------------------------------------------------------------------------------
+
+5.1 M1: Módulo de Autenticación y Gestión de Usuarios
+- Hallazgos de Entrevistas:
+  El negocio opera con dos perfiles funcionales básicos en el mostrador: Gerente y
+  Asistente/Vendedor. Se identificó la necesidad imperiosa de diferenciar el rol
+  técnico del Optometrista para firmar recetas y emitir diagnósticos válidos.
+- Decisiones Técnicas Adoptadas:
+  * Implementación de un modelo de Control de Acceso Basado en Roles (RBAC) con
+    tres perfiles canónicos:
+    1. Administrador/Propietario: Acceso total al sistema, cierres de caja,
+       anulación de comprobantes, gestión de usuarios y reportes gerenciales.
+    2. Optometrista: Acceso prioritario a gestión de pacientes, creación y edición
+       de historias clínicas, parametrización de medidas y emisión de certificados.
+    3. Asistente/Vendedor: Registro básico de pacientes, creación de órdenes de
+       trabajo, registro de ventas, cobro de anticipos/saldos y entrega de lentes.
+  * Autenticación basada en JSON Web Tokens (JWT) con expiración acotada temporalmente,
+    asegurando sesiones cifradas y protección contra suplantación en llamadas REST.
+
+5.2 M2: Módulo de Gestión de Pacientes
+- Hallazgos de Entrevistas:
+  * El flujo de atención no debe trabarse si un menor de edad no tiene cédula o no
+    recuerda el número al momento de la emergencia o chequeo escolar.
+  * Frecuentes duplicidades en el sistema legado por errores ortográficos al escribir
+    los nombres o apellidos de los pacientes.
+  * Necesidad de almacenar exámenes diagnósticos externos (topografía corneal,
+    Pentacam, OCT, fondo de ojo) que el paciente trae impresos o en digital.
+- Decisiones Técnicas Adoptadas:
+  * Registro demográfico con validación de unicidad de cédula para mayores de edad,
+    pero permitiendo que en menores de edad el campo de identificación sea opcional,
+    asociando opcionalmente el nombre del representante sin bloquear la consulta.
+  * Búsqueda predictiva con autocompletado en tiempo real en frontend por cédula o
+    combinación de nombres/apellidos para evitar registros duplicados.
+  * Almacenamiento seguro de archivos adjuntos clínicos (PDF, PNG, JPG) vinculados
+    a la ficha del paciente mediante hash criptográfico y almacenamiento en servidor.
+
+5.3 M3: Módulo de Historia Clínica y Graduación
+- Hallazgos de Entrevistas:
+  * La consulta optométrica tiene dos públicos: menores de 40 años (solo requieren
+    refracción lejana) y mayores de 40 años (presbicia: requieren esfera lejos +
+    adición para visión de cerca con regla de adición algebraica).
+  * Los profesionales ingresan la adición a menudo sin el signo más (+). El sistema
+    debe formatearlo automáticamente para evitar errores de laboratorio.
+  * La agudeza visual debe registrarse bajo notación fraccionaria estandarizada en
+    pies (20/20, 20/25, 20/40, etc.) tanto en visión lejana como cercana, con y sin
+    corrección óptica.
+  * Se requiere capturar medidas de centrado: Distancia Nasopupilar (DNP/DP en mm)
+    y Altura Pupilar por cada ojo. Para lentes progresivos de gama alta, registrar
+    parámetros opcionales de montura: horizontal, vertical, diagonal, puente (mm)
+    y ángulos pantoscópico y panorámico (grados).
+  * La refracción puede provenir de examen interno o de prescripción externa.
+  * Necesidad de emitir e imprimir directamente Certificados de Aptitud Visual
+    Laboral y Escolar con diagnósticos CIE-10.
+  * Crucial: En el sistema legado se sobreescribían los datos del paciente. En el nuevo
+    sistema, cada examen debe generar un registro inmutable con fecha/hora y usuario.
+    Si un registro se elimina, debe usarse borrado lógico (Soft Delete) para auditoría.
+- Decisiones Técnicas Adoptadas:
+  * Validación estricta de rangos ópticos en backend y frontend (Esfera: -25.00 a
+    +25.00 D; Cilindro: 0.00 a -10.00 D; Eje: 0° a 180°; Adición: +0.75 a +4.00 D).
+  * Conversión automática de adición: cualquier valor positivo sin signo adquiere
+    automáticamente el prefijo '+'.
+  * Comparativa evolutiva en la misma interfaz: visualización del historial previo
+    y del lente anterior del paciente junto a la nueva prescripción.
+  * Implementación de Soft Delete mediante marca temporal (deleted_at) en PostgreSQL.
+
+5.4 M4: Módulo de Pedidos al Laboratorio Óptico
+- Hallazgos de Entrevistas:
+  * El seguimiento de lunas tercerizadas en papel o Excel genera extravíos, falta
+    de control en las fechas de entrega comprometidas con el paciente y desorden.
+  * La orden enviada al laboratorio técnico NO debe contener antecedentes médicos,
+    síntomas personales ni diagnósticos CIE-10 del paciente (privacidad y confidencialidad).
+  * Se requiere seleccionar de forma independiente el ojo derecho e izquierdo, pues
+    un paciente puede requerir solo una luna.
+  * Catálogo dinámico de tratamientos: antirreflejo (básico, verde, azul), fotocromático
+    (Transitions, genérico), filtro azul (Blue Block), protección UV400, policarbonato, etc.
+  * Ciclo de vida claro de la orden y registro de 'Rectificaciones' por garantías.
+- Decisiones Técnicas Adoptadas:
+  * Generación de Orden de Trabajo Técnica Digitalizada con parámetros exclusivos de
+    laboratorio: Tipo de foco (Monofocal, Bifocal, Multifocal/Progresivo), Material
+    (Resina CR-39, Policarbonato, Alto Índice, Mineral/Cristal), Tratamientos y medidas
+    de centrado (DNP y alturas).
+  * Flujo de estados formalizado y auditable: PENDIENTE -> ENVIADO AL LABORATORIO ->
+    RECIBIDO EN ÓPTICA -> ENTREGADO AL CLIENTE.
+  * Módulo de Garantías y Rectificaciones: permite registrar devoluciones de lunas
+    defectuosas o problemas de adaptación vinculadas a la orden original.
+
+5.5 M5: Módulo de Ventas y Cobros
+- Hallazgos de Entrevistas:
+  * Dinámica comercial con cobro de Anticipo al ordenar los lentes y Saldo al retiro.
+  * Gran rotación de armazones: no se codifican individualmente por modelo sino que
+    se agrupan por rango de precio y material. Los consumibles (líquidos, lentes de
+    contacto) sí se manejan con stock unitario estricto.
+  * Ante una anulación de venta, en el sistema legado se producían descuadres contables
+    porque se borraba el dinero pero el producto no volvía al inventario físico.
+  * Necesidad de consulta de flujo de caja diario en tiempo real (ingresos por efectivo,
+    transferencias bancarias, saldos por cobrar).
+- Decisiones Técnicas Adoptadas:
+  * Emisión de Comprobante de Venta Interno con numeración secuencial correlativa.
+  * Modelo híbrido de inventario: agrupación por bandas tarifarias en armazones y
+    control por SKU/unidad en consumibles.
+  * Transaccionalidad ACID en PostgreSQL: la anulación de una venta se encapsula en
+    un bloque transaccional atómico que revierte el asiento de caja, restaura el stock
+    y genera una entrada obligatoria en el Audit Log con el usuario_id responsable.
+
+
+6. DIRECTRICES ARQUITECTÓNICAS Y TECNOLÓGICAS DEFINIDAS
+--------------------------------------------------------------------------------
+A partir de los requerimientos identificados y las recomendaciones técnicas de los
+docentes revisores (Ing. Santillán e Ing. Menéndez), se ratifica la siguiente
+arquitectura tecnológica para el proyecto:
+
+1. Frontend: Single Page Application (SPA) desarrollada en React.js, estructurada con
+   componentes modulares, diseño responsivo optimizado para PCs de consultorio y
+   tablets táctiles, y arquitectura compatible con Progressive Web App (PWA) para
+   facilitar acceso seguro local o remoto.
+2. Backend: API RESTful construida sobre el framework Laravel (PHP), aprovechando su
+   robusto middleware de seguridad, validaciones de peticiones (FormRequests), ORM
+   Eloquent y control estricto de autenticación vía JWT.
+3. Base de Datos: Motor relacional PostgreSQL, elegido por su estricto cumplimiento
+   de estándares ACID, soporte nativo de tipos de datos JSONB para parámetros ópticos
+   avanzados, integridad referencial sólida y capacidades de auditoría mediante triggers.
+4. Trazabilidad y Seguridad (Secure Scrum): Enfoque preventivo de seguridad
+   integrado al ciclo ágil mediante etiquetas S-Tag (Pohl y Hof, 2015), orientadas
+   a las tres subcaracterísticas seleccionadas de la norma ISO/IEC 25010:2023:
+   - Integridad: Validación de dominios clínicos, unicidad y no corrupción de datos.
+   - Responsabilidad: Atribución inequívoca de toda transacción a un usuario mediante
+     Audit Log inmutable.
+   - Autenticidad: Control RBAC estricto y tokens JWT temporalmente acotados.
+
+
+7. MATRIZ CONSOLIDADA DE REQUISITOS DEL SISTEMA
+--------------------------------------------------------------------------------
+
+7.1 REQUISITOS FUNCIONALES NUCLEARES DEL MVP (RF-01 a RF-23):
+
+[M1: AUTENTICACIÓN Y GESTIÓN DE USUARIOS]
+- RF-01 (Control de Acceso Basado en Roles): El sistema debe restringir el acceso a
+  las vistas, formularios y endpoints del backend según tres roles predefinidos:
+  Administrador, Optometrista y Asistente/Vendedor.
+- RF-02 (Gestión Segura de Sesiones JWT): El sistema debe autenticar a los usuarios
+  y gestionar tokens de sesión JWT con expiración temporal configurada y revocación.
+
+[M2: GESTIÓN DE PACIENTES]
+- RF-03 (Registro Demográfico y Filiación): El sistema debe registrar nombres,
+  apellidos, número de cédula, teléfono de contacto y fecha de nacimiento del paciente.
+- RF-04 (Gestión Flexible de Menores de Edad): El sistema debe permitir registrar
+  la ficha clínica de un menor sin exigir de manera mandatoria su cédula de identidad,
+  asociando opcionalmente los datos del representante/tutor.
+- RF-05 (Búsqueda Predictiva y Prevención de Duplicados): El sistema debe contar con
+  búsqueda incremental en tiempo real por cédula o nombres/apellidos para evitar
+  fichas duplicadas.
+- RF-06 (Almacenamiento de Adjuntos Clínicos): El sistema debe permitir cargar y
+  asociar documentos en formato digital (PDF, JPG, PNG) de exámenes visuales externos
+  a la ficha histórica del paciente.
+
+[M3: HISTORIA CLÍNICA Y GRADUACIÓN]
+- RF-07 (Registro Refractivo Ojo por Ojo): El sistema debe capturar por separado
+  para Ojo Derecho (OD) y Ojo Izquierdo (OI): Esfera (+/-), Cilindro (-), Eje
+  (0° a 180°), Adición y Prismas.
+- RF-08 (Formateo Automático de Signo de Adición): El sistema debe asignar de forma
+  automática el signo positivo (+) al campo de adición ante cualquier ingreso numérico.
+- RF-09 (Agudeza Visual Estandarizada): El sistema debe registrar la agudeza visual
+  en notación estándar en pies (20/20, 20/25, etc.) para visión lejana y cercana,
+  con y sin corrección.
+- RF-10 (Parámetros Físico-Ópticos de Centrado): El sistema debe registrar la distancia
+  nasopupilar (DNP) e interpupilar (DP) en mm, y las alturas pupilares por ojo.
+- RF-11 (Parámetros Avanzados para Lentes Progresivos): El sistema debe permitir el
+  registro opcional de medidas de montura: horizontal (A), vertical (B), diagonal (ED),
+  puente (DBL) en mm, ángulo pantoscópico y panorámico en grados.
+- RF-12 (Comparativa Evolutiva de Graduación): El sistema debe mostrar en una misma
+  pantalla la prescripción anterior del paciente contrastada con la refracción actual.
+- RF-13 (Anamnesis Clínica y Diagnósticos CIE-10): El sistema debe capturar antecedentes
+  patológicos sistémicos, motivo de consulta, hallazgos clínicos y diagnóstico CIE-10.
+- RF-14 (Emisión de Certificados Visuales Ocupacionales): El sistema debe generar e
+  imprimir directamente certificados de salud visual laboral y escolar con membrete.
+- RF-15 (Papelera de Reciclaje / Soft Delete Clínico): Los registros de historia clínica
+  eliminados deben marcarse lógicamente como inactivos (deleted_at), impidiendo su
+  borrado físico y asegurando trazabilidad médico-legal.
+
+[M4: PEDIDOS AL LABORATORIO ÓPTICO]
+- RF-16 (Emisión de Orden de Trabajo de Laboratorio): El sistema debe generar órdenes
+  técnicas con los parámetros ópticos de confección, omitiendo datos clínicos sensibles.
+- RF-17 (Parametrización de Foco, Material y Tratamientos): El sistema debe permitir
+  seleccionar tipo de foco, material de luna y un catálogo configurable de tratamientos.
+- RF-18 (Seguimiento de Estados de Confección): El sistema debe gestionar el flujo:
+  Pendiente -> Enviado al Laboratorio -> Recibido en Óptica -> Entregado al Cliente.
+- RF-19 (Gestión de Garantías y Rectificaciones): El sistema debe registrar solicitudes
+  de rectificación de lunas por falta de adaptación o falla técnica, asociadas a la
+  orden original.
+
+[M5: VENTAS Y COBROS]
+- RF-20 (Emisión de Comprobante Interno de Venta): El sistema debe generar comprobantes
+  internos con secuencia numérica única, detallando productos, anticipo y saldo.
+- RF-21 (Gestión Híbrida de Inventario): El sistema debe administrar monturas agrupadas
+  por rango de precio/material y consumibles controlados por stock unitario estricto.
+- RF-22 (Anulación Atómica con Reversa de Stock y Caja): El sistema debe anular ventas
+  mediante transacciones atómicas que descuentan el valor de caja y retornan el producto
+  al stock en una sola operación sin inconsistencias.
+- RF-23 (Consulta de Flujo y Cuadre de Caja Diario): El sistema debe calcular en
+  tiempo real los ingresos diarios clasificados por método de pago y los saldos pendientes.
+
+
+7.2 REQUISITOS NO FUNCIONALES (RNF) BAJO ISO/IEC 25010:2023 Y S-TAGS:
+
+- RNF-01 [S-Tag: SEC-AUT-01] (Autenticidad - Control RBAC):
+  El sistema debe verificar las credenciales y el rol asignado en cada petición a
+  los recursos protegidos, denegando el acceso a rutas no autorizadas.
+- RNF-02 [S-Tag: SEC-AUT-02] (Autenticidad - Gestión Segura de Tokens):
+  El intercambio cliente-servidor debe asegurarse mediante tokens JWT firmados
+  criptográficamente, con tiempo de expiración y revocación segura.
+- RNF-03 [S-Tag: SEC-INT-01] (Integridad - Validación de Datos Clínicos):
+  El sistema debe rechazar parámetros refractivos fuera de los límites ópticos
+  estándar (esfera, cilindro en pasos de 0.25; eje de 0 a 180°).
+- RNF-04 [S-Tag: SEC-INT-02] (Integridad - Consistencia Transaccional ACID):
+  Las operaciones de registro de venta, anulación y retorno de inventario deben
+  ejecutarse bajo transacciones atómicas gestionadas por PostgreSQL.
+- RNF-05 [S-Tag: SEC-INT-03] (Integridad - Inmutabilidad de Historial Clínico):
+  Los registros de refracción previa jamás deben ser sobreescritos; cada consulta
+  debe persistir con su propio timestamp y vínculo relacional.
+- RNF-06 [S-Tag: SEC-RES-01] (Responsabilidad - Bitácora de Auditoría Inmutable):
+  El sistema debe registrar en un Audit Log centralizado cada creación, modificación,
+  anulación o soft-delete, capturando: usuario_id, acción, timestamp UTC y valores
+  anteriores y nuevos.
+- RNF-07 (Portabilidad y Usabilidad - Diseño Responsivo Web/PWA):
+  La interfaz de usuario debe adaptarse fluidamente a pantallas de escritorio (1080p)
+  y tabletas táctiles (iPad/Android), con tiempos de carga óptimos.
+- RNF-08 (Rendimiento - Latencia de Respuesta):
+  El 95% de las consultas de búsqueda predictiva de pacientes e historial clínico
+  deben resolverse en un tiempo inferior a 2.0 segundos en red de área local o internet.
+
+
+8. GESTIÓN DEL ALCANCE: DELIMITACIÓN MVP VS. REQUISITOS FUTUROS
+--------------------------------------------------------------------------------
+Para garantizar el cumplimiento de los plazos del Trabajo de Titulación (16 semanas)
+y aislar riesgos de dependencias externas que puedan bloquear las entregas incrementales,
+se estableció la siguiente delimitación consensuada con el director de grado:
+
+8.1 Requisitos Excluidos Formalmente del MVP (Catalogados como Trabajo Futuro):
+- RF-FUT-01: Facturación Electrónica con el Servicio de Rentas Internas (SRI).
+  Justificación: Requiere firma electrónica en archivo (.p12), pruebas en entorno
+  de homologación del SRI y autorizaciones burocráticas que representan un riesgo
+  crítico no controlable para el avance de los sprints ágiles.
+- RF-FUT-02: Notificaciones Automatizadas por API de WhatsApp / SMS.
+  Justificación: Dependencia de proveedores externos de pago y configuración de
+  servidores webhook. El contacto de recall anual se gestiona de forma manual durante el MVP.
+- RF-FUT-03: Proceso de Extracción, Transformación y Carga (ETL) de Base Legada (.BAK).
+  Justificación: Tarea independiente de ingeniería de datos sobre respaldos SQL peruanos
+  con modelos heterogéneos; programada como fase posterior a la estabilización del núcleo.
+- RF-FUT-04: Módulo Integral de Agenda y Citas Médicas Avanzadas.
+  Justificación: La atención del establecimiento es primordialmente por orden de llegada;
+  se priorizó la gestión clínica y de laboratorio sobre el agendamiento previo.
+- RF-FUT-05: Motor de Personalización Gráfica y Branding Dinámico en Reportes.
+  Justificación: Funcionalidad estética secundaria que no incide en la salud visual.
+
+
+9. CONCLUSIONES Y SIGUIENTES PASOS
+--------------------------------------------------------------------------------
+1. El levantamiento realizado valida plenamente la pertinencia de los 5 módulos
+   nucleares del MVP propuestos en el Anteproyecto de Titulación de la ESPOCH.
+2. Se evidencia una mejora sustancial respecto al sistema legado al resolver las
+   vulnerabilidades de sobreescritura de datos clínicos, falta de trazabilidad de
+   operaciones y ausencia de flujo digital para órdenes de laboratorio.
+3. La articulación de la norma ISO/IEC 25010:2023 con las etiquetas Secure Scrum
+   (S-Tags) proporciona una guía inequívoca para la formulación de los criterios
+   de aceptación del Product Backlog y para la redacción del documento SRS.
+4. El siguiente paso inmediato es la redacción exhaustiva de la Especificación de
+   Requisitos de Software conforme a la norma IEEE 830-1998, utilizando como
+   fundamento riguroso la información consolidada en este informe técnico.
+
+================================================================================
+FIRMAS DE RESPONSABILIDAD TÉCNICA Y ACADÉMICA
+================================================================================
+
+_______________________________________      _______________________________________
+Figueroa Díaz, Omar Santiago                 Villalva Dumancela, Alexander Rafael
+Desarrollador Backend / Investigador         Desarrollador Frontend / Investigador
+C.I. 1803391968                              C.I. 0605351899
+
+
+_______________________________________      _______________________________________
+Ing. Menéndez Verdecia, Jorge Ariel          Ing. Santillán Castillo, Julio Roberto
+Director del Trabajo de Grado                Revisor Técnico / Asesor Académico
+Docente FIE - ESPOCH                         Docente FIE - ESPOCH

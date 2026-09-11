@@ -1,0 +1,990 @@
+================================================================================
+ESPECIFICACIÓN DE REQUISITOS DE SOFTWARE (SRS)
+Conforme al estándar IEEE Std 830-1998
+================================================================================
+Proyecto: Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Revisión: 1.0 Definitiva
+Fecha: 03 de Junio de 2026
+Institución: Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Facultad de Informática y Electrónica — Carrera de Software
+================================================================================
+
+FICHA DEL DOCUMENTO
+--------------------------------------------------------------------------------
+Fecha: 03/06/2026
+Revisión: 1.0 Definitiva
+Autores:
+  - Figueroa Díaz, Omar Santiago
+  - Villalva Dumancela, Alexander Rafael
+Verificado Departamento de Calidad / Asesoría Técnica:
+  - Ing. Menéndez Verdecia, Jorge Ariel (Director de Titulación / Scrum Master)
+  - Ing. Santillán Castillo, Julio Roberto (Revisor Técnico / Asesor Metodológico)
+
+Documento validado por las partes en fecha: 03/06/2026
+Por el cliente:
+  Fdo. Propietario / Optometrista Principal
+  Óptica Vista Visión — Riobamba, Ecuador
+
+Por la empresa suministradora / Equipo de Desarrollo:
+  Fdo. Figueroa Díaz, Omar Santiago       Fdo. Villalva Dumancela, Alexander Rafael
+  Desarrollador Backend                   Desarrollador Frontend
+
+
+================================================================================
+CONTENIDO
+================================================================================
+1. INTRODUCCIÓN
+   1.1 Propósito
+   1.2 Alcance
+   1.3 Personal involucrado
+   1.4 Definiciones, acrónimos y abreviaturas
+   1.5 Referencias
+   1.6 Resumen del documento
+2. DESCRIPCIÓN GENERAL
+   2.1 Perspectiva del producto
+   2.2 Funcionalidad del producto (Módulos MVP del Anteproyecto)
+   2.3 Características de los usuarios
+   2.4 Restricciones de diseño e implementación
+   2.5 Suposiciones y dependencias
+   2.6 Evolución previsible del sistema (Requisitos Futuros)
+3. REQUISITOS ESPECÍFICOS
+   3.1 Requisitos comunes de las interfaces
+       3.1.1 Interfaces de usuario
+       3.1.2 Interfaces de hardware
+       3.1.3 Interfaces de software
+       3.1.4 Interfaces de comunicación
+   3.2 Requisitos funcionales (Organizados por los 5 Módulos Nucleares MVP)
+       3.2.1 Módulo 1: Autenticación y Gestión de Usuarios (RF-01 a RF-02)
+       3.2.2 Módulo 2: Gestión de Pacientes (RF-03 a RF-06)
+       3.2.3 Módulo 3: Historia Clínica y Graduación (RF-07 a RF-15)
+       3.2.4 Módulo 4: Pedidos al Laboratorio Óptico (RF-16 a RF-19)
+       3.2.5 Módulo 5: Ventas y Cobros (RF-20 a RF-23)
+   3.3 Requisitos no funcionales (Alineados a ISO/IEC 25010:2023 y Secure Scrum)
+       3.3.1 Requisitos de rendimiento
+       3.3.2 Seguridad (Autenticidad, Integridad y Responsabilidad - S-Tags)
+       3.3.3 Fiabilidad
+       3.3.4 Disponibilidad
+       3.3.5 Mantenibilidad
+       3.3.6 Portabilidad
+   3.4 Otros requisitos
+       3.4.1 Requisitos Legales y Normativos (LOPDP Ecuador)
+       3.4.2 Requisitos Operativos y de Negocio Local
+4. APÉNDICES
+   Apéndice A: Matriz de Trazabilidad de Requisitos (RF/RNF vs. Módulos vs. S-Tags vs. ISO 25010)
+   Apéndice B: Catálogo de Requisitos Futuros (RF-FUT-01 a RF-FUT-05)
+   Apéndice C: Glosario Técnico de Optometría y Notaciones Clínicas
+
+
+================================================================================
+1. INTRODUCCIÓN
+================================================================================
+La presente Especificación de Requisitos de Software (SRS) formaliza el conjunto de
+necesidades, restricciones y capacidades funcionales y no funcionales que debe
+satisfacer el Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO),
+desarrollado para el establecimiento de salud visual Óptica Vista Visión en la
+ciudad de Riobamba.
+
+1.1 PROPÓSITO
+El propósito de este documento es definir de manera exhaustiva, estructurada y sin
+ambigüedades los requisitos del sistema SGO para:
+a) Guiar el desarrollo técnico del equipo de ingeniería de software en el diseño
+   arquitectónico, modelado de base de datos relacional y codificación frontend/backend.
+b) Servir de contrato técnico y base de validación entre el equipo de desarrollo, el
+   cliente (Óptica Vista Visión) y el tribunal evaluador de la ESPOCH.
+c) Facilitar la planificación del Product Backlog, la delimitación de Sprints bajo
+   metodología Scrum y la verificación de criterios de aceptación de seguridad bajo
+   el estándar ISO/IEC 25010:2023 y el marco Secure Scrum.
+Audiencia: Miembros del equipo de desarrollo, director del proyecto de grado,
+revisores técnicos del tribunal académico y personal administrativo del establecimiento.
+
+1.2 ALCANCE
+- Identificación del producto: Sistema Informático de Gestión Clínica Optométrica (SGO).
+- Descripción: Aplicación web responsiva estructurada como Single Page Application
+  (SPA) con backend basado en servicios RESTful. Integra la gestión de pacientes,
+  expediente clínico optométrico con validación automática de refracción, órdenes
+  digitalizadas para el laboratorio de lentes, inventario comercial híbrido y registro
+  de ventas con comprobante interno.
+- Alineación y Consistencia con el Anteproyecto de Titulación:
+  El sistema se circunscribe estrictamente al alcance de los CINCO MÓDULOS DEL MVP
+  aprobados en el anteproyecto de titulación (Resolución FIE-ESPOCH):
+  * Módulo 1 (M1): Autenticación y Gestión de Usuarios
+  * Módulo 2 (M2): Gestión de Pacientes
+  * Módulo 3 (M3): Historia Clínica y Graduación
+  * Módulo 4 (M4): Pedidos al Laboratorio Óptico
+  * Módulo 5 (M5): Ventas y Cobros
+- Beneficios esperados:
+  * Eliminación de la sobreescritura de expedientes clínicos presente en el sistema legado.
+  * Trazabilidad total de operaciones sensibles mediante bitácora inmutable (Audit Log).
+  * Control riguroso de estados en los pedidos de lunas tercerizadas a laboratorios.
+  * Agilización transaccional en ventas y cuadre diario de caja.
+  * Cumplimiento con las subcaracterísticas de seguridad (Autenticidad, Integridad y
+    Responsabilidad) de la norma ISO/IEC 25010:2023.
+
+1.3 PERSONAL INVOLUCRADO
++-----------------------+---------------------+----------------------+-------------------------------+-----------------------------------+------------+
+| Nombre                | Rol                 | Categoría Profesional| Responsabilidades             | Información de Contacto           | Aprobación |
++-----------------------+---------------------+----------------------+-------------------------------+-----------------------------------+------------+
+| Omar Santiago         | Desarrollador       | Egresado Carrera de  | Arquitectura backend, modelo  | omar.figueroa@espoch.edu.ec       | Sí         |
+| Figueroa Díaz         | Backend / Autor     | Software (ESPOCH)    | de datos relacional y API REST| Telf: 0992714396                  |            |
+| Alexander Rafael      | Desarrollador       | Egresado Carrera de  | Interfaz de usuario (React),  | alexander.villalva@gmail.com      | Sí         |
+| Villalva Dumancela    | Frontend / Autor    | Software (ESPOCH)    | UX clínica y validaciones SPA | Telf: 0958763979                  |            |
+| Ing. Jorge Ariel      | Director Trabajo de | Docente Ocasional    | Dirección metodológica Scrum, | jorge.menendez@espoch.edu.ec      | Sí         |
+| Menéndez Verdecia     | Grado / Scrum Master| Titular Auxiliar FIE | supervisión de calidad y BD   | Telf: 0983689403                  |            |
+| Ing. Julio Roberto    | Revisor Técnico /   | Docente Titular      | Asesoría técnica en seguridad,| julio.santillan@espoch.edu.ec     | Sí         |
+| Santillán Castillo    | Asesor Académico    | Agregado FIE         | accesibilidad web y PWA       | Telf: FIE-ESPOCH                  |            |
+| Propietario /         | Stakeholder         | Licenciado en        | Definición de procesos,       | Óptica Vista Visión               | Sí         |
+| Optometrista Principal| Principal / Cliente | Optometría           | validación clínica y pruebas  | Riobamba, Ecuador                 |            |
++-----------------------+---------------------+----------------------+-------------------------------+-----------------------------------+------------+
+
+1.4 DEFINICIONES, ACRÓNIMOS Y ABREVIATURAS
+- ACID: Atomicidad, Consistencia, Aislamiento y Durabilidad (propiedades transaccionales de BD).
+- Adición (Add): Potencia dióptrica positiva adicional requerida para visión de cerca en presbicia.
+- CIE-10: Clasificación Internacional de Enfermedades, 10.ª edición (OMS).
+- Cilindro (Cyl): Potencia dióptrica requerida para corregir el astigmatismo.
+- Dioptría (D): Unidad de medida de la potencia óptica de refracción de una lente.
+- DNP / DP: Distancia Nasopupilar / Distancia Interpupilar en milímetros (mm).
+- Eje (Axis): Orientación meridional del cilindro astigmático, medida de 0° a 180°.
+- Esfera (Sph): Potencia de corrección para miopía (signo -) o hipermetropía (signo +).
+- IEEE: Institute of Electrical and Electronics Engineers.
+- ISO/IEC 25010:2023: Estándar internacional para evaluación de calidad del producto software.
+- JWT: JSON Web Token (estándar abierto RFC 7519 para tokens seguros de autenticación).
+- LOPDP: Ley Orgánica de Protección de Datos Personales de la República del Ecuador.
+- MDI: Multiple Document Interface (arquitectura de ventanas superpuestas del software legado).
+- MVP: Producto Mínimo Viable (Minimum Viable Product).
+- OD / OI: Ojo Derecho (Oculus Dexter) / Ojo Izquierdo (Oculus Sinister).
+- RBAC: Role-Based Access Control (Control de Acceso Basado en Roles).
+- SGO: Sistema de Gestión Optométrica.
+- Soft Delete: Borrado lógico mediante marcado de registro inactivo (timestamp deleted_at).
+- S-Tag: Secure Scrum Security Tag (etiqueta formal de trazabilidad de requisitos de seguridad).
+
+1.5 REFERENCIAS
+[1] IEEE Std 830-1998, IEEE Recommended Practice for Software Requirements Specifications.
+[2] ISO/IEC 25010:2023, Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — Product quality model.
+[3] Anteproyecto del Trabajo de Grado: Desarrollo de un sistema informático de gestión clínica optométrica utilizando la metodología ágil Scrum, garantizando la seguridad de los datos de salud visual, ESPOCH, Mayo 2026.
+[4] Informe Técnico Consolidado de Entrevistas y Levantamiento de Requerimientos (informeEntrevistasConsolidado.txt), Mayo 2026.
+[5] Pohl, C., & Hof, H. J. (2015). Secure Scrum: Development of Secure Software with Scrum.
+[6] Schwaber, K., & Sutherland, J. (2020). La Guía de Scrum: Las Reglas del Juego.
+[7] Registro Oficial de la República del Ecuador, Ley Orgánica de Protección de Datos Personales (LOPDP), Mayo 2021.
+
+1.6 RESUMEN DEL DOCUMENTO
+El documento se divide en 4 secciones: la Sección 1 introduce el contexto general,
+actores y referencias; la Sección 2 presenta la perspectiva global, arquitectura, perfiles
+de usuario y restricciones del sistema; la Sección 3 detalla exhaustivamente los
+requisitos funcionales (RF-01 a RF-23) y no funcionales (RNF-01 a RNF-08) estructurados
+en tablas formalizadas; y la Sección 4 contiene los apéndices de trazabilidad y glosario.
+
+
+================================================================================
+2. DESCRIPCIÓN GENERAL
+================================================================================
+
+2.1 PERSPECTIVA DEL PRODUCTO
+El Sistema de Gestión Optométrica (SGO) es un producto de software nuevo, autónomo e
+independiente, concebido para reemplazar la aplicación de escritorio monolítica legada
+de la Óptica Vista Visión. Se estructura bajo una moderna arquitectura web cliente-servidor
+desacoplada:
+- Capa Cliente (Frontend): Single Page Application (SPA) responsiva desarrollada en React.
+- Capa de Servicios (Backend): API RESTful desarrollada sobre el framework Laravel.
+- Capa de Persistencia: Base de datos relacional PostgreSQL con soporte transaccional ACID.
+
+El sistema interactúa externamente con los laboratorios ópticos mediante la emisión de
+órdenes de trabajo técnicas estandarizadas (en formato digital/imprimible), y con los
+pacientes mediante la generación de comprobantes de venta y certificados visuales ocupacionales.
+
+2.2 FUNCIONALIDAD DEL PRODUCTO
+De acuerdo con la delimitación del MVP establecida en el Anteproyecto de Titulación,
+el sistema implementa cinco módulos nucleares interconectados:
+1. Módulo de Autenticación y Gestión de Usuarios: Registro de operadores, autenticación
+   mediante JWT y control de acceso granular según roles (Administrador, Optometrista,
+   Asistente).
+2. Módulo de Gestión de Pacientes: Registro de datos demográficos y de filiación,
+   búsqueda predictiva con prevención de duplicados, soporte ágil para menores de edad
+   y repositorio seguro de archivos complementarios adjuntos (PDFs/imágenes).
+3. Módulo de Historia Clínica y Graduación: Registro exhaustivo de parámetros refractivos
+   por ojo (Esfera, Cilindro, Eje, Adición con signo positivo automático, Prismas,
+   Agudeza Visual en notación 20/XX, Distancia Nasopupilar y medidas de montura),
+   anamnesis CIE-10, comparativa evolutiva con lentes anteriores, emisión de certificados
+   ocupacionales y preservación histórica con borrado lógico (Soft Delete).
+4. Módulo de Pedidos al Laboratorio Óptico: Creación de órdenes técnicas de confección
+   omitiendo datos médicos confidenciales, catálogo de focos, materiales y tratamientos,
+   seguimiento del ciclo de estados (Pendiente, Enviado, Recibido, Entregado) y control
+   de rectificaciones por garantía.
+5. Módulo de Ventas y Cobros: Emisión de comprobantes internos de venta, control híbrido
+   de stock (monturas por rango de precio y consumibles por unidad), cobro de anticipos
+   y liquidación de saldos, reversión atómica de caja e inventario ante anulaciones,
+   y monitoreo en tiempo real del flujo financiero diario.
+
+2.3 CARACTERÍSTICAS DE LOS USUARIOS
++-------------------------+--------------------+------------------------+-------------------------------------------------------------+
+| Tipo de Usuario         | Formación          | Habilidades            | Actividades Principales en el Sistema                       |
++-------------------------+--------------------+------------------------+-------------------------------------------------------------+
+| Administrador /         | Superior en        | Gestión administrativa,| Gestión de usuarios y perfiles, visualización de auditoría, |
+| Propietario             | Optometría / Adm.  | manejo de inventarios  | anulación de ventas con reversión atómica, apertura y       |
+|                         | de Empresas        | y supervisión contable | cierre de caja diario, reportes y métricas de desempeño.   |
++-------------------------+--------------------+------------------------+-------------------------------------------------------------+
+| Optometrista Clínico    | Profesional        | Evaluación refractiva, | Registro y consulta de historias clínicas, refracción       |
+|                         | Licenciado en      | diagnóstico patológico | automatizada, registro de parámetros avanzados de montura,  |
+|                         | Optometría         | y prescripción óptica  | emisión de certificados ocupacionales, pedidos a laborat.   |
++-------------------------+--------------------+------------------------+-------------------------------------------------------------+
+| Asistente / Vendedor    | Bachiller o técnico| Atención al cliente,   | Registro demográfico de pacientes, búsqueda de fichas,      |
+|                         | en ventas y cobranz| ventas de mostrador y  | emisión de órdenes técnicas, registro de ventas, cobranza   |
+|                         |                    | digitación básica      | de anticipos y saldos, entrega de trabajos de laboratorio.  |
++-------------------------+--------------------+------------------------+-------------------------------------------------------------+
+
+2.4 RESTRICCIONES DE DISEÑO E IMPLEMENTACIÓN
+1. Restricción de Alcance y Tiempo: El desarrollo está restringido a un período estricto
+   de 16 semanas conforme al cronograma de titulación de la ESPOCH (Fase 1 a Fase 4).
+2. Restricción Tecnológica: Uso obligatorio de React en frontend, Laravel en backend y
+   PostgreSQL como gestor de base de datos relacional.
+3. Restricción de Independencia Externa: Se excluye la facturación electrónica SRI y APIs
+   externas de mensajería comercial para evitar dependencias que paralicen las entregas.
+4. Restricción Normativa: Cumplimiento de la Ley Orgánica de Protección de Datos Personales
+   (LOPDP Ecuador) respecto al tratamiento confidencial y seguro de datos de salud.
+5. Restricción de Concurrencia y Despliegue: Capacidad para operar de manera local en el
+   servidor del consultorio o en servidor web remoto (GCP / VPS) mediante protocolo HTTPS.
+
+2.5 SUPOSICIONES Y DEPENDENCIAS
+1. Conectividad: Se asume que el consultorio cuenta con red local operativa (LAN/WLAN)
+   para la comunicación fluida entre terminales de escritorio y tabletas.
+2. Navegadores: Los clientes utilizarán navegadores web modernos con soporte ECMAScript 6+
+   (Google Chrome, Mozilla Firefox, Microsoft Edge o Safari).
+3. Hardware de Entrada: Los usuarios disponen de teclado numérico estándar y mouse/pantalla
+   táctil para la agilización de la captura de datos refractivos.
+4. Dependencia de Laboratorios: Se asume que los laboratorios ópticos externos continuarán
+   recibiendo las especificaciones de lunas mediante órdenes impresas o en PDF digital.
+
+2.6 EVOLUCIÓN PREVISIBLE DEL SISTEMA (REQUISITOS FUTUROS)
+El diseño arquitectónico modular prevé la integración en fases posteriores al MVP de:
+- RF-FUT-01: Integración directa de Facturación Electrónica con los Web Services del SRI.
+- RF-FUT-02: Envío automático de notificaciones de control anual y alertas vía WhatsApp API.
+- RF-FUT-03: Proceso ETL para migración histórica de 3.000 a 5.000 registros desde el
+  archivo de respaldo .BAK del sistema legado.
+- RF-FUT-04: Módulo de Agenda de Citas Médicas y recordatorios de turnos.
+- RF-FUT-05: Motor de personalización corporativa con logotipos dinámicos en reportes.
+
+================================================================================
+3. REQUISITOS ESPECÍFICOS
+================================================================================
+
+3.1 REQUISITOS COMUNES DE LAS INTERFACES
+
+3.1.1 Interfaces de Usuario
+- Interfaz web SPA intuitiva, minimalista y con diseño visual adaptado al entorno clínico.
+- Formularios optométricos organizados en cuadrículas simétricas para OD y OI, con teclas
+  rápidas (Tab / Enter) para transitar entre Esfera, Cilindro, Eje y Adición.
+- Diseño responsivo adaptado a resoluciones de monitor de escritorio (1920x1080, 1366x768)
+  y tabletas táctiles (mínimo 1024x768) en posición horizontal.
+- Feedback visual inmediato (notificaciones Toast y diálogos de confirmación) ante
+  operaciones destructivas o guardados exitosos.
+
+3.1.2 Interfaces de Hardware
+- Compatibilidad con computadoras personales de escritorio y computadoras portátiles.
+- Compatibilidad con tabletas táctiles para digitación clínica al lado del foróptero.
+- Compatibilidad con impresoras de inyección de tinta/láser estándar (hojas A4/Carta para
+  certificados de salud visual y órdenes de laboratorio) e impresoras térmicas de 80 mm
+  para comprobantes internos de venta.
+
+3.1.3 Interfaces de Software
+- Motor de Base de Datos PostgreSQL 15+: Conexión segura mediante PDO/Eloquent.
+- API Backend Laravel 10+: Respuestas estructuradas en formato JSON bajo estándar REST.
+- Sistema de Generación de Documentos: Librería para renderizado de PDFs (ej. DomPDF / Snappy)
+  para certificados médicos y órdenes de laboratorio.
+- Cifrado y Tokens: Librería JWT (tymon/jwt-auth o Laravel Sanctum) para generación de firmas SHA-256.
+
+3.1.4 Interfaces de Comunicación
+- Protocolo de transporte seguro HTTPS mediante TLS 1.2 / TLS 1.3 en todas las conexiones.
+- Intercambio de cargas útiles (payloads) exclusivamente en formato UTF-8 JSON.
+
+
+3.2 REQUISITOS FUNCIONALES (POR MÓDULO DEL MVP)
+
+A continuación se especifica cada requisito funcional siguiendo el formato tabular
+estandarizado de la plantilla IEEE 830:
+
+--------------------------------------------------------------------------------
+3.2.1 MÓDULO 1: AUTENTICACIÓN Y GESTIÓN DE USUARIOS (M1)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-01                                                  |
+| NOMBRE DE REQUISITO:  Control de Acceso Basado en Roles (RBAC)               |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2 (Hallazgo M1), Anteproyecto |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe autenticar a los operadores del sistema y restringir el      |
+| acceso a las rutas, vistas, acciones y endpoints de la API según tres perfiles|
+| de usuario predeterminados: Administrador/Propietario, Optometrista y        |
+| Asistente/Vendedor.                                                          |
+| ENTRADAS:                                                                    |
+| - Nombre de usuario / correo electrónico y contraseña cifrada.              |
+| PROCESO:                                                                     |
+| - El backend verifica las credenciales contra la tabla de usuarios.          |
+| - Recupera el rol asignado y genera el token de autorización correspondiente. |
+| - Aplica middlewares de seguridad en cada petición a la API REST.            |
+| SALIDAS:                                                                     |
+| - Acceso concedido a los módulos autorizados según perfil, o denegación (403)|
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-AUT-01]: Bloqueo efectivo de acceso a rutas no autorizadas en frontend|
+|   y backend ante peticiones manipuladas.                                     |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-02                                                  |
+| NOMBRE DE REQUISITO:  Gestión Segura de Sesiones Basadas en JWT              |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 2 (Decisiones Técnicas), Anteproyecto       |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe gestionar sesiones de usuario activas y acotadas temporalmente|
+| utilizando tokens JWT cifrados, implementando renovación periódica y cierre  |
+| seguro de sesión con invalidación de token.                                  |
+| ENTRADAS:                                                                    |
+| - Petición de login con credenciales válidas; encabezado Bearer Token en cada|
+|   solicitud posterior.                                                       |
+| PROCESO:                                                                     |
+| - Generación del token con payload seguro (user_id, rol, exp).               |
+| - Validación de expiración (máximo 8 horas) en cada llamada HTTP.             |
+| - Inclusión de token en lista negra (blacklist) al cerrar sesión.            |
+| SALIDAS:                                                                     |
+| - Token JWT emitido en cabecera HTTP; revocación inmediata ante logout.      |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-AUT-02]: Rechazo automático de peticiones con tokens expirados,       |
+|   alterados o inexistentes (código HTTP 401 Unauthorized).                   |
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.2 MÓDULO 2: GESTIÓN DE PACIENTES (M2)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-03                                                  |
+| NOMBRE DE REQUISITO:  Registro Demográfico y Filiación del Paciente          |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2, Anteproyecto               |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir registrar, editar y consultar la ficha básica del   |
+| paciente incluyendo: nombres completos, apellidos completos, número de cédula|
+| de identidad, fecha de nacimiento, teléfono de contacto y dirección.         |
+| ENTRADAS:                                                                    |
+| - Formulario de filiación completado por el operador.                         |
+| PROCESO:                                                                     |
+| - Validación del algoritmo de cédula ecuatoriana (módulo 10) para adultos.   |
+| - Verificación de unicidad del número de cédula en base de datos.            |
+| - Persistencia del registro con marcas temporales de creación y autor.       |
+| SALIDAS:                                                                     |
+| - Ficha de paciente creada exitosamente con identificador único (ID).        |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-01]: Rechazo de cédulas duplicadas o estructuralmente inválidas.  |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-04                                                  |
+| NOMBRE DE REQUISITO:  Gestión Flexible de Menores de Edad                    |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 2 (Hallazgo M2), Requisitos Detectados      |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir crear y asociar expedientes clínicos a nombre de    |
+| menores de edad sin exigir de forma obligatoria el número de cédula de       |
+| identidad, permitiendo registrar opcionalmente el nombre del representante.  |
+| ENTRADAS:                                                                    |
+| - Checkbox Menor de Edad, nombres, apellidos, fecha de nacimiento del menor, |
+|   nombre opcional del tutor o representante legal.                           |
+| PROCESO:                                                                     |
+| - Desactivación de la obligatoriedad del campo cédula si es menor de edad.   |
+| - Generación de un identificador sustituto interno temporal para el menor.   |
+| SALIDAS:                                                                     |
+| - Ficha clínica del menor registrada sin trabas en el flujo asistencial.     |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Registro exitoso de pacientes de 0 a 17 años sin cédula registrada.        |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-05                                                  |
+| NOMBRE DE REQUISITO:  Búsqueda Predictiva y Detección de Duplicados          |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2, Anteproyecto               |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe ofrecer una interfaz de búsqueda con autocompletado en tiempo|
+| real capaz de localizar pacientes a partir de los primeros caracteres de su |
+| cédula o nombres/apellidos, alertando de posibles duplicados existentes.     |
+| ENTRADAS:                                                                    |
+| - Texto de búsqueda ingresado por el operador (mínimo 2 caracteres).         |
+| PROCESO:                                                                     |
+| - Consulta indexada a la base de datos PostgreSQL usando operadores ILIKE o  |
+|   trigramas de similitud de texto.                                           |
+| SALIDAS:                                                                     |
+| - Lista desplegable de pacientes coincidentes con nombre, cédula y edad.     |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-01]: Despliegue de resultados en tiempo < 1.0s; prevención activa |
+|   de re-registros de un mismo paciente.                                      |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-06                                                  |
+| NOMBRE DE REQUISITO:  Carga y Repositorio de Adjuntos Clínicos               |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Requisitos Detectados                    |
+| PRIORIDAD:            Media / Deseado                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir cargar, asociar y visualizar archivos digitales de  |
+| exámenes complementarios externos (Pentacam, OCT, topografías, etc.) en      |
+| formatos estándar (PDF, JPG, PNG) a la ficha del paciente.                   |
+| ENTRADAS:                                                                    |
+| - Archivo digital seleccionado por el usuario; descripción del estudio.      |
+| PROCESO:                                                                     |
+| - Validación del tipo MIME y tamaño de archivo (máximo 10 MB).               |
+| - Almacenamiento seguro en disco con nombre hash UUID y registro en BD.      |
+| SALIDAS:                                                                     |
+| - Enlace persistente de descarga y visualización del archivo en la ficha.    |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-02]: Verificación de integridad de almacenamiento y aislamiento   |
+|   de archivos por paciente.                                                  |
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.3 MÓDULO 3: HISTORIA CLÍNICA Y GRADUACIÓN (M3)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-07                                                  |
+| NOMBRE DE REQUISITO:  Examen Refractivo Estándar Ojo por Ojo                 |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2 (Hallazgo M3), Anteproyecto |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe capturar y validar los parámetros de refracción óptica de    |
+| manera independiente para Ojo Derecho (OD) y Ojo Izquierdo (OI): Esfera (Sph)|
+| de -25.00 a +25.00 D; Cilindro (Cyl) de 0.00 a -10.00 D; Eje de 0° a 180°;    |
+| Adición (Add) de +0.75 a +4.00 D; Prismas y Base (Superior, Inferior, etc.). |
+| ENTRADAS:                                                                    |
+| - Valores numéricos de dioptrías y ángulos digitados por el optometrista.    |
+| PROCESO:                                                                     |
+| - Validación de pasos de 0.25 en esfera, cilindro y adición.                 |
+| - Validación de rango de 0 a 180 en eje solo cuando hay cilindro presente.   |
+| SALIDAS:                                                                     |
+| - Registro estructurado de graduación clínica guardado en base de datos.     |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-01]: Bloqueo de valores fuera de rango clínico tanto en cliente   |
+|   como en el backend.                                                        |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-08                                                  |
+| NOMBRE DE REQUISITO:  Formateo Automático de Signo de Adición                |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Requisitos Detectados                    |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe asumir por defecto el signo positivo (+) en el campo Adición,|
+| formateando y convirtiendo de manera automática cualquier número ingresado   |
+| sin signo para garantizar su correcta notación algebraica clínica.           |
+| ENTRADAS:                                                                    |
+| - Cadena o número ingresado en el campo Adición (ej. 2, 1.75, +2.50).        |
+| PROCESO:                                                                     |
+| - Detección de ausencia de signo e interpolación del prefijo +.              |
+| SALIDAS:                                                                     |
+| - Valor visualizado y persistido con notación explícita (ej. +2.00).         |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-01]: Todo valor de adición se almacena obligatoriamente con prefijo|
+|   positivo estandarizado.                                                    |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-09                                                  |
+| NOMBRE DE REQUISITO:  Agudeza Visual Estandarizada en Notación Fraccionaria  |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Anteproyecto                             |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir registrar la agudeza visual de lejos y cerca, con   |
+| corrección (CC) y sin corrección (SC), utilizando la notación fraccionaria   |
+| Snellen estándar en pies (ej. 20/20, 20/25, 20/30, 20/40, 20/50, 20/100, etc.)|
+| ENTRADAS:                                                                    |
+| - Selección de lista desplegable o digitación de fracción Snellen por ojo.   |
+| PROCESO:                                                                     |
+| - Validación del formato regular 20/[0-9]{2,3}.                              |
+| SALIDAS:                                                                     |
+| - Parámetros de agudeza visual almacenados en la historia clínica.           |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Consistencia de notación de agudeza en pantallas e impresiones clínicas.   |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-10                                                  |
+| NOMBRE DE REQUISITO:  Parámetros Físico-Ópticos Estándar de Centrado         |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2, Requisitos Detectados      |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe registrar las medidas de centrado pupilar necesarias para la |
+| confección de lentes: Distancia Interpupilar (DP) en mm, Distancia           |
+| Nasopupilar monocular (DNP derecha e izquierda en mm) y Altura Pupilar (mm). |
+| ENTRADAS:                                                                    |
+| - Medidas milimétricas ingresadas en los campos de centrado.                 |
+| PROCESO:                                                                     |
+| - Validación de rango razonable (DNP: 24 a 38 mm; DP total: 48 a 76 mm).     |
+| SALIDAS:                                                                     |
+| - Parámetros de centrado asociados al registro refractivo del paciente.      |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-01]: Validación de sumatoria consistente (DNP OD + DNP OI = DP).  |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-11                                                  |
+| NOMBRE DE REQUISITO:  Parámetros Avanzados para Lentes Progresivos/Alta Gama |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2, Requisitos Detectados      |
+| PRIORIDAD:            Media / Deseado                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir registrar opcionalmente las medidas físicas de la   |
+| montura: ancho horizontal (A en mm), altura vertical (B en mm), diagonal     |
+| efectiva (ED en mm), distancia del puente (DBL en mm), ángulo pantoscópico    |
+| (grados) y ángulo panorámico/facial (grados).                                |
+| ENTRADAS:                                                                    |
+| - Valores físicos de montura en subformulario de personalización de lente.   |
+| PROCESO:                                                                     |
+| - Almacenamiento en estructura semiestructurada JSONB en PostgreSQL.          |
+| SALIDAS:                                                                     |
+| - Parámetros avanzados listos para su exportación a orden de laboratorio.    |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Disponibilidad de datos avanzados al generar pedidos de lentes progresivos.|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-12                                                  |
+| NOMBRE DE REQUISITO:  Comparativa Evolutiva y Contraste de Lente Anterior    |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Requisitos Detectados                    |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe presentar en la misma interfaz de consulta optométrica la    |
+| graduación anterior del paciente (último examen registrado o lentes en uso)  |
+| confrontada directamente con la nueva medición para evaluar progresión.      |
+| ENTRADAS:                                                                    |
+| - Selección de un paciente con historial clínico previo.                     |
+| PROCESO:                                                                     |
+| - Carga asíncrona del último registro refractivo del paciente.               |
+| - Presentación lado a lado en pantalla de refracción previa vs. actual.      |
+| SALIDAS:                                                                     |
+| - Cuadro comparativo clínico interactivo.                                    |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-02]: Lectura fidedigna del historial previo sin riesgo de cruce.  |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-13                                                  |
+| NOMBRE DE REQUISITO:  Anamnesis Clínica y Diagnósticos CIE-10                |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2 (Hallazgo M3), Anteproyecto |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir registrar antecedentes patológicos personales y     |
+| familiares (diabetes, hipertensión, glaucoma), motivo de consulta, hallazgos|
+| del examen ocular físico y diagnóstico clasificado según catálogo CIE-10.    |
+| ENTRADAS:                                                                    |
+| - Selección de patologías sistémicas, texto de motivo de consulta y código    |
+|   CIE-10 (ej. H52.1 Miopía, H52.2 Astigmatismo, H52.4 Presbicia).           |
+| PROCESO:                                                                     |
+| - Vinculación relacional de diagnósticos con la historia clínica.            |
+| SALIDAS:                                                                     |
+| - Registro integral de anamnesis clínica persistido.                         |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Búsqueda rápida y selección estandarizada de patologías CIE-10.            |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-14                                                  |
+| NOMBRE DE REQUISITO:  Generación e Impresión de Certificados Ocupacionales   |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2 (Hallazgo Certificados)     |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe generar e imprimir directamente certificados de salud visual |
+| de aptitud laboral o escolar, extrayendo automáticamente los datos del        |
+| paciente, diagnóstico, agudeza visual, recomendaciones y firma profesional.  |
+| ENTRADAS:                                                                    |
+| - Solicitud de certificado desde la historia clínica; tipo de aptitud.       |
+| PROCESO:                                                                     |
+| - Renderizado de plantilla formal en PDF con membrete institucional.         |
+| SALIDAS:                                                                     |
+| - Documento PDF imprimible y almacenable digitalmente.                       |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Impresión directa en formato A4 con todos los campos clínicos consolidados.|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-15                                                  |
+| NOMBRE DE REQUISITO:  Papelera de Reciclaje / Soft Delete Clínico            |
+| TIPO:                 Requisito / Restricción                                |
+| FUENTE DEL REQUISITO: Entrevista 2 (Decisiones Técnicas), Requisitos Detect. |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| Los registros de historia clínica y refracción eliminados o modificados no   |
+| deben ser borrados físicamente de la base de datos; deben marcarse de forma  |
+| lógica (soft delete) en una papelera de reciclaje para auditoría forense.    |
+| ENTRADAS:                                                                    |
+| - Petición de eliminación ejecutada por un usuario autorizado.               |
+| PROCESO:                                                                     |
+| - Asignación de timestamp UTC en la columna deleted_at del registro.         |
+| - Ocultamiento del registro en vistas operativas estándar.                   |
+| - Generación obligatoria de registro en el Audit Log con motivo del borrado. |
+| SALIDAS:                                                                     |
+| - Registro preservado físicamente en la BD y excluido de consultas activas.  |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-03] y [SEC-RES-01]: Verificación de persistencia física en tabla  |
+|   PostgreSQL con trazabilidad completa del evento.                           |
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.4 MÓDULO 4: PEDIDOS AL LABORATORIO ÓPTICO (M4)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-16                                                  |
+| NOMBRE DE REQUISITO:  Emisión de Orden de Trabajo de Laboratorio             |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2, Anteproyecto               |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe emitir una orden de trabajo técnica digital con los datos    |
+| exclusivos de confección óptica (graduación, alturas, DNP, montura),         |
+| omitiendo deliberadamente diagnósticos clínicos o datos sensibles de salud.  |
+| ENTRADAS:                                                                    |
+| - Selección de historia clínica y parámetros de fabricación de lunas.        |
+| PROCESO:                                                                     |
+| - Filtro de datos: inclusión de parámetros ópticos y exclusión de anamnesis. |
+| - Generación de identificador correlativo de orden de laboratorio.           |
+| SALIDAS:                                                                     |
+| - Orden técnica digitalizada descargable en PDF e imprimible.                |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-01]: Comprobación de que la orden emitida para el laboratorio no  |
+|   expone antecedentes personales ni diagnósticos patológicos del paciente.   |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-17                                                  |
+| NOMBRE DE REQUISITO:  Especificaciones de Material, Foco y Tratamientos      |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Requisitos Detectados                    |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir parametrizar en cada pedido el tipo de foco (mono-  |
+| focal, bifocal flat-top/invisible, progresivo), material de luna (resina,    |
+| policarbonato, alto índice, cristal) y catálogo configurable de tratamientos |
+| (antirreflejo básico/azul, fotocromático, filtro UV, antirrayas).            |
+| ENTRADAS:                                                                    |
+| - Opciones seleccionadas por el operador en el formulario de pedido.         |
+| PROCESO:                                                                     |
+| - Validación de compatibilidad entre material, foco y tratamientos.          |
+| - Permite selección independiente para luna derecha, izquierda o ambas.      |
+| SALIDAS:                                                                     |
+| - Especificación técnica completa asociada al pedido.                        |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Configuración dinámica y selección fluida sin duplicación de descripciones.|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-18                                                  |
+| NOMBRE DE REQUISITO:  Flujo de Estados de Confección del Pedido              |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2 (Hallazgo M4), Anteproyecto |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe rastrear y gestionar el ciclo de vida del pedido al          |
+| laboratorio a través del flujo estandarizado: PENDIENTE -> ENVIADO AL        |
+| LABORATORIO -> RECIBIDO EN ÓPTICA -> ENTREGADO AL CLIENTE.                   |
+| ENTRADAS:                                                                    |
+| - Cambio manual de estado realizado por el operador autorizado.              |
+| PROCESO:                                                                     |
+| - Validación de transición permitida en la máquina de estados.               |
+| - Registro automático de fecha, hora y usuario que efectuó la transición.    |
+| SALIDAS:                                                                     |
+| - Estado actualizado en tablero kanban/lista de pedidos; alerta de entrega.  |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-RES-01]: Historial auditable de cada cambio de estado del pedido.     |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-19                                                  |
+| NOMBRE DE REQUISITO:  Gestión de Garantías y Rectificaciones                 |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 2 (Hallazgo M4), Requisitos Detectados      |
+| PRIORIDAD:            Media / Deseado                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir registrar ajustes o rectificaciones de lunas        |
+| devueltas por el paciente debido a fallas técnicas de laboratorio o falta de |
+| adaptación dióptrica, vinculando la re-orden a la orden original de trabajo. |
+| ENTRADAS:                                                                    |
+| - Selector Rectificación/Garantía sobre un pedido previo; motivo de cambio.  |
+| PROCESO:                                                                     |
+| - Creación de orden técnica derivada con referencia a la orden matriz.       |
+| SALIDAS:                                                                     |
+| - Orden de rectificación emitida sin duplicación de cobro al cliente.        |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-RES-01]: Trazabilidad de incidencias técnicas por proveedor/laborat.  |
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.5 MÓDULO 5: VENTAS Y COBROS (M5)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-20                                                  |
+| NOMBRE DE REQUISITO:  Emisión de Comprobante Interno de Venta                |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2, Anteproyecto               |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe emitir comprobantes internos de venta con numeración         |
+| secuencial correlativa, desglosando cliente, ítems comercializados (lunas,   |
+| armazón, accesorios), total, monto de anticipo cobrado y saldo pendiente.    |
+| ENTRADAS:                                                                    |
+| - Datos de la venta, productos, valores monetarios y método de pago.         |
+| PROCESO:                                                                     |
+| - Cálculo aritmético automático de subtotal, descuentos y saldo por cobrar.  |
+| - Asignación de número de comprobante único e irrepetible.                   |
+| SALIDAS:                                                                     |
+| - Comprobante de venta generado e imprimible en formato ticket o recibo.     |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Secuencia numérica estricta sin saltos ni duplicados en comprobantes.      |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-21                                                  |
+| NOMBRE DE REQUISITO:  Gestión Híbrida de Inventario                          |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2 (Hallazgo M5), Anteproyecto |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe soportar un modelo híbrido de control de inventario:         |
+| a) Armazones y monturas: venta y control agrupado por categoría de precio y  |
+|    material (plástico, metal, acetato, etc.) sin exigencia de código unitario.|
+| b) Consumibles y accesorios (gotas, líquidos, lentes de contacto): control   |
+|    unitario estricto de stock con descuento automático por cada venta.       |
+| ENTRADAS:                                                                    |
+| - Selección de armazón por tarifa o consumible por código de producto.       |
+| PROCESO:                                                                     |
+| - Descuento automático de existencias físicas para productos unitarios.      |
+| SALIDAS:                                                                     |
+| - Stock actualizado en tiempo real en base de datos.                         |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-02]: Descuento consistente y prevención de stock negativo.        |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-22                                                  |
+| NOMBRE DE REQUISITO:  Anulación con Reversa Atómica de Stock y Caja          |
+| TIPO:                 Requisito / Restricción                                |
+| FUENTE DEL REQUISITO: Entrevista 2 (Decisiones Menéndez), Anteproyecto       |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| Al anular una venta autorizada, el sistema debe ejecutar una transacción     |
+| atómica única que revierta simultáneamente el movimiento de caja (descuento  |
+| del dinero recibido) y retorne las unidades físicas al stock de inventario,  |
+| registrando el evento en la bitácora de auditoría.                           |
+| ENTRADAS:                                                                    |
+| - Petición de anulación con motivo justificado por usuario Administrador.     |
+| PROCESO:                                                                     |
+| - Inicio de transacción de BD (BEGIN TRANSACTION).                           |
+| - Marcado de comprobante como ANULADO.                                       |
+| - Reversión de asiento de cobro en caja diaria.                              |
+| - Incremento de existencias en tabla de productos.                           |
+| - Confirmación transaccional (COMMIT) o rollback ante cualquier fallo.       |
+| SALIDAS:                                                                     |
+| - Caja e inventario sincronizados perfectamente sin inconsistencias.         |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [SEC-INT-02] y [SEC-RES-01]: Atomicidad garantizada; trazabilidad total de |
+|   la anulación con id de usuario responsable.                                |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-23                                                  |
+| NOMBRE DE REQUISITO:  Cierre y Consulta de Flujo Financiero Diario           |
+| TIPO:                 Requisito                                              |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2, Anteproyecto               |
+| PRIORIDAD:            Alta / Esencial                                        |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir consultar en un panel consolidado en tiempo real el |
+| total de ventas del día, detalle de cobros por forma de pago (efectivo,      |
+| transferencia bancaria), total de saldos pendientes de cobro y avance de caja.|
+| ENTRADAS:                                                                    |
+| - Rango de fechas o selección de jornada diaria actual.                      |
+| PROCESO:                                                                     |
+| - Agrupación y sumatoria de transacciones financieras registradas en el día. |
+| SALIDAS:                                                                     |
+| - Resumen de cuadre de caja diario descargable e imprimible.                 |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Coincidencia exacta entre transacciones emitidas y arqueo de caja.         |
++------------------------------------------------------------------------------+
+
+
+3.3 REQUISITOS NO FUNCIONALES (ISO/IEC 25010:2023 Y SECURE SCRUM)
+
+3.3.1 Requisitos de Rendimiento
+- RNF-08 (Tiempo de Respuesta en Consultas Críticas):
+  Las búsquedas predictivas de pacientes, historiales clínicos y consolidación
+  de caja diaria deben responder en un tiempo medio inferior a 2.0 segundos bajo
+  condiciones normales de operación (hasta 10 usuarios concurrentes en red local).
+- Optimización de Carga: La carga inicial de la aplicación web SPA (bundle JS/CSS)
+  no debe exceder los 3.0 segundos en conexiones de banda ancha estándar (10 Mbps).
+
+3.3.2 Seguridad (Alineada a ISO/IEC 25010:2023 y S-Tags)
+- RNF-01 [S-Tag: SEC-AUT-01] (Autenticidad - Control de Acceso Basado en Roles):
+  El sistema debe verificar la autenticidad e identidad de cada usuario mediante
+  RBAC, denegando tajantemente la ejecución de operaciones no autorizadas.
+- RNF-02 [S-Tag: SEC-AUT-02] (Autenticidad - Manejo Seguro de Tokens JWT):
+  El intercambio de peticiones cliente-servidor debe asegurarse mediante tokens
+  JWT firmados criptográficamente (HMAC-SHA256), con vencimiento acotado a 8 horas.
+- RNF-03 [S-Tag: SEC-INT-01] (Integridad - Validación Robusta de Entradas Clínicas):
+  El sistema debe aplicar validaciones formales en frontend y backend para garantizar
+  que los datos de refracción se mantengan dentro de rangos ópticos coherentes y
+  con pasos de 0.25 dioptrías, evitando datos basura.
+- RNF-04 [S-Tag: SEC-INT-02] (Integridad - Consistencia Referencial y Transaccional):
+  El motor relacional PostgreSQL debe garantizar atomicidad (ACID) en la anulación
+  de ventas, cobros y movimientos de inventario, impidiendo registros huérfanos.
+- RNF-05 [S-Tag: SEC-INT-03] (Integridad - Inmutabilidad del Historial Clínico):
+  Los registros de graduación y exámenes previos jamás deben ser sobreescritos.
+  Toda nueva evaluación genera un nuevo registro cronológico. Toda eliminación
+  debe operar mediante borrado lógico (Soft Delete).
+- RNF-06 [S-Tag: SEC-RES-01] (Responsabilidad - Bitácora de Auditoría Inmutable):
+  El sistema debe almacenar en un Audit Log inmutable cada evento crítico de
+  escritura (creación, edición, borrado lógico, anulación), capturando obligatoriamente:
+  identificador de usuario (user_id), acción, dirección IP, marca temporal UTC y
+  estado anterior vs. nuevo de la entidad en formato JSONB.
+
+3.3.3 Fiabilidad
+- Tolerancia a Fallos: El sistema debe manejar excepciones en el backend retornando
+  códigos de estado HTTP descriptivos y mensajes de error amigables sin exponer
+  detalles internos del servidor o volcados de pila (stack traces).
+- Copias de Seguridad: La base de datos debe ser respaldable mediante scripts de
+  volcado (pg_dump) periódicos automatizables.
+
+3.3.4 Disponibilidad
+- El sistema debe estar disponible operativamente al menos el 99.0% del tiempo durante
+  el horario de atención comercial del establecimiento (lunes a sábado, 08:00 a 19:00).
+- Modo Autónomo Local: Capacidad para ejecutarse en red de área local en el consultorio,
+  garantizando operación continua aun cuando se interrumpa la conexión a internet externa.
+
+3.3.5 Mantenibilidad
+- Modularidad y Desacoplamiento: Separación estricta entre la capa de presentación (React)
+  y la lógica de negocio (API Laravel), facilitando refactorizaciones independientes.
+- Código Limpio y Trazable: Nombres estandarizados de controladores, rutas y migraciones,
+  siguiendo directrices PSR-12 en PHP y ESLint/Prettier en JavaScript.
+
+3.3.6 Portabilidad
+- RNF-07 (Diseño Responsivo y Soporte Multiplataforma):
+  La arquitectura web debe ser responsiva y garantizar visualización y usabilidad óptimas
+  en computadoras de escritorio (Windows, Linux, macOS) y tabletas táctiles (Android, iPadOS).
+
+
+3.4 OTROS REQUISITOS
+
+3.4.1 Requisitos Legales y de Cumplimiento (LOPDP Ecuador)
+- Protección de Datos Sensibles de Salud: Conforme a la Ley Orgánica de Protección de
+  Datos Personales (LOPDP), los registros clínicos del paciente son confidenciales.
+  Las órdenes emitidas hacia terceros (laboratorios) no deben contener diagnósticos
+  patológicos ni información personal innecesaria.
+- Consentimiento y Ficha: Los datos de contacto del paciente se capturan con fines
+  exclusivos de atención optométrica y seguimiento de salud visual.
+
+3.4.2 Requisitos Operativos y de Negocio Local
+- Moneda Oficial: Todos los cálculos y transacciones se expresan en Dólares de los
+  Estados Unidos de América (USD).
+- Formato de Fechas: Visualización y captura bajo estándar regional dd/mm/aaaa.
+
+
+================================================================================
+4. APÉNDICES
+================================================================================
+
+APÉNDICE A: MATRIZ DE TRAZABILIDAD INTEGRAL DE REQUISITOS
+--------------------------------------------------------------------------------
++-----------+----------------------+--------------+---------------+--------------------------------------+
+| Requisito | Módulo del MVP       | Clasificac.  | S-Tag / Norma | Criterio de Verificación Principal   |
++-----------+----------------------+--------------+---------------+--------------------------------------+
+| RF-01     | M1: Autenticación    | Seguridad    | SEC-AUT-01    | Verificación RBAC y bloqueo de rutas.|
+| RF-02     | M1: Autenticación    | Seguridad    | SEC-AUT-02    | Sesión JWT con expiración temporal.  |
+| RF-03     | M2: Pacientes        | Funcional    | SEC-INT-01    | Algoritmo cédula y datos completos.  |
+| RF-04     | M2: Pacientes        | Funcional    | —             | Registro de menores sin cédula oblig.|
+| RF-05     | M2: Pacientes        | Funcional    | SEC-INT-01    | Búsqueda predictiva sin duplicados.  |
+| RF-06     | M2: Pacientes        | Funcional    | SEC-INT-02    | Repositorio seguro de PDFs/imágenes. |
+| RF-07     | M3: Historia Clínica | Funcional    | SEC-INT-01    | Rangos ópticos Sph/Cyl/Axis/Add.     |
+| RF-08     | M3: Historia Clínica | Funcional    | SEC-INT-01    | Formateo automático de signo (+).    |
+| RF-09     | M3: Historia Clínica | Funcional    | —             | Notación Snellen en pies (20/XX).    |
+| RF-10     | M3: Historia Clínica | Funcional    | SEC-INT-01    | Medidas de centrado DP y DNP en mm.  |
+| RF-11     | M3: Historia Clínica | Funcional    | SEC-INT-02    | Parámetros físicos montura (JSONB).  |
+| RF-12     | M3: Historia Clínica | Funcional    | SEC-INT-02    | Comparativa en pantalla vs. anterior.|
+| RF-13     | M3: Historia Clínica | Funcional    | —             | Registro anamnesis y CIE-10.         |
+| RF-14     | M3: Historia Clínica | Funcional    | —             | Emisión PDF certificado ocupacional. |
+| RF-15     | M3: Historia Clínica | Seguridad    | SEC-INT-03    | Soft delete con deleted_at y log.    |
+| RF-16     | M4: Laboratorio      | Funcional    | SEC-INT-01    | Orden sin datos sensibles de salud.  |
+| RF-17     | M4: Laboratorio      | Funcional    | —             | Catálogo editable lunas/tratamientos.|
+| RF-18     | M4: Laboratorio      | Funcional    | SEC-RES-01    | Trazabilidad de estados del pedido.  |
+| RF-19     | M4: Laboratorio      | Funcional    | SEC-RES-01    | Registro de garantía/rectificación.  |
+| RF-20     | M5: Ventas y Cobros  | Funcional    | —             | Comprobante secuencial correlativo.  |
+| RF-21     | M5: Ventas y Cobros  | Funcional    | SEC-INT-02    | Inventario híbrido (precio/unidad).  |
+| RF-22     | M5: Ventas y Cobros  | Seguridad    | SEC-INT-02    | Anulación atómica con reversa ACID.  |
+| RF-23     | M5: Ventas y Cobros  | Funcional    | —             | Cuadre de caja y saldos en tiempo real|
+| RNF-01    | Transversal          | Seguridad    | SEC-AUT-01    | Control de acceso estricto RBAC.     |
+| RNF-02    | Transversal          | Seguridad    | SEC-AUT-02    | Tokens JWT cifrados y seguros.       |
+| RNF-03    | M3: Historia Clínica | Calidad/Seg. | SEC-INT-01    | Validación de rangos dióptricos.     |
+| RNF-04    | M5: Ventas y Cobros  | Calidad/Seg. | SEC-INT-02    | Transacciones ACID en PostgreSQL.    |
+| RNF-05    | M3: Historia Clínica | Calidad/Seg. | SEC-INT-03    | No sobreescritura de refracciones.   |
+| RNF-06    | Transversal          | Calidad/Seg. | SEC-RES-01    | Bitácora inmutable de auditoría.      |
+| RNF-07    | Transversal          | Portabilidad | ISO 25010     | Diseño responsivo Web/PWA.           |
+| RNF-08    | Transversal          | Rendimiento  | ISO 25010     | Latencia < 2.0s en búsquedas clave.   |
++-----------+----------------------+--------------+---------------+--------------------------------------+
+
+
+APÉNDICE B: CATÁLOGO DE REQUISITOS FUTUROS (FUERA DEL ALCANCE DEL MVP)
+--------------------------------------------------------------------------------
+1. RF-FUT-01: Facturación Electrónica SRI (WebService oficial con comprobantes XML).
+2. RF-FUT-02: Notificaciones y Recordatorios Automatizados por WhatsApp API.
+3. RF-FUT-03: Proceso de Migración ETL de Base Legada (.BAK de SQL Server peruano).
+4. RF-FUT-04: Módulo Integral de Agenda y Citas Médicas con Turnos.
+5. RF-FUT-05: Motor de Branding y Personalización Gráfica Corporativa en Reportes.
+
+
+APÉNDICE C: GLOSARIO TÉCNICO DE OPTOMETRÍA Y NOTACIONES CLÍNICAS
+--------------------------------------------------------------------------------
+- Agudeza Visual (AV): Capacidad del ojo para percibir detalles a una distancia dada.
+- Astigmatismo: Defecto refractivo debido a la curvatura asimétrica de la córnea/cristalino.
+- Biselado: Proceso técnico de pulido de los bordes de la luna para encajar en el armazón.
+- Dioptría (D): Unidad de potencia refractiva de las lentes.
+- Distancia Pupilar (DP): Separación total entre los centros de ambas pupilas.
+- Distancia Nasopupilar (DNP): Medida individual desde el centro de la pupila a la nariz.
+- Eje: Orientación en grados sexagesimales (0° a 180°) de la corrección cilíndrica.
+- Hipermetropía: Defecto de visión que dificulta el enfoque cercano (signo +).
+- Miopía: Defecto de visión que dificulta el enfoque lejano (signo -).
+- Presbicia: Pérdida gradual de la capacidad acomodativa del ojo asociada a la edad (>40 años).
+- Prisma: Lente que desvía los rayos de luz para tratar estrabismo o forias.
+================================================================================
+FIN DE LA ESPECIFICACIÓN DE REQUISITOS DE SOFTWARE
+================================================================================
