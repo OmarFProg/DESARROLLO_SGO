@@ -1,0 +1,1181 @@
+INFORME DE INNOVACIONES EN SISTEMAS OPTOMÉTRICOS Y DE GESTIÓN OPTOMÉTRICA
+Análisis de AIPD / Digital Center de Novar Technologies
+
+Fecha de análisis: 17 de septiembre de 2026
+Fuente principal: publicación de Ruben Desia en LinkedIn sobre AIPD / Digital Center
+Producto analizado: AIPD y plataforma Digital Center
+Empresa asociada: Novar Technologies
+
+======================================================================
+1. OBJETIVO
+======================================================================
+
+Analizar la publicación proporcionada y contrastarla con información pública
+del fabricante para identificar:
+
+- descripción técnica del sistema;
+- funcionalidades innovadoras;
+- productos o componentes tecnológicos identificados;
+- tecnologías utilizadas o declaradas;
+- posibilidades de integración con sistemas de gestión optométrica;
+- implicaciones tecnológicas;
+- infraestructura y recursos requeridos;
+- oportunidades para el diseño de un sistema propio de gestión optométrica.
+
+======================================================================
+2. FUENTES Y ALCANCE DEL ANÁLISIS
+======================================================================
+
+La publicación de LinkedIn analizada anuncia una nueva versión de AIPD,
+descrita como una solución de medición de IPD impulsada por inteligencia
+artificial, con reconocimiento de pupilas, detección de monturas mediante IA,
+integración con sistemas de gestión y disponibilidad para tablets,
+smartphones, iOS y Android.
+
+La información pública de Digital Center amplía el alcance del producto:
+la plataforma integra herramientas de medición, cálculo, diseño de lentes,
+comparación de espesores y materiales, herramientas de marketing y
+tratamientos, asistencia mediante IA, contenidos de conocimiento y
+capacitación.
+
+La documentación pública también indica que AIPD puede capturar imágenes
+mediante dispositivos móviles y transferirlas al Digital Center instalado
+en PC.
+
+IMPORTANTE:
+No toda tecnología interna del producto está públicamente documentada en la
+publicación. Por tanto, este informe distingue entre:
+
+A. capacidades confirmadas por fuentes públicas;
+B. tecnologías declaradas públicamente por personal de Novar;
+C. arquitectura recomendada para desarrollar una solución equivalente.
+
+No se debe asumir que una tecnología propuesta en este informe sea
+necesariamente la tecnología actualmente utilizada por Digital Center.
+
+
+======================================================================
+3. DESCRIPCIÓN TÉCNICA DEL SISTEMA
+======================================================================
+
+Digital Center puede caracterizarse como una plataforma de software
+especializada en el ecosistema óptico/optométrico que combina:
+
+1. captura y análisis de mediciones;
+2. inteligencia artificial;
+3. cálculo y simulación óptica;
+4. apoyo a la selección/personalización de lentes;
+5. herramientas de comunicación comercial;
+6. contenidos educativos;
+7. integración con dispositivos móviles;
+8. integración con sistemas de gestión.
+
+Su enfoque puede representarse conceptualmente como:
+
+DISPOSITIVO MÓVIL
+       |
+       | captura de imágenes
+       v
+      AIPD
+       |
+       | análisis mediante IA
+       v
+RECONOCIMIENTO DE PUPILAS
+       +
+RECONOCIMIENTO DE MONTURA
+       |
+       v
+DIGITAL CENTER
+       |
+       +---- Medición
+       +---- Cálculo
+       +---- Diseño de lentes
+       +---- Comparación de materiales/espesores
+       +---- Visualización
+       +---- Marketing y tratamientos
+       +---- Asistencia IA
+       +---- Conocimiento/capacitación
+       |
+       v
+INTEGRACIÓN CON SISTEMA DE GESTIÓN
+
+
+======================================================================
+4. AIPD: INNOVACIÓN PRINCIPAL IDENTIFICADA
+======================================================================
+
+AIPD corresponde a una solución de medición de distancia interpupilar
+(IPD, Interpupillary Distance) apoyada por inteligencia artificial.
+
+Según la información pública revisada, el sistema:
+
+- utiliza la cámara de un smartphone o tablet;
+- captura imágenes del paciente;
+- utiliza IA para identificar la posición de las pupilas;
+- reconoce la forma de la montura;
+- permite procesar la información en Digital Center;
+- busca mejorar la precisión de la medición;
+- permite trabajar con diferentes tipos de monturas;
+- está orientado a personalizar el diseño/adaptación de lentes.
+
+La innovación fundamental consiste en trasladar una medición tradicional
+realizada manualmente a un flujo de captura digital + visión por computador
++ procesamiento algorítmico.
+
+Esto permite transformar una medición física en un dato digital reutilizable.
+
+
+======================================================================
+5. FLUJO TECNOLÓGICO IDENTIFICADO
+======================================================================
+
+El flujo funcional puede representarse de la siguiente manera:
+
+1. Preparación del paciente.
+2. Colocación/selección de la montura.
+3. Captura de imágenes mediante smartphone o tablet.
+4. Transferencia de la imagen hacia Digital Center.
+5. Procesamiento mediante algoritmos de IA.
+6. Detección de pupilas.
+7. Determinación de parámetros de posicionamiento.
+8. Reconocimiento de la forma de la montura.
+9. Generación de datos de medición.
+10. Utilización de los datos para cálculo/personalización de lentes.
+11. Integración potencial con el sistema de gestión.
+
+Este flujo es importante porque elimina una parte de la digitación manual
+y crea una conexión entre la medición realizada en la óptica y el proceso
+posterior de diseño/fabricación/adaptación.
+
+
+======================================================================
+6. RECONOCIMIENTO DE MONTURA MEDIANTE IA
+======================================================================
+
+Una segunda innovación importante es el reconocimiento automático de la
+geometría/formato de la montura.
+
+Digital Center declara que su IA reconoce la forma del marco para permitir
+un ajuste y personalización más precisos.
+
+Desde el punto de vista tecnológico, este componente puede involucrar:
+
+- procesamiento digital de imágenes;
+- detección de objetos;
+- segmentación;
+- extracción de características;
+- modelos de visión por computador;
+- redes neuronales convolucionales;
+- estimación geométrica.
+
+Esta capacidad tiene un potencial importante para un sistema de gestión
+optométrica porque permite relacionar:
+
+PACIENTE
+  ->
+MONTURA
+  ->
+MEDICIONES
+  ->
+RECETA
+  ->
+DISEÑO DE LENTE
+  ->
+PEDIDO
+  ->
+LABORATORIO
+  ->
+ENTREGA.
+
+
+======================================================================
+7. DIGITAL CENTER COMO PLATAFORMA
+======================================================================
+
+El producto no debe interpretarse solamente como una aplicación de
+medición.
+
+La información pública muestra varios grupos de herramientas.
+
+7.1. Herramientas de medición
+
+- AIPD.
+- captura de imágenes;
+- reconocimiento de pupilas;
+- reconocimiento de posicionamiento;
+- reconocimiento de formato de montura.
+
+7.2. Herramientas de cálculo
+
+- diseñador de lentes;
+- comparador de espesores;
+- calculadoras especializadas;
+- cálculos para diferentes configuraciones ópticas.
+
+7.3. Herramientas de marketing
+
+- comparación de campos visuales;
+- comparación de diseños;
+- materiales;
+- tratamientos;
+- tecnologías de lentes.
+
+7.4. Herramientas de conocimiento
+
+- contenidos sobre ojo y visión;
+- Sophia, asistente de IA especializada;
+- Campus para eventos, charlas, capacitaciones, lanzamientos y noticias.
+
+7.5. Experiencia del cliente
+
+Digital Center plantea además diferentes configuraciones físicas denominadas
+Spazio Digital Center:
+
+- Origin: AIPD Box + PC.
+- Discovery: AIPD Box + PC + TV Wall.
+- Totem: AIPD Box + PC + TV + Totem.
+- Immersion: AIPD Box + PC + TV Wall.
+
+Esto muestra una tendencia importante: el software deja de ser solamente una
+herramienta administrativa y pasa a convertirse en parte de la experiencia
+de atención, demostración y decisión de compra.
+
+
+======================================================================
+8. ASISTENTE DE IA: SOPHIA
+======================================================================
+
+Digital Center incorpora Sophia como asistente de IA especializada en
+óptica, optometría y oftalmología, según la información pública del producto.
+
+La función representa una segunda línea de innovación:
+
+MEDICIÓN CON IA
+        +
+ASISTENCIA/CONOCIMIENTO CON IA.
+
+Un sistema de gestión optométrica moderno podría aprovechar este concepto
+para desarrollar un asistente interno que consulte información autorizada
+del sistema y genere respuestas o resúmenes operativos.
+
+Ejemplos:
+
+- "¿Cuántas citas están pendientes?"
+- "¿Qué pedidos están retrasados?"
+- "¿Cuáles son los productos con menor stock?"
+- "¿Cuántos pacientes no asistieron este mes?"
+- "¿Qué tratamientos se solicitan con mayor frecuencia?"
+
+La IA debe limitarse a funciones autorizadas y no debe sustituir el
+criterio clínico del profesional.
+
+
+======================================================================
+9. TECNOLOGÍAS IDENTIFICADAS O DECLARADAS
+======================================================================
+
+En publicaciones públicas asociadas a Ruben Desia se han mencionado
+tecnologías utilizadas en desarrollos de Novar relacionados con IA,
+incluyendo:
+
+- procesamiento de lenguaje natural (NLP);
+- Machine Learning;
+- Azure AI Services;
+- GPT-4 Turbo;
+- Python;
+- YOLOv8;
+- TensorFlow;
+- redes neuronales convolucionales;
+- detección de objetos;
+- segmentación de imágenes.
+
+Estas referencias son evidencia de tecnologías declaradas públicamente por
+personal relacionado con Novar, pero no deben interpretarse como una
+especificación completa de la arquitectura actual de AIPD/Digital Center.
+
+Para una implementación propia, estas tecnologías pueden clasificarse así:
+
+VISIÓN ARTIFICIAL
+- Python.
+- OpenCV.
+- TensorFlow o PyTorch.
+- YOLO u otros modelos de detección.
+- modelos de segmentación.
+
+IA GENERATIVA / ASISTENTE
+- modelos de lenguaje.
+- RAG.
+- APIs de modelos de IA.
+- bases de conocimiento.
+
+BACKEND
+- API REST.
+- Python/FastAPI, Django, Node.js, PHP/Laravel,
+  Java/Spring o .NET, según el equipo.
+
+DATOS
+- PostgreSQL o MySQL/MariaDB.
+- almacenamiento de imágenes/documentos.
+
+CLIENTE
+- Android.
+- iOS.
+- aplicación web.
+- PC Windows.
+
+
+======================================================================
+10. INTEGRACIÓN MÓVIL + PC
+======================================================================
+
+Una característica técnicamente relevante de AIPD es la combinación de:
+
+SMARTPHONE/TABLET
+        |
+        | cámara
+        v
+CAPTURA DE IMAGEN
+        |
+        | transmisión
+        v
+DIGITAL CENTER EN PC
+        |
+        v
+PROCESAMIENTO
+
+La aplicación publicada para Android indica que las fotografías tomadas con
+la cámara del teléfono pueden enviarse a la aplicación Digital Center y que
+se requiere previamente la versión de PC de Digital Center.
+
+Esto demuestra una arquitectura híbrida cliente móvil + aplicación de
+escritorio.
+
+Para un sistema propio puede evolucionarse hacia:
+
+APP MÓVIL
+     |
+     v
+API SEGURA
+     |
+     v
+SERVICIO DE VISIÓN ARTIFICIAL
+     |
+     v
+BASE DE DATOS
+     |
+     v
+SISTEMA DE GESTIÓN OPTOMÉTRICA.
+
+
+======================================================================
+11. PROPUESTAS / PRODUCTOS DE INNOVACIÓN IDENTIFICADOS
+======================================================================
+
+11.1. Módulo de medición IPD mediante IA
+
+Producto:
+Aplicación móvil para medición de distancia interpupilar.
+
+Componentes:
+
+- cámara;
+- captura guiada;
+- detección de rostro;
+- detección de pupilas;
+- cálculo de distancia;
+- validación de calidad;
+- registro del resultado;
+- envío al sistema de gestión.
+
+
+11.2. Reconocimiento automático de montura
+
+Producto:
+Módulo de visión artificial capaz de detectar el contorno y geometría de
+la montura.
+
+Posibles datos:
+
+- ancho;
+- alto;
+- forma;
+- posición;
+- referencias geométricas;
+- características relevantes para el diseño.
+
+
+11.3. Sistema de centrado digital
+
+Producto:
+Asistente de centrado que combine:
+
+- posición pupilar;
+- geometría de montura;
+- posición de la cabeza;
+- distancia de captura;
+- parámetros del lente.
+
+Debe validarse clínicamente antes de utilizarlo como sustituto de procesos
+profesionales.
+
+
+11.4. Digital Lens Designer
+
+Producto:
+Herramienta de simulación y diseño de lentes.
+
+Funciones potenciales:
+
+- selección de lente;
+- material;
+- índice;
+- espesor;
+- diseño;
+- tratamiento;
+- simulación;
+- comparación.
+
+
+11.5. Simulador visual para paciente
+
+Producto:
+Interfaz para demostrar visualmente diferencias entre:
+
+- visión simple;
+- bifocal;
+- progresiva;
+- diseños ocupacionales;
+- tratamientos;
+- materiales.
+
+Su objetivo es convertir información técnica en información visual
+comprensible para el paciente/cliente.
+
+
+11.6. Asistente IA para profesionales
+
+Producto:
+Asistente especializado conectado al sistema de gestión.
+
+Funciones potenciales:
+
+- consulta de indicadores;
+- generación de reportes;
+- explicación de conceptos;
+- apoyo administrativo;
+- búsqueda de información;
+- capacitación.
+
+
+11.7. Plataforma de capacitación
+
+Producto:
+Módulo educativo integrado con:
+
+- cursos;
+- eventos;
+- capacitaciones;
+- lanzamientos;
+- noticias;
+- documentación técnica.
+
+
+11.8. Plataforma de experiencia digital en óptica
+
+Producto:
+Diseño de un espacio físico/digital que combine:
+
+- dispositivo de medición;
+- computador;
+- pantalla;
+- visualización;
+- simulación;
+- asesoramiento.
+
+Este concepto puede ser adaptado a ópticas pequeñas mediante una versión
+de bajo costo.
+
+
+======================================================================
+12. PROPUESTA DE INNOVACIÓN PARA UN SISTEMA DE GESTIÓN OPTOMÉTRICA
+======================================================================
+
+A partir de las capacidades observadas, se propone un sistema denominado
+conceptualmente:
+
+"SISTEMA INTEGRADO DE GESTIÓN Y PERSONALIZACIÓN OPTOMÉTRICA"
+
+Componentes:
+
+A. Gestión administrativa
+- usuarios;
+- roles;
+- agenda;
+- pacientes;
+- inventario;
+- pedidos;
+- proveedores.
+
+B. Gestión clínica
+- historia clínica;
+- agudeza visual;
+- refracción;
+- receta;
+- observaciones;
+- seguimiento.
+
+C. Medición digital
+- IPD;
+- centrado;
+- reconocimiento de montura;
+- captura fotográfica.
+
+D. Personalización
+- selección de lente;
+- material;
+- tratamiento;
+- simulación;
+- comparación.
+
+E. Comunicación
+- correo;
+- WhatsApp mediante API oficial;
+- recordatorios;
+- seguimiento.
+
+F. Inteligencia
+- dashboard;
+- analítica;
+- asistente IA;
+- generación de reportes.
+
+
+======================================================================
+13. ARQUITECTURA TECNOLÓGICA PROPUESTA
+======================================================================
+
+                    PACIENTE
+                       |
+                       v
+             APP MÓVIL / WEB
+                       |
+            +----------+----------+
+            |                     |
+            v                     v
+       CAPTURA IA             GESTIÓN
+       - rostro               - pacientes
+       - pupilas              - citas
+       - montura              - historia
+       - centrado             - receta
+            |                 - pedidos
+            |                 - inventario
+            +--------+--------+
+                     |
+                     v
+                API/BACKEND
+                     |
+       +-------------+-------------+
+       |             |             |
+       v             v             v
+   BASE DATOS    MOTOR IA     DOCUMENTOS
+       |             |
+       |             +-- Visión artificial
+       |             +-- NLP
+       |             +-- Asistente
+       |
+       +-- Auditoría
+       +-- Seguridad
+       +-- Reportes
+                     |
+                     v
+              INTEGRACIONES
+              - laboratorio
+              - mensajería
+              - facturación
+              - interoperabilidad
+
+
+======================================================================
+14. DATOS QUE DEBERÍAN SER ESTRUCTURADOS
+======================================================================
+
+Para permitir integración con IA y otros sistemas, no se recomienda
+guardar toda la información en textos libres.
+
+Ejemplos de entidades:
+
+PACIENTE
+- id_paciente
+- identificación
+- nombres
+- fecha_nacimiento
+- contacto
+
+ATENCIÓN
+- id_atencion
+- paciente
+- profesional
+- fecha
+- motivo
+- observaciones
+
+REFRACCIÓN
+- OD esfera
+- OD cilindro
+- OD eje
+- OI esfera
+- OI cilindro
+- OI eje
+- adición
+- agudeza visual
+
+MEDICIÓN DIGITAL
+- IPD total
+- IPD OD
+- IPD OI
+- parámetros de centrado
+- imagen
+- dispositivo
+- fecha
+- algoritmo/modelo
+- nivel de confianza, si el modelo lo proporciona
+
+MONTURA
+- fabricante
+- modelo
+- ancho
+- alto
+- geometría
+- imagen
+
+PEDIDO
+- paciente
+- receta
+- montura
+- lente
+- tratamiento
+- laboratorio
+- estado
+- fechas.
+
+
+======================================================================
+15. IMPLICACIONES TECNOLÓGICAS
+======================================================================
+
+15.1. Visión artificial
+
+Es uno de los componentes más exigentes.
+
+Se requiere:
+
+- imágenes de calidad;
+- cámara adecuada;
+- condiciones controladas;
+- modelos entrenados;
+- datos de entrenamiento;
+- validación;
+- procesamiento;
+- control de errores.
+
+15.2. Calibración
+
+La medición mediante cámara no debe considerarse automáticamente equivalente
+a una medición clínica validada.
+
+Se requiere comprobar:
+
+- escala;
+- distancia;
+- perspectiva;
+- resolución;
+- posición;
+- iluminación;
+- características del dispositivo;
+- repetibilidad.
+
+15.3. Variabilidad de smartphones
+
+Diferentes teléfonos tienen:
+
+- cámaras diferentes;
+- resoluciones diferentes;
+- lentes diferentes;
+- sensores diferentes;
+- procesamiento fotográfico diferente.
+
+Por ello, el software debe incluir controles de calidad y posiblemente una
+fase de calibración o validación por dispositivo.
+
+
+======================================================================
+16. IMPLICACIONES DE SEGURIDAD Y PRIVACIDAD
+======================================================================
+
+La utilización de fotografías faciales y datos clínicos aumenta la
+sensibilidad del sistema.
+
+Se recomienda:
+
+- HTTPS/TLS;
+- cifrado en reposo;
+- autenticación;
+- control de acceso por roles;
+- MFA para perfiles críticos;
+- gestión de sesiones;
+- auditoría;
+- eliminación o conservación controlada de imágenes;
+- políticas de retención;
+- consentimiento cuando corresponda;
+- minimización de datos;
+- protección de respaldos.
+
+En Ecuador debe analizarse específicamente el marco jurídico aplicable a
+datos personales y datos relacionados con salud antes del despliegue.
+
+
+======================================================================
+17. IMPLICACIONES DE RECURSOS HUMANOS
+======================================================================
+
+Para desarrollar una solución propia de este nivel se recomienda un equipo
+multidisciplinario:
+
+1. Analista de sistemas.
+2. Desarrollador backend.
+3. Desarrollador frontend/móvil.
+4. Especialista en IA/visión artificial.
+5. Diseñador UX/UI.
+6. Especialista en bases de datos.
+7. DevOps/infraestructura.
+8. Profesional optometrista u óptico para validación funcional.
+9. Especialista de pruebas.
+10. Responsable de seguridad, según el nivel del proyecto.
+
+En un proyecto académico pequeño algunos roles pueden ser asumidos por la
+misma persona.
+
+
+======================================================================
+18. INFRAESTRUCTURA REQUERIDA
+======================================================================
+
+NIVEL PROTOTIPO
+
+- smartphone con cámara;
+- PC Windows;
+- memoria RAM suficiente;
+- conexión a Internet;
+- servidor de desarrollo;
+- base de datos.
+
+NIVEL ÓPTICA PEQUEÑA
+
+- 1 PC;
+- smartphones/tablets compatibles;
+- red Wi-Fi estable;
+- servidor local o VPS;
+- respaldo externo;
+- UPS;
+- impresora, si se generan documentos.
+
+NIVEL PROFESIONAL / MULTISUCURSAL
+
+- aplicación web;
+- API;
+- base de datos administrada;
+- almacenamiento de imágenes;
+- servicio de IA;
+- monitoreo;
+- backups;
+- alta disponibilidad cuando sea necesario;
+- gestión centralizada de usuarios.
+
+
+======================================================================
+19. COSTOS Y RECURSOS DE SOFTWARE
+======================================================================
+
+La implementación puede dividirse en:
+
+COSTOS DE SOFTWARE
+- desarrollo;
+- alojamiento;
+- base de datos;
+- servicios de IA;
+- almacenamiento;
+- mensajería;
+- certificados;
+- mantenimiento.
+
+COSTOS DE HARDWARE
+- smartphones/tablets;
+- PC;
+- cámaras, si fueran necesarias;
+- pantalla para demostración;
+- infraestructura de red;
+- respaldo eléctrico.
+
+COSTOS DE OPERACIÓN
+- soporte;
+- actualización de modelos;
+- capacitación;
+- validación;
+- mantenimiento;
+- seguridad.
+
+
+======================================================================
+20. PRODUCTOS DE INNOVACIÓN PRIORIZABLES PARA UN PROYECTO ACADÉMICO
+======================================================================
+
+Una implementación académica no necesita reproducir toda la plataforma.
+
+Se pueden seleccionar como productos:
+
+PRODUCTO 1
+Medición de IPD mediante visión artificial.
+
+PRODUCTO 2
+Reconocimiento de montura mediante IA.
+
+PRODUCTO 3
+Historia clínica optométrica estructurada.
+
+PRODUCTO 4
+Generación automática de receta.
+
+PRODUCTO 5
+Módulo de pedido conectado con receta y montura.
+
+PRODUCTO 6
+Dashboard de gestión.
+
+PRODUCTO 7
+Asistente IA para consultas administrativas.
+
+PRODUCTO 8
+Generación de documentos verificables mediante QR.
+
+PRODUCTO 9
+Sistema de recordatorios y seguimiento.
+
+PRODUCTO 10
+Módulo de simulación/comparación de lentes.
+
+
+======================================================================
+21. POSIBLE DIFERENCIACIÓN DE UN SISTEMA PROPIO
+======================================================================
+
+AIPD/Digital Center demuestra que existe una tendencia hacia:
+
+MEDIR
++
+INTERPRETAR
++
+CALCULAR
++
+SIMULAR
++
+COMUNICAR
++
+GESTIONAR.
+
+Para un sistema propio de gestión optométrica se puede avanzar hacia:
+
+MEDIR
++
+HISTORIA CLÍNICA
++
+RECETA
++
+PERSONALIZAR
++
+PEDIDO
++
+INVENTARIO
++
+SEGUIMIENTO
++
+ANALÍTICA
++
+IA.
+
+Esto permitiría pasar de un software administrativo tradicional a un
+ecosistema digital de gestión optométrica.
+
+
+======================================================================
+22. INTEROPERABILIDAD
+======================================================================
+
+Una arquitectura moderna debería considerar una API.
+
+Ejemplo:
+
+APP MÓVIL
+   |
+   v
+API
+   |
+   +-- Sistema de gestión
+   +-- Motor IA
+   +-- Base de datos
+   +-- Laboratorio
+   +-- Mensajería
+   +-- Portal paciente
+
+Para interoperabilidad clínica puede evaluarse HL7 FHIR cuando el alcance
+del proyecto y los sistemas externos lo justifiquen.
+
+Posibles recursos conceptuales:
+
+Patient
+Practitioner
+Organization
+Appointment
+Observation
+DiagnosticReport
+
+La adopción debe realizarse según los requisitos reales y no solamente por
+incorporar una tecnología de moda.
+
+
+======================================================================
+23. ANALÍTICA E INTELIGENCIA ARTIFICIAL
+======================================================================
+
+Una evolución interesante consiste en crear un sistema de analítica que
+combine datos clínicos y administrativos.
+
+Ejemplos:
+
+- demanda de productos;
+- frecuencia de controles;
+- tiempos de atención;
+- tiempos de entrega;
+- comportamiento de pedidos;
+- inventario;
+- campañas;
+- productividad operacional.
+
+La IA generativa podría funcionar como interfaz conversacional para consultar
+información autorizada.
+
+Ejemplo:
+
+USUARIO:
+"¿Qué pedidos llevan más de cinco días pendientes?"
+
+SISTEMA:
+consulta datos autorizados
++
+aplica reglas
++
+genera resumen.
+
+Este enfoque es distinto de permitir que una IA invente información clínica.
+La IA debe responder a partir de datos verificables y con mecanismos de
+control.
+
+
+======================================================================
+24. RIESGOS TÉCNICOS
+======================================================================
+
+RIESGO 1: Error de medición.
+MITIGACIÓN: validación, control de calidad y comparación con métodos
+profesionales.
+
+RIESGO 2: Mala calidad de imagen.
+MITIGACIÓN: detección automática de calidad y repetición de captura.
+
+RIESGO 3: Variación entre dispositivos.
+MITIGACIÓN: pruebas por modelo/dispositivo y calibración.
+
+RIESGO 4: Sesgo del modelo de IA.
+MITIGACIÓN: conjunto de datos representativo y evaluación independiente.
+
+RIESGO 5: Pérdida de datos.
+MITIGACIÓN: backups y recuperación.
+
+RIESGO 6: Acceso no autorizado.
+MITIGACIÓN: RBAC, MFA, cifrado y auditoría.
+
+RIESGO 7: Dependencia de servicios externos.
+MITIGACIÓN: arquitectura desacoplada y mecanismos de contingencia.
+
+RIESGO 8: Uso clínico incorrecto.
+MITIGACIÓN: validación por profesionales y delimitación clara del alcance
+del software.
+
+
+======================================================================
+25. HOJA DE RUTA PROPUESTA
+======================================================================
+
+FASE 1 - DIGITALIZACIÓN
+- pacientes;
+- agenda;
+- historia clínica;
+- receta;
+- documentos.
+
+FASE 2 - INTEGRACIÓN
+- pedidos;
+- inventario;
+- laboratorio;
+- comunicación.
+
+FASE 3 - MEDICIÓN DIGITAL
+- captura móvil;
+- IPD;
+- reconocimiento de montura;
+- centrado.
+
+FASE 4 - INTELIGENCIA
+- visión artificial;
+- dashboards;
+- asistente IA.
+
+FASE 5 - EXPERIENCIA DEL PACIENTE
+- simulación;
+- comparación;
+- portal;
+- recordatorios.
+
+FASE 6 - INTEROPERABILIDAD
+- API;
+- integración con terceros;
+- FHIR cuando corresponda.
+
+FASE 7 - ESCALABILIDAD
+- nube;
+- multisucursal;
+- monitoreo;
+- alta disponibilidad.
+
+
+======================================================================
+26. CONCLUSIONES
+======================================================================
+
+1. La publicación analizada presenta AIPD como una solución de medición de
+distancia interpupilar apoyada por inteligencia artificial, orientada a
+mejorar la precisión y personalización de la adaptación de lentes.
+
+2. La innovación no está únicamente en automatizar una medición, sino en
+convertir la captura de una imagen en datos digitales reutilizables dentro
+de un flujo de trabajo óptico.
+
+3. El reconocimiento de pupilas y monturas mediante IA representa una
+aplicación concreta de visión artificial en el sector óptico.
+
+4. Digital Center amplía el concepto de AIPD al integrar medición, cálculo,
+diseño de lentes, comparación de materiales/espesores, herramientas de
+marketing, conocimiento y asistencia mediante IA.
+
+5. La integración móvil + PC demuestra un modelo híbrido en el cual el
+smartphone actúa como dispositivo de captura y el sistema de escritorio
+realiza o coordina el procesamiento y la gestión.
+
+6. La plataforma evidencia una tendencia hacia la transformación de la
+óptica en un entorno digital donde medición, personalización, comunicación
+y gestión están conectadas.
+
+7. Para un nuevo sistema de gestión optométrica, una oportunidad importante
+consiste en integrar la medición digital con la historia clínica, receta,
+montura, pedido, inventario y laboratorio.
+
+8. La implementación de IA requiere recursos especializados, datos de
+calidad, infraestructura, validación y controles de seguridad.
+
+9. La captura de imágenes faciales y datos clínicos incrementa las
+exigencias de privacidad y seguridad; por ello, la arquitectura debe
+considerar protección de datos desde el diseño.
+
+10. Para un proyecto académico de gestión optométrica, AIPD/Digital Center
+puede utilizarse como referencia de innovación, pero el objetivo no debería
+ser copiar el producto, sino identificar patrones tecnológicos transferibles
+a un sistema propio.
+
+11. La principal oportunidad de innovación consiste en desarrollar un
+ecosistema integrado:
+
+MEDICIÓN DIGITAL
+      +
+HISTORIA CLÍNICA
+      +
+RECETA
+      +
+PERSONALIZACIÓN
+      +
+PEDIDO
+      +
+INVENTARIO
+      +
+COMUNICACIÓN
+      +
+ANALÍTICA
+      +
+IA.
+
+
+======================================================================
+27. RESUMEN EJECUTIVO
+======================================================================
+
+AIPD/Digital Center representa un caso relevante de innovación aplicada al
+sector óptico/optométrico. Su propuesta combina inteligencia artificial,
+captura de imágenes mediante smartphones/tablets, reconocimiento de pupilas,
+reconocimiento de monturas, herramientas de cálculo y diseño de lentes,
+visualización de productos, asistencia mediante IA y contenidos educativos.
+
+Desde la perspectiva de un sistema de gestión optométrica, el aspecto más
+importante es la transformación de una medición física en información
+digital que puede integrarse con otros procesos.
+
+La arquitectura propuesta para una solución propia debe considerar una
+aplicación móvil/web, API, backend, base de datos, almacenamiento seguro,
+motor de visión artificial, mecanismos de auditoría e integraciones externas.
+
+Como línea de innovación para una investigación o proyecto académico se
+propone desarrollar un sistema que conecte:
+
+Paciente -> Historia clínica -> Medición digital -> Refracción -> Receta ->
+Montura -> Personalización -> Pedido -> Inventario -> Laboratorio ->
+Entrega -> Seguimiento.
+
+La IA puede incorporarse progresivamente en visión artificial, analítica y
+asistencia conversacional, manteniendo siempre validación profesional,
+seguridad, trazabilidad de las operaciones y control sobre el uso clínico.
+
+
+======================================================================
+28. FUENTES CONSULTADAS
+======================================================================
+
+1. Publicación de Ruben Desia en LinkedIn sobre la nueva versión de AIPD,
+   reconocimiento pupilar, detección de monturas, integración con sistemas
+   de gestión y disponibilidad móvil.
+
+2. Digital Center / Novar Technologies. Información pública del producto
+   Digital Center y AIPD: mediciones mediante IA, diseño de lentes,
+   comparación de espesores/materiales, herramientas de marketing,
+   asistencia IA, Campus y configuraciones Spazio.
+
+3. Google Play. Aplicación Novar AIPD: captura de fotografías mediante
+   cámara móvil y transferencia hacia Digital Center PC.
+
+4. Publicaciones públicas asociadas a Ruben Desia sobre tecnologías de IA
+   utilizadas en desarrollos de Novar: NLP, Machine Learning, Azure AI
+   Services, GPT-4 Turbo, Python, YOLOv8, TensorFlow y redes neuronales
+   convolucionales.
+
+Fecha de consulta de fuentes web: 17 de septiembre de 2026.
+
+
+======================================================================
+FIN DEL INFORME
+======================================================================

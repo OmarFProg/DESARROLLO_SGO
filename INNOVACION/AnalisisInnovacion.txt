@@ -1,0 +1,72 @@
+teniendo en cuenta los modulos que de manera obligatoria se van a procesar:
+    AUTENTICACIÓN Y GESTIÓN DE USUARIOS
+    GESTIÓN DE PACIENTES
+    HISTORIA CLINICA Y GRADUACION
+    PEDIDOS AL LABORATORIO ÓPTICO
+    VENTAS Y COBROS
+
+para todas las prouestas resolver: 
+    definicion, 
+    funcionamiento, 
+    arquitectura reomendada dada la defincion/requerimientacion del sistema
+    recursos minimos en equipo de desarrollo
+    recursos minimos en equipo de despliegue
+
+
+CHATBOT CON LOS DATOS	
+    CHATBOT INFORMATIVO	
+	basados en reglas, 	
+	chatbot con los datos	
+        consultas a la bd, ej
+    pedidos pendientes enviados al lab
+    lista de productos (de una categoria) en un rango de precios especificado (como funcionaria de acuerdo a su negocio)
+    productos mas vendidos en un intervalo de tiempo: el mes, 
+    total de ventas en el mes
+	
+CHATBOT DE SUGERENCIAS
+		aprendizage continuo  partir de los datos, 
+        a partir de los resultados en componentes del dashboard
+		orientarle a ser inteligente al chatbot
+
+
+ASISTENTE INTELIGENTE Q RESULVE DUDAS RESPECTO AL NEGOCIO
+	MEDIANTE INFROMACION ALMACENADA EN SU BASE DE CONOCIMIENTO	
+	COMO MEDIANTE INFORMACION ONSULTADA DE FUENTES DE INTERNET	
+
+
+ASISTENTE CONVERSACIONAL hace funciones de escritura/modificacion/actua
+    ej: cambiar un precio
+
+
+USO DE ESCANEO DE QR PARA OBTENER INFORMACION
+    este producto como se relacionaria con los/o algun objetivos/atributos de calidad planteados en el proyecto:
+        Seguridad de los datos
+        Integridad
+        Responsabilidad
+        Autenticidad
+
+EMICION DE ALERTAS 
+    PARA PEDIDOS Q SE REFIERAN A TIEMPOS DE ENTREGA DEL PEDIDO Y ACCESO A DETALLES		
+    ALERTAS DE INVENTARIO REDUCIDO	
+
+
+de pronto alguna innovacion que implique FUNCIONALIDADES DE SEGUIMIENTO CLINICO OPTOMETRICO
+    EJ: dar ejemplo	
+
+SEGURIDAD ASISTIDA POR IA
+    reconocimiento de riesgos sobre trafico/acciones sobre el sistema	
+
+PRINCIPIOS/DIRECTRICES DE INNOVACION
+    ORIENTARSE A SER UN SISTEMA DE VANGUARDIA,
+    UN SISTEMA Q DESPUENTE CON RESPECTO A LOS OTORS SISTEMAS EXISTENTES	
+    DEBE SER UN COMPONNTE DE INTERES PARA EL NEGOCIO	
+    PROCURAR/ORIENTARSE A SOLVENTAR/REFORZAR/AMPLIAR LA EJECUCION DE UNO/ALGUN OBJETIVO
+
+bajo el cpntexto de conocer innovaciones en sistemas optometricos y de gestion optometrica
+analizar el video dado:
+ propuestas/productos de innovacion identificados
+ tecnologias, implicaciones tecnologicas y de recursos para su implementacion
+ retornar informeInnovciones.txt
+	
+		
+	

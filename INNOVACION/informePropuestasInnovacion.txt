@@ -1,0 +1,942 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE ANÁLISIS, CRUCE DE INFORMACIÓN Y PROPUESTAS DE INNOVACIÓN
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+--------------------------------------------------------------------------------
+Proyecto:           Desarrollo de un sistema informático de gestión clínica 
+                    optométrica utilizando la metodología ágil Scrum, garantizando 
+                    la seguridad de los datos de salud visual.
+Documento:          Informe de Análisis, Cruce de Información y Cartera de 
+                    Propuestas de Innovación para el Product Owner y Stakeholder Técnico.
+Destinatarios:      - Product Owner / Beneficiario: Propietario de Óptica Vista Visión
+                    - Stakeholder Técnico / Scrum Master: Ing. Jorge Menéndez Verdecia
+                    - Asesor Técnico / Revisor: Ing. Julio Santillán Castillo
+Autores / Devs:     - Villalva Dumancela, Alexander Rafael (C.I. 0605351899, Cód. 7135)
+                    - Figueroa Díaz, Omar Santiago (C.I. 1803391968, Cód. 7253)
+Contexto Operativo: Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Fecha de Emisión:   Septiembre 2026 / Período Académico 2026 - 2027
+Archivo Destino:    DESARROLLO_SGO/INNOVACION/informePropuestasInnovacion.txt
+Versión:            1.0 Final Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. RESUMEN EJECUTIVO Y ANTECEDENTES DEL REQUERIMIENTO DE INNOVACIÓN
+2. CONTEXTO OPERATIVO, OBJETIVOS Y ALCANCE FORMAL DEL PROYECTO SGO
+   2.1 Objetivos del Anteproyecto de Titulación (ESPOCH)
+   2.2 Módulos Nucleares del MVP (RF-01 a RF-23)
+   2.3 Requisitos No Funcionales y Subcaracterísticas ISO/IEC 25010:2023
+   2.4 Restricciones Operativas, Fronteras y Plazos de Ejecución
+3. ANÁLISIS COMPARATIVO Y CRUCE DE INFORMACIÓN CON SISTEMAS DE VANGUARDIA
+   3.1 Caracterización de las Soluciones de Vanguardia Analizadas
+   3.2 Matriz de Cruce de Información (Estado del Arte vs. Sistema SGO)
+   3.3 Hallazgos y Oportunidades Clave de Diferenciación Tecnológica
+4. PRINCIPIOS Y DIRECTRICES RECTORES PARA LA INNOVACIÓN EN EL SGO
+5. CARTERA DE PROPUESTAS DE INNOVACIÓN PARA EL OWNER Y STAKEHOLDER TÉCNICO
+   5.1 PROPUESTA 1: Sistema de Verificación Criptográfica y Autenticidad Documental 
+       Mediante Códigos QR Dinámicos (Recetas, Certificados y Órdenes de Taller)
+   5.2 PROPUESTA 2: Motor de Alertas Clínicas Predictivas y Seguimiento Optométrico 
+       Longitudinal (Detección de Progresión Miópica y Variaciones Dióptricas Atípicas)
+   5.3 PROPUESTA 3: Asistente Inteligente de Consulta Operativa "Chatbot con los Datos" 
+       (Consultas de Negocio, Inventario y Órdenes de Laboratorio)
+   5.4 PROPUESTA 4: Asistente Conversacional Transaccional con Doble Factor de 
+       Confirmación y No Repudio (Escritura Segura de Parámetros y Precios)
+   5.5 PROPUESTA 5: Motor de Ciberseguridad Asistida y Detección Heurística de 
+       Anomalías en Auditoría (Blindaje ISO/IEC 25010)
+   5.6 PROPUESTA 6: Asistente Móvil WebRTC para Medición Pupilocéntrica Digital y 
+       Detección de Monturas mediante Visión Artificial Ligera
+6. MATRIZ INTEGRAL DE EVALUACIÓN Y TOMA DE DECISIONES ESTRATÉGICAS
+7. HOJA DE RUTA (ROADMAP) DE IMPLEMENTACIÓN ÁGIL POR SPRINTS
+8. CONCLUSIONES Y RECOMENDACIONES PARA LA MESA DE NEGOCIACIÓN
+================================================================================
+
+
+================================================================================
+1. RESUMEN EJECUTIVO Y ANTECEDENTES DEL REQUERIMIENTO DE INNOVACIÓN
+================================================================================
+
+En el marco del desarrollo del Trabajo de Titulación de la Carrera de Software de 
+la Escuela Superior Politécnica de Chimborazo (ESPOCH), titulado "Desarrollo de un 
+sistema informático de gestión clínica optométrica utilizando la metodología ágil 
+Scrum, garantizando la seguridad de los datos de salud visual", el STAKEHOLDER TÉCNICO 
+(Director/Tutor del proyecto) ha establecido como directriz obligatoria la 
+incorporación de al menos un COMPONENTE INNOVADOR que distinga a la solución de 
+los sistemas tradicionales del mercado y aporte un valor diferencial comprobable.
+
+Para responder a esta exigencia, el equipo de desarrollo recopiló las directrices 
+institucionales preliminares consignadas en `AnalisisInnovacion.txt` y ejecutó un 
+estudio técnico exhaustivo de los sistemas y tecnologías de vanguardia que lideran 
+el sector optométrico a nivel internacional:
+1. QUIBER / ÓpticaPro (Gestión integrada, Optotipo digital clínico, WhatsApp y QR).
+2. SistemaOptica (SaaS cloud con captura por comandos de voz mediante IA y CRM).
+3. Laboratorios Optec (Manufactura avanzada Freeform y tallado digital CNC).
+4. Jishi AI Digital Eyewear System (Evaluación computarizada de calce de gafas).
+5. Novar AIPD & Digital Center (Medición IPD con IA, reconocimiento de montura y Sophia IA).
+6. Lemon Soft Optisys & DigiPad 3D (Centrado pupilar en tablet, simulación 3D y realidad virtual).
+
+El presente informe realiza un cruce riguroso entre las necesidades basales del 
+SGO (delimitadas en el Anteproyecto, el Documento de Alcance y el Informe de la Fase 3 
+de Requerimentación) y las tecnologías de punta analizadas. Como resultado, se 
+formula una cartera estructurada de seis (6) propuestas de innovación viables, 
+especificando para cada una su esquema tecnológico, su vinculación matemática y 
+metodológica con las subcaracterísticas de seguridad de la norma ISO/IEC 25010:2023 
+(Autenticidad, Integridad, Responsabilidad y Seguridad de Datos), y su pertinencia 
+técnica en función del cronograma estricto de 18 semanas (4 sprints quincenales).
+
+
+================================================================================
+2. CONTEXTO OPERATIVO, OBJETIVOS Y ALCANCE FORMAL DEL PROYECTO SGO
+================================================================================
+
+Para asegurar que cualquier componente innovador no incurra en desviación de alcance 
+(scope creep) ni ponga en riesgo la culminación académica del proyecto, es imperativo 
+fundamentar las propuestas sobre la línea base aprobada por la ESPOCH:
+
+2.1 OBJETIVOS DEL ANTEPROYECTO DE TITULACIÓN (BASE ESPOCH)
+- Objetivo General:
+  Desarrollar un sistema informático de gestión clínica optométrica utilizando la 
+  metodología ágil Scrum, garantizando la seguridad de los datos de salud visual.
+- Objetivos Específicos:
+  1. Analizar los procesos clínicos y administrativos del sector optométrico mediante 
+     levantamiento de requerimientos funcionales y no funcionales de la óptica de 
+     estudio, para identificar las deficiencias de integridad, control de acceso y 
+     trazabilidad de datos que determinan el alcance del sistema.
+  2. Estudiar la metodología ágil Scrum mediante la revisión de literatura especializada, 
+     para conocer su estructura y aplicabilidad en el desarrollo de un sistema 
+     informático de gestión clínica optométrica seguro.
+  3. Construir un sistema de gestión clínica optométrica seguro utilizando la 
+     metodología ágil Scrum.
+  4. Evaluar el cumplimiento de los atributos de seguridad del sistema, mediante 
+     la medición de las subcaracterísticas de integridad, responsabilidad y 
+     autenticidad establecidas en la norma ISO/IEC 25010:2023.
+
+2.2 MÓDULOS NUCLEARES DEL MVP (23 REQUISITOS FUNCIONALES)
+Conforme al informe de especificación formal `informeFase3.txt`, el sistema se 
+estructura en 5 módulos obligatorios que integran 23 Requisitos Funcionales (RF):
+- M1: Autenticación y Gestión de Usuarios (RF-01 a RF-02): Control de acceso 
+  basado en roles (RBAC) para Administrador, Optometrista y Asistente; gestión de 
+  tokens JWT con expiración por 20 min de inactividad.
+- M2: Gestión de Pacientes (RF-03 a RF-06): Registro demográfico, soporte flexible 
+  para menores de edad sin cédula, validador de cédula ecuatoriana módulo 10 con 
+  búsqueda predictiva anti-duplicados y repositorio seguro de adjuntos clínicos.
+- M3: Historia Clínica y Graduación (RF-07 a RF-15): Examen refractivo OD/OI 
+  (esferas, cilindros negativos obligatorios, ejes, adiciones positivas forzadas, 
+  AV Snellen en pies, DNP/alturas), parámetros avanzados para lentes progresivos, 
+  comparativa evolutiva simultánea con lente anterior, codificación diagnóstica 
+  CIE-10, emisión de recetas/certificados en PDF e inmutabilidad histórica con 
+  papelera lógica (soft delete).
+- M4: Pedidos al Laboratorio Óptico (RF-16 a RF-19): Emisión de órdenes técnicas de 
+  trabajo con aislamiento de diagnósticos personales (cumplimiento LOPDP), catálogo 
+  de materiales y tratamientos ópticos, máquina de estados finitos del ciclo de 
+  vida del pedido (4 estados) y gestión de garantías por rectificación de lunas.
+- M5: Ventas y Cobros (RF-20 a RF-23): Venta por lotes homogéneos de armazones, 
+  cobros bajo transacciones ACID con pagos mixtos (efectivo/transferencia) y 
+  anticipos/saldos, emisión de comprobantes térmicos POS de 80 mm y arqueo diario 
+  de caja con conciliación inmutable.
+
+2.3 REQUISITOS NO FUNCIONALES Y ATRIBUTOS DE CALIDAD (ISO/IEC 25010:2023)
+- Autenticidad (RNF-SEG-01): Cifrado bcrypt (costo 12), verificación estricta de 
+  tokens JWT (RFC 7519) en cada endpoint, bloqueo por 5 intentos fallidos.
+- Integridad (RNF-SEG-02): Validación dual (React + Laravel FormRequests), 
+  restricciones CHECK y foreign keys ON DELETE RESTRICT en PostgreSQL, transacciones 
+  con aislamiento READ COMMITTED.
+- Responsabilidad y No Repudio (RNF-SEG-03): Tabla inmutable `audit_logs` que captura 
+  id, usuario, IP, evento, tabla, registro, old_values (JSONB), new_values (JSONB) 
+  y timestamp UTC ante cualquier inserción, actualización o borrado lógico.
+- Seguridad de Datos y Privacidad (RNF-LEG-01): Cumplimiento de la Ley Orgánica 
+  de Protección de Datos Personales (LOPDP Ecuador) y Acuerdo Ministerial N.° 030-2020 
+  del MSP; aislamiento de la información sensible de salud en órdenes a talleres externos.
+
+2.4 RESTRICCIONES OPERATIVAS, FRONTERAS Y PLAZOS DE EJECUCIÓN
+- Equipo de trabajo: 2 ingenieros de software en formación (investigadores).
+- Duración total del proyecto: 18 semanas (septiembre 2026 a enero 2027).
+- Tiempo de desarrollo efectivo: 4 sprints quincenales (8 semanas calendario).
+- Entorno de operación: Red de área local (LAN) en Óptica Vista Visión, Riobamba.
+- Resiliencia requerida: Autonomía operativa del 99.5% sin internet (el sistema no 
+  debe bloquearse si se cae la conexión externa de banda ancha).
+- Fronteras estrictas (Fuera de Alcance / Out-of-Scope según Documento de Alcance):
+  * No facturación electrónica en línea directa con WebServices del SRI.
+  * No pasarelas de pago con tarjeta en tiempo real (Stripe/Datafast).
+  * No integración directa por drivers propietarios a autorefractómetros físicos.
+  * No contratación de servicios pagos de WhatsApp Business Cloud API de Meta.
+
+
+================================================================================
+3. ANÁLISIS COMPARATIVO Y CRUCE DE INFORMACIÓN CON SISTEMAS DE VANGUARDIA
+================================================================================
+
+3.1 CARACTERIZACIÓN DE LAS SOLUCIONES DE VANGUARDIA ANALIZADAS
+A partir de los informes técnicos elaborados sobre las soluciones de referencia, 
+se resumen sus aportes tecnológicos cardinales:
+
+1. QUIBER / ÓpticaPro (Chile/Latinoamérica - Video VID-20260426-WA0004):
+   - Dashboard operacional con indicadores unificados en tiempo real.
+   - Optotipo digital interactivo calibrable por software según distancia y resolución.
+   - Generación de certificados y recetas digitales con código QR de verificación.
+   - Trazabilidad de órdenes de laboratorio por estados operativos.
+   - Módulo de comunicación y marketing con integración a WhatsApp.
+
+2. SistemaOptica (SaaS Cloud México/Internacional - sistemaoptica.com):
+   - Asistente inteligente con Speech-to-Text / NLP para captura clínica por voz 
+     "hands-free" mientras el profesional opera el foróptero o lámpara de hendidura.
+   - Gestión matricial multidimensional de inventario de micas ópticas (esfera vs. cilindro).
+   - Trazabilidad omnicanal con avisos automáticos de estado de pedidos al paciente.
+   - Sistema de micro-tutoriales interactivos integrados en interfaz.
+
+3. Laboratorios Optec (Ecuador - Manufactura Industrial de Lentes Freeform):
+   - Flujo industrial de tallado digital punto a punto en generadores CNC de diamante.
+   - Micro-grabado láser de autenticidad y centrado óptico en la masa del lente.
+   - Procesamiento de fichas técnicas bajo estándares industriales (protocolo OMA).
+   - Demuestra la necesidad crítica de que el software emita fichas técnicas exactas 
+     de prescripción sin errores humanos.
+
+4. Jishi AI Digital Eyewear System (Dispositivo Portátil Tablet - Video WA0084):
+   - Detección facial y ocular mediante visión artificial en tablet táctil.
+   - Evaluación digital estandarizada del calce, inclinación y posición de las gafas.
+   - Emisión automatizada del "Eyeglasses Wearing Assessment Report".
+   - Registro digital evolutivo de medidas del paciente.
+
+5. Novar AIPD & Digital Center (Argentina/Global - Publicación Ruben Desia):
+   - Solución de medición de distancia interpupilar (IPD) y nasopupilar (DNP) mediante 
+     inteligencia artificial en smartphones y tablets.
+   - Reconocimiento automático de la geometría de la montura por visión por computador.
+   - Asistente inteligente Sophia especializado en óptica, optometría y analítica.
+   - Simulador 3D de espesores y campos visuales para lentes multifocales y progresivos.
+
+6. Lemon Soft Optisys & DigiPad 3D Premium (Argentina - lemonsoft.com.ar):
+   - Pupilorreflexometría digital portátil en iPad/tablet (tecnologías DIPC y MAPP).
+   - Captura en 60 segundos de DNP, alturas de montaje, ángulo pantoscópico y ángulo galbánico.
+   - Modelado tridimensional predictivo de espesores según índice de refracción (1.50 a 1.74).
+   - Módulo inmersivo de Realidad Virtual (VR 360°) para demostración de aberraciones ópticas.
+
+
+3.2 MATRIZ DE CRUCE DE INFORMACIÓN: ESTADO DEL ARTE VS. SISTEMA SGO
+En la siguiente matriz se contrasta lo implementado en los 5 módulos obligatorios 
+del SGO frente a lo que ofrecen los sistemas de vanguardia, identificando brechas 
+técnicas y oportunidades de innovación adoptables:
+
++--------------------+-------------------------+-------------------------+-------------------------+
+| DOMINIO / PROCESO  | LÍNEA BASE SGO (MVP)    | SISTEMAS DE VANGUARDIA  | BRECHA / OPORTUNIDAD    |
++--------------------+-------------------------+-------------------------+-------------------------+
+| Autenticación y    | RBAC 3 roles, JWT, logs | RBAC multi-sucursal,    | Auditoría reactiva      |
+| Seguridad          | reactivos en DB, 20 min | biometría, detección de | pasiva en SGO; falta    |
+|                    | inactividad estricta.   | anomalías en tiempo real| detección heurística de |
+|                    | (M1 - RF-01, RF-02)     | (Novar, SistemaOptica). | riesgos de seguridad.   |
++--------------------+-------------------------+-------------------------+-------------------------+
+| Gestión de         | Cédula módulo 10,       | Registro biométrico,    | SGO posee alta solidez  |
+| Pacientes          | menores flexibles,      | fotos de rostro en alta | demográfica; carece de  |
+|                    | adjuntos PDF/JPG/PNG.   | resolución, anamnesis   | canal de interacción    |
+|                    | (M2 - RF-03 a RF-06)    | guiada por voz.         | conversacional directa. |
++--------------------+-------------------------+-------------------------+-------------------------+
+| Historia Clínica   | Validaciones dioptricas | Captura de datos por voz| SGO valida límites pero |
+| y Graduación       | duales, Snellen pies,   | (STT), optotipo digital,| no detecta progresión   |
+|                    | CIE-10, comparativa     | centrado por IA (AIPD), | longitudinal patológica |
+|                    | estática lente anterior.| simulación 3D de lentes | ni verifica recetas     |
+|                    | (M3 - RF-07 a RF-15)    | (Lemon Soft, Novar).    | externamente vía QR.    |
++--------------------+-------------------------+-------------------------+-------------------------+
+| Pedidos al Taller  | Órdenes aisladas LOPDP, | Protocolo industrial OMA| SGO depende de cambio   |
+| de Laboratorio     | 4 estados operativos,   | micro-marcado láser,    | manual de estados; no   |
+|                    | rectificación/garantía. | alertas push automáticas| proyecta retrasos ni da |
+|                    | (M4 - RF-16 a RF-19)    | por WhatsApp (Optec).   | acceso seguro al taller.|
++--------------------+-------------------------+-------------------------+-------------------------+
+| Ventas, Cobros y   | Lotes de armazones,     | POS con inventario      | SGO maneja cobro ACID   |
+| Negocio            | pagos mixtos, anticipos,| matricial, timbrado SRI | robusto; carece de      |
+|                    | arqueo diario inmutable.| en nube, chatbots de    | asistente conversacional|
+|                    | (M5 - RF-20 a RF-23)    | ventas y consultas.     | para consultar caja.    |
++--------------------+-------------------------+-------------------------+-------------------------+
+
+
+3.3 HALLAZGOS Y OPORTUNIDADES CLAVE DE DIFERENCIACIÓN TECNOLÓGICA
+1. Brecha de Autenticidad Documental Externa: El SGO genera recetas y certificados 
+   en PDF (RF-14), pero carece de un mecanismo que permita a terceros (escuelas, 
+   empresas o pacientes) comprobar que el documento no fue adulterado tras imprimirse.
+2. Brecha de Inteligencia Clínica Longitudinal: El SGO compara la refracción actual 
+   con la inmediata anterior (RF-12), pero el análisis es puramente visual para el 
+   operador; el sistema no computa alertas sobre progresiones miópicas aceleradas.
+3. Brecha de Interacción y Acceso a la Información: La consulta de datos gerenciales 
+   (pedidos retrasados, stock crítico, ventas del día) exige navegación multipantalla; 
+   los sistemas líderes incorporan asistentes conversacionales para agilizar decisiones.
+4. Oportunidad en Seguridad ISO/IEC 25010: El Anteproyecto exige evaluar rigurosamente 
+   la seguridad; una innovación que procese los logs de auditoría para detectar 
+   comportamientos anómalos maximizaría el cumplimiento del Objetivo Específico 4.
+
+
+================================================================================
+4. PRINCIPIOS Y DIRECTRICES RECTORES PARA LA INNOVACIÓN EN EL SGO
+================================================================================
+
+A partir de las directrices fijadas en `AnalisisInnovacion.txt` y las limitaciones 
+reales del proyecto de titulación, toda propuesta debe acatar cuatro principios:
+
+1. Principio de Vanguardia y Trascendencia: La innovación debe transformar al SGO 
+   en un software de punta que despunte con respecto a los sistemas oftalmológicos 
+   legados de escritorio existentes en Riobamba y la región central del país.
+2. Principio de Interés para el Negocio: Debe resolver problemas operativos o clínicos 
+   tangibles de Óptica Vista Visión, incrementando la productividad, fidelizando 
+   al paciente o evitando pérdidas financieras por mermas y errores técnicos.
+3. Principio de Alineación Normativa ISO 25010: Debe reforzar de manera directa 
+   uno o más atributos de calidad del proyecto: Autenticidad, Integridad, 
+   Responsabilidad y Seguridad de los Datos de Salud Visual.
+4. Principio de Factibilidad en Plazos y LAN: Debe ser construible por el equipo de 
+   2 desarrolladores dentro de los 4 sprints quincenales, operando de forma autónoma 
+   en red local (LAN) sin incurrir en costos recurrentes de licenciamiento privativo.
+
+
+================================================================================
+5. CARTERA DE PROPUESTAS DE INNOVACIÓN PARA EL OWNER Y STAKEHOLDER TÉCNICO
+================================================================================
+
+A continuación, se detalla la cartera de seis (6) propuestas de innovación 
+diseñadas a la medida del Sistema SGO:
+
+--------------------------------------------------------------------------------
+5.1 PROPUESTA 1: SISTEMA DE VERIFICACIÓN CRIPTOGRÁFICA Y AUTENTICIDAD DOCUMENTAL 
+                 MEDIANTE CÓDIGOS QR DINÁMICOS (RECETAS, CERTIFICADOS Y TALLER)
+--------------------------------------------------------------------------------
+
+A. DEFINICIÓN:
+Componente de seguridad documental y trazabilidad distribuida que genera e 
+imprime códigos QR estandarizados en las recetas oftálmicas, certificados de 
+aptitud visual (RF-14) y órdenes técnicas de laboratorio (RF-16). El QR contiene 
+una carga útil firmada criptográficamente con HMAC-SHA256 y un identificador único 
+(UUIDv4) que enlaza a un portal web público de verificación rápida.
+
+B. FUNCIONAMIENTO Y FLUJO DE INTERACCIÓN:
+1. Emisión: Al finalizar la consulta o emitir la orden de taller, el backend de 
+   Laravel genera un token efímero firmado compuesto por: `ID_Documento + 
+   Hash_Contenido + ID_Profesional + Timestamp_UTC`.
+2. Estampado: Se renderiza un código QR en el pie de página del PDF utilizando la 
+   librería `simplesoftwareio/simple-qrcode`.
+3. Verificación Pública (Paciente o Tercero): Al escanear el QR con cualquier 
+   dispositivo móvil (smartphone), el navegador accede a la ruta pública:
+   `https://sgo.opticavistavision.com/verificar/{token}`.
+4. Respuesta Segura con Divulgación Cero (Zero-Knowledge):
+   - Si es Receta o Certificado: El sistema despliega una vista minimalista que valida 
+     la autenticidad del documento, nombre del paciente, optometrista firmante, 
+     registro profesional MSP, fecha y estado de vigencia (Válido / Anulado). 
+     Si el PDF fue alterado físicamente, el hash no coincidirá.
+   - Si es Orden de Taller: El laboratorio escanea el ticket desde su móvil y ve 
+     únicamente la prescripción óptica de biselado y el estado logístico actual, 
+     sin exponer jamás diagnósticos privados ni datos de contacto (LOPDP).
+5. Auditoría: Cada escaneo queda registrado en la bitácora del sistema (IP, user-agent).
+
+C. ESQUEMA Y ARQUITECTURA TECNOLÓGICA RECOMENDADA:
+```
+ +-------------------------------------------------------------------------+
+ |                          ARQUITECTURA PROPUESTA 1                       |
+ |                                                                         |
+ |  [React Frontend] -----> [POST /api/v1/recetas/emitir]                 |
+ |                                   |                                     |
+ |                                   v                                     |
+ |                          [Laravel Backend Controller]                   |
+ |                                   |                                     |
+ |                   +---------------+---------------+                     |
+ |                   |                               |                     |
+ |                   v                               v                     |
+ |      [HMAC-SHA256 Token Engine]      [Simple-QRCode Generator]         |
+ |       Token = Hash(Doc + Clave)       Render matriz 2D SVG/PNG          |
+ |                   |                               |                     |
+ |                   +---------------+---------------+                     |
+ |                                   |                                     |
+ |                                   v                                     |
+ |                     [DomPDF / Snappy PDF Service]                       |
+ |                     Documento con QR Dinámico Estampado                 |
+ |                                   |                                     |
+ |     ------------------------------+--------------------------------     |
+ |                                   |                                     |
+ |                                   v                                     |
+ |            [Smartphone Escaneo QR - Paciente/Laboratorio]               |
+ |                                   |                                     |
+ |                                   v                                     |
+ |              [GET /verificar-documento/{uuid}/{signature}]              |
+ |                                   |                                     |
+ |                                   v                                     |
+ |             [Servicio Verificador de Integridad y Autenticidad]         |
+ |                - Comprobación contra DB PostgreSQL                      |
+ |                - Registro en audit_logs de acceso externo               |
+ +-------------------------------------------------------------------------+
+```
+- Tecnologías: PHP 8.2 (Laravel 11), paquete `simplesoftwareio/simple-qrcode` o 
+  `endroid/qr-code`, JWT/HMAC con `hash_hmac('sha256')`, PostgreSQL 15, React SPA.
+
+D. RECURSOS MÍNIMOS EN EQUIPO DE DESARROLLO:
+- Hardware: 1 Laptop de desarrollo (Core i5 8GB RAM, SSD).
+- Software: VS Code, PHP 8.2, Composer, Node.js v20, Docker Desktop, Git.
+- Perfiles: 1 Desarrollador Full-Stack (esfuerzo estimado: 1 sprint / 1 desarrollador).
+
+E. RECURSOS MÍNIMOS EN EQUIPO DE DESPLIEGUE (ÓPTICA):
+- Hardware: Servidor local existente (MiniPC o Desktop Core i3, 8GB RAM), router LAN.
+- Impresora: Impresora láser/inyección convencional (formato A4) o térmica POS (80 mm).
+- Costo Adicional: $0.00 (utiliza librerías open source y hosting web estándar).
+
+F. GRADO DE VINCULACIÓN CON LOS OBJETIVOS DEL PROYECTO (ISO/IEC 25010:2023):
+- Autenticidad: **MÁXIMA**. Erradica la falsificación de recetas y certificados de 
+  aptitud visual emitidos a nombre de la óptica o del profesional.
+- Integridad: **MÁXIMA**. Cualquier alteración física o digital en las dioptrías 
+  o fechas del documento impreso es detectada inmediatamente al contrastar con el hash.
+- Responsabilidad: **ALTA**. Vincula unívocamente la orden técnica o receta al 
+  optometrista emisor con sello de tiempo UTC inalterable en `audit_logs`.
+- Seguridad de Datos: **ALTA**. Implementa minimización de datos para el laboratorio, 
+  cumpliendo con la Ley Orgánica de Protección de Datos Personales (LOPDP Ecuador).
+
+G. PERTINENCIA DADOS LOS PLAZOS PARA EJECUCIÓN:
+- Pertinencia: **CRÍTICA / PRIORIDAD MÁXIMA (RECOMENDADA)**.
+- Factibilidad Temporal: Muy alta. Puede implementarse en el **Sprint 2 o 3** 
+  en paralelo a la construcción de RF-14 y RF-16. Su impacto demostrativo ante el 
+  tribunal de grado de la ESPOCH es de altísimo nivel académico y práctico.
+
+
+--------------------------------------------------------------------------------
+5.2 PROPUESTA 2: MOTOR DE ALERTAS CLÍNICAS PREDICTIVAS Y SEGUIMIENTO OPTOMÉTRICO 
+                 LONGITUDINAL (PROGRESIÓN MIÓPICA Y SALTOS DIÓPTRICOS ATÍPICOS)
+--------------------------------------------------------------------------------
+
+A. DEFINICIÓN:
+Sistema de soporte a la decisión clínica (CDSS - Clinical Decision Support System) 
+incorporado en el Módulo de Historia Clínica (M3) que procesa series temporales de 
+exámenes refractivos para identificar patrones patológicos de progresión miópica, 
+astigmatismos irregulares o saltos dióptricos atípicos, generando alertas preventivas 
+y recomendaciones de seguimiento personalizado.
+
+B. FUNCIONAMIENTO Y FLUJO DE INTERACCIÓN:
+1. Monitoreo en Tiempo Real (Extensión CUS-EXT-01): Mientras el optometrista digita 
+   la refracción actual en React (RF-07), el motor compara automáticamente en memoria 
+   y contra el registro histórico previo (RF-12):
+   - Tasa de Progresión Miópica Anualizada: $\Delta E = \frac{Esfera_{actual} - Esfera_{anterior}}{Tiempo_{meses}} \times 12$.
+   - Salto Dióptrico Brusco: Variación en esfera o cilindro $\ge |1.50|$ D en menos de 1 año.
+   - Rotación Anómala de Eje: Giro de eje astigmático $\ge 30^\circ$ con cilindros $> 1.00$ D.
+2. Disparo de Alertas Clínicas Ergonómicas:
+   - Alerta Roja (Sospecha de Queratocono / Ectasia): Si hay aumento rápido de 
+     cilindro miópico y cambio de eje en pacientes menores a 25 años.
+   - Alerta Amarilla (Progresión Miópica Infantil Severa): Si la miopía progresa 
+     a un ritmo mayor a $-0.75$ D/año en menores de 18 años (conforme a guías WCO).
+3. Sugerencia de Protocolos: El sistema sugiere automáticamente al profesional: 
+   "Agendar control en 6 meses", "Recomendar lentes con control de miopía" o 
+   "Requerir topografía corneal complementaria (RF-06)".
+4. Forzado de Responsabilidad Clínica: Si el optometrista decide ignorar la alerta y 
+   guardar la graduación atípica, el sistema exige ingresar una breve justificación 
+   médica obligatoria que se persiste en `audit_logs` para no repudio.
+
+C. ESQUEMA Y ARQUITECTURA TECNOLÓGICA RECOMENDADA:
+```
+ +-------------------------------------------------------------------------+
+ |                          ARQUITECTURA PROPUESTA 2                       |
+ |                                                                         |
+ |  [React UI: Formulario Refracción OD/OS]                                |
+ |        | (Evento onBlur / onChange en campos Esfera, Cilindro, Eje)     |
+ |        v                                                                |
+ |  [Clinical Heuristic Engine - Frontend Worker]                          |
+ |        | (Cálculo instantáneo de deltas de variación sin latencia)      |
+ |        v                                                                |
+ |  [Validación Dual Backend - Laravel ClinicalService]                    |
+ |        |                                                                |
+ |        +---> Consulta series temporales en PostgreSQL:                  |
+ |        |     SELECT examenes WHERE paciente_id = X ORDER BY fecha ASC   |
+ |        |                                                                |
+ |        +---> Algoritmo Heurístico de Progresión (Reglas Clínicas WCO)   |
+ |              - Regla 1: Salto Atípico (|Delta| >= 1.50 D)               |
+ |              - Regla 2: Progresión Miópica Acelerada (Delta < -0.75/año)|
+ |              - Regla 3: Torsión de Eje Cilíndrico                      |
+ |                                                                         |
+ |  [Modal de Alerta Preventiva en UI]                                     |
+ |        |                                                                |
+ |        +---> Aceptación de Parámetros -> INSERT con Flag 'atípico'      |
+ |        +---> Justificación Clínica Obligatoria -> Guardado en AuditLog  |
+ +-------------------------------------------------------------------------+
+```
+- Tecnologías: Algoritmos determinísticos en TypeScript (React) y PHP 8.2 (Laravel 
+  Service Pattern), consultas indexadas por fecha en PostgreSQL con JSONB, Chart.js 
+  para curva evolutiva visual en pantalla de consulta.
+
+D. RECURSOS MÍNIMOS EN EQUIPO DE DESARROLLO:
+- Hardware: Equipo de desarrollo estándar.
+- Software: VS Code, PHPStan, PHPUnit para pruebas unitarias de casos clínicos límites.
+- Perfiles: 1 Desarrollador Backend/Lógica Clínica y colaboración con el Optometrista.
+
+E. RECURSOS MÍNIMOS EN EQUIPO DE DESPLIEGUE (ÓPTICA):
+- Hardware: El mismo equipo de consulta del consultorio.
+- Rendimiento: 0 sobrecarga computacional; ejecución en sub-milisegundos en memoria.
+
+F. GRADO DE VINCULACIÓN CON LOS OBJETIVOS DEL PROYECTO (ISO/IEC 25010:2023):
+- Integridad Clínica: **MÁXIMA**. Previene la digitación errónea de recetas (ej. 
+  confundir un signo negativo por positivo o tipear un 5.00 en vez de 0.50 D), 
+  blindando la salud ocular del paciente antes de la talla de lunas.
+- Responsabilidad: **MÁXIMA**. Toda excepción a la regla de variación requiere 
+  justificación explícita del autor de la consulta, eliminando el repudio pericial.
+- Seguridad de Datos: **ALTA**. Asegura que el historial refractivo mantenga una 
+  evolución fisiológicamente coherente y auditable en el tiempo.
+
+G. PERTINENCIA DADOS LOS PLAZOS PARA EJECUCIÓN:
+- Pertinencia: **MUY ALTA (RECOMENDADA DIRECTA)**.
+- Factibilidad Temporal: Excelente. Se acopla de forma natural a la construcción del 
+  **Sprint 2** (Módulo 3: RF-07, RF-12 y Caso de Uso Extendido CUS-EXT-01). No añade 
+  servidores ni dependencias de terceros.
+
+
+--------------------------------------------------------------------------------
+5.3 PROPUESTA 3: ASISTENTE INTELIGENTE OPERATIVO "CHATBOT CON LOS DATOS" 
+                 (CONSULTAS SEGURAS DE NEGOCIO, INVENTARIO Y ÓRDENES DE TALLER)
+--------------------------------------------------------------------------------
+
+A. DEFINICIÓN:
+Interfaz conversacional inteligente integrada en el Dashboard del SGO que permite 
+al Propietario, Optometrista y Asistente consultar mediante lenguaje natural el 
+estado operativo del negocio, pedidos pendientes de taller, existencias de lotes de 
+armazones y métricas financieras de venta, operando con estricto control de roles (RBAC).
+
+B. FUNCIONAMIENTO Y FLUJO DE INTERACCIÓN:
+1. Entrada del Usuario: El operador interactúa con un widget flotante en el sistema:
+   - Administrador pregunta: "¿Cuánto se ha cobrado hoy en transferencias y cuánto hay en caja?"
+   - Optometrista pregunta: "¿Qué pedidos al taller de Quito llevan más de 3 días pendientes?"
+   - Asistente pregunta: "¿Qué lotes de armazones tienen stock crítico menor a 3 unidades?"
+2. Procesamiento Seguro de Intenciones (Dual Mode):
+   - Modo Autónomo LAN (Reglas y Patrones Determinísticos): Mediante un analizador 
+     léxico-sintáctico (Regex + Diccionario de Palabras Clave), el sistema clasifica 
+     la intención y extrae entidades (fechas, montos, estados, categorías) sin 
+     necesidad de conexión a internet.
+   - Modo Aumentado (Opcional si hay internet): Conexión mediante API REST a un modelo 
+     LLM liviano (Claude Haiku / Gemini Flash) que sintetiza y contextualiza 
+     respuestas comerciales avanzadas.
+3. Ejecución de Consultas Parametrizadas Seguras: El motor traduce la intención a 
+   consultas SQL precompiladas de solo lectura (`SELECT`), impidiendo inyecciones SQL.
+4. Filtro RBAC: Si un usuario con rol Asistente pregunta por el balance de caja o 
+   historias clínicas de pacientes, el chatbot deniega la respuesta con HTTP 403.
+5. Respuesta Visual Interactiva: La respuesta se presenta en una tarjeta con datos 
+   resumidos, badges de alerta y enlaces directos a las pantallas correspondientes.
+
+C. ESQUEMA Y ARQUITECTURA TECNOLÓGICA RECOMENDADA:
+```
+ +-------------------------------------------------------------------------+
+ |                          ARQUITECTURA PROPUESTA 3                       |
+ |                                                                         |
+ |  [React Dashboard: Floating Chatbot Widget]                             |
+ |        | (Prompt de consulta en lenguaje natural)                       |
+ |        v                                                                |
+ |  [POST /api/v1/chatbot/consulta] (JWT Bearer Token con Rol)             |
+ |        |                                                                |
+ |        v                                                                |
+ |  [Security & RBAC Enforcement Middleware]                               |
+ |        | (Valida si el rol tiene permiso para la categoría consultada)  |
+ |        v                                                                |
+ |  [NLP Intent Router & Entity Extractor]                                 |
+ |        |                                                                |
+ |        +---> Si LAN Offline: Router de Expresiones y Plantillas SQL     |
+ |        +---> Si Online: Prompt Engineering contextual con esquema seguro|
+ |        |                                                                |
+ |        v                                                                |
+ |  [Parametrized Safe Query Builder (PostgreSQL Read-Only)]               |
+ |        | (Ejecuta SELECT indexados; NUNCA sentencias INSERT/UPDATE/DEL) |
+ |        v                                                                |
+ |  [Response Formatter + Card Generator]                                  |
+ |        | (Genera respuesta conversacional + botón de acción rápida)     |
+ |        v                                                                |
+ |  [Audit Log Logger] -> Registra consulta, usuario e intención en DB     |
+ +-------------------------------------------------------------------------+
+```
+- Tecnologías: Laravel ChatBot Service, PostgreSQL (Read-Only Views), React UI con 
+  Tailwind CSS, integración opcional vía cURL a LLM API cuando haya conectividad.
+
+D. RECURSOS MÍNIMOS EN EQUIPO DE DESARROLLO:
+- Hardware: Equipo de desarrollo estándar.
+- Software: VS Code, Postman, API Key de pruebas para IA generativa.
+- Perfiles: 1 Desarrollador Backend (parseo y queries seguras) y 1 Desarrollador Frontend.
+
+E. RECURSOS MÍNIMOS EN EQUIPO DE DESPLIEGUE (ÓPTICA):
+- Hardware: Servidor local existente de la óptica.
+- Red: Operativo 100% en LAN en modo local; requiere internet opcional para modo LLM.
+
+F. GRADO DE VINCULACIÓN CON LOS OBJETIVOS DEL PROYECTO (ISO/IEC 25010:2023):
+- Autenticidad y Autorización: **MÁXIMA**. El chatbot respeta al 100% los perfiles 
+  RBAC del sistema; no expone información sensible a roles no autorizados.
+- Integridad: **MÁXIMA**. Arquitectura estrictamente desacoplada con permisos de 
+  solo lectura (`GRANT SELECT`), haciendo matemáticamente imposible que una 
+  alucinación o instrucción del chat modifique datos transaccionales de caja o clínicos.
+- Responsabilidad: **ALTA**. Todas las consultas efectuadas a la base de conocimiento 
+  quedan auditadas con ID de usuario y marca de tiempo en `audit_logs`.
+
+G. PERTINENCIA DADOS LOS PLAZOS PARA EJECUCIÓN:
+- Pertinencia: **ALTA (MUY SOLICITADA POR STAKEHOLDER TÉCNICO)**.
+- Factibilidad Temporal: Factible en **Sprint 3 o 4**. Al diseñarse en base a 
+  plantillas SQL y parseo determinístico, se garantiza su entrega a tiempo sin 
+  bloqueos por entrenamiento complejo de modelos.
+
+
+--------------------------------------------------------------------------------
+5.4 PROPUESTA 4: ASISTENTE CONVERSACIONAL TRANSACCIONAL CON DOBLE FACTOR DE 
+                 CONFIRMACIÓN Y NO REPUDIO (ESCRITURA SEGURA DE PARÁMETROS Y PRECIOS)
+--------------------------------------------------------------------------------
+
+A. DEFINICIÓN:
+Extensión avanzada del asistente inteligente orientada a operaciones de escritura, 
+actualización y parametrización operativa (ej. modificar precio base de lote de 
+armazones, actualizar tiempo estimado de taller, dar de baja stock averiado) 
+mediante comandos conversacionales protegidos por confirmación explícita y no repudio.
+
+B. FUNCIONAMIENTO Y FLUJO DE INTERACCIÓN:
+1. Comando de Entrada: El Administrador digita o dicta al asistente:
+   "Actualizar precio de venta del Lote Medio a 45 dólares".
+2. Parseo y Extracción de Parámetros: El sistema valida la semántica:
+   - Acción: `UPDATE_PRECIO_LOTE`.
+   - Entidad objetivo: `Lote Medio (ID: 2)`.
+   - Valor anterior: `$40.00`.
+   - Valor propuesto: `$45.00`.
+3. Barrera de Seguridad (Two-Step Confirmation): El bot NO ejecuta el cambio ciegamente; 
+   despliega una ventana modal de confirmación con diff visual:
+   "¿Confirma actualizar el precio del Lote Medio de $40.00 a $45.00? Ingrese su contraseña".
+4. Reautenticación y Ejecución Transaccional: El Administrador valida su clave o PIN 
+   maestro. El sistema abre un bloque transaccional ACID (`BEGIN TRANSACTION`), 
+   actualiza la tabla `lotes_armazones`, confirma (`COMMIT`) y escribe el registro 
+   forense inmutable en `audit_logs` con `old_values: {"precio": 40.00}` y 
+   `new_values: {"precio": 45.00}`.
+
+C. ESQUEMA Y ARQUITECTURA TECNOLÓGICA RECOMENDADA:
+```
+ +-------------------------------------------------------------------------+
+ |                          ARQUITECTURA PROPUESTA 4                       |
+ |                                                                         |
+ |  [Admin Chat Input] ----> "Subir precio de Lote Económico a $30"        |
+ |                                   |                                     |
+ |                                   v                                     |
+ |                    [Transactional Intent Parser]                        |
+ |                                   |                                     |
+ |                                   v                                     |
+ |                  [Security Challenge & Diff Modal]                      |
+ |                   - Muestra valor viejo vs. nuevo                       |
+ |                   - Exige reingreso de contraseña / PIN                 |
+ |                                   |                                     |
+ |                  +----------------+----------------+                    |
+ |                  | (Contraseña correcta)           | (Rechazo / Cancel) |
+ |                  v                                 v                    |
+ |        [Laravel DB Transaction]             [Abortar y Auditar]         |
+ |         BEGIN;                                                          |
+ |         UPDATE catalogo_lotes SET ...;                                  |
+ |         INSERT INTO audit_logs ...;                                     |
+ |         COMMIT;                                                         |
+ +-------------------------------------------------------------------------+
+```
+
+D. RECURSOS MÍNIMOS EN EQUIPO DE DESARROLLO:
+- Hardware: Equipo de desarrollo estándar.
+- Software: VS Code, Docker, Laravel Test Suite para pruebas transaccionales concurrentes.
+- Perfiles: 1 Desarrollador Backend Senior (manejo de transacciones ACID y auth).
+
+E. RECURSOS MÍNIMOS EN EQUIPO DE DESPLIEGUE (ÓPTICA):
+- Hardware: Mismo servidor local existente.
+- Requisitos: Navegador web actualizado.
+
+F. GRADO DE VINCULACIÓN CON LOS OBJETIVOS DEL PROYECTO (ISO/IEC 25010:2023):
+- Autenticidad: **MÁXIMA**. Exige reautenticación explícita en el momento de la mutación.
+- Integridad Transaccional: **MÁXIMA**. Operaciones atómicas bajo ACID en PostgreSQL.
+- Responsabilidad: **CRÍTICA**. Previene que un usuario alegue "el asistente cambió 
+  el precio solo"; el log almacena el consentimiento explícito del operador.
+
+G. PERTINENCIA DADOS LOS PLAZOS PARA EJECUCIÓN:
+- Pertinencia: **MEDIA**.
+- Factibilidad Temporal: Requiere alta cobertura de pruebas y validaciones estrictas. 
+  Se recomienda como **fase 2 de la Propuesta 3** o candidato a ser desarrollado 
+  únicamente si el Sprint 4 cuenta con holgura de tiempo.
+
+
+--------------------------------------------------------------------------------
+5.5 PROPUESTA 5: MOTOR DE CIBERSEGURIDAD ASISTIDA Y DETECCIÓN HEURÍSTICA DE 
+                 ANOMALÍAS EN AUDITORÍA (BLINDAJE Y MEDICIÓN ISO/IEC 25010:2023)
+--------------------------------------------------------------------------------
+
+A. DEFINICIÓN:
+Módulo de seguridad proactiva y analítica forense que procesa continuamente la 
+tabla de auditoría inmutable (`audit_logs`) para detectar patrones de tráfico anómalos, 
+intentos de intrusión, modificaciones masivas fuera de horario laboral o suplantación 
+de identidad, generando un Índice de Salud de Seguridad y disparando bloqueos 
+preventivos automáticos.
+
+B. FUNCIONAMIENTO Y FLUJO DE INTERACCIÓN:
+1. Ingestión de Eventos: Cada evento transaccional (login, actualización clínica, 
+   anulación de venta, borrado lógico de historia) registrado en `audit_logs` 
+   es analizado asíncronamente mediante un Job de Laravel.
+2. Detección Heurística de Riesgos:
+   - Regla 1 (Fuerza Bruta y Password Spraying): Detección de $> 5$ fallos de login 
+     desde una misma IP en un intervalo de 10 minutos. Bloqueo automático temporal (RF-01).
+   - Regla 2 (Fuga o Exfiltración Masiva de Pacientes): Usuario que consulta o 
+     descarga $> 20$ fichas clínicas en menos de 2 minutos.
+   - Regla 3 (Operación Fuera de Horario): Transacciones de cobro o cambios en 
+     historias clínicas ejecutados entre las 22:00 y las 06:00 horas locales.
+   - Regla 4 (Anomalía de Borrado): Intentos repetitivos de anulación de ventas 
+     o envío de historias a papelera lógica en una misma jornada.
+3. Dashboard de Seguridad para el Administrador: Visualización en tiempo real del 
+   estado de los 3 perfiles de usuario, mapa de accesos en LAN, logs sospechosos y 
+   botón de revocación inmediata de sesiones activas (purga forzada de tokens JWT).
+4. Generación de Métricas Cuantitativas para la Tesis: Exportación directa de métricas 
+   formales de las subcaracterísticas de ISO/IEC 25010 (Tasa de ataques mitigados, 
+   tiempo medio de detección, 100% de trazabilidad de cambios clínicos).
+
+C. ESQUEMA Y ARQUITECTURA TECNOLÓGICA RECOMENDADA:
+```
+ +-------------------------------------------------------------------------+
+ |                          ARQUITECTURA PROPUESTA 5                       |
+ |                                                                         |
+ |  [Operaciones de Usuarios: React SPA] ---> [API Endpoints SGO]          |
+ |                                                   |                     |
+ |                                                   v                     |
+ |  [PostgreSQL 15: Tabla inmutable audit_logs] <----+                     |
+ |        |                                                                |
+ |        v (Trigger / Pipeline de Análisis Asíncrono)                     |
+ |  [Security Event Processor - Laravel Job / Command]                    |
+ |        |                                                                |
+ |        +---> Evaluador Heurístico de Patrones de Amenaza                |
+ |        |     - Fuerza Bruta                                             |
+ |        |     - Scraping Masivo                                          |
+ |        |     - Horarios Atípicos                                        |
+ |        |     - Salto de Rol no Autorizado (HTTP 403 Spikes)             |
+ |        |                                                                |
+ |        v                                                                |
+ |  [Tabla security_incidents + Notificación en Dashboard Admin]          |
+ |        |                                                                |
+ |        +---> Si Riesgo Severo: Revocación de Token en Redis/DB          |
+ |        +---> Si Riesgo Medio: Flag preventiva en panel de control       |
+ |                                                                         |
+ |  [Generador de Reportes de Seguridad ISO/IEC 25010 para Tesis]          |
+ +-------------------------------------------------------------------------+
+```
+- Tecnologías: PHP 8.2 (Laravel Jobs / Artisan Cron), PostgreSQL, React Dashboard, 
+  estándar ISO/IEC 25010:2023 / Secure Scrum.
+
+D. RECURSOS MÍNIMOS EN EQUIPO DE DESARROLLO:
+- Hardware: Equipo de desarrollo estándar.
+- Software: Entorno de pruebas con scripts de simulación de ataques (Postman/Curl).
+- Perfiles: 1 Desarrollador enfocado en Seguridad y Arquitectura.
+
+E. RECURSOS MÍNIMOS EN EQUIPO DE DESPLIEGUE (ÓPTICA):
+- Hardware: Servidor local existente (despreciable consumo de CPU).
+
+F. GRADO DE VINCULACIÓN CON LOS OBJETIVOS DEL PROYECTO (ISO/IEC 25010:2023):
+- Seguridad de Datos: **DIRECTA Y TOTAL**. Convierte los requisitos de seguridad de 
+  un esquema reactivo estático a un marco proactivo e inteligente.
+- Autenticidad, Integridad y Responsabilidad: **VINCULACIÓN NUCLEARES AL 100%**. 
+  Cumple directamente con el **Objetivo Específico 4 del Anteproyecto de Titulación**: 
+  "Evaluar el cumplimiento de los atributos de seguridad... mediante la medición 
+  de las subcaracterísticas de integridad, responsabilidad y autenticidad".
+
+G. PERTINENCIA DADOS LOS PLAZOS PARA EJECUCIÓN:
+- Pertinencia: **EXCEPCIONALMENTE ALTA**.
+- Factibilidad Temporal: Muy factible en el **Sprint 4** o integrado progresivamente 
+  con el desarrollo de la bitácora de auditoría. Brinda el sustento experimental y 
+  los gráficos cuantitativos necesarios para el informe final de titulación.
+
+
+--------------------------------------------------------------------------------
+5.6 PROPUESTA 6: ASISTENTE MÓVIL WEBRTC PARA MEDICIÓN PUPILOCÉNTRICA DIGITAL Y 
+                 DETECCIÓN DE MONTURAS MEDIANTE VISIÓN ARTIFICIAL LIGERA
+--------------------------------------------------------------------------------
+
+A. DEFINICIÓN:
+Módulo de visión computacional web móvil (inspirado en Novar AIPD, Jishi AI y 
+Lemon Soft DigiPad 3D) que permite al optometrista o asistente utilizar la cámara 
+de una tablet o teléfono inteligente conectado a la red Wi-Fi de la óptica para 
+asistir en la captura de la Distancia Pupilar (DP), Distancias Nasopupilares (DNP) 
+y calce de la montura, autocompletando la ficha de examen (RF-10) y orden de taller (RF-16).
+
+B. FUNCIONAMIENTO Y FLUJO DE INTERACCIÓN:
+1. Acceso Móvil PWA: El operador abre la ficha del paciente en una tablet o smartphone 
+   y presiona "Capturar Medidas con Cámara".
+2. Guía Visual de Posicionamiento: Se activa la cámara frontal/trasera mediante WebRTC; 
+   el paciente sostiene un patrón de calibración física estandarizado sobre su frente 
+   (tarjeta de dimensiones universales ISO/IEC 7810 ID-1, 85.60 mm).
+3. Detección Facial Mediante Visión Artificial Ligera: Mediante la librería JavaScript 
+   de visión en navegador (MediaPipe Face Mesh de Google o OpenCV.js), el sistema 
+   identifica los centros pupilares (puntos 468 y 473 del iris) y la escala milimétrica.
+4. Cálculo y Transferencia: Se calcula la DP total, DNP derecha, DNP izquierda y la 
+   altura focal pupilar en milímetros.
+5. Ingesta Automática en SGO: El operador revisa los valores en pantalla, valida 
+   el resultado clínico y presiona "Transferir a Historia"; los datos viajan por 
+   la API REST local y pueblan automáticamente los campos de RF-10 en React.
+
+C. ESQUEMA Y ARQUITECTURA TECNOLÓGICA RECOMENDADA:
+```
+ +-------------------------------------------------------------------------+
+ |                          ARQUITECTURA PROPUESTA 6                       |
+ |                                                                         |
+ |  [Tablet / Smartphone con Cámara - Navegador Web PWA]                   |
+ |        | (Captura de video vía WebRTC en red Wi-Fi LAN)                 |
+ |        v                                                                |
+ |  [Client-Side Computer Vision: MediaPipe Face Mesh / OpenCV.js]         |
+ |        |                                                                |
+ |        +---> Detección de Landmarks Faciales (Iris y Puente Nasal)      |
+ |        +---> Calibración de Escala Milimétrica (Referencia Tarjeta ID-1)|
+ |        +---> Cálculo: DP Total, DNP Monoculares, Altura Pupilar         |
+ |        |                                                                |
+ |        v                                                                |
+ |  [Validación y Ajuste Manual del Optometrista en Tablet UI]             |
+ |        |                                                                |
+ |        v                                                                |
+ |  [POST /api/v1/pacientes/{id}/medidas-pupilares]                        |
+ |        |                                                                |
+ |        v                                                                |
+ |  [Laravel Backend: Inserción en Tabla examenes_refractivos]             |
+ |        | (Puebla campos de RF-10 y RF-16; genera log de auditoría)      |
+ +-------------------------------------------------------------------------+
+```
+
+D. RECURSOS MÍNIMOS EN EQUIPO DE DESARROLLO:
+- Hardware: Laptops de desarrollo, 1 tablet Android o smartphone de pruebas.
+- Software: VS Code, librerías MediaPipe / TensorFlow.js, calibradores visuales.
+- Perfiles: 1 Desarrollador con conocimientos en visión computacional frontend.
+
+E. RECURSOS MÍNIMOS EN EQUIPO DE DESPLIEGUE (ÓPTICA):
+- Hardware: 1 Tablet o smartphone comercial con cámara de buena resolución (1080p).
+- Espacio: Iluminación frontal adecuada en el gabinete optométrico.
+
+F. GRADO DE VINCULACIÓN CON LOS OBJETIVOS DEL PROYECTO (ISO/IEC 25010:2023):
+- Integridad de Datos: **ALTA**. Elimina errores de transcripción manual de medidas 
+  de distancia pupilar desde el pupilorreflexómetro manual hacia la pantalla.
+- Autenticidad y Responsabilidad: **MEDIA-ALTA**. Registra el dispositivo de captura, 
+  la hora y el operador responsable.
+
+G. PERTINENCIA DADOS LOS PLAZOS PARA EJECUCIÓN:
+- Pertinencia: **MEDIA-BAJA (RIESGO ALTO DE CRONOGRAMA)**.
+- Factibilidad Temporal: La calibración clínica de distancias milimétricas en visión 
+  computacional requiere exhaustivas pruebas de iluminación, ángulos y repetibilidad 
+  para no incurrir en errores de aberración óptica.
+- Dictamen: **Se recomienda como Trabajo Futuro o Prototipo Experimental (Spike)** 
+  si se culminan con éxito y anticipación los 4 sprints principales.
+
+
+================================================================================
+6. MATRIZ INTEGRAL DE EVALUACIÓN Y TOMA DE DECISIONES ESTRATÉGICAS
+================================================================================
+
+La siguiente matriz ponderada sintetiza y clasifica las seis propuestas para 
+facilitar el acuerdo técnico entre el Product Owner y el Stakeholder Técnico:
+
++-------------------------------------------------------------------------------------------------------------------------------+
+| CRITERIOS DE EVALUACIÓN                                                                                                       |
+| C1: Grado de Innovación y Diferenciación Competitiva                                                                          |
+| C2: Vinculación con Atributos ISO 25010 (Seguridad, Integridad, Responsabilidad, Autenticidad)                                |
+| C3: Aporte al Cumplimiento de los Objetivos de Titulación de Grado                                                            |
+| C4: Factibilidad en Plazo (18 semanas / 4 Sprints quincenales)                                                                |
+| C5: Resiliencia y Autonomía Operativa en Red Local (LAN sin dependencia obligatoria de nube)                                  |
+| C6: Costo Financiero de Construcción y Despliegue ($ USD)                                                                     |
++----+------------------------------------+-----+-----+-----+-----+-----+---------+---------------------------------------------+
+| N° | PROPUESTA DE INNOVACIÓN            | C1  | C2  | C3  | C4  | C5  | C6      | DICTAMEN / RECOMENDACIÓN ESTRATÉGICA        |
++----+------------------------------------+-----+-----+-----+-----+-----+---------+---------------------------------------------+
+| P1 | Verificación Criptográfica QR en   |     |     |     |     |     |         | **SELECCIÓN PRIORITARIA 1 (MUST HAVE)**     |
+|    | Recetas, Certificados y Taller     | 4/5 | 5/5 | 5/5 | 5/5 | 5/5 | $0.00   | Impacto inmediato en autenticidad documental|
+|    |                                    |     |     |     |     |     |         | y privacidad LOPDP. 0% riesgo cronograma.   |
++----+------------------------------------+-----+-----+-----+-----+-----+---------+---------------------------------------------+
+| P2 | Alertas Clínicas Predictivas y     |     |     |     |     |     |         | **SELECCIÓN PRIORITARIA 2 (MUST HAVE)**     |
+|    | Progresión Miópica Longitudinal    | 4/5 | 5/5 | 5/5 | 5/5 | 5/5 | $0.00   | Blindaje de integridad clínica en M3.       |
+|    |                                    |     |     |     |     |     |         | Se acopla de forma nativa a CUS-EXT-01.     |
++----+------------------------------------+-----+-----+-----+-----+-----+---------+---------------------------------------------+
+| P3 | Chatbot Operativo con los Datos    |     |     |     |     |     |         | **SELECCIÓN RECOMENDADA (SHOULD HAVE)**     |
+|    | (Consultas de Negocio e Inventario)| 5/5 | 4/5 | 4/5 | 4/5 | 5/5 | $0.00   | Satisface al 100% directriz de innovación.  |
+|    |                                    |     |     |     |     |     | (Local) | Enfoque híbrido seguro en solo lectura.     |
++----+------------------------------------+-----+-----+-----+-----+-----+---------+---------------------------------------------+
+| P4 | Asistente Transaccional de         |     |     |     |     |     |         | **CONDICIONAL (COULD HAVE / FASE 2)**       |
+|    | Escritura con Confirmación y Auth  | 4/5 | 5/5 | 4/5 | 3/5 | 5/5 | $0.00   | Alta complejidad de pruebas concurrentes.   |
+|    |                                    |     |     |     |     |     |         | Desarrollar solo tras estabilizar P3.       |
++----+------------------------------------+-----+-----+-----+-----+-----+---------+---------------------------------------------+
+| P5 | Ciberseguridad Asistida y          |     |     |     |     |     |         | **SELECCIÓN CIENTÍFICA (MUST TITULACIÓN)**  |
+|    | Detección Heurística de Anomalías  | 4/5 | 5/5 | 5/5 | 4/5 | 5/5 | $0.00   | Aporte clave para el Objetivo 4 de tesis.   |
+|    |                                    |     |     |     |     |     |         | Genera métricas cuantitativas ISO 25010.    |
++----+------------------------------------+-----+-----+-----+-----+-----+---------+---------------------------------------------+
+| P6 | Medición Pupilar Móvil WebRTC      |     |     |     |     |     |         | **TRABAJO FUTURO / SPIKE (OUT OF SCOPE)**   |
+|    | con Visión Artificial              | 5/5 | 3/5 | 3/5 | 2/5 | 4/5 | $0.00   | Alto riesgo de calibración óptica clínica.  |
+|    |                                    |     |     |     |     |     |         | Postergar para evitar scope creep.          |
++----+------------------------------------+-----+-----+-----+-----+-----+---------+---------------------------------------------+
+
+
+================================================================================
+7. HOJA DE RUTA (ROADMAP) DE IMPLEMENTACIÓN ÁGIL POR SPRINTS
+================================================================================
+
+Para integrar los componentes innovadores seleccionados sin alterar el plazo de 
+18 semanas (concluyendo en enero de 2027), se define el siguiente cronograma de 
+incorporación ágil dentro de los 4 Sprints del proyecto:
+
+--------------------------------------------------------------------------------
+SPRINT 1: NÚCLEO ARQUITECTÓNICO Y GESTIÓN DE PACIENTES (SEMANAS 1 - 2)
+--------------------------------------------------------------------------------
+- Objetivos Base: M1 (Autenticación RBAC, JWT, sesiones) y M2 (Pacientes, validación 
+  cédula ecuatoriana módulo 10, adjuntos).
+- Inclusión de Innovación:
+  * Arquitectura base para inmutabilidad de auditoría en PostgreSQL (`audit_logs`).
+  * Estructuración del pipeline de hashing criptográfico HMAC para futuros QRs.
+
+--------------------------------------------------------------------------------
+SPRINT 2: NÚCLEO CLÍNICO Y VERIFICACIÓN DOCUMENTAL (SEMANAS 3 - 4)
+--------------------------------------------------------------------------------
+- Objetivos Base: M3 (Examen refractivo OD/OI, validaciones dioptricas, CIE-10, PDF).
+- Inclusión de Innovación:
+  * **INNOVACIÓN 1 (PROPUESTA 1 - QR DINÁMICO)**: Generación y firmado de códigos 
+    QR en recetas y certificados de aptitud visual con portal web de verificación.
+  * **INNOVACIÓN 2 (PROPUESTA 2 - CDSS CLÍNICO)**: Motor heurístico de alertas de 
+    progresión miópica acelerada y saltos dióptricos atípicos (CUS-EXT-01).
+
+--------------------------------------------------------------------------------
+SPRINT 3: LOGÍSTICA DE LABORATORIO Y ASISTENTE INTELIGENTE (SEMANAS 5 - 6)
+--------------------------------------------------------------------------------
+- Objetivos Base: M4 (Órdenes a taller de laboratorio aisladas bajo LOPDP, estados).
+- Inclusión de Innovación:
+  * **INNOVACIÓN 1 (Extensión Propuesta 1)**: QR dinámico en tickets de taller para 
+    aislamiento de datos personales hacia talleres externos de Quito/Guayaquil.
+  * **INNOVACIÓN 3 (PROPUESTA 3 - CHATBOT CON LOS DATOS)**: Implementación del 
+    asistente conversacional de solo lectura en el Dashboard para consultar órdenes 
+    pendientes de taller, retrasos y stock de armazones.
+
+--------------------------------------------------------------------------------
+SPRINT 4: VENTAS, ARQUEO Y BLINDAJE DE CIBERSEGURIDAD (SEMANAS 7 - 8)
+--------------------------------------------------------------------------------
+- Objetivos Base: M5 (Ventas por lotes, cobros ACID, anticipos y arqueo diario).
+- Inclusión de Innovación:
+  * **INNOVACIÓN 4 (PROPUESTA 5 - CIBERSEGURIDAD ASISTIDA)**: Procesador de análisis 
+    de anomalías en `audit_logs`, generación de alertas de riesgo y consolidación 
+    de métricas ISO/IEC 25010:2023 para la validación de la tesis de grado.
+  * (Opcional si hay holgura): Extensión transaccional de escritura controlada (Propuesta 4).
+
+
+================================================================================
+8. CONCLUSIONES Y RECOMENDACIONES PARA LA MESA DE NEGOCIACIÓN
+================================================================================
+
+1. SÍNTESIS DEL ESTUDIO TÉCNICO:
+   El análisis de los sistemas de vanguardia (QUIBER, SistemaOptica, Lab Optec, 
+   Jishi AI, Novar Digital Center y Lemon Soft) demuestra que la tendencia mundial 
+   en optometría converge en tres ejes: digitalización clínica libre de errores, 
+   autenticidad documental con trazabilidad y asistencia mediante algoritmos 
+   inteligentes orientados al negocio.
+
+2. COMBINACIÓN GANADORA RECOMENDADA (TRIPLE CORONA DE INNOVACIÓN):
+   Para maximizar la calificación técnica del Trabajo de Titulación sin poner en 
+   riesgo el plazo de 18 semanas, se recomienda presentar al Product Owner y al 
+   Stakeholder Técnico la adopción sinérgica de tres propuestas complementarias:
+   - **Eje de Autenticidad y LOPDP**: Propuesta 1 (Códigos QR Criptográficos en 
+     documentos clínicos y órdenes de laboratorio).
+   - **Eje de Integridad Clínica**: Propuesta 2 (Alertas predictivas de progresión 
+     miópica y saltos atípicos en historia clínica).
+   - **Eje de Vanguardia y Soporte al Negocio**: Propuesta 3 (Chatbot conversacional 
+     con los datos operativos de inventario y pedidos).
+   - **Eje de Validación Científica**: Propuesta 5 (Detección de anomalías en 
+     auditoría para medición cuantitativa de la norma ISO/IEC 25010:2023).
+
+3. DESESTIMACIÓN TÉCNICA DE RIESGOS (SCOPE CREEP):
+   Se aconseja al equipo acordar formalmente con el Director que la **Propuesta 6 
+   (Medición pupilar con cámara web/móvil)** quede catalogada estrictamente como 
+   "Trabajo Futuro", debido a que la calibración milimétrica en visión computacional 
+   requiere ensayos metrológicos extensos que desbordarían los 4 sprints de desarrollo.
+
+4. DECLARACIÓN DE PERTINENCIA:
+   Las soluciones propuestas respetan al 100% las fronteras del sistema, no 
+   dependen de servicios pagos de internet, garantizan la autonomía en red local 
+   de Óptica Vista Visión y constituyen una contribución científica y práctica de 
+   alto valor para la carrera de Software de la ESPOCH.
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE PROPUESTAS DE INNOVACIÓN - SGO 2026
+================================================================================

@@ -1,0 +1,146 @@
+================================================================================
+ANÁLISIS DE ROLES SCRUM Y TAREAS PERTINENTES
+Proyecto: Sistema Informático de Gestión Clínica Optométrica
+Metodología: Scrum + Secure Scrum (S-Tags) · ISO/IEC 25010:2023
+Elaborado por: Figueroa Díaz, Omar Santiago · Villalva Dumancela, Alexander Rafael
+================================================================================
+
+
+1. ING. MENÉNDEZ — ROL ASIGNADO: SCRUM MASTER (2 h/semana, 32 h totales)
+--------------------------------------------------------------------------------
+
+Perfil técnico relevante: bases de datos, transacciones, programación orientada
+a objetos (POO). Es el perfil más alineado con las tareas técnicas de mayor
+criticidad del proyecto. Sus tareas y subtareas se organizan por fase:
+
+FASE 0-1 (Configuración y diagnóstico):
+  - Validar el Product Backlog inicial (coherencia entre historias de usuario
+    y requerimientos de seguridad levantados).
+  - Revisar y aprobar el Diseño Entidad-Relación (DER, 9 entidades) con
+    énfasis en integridad referencial y normalización.
+  - Validar la especificación de los 23 endpoints OpenAPI, particularmente
+    los de autenticación (M1) e historia clínica (M3).
+
+FASE 2 (Diseño arquitectónico):
+  - Aprobar la matriz RBAC (3 roles, 42 permisos): verificar que los permisos
+    por rol no generen escalación de privilegios ni acceso cruzado indebido
+    entre módulos.
+  - Validar los scripts DDL (PostgreSQL): restricciones de clave foránea,
+    constraints de dominio (rangos Sph/Cyl/Axis), tipos de dato.
+  - Revisar la estrategia de auditoría: triggers PostgreSQL (created_by,
+    updated_at, old_value) que sustentan la subcaracterística de
+    responsabilidad — su experticia en transacciones es directamente
+    aplicable aquí.
+
+FASE 3 (Sprints de desarrollo):
+  - Sprint 1: Validar la implementación JWT (Laravel Sanctum): expiración de
+    tokens, refresh strategy, middleware de autenticación — subcaracterística
+    autenticidad.
+  - Sprint 2: Validar los triggers de audit log (INSERT/UPDATE/DELETE con
+    old_value) como evidencia de la subcaracterística responsabilidad;
+    revisar las validaciones de rango (Sph ∈ [-20,+20], Cyl ∈ [-8,0],
+    Axis ∈ [0,180]) como evidencia de integridad de entrada.
+  - Sprints 3-4: Revisar integridad referencial entre pedido–paciente–
+    historia clínica–venta; validar los 12 scripts SQL de pruebas integrales.
+  - Participar en cada Sprint Review (Hito Sprint Review 1-4) como líder
+    de la sesión de inspección e impedimentos.
+
+FASE 4 (Evaluación ISO/IEC 25010):
+  - Validar la matriz de métricas (TIR, TCRA, TAV, TCFE, TRPCC) y sus
+    fórmulas de cálculo antes de aplicarlas sobre los 385 registros de
+    muestra.
+  - Revisar el informe de evaluación de calidad antes de la entrega final.
+  - Facilitar la Retrospectiva final del proyecto.
+
+
+2. ING. SANTILLÁN — ROL PROPUESTO: STAKEHOLDER TÉCNICO /
+                                    REVISOR DE CALIDAD DE IMPLEMENTACIÓN
+--------------------------------------------------------------------------------
+
+Nota sobre el rol: Scrum no define este rol formalmente, pero lo contempla
+dentro de los stakeholders que participan en los Sprint Reviews y aportan
+retroalimentación especializada. Dado que su asignatura (Aplicaciones
+Informáticas II, octavo semestre) cubre los cuatro aspectos del mantenimiento
+de software (fundamentos, criterios técnicos/administrativos/económicos,
+técnicas de reingeniería e ingeniería inversa, y proceso de mantenimiento),
+su participación se alinea específicamente con la subcaracterística de
+mantenibilidad — una de las cuatro características de ISO/IEC 25010:2023
+que el proyecto atiende a nivel de criterio de diseño arquitectónico
+(sección 4.4.2.6 del anteproyecto).
+
+SPRINT 2 (M3 Historia Clínica — revisión de código):
+  - Evaluar la comprensibilidad del código (Unidad 1 del sílabo: naturaleza
+    y necesidad de mantenimiento): verificar que la lógica de los triggers
+    y las validaciones clínicas sean documentables y comprensibles para un
+    mantenedor futuro.
+  - Revisar si la modularización backend (controladores, servicios,
+    repositorios en Laravel) sigue el principio de separación de
+    responsabilidades declarado en la arquitectura en capas del anteproyecto.
+
+SPRINTS 3-4 (M4 Pedidos + M5 Ventas — revisión de criterios técnicos):
+  - Aplicar criterios técnicos de mantenibilidad (Unidad 2 del sílabo:
+    criterios técnicos de mantenimiento) sobre los módulos entregados:
+    cohesión interna, acoplamiento entre módulos, duplicación de lógica
+    de negocio.
+  - Evaluar la documentación interna del código (comentarios, nombres de
+    variables, estructura de carpetas) como condición previa a la Definición
+    de Terminado de cada sprint — conecta directamente con la Unidad 4 del
+    sílabo (documentación del mantenimiento).
+
+SPRINT 4 (Pruebas integrales):
+  - Revisar los 45 casos de prueba funcionales (9 por módulo) desde la
+    perspectiva de cobertura de mantenimiento: ¿los casos de prueba permiten
+    detectar regresiones en sprints futuros? (Unidad 4: planificación y
+    ejecución del mantenimiento).
+  - Evaluar si el sistema legado analizado en la Fase 1 (sistema peruano
+    con deficiencias identificadas) puede servir como caso de estudio de
+    ingeniería inversa en el contexto de la asignatura (Unidad 3: ingeniería
+    inversa y migración) — beneficia tanto al proyecto como al contenido
+    académico de la asignatura.
+
+FASE 4 (Evaluación):
+  - Participar en el Sprint Review 4 y en las pruebas UAT como revisor
+    técnico externo, validando que el sistema cumpla los criterios de
+    mantenibilidad declarados en la sección 4.4.2.6 del marco teórico.
+  - Emitir criterio técnico sobre si la arquitectura en capas implementada
+    satisface la separación de responsabilidades como criterio de diseño —
+    sustento documental a la afirmación del anteproyecto sobre fiabilidad
+    y mantenibilidad.
+
+
+3. TABLA SÍNTESIS DE ROLES Y RESPONSABILIDADES
+--------------------------------------------------------------------------------
+
+Sprint / Fase  | Ing. Menéndez (Scrum Master)              | Ing. Santillán (Stakeholder Técnico)
+---------------+-------------------------------------------+--------------------------------------
+Fase 0-1       | Validar PB, DER, endpoints                | —
+Fase 2         | Aprobar RBAC, DDL, auditoría              | —
+Sprint 1       | Validar JWT / autenticación               | —
+Sprint 2       | Validar audit log, triggers, Sph/Cyl      | Cohesión/acoplamiento M3, documentación
+Sprint 3       | Validar integridad referencial M4-M5      | Criterios técnicos de mantenibilidad M4-M5
+Sprint 4       | Validar scripts SQL integrales            | Cobertura de casos de prueba (regresión)
+Fase 4         | Validar métricas TIR/TCRA/TAV/TCFE/TRPCC | Criterio técnico: mantenibilidad arquitectónica
+
+
+4. OBSERVACIÓN RESPECTO A LA TABLA 5-2 (RECURSOS HUMANOS DEL ANTEPROYECTO)
+--------------------------------------------------------------------------------
+
+La Tabla 5-2 no registra al Ing. Santillán como participante del proyecto, lo
+cual es correcto dado que su participación es de naturaleza académica (dentro
+del marco de la asignatura), no como recurso contratado.
+
+Sin embargo, para documentar formalmente su rol ante la comisión de titulación,
+se recomienda añadir la siguiente nota al pie de la Tabla 5-2 o en la sección
+de Recursos Humanos:
+
+  "La implementación del sistema contará adicionalmente con la revisión técnica
+  de los docentes de la asignatura Aplicaciones Informáticas II (ESPOCH), en el
+  marco del período académico septiembre 2026 – febrero 2027, con énfasis en
+  criterios de mantenibilidad y calidad de implementación."
+
+Esta nota formaliza la participación del Ing. Santillán sin alterar el
+presupuesto ni los roles Scrum ya definidos en el anteproyecto aprobado.
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================
