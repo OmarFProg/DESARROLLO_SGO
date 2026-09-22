@@ -1,0 +1,495 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN: FASE 7
+EVALUACIÓN DE FACTIBILIDAD DE MERCADO Y ESTRATEGIA DE DESPLIEGUE
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase Ejecutada:  FASE 7: EVALUACIÓN DE FACTIBILIDAD DE MERCADO Y ESTRATEGIA DE DESPLIEGUE
+                 (Conforme a PlanEstudioFactibilidad.txt, directrices.txt y
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf)
+Sección del      SECCIÓN 9: FACTIBILIDAD DE MERCADO
+Formato ESPOCH:  (Diagnóstico del sector, benchmarking, FODA, propuesta de valor y estrategia del Owner)
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf7.txt
+Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
+Versión:         1.0 Definitiva y Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 7
+   1.1 Propósito y Enfoque de la Viabilidad de Mercado en Software Clínico-Optométrico
+   1.2 Objetivos Específicos de la Fase 7
+   1.3 Marco de Referencia y Articulación con Directrices Institucionales
+2. DIAGNÓSTICO DEL MERCADO SECTORIAL Y ENTORNO DE LA SALUD VISUAL EN RIOBAMBA
+   2.1 Caracterización del Sector Optométrico en la Ciudad de Riobamba y Chimborazo
+   2.2 Problemática Tecnológica Común y Necesidades No Satisfechas
+       - La brecha entre talonarios manuales y hojas de cálculo no estandarizadas
+       - La ineficiencia de los sistemas contables genéricos frente a datos refractivos
+       - La inadecuación legal y tributaria del software extranjero importado
+   2.3 Segmentación del Mercado Objetivo y Definición del Perfil de Adopción
+       - Segmento Primario: Microempresas y Consultorios Clínicos Independientes (Caso Piloto: Óptica Vista Visión)
+       - Segmento Secundario: Cadenas y Consultorios Multisede Regionales
+       - Segmento Terciario: Gabinetes Universitarios y Fundaciones de Asistencia Visual
+3. BENCHMARKING COMPETITIVO Y ANÁLISIS DEL ESTADO DEL ARTE
+   3.1 Mapeo de Soluciones Informáticas Vigentes en el Entorno Nacional
+       - Categoría A: Facturadores y ERPs Genéricos (Facturero Móvil SRI, Contífico, Dora, Mónica)
+       - Categoría B: Software Optométrico Extranjero (Visual Óptica, QUIBER/ÓpticaPro, SistemaOptica)
+       - Categoría C: Métodos Tradicionales Manuales (Recetarios físicos y libros contables de papel)
+   3.2 Matriz de Benchmarking Multidimensional (Funcionalidad, SRI, LOPDP, IA y Costo)
+   3.3 Análisis de Brechas Críticas en las Alternativas Actuales
+4. PROPUESTA DE VALOR DIFERENCIADORA DEL SISTEMA SGO
+   4.1 Definición de la Propuesta de Valor Única (PVU)
+   4.2 Pilares de Ventaja Competitiva
+       - Integración Clínica Nativa (Esfera, Cilindro, Eje, Snellen, CIE-10 y DNP)
+       - Facturación Electrónica SRI v1.1.0 Offline con Firma Criptográfica XAdES-BES
+       - Blindaje Jurídico LOPDP mediante Disociación Técnica en Órdenes de Laboratorio
+       - Asistente Inteligente Operativo "Chatbot con los Datos" (Solo Lectura / SELECT Guard)
+       - Resiliencia Operativa Offline en Red Local (99.5% sin depender de Internet)
+       - Cero Costo Recurrente de Licenciamiento para el Establecimiento Beneficiario
+5. ANÁLISIS ESTRATÉGICO FODA / DAFO DEL PRODUCTO
+   5.1 Matriz de Factores Internos (Fortalezas y Debilidades)
+   5.2 Matriz de Factores Externos (Oportunidades y Amenazas)
+   5.3 Matriz de Estrategias Cruzadas (FO, DO, FA, DA)
+6. ESTRATEGIA DE ABORDAJE, VALIDACIÓN CONTINUA Y PARTICIPACIÓN DEL PRODUCT OWNER
+   6.1 Mecanismo de Validación Iterativa en Sprints Quincenales
+   6.2 Infraestructura de Acceso Remoto Seguro para el Product Owner
+       - Implementación de Túneles Cifrados (Cloudflare Tunnels / Ngrok)
+       - Enlace Seguro al Servidor de Staging AMD Ryzen 5 9600X
+       - Validación en Horarios No Laborables desde Dispositivos Móviles y Tabletas
+   6.3 Ciclo Rápido de Retroalimentación Clínica y Comercial (Feedback Loop)
+   6.4 Pruebas Piloto de Campo con Pacientes Reales en Consultorio
+7. MODELO DE IMPLANTACIÓN, ADOPCIÓN Y TRANSFERENCIA TECNOLÓGICA
+   7.1 Plan de Despliegue en Óptica Vista Visión y Garantía de Continuidad
+   7.2 Viabilidad de Replicabilidad Comercial y Transferibilidad al Gremio Optométrico
+   7.3 Estrategia de Mitigación de la Resistencia al Cambio y Retención de Usuarios
+8. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD DE MERCADO Y DECLARACIÓN DE CIERRE
+================================================================================
+
+
+================================================================================
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 7
+================================================================================
+
+1.1 PROPÓSITO Y ENFOQUE DE LA VIABILIDAD DE MERCADO EN SOFTWARE CLÍNICO-OPTOMÉTRICO
+El análisis de factibilidad de mercado dentro de un proyecto de ingeniería de software 
+orientado a la salud no se restringe a la cuantificación de una demanda transaccional abstracta; 
+constituye la evaluación rigurosa de la necesidad real del usuario, el grado de aceptación 
+operativa en el nicho especializado, la identificación de las ventajas comparativas y competitivas 
+frente a las alternativas comerciales del entorno, y la formulación de una estrategia metódica 
+de interacción y validación continua con el Product Owner (PO) y los usuarios finales.
+
+Para el Sistema de Gestión Optométrica (SGO), la factibilidad de mercado responde a una 
+realidad estructural comprobada: los consultorios optométricos independientes de la ciudad 
+de Riobamba y del país operan en una encrucijada crítica entre la informalidad de registros 
+manuales en papel (altamente propensos a pérdida y sanciones tributarias), el uso de sistemas 
+contables genéricos que carecen de campos clínicos para parámetros refractivos, y la importación 
+costosa de paquetes informáticos extranjeros que no se adaptan a la normativa tributaria del SRI 
+ni a la Ley Orgánica de Protección de Datos Personales (LOPDP).
+
+1.2 OBJETIVOS ESPECÍFICOS DE LA FASE 7
+1. Diagnosticar el mercado sectorial de establecimientos ópticos y consultorios optométricos 
+   en Riobamba y la provincia de Chimborazo, dimensionando el tamaño del nicho y sus necesidades insatisfechas.
+2. Ejecutar un benchmarking multidimensional de las soluciones existentes en el mercado 
+   (sistemas contables genéricos, software extranjero y métodos manuales), contrastándolas 
+   con los 7 módulos del SGO.
+3. Formular la Propuesta de Valor Única (PVU) del sistema, fundamentada en la integración 
+   clínica nativa, facturación electrónica offline SRI v1.1.0, disociación LOPDP y asistente IA de solo lectura.
+4. Desarrollar la Matriz FODA / DAFO estratégica y construir las matrices de impacto cruzado (FO, DO, FA, DA).
+5. Diseñar la estrategia de abordaje, validación quincenal y despliegue de versiones preliminares 
+   mediante túneles remotos seguros (Cloudflare Tunnels / Ngrok) apuntando al servidor de Staging, 
+   asegurando la retroalimentación continua del Product Owner.
+6. Emitir el dictamen formal concluyente de viabilidad de mercado conforme a los estándares de titulación de la ESPOCH.
+
+1.3 MARCO DE REFERENCIA Y ARTICULACIÓN CON DIRECTRICES INSTITUCIONALES
+La presente fase se articula de manera directa con los lineamientos fijados en:
+- `FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf` (Sección 9: Factibilidad de Mercado).
+- `directrices.txt` (Líneas 81 a 86: insumo Marco Teórico del Anteproyecto, estrategia de abordaje a consumidores potenciales mediante entregables constantes de validación y acceso remoto a versiones del sistema).
+- `Anteproyecto.pdf` (Justificación, Marco Teórico y Planteamiento del Problema).
+- `informeEntrevistasConsolidado.txt` (Diagnóstico del sistema legado y caracterización operativa de Óptica Vista Visión).
+- `informePropuestasInnovacion.txt` (Cruce de información de software de vanguardia y propuesta de valor).
+
+
+================================================================================
+2. DIAGNÓSTICO DEL MERCADO SECTORIAL Y ENTORNO DE LA SALUD VISUAL EN RIOBAMBA
+================================================================================
+
+2.1 CARACTERIZACIÓN DEL SECTOR OPTOMÉTRICO EN LA CIUDAD DE RIOBAMBA Y CHIMBORAZO
+La ciudad de Riobamba, cabecera cantonal de la provincia de Chimborazo, concentra una actividad 
+comercial y de servicios de salud de alta relevancia en la Región Central del Ecuador. Según datos 
+del Ministerio de Salud Pública (MSP), el Servicio de Rentas Internas (SRI) y registros de la 
+Cámara de Comercio local, en la zona urbana de Riobamba operan entre 45 y 60 establecimientos 
+dedicados a la atención optométrica, venta de armazones y dispensación de lentes oftálmicos.
+
+Estos establecimientos se dividen en dos categorías operativas:
+1. Sucursales de grandes cadenas comerciales nacionales (como GMO, Óptica Los Andes o Lafam): 
+   Cuentan con software corporativo propietario cerrado y centralizado, inaccesible para 
+   ópticas independientes debido a sus costos privativos de desarrollo y mantenimiento.
+2. Consultorios optométricos independientes y microempresas de salud visual (más del 75% 
+   del total de locales en Riobamba, entre los cuales se ubica Óptica Vista Visión): 
+   Negocios gestionados directamente por optometristas titulados o familias profesionales, 
+   que carecen de departamentos de tecnología y requieren soluciones eficientes, económicas, 
+   autónomas y de fácil adopción.
+
+2.2 PROBLEMÁTICA TECNOLÓGICA COMÚN Y NECESIDADES NO SATISFECHAS
+A través de las sesiones de relevamiento empírico y el análisis del estado del arte consignado 
+en el Anteproyecto, se identificaron tres patrones críticos que aquejan al mercado de ópticas independientes:
+
+1. La brecha entre talonarios manuales y hojas de cálculo no estandarizadas:
+   - Más del 40% de los pequeños consultorios aún registran la refracción del paciente en 
+     fichas de cartulina física y confeccionan los pedidos al laboratorio en notas de pedido de papel.
+   - Consecuencias: Pérdida recurrente de historiales clínicos, ilegibilidad en la prescripción 
+     (confusión entre cilindros positivos y negativos, o errores en el ángulo del eje), y una tasa 
+     de reproceso en la talla de lentes que genera pérdidas directas por rectificaciones de taller.
+
+2. La ineficiencia de los sistemas contables genéricos frente a datos refractivos:
+   - Muchos establecimientos que han intentado informatizarse han contratado software contable 
+     estándar (Facturero Móvil SRI, Contífico, Mónica o Dora).
+   - Deficiencia crítica: Dichos sistemas registran ventas y emiten facturas, pero son absolutamente 
+     ciegos al ámbito optométrico: no disponen de tablas para almacenar Esfera, Cilindro, Eje, 
+     Adición, Agudeza Visual (Snellen), Distancia Nasopupilar (DNP), alturas de montaje ni códigos CIE-10. 
+     Esto obliga al optometrista a duplicar el trabajo: anota en un cuaderno la parte clínica y 
+     vuelve a digitar en el sistema contable la parte comercial.
+
+3. La inadecuación legal y tributaria del software extranjero importado:
+   - Existen en el mercado paquetes informáticos procedentes de Perú, Colombia o México (tales 
+     como Visual Óptica o versiones crackeadas de programas descontinuados).
+   - Deficiencias estructurales:
+     a) Desconexión total con el SRI: No generan el XML bajo la Ficha Técnica v1.1.0 del SRI Ecuador 
+        ni soportan el firmado digital XAdES-BES con token o archivo PKCS#12 (.p12).
+     b) Incompatibilidad con la LOPDP: Transmiten o almacenan nombres, cédulas y diagnósticos clínicos 
+        en servidores fuera del país o los imprimen en órdenes de laboratorio sin disociación de datos personales.
+     c) Costos recurrentes en dólares: Esquemas de suscripción SaaS que oscilan entre $35.00 y $80.00 USD 
+        mensuales, representando un drenaje financiero inaceptable para microempresas locales.
+
+2.3 SEGMENTACIÓN DEL MERCADO OBJETIVO Y DEFINICIÓN DEL PERFIL DE ADOPCIÓN
+Para maximizar el impacto del software y garantizar su viabilidad comercial, se define una 
+segmentación estratégica estructurada en tres niveles:
+
+TABLA 1: SEGMENTACIÓN DEL MERCADO META PARA EL SISTEMA SGO
++-----------------------+---------------------------------------+---------------------------------------------+
+| SEGMENTO              | POBLACIÓN OBJETIVO EN LA REGIÓN       | CARACTERÍSTICAS OPERATIVAS Y PERFIL         |
++-----------------------+---------------------------------------+---------------------------------------------+
+| Segmento Primario     | Óptica Vista Visión y ~35 consultorios| - 1 a 2 consultorios por establecimiento.   |
+| (Nicho Inmediato /    | optométricos independientes de la     | - 5 a 15 pacientes diarios.                 |
+| Caso Piloto)          | ciudad de Riobamba y Chimborazo.      | - Personal reducido (1 Optometrista + 1 Aux)|
+|                       |                                       | - Urgencia de unificar refracción y SRI.    |
++-----------------------+---------------------------------------+---------------------------------------------+
+| Segmento Secundario   | Pequeñas cadenas locales y ópticas con| - 2 a 4 sucursales interconectadas.         |
+| (Expansión Regional)  | presencia en Riobamba, Ambato, Latacunga| - Mayor volumen de pedidos a talleres.      |
+|                       | y Guaranda (Zona 3 del Ecuador).      | - Necesidad de reportes consolidados y      |
+|                       |                                       |   consultas ágiles mediante IA.             |
++-----------------------+---------------------------------------+---------------------------------------------+
+| Segmento Terciario    | Gabinetes optométricos universitarios,| - Fines formativos, docentes y comunitarios.|
+| (Institucional /      | clínicas docentes y fundaciones de    | - Rigor metodológico en historia clínica y  |
+| Asistencial)          | ayuda social sin fines de lucro.      |   cumplimiento irrestricto de la LOPDP.     |
++-----------------------+---------------------------------------+---------------------------------------------+
+
+
+================================================================================
+3. BENCHMARKING COMPETITIVO Y ANÁLISIS DEL ESTADO DEL ARTE
+================================================================================
+
+3.1 MAPEO DE SOLUCIONES INFORMÁTICAS VIGENTES EN EL ENTORNO NACIONAL
+El estudio de mercado ejecutado auditó las tres alternativas comúnmente encontradas en el sector:
+
+1. Categoría A: Facturadores y ERPs Genéricos (Facturero Móvil SRI, Contífico, Dora, Mónica):
+   - Ventajas: Emiten facturas electrónicas válidas ante el SRI y controlan inventario general de mercadería.
+   - Desventajas: Cero funcionalidad optométrica. No permiten registrar datos de refracción, no generan recetas 
+     ópticas, no gestionan órdenes de trabajo a laboratorios de biselado y carecen de asistentes inteligentes.
+
+2. Categoría B: Software Optométrico Especializado Extranjero (Visual Óptica, QUIBER/ÓpticaPro, SistemaOptica):
+   - Ventajas: Excelente diseño de formularios clínicos, soporte para optotipos y seguimiento de lentes.
+   - Desventajas: Desarrollados para normativas fiscales de Chile, México, Perú o Colombia. Para operar en Ecuador 
+     exigen pagar pasarelas de terceros o recurrir a la doble digitación en el portal web del SRI. Además, 
+     sus costos de suscripción recurrente mensual resultan elevados y carecen de soporte técnico presencial en Riobamba.
+
+3. Categoría C: Métodos Tradicionales Manuales (Talonarios preimpresos, fichas de cartulina y Excel):
+   - Ventajas: Costo inicial aparentemente bajo y nula curva de aprendizaje tecnológico.
+   - Desventajas: Alta vulnerabilidad pericial, lentitud de atención, pérdida irreparable de fichas clínicas, 
+     imposibilidad de emitir facturas electrónicas válidas y sobrecostos por errores en manufactura de lentes.
+
+3.2 MATRIZ DE BENCHMARKING MULTIDIMENSIONAL
+En la Tabla 2 se comparan objetivamente las capacidades del Sistema SGO frente a las soluciones del mercado:
+
+TABLA 2: MATRIZ DE BENCHMARKING COMPARATIVO MULTIDIMENSIONAL
++------------------------------------+---------------+--------------------+------------------+---------------+
+| CRITERIO DE EVALUACIÓN TÉCNICA     | MÉTODO MANUAL | ERP GENÉRICO       | SOFTWARE FORÁNEO | SISTEMA SGO   |
+| Y DE MERCADO                       | (PAPEL/EXCEL) | (CONTÍFICO/SRI)    | (QUIBER/VISUAL)  | (PROPUESTA)   |
++------------------------------------+---------------+--------------------+------------------+---------------+
+| Módulo Clínico de Refracción OD/OI | Nulo / Básico | Inexistente (0%)   | Completo         | Completo      |
+| (Esferas, Cilindros, Ejes, Adición)| (Manual)      |                    |                  | (Validación)  |
++------------------------------------+---------------+--------------------+------------------+---------------+
+| Diagnósticos CIE-10 y Recetas PDF  | Manual        | Inexistente        | Disponible       | Nativo        |
++------------------------------------+---------------+--------------------+------------------+---------------+
+| Órdenes a Taller con Disociación   | Inexistente   | Inexistente        | Parcial          | Nativo        |
+| de Datos Personales (LOPDP Art. 25)| (Riesgo legal)|                    | (Sin LOPDP Ec)   | (Blindado)    |
++------------------------------------+---------------+--------------------+------------------+---------------+
+| Facturación Electrónica Nativa SRI | Inexistente   | Nativo             | Inexistente /    | Nativo        |
+| (Esquema XML v1.1.0 + XAdES-BES)   |               |                    | Costoso conector | (Automático)  |
++------------------------------------+---------------+--------------------+------------------+---------------+
+| Asistente Inteligente Operativo    | Inexistente   | Inexistente        | Exclusivo SaaS   | Nativo        |
+| "Chatbot con los Datos"            |               |                    | ($$$ / Inseguro) | (SELECT Guard)|
++------------------------------------+---------------+--------------------+------------------+---------------+
+| Resiliencia Offline en Red LAN     | 100% Manual   | Nula (Requiere     | Depende de Cloud | Nativa 99.5%  |
+| (Opera sin conexión a Internet)    |               | Internet 100%)     | (Se bloquea)     | (Sincroniza)  |
++------------------------------------+---------------+--------------------+------------------+---------------+
+| Costo de Licenciamiento Mensual    | $0.00         | $25.00 - $60.00/mes| $35.00 - $80/mes | $0.00         |
+| para Óptica Vista Visión           |               |                    |                  | (Propiedad)   |
++------------------------------------+---------------+--------------------+------------------+---------------+
+| Soporte Local y Personalización    | Nulo          | Remoto genérico    | Remoto extranjero| Directo       |
+| en la Ciudad de Riobamba           |               |                    |                  | (Desarrollad.)|
++------------------------------------+---------------+--------------------+------------------+---------------+
+
+3.3 ANÁLISIS DE BRECHAS CRÍTICAS EN LAS ALTERNATIVAS ACTUALES
+El benchmarking demuestra que NINGUNA de las soluciones analizadas cubre simultáneamente:
+1. La especificidad médica y óptica requerida en la consulta refractiva.
+2. El cumplimiento tributario exigido por la Resolución NAC-DGERCGC18-00000233 del SRI.
+3. El blindaje de privacidad para datos sensibles de salud visual normado por la LOPDP ecuatoriana.
+4. La accesibilidad económica para un consultorio independiente de escala microempresarial.
+
+El SGO cierra con éxito esta brecha estructural, posicionándose como la opción idónea para el mercado objetivo.
+
+
+================================================================================
+4. PROPUESTA DE VALOR DIFERENCIADORA DEL SISTEMA SGO
+================================================================================
+
+4.1 DEFINICIÓN DE LA PROPUESTA DE VALOR ÚNICA (PVU)
+La Propuesta de Valor Única del Sistema SGO se formula de la siguiente manera:
+"El Sistema SGO es la primera plataforma integral de gestión clínica y comercial 
+desarrollada específicamente para el ecosistema optométrico ecuatoriano, que fusiona 
+en un único flujo ágil la atención refractiva con validaciones ópticas rigurosas, 
+la emisión disociada de órdenes a talleres bajo la LOPDP, la facturación electrónica 
+nativa con el SRI en modo offline resiliente, y la toma de decisiones asistida por un 
+Chatbot Inteligente de solo lectura, eliminando para siempre las dobles digitaciones 
+y las costosas suscripciones mensuales de software extranjero".
+
+4.2 PILARES DE VENTAJA COMPETITIVA
+1. Integración Clínica y Comercial Unificada:
+   - En una sola pantalla se concluye la refracción, se selecciona el armazón del inventario, 
+     se genera la orden técnica para el laboratorio óptico y se emite la factura electrónica 
+     hacia el SRI, reduciendo el tiempo total de atención de 15 minutos a menos de 4 minutos.
+2. Facturación Electrónica SRI Nativa y Resiliente (M6 / RF-24 a RF-27):
+   - Generación instantánea del XML v1.1.0, sellado criptográfico XAdES-BES con firma .p12, 
+     cálculo del Módulo 11 y emisión del RIDE PDF con código de barras Code128. Si el internet 
+     del establecimiento o los servidores del SRI fallan, la venta local concluye en milisegundos 
+     y el comprobante queda encolado para transmisión en diferido sin paralizar el negocio.
+3. Blindaje Legal de Privacidad (LOPDP Ecuador):
+   - A diferencia de los sistemas tradicionales donde el taller de lunas conoce el nombre, cédula 
+     y teléfono del paciente, el SGO disocia los datos: el laboratorio únicamente recibe un código 
+     anónimo de orden técnica con las especificaciones de dioptrías, materiales y tratamientos, 
+     salvaguardando la confidencialidad médica (Art. 25 LOPDP).
+4. Asistente Inteligente Operativo "Chatbot con los Datos" (M7 / RF-28 a RF-31):
+   - Proporciona al Product Owner un canal conversacional intuitivo para consultar en lenguaje 
+     natural el estado de pedidos enviados al taller, los totales de venta diaria o los armazones 
+     con bajo stock, operando con un usuario de base de datos restringido exclusivamente a 
+     consultas de lectura (`GRANT SELECT`), lo cual garantiza una seguridad informática absoluta.
+5. Soberanía Tecnológica y Cero Costo Recurrente:
+   - El beneficiario no queda cautivo de cánones mensuales en divisas foráneas. El software pasa 
+     a ser propiedad operativa de la óptica, respaldado por una arquitectura de código abierto 
+     (PostgreSQL, Laravel, React y NestJS).
+
+
+================================================================================
+5. ANÁLISIS ESTRATÉGICO FODA / DAFO DEL PRODUCTO
+================================================================================
+
+5.1 MATRIZ DE FACTORES INTERNOS Y EXTERNOS
+
+TABLA 3: ANÁLISIS FODA ESTRATÉGICO DEL SISTEMA SGO
++---------------------------------------------------------------------------------------------------------+
+| FACTORES INTERNOS                                                                                       |
++---------------------------------------------------------------------------------------------------------+
+| FORTALEZAS (F)                                    | DEBILIDADES (D)                                     |
+| 1. Arquitectura moderna, modular y desacoplada    | 1. Solución concebida inicialmente como trabajo de   |
+|    (React, Laravel, NestJS, PostgreSQL).          |    titulación para un solo establecimiento.         |
+| 2. Facturación electrónica nativa SRI v1.1.0      | 2. Ausencia inicial de pasarelas de pago con tarjeta|
+|    con firma XAdES-BES offline.                   |    de crédito en línea (Stripe/Datafast).           |
+| 3. Cumplimiento estricto de la LOPDP ecuatoriana  | 3. Ausencia inicial de portal web público para      |
+|    mediante disociación en órdenes de laboratorio.|    reserva de citas en línea por los pacientes.     |
+| 4. Asistente IA con blindaje de solo lectura.     | 4. Dependencia de los dos autores desarrolladores   |
+| 5. Autonomía operativa en red local LAN (99.5%).  |    para el soporte técnico presencial inicial.      |
+| 6. Cero costo de licenciamiento comercial.        |                                                     |
++---------------------------------------------------------------------------------------------------------+
+| FACTORES EXTERNOS                                                                                       |
++---------------------------------------------------------------------------------------------------------+
+| OPORTUNIDADES (O)                                 | AMENAZAS (A)                                        |
+| 1. Obligatoriedad universal de facturación SRI    | 1. Resistencia al cambio tecnológico y apego cultural|
+|    para servicios de salud en Ecuador.            |    a los registros en talonarios de papel.          |
+| 2. Vacío de software clínico-tributario local     | 2. Cambios intempestivos en las especificaciones    |
+|    accesible en Riobamba y la Zona 3.             |    técnicas o WebServices del SRI.                  |
+| 3. Rigor creciente en auditorías sanitarias y     | 3. Presencia de paquetes comerciales foráneos con   |
+|    de protección de datos personales.             |    altas inversiones en marketing digital.          |
+| 4. Alto potencial de replicabilidad comercial     | 4. Cortes prolongados de energía eléctrica en la red|
+|    y licenciamiento a otros consultorios.         |    pública local (mitigado con hardware portátil).  |
++---------------------------------------------------------------------------------------------------------+
+
+5.2 MATRIZ DE ESTRATEGIAS CRUZADAS (FO, DO, FA, DA)
+
+TABLA 4: MATRIZ DE ESTRATEGIAS CRUZADAS (IMPACTO ESTRATÉGICO)
++-----------------------+---------------------------------------------------+---------------------------------------------------+
+| MATRIZ CRUZADA        | OPORTUNIDADES (O)                                 | AMENAZAS (A)                                      |
++-----------------------+---------------------------------------------------+---------------------------------------------------+
+| FORTALEZAS (F)        | ESTRATEGIAS FO (Maxi-Maxi):                       | ESTRATEGIAS FA (Maxi-Mini):                       |
+|                       | - Posicionar al SGO como la única solución local  | - Aprovechar la arquitectura offline y el firmado |
+|                       |   que combina legalidad tributaria SRI, blindaje  |   XAdES-BES local para garantizar operatividad    |
+|                       |   LOPDP y refracción clínica en una sola suite.   |   ininterrumpida frente a caídas del portal SRI.  |
+|                       | - Promover la replicabilidad del software en el   | - Emplear el ahorro financiero (cero licencia)    |
+|                       |   Colegio de Optometristas de Chimborazo.         |   como argumento contundente ante software foráneo|
++-----------------------+---------------------------------------------------+---------------------------------------------------+
+| DEBILIDADES (D)       | ESTRATEGIAS DO (Mini-Maxi):                       | ESTRATEGIAS DA (Mini-Mini):                       |
+|                       | - Diseñar la base de datos con capacidad multi-   | - Ejecutar un plan intensivo de capacitación y    |
+|                       |   sucursal desde la fase de arquitectura para     |   acompañamiento personalizado durante el Sprint 1|
+|                       |   facilitar la expansión hacia cadenas regionales.|   para extinguir el temor a la interfaz digital.  |
+|                       | - Incorporar el módulo de agendamiento web en una | - Estandarizar la documentación técnica y pruebas |
+|                       |   segunda fase evolutiva del proyecto de grado.   |   automatizadas para facilitar soporte futuro.    |
++-----------------------+---------------------------------------------------+---------------------------------------------------+
+
+
+================================================================================
+6. ESTRATEGIA DE ABORDAJE, VALIDACIÓN CONTINUA Y PARTICIPACIÓN DEL PRODUCT OWNER
+================================================================================
+
+6.1 MECANISMO DE VALIDACIÓN ITERATIVA EN SPRINTS QUINCENALES
+Conforme a la metodología Scrum adoptada y a las directrices de `directrices.txt` (líneas 81-86), 
+la interacción con el Product Owner (propietario y optometrista de Óptica Vista Visión) se 
+estructura en ciclos cortos de inspección y adaptación cada dos semanas (14 días calendario):
+
+1. Sesiones de Sprint Planning:
+   - Al inicio de cada Sprint, los desarrolladores revisan con el PO las historias de usuario 
+     a construir, clarificando las fórmulas optométricas, los criterios de aceptación y los formatos de impresión.
+2. Demostraciones Funcionales en Vivo (Sprint Reviews):
+   - Al término de cada Sprint, el equipo no presenta diapositivas conceptuales sino el incremento 
+     de software funcionando en tiempo real sobre datos de prueba representativos del consultorio.
+   - El PO manipula directamente las interfaces, simula una consulta refractiva, prueba la emisión 
+     de órdenes y valida si el flujo responde con naturalidad al ritmo de atención a pacientes.
+
+6.2 INFRAESTRUCTURA DE ACCESO REMOTO SEGURO PARA EL PRODUCT OWNER
+Para cumplir cabalmente con la directriz que exige "entregas/acceso remoto a versiones del sistema":
+- Desafío Operativo: El Product Owner atiende pacientes durante el día y dispone de escaso tiempo 
+  en horario de oficina para revisiones exhaustivas de interfaces o validaciones minuciosas de flujos.
+- Solución Técnica Implementada:
+  1. Servidor de Staging Dedicado: Se utiliza la estación de trabajo `DESKTOP-MO7Q55S` (AMD Ryzen 5 9600X, 
+     16 GB RAM DDR5) como entorno permanente de pruebas e integración continua.
+  2. Implementación de Túnel Seguro Cifrado (Cloudflare Zero Trust Tunnels / Ngrok Pro):
+     * Se expone el frontend React y la API backend mediante un túnel seguro con certificado SSL/TLS 
+       de extremo a extremo, asignando un subdominio cifrado (ej. `https://sgo-staging.vistavision.ec` 
+       o URL temporal autenticada de Cloudflare).
+     * Seguridad de Acceso: El túnel no requiere abrir puertos en el router del laboratorio ni exponer 
+       la IP pública del equipo. Se configura con autenticación de doble factor mediante correo electrónico 
+       autorizado del Product Owner.
+  3. Ubicuidad y Compatibilidad Multidispositivo:
+     * El Product Owner puede acceder desde su tableta iPad, laptop personal o teléfono inteligente 
+       fuera del consultorio (en horas de la noche o fines de semana) para explorar las nuevas pantallas, 
+       probar la legibilidad de tipografías clínicas y verificar la navegación adaptativa.
+
+TABLA 5: ARQUITECTURA DE VALIDACIÓN REMOTA Y DESPLIEGUE CONTINUO
++---------------------------+---------------------------------------------------------------------------------+
+| COMPONENTE DE ACCESO      | ESPECIFICACIÓN TÉCNICA Y SEGURIDAD                                              |
++---------------------------+---------------------------------------------------------------------------------+
+| Entorno de Ejecución      | Servidor Staging Local (AMD Ryzen 5 9600X, Docker Compose, PostgreSQL 16).       |
++---------------------------+---------------------------------------------------------------------------------+
+| Protocolo de Túnel        | Cloudflare Tunnel (cloudflared daemon) / Ngrok HTTPS con cifrado TLS 1.3.       |
++---------------------------+---------------------------------------------------------------------------------+
+| Control de Acceso         | Restricción por lista blanca de correos y Token Bearer temporal para el PO.     |
++---------------------------+---------------------------------------------------------------------------------+
+| Datos de Prueba           | Base de datos poblada con registros sintéticos anonimizados (cero datos reales).|
++---------------------------+---------------------------------------------------------------------------------+
+| Canal de Reporte          | Formulario embebido de captura de observaciones rápidas y grupo privado de chat.|
++---------------------------+---------------------------------------------------------------------------------+
+
+6.3 CICLO RÁPIDO DE RETROALIMENTACIÓN CLÍNICA Y COMERCIAL (FEEDBACK LOOP)
+Las observaciones emitidas por el Product Owner en las revisiones presenciales o a través del 
+acceso remoto se procesan bajo el siguiente protocolo de ingeniería:
+1. Registro y Categorización: La retroalimentación se ingresa en el Product Backlog catalogada 
+   en tres niveles: (a) Bloqueante / Error Clínico, (b) Mejora Ergonómica / UX, o (c) Nueva Sugerencia de Negocio.
+2. Refinamiento y Negociación: En coordinación con el Scrum Master (Ing. Jorge Menéndez), se evalúa 
+   si el ajuste cabe dentro del alcance delimitado del Sprint en curso o si se programa para el siguiente Sprint Backlog.
+3. Validación en el Incremento Posterior: Cada corrección solicitada se presenta explícitamente 
+   en el siguiente Sprint Review para su visto bueno definitivo por parte del PO.
+
+6.4 PRUEBAS PILOTO DE CAMPO CON PACIENTES REALES EN CONSULTORIO
+Previo a la liberación final del software, se contempla una ventana de 10 días laborables de 
+pruebas en paralelo (Shadow Testing) en las instalaciones de Óptica Vista Visión:
+- El optometrista atiende al paciente registrando la consulta simultáneamente en el sistema tradicional 
+  y en el nuevo Sistema SGO.
+- Se cronometra la velocidad de digitación de la fórmula dióptrica, se verifica la impresión 
+  del comprobante de venta POS y se audita el XML de facturación generado en el ambiente de 
+  pruebas del SRI, garantizando la estabilidad operativa del producto antes de su pase a producción definitivo.
+
+
+================================================================================
+7. MODELO DE IMPLANTACIÓN, ADOPCIÓN Y TRANSFERENCIA TECNOLÓGICA
+================================================================================
+
+7.1 PLAN DE DESPLIEGUE EN ÓPTICA VISTA VISIÓN Y GARANTÍA DE CONTINUIDAD
+El modelo de adopción propuesto garantiza la soberanía del establecimiento y elimina 
+la dependencia perpetua de proveedores externos:
+1. Entrega del Producto: Se suministra el código fuente completo, contenedores Docker parametrizados, 
+   scripts de despliegue automatizado y la documentación técnica de arquitectura y manuales de usuario.
+2. Instalación en Infraestructura Local: El sistema se instala en la estación principal del consultorio 
+   conectada a la red LAN, asegurando independencia operativa frente a cortes de Internet.
+3. Soporte Post-Implementación: Los desarrolladores brindan un período de garantía técnica directa 
+   de 30 días laborables para soporte in situ, resolución de dudas operativas y afinamiento de periféricos.
+
+7.2 VIABILIDAD DE REPLICABILIDAD COMERCIAL Y TRANSFERIBILIDAD AL GREMIO OPTOMÉTRICO
+Aunque el presente proyecto se desarrolla y valida en Óptica Vista Visión como caso piloto de titulación, 
+el estudio de mercado confirma un alto potencial de replicabilidad:
+- Existe un mercado latente de más de 35 ópticas en Riobamba y más de 300 en la Zona Central del país 
+  que sufren idénticas carencias tecnológicas.
+- El software puede evolucionar hacia un modelo de distribución para el gremio optométrico, 
+  ya sea mediante licenciamiento institucional o empaquetamiento SaaS alojado en la nube (`SERV_PRODUCCION`), 
+  lo que evidencia una viabilidad comercial sobresaliente más allá del ámbito académico inmediato.
+
+7.3 ESTRATEGIA DE MITIGACIÓN DE LA RESISTENCIA AL CAMBIO Y RETENCIÓN DE USUARIOS
+Para neutralizar la resistencia humana habitual ante la sustitución de procesos manuales por sistemas informáticos:
+1. Interfaz Intuitiva con Enfoque Clínico: Las pantallas replican visualmente la estructura universal 
+   de una receta optométrica tradicional (OD arriba, OI abajo; Esfera, Cilindro, Eje, Adición en columnas claras).
+2. Prevención Asistida de Errores: El sistema valida automáticamente signos incongruentes 
+   (alertando si se digita un cilindro positivo o un eje fuera de 0° a 180°), generando confianza 
+   en el profesional en lugar de fricción o retrasos.
+3. Capacitación Práctica por Perfiles: Talleres breves de 45 minutos diferenciados para el Optometrista 
+   (módulos clínicos y órdenes) y la Asistente Comercial (ventas, cobranzas, arqueo de caja y facturación SRI).
+
+
+================================================================================
+8. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD DE MERCADO Y DECLARACIÓN DE CIERRE
+================================================================================
+
+A partir de las evaluaciones sectoriales, el benchmarking técnico y la estrategia de validación formulada:
+
+1. Se concluye que existe una DEMANDA SECTORIAL REAL, CLARA Y DESATENDIDA en los consultorios 
+   optométricos de la ciudad de Riobamba, donde los sistemas comerciales genéricos y los paquetes 
+   extranjeros no satisfacen las exigencias combinadas de precisión refractiva, normativa tributaria 
+   del SRI y protección de datos bajo la LOPDP.
+2. El Sistema SGO presenta una PROPUESTA DE VALOR SÓLIDA Y DIFERENCIADA, resolviendo la doble 
+   digitación, eliminando costos recurrentes de licenciamiento e introduciendo herramientas de vanguardia 
+   como el Asistente Inteligente de solo lectura y la facturación offline resiliente.
+3. La estrategia de interacción con el Product Owner, sustentada en demostraciones quincenales (Sprint Reviews) 
+   y acceso remoto continuo a través de túneles seguros cifrados (Cloudflare/Ngrok) hacia el servidor 
+   de Staging AMD Ryzen 5 9600X, garantiza una adopción orgánica, una validación clínica rigurosa y un 
+   ajuste perfecto a las rutinas de trabajo reales del establecimiento.
+4. Se verifica el cumplimiento total de las directrices metodológicas institucionales y se 
+   declara formalmente la VIABILIDAD PLENA DE MERCADO del proyecto SGO.
+
+Por tanto, se emite el DICTAMEN DE APROBACIÓN DE LA FASE 7 y se autoriza el paso a la 
+**Fase 8: Evaluación de Factibilidad Operacional y de Procesos de Negocio (Sección 10)**.
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE EJECUCIÓN — FASE 7
+================================================================================

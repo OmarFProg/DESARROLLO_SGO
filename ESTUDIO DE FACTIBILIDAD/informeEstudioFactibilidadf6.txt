@@ -1,0 +1,309 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN: FASE 6
+EVALUACIÓN DE FACTIBILIDAD DE RECURSOS Y ORGANIZACIÓN SCRUM
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase Ejecutada:  FASE 6: EVALUACIÓN DE FACTIBILIDAD DE RECURSOS Y ORGANIZACIÓN SCRUM
+                 (Conforme a PlanEstudioFactibilidad.txt, directrices.txt y
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf)
+Sección del      SECCIÓN 8: FACTIBILIDAD DE RECURSOS
+Formato ESPOCH:  (Estructura de talento humano, roles Scrum, recursos materiales y suficiencia)
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf6.txt
+Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
+Versión:         1.0 Definitiva y Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 6
+   1.1 Propósito y Enfoque de la Factibilidad de Recursos
+   1.2 Objetivos Específicos de la Fase 6
+   1.3 Criterios de Evaluación bajo el Marco Ágil Scrum
+2. ESTRUCTURA DEL TALENTO HUMANO Y ORGANIZACIÓN BAJO EL MARCO SCRUM
+   2.1 Definición del Scrum Team del Proyecto SGO
+       - Product Owner (Propietario y Optometrista Principal de Óptica Vista Visión)
+       - Scrum Master (Ing. Jorge Ariel Menéndez Verdecia - Director de Titulación)
+       - Revisor Técnico y Asesor Metodológico (Ing. Julio Roberto Santillán Castillo)
+       - Developers / Equipo de Desarrollo (Omar Figueroa Díaz y Alexander Villalva Dumancela)
+   2.2 Perfiles de Competencia, Formación Académica y Destrezas Técnicas
+   2.3 Evaluación de la Suficiencia del Talento Humano y Capacidad Operativa
+       - Capacidad de Entrega (Velocity Proyectada de 25 a 30 Story Points por Sprint)
+       - Justificación de No Contratación de Personal Externo Adicional
+3. MATRIZ INTEGRAL DE RESPONSABILIDADES RACI POR COMPONENTE DEL SISTEMA
+4. INVENTARIO Y DISPONIBILIDAD DE RECURSOS MATERIALES, LOGÍSTICOS Y FÍSICOS
+   4.1 Infraestructura Física e Instalaciones Disponibles
+   4.2 Recursos Materiales de Cómputo y Conectividad
+   4.3 Periféricos y Dispositivos de Validación de Campo en Óptica Vista Visión
+   4.4 Herramientas de Gestión de Proyecto y Acceso a Bases Científicas (ESPOCH)
+5. DINÁMICA OPERATIVA DEL SCRUM TEAM: CEREMONIAS Y GESTIÓN DE ARTEFACTOS
+   5.1 Gestión de Artefactos: Product Backlog, Security Backlog e Incremento Potencialmente Desplegable
+   5.2 Eventos y Ceremonias Ágiles Adaptadas al Contexto Clínico
+       - Sprint Planning Quincenal
+       - Daily Scrum Focalizado
+       - Sprint Review y Demostración en Consultorio
+       - Sprint Retrospective y Mejora Continua
+6. ANÁLISIS DE RIESGOS DE RECURSOS Y PLANES DE CONTINGENCIA
+   6.1 Contingencia ante Indisponibilidad Temporal de un Miembro del Equipo
+   6.2 Contingencia ante Fallos Catastróficos de Hardware
+   6.3 Gestión de Tiempos y Disponibilidad del Product Owner
+7. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD DE RECURSOS Y DECLARACIÓN DE CIERRE
+
+
+================================================================================
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 6
+================================================================================
+
+1.1 PROPÓSITO Y ENFOQUE DE LA FACTIBILIDAD DE RECURSOS
+El presente informe documenta la ejecución formal de la FASE 6: EVALUACIÓN DE FACTIBILIDAD 
+DE RECURSOS Y ORGANIZACIÓN SCRUM, dando estricto cumplimiento al capítulo de Factibilidad 
+de Recursos (Sección 8) del `FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf` 
+y a las directrices institucionales de `ESTUDIO DE FACTIBILIDAD/directrices.txt` (líneas 78-80).
+
+La viabilidad de recursos determina si el proyecto cuenta con el tipo, calidad y cantidad 
+suficiente de recursos humanos, materiales, logísticos y de infraestructura para ejecutar 
+satisfactoriamente el plan de desarrollo sin interrupciones, sobrecostos o dependencias 
+críticas no cubiertas. En proyectos de software desarrollados bajo el marco ágil Scrum, 
+la conformación de un equipo cohesionado, multidisciplinario y autosuficiente constituye 
+el factor primordial de éxito para transformar los 31 requerimientos de la SRS v2.0 en 
+incrementos de software funcionales y seguros.
+
+1.2 OBJETIVOS ESPECÍFICOS DE LA FASE 6
+1. Definir formalmente los roles, funciones y asignaciones del Scrum Team (Product Owner, 
+   Scrum Master, Asesor Técnico y Developers), sustentados en la Sección 4.4.2.5 del Anteproyecto.
+2. Analizar las competencias técnicas de los dos ingenieros de software desarrolladores 
+   (Omar Figueroa y Alexander Villalva), demostrando su idoneidad para cubrir el desarrollo 
+   full-stack, la integración de la API-SRI (NestJS/SOAP) y el Asistente Inteligente de IA.
+3. Evaluar cuantitativamente la capacidad operativa del equipo (Velocity de 25 a 30 Story Points/Sprint), 
+   certificando que NO se requiere contratar personal adicional.
+4. Consolidar el inventario exhaustivo de recursos materiales, físicos y tecnológicos disponibles.
+5. Estructurar la Matriz de Asignación de Responsabilidades RACI detallada por subsistema.
+6. Establecer el protocolo de ceremonias y gestión de artefactos del marco Secure Scrum.
+7. Emitir el dictamen formal de Factibilidad Plena de Recursos.
+
+1.3 CRITERIOS DE EVALUACIÓN BAJO EL MARCO ÁGIL SCRUM
+La evaluación se apoya en los principios canónicos de la Guía de Scrum (Schwaber & Sutherland, 2020), 
+el modelo de Secure Scrum (Pohl & Hof, 2015) y los estudios empíricos de Scrum en sistemas de 
+salud (Kokol et al., 2022), los cuales demuestran que los equipos pequeños (2 a 5 personas) 
+presentan menor fricción comunicacional, mayor velocidad de iteración y máxima adaptabilidad.
+
+
+================================================================================
+2. ESTRUCTURA DEL TALENTO HUMANO Y ORGANIZACIÓN BAJO EL MARCO SCRUM
+================================================================================
+
+Conforme a la Sección 4.4.2.5 del Anteproyecto de Titulación (`Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.pdf`, 
+pp. 12-14), el proyecto adopta la estructura de un Scrum Team unificado y multidisciplinario:
+
+2.1 DEFINICIÓN DEL SCRUM TEAM DEL PROYECTO SGO
+
+1. Product Owner (PO) — Propietario / Optometrista Principal de Óptica Vista Visión:
+   - Rol y Responsabilidades: Máximo responsable de optimizar el valor del producto clínico-comercial. 
+     Define los requerimientos del dominio optométrico, valida los flujos de refracción OD/OI, 
+     establece las prioridades del Product Backlog, aprueba los criterios de aceptación en cada 
+     Sprint Review y autoriza el pase a producción de cada incremento funcional.
+   - Dedicación al Proyecto: Disponibilidad de 4 a 6 horas semanales para sesiones de refinamiento 
+     (Backlog Refinement), pruebas de usuario y ceremonias de Sprint Review.
+
+2. Scrum Master (SM) — Ing. Jorge Ariel Menéndez Verdecia (Director de Titulación ESPOCH):
+   - Rol y Responsabilidades: Líder servicial y garante de la correcta aplicación del marco 
+     metodológico Scrum. Facilita los eventos ágiles, remueve impedimentos institucionales 
+     y técnicos, asesora en el diseño de la arquitectura relacional en PostgreSQL y supervisa 
+     el cumplimiento de los estándares de calidad del software y directrices de la ESPOCH.
+   - Dedicación al Proyecto: Sesiones periódicas de seguimiento quincenal y tutoría académica.
+
+3. Revisor Técnico y Asesor Académico — Ing. Julio Roberto Santillán Castillo (Docente Titular FIE):
+   - Rol y Responsabilidades: Revisor metodológico y técnico. Provee asesoría especializada 
+     en ciberseguridad transaccional, accesibilidad web, diseño para dispositivos táctiles (PWA) 
+     y evaluación formal de los atributos de calidad de la norma ISO/IEC 25010:2023.
+
+4. Developers / Equipo de Desarrollo (2 Ingenieros de Software en Formación):
+   - Desarrollador 1: Omar Santiago Figueroa Díaz (Backend Lead & Ciberseguridad):
+     * Responsable de la arquitectura de servicios REST en Laravel 10+, diseño físico del 
+       modelo de base de datos relacional PostgreSQL 16, transacciones ACID de caja e inventario, 
+       implementación del microservicio de Facturación Electrónica NestJS (API-SRI), integración 
+       criptográfica XAdES-BES, comunicación SOAP y tabla inmutable `audit_logs`.
+   - Desarrollador 2: Alexander Rafael Villalva Dumancela (Frontend Lead & UX / IA):
+     * Responsable de la interfaz web Single Page Application (SPA) responsiva en React 18, 
+       diseño ergonómico de formularios clínicos OD/OI, componentes PWA para tabletas táctiles, 
+       implementación de la interfaz conversacional del Asistente Inteligente ("Chatbot con los datos"), 
+       enrutamiento de intenciones en modo LAN offline y pruebas de usabilidad en consultorio.
+   - Dedicación de los Desarrolladores: Tiempo completo (40 horas semanales por investigador) 
+     durante las 16 semanas efectivas del proyecto (1,280 horas-hombre combinadas).
+
+2.2 PERFILES DE COMPETENCIA Y DESTREZAS TÉCNICAS
+Los desarrolladores acreditan formación de octavo nivel en la Carrera de Software de la 
+Facultad de Informática y Electrónica (FIE-ESPOCH), contando con destrezas demostradas en:
+- Dominio del lenguaje TypeScript, PHP 8.2 moderno, JavaScript ES6+ y Python.
+- Manejo avanzado de motores relacionales SQL (PostgreSQL, MySQL, SQL Server) y ORMs (Eloquent, TypeORM).
+- Criptografía aplicada (algoritmos RSA, SHA-1, SHA-256, certificados PKCS#12 y tokens JWT).
+- Integración de servicios web SOAP (WSDL/XML) y APIs RESTful (OpenAPI/Swagger).
+- Metodologías ágiles (Scrum, Kanban, TDD) y control de versiones distribuido con Git y GitHub.
+
+2.3 EVALUACIÓN DE SUFICIENCIA DEL TALENTO HUMANO Y CAPACIDAD OPERATIVA
+- Estimación de Capacidad y Velocidad (Velocity):
+  El Product Backlog consolidado comprende 31 Requisitos Funcionales desglosados en aproximadamente 
+  48 Historias de Usuario (HU). Con una estimación media de 2.5 días por historia de usuario 
+  para dos desarrolladores en paralelo, se proyecta una velocidad de entrega de 12 historias 
+  por Sprint quincenal (25 a 30 Story Points por ciclo).
+- Duración del Desarrollo: 4 Sprints quincenales (8 semanas / 2 meses calendario).
+- Margen de Seguridad: El cronograma académico contempla 18 semanas de período lectivo, lo que 
+  otorga un margen de holgura superior al 50% para pruebas de seguridad, ajustes de campo y documentación final.
+- Confirmación de No Contratación Externa:
+  Se concluye categóricamente que el equipo conformado por dos desarrolladores full-stack 
+  posee la capacidad técnica, dedicación temporal y autosuficiencia requerida para construir 
+  el 100% de los módulos sin requerir la contratación de desarrolladores, diseñadores o consultores 
+  externos, eliminando riesgos de sobrecostos presupuestarios.
+
+
+================================================================================
+3. MATRIZ INTEGRAL DE RESPONSABILIDADES RACI POR COMPONENTE DEL SISTEMA
+================================================================================
+
+TABLA 1: MATRIZ RACI DEL PROYECTO SGO
++------------------------------------+-------+-------+-------+-------+-------+
+| MÓDULO O COMPONENTE TÉCNICO        | BACK  | FRONT | PO    | SM    | ASES  |
+|                                    | (OF)  | (AV)  | (Cli) | (JM)  | (JS)  |
++------------------------------------+-------+-------+-------+-------+-------+
+| M1: Autenticación RBAC y JWT       |   R   |   R   |   I   |   A   |   C   |
+| M2: Gestión de Pacientes y Cédula  |   R   |   R   |   C   |   A   |   I   |
+| M3: Historia Clínica y Refracción  |   R   |   R   |   A   |   A   |   C   |
+| M4: Pedidos a Laboratorio (LOPDP)  |   R   |   R   |   A   |   A   |   C   |
+| M5: Ventas, Caja e Inventario ACID |   R   |   R   |   A   |   A   |   C   |
+| M6: Facturación SRI (XAdES/SOAP)   |   R   |   C   |   A   |   A   |   C   |
+| M7: Asistente Inteligente (Chatbot)|   R   |   R   |   C   |   A   |   C   |
+| Infraestructura y Servidor Staging |   C   |   R   |   I   |   A   |   C   |
+| Despliegue en Producción (Cloud)   |   R   |   C   |   A   |   A   |   C   |
+| Pruebas de Seguridad ISO 25010     |   R   |   R   |   C   |   A   |   A   |
+| Capacitación y Soporte a la Óptica |   C   |   R   |   A   |   I   |   I   |
++------------------------------------+-------+-------+-------+-------+-------+
+Leyenda RACI: R = Responsable directo de ejecución, A = Aprobador final, C = Consultado técnico, I = Informado.
+- OF: Omar Santiago Figueroa Díaz
+- AV: Alexander Rafael Villalva Dumancela
+- Cli: Product Owner / Optometrista (Óptica Vista Visión)
+- JM: Ing. Jorge Ariel Menéndez Verdecia (Scrum Master / Director Titulación)
+- JS: Ing. Julio Roberto Santillán Castillo (Asesor Académico / Revisor)
+
+
+================================================================================
+4. INVENTARIO Y DISPONIBILIDAD DE RECURSOS MATERIALES Y FÍSICOS
+================================================================================
+
+4.1 INFRAESTRUCTURA FÍSICA E INSTALACIONES DISPONIBLES
+- Laboratorio de Ingeniería de Software (FIE-ESPOCH): Espacio académico dotado de mobiliario 
+  ergonómico, suministro eléctrico estabilizado y conexión directa al backbone universitario.
+- Consultorio de Óptica Vista Visión: Instalación comercial y asistencial en Riobamba disponible 
+  para sesiones de observación de campo, pruebas de usabilidad clínica con pacientes reales y 
+  verificación de interfaces en mostrador.
+
+4.2 RECURSOS MATERIALES DE CÓMPUTO Y CONECTIVIDAD
+- Estación de Trabajo 1 (`DESKTOP-MO7Q55S` - Alexander Villalva):
+  * AMD Ryzen 5 9600X (12 hilos, 5.4 GHz Turbo), 16 GB RAM DDR5, GPU NVIDIA RTX 2080 (8 GB GDDR6), 
+    SSD NVMe PCIe 4.0, Windows 11 Pro.
+  * Función: Servidor local de Staging, pruebas concurrentes Docker Compose y desarrollo frontend.
+- Estación de Trabajo 2 (`DESKTOP-ML70LGD` - Omar Figueroa):
+  * Intel Core i5-7200U (4 hilos, 3.1 GHz), 12 GB RAM DDR4, SSD SATA III, Windows 10 Home.
+  * Función: Estación de ingeniería backend Laravel, modelado relacional PostgreSQL y API-SRI.
+- Conectividad a Internet: Enlace simétrico de fibra óptica en estaciones de trabajo y red privada 
+  en Óptica Vista Visión (ancho de banda > 100 Mbps).
+
+4.3 PERIFÉRICOS Y DISPOSITIVOS DE VALIDACIÓN DE CAMPO EN LA ÓPTICA
+- Dispositivo Móvil de Consulta: Tableta táctil de 10 pulgadas (resolución 1280x800, Android 11+ con Chrome) 
+  destinada al ingreso ágil de refracción y selección de armazones al lado del foróptero.
+- Terminal Fija de Mostrador: Computador de recepción de la óptica para cobros, arqueo de caja y facturación SRI.
+- Impresora Térmica POS: Impresora de tickets térmicos de 80 mm para emisión de recibos internos de cobro.
+- Impresora Documental A4: Impresora multifunción láser monocromática para certificados de salud visual y RIDE.
+
+4.4 HERRAMIENTAS DE GESTIÓN DE PROYECTO Y ACCESO A BASES CIENTÍFICAS
+- Control de Versiones: Repositorio oficial en GitHub (`OmarFProg/DESARROLLO_SGO`) con control de ramas y pull requests.
+- Gestión Ágil: Tablero Scrum en GitHub Projects con seguimiento visual de Sprint Backlog e historias de usuario.
+- Acceso Bibliográfico Científico: Acceso institucional ilimitado provisto por la ESPOCH a bases 
+  de datos Scopus, IEEE Xplore, ScienceDirect y SpringerLink, cubierto al 100% sin costo para los proponentes.
+
+
+================================================================================
+5. DINÁMICA OPERATIVA DEL SCRUM TEAM: CEREMONIAS Y GESTIÓN DE ARTEFACTOS
+================================================================================
+
+5.1 GESTIÓN DE ARTEFACTOS ÁGILES (SECURE SCRUM)
+Conforme a Pohl y Hof (2015) y Schwaber y Sutherland (2020), se estructuran tres artefactos:
+1. Product Backlog: Pila única de trabajo priorizada según valor clínico y comercial, que integra 
+   de forma nativa las Historias de Usuario Funcionales y las Historias de Seguridad (Security Stories) 
+   etiquetadas con S-Tags ([S-TAG-AUTH], [S-TAG-INT], [S-TAG-RES]).
+2. Sprint Backlog: Conjunto de ítems del Product Backlog seleccionados para el Sprint quincenal, 
+   acompañados del plan detallado de tareas técnicas de frontend y backend.
+3. Incremento de Software Potencialmente Desplegable: Código fuente probado funcionalmente, 
+   integrado en el repositorio y desplegado en el entorno de Staging (`DESKTOP-MO7Q55S`), 
+   que cumple rigurosamente con la Definición de Terminado con Seguridad (Security DoD).
+
+5.2 EVENTOS Y CEREMONIAS ÁGILES
+El ciclo operativo se organiza en Sprints de dos semanas (10 días laborables):
+- Sprint Planning (Lunes de inicio de Sprint, 2 horas):
+  * El Product Owner presenta los ítems de mayor prioridad clínica/comercial.
+  * Los Developers seleccionan el alcance factible y definen el Sprint Goal.
+- Daily Scrum (Diario, 15 minutos):
+  * Reunión de sincronización técnica entre Omar Figueroa y Alexander Villalva para responder: 
+    ¿Qué se completó ayer? ¿Qué se construirá hoy? ¿Existen impedimentos técnicos?
+- Sprint Review (Viernes de cierre de Sprint, 2 horas):
+  * Demostración funcional en vivo ante el Product Owner en las instalaciones de Óptica Vista Visión 
+    o mediante acceso remoto al servidor de Staging.
+  * El PO inspecciona el incremento y valida el cumplimiento de los criterios de aceptación.
+- Sprint Retrospective (Viernes de cierre, 1 hora):
+  * Sesión de mejora continua entre los Developers y el Scrum Master para optimizar procesos y calidad de código.
+
+
+================================================================================
+6. ANÁLISIS DE RIESGOS DE RECURSOS Y PLANES DE CONTINGENCIA
+================================================================================
+
+TABLA 2: MATRIZ DE RIESGOS DE RECURSOS Y PLANES DE CONTINGENCIA
++-----------------------------------+--------------------+-----------------------------------------------------+
+| RIESGO IDENTIFICADO               | NIVEL DE IMPACTO   | ESTRATEGIA DE MITIGACIÓN / CONTINGENCIA             |
++-----------------------------------+--------------------+-----------------------------------------------------+
+| R1: Indisponibilidad temporal de  | Moderado           | Código versionado diariamente en GitHub; modularidad|
+|     un desarrollador (enfermedad) |                    | desacoplada que permite al otro autor continuar.    |
++-----------------------------------+--------------------+-----------------------------------------------------+
+| R2: Falla de hardware en estación | Moderado           | Respaldos automáticos en la nube; portabilidad total|
+|     de trabajo de desarrollo      |                    | de contenedores Docker desplegables en horas.       |
++-----------------------------------+--------------------+-----------------------------------------------------+
+| R3: Limitación de tiempo del PO   | Bajo               | Planificación de sesiones de revisión en horarios   |
+|     por atención a pacientes      |                    | de baja afluencia; acceso remoto vía túnel seguro.  |
++-----------------------------------+--------------------+-----------------------------------------------------+
+| R4: Dependencia de un solo rol de | Bajo               | Parejas de programación (Peer Review) cruzadas entre|
+|     desarrollo en cada capa       |                    | backend y frontend para evitar silos de conocimiento|
++-----------------------------------+--------------------+-----------------------------------------------------+
+
+
+================================================================================
+7. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD DE RECURSOS Y DECLARACIÓN DE CIERRE
+================================================================================
+
+1. El proyecto cuenta con un equipo humano multidisciplinario, altamente capacitado y 
+   formalmente organizado bajo los roles de Scrum, con dedicación de tiempo completo por parte 
+   de los dos ingenieros desarrolladores y acompañamiento metodológico continuo de los docentes asesores.
+2. La infraestructura material, equipos de cómputo auditados (AMD Ryzen 5 9600X e Intel Core i5-7200U), 
+   redes de telecomunicaciones, dispositivos móviles de consultorio y herramientas de gestión 
+   se encuentran disponibles, operativas y cubren con creces las demandas del software.
+3. Se concluye categóricamente que el proyecto es 100% autosuficiente y que NO se requiere 
+   contratar personal externo adicional para completar la totalidad del alcance delimitado.
+4. Se emite formalmente el DICTAMEN DE VIABILIDAD PLENA DE RECURSOS, declarándose concluida 
+   y aprobada la FASE 6 y habilitándose la ejecución de la **Fase 7 (Evaluación de Factibilidad de Mercado y Estrategia de Despliegue)**.
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE EJECUCIÓN — FASE 6
+================================================================================

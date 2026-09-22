@@ -1,0 +1,637 @@
+================================================================================
+INFORME TÉCNICO DE IMPLEMENTACIÓN: SISTEMA DE FACTURACIÓN ELECTRÓNICA (API-SRI)
+================================================================================
+
+Fecha: 21 de Septiembre de 2026
+Documento: InformeImplementacionAppFacturacionElectronica.txt
+Versión del Documento: 1.0.0
+Sistema: API SRI - Facturación Electrónica Ecuador
+Entorno Tecnológico: NestJS / TypeScript / PostgreSQL / TypeORM / CQRS / SOAP / XAdES-BES
+
+--------------------------------------------------------------------------------
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. DESCRIPCIÓN DEL SISTEMA
+   1.1 Propósito y Objetivo General
+   1.2 Alcance Funcional
+   1.3 Cumplimiento Normativo (SRI Ecuador)
+   1.4 Módulos Principales del Sistema
+
+2. FUNCIONAMIENTO Y FLUJO OPERATIVO DETALLADO
+   2.1 Flujo de Preparación de Datos Maestros
+   2.2 Creación y Registro de Comprobantes (Flujo CQRS)
+   2.3 Generación de la Clave de Acceso (Algoritmo Módulo 11)
+   2.4 Construcción del Esquema XML (Comprobante v1.1.0)
+   2.5 Proceso de Firma Electrónica (Estándar XAdES-BES)
+   2.6 Envío y Recepción en Servicios Web del SRI (SOAP Offline)
+   2.7 Consulta y Verificación del Estado de Autorización
+   2.8 Generación de RIDE en Formato PDF y Código de Barras
+   2.9 Notificación Automática al Cliente por Correo Electrónico
+   2.10 Manejo de Contingencias, Reintentos y Estados Devueltos
+   2.11 Módulo ATS (Anexo Transaccional Simplificado)
+
+3. DETALLACIÓN DE ARQUITECTURA
+   3.1 Enfoque Arquitectónico (DDD, CQRS y Event-Driven)
+   3.2 Diagrama Conceptual del Flujo de Datos
+   3.3 Estructura Detallada por Capas
+       - Capa de API / Presentación (Controllers, DTOs, Swagger)
+       - Capa de Dominio y Aplicación (Commands, Queries, Events, Handlers, Services)
+       - Capa de Persistencia y Base de Datos (Entities, Repositories, Migrations)
+       - Capa de Integración Externa (Voucher, SRI Web Services, Email Service)
+       - Núcleo Arquitectónico Base (Librería interna 'alfajs')
+   3.4 Modelo de Entidades y Base de Datos
+
+4. TECNOLOGÍAS, LIBRERÍAS Y HERRAMIENTAS UTILIZADAS
+   4.1 Lenguaje y Entorno de Ejecución
+   4.2 Framework de Aplicación y Arquitectura
+   4.3 Base de Datos y Persistencia
+   4.4 Criptografía, Firma Digital y XML
+   4.5 Protocolo de Comunicación con el SRI
+   4.6 Generación de Documentos y Gráficos (RIDE & Barcodes)
+   4.7 Servicios de Mensajería y Correo
+   4.8 Infraestructura, Contenedores y Pruebas
+
+5. RECURSOS Y REQUISITOS NECESARIOS PARA LA IMPLEMENTACIÓN
+   5.1 Certificado de Firma Electrónica (Archivo .p12 / .pfx)
+   5.2 Requisitos Fiscales y del Contribuyente (SRI)
+   5.3 Servicios Web del SRI (Endpoints WSDL de Pruebas y Producción)
+   5.4 Recursos de Infraestructura y Servidor
+   5.5 Servicio de Correo Electrónico (SMTP)
+   5.6 Diccionario Completo de Variables de Entorno (.env)
+
+6. CONCLUSIONES Y RECOMENDACIONES DE PUESTA EN PRODUCCIÓN
+
+
+================================================================================
+1. DESCRIPCIÓN DEL SISTEMA
+================================================================================
+
+1.1 Propósito y Objetivo General
+---------------------------------
+El sistema analizado corresponde a una API de backend empresarial de alto rendimiento,
+diseñada específicamente para automatizar el ciclo de vida completo de la Facturación
+Electrónica en Ecuador, de conformidad estricta con las especificaciones técnicas y
+tributarias del Servicio de Rentas Internas (SRI).
+
+El sistema permite la administración comercial (clientes, productos, categorías), la
+emisión estructurada de facturas, la generación de comprobantes XML conforme a la ficha
+técnica oficial, el estampado de firma digital avanzada (XAdES-BES), la transmisión síncrona
+y asíncrona hacia los Web Services SOAP del SRI, el procesamiento de autorizaciones, la
+generación del RIDE (Representación Impresa de Documento Electrónico) en formato PDF con
+código de barras, el envío por correo electrónico al cliente final y la generación de
+anexos tributarios como el ATS (Anexo Transaccional Simplificado).
+
+1.2 Alcance Funcional
+----------------------
+- Gestión de Catálogos Comerciales: Administración integral de Clientes (con validación de
+  Cédula, RUC, Pasaporte y Consumidor Final), Ítems/Productos y Categorías de inventario.
+- Emisión de Facturas Electrónicas: Cálculo automatizado de subtotales, tarifas de IVA
+  (15%, 12%, 0%), descuentos, propinas e importes totales.
+- Generación de Claves de Acceso: Creación algorítmica de la clave única de 49 dígitos
+  conforme a la regla del Módulo 11 exigida por el SRI.
+- Generación y Estructuración de XML: Construcción del archivo XML bajo el esquema oficial
+  "factura" versión 1.1.0 del SRI.
+- Firma Electrónica XAdES-BES: Firma digital embebida en el XML utilizando certificados
+  de persona natural o jurídica en formato PKCS#12 (.p12), realizando canonicalización
+  XML-C14N, digests SHA-1 y cifrado RSA.
+- Integración SOAP con el SRI: Comunicación con los servicios web oficiales:
+  * RecepcionComprobantesOffline: Envío y validación inicial del comprobante firmado.
+  * AutorizacionComprobantesOffline: Consulta del estado de autorización tributaria.
+- Generación de RIDE (PDF): Renderizado de la representación física/gráfica oficial de la
+  factura mediante plantillas Handlebars y conversión a PDF vía Chromium/Puppeteer,
+  incluyendo código de barras Code128 de la clave de acceso.
+- Notificación al Adquiriente: Envío automático por correo electrónico (SMTP) que adjunta
+  el archivo XML legalmente firmado y el documento RIDE en formato PDF.
+- Generación de Anexo Transaccional Simplificado (ATS): Extracción y generación de reportes
+  XML y Excel de compras/ventas para fines de auditoría y reporte fiscal.
+
+1.3 Cumplimiento Normativo (SRI Ecuador)
+-----------------------------------------
+El aplicativo implementa y cumple las siguientes disposiciones técnicas:
+- Esquema de Comprobantes Electrónicos Offline (versión 1.1.0).
+- Validación de límite para Consumidor Final (máximo 40.00 USD según regulación vigente,
+  exigiendo identificación formal del comprador si se sobrepasa dicho monto).
+- Algoritmo Módulo 11 para la generación del dígito verificador en la clave de acceso.
+- Perfil de Firma Electrónica XAdES-BES (XML Advanced Electronic Signatures - Basic
+  Electronic Signature) con digest SHA-1 y formato enveloped según la norma técnica ecuatoriana.
+- Codificación de tipos de identificación (04: RUC, 05: Cédula, 06: Pasaporte, 07: Consumidor Final).
+- Soporte para códigos porcentuales de IVA actualizados (código 8 para tarifa general 15%,
+  código 2 para 12%, código 0 para 0%).
+
+1.4 Módulos Principales del Sistema
+------------------------------------
+- Invoice Module (src/invoice): Controlador, comandos, queries, repositorios y servicios
+  para gestionar el ciclo de vida de las facturas.
+- Voucher Module (src/voucher): Módulo de seguridad criptográfica y comunicación SOAP,
+  responsable de la firma XAdES-BES y el enlace con los Web Services del SRI.
+- Integrations Module (src/integrations): Orquestador de la construcción XML, cálculo de
+  clave de acceso, invocación de autorización y generación de ATS.
+- Email Module (src/email): Motor de renderizado de RIDE (Handlebars + Puppeteer),
+  generación de códigos de barras (bwip-js) y despacho de correos (Nodemailer).
+- Customer Module (src/customer): Gestión de adquirentes y validaciones de identificación.
+- Inventory Module (src/inventory): Catálogo de productos/servicios y categorías.
+- Tenant Module (src/tenant): Soporte multi-empresa / multi-inquilino.
+- Shared Module (src/shared): Servicios transversales y tareas programadas (Crons).
+- Librería Core (lib/alfajs): Clases base para auditoría completa (FullAuditedEntity),
+  borrado lógico (soft-delete), comandos y eventos abstractos de CQRS.
+
+
+================================================================================
+2. FUNCIONAMIENTO Y FLUJO OPERATIVO DETALLADO
+================================================================================
+
+2.1 Flujo de Preparación de Datos Maestros
+-----------------------------------------
+Antes de la emisión, el sistema requiere la persistencia de:
+1. Clientes: Registrados con número de identificación, razón social, correo electrónico,
+   dirección y teléfono.
+2. Ítems: Registrados con código único, nombre, descripción, precio unitario y categoría.
+3. Configuración del Emisor: RUC emisor, razón social, nombre comercial, dirección matriz,
+   establecimiento ('001'), punto de emisión ('001') y condición de obligado a llevar contabilidad.
+
+2.2 Creación y Registro de Comprobantes (Flujo CQRS)
+---------------------------------------------------
+El flujo de creación de factura se ejecuta bajo el patrón CQRS:
+1. Un cliente externo realiza una petición HTTP POST a '/invoices' con el payload de la factura.
+2. 'InvoiceController' intercepta la petición, genera un UUID v4 y delega en 'InvoiceService.create'.
+3. 'InvoiceService' instancia un 'CreateInvoiceCommand' y lo despacha al 'CommandBus'.
+4. 'CreateInvoiceCommandHandler' procesa el comando e invoca a 'InvoiceDomainService.createInvoice'.
+5. 'InvoiceDomainService' valida que el número secuencial no exista previamente y ordena
+   la persistencia en la base de datos a través de 'InvoiceRepository' (TypeORM).
+6. Se crea el registro de la entidad 'Invoice' y sus 'InvoiceItem' asociados en PostgreSQL.
+7. Al completarse la transacción, el handler publica el evento de dominio 'InvoiceCreatedEvent'
+   en el 'EventBus'.
+
+2.3 Generación de la Clave de Acceso (Algoritmo Módulo 11)
+----------------------------------------------------------
+El servicio 'AuthorizationInvoiceService' genera la Clave de Acceso de 49 dígitos requerida por el SRI:
+- Estructura de los primeros 48 dígitos:
+  * Fecha de Emisión (ddmmaaaa): 8 dígitos.
+  * Tipo de Comprobante (01 para Factura): 2 dígitos.
+  * Número de RUC del emisor: 13 dígitos.
+  * Tipo de Ambiente (1: Pruebas, 2: Producción): 1 dígito.
+  * Serie (Establecimiento 3 dígitos + Punto de Emisión 3 dígitos): 6 dígitos (ej. 001001).
+  * Número Secuencial del comprobante: 9 dígitos (ej. 000000150).
+  * Código Numérico aleatorio/seguridad: 8 dígitos.
+  * Tipo de Emisión (1: Normal): 1 dígito.
+- Cálculo del Dígito Verificador (Dígito 49):
+  * Se aplica el algoritmo Módulo 11 con ponderadores de derecha a izquierda [2, 3, 4, 5, 6, 7, 2, 3, ...].
+  * Se realiza la suma ponderada y se calcula: residuo = suma % 11; resultado = 11 - residuo.
+  * Regla SRI: Si resultado == 11 -> dígito = 0; Si resultado == 10 -> dígito = 1; en cualquier otro caso -> resultado.
+
+2.4 Construcción del Esquema XML (Comprobante v1.1.0)
+-----------------------------------------------------
+'InvoiceXmlBuilder' toma la información de la entidad 'Invoice', del cliente y de los ítems,
+construyendo el documento XML oficial:
+- <infoTributaria>: Ambiente, tipo de emisión, razón social, nombre comercial, RUC, clave de
+  acceso, codDoc (01), establecimiento, punto de emisión, secuencial y dirección matriz.
+- <infoFactura>: Fecha de emisión, dirección establecimiento, obligadoContabilidad (SI/NO),
+  tipoIdentificacionComprador (04, 05, 06, 07), razonSocialComprador, identificacionComprador,
+  totalSinImpuestos, totalDescuento, totalConImpuestos (base imponible, tarifa, valor del IVA),
+  propina, importeTotal y moneda (DOLAR).
+- <detalles>: Conjunto de etiquetas <detalle> por cada ítem (codigoPrincipal, descripcion,
+  cantidad, precioUnitario, descuento, precioTotalSinImpuesto e impuestos individuales).
+- Validación de Consumidor Final: Si el comprador es 'CONSUMIDOR FINAL' (identificación 9999999999999)
+  y el importe total supera el valor límite legal ($40.00 USD), el constructor detiene la emisión
+  lanzando una excepción explícita.
+
+2.5 Proceso de Firma Electrónica (Estándar XAdES-BES)
+-----------------------------------------------------
+El servicio 'SignService' (en src/voucher) implementa la firma digital avanzada requerida por el SRI:
+1. Lectura del Certificado: Lee el archivo binario PKCS#12 (.p12) provisto en 'files/alfasoft/'
+   y lo parsea utilizando la librería 'node-forge' con la contraseña maestra configurada.
+2. Extracción de Llaves: Localiza el 'certBag' que contiene el certificado X.509 con la extensión
+   de firma digital (OID 2.5.29.15) y extrae la llave privada RSA ('pkcs8ShroudedKeyBag' o 'keyBag').
+3. Canonicalización y Hashes:
+   - Extrae el número de serie del certificado y lo convierte de hexadecimal a decimal exacto
+     mediante 'BigInt' para evitar desbordamiento y cumplir el estándar del SRI.
+   - Calcula el hash SHA-1 en Base64 del XML original identificado bajo el ID 'comprobante'.
+   - Calcula el hash SHA-1 del certificado X.509 en formato DER.
+4. Generación de Elementos XAdES:
+   - <etsi:SignedProperties>: Incluye la hora oficial de firma (zona horaria 'America/Bogota'),
+     el digest del certificado X.509, el nombre del emisor (IssuerSerial) y el tipo de objeto.
+   - <ds:KeyInfo>: Contiene el certificado X.509 codificado en Base64, el módulo (Modulus) y
+     exponente de la clave pública RSA.
+   - <ds:SignedInfo>: Consolida las referencias con algoritmo de canonicalización
+     'http://www.w3.org/TR/2001/REC-xml-c14n-20010315' y algoritmo de firma
+     'http://www.w3.org/2000/09/xmldsig#rsa-sha1'.
+5. Firma Digital Criptográfica: Cifra el hash del SignedInfo con la llave privada del certificado
+   utilizando RSA-SHA1, generando el bloque <ds:SignatureValue>.
+6. Embebe la firma en el XML: Inserta el bloque completo <ds:Signature> dentro del elemento raíz
+   <factura>, guardando el archivo firmado en 'files/alfasoft/invoices/<invoiceNumber>.xml'.
+
+2.6 Envío y Recepción en Servicios Web del SRI (SOAP Offline)
+-------------------------------------------------------------
+1. El XML firmado se codifica en Base64.
+2. 'SoapService.validateVoucher' crea un cliente SOAP asíncrono apuntando al endpoint de Recepción:
+   'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl'.
+3. Invoca la operación 'validarComprobante' enviando el XML codificado.
+4. El SRI retorna una estructura SOAP 'RespuestaRecepcionComprobante':
+   - Si estado == 'RECIBIDA': El comprobante supera la validación estructural y de esquema.
+   - Si estado == 'DEVUELTA': El comprobante es rechazado de inmediato (por ejemplo, por
+     secuencial ya registrado, error de firma, RUC inactivo o clave de acceso malformada).
+5. Se registra la traza completa de la comunicación SOAP en 'files/alfasoft/invoices/soap.xml'.
+
+2.7 Consulta y Verificación del Estado de Autorización
+------------------------------------------------------
+1. Una vez recibido el comprobante, 'SoapService.getVoucher' se comunica con el servicio web:
+   'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl'.
+2. Invoca el método 'autorizacionComprobante' pasando la Clave de Acceso de 49 dígitos.
+3. El SRI devuelve la 'RespuestaAutorizacionComprobante':
+   - 'AUTORIZADO': Se obtiene el número de autorización oficial, la fecha/hora de autorización
+     y el XML autorizado con la firma de respuesta del SRI.
+   - 'NO AUTORIZADO': Se retornan los mensajes con los identificadores y motivos del rechazo.
+   - 'EN PROCESO' / 'PENDIENTE': La clave de acceso está siendo procesada internamente en los
+     servidores del SRI y debe ser consultada posteriormente mediante polling o cron.
+4. 'InvoiceRepository' actualiza el estado de la factura en PostgreSQL ('AUTORIZADO',
+   'ERROR SECUENCIAL REGISTRADO', etc.) junto con el mensaje emitido por la autoridad fiscal.
+
+2.8 Generación de RIDE en Formato PDF y Código de Barras
+--------------------------------------------------------
+Cuando se genera la factura y se autoriza, 'InvoiceEmailService' procede a la creación del RIDE:
+1. Generación de Código de Barras: La librería 'bwip-js' procesa la clave de acceso de 49 dígitos
+   y genera una imagen PNG en Base64 bajo la simbología estándar 'code128'.
+2. Plantilla HTML: Se compilan las plantillas Handlebars:
+   - 'invoice-template.html': Formato RIDE oficial con logotipo, datos del emisor, datos del
+     cliente, detalle de productos, desglose de impuestos y el código de barras incrustado.
+   - 'invoice-description-template.html': Cuerpo del mensaje que se mostrará en el correo del cliente.
+3. Motor Headless Puppeteer:
+   - Se levanta una instancia headless de Chromium con opciones de sandbox optimizadas
+     ('--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage').
+   - Se inyecta el HTML renderizado y se genera un documento PDF en formato A4 con márgenes oficiales.
+
+2.9 Notificación Automática al Cliente por Correo Electrónico
+-------------------------------------------------------------
+1. El servicio 'InvoiceEmailService' configura un transporte SMTP con 'nodemailer'.
+2. Configura los datos de destino a partir del correo del cliente almacenado en la factura.
+3. Adjunta de manera automática:
+   - 'Factura-<invoiceNumber>.pdf': Archivo binario con la representación impresa (RIDE).
+   - 'Factura-<invoiceNumber>.xml': Archivo legal con el XML firmado digitalmente.
+4. Realiza el envío del correo electrónico al cliente, asegurando la entrega inmediata
+   de los comprobantes válidos según lo estipula la ley tributaria.
+
+2.10 Manejo de Contingencias, Reintentos y Estados Devueltos
+------------------------------------------------------------
+- Error Secuencial Registrado: El sistema identifica el error código 45 del SRI y actualiza
+  el estado a 'ERROR SECUENCIAL REGISTRADO', impidiendo duplicidad en bases de datos.
+- Clave de Acceso en Procesamiento: El sistema maneja el código de respuesta 70 del SRI
+  ("CLAVE DE ACCESO EN PROCESAMIENTO"), permitiendo la reevaluación asíncrona mediante
+  polling ('SRI_PROCESSING_POLL_ATTEMPTS' y 'SRI_PROCESSING_POLL_DELAY_MS') o mediante
+  la ejecución de 'InvoiceCronService'.
+- Resincronización manual: El sistema cuenta con endpoints expuestos para forzar la
+  autorización manual de una factura previamente creada ('POST /invoices/authorize') y
+  para reenviar correos electrónicos ('POST /invoices/send-email/:id').
+
+2.11 Módulo ATS (Anexo Transaccional Simplificado)
+--------------------------------------------------
+El controlador 'AtsSriController' y el servicio 'AtsService' permiten:
+- 'GET /ats-sri/xml/download': Generar y descargar el archivo XML del Anexo Transaccional
+  Simplificado mensual para su presentación en el sistema DIMM / SRI en línea.
+- 'GET /ats-sri/excel/download': Exportar el reporte detallado de ventas y retenciones a
+  formato Microsoft Excel (.xlsx) para auditoría contable.
+
+
+================================================================================
+3. DETALLACIÓN DE LA ARQUITECTURA DEL SISTEMA
+================================================================================
+
+3.1 Enfoque Arquitectónico (DDD, CQRS y Event-Driven)
+-----------------------------------------------------
+El sistema implementa una arquitectura desacoplada y escalable compuesta por tres
+patrones de diseño de software empresarial:
+1. Domain-Driven Design (DDD):
+   Separación limpia entre entidades de negocio, reglas de dominio y detalles de infraestructura.
+2. Command Query Responsibility Segregation (CQRS):
+   División de las operaciones de modificación de estado (Comandos: Create, Update, Delete,
+   Authorize) y las operaciones de lectura (Queries: FindAll, FindOne), gestionadas a través
+   de 'CommandBus' y 'QueryBus' proveídos por '@nestjs/cqrs'.
+3. Event-Driven Architecture (EDA):
+   Uso del 'EventBus' para emitir eventos de dominio trasmutables (ej. 'InvoiceCreatedEvent').
+   Esto permite que módulos completamente independientes (como la integración SOAP del SRI
+   y el servicio de despacho de correos) reaccionen de forma reactiva y no bloqueante.
+
+3.2 Diagrama Conceptual del Flujo de Datos
+------------------------------------------
++-------------------+
+|  Cliente / Frontend |
++---------+---------+
+          |
+     (HTTP REST)
+          v
++-----------------------------+
+|  InvoiceController          |
++--------------+--------------+
+               |
+          (Create DTO)
+               v
++-----------------------------+
+|  InvoiceService             |
++--------------+--------------+
+               |
+          (CommandBus)
+               v
++-----------------------------+       +-------------------------+
+|  CreateInvoiceCommandHandler +-----> |  InvoiceDomainService   |
++--------------+--------------+       +------------+------------+
+               |                                   |
+          (EventBus)                      (InvoiceRepository)
+               |                                   v
+               |                             +-------------+
+               |                             | PostgreSQL  |
+               |                             +-------------+
+               +-----------------------+
+                                       |
+        +------------------------------+------------------------------+
+        |                                                             |
+        v                                                             v
++------------------------------------+              +------------------------------------+
+|  InvoiceCreatedEventHandler (SRI)  |              |  InvoiceCreatedEventHandler (Email)|
++-----------------+------------------+              +-----------------+------------------+
+                  |                                                   |
+      (AuthorizationInvoiceService)                         (InvoiceEmailService)
+                  v                                                   v
+      +------------------------+                          +------------------------+
+      | - Generación Clave     |                          | - Código de Barras     |
+      | - InvoiceXmlBuilder    |                          |   (bwip-js)            |
+      | - SignService (XAdES)  |                          | - Puppeteer (PDF RIDE) |
+      | - SoapService (SRI WS) |                          | - Nodemailer (SMTP)    |
+      +-----------+------------+                          +-----------+------------+
+                  |                                                   |
+                  v                                                   v
+           SRI WEB SERVICES                                    CORREO DEL CLIENTE
+      (Recepción & Autorización)                              (Adjuntos: XML + PDF)
+
+3.3 Estructura Detallada por Capas
+----------------------------------
+A) Capa de API / Presentación:
+   - 'src/invoice/api/controllers/invoice.controller.ts': Exposición de endpoints REST
+     (/invoices, /invoices/:id, /invoices/send-email/:id, /invoices/authorize).
+   - 'src/customer/api/controllers/customer.controller.ts': Endpoints para gestión de clientes.
+   - 'src/inventory/item/api/controllers/item.controller.ts': Endpoints para ítems y productos.
+   - 'src/integrations/sri/api/controllers/ats.controller.ts': Descarga de XML/Excel del ATS.
+   - Decoradores Swagger para autogeneración de especificación OpenAPI en '/documentation'.
+
+B) Capa de Dominio y Aplicación:
+   - Comandos: 'CreateInvoiceCommand', 'UpdateInvoiceCommand', 'DeleteInvoiceCommand',
+     'AuthorizeInvoiceCommand', 'SendEmailInvoiceCommand'.
+   - Consultas: 'FindAllInvoiceQuery', 'FindOneInvoiceQuery'.
+   - Eventos: 'InvoiceCreatedEvent'.
+   - Manejadores (Handlers): 'CreateInvoiceCommandHandler', 'AuthorizeInvoiceCommandHandler',
+     'InvoiceCreatedEventHandler'.
+   - Servicios de Dominio: 'InvoiceDomainService', 'InvoiceManager', 'AtsService'.
+
+C) Capa de Persistencia y Base de Datos:
+   - Basada en TypeORM y PostgreSQL.
+   - Entidades principales: 'Invoice', 'InvoiceItem', 'Customer', 'Item', 'Category', 'Tenant'.
+   - Repositorios: 'InvoiceRepository', 'CustomerRepository', 'ItemRepository', 'CategoryRepository'.
+   - Migraciones: Directorio 'lib/db/migrations' para control de versiones del esquema relacional.
+
+D) Capa de Integración Externa:
+   - 'src/voucher/domain/services/sign.service.ts': Criptografía PKCS#12 y firma XAdES-BES.
+   - 'src/voucher/domain/services/soap.service.ts': Clientes SOAP para el SRI.
+   - 'src/integrations/sri/domain/builders/invoice-xml.builder.ts': Construcción del XML.
+   - 'src/email/domain/services/invoice-email.service.ts': Renderizado PDF y despacho SMTP.
+
+E) Núcleo Base Reutilizable ('lib/alfajs'):
+   - Arquitectura base que provee entidades abstractas con campos de auditoría:
+     * 'CreationAuditedEntity': id, creationTime, creatorUserId.
+     * 'ModificationAuditedEntity': lastModificationTime, lastModifierUserId.
+     * 'DeletionAuditedEntity': isDeleted, deletionTime, deleterUserId (soporte para Soft Delete).
+     * 'FullAuditedEntity': Consolida creación, modificación y borrado lógico.
+     * 'IMayHaveTenant': Interfaz de soporte nativo para arquitectura Multi-Inquilino (Multi-Tenant).
+
+3.4 Modelo de Entidades y Base de Datos
+---------------------------------------
+- Tabla 'invoice':
+  * id (UUID, Clave Primaria)
+  * tenant_id (UUID del inquilino)
+  * creation_date (Fecha de emisión)
+  * invoice_number (Secuencial oficial de la factura)
+  * payment_type (Forma de pago según catálogo SRI)
+  * subtotal, total_tax, total, total_paid, to_pay (Montos financieros)
+  * access_key (Clave de acceso de 49 dígitos)
+  * authorization_status (Estado de autorización en SRI)
+  * authorization_message (Mensaje de retorno de la autoridad fiscal)
+  * status (Estado interno del documento)
+  * is_pay, is_deleted (Flags de pago y borrado lógico)
+  * customer_id (Clave foránea referenciando a la tabla 'customer')
+- Tabla 'invoice_item':
+  * id, tenant_id, invoice_id, item_id, quantity, unit_price, subtotal, tax_amount, total.
+- Tabla 'customer':
+  * id, identification (RUC/Cédula), name, email, phone, address, identification_type.
+- Tabla 'item':
+  * id, code, name, description, unit_price, category_id.
+- Tabla 'category':
+  * id, name, description.
+
+
+================================================================================
+4. TECNOLOGÍAS, LIBRERÍAS Y HERRAMIENTAS UTILIZADAS
+================================================================================
+
+4.1 Lenguaje y Entorno de Ejecución
+-----------------------------------
+- Node.js (Versión 20+ LTS): Entorno de ejecución asíncrono y de alto rendimiento.
+- TypeScript (Versión 5.1.3): Tipado estático estricto para garantizar solidez de código.
+
+4.2 Framework de Aplicación y Arquitectura
+------------------------------------------
+- NestJS (Versión 10.0.0): Framework empresarial sobre Express para construcción de microservicios.
+- @nestjs/cqrs (Versión 11.0.3): Implementación nativa de patrones CQRS y EventBus.
+- @nestjs/swagger (Versión 11.4.7): Generación interactiva de documentación OpenAPI.
+- class-validator (0.15.1) & class-transformer (0.5.1): Validación declarativa de DTOs.
+- rxjs (Versión 7.8.1): Manejo de flujos reactivos y programación asíncrona.
+
+4.3 Base de Datos y Persistencia
+--------------------------------
+- PostgreSQL (Versión 16): Sistema de base de datos relacional robusto y transaccional.
+- TypeORM (Versión 1.1.0 / @nestjs/typeorm 11.0.3): ORM para TypeScript y JavaScript.
+- pg (Versión 8.22.0): Driver cliente oficial de PostgreSQL para Node.js.
+
+4.4 Criptografía, Firma Digital y XML
+-------------------------------------
+- node-forge (Versión 1.4.0): Librería criptográfica integral en JavaScript que permite:
+  * Deserialización de archivos PKCS#12 (.p12 / .pfx).
+  * Extracción de certificados X.509 y llaves privadas RSA.
+  * Cálculo de resúmenes criptográficos SHA-1 y codificación Base64 / DER.
+  * Firma digital RSA según el estándar XMLDSig / XAdES-BES.
+- uuid (Versión 14.0.1): Generación de identificadores únicos universales (UUID v4).
+- moment-timezone (Versión 0.6.3): Manejo preciso de zonas horarias ('America/Bogota')
+  exigido en la marca de tiempo de la firma XAdES-BES.
+
+4.5 Protocolo de Comunicación con el SRI
+----------------------------------------
+- soap (Versión 1.10.0): Cliente SOAP para Node.js que procesa archivos WSDL e invoca
+  los métodos remotos 'validarComprobante' y 'autorizacionComprobante' del SRI.
+
+4.6 Generación de Documentos y Gráficos (RIDE & Barcodes)
+---------------------------------------------------------
+- puppeteer (Versión 24): Motor Chromium headless utilizado para compilar y generar
+  fielmente el RIDE en formato PDF con alta fidelidad gráfica.
+- handlebars: Motor de plantillas HTML para la estructura visual del RIDE y correo.
+- bwip-js (Versión 4.11.4): Motor generador de códigos de barras (Code128) para representar
+  la clave de acceso de 49 dígitos en el PDF.
+- stream-buffers (Versión 3.0.3): Manipulación de streams en memoria para descargas de archivos.
+
+4.7 Servicios de Mensajería y Correo
+------------------------------------
+- nodemailer (Versión 9.0.5): Módulo de transporte SMTP para el envío seguro de correos
+  electrónicos con múltiples archivos adjuntos (XML y PDF).
+
+4.8 Infraestructura, Contenedores y Pruebas
+-------------------------------------------
+- Docker & Docker Compose: Orquestación de contenedores para PostgreSQL 16, Redis y RabbitMQ.
+- Jest (Versión 29.5.0): Framework de pruebas unitarias y de integración end-to-end (e2e).
+- ESLint & Prettier: Análisis estático de código y formateo uniforme.
+- Yarn: Gestor de paquetes y dependencias del proyecto.
+
+
+================================================================================
+5. RECURSOS Y REQUISITOS NECESARIOS PARA LA IMPLEMENTACIÓN
+================================================================================
+
+Para implementar, desplegar y operar exitosamente este sistema de Facturación Electrónica,
+se requieren indispensablemente los siguientes recursos:
+
+5.1 Certificado de Firma Electrónica (Archivo .p12 / .pfx)
+----------------------------------------------------------
+- Tipo de Certificado: Archivo de Firma Electrónica en formato PKCS#12 con extensión '.p12'
+  o '.pfx', emitido por una Autoridad de Certificación (AC) acreditada en el Ecuador:
+  * Banco Central del Ecuador (BCE)
+  * Security Data S.A.
+  * ANF Autoridad de Certificación
+  * Consejo de la Judicatura
+  * Uanataca Ecuador, etc.
+- Atributos Técnicos Requeridos:
+  * Debe contener tanto el Certificado Público X.509 como la Llave Privada protegida.
+  * Debe contar explícitamente con la extensión de "Firma Digital" (Key Usage: digitalSignature,
+    OID: 2.5.29.15).
+- Contraseña de la Firma: Clave alfanumérica asignada al momento de la emisión del certificado,
+  necesaria para descifrar el contenedor PKCS#12 en cada firma.
+- Ubicación en el Sistema: El archivo debe ser alojado en el directorio del servidor:
+  'files/alfasoft/<nombre_certificado>.p12'.
+
+5.2 Requisitos Fiscales y del Contribuyente (SRI)
+-------------------------------------------------
+- RUC Activo: Registro Único de Contribuyentes (13 dígitos) en estado activo.
+- Autorización de Comprobantes Electrónicos: Estar habilitado por el SRI para emitir comprobantes
+  electrónicos bajo la modalidad offline (primero en Ambiente de Pruebas, luego en Producción).
+- Establecimiento y Punto de Emisión: Puntos autorizados en el RUC (ejemplo: 001-001).
+- Secuenciales de Facturación: Asignación controlada de secuencias numéricas (9 dígitos).
+- Clave de Acceso al portal "SRI en Línea": Para consultas tributarias, monitoreo y descarga
+  de comprobantes emitidos y recibidos.
+
+5.3 Servicios Web del SRI (Endpoints WSDL de Pruebas y Producción)
+------------------------------------------------------------------
+El servidor debe tener conectividad saliente a Internet (puertos 80 y 443) hacia las URLs del SRI:
+
+A) Ambiente 1: Pruebas y Certificación (celcer)
+   - Recepción de Comprobantes:
+     https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl
+   - Autorización de Comprobantes:
+     https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl
+
+B) Ambiente 2: Producción (cel)
+   - Recepción de Comprobantes:
+     https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl
+   - Autorización de Comprobantes:
+     https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl
+
+5.4 Recursos de Infraestructura y Servidor
+------------------------------------------
+- Servidor de Aplicación:
+  * Sistema Operativo: Linux (Ubuntu 22.04 LTS / Debian 12 recomendados) o Windows Server.
+  * Memoria RAM: Mínimo 2 GB RAM (Recomendado 4 GB RAM), debido al consumo de memoria que
+    requiere el proceso headless de Chromium/Puppeteer durante la generación de PDFs.
+  * CPU: Mínimo 2 núcleos vCPU.
+  * Almacenamiento en Disco: Al menos 20 GB SSD con permisos de lectura y escritura para la
+    generación persistente de archivos XML, trazas SOAP y documentos temporales.
+- Paquetes de Sistema requeridos en Linux (para Puppeteer):
+  * libnss3, libatk1.0-0, libatk-bridge2.0-0, libcups2, libdrm2, libxkbcommon0,
+    libxcomposite1, libxdamage1, libxfixes3, libxrandr2, libgbm1, libasound2.
+- Base de Datos:
+  * Servidor PostgreSQL 15 o 16 con capacidad de almacenamiento acorde al volumen de facturación.
+- Servicios Opcionales / Escalabilidad (Docker):
+  * Redis (Caché y gestión de bloqueos).
+  * RabbitMQ (Para encolar peticiones de autorización masivas y envíos de correo desacoplados).
+
+5.5 Servicio de Correo Electrónico (SMTP)
+-----------------------------------------
+- Servidor SMTP: Acceso a un servidor de salida de correo:
+  * Google Gmail Workspace (utilizando Contraseña de Aplicación de 16 caracteres).
+  * Servicios transaccionales (Amazon SES, SendGrid, Mailgun, Postmark).
+  * Servidor SMTP corporativo dedicado.
+- Parámetros: Host (ej. smtp.gmail.com), Puerto (587 TLS o 465 SSL), Usuario y Contraseña segura.
+
+5.6 Diccionario Completo de Variables de Entorno (.env)
+-------------------------------------------------------
+Para la puesta en marcha, el archivo '.env' en la raíz de 'api-sri' debe contener:
+
+  # Configuración del Servidor HTTP
+  PORT=3000
+
+  # Configuración de Base de Datos PostgreSQL
+  DB_TYPE=postgres
+  DB_URL=postgresql://root:superadmin@localhost:5432/test
+  DB_NAME=test
+
+  # Parámetros del SRI (Servicio de Rentas Internas)
+  SRI_ENVIRONMENT=1                     # 1 = Pruebas / Certificación, 2 = Producción
+  SRI_RUC=1799999999001                 # RUC del emisor (13 dígitos)
+  SRI_CERT_PASSWORD=TuPasswordFirma123  # Contraseña del certificado .p12
+  SRI_RECEPCION_URL=https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl
+  SRI_AUTORIZACION_URL=https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl
+  SRI_IVA_CODIGO_PORCENTAJE=8           # 8 = IVA 15%, 2 = IVA 12%, 0 = IVA 0%
+  SRI_IVA_TARIFA=15                     # Tarifa porcentual aplicada (ej. 15)
+  SRI_CONSUMIDOR_FINAL_MAX_TOTAL=40     # Límite máximo para consumidor final (40.00 USD)
+  SRI_AUTH_POLL_ATTEMPTS=3              # Reintentos de consulta de autorización
+  SRI_AUTH_POLL_DELAY_MS=2500           # Milisegundos entre consultas de autorización
+  SRI_PROCESSING_POLL_ATTEMPTS=10       # Reintentos si la clave está en procesamiento
+  SRI_PROCESSING_POLL_DELAY_MS=4000     # Milisegundos de espera para claves en proceso
+
+  # Notificaciones por Correo Electrónico (SMTP)
+  PRIVATE_EMAIL_USER=tu_correo@gmail.com
+  PRIVATE_EMAIL_PASSWORD=tu_contraseña_de_aplicacion_16_digitos
+
+  # Colas y Caché (Opcionales para entornos distribuidos)
+  REDIS_HOST=localhost
+  REDIS_PORT=6379
+  REDIS_PASSWORD=superadmin
+  REDIS_USERNAME=root
+
+
+================================================================================
+6. CONCLUSIONES Y RECOMENDACIONES DE PUESTA EN PRODUCCIÓN
+================================================================================
+
+1. Nivel de Madurez Técnica:
+   La solución analizada presenta un estándar arquitectónico avanzado. La combinación
+   de NestJS, CQRS y eventos de dominio garantiza que los procesos lentos o susceptibles
+   a fallas externas (como los tiempos de respuesta del SRI o la generación de PDFs) se
+   mantengan desacoplados de la lógica central de persistencia de facturas.
+
+2. Seguridad del Certificado Digital:
+   El archivo '.p12' y su contraseña representan la identidad legal y tributaria de la
+   empresa. Se recomienda que en ambientes de producción:
+   - Los permisos de archivo en Linux sean estrictos ('chmod 400' o 'chmod 600').
+   - La contraseña de la firma nunca sea hardcodeada en el código fuente ni subida a
+     repositorios de control de versiones Git.
+   - Se monitoree la fecha de caducidad del certificado digital para renovarlo oportunamente.
+
+3. Alta Concurrencia y Resiliencia ante Caídas del SRI:
+   Los servicios web del SRI experimentan frecuentemente intermitencias o lentitud en
+   horas pico. Se recomienda aprovechar el contenedor de RabbitMQ ya configurado en
+   'docker-compose.yml' para convertir la autorización del SRI en un proceso de cola de
+   mensajes con reintentos exponenciales y dead-letter queues (DLQ), evitando bloqueos
+   en la capa web.
+
+4. Transición de Ambiente de Pruebas a Producción:
+   Para migrar a producción se requiere únicamente:
+   - Cambiar 'SRI_ENVIRONMENT=2' en el archivo '.env'.
+   - Actualizar las URLs de WSDL a 'https://cel.sri.gob.ec/...'.
+   - Sustituir el certificado de pruebas por el certificado de producción emitido para el RUC emisor.
+   - Ejecutar la migración inicial de base de datos ('yarn typeorm migration:run').
+
+================================================================================
+FIN DEL INFORME TÉCNICO
+================================================================================

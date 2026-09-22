@@ -1,0 +1,402 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN: FASE 2
+FORMULACIÓN DE ANTECEDENTES, VISIÓN, CONTEXTO Y ALCANCE DEL ESTUDIO DE FACTIBILIDAD
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase Ejecutada:  FASE 2: FORMULACIÓN DE ANTECEDENTES, VISIÓN, CONTEXTO Y ALCANCE DEL ESTUDIO
+                 (Conforme a PlanEstudioFactibilidad.txt, directrices.txt y
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf)
+Secciones del    - SECCIÓN 2: ANTECEDENTES DEL PROYECTO
+Formato ESPOCH   - SECCIÓN 3: DESCRIPCIÓN DEL PROYECTO Y SU CONTEXTO
+Desarrolladas:   - SECCIÓN 4: ALCANCE DEL ESTUDIO DE FACTIBILIDAD
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf2.txt
+Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
+Versión:         1.0 Definitiva y Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN, ARTICULACIÓN CON LA FASE 1 Y MARCO DE EJECUCIÓN
+   1.1 Propósito y Vinculación Metodológica
+   1.2 Bases Documentales e Insumos Procesados en la Fase 2
+2. DESARROLLO FORMAL DE LA SECCIÓN 2: ANTECEDENTES DEL PROYECTO
+   2.1 Orígenes de la Necesidad y Diagnóstico Situacional del Sector Optométrico en Riobamba
+   2.2 Análisis Forense y Deficiencias Estructurales del Software Legado Oftalmológico
+       2.2.1 Destrucción y Sobreescritura de la Memoria Evolutiva Clínica
+       2.2.2 Carencia Absoluta de Auditoría, Trazabilidad y No Repudio
+       2.2.3 Desconexión Tributaria y Fricción Operativa con el SRI
+       2.2.4 Falta de Control de Estados en Talleres de Lentes Externos
+       2.2.5 Exposición Crítica a Infracciones de la LOPDP
+   2.3 Visión Estratégica, Escalabilidad y Mantenibilidad del Sistema SGO
+3. DESARROLLO FORMAL DE LA SECCIÓN 3: DESCRIPCIÓN DEL PROYECTO Y SU CONTEXTO
+   3.1 Propósito Fundamental y Objetivos Estratégicos del Software SGO
+   3.2 Catálogo Consolidado de Entregables Principales (Arquitectura de 7 Módulos Funcionales)
+       3.2.1 Módulo 1: Autenticación y Gestión de Usuarios (RBAC y JWT)
+       3.2.2 Módulo 2: Gestión Integral de Pacientes y Expediente Pediátrico Flexible
+       3.2.3 Módulo 3: Historia Clínica, Refracción Dual OD/OI y Preservación Soft Delete
+       3.2.4 Módulo 4: Pedidos al Laboratorio Óptico con Disociación LOPDP
+       3.2.5 Módulo 5: Ventas, Cobros Transaccionales ACID y Arqueo Diario de Caja
+       3.2.6 Módulo 6: Facturación Electrónica SRI (Firma XAdES-BES, SOAP y RIDE PDF)
+       3.2.7 Módulo 7: Asistente Inteligente Operativo "Chatbot con los Datos" (Solo Lectura)
+   3.3 Contexto Organizacional y Cultural de Óptica Vista Visión
+       3.3.1 Perfil Operativo del Establecimiento de Estudio
+       3.3.2 Flujo Asistencial y Rutina Cotidiana
+       3.3.3 Dinámica Cultural y Transición hacia la Digitalización Segura
+   3.4 Identificación y Caracterización de Entes Externos e Interesados (Stakeholders)
+       3.4.1 Servicio de Rentas Internas (SRI)
+       3.4.2 Ministerio de Salud Pública (MSP)
+       3.4.3 Laboratorios y Talleres Ópticos Industriales Tercerizados
+       3.4.4 Pacientes Titulares de Datos de Salud Visual
+       3.4.5 Estamento Académico de Titulación (ESPOCH)
+4. DESARROLLO FORMAL DE LA SECCIÓN 4: ALCANCE DEL ESTUDIO DE FACTIBILIDAD
+   4.1 Resultados Esperados del Estudio de Factibilidad
+   4.2 Actividades Metodológicas Principales
+   4.3 Procedimiento de Aprobación Formal y Aval de las Partes
+5. CONCLUSIONES Y DECLARACIÓN DE CIERRE DE LA FASE 2
+
+
+================================================================================
+1. INTRODUCCIÓN, ARTICULACIÓN CON LA FASE 1 Y MARCO DE EJECUCIÓN
+================================================================================
+
+1.1 PROPÓSITO Y VINCULACIÓN METODOLÓGICA
+El presente informe formaliza la ejecución de la FASE 2: FORMULACIÓN DE ANTECEDENTES, 
+VISIÓN, CONTEXTO Y ALCANCE DEL ESTUDIO, conforme a la planificación aprobada en 
+`PlanEstudioFactibilidad.txt`. 
+
+Habiéndose recopilado, auditado y pre-procesado en la Fase 1 (`informeEstudioFactibilidadf1.txt`) 
+la totalidad de insumos empíricos de hardware, los 31 requisitos funcionales, los 11 
+requisitos no funcionales, el presupuesto consolidado actualizado ($11,724.25 USD) y 
+las evidencias normativas, la Fase 2 procede a la redacción formal, rigurosa y definitiva 
+de tres secciones cardinales del formato institucional establecido en `FORMATO DE ESTUDIO 
+DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf`:
+- SECCIÓN 2: Antecedentes del Proyecto.
+- SECCIÓN 3: Descripción del Proyecto y su Contexto.
+- SECCIÓN 4: Alcance del Estudio de Factibilidad.
+
+Estas tres secciones establecen el marco de referencia sustantivo sobre el cual se 
+apoyarán las evaluaciones cuantitativas técnicas (Fase 3), económicas (Fase 4), legales 
+(Fase 5), de recursos (Fase 6), de mercado (Fase 7), operacionales (Fase 8) y temporales 
+(Fase 9), asegurando coherencia conceptual absoluta con las directrices de `directrices.txt`.
+
+1.2 BASES DOCUMENTALES E INSUMOS PROCESADOS EN LA FASE 2
+La redacción de este informe se fundamenta directamente en:
+- `ESTUDIO DE FACTIBILIDAD/directrices.txt` (Líneas 13 a 50: antecedentes, visión, contexto, entregables y alcance).
+- `ANTEPROYECTO/Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.pdf` (Capítulos I y II: planteamiento del problema, justificación y marco teórico).
+- `ENTREVISTAS/informeEntrevistasConsolidado.txt` (Hallazgos de campo y análisis forense del sistema legado).
+- `REQUERIMENTACION/Especificacion de Requisitos_02.txt` (Línea base formal de requerimientos RF-01 a RF-31 y RNF-01 a RNF-11).
+- `FACTURACION ELECTRONICA/InformeImplementacionAppFacturacionElectronica.txt` (Módulo 6: arquitectura API-SRI).
+- `INNOVACION/informePropuestasInnovacion.txt` (Módulo 7: Propuesta 3 Chatbot con los Datos).
+
+
+================================================================================
+2. DESARROLLO FORMAL DE LA SECCIÓN 2: ANTECEDENTES DEL PROYECTO
+================================================================================
+
+A continuación se presenta el desarrollo formal de la SECCIÓN 2 requerida por el estándar institucional:
+
+2.1 ORÍGENES DE LA NECESIDAD Y DIAGNÓSTICO DEL SECTOR OPTOMÉTRICO EN RIOBAMBA
+La optometría en el Ecuador constituye una disciplina fundamental de atención primaria 
+de la salud visual. La Organización Mundial de la Salud (OMS) estima que más del 80% 
+de las discapacidades visuales a nivel global son prevenibles o tratables si se cuenta 
+con diagnósticos refractivos oportunos, prescripciones ópticas exactas y registros 
+clínicos longitudinales confiables.
+
+En la ciudad de Riobamba, capital de la provincia de Chimborazo, operan decenas de 
+consultorios y centros optométricos que atienden a la población urbana y rural de la 
+región central del país. Sin embargo, a través de diversos estudios de campo, sondeos 
+preliminares y entrevistas diagnósticas consolidadas en el Anteproyecto de Titulación 
+y en `informeEntrevistasConsolidado.txt`, se identificó una realidad crítica:
+- La gran mayoría de establecimientos optométricos locales gestionan su práctica asistencial 
+  y comercial mediante sistemas informáticos genéricos no especializados, software desactualizado, 
+  hojas de cálculo electrónicas (Excel) o talonarios físicos de papel.
+- Los sistemas informáticos comerciales que se comercializan en el mercado ecuatoriano suelen 
+  ser programas empaquetados diseñados para tiendas de venta minorista (retail general) que 
+  carecen por completo de la lógica clínica optométrica (registro independiente OD/OI, pasos de 
+  0.25 dioptrías, transposición cilíndrica, agudeza Snellen fraccionaria, distancias nasopupilares 
+  y parámetros biomecánicos de montura).
+- Por su parte, los software clínicos internacionales de oftalmología de alta gama presentan 
+  costos de licenciamiento prohibitivos para microempresas locales (entre $2,500 y $5,000 USD anuales), 
+  no están adaptados a la normativa tributaria del Servicio de Rentas Internas (SRI) del Ecuador 
+  y requieren infraestructura de servidores complejos que no se justifican para consultorios pequeños.
+
+Esta brecha estructural dio origen a la iniciativa de desarrollar el Sistema Informático 
+de Gestión Clínica y Comercial Optométrica (SGO), concebido como una solución nativa, 
+segura y rigurosamente afianzada a la realidad operativa de los centros optométricos ecuatorianos.
+
+2.2 ANÁLISIS FORENSE Y DEFICIENCIAS ESTRUCTURALES DEL SOFTWARE LEGADO OFTALMOLÓGICO
+Para comprender las raíces técnicas que motivan el desarrollo del SGO, el equipo de 
+ingeniería ejecutó una auditoría forense sobre el aplicativo informático en uso dentro de 
+la unidad de estudio (Óptica Vista Visión). Dicho software, de origen peruano y arquitectura 
+monolítica cliente-servidor de escritorio basada en ventanas MDI (Multiple Document Interface) 
+sobre SQL Server, evidenció cinco deficiencias críticas que paralizan la operación y amenazan 
+la seguridad del establecimiento:
+
+2.2.1 Destrucción y Sobreescritura de la Memoria Evolutiva Clínica
+El sistema legado presentaba una falla conceptual gravísima en su diseño relacional: 
+al atender a un paciente recurrente y registrar una nueva refracción, el software actualizaba 
+(comando SQL `UPDATE`) el registro del examen anterior, SOBREESCRIBIENDO las dioptrías 
+previas. Esta deficiencia destruía irreversiblemente el historial evolutivo del paciente, 
+impidiendo al optometrista saber si la miopía o astigmatismo del paciente había progresado, 
+se mantenía estable o si presentaba variaciones atípicas sugestivas de patologías corneales.
+
+2.2.2 Carencia Absoluta de Auditoría, Trazabilidad y No Repudio
+El aplicativo legado carecía en un 100% de bitácoras de auditoría transaccional. No existía 
+registro alguno que indicara qué operador modificó una graduación clínica, a qué hora, desde 
+qué terminal, ni qué usuario eliminó o alteró un recibo de cobro de caja. Ante cualquier 
+reclamo por mala adaptación de lentes o discrepancia financiera en el arqueo diario, era 
+imposible deslindar responsabilidades, vulnerando la subcaracterística de Responsabilidad 
+establecida en la norma ISO/IEC 25010:2023.
+
+2.2.3 Desconexión Tributaria y Fricción Operativa con el SRI
+El software legado no contaba con integración electrónica con los Web Services del SRI. 
+Esto forzaba al personal de Óptica Vista Visión a una doble digitación agotadora: primero 
+registraban la venta en el sistema interno y posteriormente debían ingresar manualmente 
+al portal web "SRI y Yo en Línea" para digitar nuevamente la cédula del cliente, los 
+ítems comercializados, el subtotal y el IVA. Este proceso manual tomaba entre 8 y 12 minutos 
+por paciente, formando filas de espera, provocando errores de digitación y aumentando 
+el riesgo de sanciones tributarias por no emisión inmediata.
+
+2.2.4 Falta de Control de Estados en Talleres de Lentes Externos
+Óptica Vista Visión, al igual que la mayoría de ópticas de Riobamba, terceriza la talla, 
+tratamiento antirreflejo y biselado de lentes oftálmicos con laboratorios industriales 
+radicados en Quito, Guayaquil y Riobamba. En el software legado, las órdenes se enviaban 
+mediante notas manuscritas en papel o mensajes informales de mensajería instantánea. 
+No existía un flujo formal de estados (Pendiente, Enviado, Recibido, Entregado), lo que 
+ocasionaba frecuentes extravíos de lunas, retrasos imprevistos de hasta 8 días sin 
+conocimiento del estado y reclamos airados de clientes insatisfechos.
+
+2.2.5 Exposición Crítica a Infracciones de la LOPDP
+Las órdenes de taller en papel incluían indiscriminadamente nombres completos, diagnósticos 
+oftalmológicos y antecedentes médicos del paciente. Al entregarse a mensajeros y personal 
+de talleres externos, se violaba de forma flagrante el principio de confidencialidad y 
+minimización de datos personales sensibles de salud visual exigido por la Ley Orgánica de 
+Protección de Datos Personales (LOPDP Ecuador), exponiendo al establecimiento a multas severas.
+
+2.3 VISIÓN ESTRATÉGICA, ESCALABILIDAD Y MANTENIBILIDAD DEL SISTEMA SGO
+Frente a las deficiencias del pasado, la visión del proyecto SGO se fundamenta en:
+- Mantenibilidad y Longevidad: Desarrollar una solución construida sobre estándares abiertos 
+  (React 18, Laravel 10, NestJS 10 y PostgreSQL 16) con arquitectura desacoplada, asegurando 
+  que el software perdure a través de futuras actualizaciones tecnológicas sin obsolescencia temprana.
+- Escalabilidad Funcional: Capacidad para incorporar nuevos módulos de forma modular sin 
+  afectar el núcleo transaccional clínico (demostrado fehacientemente con la integración armónica 
+  del microservicio de Facturación Electrónica SRI y el motor conversacional de Inteligencia Artificial).
+- Activo Estratégico Empresarial: Convertir al SGO en el corazón operativo y activo intangible 
+  más valioso de Óptica Vista Visión, automatizando sus procesos críticos, garantizando 
+  inmutabilidad legal y clínica, y posicionando al centro visual como un referente de modernidad y seguridad en Riobamba.
+
+
+================================================================================
+3. DESARROLLO FORMAL DE LA SECCIÓN 3: DESCRIPCIÓN DEL PROYECTO Y SU CONTEXTO
+================================================================================
+
+A continuación se presenta el desarrollo formal de la SECCIÓN 3 requerida por el estándar institucional:
+
+3.1 PROPÓSITO FUNDAMENTAL Y OBJETIVOS ESTRATÉGICOS DEL SOFTWARE SGO
+El propósito primordial del proyecto SGO es diseñar, construir y desplegar una plataforma 
+informática integral de gestión clínica y comercial optométrica basada en metodología 
+ágil Scrum, que erradique la sobreescritura de historiales clínicos, automatice la emisión 
+de comprobantes electrónicos autorizados por el SRI, proporcione asistencia analítica 
+mediante consultas en lenguaje natural ("Chatbot con los datos") y garantice la seguridad, 
+integridad, autenticidad y trazabilidad inmutable de los datos de salud visual conforme al 
+estándar internacional ISO/IEC 25010:2023.
+
+3.2 CATÁLOGO CONSOLIDADO DE ENTREGABLES (ARQUITECTURA DE 7 MÓDULOS FUNCIONALES)
+De acuerdo con la Especificación de Requisitos formalmente aprobada en `Especificacion de 
+Requisitos_02.txt`, el sistema se compone de SIETE MÓDULOS NUCLEARES que abarcan 31 
+Requisitos Funcionales (RF-01 a RF-31):
+
+3.2.1 Módulo 1: Autenticación y Gestión de Usuarios (M1)
+- Entregables:
+  * Sistema de Control de Acceso Basado en Roles (RBAC) con tres perfiles estrictamente 
+    delimitados: Administrador/Propietario, Optometrista y Asistente Comercial (RF-01).
+  * Mecanismo criptográfico de sesiones cliente-servidor basado en tokens JWT (RFC 7519) 
+    con firma HMAC-SHA256 y expiración automática obligatoria tras 20 minutos de inactividad de periféricos (RF-02).
+
+3.2.2 Módulo 2: Gestión Integral de Pacientes (M2)
+- Entregables:
+  * Formulario de filiación demográfica con cálculo dinámico de edad cronológica en años (RF-03).
+  * Ficha clínica flexible para menores de edad (edad < 18 años) sin obligatoriedad de cédula 
+    propia en la primera consulta, permitiendo asignación de código provisional MEN-YYYYMMDD-XXXX (RF-04).
+  * Validador algorítmico Módulo 10 de cédulas de identidad ecuatorianas y barra de búsqueda 
+    predictiva en tiempo real por apellidos o documento para prevenir duplicidades (RF-05).
+  * Repositorio seguro de adjuntos clínicos digitales (PDF, JPG, PNG de hasta 10 MB) con 
+    almacenamiento aislado fuera de la raíz pública web y renombramiento criptográfico UUIDv4 (RF-06).
+
+3.2.3 Módulo 3: Historia Clínica y Graduación (M3)
+- Entregables:
+  * Interfaz de examen refractivo estándar simétrica Ojo por Ojo (OD y OI) con validación 
+    de rangos clínicos: Esferas (-25.00 a +20.00 D), Cilindros negativos obligatorios (0.00 a -10.00 D), 
+    Ejes (0° a 180°) y pasos dióptricos exactos de 0.25 D (RF-07).
+  * Asignación y formateo automático de signo positivo (+) en el campo de Adición de cerca (RF-08).
+  * Captura de agudeza visual fraccionaria lejana y cercana bajo la escala estándar Snellen en pies (20/XX) (RF-09).
+  * Registro milimétrico de Distancia Pupilar (DP), Distancia Nasopupilar monocular (DNP) y alturas de montaje (RF-10).
+  * Parámetros avanzados en formato JSONB para adaptación de lentes progresivos de gama alta 
+    (ángulo pantoscópico, ángulo galvánico y distancia al vértice) (RF-11).
+  * Panel dinámico de comparativa simultánea en pantalla contra la refracción previa del paciente (RF-12).
+  * Registro estructurado de anamnesis, antecedentes patológicos sistémicos y diagnóstico codificado según CIE-10 (RF-13).
+  * Motor de renderizado e impresión de Recetas Ópticas y Certificados de Aptitud Visual Laboral en formato PDF (RF-14).
+  * Preservación de la memoria histórica asistencial mediante borrado lógico inmutable (Soft Delete / `deleted_at`), 
+    prohibiendo la ejecución de comandos SQL destructivos (`DELETE`) sobre historias clínicas (RF-15).
+
+3.2.4 Módulo 4: Pedidos al Laboratorio Óptico (M4)
+- Entregables:
+  * Emisión de órdenes técnicas de confección para talleres externos con disociación de datos personales 
+    (cumplimiento de la LOPDP), incluyendo únicamente graduación, medidas ópticas y tipo de biselado (RF-16).
+  * Catálogo parametrizable de materiales (CR-39, Policarbonato, Alto Índice, Trivex), diseños (Monofocal, 
+    Bifocal, Progresivo) y tratamientos (Antirreflejo verde/azul, Fotocromático, Blue Block) (RF-17).
+  * Máquina de estados finitos que gobierna el ciclo de vida del pedido: PENDIENTE -> ENVIADO AL TALLER 
+    -> RECIBIDO EN ÓPTICA -> ENTREGADO AL CLIENTE, con registro temporal inalterable (RF-18).
+  * Gestión de garantías y rectificaciones de lunas por desadaptación o falla técnica de taller, vinculando 
+    la nueva orden técnica a la orden original sin generar duplicación de cobro al cliente (RF-19).
+
+3.2.5 Módulo 5: Ventas y Cobros Locales (M5)
+- Entregables:
+  * Emisión de comprobantes internos de venta y notas de entrega con numeración secuencial correlativa 
+    y desglose de montos de anticipo y saldos por cobrar (RF-20).
+  * Modelo híbrido de inventario: control agrupado por categoría tarifaria para armazones y monturas, 
+    y control de stock unitario con descuento automático por venta para consumibles y accesorios (RF-21).
+  * Procedimiento de anulación con reversión atómica ACID (PostgreSQL `BEGIN TRANSACTION / COMMIT`) que 
+    restituye simultáneamente el dinero en caja y devuelve las existencias físicas al inventario (RF-22).
+  * Panel de arqueo y cierre diario de caja con conciliación en tiempo real de pagos en efectivo y transferencias (RF-23).
+
+3.2.6 Módulo 6: Facturación Electrónica SRI (M6) — [NUEVO REQUISITO INCORPORADO]
+- Entregables:
+  * Generador de comprobantes de Factura en formato XML oficial conforme al esquema XSD v1.1.0 del SRI 
+    y cálculo algorítmico de la Clave de Acceso de 49 dígitos con ponderador Módulo 11 (RF-24).
+  * Motor criptográfico de Firma Digital Avanzada XAdES-BES (enveloped) con soporte para certificados 
+    digitales en formato PKCS#12 (.p12 / .pfx) emitidos en Ecuador (BCE, Security Data, ANF) (RF-25).
+  * Cliente de comunicación asíncrona sobre protocolo SOAP para los Web Services oficiales del SRI:
+    `RecepcionComprobantesOffline` y `AutorizacionComprobantesOffline`, con colas de contingencia y reintentos (RF-26).
+  * Renderizador de RIDE (Representación Impresa de Documento Electrónico) en PDF con incrustación 
+    de código de barras Code128 de la clave de acceso (vía Puppeteer/bwip-js) y despacho automático 
+    al correo del cliente mediante transporte SMTP con archivos XML y PDF adjuntos (RF-27).
+
+3.2.7 Módulo 7: Asistente Inteligente Operativo "Chatbot con los Datos" (M7) — [INNOVACIÓN INCORPORADA]
+- Entregables:
+  * Interfaz conversacional integrada en el Dashboard del SGO para consultas operativas en lenguaje natural 
+    sobre caja diaria, existencias de armazones y estado de órdenes en talleres externos (RF-28).
+  * Mecanismo de blindaje inviolable de solo lectura (Read-Only Guard): el asistente se conecta a 
+    PostgreSQL mediante un usuario restringido con privilegios exclusivos de `GRANT SELECT`, imposibilitando 
+    cualquier modificación accidental o alucinación sobre datos de salud o dinero (RF-29).
+  * Filtro estricto de autorización por roles (RBAC) en las respuestas del chat, vetando que el perfil 
+    Asistente acceda a métricas financieras o historiales clínicos confidenciales (RF-30).
+  * Arquitectura híbrida Dual-Mode: Modo Autónomo LAN Offline (operativo al 100% sin internet mediante 
+    enrutador léxico-sintáctico determinístico) y Modo Aumentado Online (conexión a LLM), registrando 
+    cada consulta en la tabla inmutable `audit_logs` (RF-31).
+
+3.3 CONTEXTO ORGANIZACIONAL Y CULTURAL DE ÓPTICA VISTA VISIÓN
+Para garantizar la pertinencia del diseño, el estudio de factibilidad se contextualiza en la realidad 
+del establecimiento beneficiario:
+- Identificación: Óptica Vista Visión, establecimiento privado de salud visual ubicado en el sector 
+  comercial céntrico de Riobamba.
+- Perfil Asistencial y Carga Operativa:
+  * Atiende un promedio de 5 a 10 pacientes diarios (entre 150 y 250 atenciones al mes).
+  * Cuenta con dos profesionales: el Propietario (quien ejerce como Optometrista Principal y Administrador) 
+    y una Optometrista Auxiliar encargada de la atención a pacientes y recepción comercial.
+  * La unidad dispone de un consultorio optométrico equipado con foróptero manual, proyector de optotipos, 
+    caja de pruebas, retinoscopio, oftalmoscopio y lensómetro digital, además de un área de mostrador para armazones.
+- Cultura Organizacional:
+  * El negocio se sustenta en la confianza, el prestigio profesional y la relación personalizada y cercana con el paciente.
+  * Existe una alta aversión a sistemas lentos o pantallas engorrosas que interrumpan el contacto visual con el paciente.
+  * La adopción de la solución está asegurada por el involucramiento activo del propietario como Product Owner 
+    desde las fases preliminares de levantamiento de requisitos.
+
+3.4 IDENTIFICACIÓN Y CARACTERIZACIÓN DE ENTES EXTERNOS E INTERESADOS (STAKEHOLDERS)
+El sistema SGO interactúa directamente con cinco actores externos:
+1. Servicio de Rentas Internas (SRI): Entidad tributaria gubernamental receptora de los comprobantes 
+   XML firmados. Exige disponibilidad del esquema v1.1.0, respuesta SOAP y entrega del RIDE.
+2. Ministerio de Salud Pública (MSP): Autoridad rectora de salud que regula la obligatoriedad de 
+   la historia clínica (Acuerdo 030-2020), la codificación CIE-10 y la confidencialidad de datos.
+3. Laboratorios Ópticos Industriales Externos: Talleres tercerizados de talla y biselado (ubicados en Quito, 
+   Guayaquil y Riobamba). Receptores de las órdenes técnicas de confección desprovistas de datos sensibles.
+4. Pacientes: Usuarios finales del servicio y titulares de los datos de salud visual amparados por la LOPDP. 
+   Receptores de recetas ópticas digitales y facturas electrónicas en su correo.
+5. Estamento Académico ESPOCH: Dirección de Titulación de la Carrera de Software, Tribunal Evaluador y 
+   comunidad politécnica, quienes velan por la calidad metodológica, el rigor científico y el cumplimiento del marco Scrum.
+
+
+================================================================================
+4. DESARROLLO FORMAL DE LA SECCIÓN 4: ALCANCE DEL ESTUDIO DE FACTIBILIDAD
+================================================================================
+
+A continuación se presenta el desarrollo formal de la SECCIÓN 4 requerida por el estándar institucional:
+
+4.1 RESULTADOS ESPERADOS DEL ESTUDIO DE FACTIBILIDAD
+Conforme a las directrices institucionales de `ESTUDIO DE FACTIBILIDAD/directrices.txt` (líneas 44-50), 
+el presente estudio tiene por alcance entregar una evaluación estructurada, objetiva y reproducible 
+de los factores técnicos, económicos, legales, operacionales, temporales, de mercado y de recursos 
+que inciden en el éxito o fracaso del proyecto SGO.
+
+Los resultados específicos que se obtienen del estudio comprenden:
+1. Reducción Sistemática de la Incertidumbre: Disponer de análisis cuantitativos de hardware, métricas de 
+   red y presupuestos auditados que permitan tomar decisiones fundamentadas antes del desarrollo extensivo.
+2. Certificación de Factibilidad Técnica: Demostrar que los recursos computacionales disponibles 
+   (especialmente el equipo AMD Ryzen 5 9600X con 16 GB RAM) soportan holgadamente la arquitectura de 
+   microservicios y los requerimientos de staging, y que el escenario en la nube (`SERV_PRODUCCION`) es técnicamente viable.
+3. Validación de Viabilidad Financiera: Demostrar que el presupuesto consolidado de $11,724.25 USD 
+   es financiable al 100% por los proponentes, y que la óptica obtiene un beneficio anual de $2,820.00 USD 
+   con un período de recuperación inferior a 40 días.
+4. Blindaje Jurídico: Evidenciar que la arquitectura disociada cumple con la LOPDP y que el módulo SRI 
+   satisface la normativa de comprobantes electrónicos v1.1.0, descartando litigios o sanciones fiscales.
+5. Autorización Formal del Proyecto: Servir de documento habilitante y base contractual vinculante 
+   para la aprobación del inicio de los Sprints de desarrollo por parte de la ESPOCH y Óptica Vista Visión.
+
+4.2 ACTIVIDADES METODOLÓGICAS PRINCIPALES
+Para alcanzar los resultados esperados, el estudio de factibilidad ejecuta las siguientes actividades:
+- Actividad A1: Auditoría forense de los diagnósticos de hardware DxDiag de las estaciones de trabajo de los investigadores.
+- Actividad A2: Análisis de compatibilidad arquitectónica del stack tecnológico (React, Laravel, NestJS, PostgreSQL).
+- Actividad A3: Costeo financiero de licencias, infraestructura cloud, firma electrónica y estimación de ahorros operativos.
+- Actividad A4: Evaluación del cumplimiento de la LOPDP, resoluciones del SRI y normativas del MSP.
+- Actividad A5: Diagnóstico del mercado de software optométrico en Riobamba y diseño de la estrategia de entregas continuas con el Owner.
+- Actividad A6: Mapeo de flujos asistenciales y diseño del plan de gestión del cambio y capacitación en consultorio.
+- Actividad A7: Modelado del cronograma de 4 Sprints quincenales, cálculo de la ruta crítica y análisis de holguras en 18 semanas.
+
+4.3 PROCEDIMIENTO DE APROBACIÓN FORMAL
+El Estudio de Factibilidad se somete al siguiente protocolo formal de aprobación:
+1. Revisión Técnica de Pares: Verificación mutua entre Omar Figueroa (Backend/Seguridad/Presupuesto) 
+   y Alexander Villalva (Frontend/UX/Mercado/Operaciones).
+2. Revisión y Aprobación del Product Owner: Sesión presencial de revisión con el Propietario de Óptica 
+   Vista Visión, evaluando el encaje operacional y los compromisos de validación quincenal.
+3. Revisión Metodológica y Supervisión de Calidad: Evaluación formal a cargo del Director de Titulación 
+   (Ing. Jorge Menéndez) y Asesor Académico (Ing. Julio Santillán).
+4. Firma del Acta de Aprobación: Estampado formal de firmas de las cuatro partes en la Sección 12 del 
+   documento, formalizando el inicio oficial de la construcción del software.
+
+
+================================================================================
+5. CONCLUSIONES Y DECLARACIÓN DE CIERRE DE LA FASE 2
+================================================================================
+
+1. La Fase 2 ha sido completada en su totalidad, desarrollando con exhaustivo rigor académico y 
+   técnico las Secciones 2 (Antecedentes), 3 (Descripción del Proyecto y Contexto) y 4 (Alcance 
+   del Estudio de Factibilidad) del formato institucional de la ESPOCH.
+2. La caracterización de los antecedentes evidencia que la problemática de Óptica Vista Visión 
+   no es un caso aislado, sino el reflejo de una deficiencia estructural en el sector optométrico 
+   de Riobamba provocada por el uso de sistemas legados obsoletos que destruyen la historia clínica del paciente.
+3. La descripción de los 7 módulos funcionales integra de forma armónica la Facturación Electrónica 
+   con el SRI y la innovación del Asistente Inteligente ("Chatbot con los datos"), estableciendo 
+   con precisión las fronteras operativas del sistema y sus relaciones con entes externos (SRI, MSP, talleres).
+4. El alcance del estudio define resultados tangibles y medibles que garantizan la reducción de la 
+   incertidumbre técnica y económica, habilitando de manera inmediata la ejecución de la Fase 3 
+   (Evaluación de Factibilidad Técnica y de Infraestructura).
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE EJECUCIÓN — FASE 2
+================================================================================

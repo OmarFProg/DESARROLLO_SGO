@@ -4,7 +4,7 @@ FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
 CARRERA DE SOFTWARE
 TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
 ================================================================================
-PLAN POR FASES PARA EL DESARROLLO DE REQUISITOS
+PLAN POR FASES PARA EL DESARROLLO DE REQUISITOS (VERSIÓN 2.0 ACTUALIZADA)
 SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
 ================================================================================
 
@@ -12,88 +12,165 @@ DOCUMENTO DE PLANIFICACIÓN Y GESTIÓN DE REQUISITOS
 Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
                  utilizando la metodología ágil Scrum, garantizando la seguridad 
                  de los datos de salud visual.
-Autores:         - Figueroa Díaz, Omar Santiago (Backend / Seguridad)
-                 - Villalva Dumancela, Alexander Rafael (Frontend / Usabilidad)
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
 Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
-Documentos base: - informeEntrevistasConsolidado.txt
-                 - Especificacion de Requisitos_01.txt (IEEE Std 830-1998)
+Documentos base: - informeEntrevistasConsolidado.txt (Entrevistas de Elicitación)
+                 - Especificacion de Requisitos_01.txt (Línea Base Inicial IEEE 830)
+                 - InformeImplementacionAppFacturacionElectronica.txt (API SRI NestJS)
+                 - informePropuestasInnovacion.txt (Propuesta 3: Chatbot con los Datos)
                  - Anteproyecto de Titulación ESPOCH (Alexander Villalva & Omar Figueroa)
                  - Orden_Metodologico_Implementacion_Sistema.txt
-                 - CasosUsoTeoria.txt (UML - Técnicas de Elicitación)
+                 - CasosUsoTeoria.txt (UML - Técnicas de Elicitación y Modelado)
+                 - directrices.txt (Estudio de Factibilidad)
 Ubicación:       DESARROLLO_SGO/REQUERIMENTACION/plaDesarrolloRequisitos.txt
-Versión:         1.0 Definitiva
+Versión:         2.0 Actualizada y Aprobada (Incorporación SRI e Innovación IA)
+Fecha:           Septiembre 2026 / Período Académico 2026 - 2027
 ================================================================================
 
 
 TABLA DE CONTENIDOS
 --------------------------------------------------------------------------------
-1. INTRODUCCIÓN Y OBJETIVOS DEL PLAN DE REQUISITOS
-   1.1 Propósito y Justificación
-   1.2 Alineación con el Objetivo Específico 1 del Anteproyecto
-   1.3 Alcance y Audiencia
+1. INTRODUCCIÓN Y OBJETIVOS DEL PLAN DE REQUISITOS ACTUALIZADO
+   1.1 Propósito y Justificación del Plan v2.0
+   1.2 Alineación con los Objetivos del Anteproyecto de Titulación
+   1.3 Justificación Técnica de los Nuevos Requisitos Incorporados:
+       - Módulo de Facturación Electrónica SRI (API SRI)
+       - Módulo de Innovación: Asistente Inteligente Operativo "Chatbot con los Datos"
+   1.4 Alcance, Audiencia y Vinculación con el Estudio de Factibilidad
 2. MARCO NORMATIVO Y LINEAMIENTOS TÉCNICOS DE REQUERIMENTACIÓN
-   2.1 Estándares Internacionales Aplicables (IEEE Std 830, ISO/IEC/IEEE 29148, ISO/IEC 25010)
-   2.2 Integración con Secure Scrum y S-Tags
-   2.3 Principios del Orden Metodológico de Implementación
-3. FASE 1: ELICITACIÓN Y LEVANTAMIENTO DE REQUISITOS
-   3.1 Identificación de Fuentes de Información y Stakeholders
-   3.2 Estrategia Multimétodo de Elicitación
+   2.1 Estándares Internacionales (IEEE Std 830-1998, ISO/IEC/IEEE 29148, ISO/IEC 25010:2023)
+   2.2 Marco Tributario y Criptográfico (Ficha Técnica SRI v1.1.0, XAdES-BES, PKCS#12)
+   2.3 Directrices de Inteligencia Artificial Segura y No Repudio (Read-Only Guard)
+   2.4 Integración Transversal con Secure Scrum y S-Tags
+   2.5 Principios del Orden Metodológico de Implementación
+3. FASE 1: ELICITACIÓN Y LEVANTAMIENTO DE REQUISITOS EXTENDIDO
+   3.1 Fuentes Primarias de Información y Stakeholders
+   3.2 Estrategia Multimétodo de Elicitación y Validación
    3.3 Análisis Forense del Sistema Legado Oftalmológico
-   3.4 Protocolo de Registro y Consolidación de Entrevistas
-4. FASE 2: ANÁLISIS, REFINAMIENTO Y NEGOCIACIÓN DE ALCANCE
-   4.1 Delimitación del Alcance: Reducción de 17 Módulos a 5 Módulos MVP
-   4.2 Análisis de Dependencias Críticas y Gestión de Riesgos (Exclusión SRI)
-   4.3 Formalización de Reglas de Negocio y Restricciones Clínicas
-5. FASE 3: ESPECIFICACIÓN Y MODELADO FORMAL DE REQUISITOS
-   5.1 Estructuración de la Especificación de Requisitos de Software (SRS)
-   5.2 Catálogo Consolidado de Requisitos Funcionales (RF-01 a RF-23 por Módulo)
-   5.3 Especificación de Requisitos No Funcionales (Seguridad ISO/IEC 25010:2023)
-   5.4 Modelado Formal con Casos de Uso (UML): Transición CUN a CUS
+   3.4 Relevamiento de Necesidades Tributarias y Regulatorias (SRI)
+   3.5 Identificación de Oportunidades de Innovación Asistencial y Operativa
+4. FASE 2: ANÁLISIS, REFINAMIENTO Y NEGOCIACIÓN DE ALCANCE (TRANSICIÓN A LA ARQUITECTURA EXTENDIDA)
+   4.1 Delimitación del Alcance: De 5 Módulos MVP a 7 Módulos Funcionales
+   4.2 Análisis de Dependencias Críticas y Gestión de Riesgos:
+       - Mitigación del Riesgo Tributario SRI mediante Arquitectura Desacoplada y Modo Offline
+       - Mitigación del Riesgo de Alucinación en IA mediante Motor Determinístico y Solo Lectura
+   4.3 Formalización de Reglas de Negocio, Restricciones Clínicas y Fiscales
+5. FASE 3: ESPECIFICACIÓN Y MODELADO FORMAL DE REQUISITOS (RF-01 A RF-31)
+   5.1 Estructuración de la Especificación de Requisitos de Software (SRS v2.0)
+   5.2 Catálogo Consolidado de Requisitos Funcionales por Módulo:
+       - Módulo 1: Autenticación y Gestión de Usuarios (RF-01 a RF-02)
+       - Módulo 2: Gestión de Pacientes (RF-03 a RF-06)
+       - Módulo 3: Historia Clínica y Graduación (RF-07 a RF-15)
+       - Módulo 4: Pedidos al Laboratorio Óptico (RF-16 a RF-19)
+       - Módulo 5: Ventas y Cobros Locales (RF-20 a RF-23)
+       - Módulo 6: Facturación Electrónica SRI (RF-24 a RF-27)
+       - Módulo 7: Asistente Inteligente Operativo "Chatbot con los Datos" (RF-28 a RF-31)
+   5.3 Especificación de Requisitos No Funcionales (ISO/IEC 25010:2023 y S-Tags)
+   5.4 Modelado Formal con Casos de Uso (UML): Paquetes y Relaciones <<include>> / <<extend>>
    5.5 Asignación Sistemática de S-Tags de Seguridad
 6. FASE 4: VERIFICACIÓN, VALIDACIÓN Y GESTIÓN DE CALIDAD DE REQUISITOS
-   6.1 Criterios de Calidad Formal para los Requisitos
+   6.1 Criterios de Calidad Formal para Requisitos de Software
    6.2 Métodos de Inspección y Revisiones Técnicas Formales (FBR)
-   6.3 Matriz de Trazabilidad Bidireccional de Requisitos
-7. FASE 5: GESTIÓN DEL CAMBIO Y TRANSICIÓN AL PRODUCT BACKLOG DE SCRUM
+   6.3 Matriz de Trazabilidad Bidireccional de Requisitos (RF / RNF / Casos de Uso / S-Tags)
+7. FASE 5: GESTIÓN DEL CAMBIO, TRANSICIÓN A SCRUM Y ARTICULACIÓN METODOLÓGICA
    7.1 Transformación de Requisitos en Historias de Usuario con Criterios de Aceptación
-   7.2 Construcción del Product Backlog Inicial y Security Backlog
+   7.2 Construcción del Product Backlog Consolidado y Security Backlog
    7.3 Definición de Terminado con Seguridad (Security Definition of Done - DoD)
-   7.4 Articulación con las Etapas Posteriores (MER, Arquitectura, Sprints, Pruebas)
-8. CRONOGRAMA, MATRIZ RACI Y RESPONSABILIDADES POR FASE
-9. CONCLUSIONES Y DIRECTRICES OPERATIVAS PARA EL EQUIPO
+   7.4 Articulación Vinculante con el Estudio de Factibilidad (Técnica, Económica, Legal y Operativa)
+   7.5 Insumos para las Etapas Posteriores (MER Extendido, Arquitectura Híbrida, Sprints y Pruebas)
+8. CRONOGRAMA, MATRIZ RACI Y RESPONSABILIDADES POR FASE Y SPRINT
+   8.1 Matriz RACI de Responsabilidades
+   8.2 Planificación Temporal y Despliegue en 4 Sprints Quincenales
+9. CONCLUSIONES Y DIRECTRICES OPERATIVAS PARA EL EQUIPO DE INGENIERÍA
 
 
 ================================================================================
-1. INTRODUCCIÓN Y OBJETIVOS DEL PLAN DE REQUISITOS
+1. INTRODUCCIÓN Y OBJETIVOS DEL PLAN DE REQUISITOS ACTUALIZADO
 ================================================================================
 
-1.1 PROPÓSITO Y JUSTIFICACIÓN
-El presente documento establece el plan estructurado por fases para la ingeniería 
-de requisitos del Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO).
-El éxito en el desarrollo de un software asistencial para el sector de la salud visual 
-radica en la precisión, rigor y completitud del proceso de levantamiento, análisis y 
-especificación de requerimientos, previniendo desviaciones funcionales, retrabajo 
-y vulnerabilidades en el manejo de datos de salud protegidos por la ley.
+1.1 PROPÓSITO Y JUSTIFICACIÓN DEL PLAN V2.0
+El presente documento actualiza y amplía de manera integral la planificación de la 
+ingeniería de requisitos para el Sistema Informático de Gestión Clínica y Comercial 
+Optométrica (SGO), evolucionando desde la línea base inicial (versión 1.0) hacia una 
+versión 2.0 enriquecida con dos capacidades estratégicas indispensables para el éxito 
+asistencial, comercial y académico del proyecto:
+1. La integración del Módulo de Facturación Electrónica con los Web Services del 
+   Servicio de Rentas Internas (SRI) del Ecuador, formalizada a través del estudio técnico 
+   y microservicio de referencia consignado en `InformeImplementacionAppFacturacionElectronica.txt`.
+2. La incorporación del Componente de Innovación Tecnológica establecido por el 
+   Stakeholder Técnico (Director de Titulación) y documentado en `informePropuestasInnovacion.txt`, 
+   materializado en la PROPUESTA 3: ASISTENTE INTELIGENTE OPERATIVO "CHATBOT CON LOS DATOS" 
+   (consultas de negocio, inventario y órdenes de taller en lenguaje natural).
 
-1.2 ALINEACIÓN CON EL OBJETIVO ESPECÍFICO 1 DEL ANTEPROYECTO
-El Anteproyecto de Titulación aprobado por la ESPOCH estipula en su primer objetivo 
-específico:
-"Analizar los procesos clínicos y administrativos del sector optométrico mediante 
- levantamiento de requerimientos funcionales y no funcionales de la óptica de estudio, 
- para identificar las deficiencias de integridad, control de acceso y trazabilidad 
- de datos que determinan el alcance del sistema."
-Este plan operacionaliza dicho objetivo mediante una metodología rigurosa y reproducible.
+Esta actualización asegura que el proceso de requerimentación mantenga su rigor formal, 
+evite cualquier desviación incontrolada del alcance (scope creep) y proporcione los insumos 
+técnicos estructurados que exige de forma imperativa el documento de directrices del 
+ESTUDIO DE FACTIBILIDAD (`ESTUDIO DE FACTIBILIDAD/directrices.txt`).
 
-1.3 ALCANCE Y AUDIENCIA
-El plan cubre todas las actividades de ingeniería de requisitos desde la primera 
-interacción con el cliente en la ciudad de Riobamba hasta la formalización de la 
-Especificación de Requisitos de Software (SRS) y la generación del Product Backlog 
-inicial. Está dirigido a:
-- El equipo de desarrollo (desarrolladores backend y frontend).
-- El Director de Titulación y asesor metodológico de la ESPOCH.
-- El Product Owner y personal clínico de Óptica Vista Visión.
+1.2 ALINEACIÓN CON LOS OBJETIVOS DEL ANTEPROYECTO DE TITULACIÓN
+El proyecto de titulación aprobado por la ESPOCH establece los siguientes objetivos rectores:
+- Objetivo General: Desarrollar un sistema informático de gestión clínica optométrica 
+  utilizando la metodología ágil Scrum, garantizando la seguridad de los datos de salud visual.
+- Objetivo Específico 1: Analizar los procesos clínicos y administrativos del sector 
+  optométrico mediante levantamiento de requerimientos funcionales y no funcionales de la 
+  óptica de estudio, para identificar las deficiencias de integridad, control de acceso 
+  y trazabilidad de datos que determinan el alcance del sistema.
+- Objetivo Específico 2: Estudiar la metodología ágil Scrum mediante revisión de literatura 
+  para estructurar el desarrollo de software clínico seguro.
+- Objetivo Específico 3: Construir el sistema informático integrando los componentes clínicos, 
+  comerciales y de seguridad mediante Sprints ágiles.
+- Objetivo Específico 4: Evaluar el cumplimiento de los atributos de seguridad del sistema 
+  mediante la medición de las subcaracterísticas de integridad, responsabilidad y autenticidad 
+  de la norma ISO/IEC 25010:2023.
+
+El presente Plan v2.0 articula el cumplimiento del Objetivo Específico 1 y sienta las bases 
+metodológicas para los Objetivos 3 y 4 al incluir los estándares de firma digital y seguridad 
+de solo lectura para modelos de IA.
+
+1.3 JUSTIFICACIÓN TÉCNICA DE LOS NUEVOS REQUISITOS INCORPORADOS
+
+A. FACTURACIÓN ELECTRÓNICA SRI (ECUADOR):
+- Justificación Operativa: Conforme a las reformas tributarias de la República del Ecuador, 
+  los establecimientos de salud visual están obligados a emitir comprobantes de venta bajo 
+  la modalidad de Facturación Electrónica Offline autorizada por el SRI. Mantener un 
+  sistema aislado con comprobantes meramente internos obligaba a los operadores de Óptica 
+  Vista Visión a una doble digitación manual en el portal del SRI, duplicando los tiempos 
+  de facturación, generando errores de cálculo y aumentando el riesgo de multas tributarias.
+- Justificación Técnica: El equipo de desarrollo ya completó la investigación aplicada, 
+  el diseño arquitectónico y la implementación de un aplicativo especializado de backend 
+  (API SRI en NestJS / TypeScript / PostgreSQL / TypeORM / CQRS / SOAP / XAdES-BES), 
+  demostrado fehacientemente en `InformeImplementacionAppFacturacionElectronica.txt`. La 
+  integración de este módulo desacoplado mediante eventos y endpoints REST permite incorporar 
+  la facturación electrónica al SGO con mínimo riesgo de acoplamiento y control total de contingencias.
+
+B. ASISTENTE INTELIGENTE OPERATIVO "CHATBOT CON LOS DATOS" (PROPUESTA 3 DE INNOVACIÓN):
+- Justificación Académica e Institucional: La dirección del proyecto de titulación en la 
+  ESPOCH estableció como condición indispensable que el software no fuese un CRUD administrativo 
+  convencional, sino que presentase un factor de innovación tecnológica palpable frente a los 
+  sistemas del mercado internacional analizados (Novar AIPD, Lemon Soft DigiPad, SistemaOptica, Quiber).
+- Justificación de Negocio y Seguridad: Tras evaluar seis alternativas en el informe 
+  `informePropuestasInnovacion.txt`, se seleccionó la Propuesta 3 por su equilibrio insuperable 
+  entre alto impacto operacional, viabilidad temporal en Sprints y estricto cumplimiento 
+  con ISO/IEC 25010:2023. El asistente permite a los directivos y operadores consultar 
+  el estado financiero de caja, stock crítico de armazones y estado de pedidos de taller 
+  en lenguaje natural sin exponer la integridad de los datos, ya que opera bajo un 
+  blindaje inviolable de solo lectura (`GRANT SELECT`) y control de acceso RBAC.
+
+1.4 ALCANCE, AUDIENCIA Y VINCULACIÓN CON EL ESTUDIO DE FACTIBILIDAD
+El Plan v2.0 define el marco operativo que guía la redacción de la `Especificacion de 
+Requisitos_02.txt`, la construcción del Product Backlog y la ejecución de los Sprints. 
+Asimismo, actúa como INSUMO DIRECTO para el ESTUDIO DE FACTIBILIDAD en sus dimensiones:
+- Factibilidad Técnica: Evaluación de recursos de hardware/software para Laravel, NestJS, 
+  PostgreSQL y el motor de IA, analizando escenarios de despliegue en servidor local vs. producción.
+- Factibilidad Económica: Determinación de costos de certificados de firma digital (.p12), 
+  consumo de tokens de IA y retorno de inversión por optimización operativa.
+- Factibilidad Legal: Cumplimiento de la Ley Orgánica de Protección de Datos Personales (LOPDP), 
+  Ley de Comercio Electrónico y Resoluciones Tributarias del SRI para comprobantes electrónicos.
+- Factibilidad Operativa y de Mercado: Adopción por parte del personal de Óptica Vista Visión 
+  y diferenciación competitiva frente a soluciones existentes en el mercado de Riobamba.
 
 
 ================================================================================
@@ -101,346 +178,356 @@ inicial. Está dirigido a:
 ================================================================================
 
 2.1 ESTÁNDARES INTERNACIONALES APLICABLES
-El proceso de desarrollo de requisitos se fundamenta técnicamente en tres pilares:
+El proceso de ingeniería de requisitos se rige por tres estándares internacionales:
 1. IEEE Std 830-1998 (Recommended Practice for Software Requirements Specifications):
-   Proporciona la estructura canónica para la elaboración de la SRS, garantizando 
-   que los requisitos sean:
-   - Correctos: Reflejan fielmente lo solicitado por los usuarios.
-   - No ambiguos: Poseen una interpretación unívoca entre desarrolladores y usuarios.
-   - Completos: Incluyen todas las entradas, salidas, respuestas y restricciones.
-   - Consistentes: No presentan contradicciones internas entre requerimientos.
-   - Verificables: Existe un método finito y rentable para comprobar su cumplimiento.
-   - Modificables: Su estructura permite incorporar cambios sin perder coherencia.
-   - Trazables: Se conoce el origen y destino de cada requerimiento.
-2. ISO/IEC/IEEE 29148:2018 (Systems and software engineering — Life cycle processes — 
-   Requirements engineering):
-   Guía los procesos de elicitación, análisis, especificación y validación continua.
+   Garantiza que los requisitos cumplan las ocho características fundamentales: Correctitud, 
+   No ambigüedad, Completitud, Consistencia, Verificabilidad, Modificabilidad, Trazabilidad 
+   y Priorización MoSCoW.
+2. ISO/IEC/IEEE 29148:2018 (Systems and software engineering — Life cycle processes — Requirements engineering):
+   Estructura las etapas formales de elicitación, análisis, especificación, verificación y validación continua.
 3. ISO/IEC 25010:2023 (Systems and software Quality Requirements and Evaluation - SQuaRE):
-   Estructura la evaluación de los Requisitos No Funcionales, focalizándose en la 
-   característica de Seguridad y sus subcaracterísticas:
-   - Autenticidad: Comprobación inequívoca de la identidad de usuarios y procesos.
-   - Integridad: Protección contra la alteración no autorizada de datos refractivos.
-   - Responsabilidad: Registro inmutable de acciones para asegurar el no repudio.
+   Define la taxonomía para Requisitos No Funcionales, concentrándose en:
+   - Seguridad: Autenticidad, Integridad, Responsabilidad (No Repudio) y Confidencialidad.
+   - Rendimiento: Eficiencia temporal en consultas relacionales y latencia de IA < 2.0 s.
+   - Fiabilidad: Tolerancia a caídas de servicios externos mediante colas de contingencia.
+   - Usabilidad: Interacción conversacional intuitiva y accesibilidad ergonómica en consultorio.
 
-2.2 INTEGRACIÓN CON SECURE SCRUM Y S-TAGS
-Siguiendo la propuesta teórica de Pohl y Hof (2015), los requisitos de seguridad no 
-se formulan como anexos aislados, sino que se integran transversalmente en el proceso 
-ágil mediante etiquetas de seguridad (S-Tags):
-- [S-TAG-AUTH]: Requisitos de autenticación, gestión de tokens JWT y control RBAC.
-- [S-TAG-INT]: Requisitos de integridad referencial, validación de dioptrías y no sobreescritura.
-- [S-TAG-RES]: Requisitos de auditoría transaccional, logs inmutables y trazabilidad.
+2.2 MARCO TRIBUTARIO Y CRIPTOGRÁFICO DE FACTURACIÓN ELECTRÓNICA
+La especificación de los requisitos de facturación se somete a la normativa oficial:
+1. Ficha Técnica de Comprobantes Electrónicos Offline (SRI Ecuador, versión 1.1.0):
+   - Estructura obligatoria del XML bajo esquema XSD para Comprobante de Factura.
+   - Algoritmo de generación de Clave de Acceso de 49 dígitos con ponderación Módulo 11.
+   - Regla de negocio para Consumidor Final (máximo 40.00 USD según Resolución NAC-DGERCGC24-00000008).
+   - Catálogo de tarifas de IVA vigentes (Código 8 para tarifa 15%, Código 0 para tarifa 0%).
+2. Estándar de Firma Digital XAdES-BES (XML Advanced Electronic Signatures - Basic Electronic Signature):
+   - Firma enveloped con algoritmo RSA-SHA1 y canonicalización XML-C14N.
+   - Certificado de firma electrónica en formato estándar PKCS#12 (.p12 / .pfx) emitido por 
+     autoridades de certificación acreditadas en Ecuador (BCE, Security Data, ANF, UANATACA).
+3. Protocolo de Transmisión Web Services SOAP:
+   - RecepcionComprobantesOffline: Validación estructural y recepción del comprobante firmado.
+   - AutorizacionComprobantesOffline: Consulta y obtención del número y estado de autorización.
 
-2.3 PRINCIPIOS DEL ORDEN METODOLÓGICO DE IMPLEMENTACIÓN
-Conforme al documento de Orden Metodológico de la planificación, el desarrollo de 
-requisitos no es un evento aislado ni desordenado; actúa como el INSUMO FUNDACIONAL 
-del ciclo de vida:
-  REQUISITOS (SRS) -> CASOS DE USO (UML) -> MER (Base de Datos) -> ARQUITECTURA
-  -> ESQUEMA DE NAVEGACIÓN -> PRODUCT BACKLOG -> SPRINTS Y PRUEBAS.
+2.3 DIRECTRICES DE INTELIGENCIA ARTIFICIAL SEGURA Y NO REPUDIO (READ-ONLY GUARD)
+Para integrar el asistente inteligente sin vulnerar la integridad ni la privacidad clínica:
+1. Blindaje de Solo Lectura (Read-Only Data Isolation):
+   - El motor de procesamiento de lenguaje natural (NLP) se conecta a la base de datos a 
+     través de un rol de PostgreSQL con privilegios estrictos de solo lectura (`GRANT SELECT`). 
+     Tiene vetada por completo la ejecución de sentencias DML de modificación (`INSERT`, 
+     `UPDATE`, `DELETE`) y comandos DDL.
+2. Enfoque Híbrido Dual (Dual-Mode Architecture):
+   - Modo Autónomo LAN Offline: Enrutador determinístico basado en expresiones regulares y 
+     árbol de plantillas SQL parametrizadas, operativo al 100% sin conexión a internet.
+   - Modo Aumentado Online: Conexión opcional mediante API segura a modelos LLM livianos 
+     (ej. Gemini Flash / Claude Haiku) con sanitización previa de prompts para evitar fuga de PII.
+3. Trazabilidad Transaccional del Asistente:
+   - Cada interacción en el chat genera un registro inmutable en `audit_logs` con el 
+     identificador del operador, timestamp UTC, prompt original, consulta SQL generada y tiempo de respuesta.
+
+2.4 INTEGRACIÓN TRANSVERSAL CON SECURE SCRUM Y S-TAGS
+Se adoptan las etiquetas de seguridad semánticas (Pohl y Hof, 2015) para los requerimientos:
+- [S-TAG-AUTH]: Autenticación RBAC, expiración JWT, validación de certificados X.509 de firma.
+- [S-TAG-INT]: Integridad clínica dioptrica, consistencia tributaria en XML, protección de solo lectura en IA.
+- [S-TAG-RES]: Responsabilidad, no repudio criptográfico mediante firma digital y logs inmutables.
+
+2.5 PRINCIPIOS DEL ORDEN METODOLÓGICO DE IMPLEMENTACIÓN
+Conforme a `Orden_Metodologico_Implementacion_Sistema.txt`, la ingeniería de requisitos 
+rige la evolución de todo el proyecto:
+  REQUISITOS SRS v2.0 -> CASOS DE USO UML -> MER EXTENDIDO (BD) -> ARQUITECTURA HÍBRIDA
+  -> ESQUEMA DE NAVEGACIÓN -> PRODUCT BACKLOG -> SPRINTS SCRUM -> EVALUACIÓN ISO 25010.
 
 
 ================================================================================
-3. FASE 1: ELICITACIÓN Y LEVANTAMIENTO DE REQUISITOS
+3. FASE 1: ELICITACIÓN Y LEVANTAMIENTO DE REQUISITOS EXTENDIDO
 ================================================================================
 
-La Fase 1 tiene por objetivo extraer, descubrir y recopilar las necesidades, problemas, 
-expectativas y restricciones del entorno clínico y comercial de Óptica Vista Visión.
+3.1 FUENTES PRIMARIAS DE INFORMACIÓN Y STAKEHOLDERS
+- Stakeholder Primario: Propietario de Óptica Vista Visión / Optometrista Principal (experto de dominio).
+- Stakeholder Secundario: Asistente comercial y auxiliar de recepción de la óptica.
+- Stakeholder Técnico: Ing. Jorge Menéndez Verdecia (Director de Titulación / Scrum Master).
+- Asesor Metodológico: Ing. Julio Santillán Castillo (Revisor Académico).
+- Fuentes Técnicas Implementadas: Código fuente y documentación del sistema API-SRI (`src/invoice`, `src/voucher`).
+- Fuentes de Estado del Arte: Análisis de sistemas de vanguardia internacionales (`informePropuestasInnovacion.txt`).
+- Fuentes Documentales Legales: Ley Orgánica de Protección de Datos Personales (LOPDP), Ficha Técnica SRI v1.1.0.
 
-3.1 IDENTIFICACIÓN DE FUENTES DE INFORMACIÓN Y STAKEHOLDERS
-Para evitar sesgos y vacíos de información, se definen cuatro fuentes primarias:
-- Stakeholder Primario: Propietario de la óptica y Optometrista Principal (experto de dominio).
-- Stakeholder Secundario: Asistente comercial / Optometrista auxiliar (atención y ventas).
-- Artifacts & Software: Sistema legado oftalmológico MDI en uso y base de datos SQL Server.
-- Fuentes Documentales: Hojas físicas de anamnesis, recetas manuscritas, órdenes de 
-  laboratorio en papel, facturas manuales y normativa sanitaria nacional (MSP y LOPDP).
-
-3.2 ESTRATEGIA MULTIMÉTODO DE ELICITACIÓN
-Se definen cuatro técnicas concurrentes de levantamiento:
-1. Entrevistas Semi-estructuradas:
-   - Dinámica abierta para identificar el flujo de pacientes, la cadena de valor, 
-     los tiempos de consulta y los puntos de dolor operativos cotidianos.
-2. Entrevistas Estructuradas con Guion Técnico:
-   - Cuestionarios específicos para parametrizar formatos clínicos: rangos de esfera, 
-     cilindro, eje, signos permitidos, catálogos de armazones y tratamientos de lunas.
-3. Observación Directa y Análisis de Campo:
-   - Registro presencial de los pasos que sigue el paciente desde que ingresa a la 
-     óptica hasta que se le entrega el trabajo y se cobra.
-4. Talleres de Codiseño Técnico:
-   - Sesiones conjuntas entre el equipo de desarrollo (Omar Figueroa y Alexander Villalva), 
-     el Director de Proyecto (Jorge Menéndez) y el Asesor Técnico (Julio Santillán).
+3.2 ESTRATEGIA MULTIMÉTODO DE ELICITACIÓN Y VALIDACIÓN
+1. Entrevistas Semi-estructuradas y Estructuradas: Registradas en `informeEntrevistasConsolidado.txt`.
+2. Observación Directa en Consultorio: Estudio de tiempos de atención, refracción, pedidos y cobros.
+3. Mesas Técnicas de Codiseño Arquitectónico: Sesiones periódicas con los directores de la ESPOCH.
+4. Prototipado y Validación Rápida: Pruebas de integración del microservicio de firma digital y pruebas de prompts de IA.
 
 3.3 ANÁLISIS FORENSE DEL SISTEMA LEGADO OFTALMOLÓGICO
-Actividad crítica ejecutada para identificar debilidades estructurales que el nuevo 
-sistema SGO debe resolver de raíz:
-- Evaluación de Usabilidad: La interfaz MDI (Multiple Document Interface) satura la pantalla 
-  con ventanas flotantes superpuestas que provocan pérdida de foco y cierres inesperados.
-- Evaluación de Integridad: El sistema legado sobreescribía la refracción anterior del 
-  paciente al registrar una nueva consulta, borrando la memoria evolutiva clínica.
-- Evaluación de Auditoría: Carencia absoluta de logs de eventos; imposibilidad de conocer 
-  quién modificó una graduación o quién eliminó un recibo.
-- Evaluación de Dependencias: Dependencia bloqueante de servicios web externos para cobros.
+- Deficiencias Críticas Detectadas:
+  * Sobreescritura destructiva de historiales clínicos anteriores.
+  * Carencia absoluta de trazabilidad y registros de auditoría.
+  * Inexistencia de enlace automatizado con facturación electrónica (doble facturación manual).
+  * Incapacidad para obtener reportes analíticos rápidos de inventario y estado de talleres externos.
 
-3.4 PROTOCOLO DE REGISTRO Y CONSOLIDACIÓN
-Toda información elicitada se documenta de forma estandarizada en actas técnicas y 
-fichas de trabajo, culminando en la redacción del informeEntrevistasConsolidado.txt.
+3.4 RELEVAMIENTO DE NECESIDADES TRIBUTARIAS Y REGULATORIAS (SRI)
+- Necesidad obligatoria de emisión de facturas electrónicas con firma digital XAdES-BES.
+- Requerimiento de emisión y entrega del RIDE en PDF con código de barras Code128 de la clave de acceso.
+- Generación del Anexo Transaccional Simplificado (ATS) en XML y Excel para balances tributarios.
+
+3.5 IDENTIFICACIÓN DE OPORTUNIDADES DE INNOVACIÓN ASISTENCIAL Y OPERATIVA
+- Necesidad de agilizar la consulta de directivos sobre indicadores de venta y pedidos pendientes 
+  mediante una interfaz conversacional amigable que reduzca la curva de navegación en el sistema.
 
 
 ================================================================================
-4. FASE 2: ANÁLISIS, REFINAMIENTO Y NEGOCIACIÓN DE ALCANCE
+4. FASE 2: ANÁLISIS, REFINAMIENTO Y NEGOCIACIÓN DE ALCANCE (ARQUITECTURA EXTENDIDA)
 ================================================================================
 
-La Fase 2 procesa los hallazgos brutos de la elicitación, resolviendo conflictos de interés, 
-filtrando redundancias y delimitando estrictamente el alcance técnico viable.
+4.1 DELIMITACIÓN DEL ALCANCE: DE 5 MÓDULOS MVP A 7 MÓDULOS FUNCIONALES
+La integración de las nuevas necesidades amplía la estructura formal del software a SIETE MÓDULOS:
 
-4.1 DELIMITACIÓN DEL ALCANCE: DE 17 PROCESOS AL MVP DE 5 MÓDULOS
-El levantamiento en el sector reveló 17 procesos funcionales teóricos. Para garantizar 
-un desarrollo riguroso en un marco temporal de 16 semanas, alta cohesión y máxima seguridad, 
-se negoció y pactó la reducción formal al Producto Mínimo Viable (MVP) compuesto por 
-CINCO MÓDULOS NUCLEARES:
-
-+-----------------------------+--------------------------------------------------------+
-| MÓDULO MVP                  | ALCANCE FUNCIONAL CONSOLIDADO                          |
-+-----------------------------+--------------------------------------------------------+
-| M1: Autenticación y         | Control de acceso granular RBAC (Admin, Optometrista,  |
-|     Gestión de Usuarios     | Asistente). Cierre por inactividad. Tokens JWT.        |
-+-----------------------------+--------------------------------------------------------+
-| M2: Gestión de Pacientes    | Registro demográfico, detección inteligente de         |
-|                             | duplicados por cédula y búsqueda autocompletada.       |
-+-----------------------------+--------------------------------------------------------+
-| M3: Historia Clínica y      | Anamnesis, refracción completa OD/OI, codificación     |
-|     Graduación              | CIE-10, emisión de recetas y certificados laborales.   |
-+-----------------------------+--------------------------------------------------------+
-| M4: Pedidos al Laboratorio  | Digitalización de órdenes a talleres ópticos externos, |
-|     Óptico                  | seguimiento de estados (Pendiente/Taller/Recibido).    |
-+-----------------------------+--------------------------------------------------------+
-| M5: Ventas y Cobros         | Facturación interna, gestión de anticipos y saldos     |
-|                             | pendientes, transacciones ACID para cobro seguro.      |
-+-----------------------------+--------------------------------------------------------+
++----+------------------------------------+-----------------------------------------------------+
+| ID | MÓDULO FUNCIONAL                   | ALCANCE CONSOLIDADO (SRS v2.0)                      |
++----+------------------------------------+-----------------------------------------------------+
+| M1 | Autenticación y Usuarios           | RBAC (Admin, Optometrista, Asistente), JWT y logs.  |
+| M2 | Gestión de Pacientes               | Cédula módulo 10, menores flexibles, adjuntos PDF.  |
+| M3 | Historia Clínica y Graduación      | Refracción OD/OI, adición (+), CIE-10, soft-delete. |
+| M4 | Pedidos al Laboratorio Óptico      | Órdenes técnicas aisladas (LOPDP), 4 estados.       |
+| M5 | Ventas y Cobros Locales            | Lotes de armazones, cobros ACID mixtos, caja diaria.|
+| M6 | Facturación Electrónica SRI        | Generación XML v1.1.0, clave acceso 49 dígitos      |
+|    |                                    | módulo 11, firma XAdES-BES, SOAP SRI, RIDE PDF y ATS.|
+| M7 | Asistente Inteligente Operativo    | Chatbot con los datos: consultas en lenguaje        |
+|    | ("Chatbot con los Datos")          | natural sobre ventas, inventario y taller, RBAC,    |
+|    |                                    | solo lectura estricta y modo híbrido LAN/Online.    |
++----+------------------------------------+-----------------------------------------------------+
 
 4.2 ANÁLISIS DE DEPENDENCIAS CRÍTICAS Y GESTIÓN DE RIESGOS
-Se evaluaron y descartaron conscientemente requerimientos que ponían en riesgo el proyecto:
-- Exclusión de Facturación Electrónica SRI: Se posterga como trabajo futuro (RF-FUT-01). 
-  La dependencia directa del WebService del SRI introduce riesgos burocráticos y caídas 
-  del servicio tributario que bloquearían la operación del consultorio y los sprints ágiles.
-- Exclusión de Notificaciones Automáticas por WhatsApp API: Se posterga como RF-FUT-02 
-  debido a costos recurrentes por mensaje y riesgos de suspensión de líneas telefónicas.
-- Exclusión de Migración Masiva Automatizada del Sistema Legado: Debido a la corrupción y 
-  duplicidad de datos del sistema anterior, se adopta carga manual progresiva bajo demanda.
 
-4.3 FORMALIZACIÓN DE REGLAS DE NEGOCIO Y RESTRICCIONES CLÍNICAS
-Se extrajeron reglas imperativas que gobiernan la lógica de los requerimientos:
-- Regla RN-CLI-01 (Formato de Adición): La adición es siempre de valor positivo (+). Si el 
-  usuario ingresa un valor sin signo, el sistema lo interpreta y almacena automáticamente 
-  con signo (+).
-- Regla RN-CLI-02 (Rangos de Refracción): La esfera debe oscilar entre -25.00 y +20.00 D; 
-  el cilindro entre -10.00 y 0.00 D (notación cilíndrica negativa obligatoria); el eje entre 
-  0° y 180° enteros; pasos dióptricos de 0.25 D.
-- Regla RN-CLI-03 (Registro de Menores de Edad): No bloquear la apertura de ficha de menores 
-  por falta de cédula propia; admitir registro con identificación del tutor o código temporal.
-- Regla RN-SEG-01 (Inmutabilidad Clínica): Toda modificación o eliminación de antecedentes 
-  se realiza mediante borrado lógico (Soft Delete) y genera un log con valor previo y nuevo.
+A. MITIGACIÓN DE RIESGOS EN FACTURACIÓN ELECTRÓNICA SRI:
+- Riesgo Identificado: Caídas temporales o intermitencia severa en los Web Services del SRI 
+  que podrían bloquear la operación de cobro y entrega en la óptica.
+- Estrategia de Mitigación:
+  * Arquitectura Desacoplada Basada en Eventos (CQRS & EventBus): La venta local en M5 y la 
+    creación del comprobante en M6 se confirman de forma inmediata en la base de datos local.
+  * La transmisión SOAP al SRI se ejecuta de forma asíncrona a través de un handler reactivo.
+  * Manejo de contingencia offline con reintentos programados (cron jobs y re-autorización manual).
+  * Si el SRI está caído, el sistema emite el comprobante en estado 'PENDIENTE' o 'EN PROCESO' 
+    sin detener la atención al paciente, sincronizándolo una vez restablecido el servicio.
+
+B. MITIGACIÓN DE RIESGOS EN EL ASISTENTE INTELIGENTE OPERATIVO (CHATBOT):
+- Riesgo Identificado: Alucinaciones de modelos de lenguaje, potenciales inyecciones SQL o 
+  modificaciones no autorizadas de registros clínicos y comerciales.
+- Estrategia de Mitigación:
+  * Restricción absoluta de conexión a nivel de PostgreSQL: usuario de BD exclusivo con permisos 
+    únicos de `GRANT SELECT` sobre vistas seguras predefinidas.
+  * Sanitización y validación sintáctica de intenciones: el chatbot jamás concatena texto 
+    directo en sentencias SQL; utiliza consultas parametrizadas precompiladas.
+  * Operatividad local autónoma garantizada (Modo Determinístico LAN) para no depender de 
+    internet ni de APIs comerciales externas para la operativa diaria.
+
+4.3 FORMALIZACIÓN DE REGLAS DE NEGOCIO, RESTRICCIONES CLÍNICAS Y FISCALES
+- RN-CLI-01 a RN-CLI-03: Reglas clínicas de adición positiva forzada, rangos dióptricos y menores sin cédula.
+- RN-SEG-01: Inmutabilidad clínica mediante borrado lógico (Soft Delete) y bitácora obligatoria.
+- RN-SRI-01 (Límite Consumidor Final): Ventas mayores a 40.00 USD exigen obligatoriamente 
+  identificación formal (Cédula/RUC) con datos de comprador válidos según disposición del SRI.
+- RN-SRI-02 (Algoritmo Clave de Acceso): 49 dígitos estructurados con cálculo de dígito verificador 
+  Módulo 11 ponderado de 2 a 7.
+- RN-IA-01 (Inviolabilidad Transaccional del Chatbot): El asistente inteligente tiene prohibido 
+  ejecutar inserciones, actualizaciones, borrados o transferencias de caja bajo cualquier circunstancia.
 
 
 ================================================================================
-5. FASE 3: ESPECIFICACIÓN Y MODELADO FORMAL DE REQUISITOS
+5. FASE 3: ESPECIFICACIÓN Y MODELADO FORMAL DE REQUISITOS (RF-01 A RF-31)
 ================================================================================
 
-La Fase 3 traduce las necesidades negociadas en artefactos formales de ingeniería de 
-software, combinando especificación textual estandarizada y modelado gráfico UML.
+5.1 ESTRUCTURACIÓN DE LA ESPECIFICACIÓN DE REQUISITOS (SRS v2.0)
+La `Especificacion de Requisitos_02.txt` adopta formalmente el estándar IEEE Std 830-1998 
+organizada en cuatro secciones canónicas y tres apéndices de trazabilidad.
 
-5.1 ESTRUCTURACIÓN DE LA SRS (IEEE STD 830-1998)
-La Especificación de Requisitos de Software se organiza conforme al índice canónico:
-1. INTRODUCCIÓN (Propósito, Alcance, Personal Involucrado, Definiciones, Referencias).
-2. DESCRIPCIÓN GENERAL (Perspectiva, Funcionalidad del MVP, Restricciones y Suposiciones).
-3. REQUISITOS ESPECÍFICOS:
-   - 3.1 Requisitos de Interfaces (UI, Hardware, Software, Comunicación).
-   - 3.2 Requisitos Funcionales Nucleares (RF-01 a RF-23).
-   - 3.3 Requisitos No Funcionales (ISO/IEC 25010:2023).
-   - 3.4 Requisitos Legales y Operativos (LOPDP Ecuador).
-4. APÉNDICES (Matriz de Trazabilidad, Catálogo de Requisitos Futuros, Glosario Optométrico).
+5.2 CATÁLOGO CONSOLIDADO DE REQUISITOS FUNCIONALES (31 REQUISITOS)
 
-5.2 CATÁLOGO CONSOLIDADO DE REQUISITOS FUNCIONALES (RF-01 A RF-23)
-- Módulo 1 (Autenticación y Usuarios):
-  * RF-01: Control de Acceso Basado en Roles (RBAC: Admin, Optometrista, Asistente).
-  * RF-02: Gestión Segura de Sesiones y Tokens JWT con expiración automática.
-- Módulo 2 (Gestión de Pacientes):
-  * RF-03: Registro Demográfico y Filiación del Paciente.
-  * RF-04: Manejo Flexible de Fichas para Pacientes Menores de Edad.
-  * RF-05: Búsqueda Predictiva y Prevención de Cédulas Duplicadas.
-  * RF-06: Carga y Almacenamiento Seguro de Adjuntos Clínicos Digitales.
-- Módulo 3 (Historia Clínica y Graduación):
-  * RF-07: Registro de Examen Refractivo Estándar (OD y OS: Esf, Cil, Eje, Adición, DP, AV).
-  * RF-08: Aplicación Automática de Signo Positivo en Adición.
-  * RF-09: Registro Estandarizado de Agudeza Visual Fraccionaria (Escala Snellen en pies).
-  * RF-10: Captura de Parámetros Físico-Ópticos (Distancia y Altura Nasopupilar).
-  * RF-11: Parámetros Avanzados para Lentes Progresivos (Montura y Ángulo Pantoscópico).
-  * RF-12: Comparativa Evolutiva Directa con Refracción Anterior.
-  * RF-13: Registro de Anamnesis, Patologías Sistémicas y Diagnóstico CIE-10.
-  * RF-14: Emisión e Impresión de Certificados de Aptitud Visual Laboral y Recetas.
-  * RF-15: Histórico Clínico Inmutable mediante Papelera Lógica (Soft Delete).
-- Módulo 4 (Pedidos al Laboratorio Óptico):
-  * RF-16: Emisión de Órdenes de Trabajo Técnicas para Laboratorio Externo.
+- MÓDULO 1: AUTENTICACIÓN Y GESTIÓN DE USUARIOS (M1)
+  * RF-01: Control de Acceso Basado en Roles (RBAC: Admin, Optometrista, Asistente) [S-TAG-AUTH-01].
+  * RF-02: Gestión Segura de Sesiones Basadas en JWT con expiración por inactividad [S-TAG-AUTH-02].
+
+- MÓDULO 2: GESTIÓN DE PACIENTES (M2)
+  * RF-03: Registro Demográfico y Filiación del Paciente [S-TAG-INT-01].
+  * RF-04: Gestión Flexible de Menores de Edad sin Cédula Obligatoria.
+  * RF-05: Búsqueda Predictiva y Prevención de Cédulas Duplicadas con Módulo 10 [S-TAG-INT-01].
+  * RF-06: Carga y Repositorio Seguro de Adjuntos Clínicos Digitales [S-TAG-INT-02].
+
+- MÓDULO 3: HISTORIA CLÍNICA Y GRADUACIÓN (M3)
+  * RF-07: Examen Refractivo Estándar Ojo por Ojo (OD/OI: Sph, Cyl, Axis, Add) [S-TAG-INT-01].
+  * RF-08: Formateo y Asignación Automática de Signo Positivo (+) en Adición [S-TAG-INT-01].
+  * RF-09: Captura de Agudeza Visual Fraccionaria en Escala Snellen Pies (20/XX).
+  * RF-10: Registro de Parámetros Físico-Ópticos (DNP y Alturas Focales) [S-TAG-INT-01].
+  * RF-11: Parámetros Avanzados para Lentes Progresivos y Monturas Especiales [S-TAG-INT-02].
+  * RF-12: Comparativa Dinámica en Pantalla contra Refracción Anterior [S-TAG-INT-02].
+  * RF-13: Registro de Anamnesis, Antecedentes Sistémicos y Codificación CIE-10.
+  * RF-14: Emisión e Impresión de Certificados de Aptitud Visual y Recetas Médicas en PDF.
+  * RF-15: Preservación Histórica e Inmutabilidad con Papelera Lógica (Soft Delete) [S-TAG-INT-03].
+
+- MÓDULO 4: PEDIDOS AL LABORATORIO ÓPTICO (M4)
+  * RF-16: Emisión de Órdenes Técnicas de Trabajo con Aislamiento de Datos de Salud [S-TAG-INT-01].
   * RF-17: Catálogo Parametrizable de Materiales de Lunas y Tratamientos Ópticos.
-  * RF-18: Trazabilidad y Transición de Estados del Pedido (Pendiente/En Taller/Recibido).
-  * RF-19: Gestión de Garantías y Rectificaciones por Falla de Adaptación.
-- Módulo 5 (Ventas y Cobros):
-  * RF-20: Catálogo Simplificado de Venta por Lotes de Precio para Armazones.
-  * RF-21: Registro de Cobro Transaccional con Soporte de Pagos Mixtos y Anticipos.
-  * RF-22: Emisión de Comprobantes Internos de Venta y Notas de Retiro.
-  * RF-23: Cierre Diario de Caja y Arqueo Consolidado de Transacciones.
+  * RF-18: Flujo y Máquina de Estados del Pedido (Pendiente, Enviado, Recibido, Entregado) [S-TAG-RES-01].
+  * RF-19: Gestión de Garantías y Rectificaciones de Lunas Derivadas [S-TAG-RES-01].
+
+- MÓDULO 5: VENTAS Y COBROS LOCALES (M5)
+  * RF-20: Emisión de Comprobantes Internos de Venta y Notas de Entrega con Secuencial Correlativo.
+  * RF-21: Gestión Híbrida de Inventario (Lotes por Tarifa de Armazones y Stock Unitario de Consumibles) [S-TAG-INT-02].
+  * RF-22: Anulación con Reversa Atómica ACID de Movimientos de Caja y Existencias [S-TAG-INT-02, S-TAG-RES-01].
+  * RF-23: Cierre Diario de Caja y Arqueo Consolidado de Flujo Financiero en Tiempo Real.
+
+- MÓDULO 6: FACTURACIÓN ELECTRÓNICA SRI (M6) — [NUEVO REQUISITO INCORPORADO]
+  * RF-24: Generación y Estructuración de Factura Electrónica XML v1.1.0 con Clave de Acceso Módulo 11 [S-TAG-INT-04].
+  * RF-25: Firma Electrónica Digital Avanzada XAdES-BES con Certificado PKCS#12 (.p12) [S-TAG-AUTH-03, S-TAG-RES-02].
+  * RF-26: Transmisión y Consulta de Autorización SOAP ante Web Services del SRI (Offline / Reintentos) [S-TAG-INT-05].
+  * RF-27: Generación de RIDE (PDF con Código de Barras Code128) y Notificación al Adquirente vía Correo Electrónico (SMTP).
+
+- MÓDULO 7: ASISTENTE INTELIGENTE OPERATIVO "CHATBOT CON LOS DATOS" (M7) — [NUEVO REQUISITO INCORPORADO]
+  * RF-28: Interfaz Conversacional y Enrutamiento de Intenciones para Consultas Operativas de Negocio, Inventario y Taller.
+  * RF-29: Ejecución Segura de Consultas Parametrizadas de Solo Lectura (Read-Only Guard Inviolable) [S-TAG-INT-06].
+  * RF-30: Control de Acceso Estricto Basado en Roles (RBAC) en Respuestas del Asistente [S-TAG-AUTH-04].
+  * RF-31: Modo Híbrido de Operación (LAN Offline Determinístico / LLM Aumentado Online) con Auditoría Inmutable [S-TAG-RES-03].
 
 5.3 ESPECIFICACIÓN DE REQUISITOS NO FUNCIONALES (ISO/IEC 25010:2023)
-- RNF-SEG-01 (Autenticidad): Cifrado de contraseñas mediante bcrypt (factor de trabajo >= 12) 
-  y validación de claims en tokens JWT para cada solicitud HTTP.
-- RNF-SEG-02 (Integridad): Validación de restricciones en frontend y backend (validación dual), 
-  restricciones CHECK a nivel de motor de base de datos relacional y transacciones ACID.
-- RNF-SEG-03 (Responsabilidad / No Repudio): Pistas de auditoría inmutables (Audit Log) 
-  que registran timestamp UTC, usuario, dirección IP, tipo de operación, valor anterior y nuevo.
-- RNF-REN-01 (Rendimiento): Tiempo de respuesta en búsquedas y guardados < 1.5 segundos.
-- RNF-DIS-01 (Disponibilidad): Operabilidad 99% en red local del consultorio sin depender de nube.
+- RNF-01 a RNF-06: Subcaracterísticas de Autenticidad, Integridad y Responsabilidad base del SGO.
+- RNF-07: Portabilidad y diseño responsivo multiplataforma (Web SPA y PWA).
+- RNF-08: Rendimiento de respuestas clave en menos de 2.0 segundos.
+- RNF-09 [Fiabilidad y Resiliencia SRI]: Desacoplamiento asíncrono con tolerancia a indisponibilidad 
+  de Web Services del SRI mediante colas y transacciones locales seguras.
+- RNF-10 [Seguridad Criptográfica y Firma]: Cuidado y custodia en memoria de contraseñas y certificados 
+  .p12 durante la firma digital XAdES-BES, sin almacenamiento de claves privadas en texto claro.
 
 5.4 MODELADO FORMAL CON CASOS DE USO (UML)
-De acuerdo con la teoría de CasosUsoTeoria.txt y Orden_Metodologico_Implementacion_Sistema.txt:
-1. Mapeo CUN -> CUS: Transformar cada proceso del negocio en casos de uso del software.
-2. Agrupación Jerárquica por Paquetes / Subsistemas:
-   - Paquete 1: <<subsystem>> Autenticación y Seguridad
-   - Paquete 2: <<subsystem>> Gestión de Pacientes
-   - Paquete 3: <<subsystem>> Historia Clínica y Refracción
-   - Paquete 4: <<subsystem>> Pedidos al Laboratorio
-   - Paquete 5: <<subsystem>> Ventas y Cobros
-3. Aplicación Rigurosa de Relaciones UML:
-   - Inclusión (<<include>>): Para validaciones comunes (Validar Cédula, Validar Rangos Dióptricos) 
-     y registro transversal de auditoría (Registrar Log).
-   - Extensión (<<extend>>): Para comportamientos condicionales de excepción (Alertar Progresión 
-     Atípica, Registrar Biselado Especial, Cobrar Anticipo).
-4. Fichas de Especificación Textual: Interacciones numeradas actor <-> sistema en lenguaje natural.
+Se definen dos nuevos paquetes / subsistemas en la arquitectura UML:
+- <<subsystem>> Facturación Electrónica SRI:
+  * CUS-24: Generar Comprobante Electrónico XML y Clave de Acceso (<<include>> Validar Algoritmo Módulo 11).
+  * CUS-25: Firmar Digitalmente Comprobante con Estándar XAdES-BES.
+  * CUS-26: Transmitir Comprobante a Web Services del SRI y Consultar Autorización.
+  * CUS-27: Generar RIDE en PDF y Despachar Notificación al Correo Electrónico del Cliente.
+- <<subsystem>> Asistente Inteligente Operativo ("Chatbot"):
+  * CUS-28: Consultar Métrica de Negocio, Stock o Taller en Lenguaje Natural.
+  * CUS-29: Validar Autorización de Consulta según Rol del Usuario (<<include>>).
+  * CUS-30: Registrar Evento de Consulta en Bitácora de Auditoría (<<include>>).
 
 5.5 ASIGNACIÓN SISTEMÁTICA DE S-TAGS
-Cada requerimiento formalizado en la SRS se etiqueta con su correspondiente identificador de seguridad:
-- [S-TAG-AUTH-01] a [S-TAG-AUTH-04] para requerimientos de autenticidad.
-- [S-TAG-INT-01] a [S-TAG-INT-06] para requerimientos de integridad clínica y transaccional.
-- [S-TAG-RES-01] a [S-TAG-RES-04] para requerimientos de auditoría y trazabilidad inmutable.
+- S-TAG-AUTH: Autenticación de operadores (01, 02), validación de certificado digital X.509 (03) y autorización RBAC en IA (04).
+- S-TAG-INT: Integridad clínica (01, 02, 03), integridad fiscal de esquema XML SRI (04, 05) y aislamiento de solo lectura en base de datos (06).
+- S-TAG-RES: Auditoría general SGO (01), no repudio tributario por firma digital (02) y bitácora de auditoría de consultas de IA (03).
 
 
 ================================================================================
 6. FASE 4: VERIFICACIÓN, VALIDACIÓN Y GESTIÓN DE CALIDAD DE REQUISITOS
 ================================================================================
 
-La Fase 4 asegura que los requisitos especificados representen fielmente las necesidades 
-del usuario (validación) y cumplan con los atributos de calidad técnica formal (verificación).
-
-6.1 CRITERIOS DE CALIDAD FORMAL PARA LOS REQUISITOS
-Cada requisito se evalúa individual y grupalmente mediante la lista de verificación:
-- ¿Es atómico y contiene una sola exigencia comprobable?
-- ¿Evita términos vagos ("rápido", "intuitivo", "seguro") sustituyéndolos por métricas medibles?
-- ¿Presenta trazabilidad directa a una necesidad expresada en las entrevistas?
-- ¿Está asignado a un módulo específico del MVP sin invadir módulos futuros?
+6.1 CRITERIOS DE CALIDAD FORMAL
+Cada requisito incorporado en la versión 2.0 fue sometido a evaluación contra la matriz 
+de criterios: Atomicidad, Coherencia, Independencia, Verificabilidad técnica y No ambigüedad.
 
 6.2 MÉTODOS DE INSPECCIÓN Y REVISIONES TÉCNICAS FORMALES (FBR)
-Se establecen dos ciclos formales de revisión:
-1. Revisión Técnica de Pares (Peer Review):
-   - Omar Figueroa (Backend) y Alexander Villalva (Frontend) inspeccionan cruzadamente 
-     las especificaciones para verificar la coherencia entre contratos de API y pantallas UI.
-2. Revisión con el Director de Titulación y Asesor Técnico:
-   - Evaluación formal junto al Ing. Jorge Menéndez e Ing. Julio Santillán para 
-     validar el cumplimiento de los estándares ESPOCH y la factibilidad del marco Scrum.
-3. Validación con el Product Owner / Cliente:
-   - Sesión de "Walkthrough" con el Propietario de Óptica Vista Visión, leyendo las 
-     fichas de casos de uso para obtener la aprobación formal y firma del documento SRS.
+1. Revisión Técnica de Pares (Peer Review): Verificación cruzada entre Backend (API SRI y consultas IA) 
+   y Frontend (interfaces de usuario y widget de chat).
+2. Inspección con Director y Asesor Académico de la ESPOCH: Validación de la estructura 
+   de microservicios, seguridad criptográfica y aporte de innovación de la Propuesta 3.
+3. Validación con el Product Owner: Confirmación de reglas de negocio para límites de 
+   consumidor final ($40 USD), tarifas de IVA (15%) y preguntas frecuentes del chatbot.
 
-6.3 MATRIZ DE TRAZABILIDAD BIDIRECCIONAL DE REQUISITOS
-Se construye y mantiene la matriz que enlaza los artefactos del ciclo de vida:
-  [Fuente / Entrevista] <---> [Requisito SRS (RF/RNF)] <---> [S-Tag] <--->
-  [Caso de Uso (CUS)] <---> [Historia de Usuario (PB)] <---> [Caso de Prueba]
-Esta matriz previene requisitos "huérfanos" y garantiza que ninguna función implementada 
-carezca de justificación clínica o de negocio.
+6.3 MATRIZ DE TRAZABILIDAD BIDIRECCIONAL
+Garantiza el ciclo de vida continuo:
+  [Entrevistas / Normativa SRI / Informe Innovación] <---> [RF-01 a RF-31 / RNF-01 a RNF-10]
+  <---> [Casos de Uso CUS-01 a CUS-30] <---> [Historias de Usuario Backlog] <---> [Casos de Prueba]
 
 
 ================================================================================
-7. FASE 5: GESTIÓN DEL CAMBIO Y TRANSICIÓN AL PRODUCT BACKLOG DE SCRUM
+7. FASE 5: GESTIÓN DEL CAMBIO, TRANSICIÓN A SCRUM Y ARTICULACIÓN METODOLÓGICA
 ================================================================================
 
-La Fase 5 cierra el puente metodológico entre la Especificación de Requisitos y el 
-marco de desarrollo ágil Scrum, garantizando que los requerimientos se conviertan en 
-artefactos operativos de desarrollo.
+7.1 TRANSFORMACIÓN EN HISTORIAS DE USUARIO
+Los 31 requerimientos funcionales y requisitos no funcionales se desglosan en Historias 
+de Usuario estructuradas con la sintaxis:
+  "COMO [Rol] QUIERO [Acción] PARA [Beneficio]"
+Acompañadas de sus Criterios de Aceptación bajo el estándar Gherkin ("DADO QUE... CUANDO... ENTONCES...").
 
-7.1 TRANSFORMACIÓN DE REQUISITOS EN HISTORIAS DE USUARIO
-Cada Caso de Uso o Requisito Funcional se descompone en Historias de Usuario bajo el formato:
-  COMO [Rol / Actor del sistema]
-  QUIERO [Acción funcional u operativa]
-  PARA [Beneficio clínico, administrativo o de seguridad]
-Acompañadas siempre de sus Criterios de Aceptación estructurados bajo la notación:
-  DADO QUE... CUANDO... ENTONCES...
-
-7.2 CONSTRUCCIÓN DEL PRODUCT BACKLOG Y SECURITY BACKLOG
-- Product Backlog: Pila unificada de trabajo priorizada según valor clínico y comercial.
-- Security Backlog: Siguiendo a Pohl y Hof (2015), los requisitos marcados con S-Tags 
-  se integran directamente en las Historias de Usuario, convirtiendo las restricciones 
-  de integridad, responsabilidad y autenticidad en ítems verificables por el equipo.
+7.2 CONSTRUCCIÓN DEL PRODUCT BACKLOG CONSOLIDADO Y SECURITY BACKLOG
+- Épica 1: Autenticación, Usuarios y Seguridad Central (RF-01, RF-02).
+- Épica 2: Gestión Integral de Pacientes y Expediente Digital (RF-03 a RF-06).
+- Épica 3: Examen Refractivo Clínico y Prescripción Médica (RF-07 a RF-15).
+- Épica 4: Trazabilidad de Pedidos a Laboratorios Externos (RF-16 a RF-19).
+- Épica 5: Ventas de Mostrador, Arqueo de Caja e Inventario Híbrido (RF-20 a RF-23).
+- Épica 6: Emisión, Firma y Autorización de Facturación Electrónica SRI (RF-24 a RF-27).
+- Épica 7: Asistencia Inteligente Operativa con Consultas en Lenguaje Natural (RF-28 a RF-31).
 
 7.3 DEFINICIÓN DE TERMINADO CON SEGURIDAD (SECURITY DEFINITION OF DONE - DoD)
-Ninguna Historia de Usuario se considera "Terminada" (Done) al finalizar un Sprint si no 
-cumple las siguientes condiciones técnicas:
-1. El código frontend y backend ha sido probado funcionalmente.
-2. Cumple con los criterios de aceptación específicos de la historia.
-3. Se verificaron las restricciones de integridad y validación de tipos de datos.
-4. Las operaciones críticas ejecutan el registro inmutable de auditoría (Audit Log).
-5. Las rutas y controladores cuentan con middleware de autenticación y autorización por rol.
-6. El código está integrado en la rama principal del repositorio de control de versiones.
+Una historia de usuario se considera formalmente terminada si y solo si:
+1. Pasa las pruebas unitarias y de integración funcionales.
+2. Cumple con los criterios de aceptación en frontend y backend.
+3. Supera la validación dual de entradas y restricciones de integridad de datos.
+4. En endpoints de facturación, valida el esquema XML y la firma XAdES-BES antes de invocar SOAP.
+5. En el asistente inteligente, se verifica la imposibilidad de ejecutar consultas de modificación (INSERT/UPDATE/DELETE).
+6. Registra el evento correspondiente en la bitácora inmutable `audit_logs`.
+7. Código integrado en el repositorio oficial de GitHub (`OmarFProg/DESARROLLO_SGO`).
 
-7.4 ARTICULACIÓN CON LAS ETAPAS POSTERIORES DEL ORDEN METODOLÓGICO
-Conforme a Orden_Metodologico_Implementacion_Sistema.txt, la finalización de este 
-plan de requisitos habilita de forma inmediata y secuencial:
-- El diseño del MER (Modelo Entidad-Relación) para soportar las entidades identificadas.
-- La arquitectura tecnológica en capas (React PWA + Laravel API REST + PostgreSQL).
-- El diseño del esquema de navegación y prototipado UI.
-- La planificación de Sprints y la asignación formal de tareas de desarrollo.
+7.4 ARTICULACIÓN VINCULANTE CON EL ESTUDIO DE FACTIBILIDAD
+El presente plan y la `Especificacion de Requisitos_02.txt` proporcionan los insumos formales 
+para la ejecución del Estudio de Factibilidad (`ESTUDIO DE FACTIBILIDAD/directrices.txt`):
+- Factibilidad Técnica: Recursos de servidor para API Laravel, microservicio NestJS y motor IA; 
+  escenario de pruebas locales y escenario de producción en la nube.
+- Factibilidad Económica: Presupuesto actualizado de infraestructura, adquisición de firma 
+  electrónica (.p12), costos de contingencia y retorno de inversión de la óptica.
+- Factibilidad Legal: Normativa sanitaria MSP, Ley de Comercio Electrónico, Resoluciones SRI y LOPDP.
+- Factibilidad de Recursos y Scrum: Roles asignados (Omar Figueroa - Backend/SRI, Alexander Villalva - Frontend/IA, 
+  Jorge Menéndez - Scrum Master/Director, Julio Santillán - Asesor Técnico).
+
+7.5 INSUMOS PARA ETAPAS POSTERIORES DEL ORDEN METODOLÓGICO
+Habilita de forma secuencial y coordinada:
+- MER Extendido de Base de Datos: Entidades de facturación (`invoice`, `invoice_item`, `customer`) 
+  y tablas de intenciones/auditoría para el asistente de IA.
+- Arquitectura Tecnológica Híbrida: Frontend React + Backend Laravel + Microservicio NestJS API SRI + PostgreSQL.
 
 
 ================================================================================
-8. CRONOGRAMA, MATRIZ RACI Y RESPONSABILIDADES POR FASE
+8. CRONOGRAMA, MATRIZ RACI Y RESPONSABILIDADES POR FASE Y SPRINT
 ================================================================================
 
-8.1 MATRIZ RACI (Responsable, Aprobador, Consultado, Informado):
+8.1 MATRIZ RACI DE RESPONSABILIDADES:
 +------------------------------------+-------+-------+-------+-------+-------+
-| FASE DE REQUERIMENTACIÓN           | BACK  | FRONT | PO    | DIR   | ASES  |
+| FASE O ACTIVIDAD METODOLÓGICA      | BACK  | FRONT | PO    | DIR   | ASES  |
 |                                    | (OF)  | (AV)  | (Cli) | (JM)  | (JS)  |
 +------------------------------------+-------+-------+-------+-------+-------+
-| F1: Elicitación y Entrevistas      |   R   |   R   |   A   |   I   |   C   |
-| F2: Análisis y Negociación MVP     |   R   |   R   |   A   |   C   |   C   |
-| F3: Especificación IEEE 830 y UML  |   R   |   R   |   C   |   A   |   C   |
+| F1: Elicitación y Relevamiento SRI |   R   |   R   |   A   |   I   |   C   |
+| F2: Análisis y Negociación Alcance |   R   |   R   |   A   |   C   |   C   |
+| F3: Especificación SRS v2.0 (IEEE) |   R   |   R   |   C   |   A   |   C   |
 | F4: Verificación y Validación      |   R   |   R   |   A   |   A   |   A   |
-| F5: Transición a Product Backlog   |   R   |   R   |   A   |   C   |   C   |
+| F5: Product Backlog & Secure DoD   |   R   |   R   |   A   |   C   |   C   |
+| Sprint 1: M1 (Auth) & M2 (Pacientes)|  R   |   R   |   C   |   A   |   I   |
+| Sprint 2: M3 (Historia) & M4 (Lab) |   R   |   R   |   A   |   A   |   I   |
+| Sprint 3: M5 (Ventas) & M6 (SRI)   |   R   |   R   |   A   |   A   |   C   |
+| Sprint 4: M7 (Chatbot IA) & Pruebas|   R   |   R   |   A   |   A   |   A   |
 +------------------------------------+-------+-------+-------+-------+-------+
-Leyenda: 
-- OF: Omar Figueroa (Backend/Seguridad)
-- AV: Alexander Villalva (Frontend/Usabilidad)
+Leyenda:
+- OF: Omar Figueroa (Backend / Ciberseguridad / API SRI)
+- AV: Alexander Villalva (Frontend / UX / Asistente IA)
 - Cli: Product Owner / Optometrista (Óptica Vista Visión)
-- JM: Ing. Jorge Menéndez (Director Titulación / Scrum Master)
-- JS: Ing. Julio Santillán (Asesor Técnico)
+- JM: Ing. Jorge Menéndez (Director de Titulación / Scrum Master)
+- JS: Ing. Julio Santillán (Asesor Académico y Metodológico)
 
-8.2 DISTRIBUCIÓN TEMPORAL SUGERIDA (Primeras 4 Semanas del Proyecto):
-- Semana 1: Ejecución de Fase 1 (Entrevistas, relevamiento del sistema legado y observación).
-- Semana 2: Ejecución de Fase 2 (Negociación, filtrado a 5 módulos MVP y reglas de negocio).
-- Semana 3: Ejecución de Fase 3 (Redacción formal SRS IEEE 830, Casos de Uso y S-Tags).
-- Semana 4: Ejecución de Fases 4 y 5 (Validación formal, firma de SRS y construcción del Backlog).
+8.2 PLANIFICACIÓN TEMPORAL POR SPRINTS QUINCENALES (8 SEMANAS EFECTIVAS):
+- Sprint 1 (Semanas 1-2): Construcción de M1 (Autenticación RBAC, JWT) y M2 (Pacientes, Cédula M10, Menores).
+- Sprint 2 (Semanas 3-4): Construcción de M3 (Historia Clínica, Refracción OD/OI, Soft Delete) y M4 (Pedidos de Laboratorio).
+- Sprint 3 (Semanas 5-6): Construcción de M5 (Ventas, Caja) y M6 (Facturación Electrónica SRI: XML, Firma XAdES, SOAP, RIDE).
+- Sprint 4 (Semanas 7-8): Construcción de M7 (Asistente Inteligente Chatbot con los Datos), Integración Global y Pruebas ISO 25010.
 
-
-================================================================================
-9. CONCLUSIONES Y DIRECTRICES OPERATIVAS PARA EL EQUIPO
-================================================================================
-
-1. El plan por fases estructurado en este documento garantiza que ningún requisito 
-   del sistema SGO sea producto de la improvisación o suposiciones no validadas.
-2. La reducción sistemática de 17 procesos sectoriales a 5 módulos nucleares garantiza 
-   la viabilidad de entrega dentro del cronograma académico de la ESPOCH, eliminando 
-   dependencias bloqueantes como la facturación electrónica SRI.
-3. La articulación de IEEE Std 830 con ISO/IEC 25010:2023 y Secure Scrum asegura que 
-   los requisitos de seguridad (autenticidad, integridad y trazabilidad) sean tratados 
-   como ciudadanos de primera clase desde la especificación hasta la Definition of Done.
-4. El orden metodológico establecido sirve como brújula técnica vinculante para las 
-   siguientes etapas de diseño de base de datos relacional, arquitectura de software 
-   y ejecución de los Sprints de construcción.
 
 ================================================================================
-FIN DEL PLAN DE DESARROLLO DE REQUISITOS
+9. CONCLUSIONES Y DIRECTRICES OPERATIVAS PARA EL EQUIPO DE INGENIERÍA
+================================================================================
+
+1. La formulación del Plan de Requisitos v2.0 resuelve de forma armónica la necesidad 
+   operativa y legal de Facturación Electrónica con el SRI y la exigencia académica de 
+   innovación impuesta por la ESPOCH (Asistente Inteligente "Chatbot con los datos").
+2. La arquitectura desacoplada para el SRI y el blindaje de solo lectura para el asistente 
+   inteligente garantizan que la incorporación de ambas funcionalidades no incremente los 
+   riesgos de disponibilidad ni vulnere la integridad de los datos de salud y finanzas.
+3. El documento de requisitos `Especificacion de Requisitos_02.txt` generado a partir de este 
+   plan se constituye en la línea base contractual y técnica definitiva para el desarrollo 
+   del software y en el insumo obligatorio e indispensable para la redacción inmediata del 
+   Estudio de Factibilidad del proyecto.
+
+================================================================================
+FIN DEL PLAN DE DESARROLLO DE REQUISITOS (VERSIÓN 2.0)
 ================================================================================

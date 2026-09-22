@@ -1,0 +1,377 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN: FASE 10
+SÍNTESIS EJECUTIVA, RECOMENDACIONES Y PROTOCOLO DE APROBACIÓN CONSOLIDADA
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase Ejecutada:  FASE 10: SÍNTESIS EJECUTIVA, RECOMENDACIONES Y PROTOCOLO DE APROBACIÓN
+                 (Conforme a PlanEstudioFactibilidad.txt, directrices.txt y
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf)
+Secciones del    - SECCIÓN 1: RESUMEN EJECUTIVO DEL ESTUDIO DE FACTIBILIDAD
+Formato ESPOCH:  - SECCIÓN 12: RECOMENDACIONES Y APROBACIÓN FINAL
+                 - CONSOLIDACIÓN MAESTRA DE LAS 12 SECCIONES DEL ESTUDIO
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf10.txt
+Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
+Versión:         1.0 Definitiva y Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 10
+   1.1 Propósito y Enfoque de la Fase de Consolidación Final
+   1.2 Objetivos Específicos de la Fase 10
+   1.3 Trazabilidad Transversal de las 10 Fases Ejecutadas
+2. SECCIÓN 1: RESUMEN EJECUTIVO (FORMATO OFICIAL ESPOCH)
+   2.1 Declaración Institucional y Propósito Estratégico del Sistema SGO
+   2.2 Síntesis de la Problemática y Oportunidad de Innovación Tecnológica
+   2.3 Síntesis de Requerimentación y Alcance del Software (7 Módulos, 31 RFs, 11 RNFs)
+   2.4 Síntesis de la Factibilidad Técnica (Hardware Auditado, Microservicios y PWA)
+   2.5 Síntesis de la Factibilidad Económica (Presupuesto $11,724.25, Ahorro $2,824/año, ROI 969.6%)
+   2.6 Síntesis de la Factibilidad Legal (LOPDP, SRI v1.1.0 Offline, XAdES-BES, MSP CIE-10)
+   2.7 Síntesis de la Factibilidad de Recursos y Organización Scrum (Scrum Team y Autosuficiencia)
+   2.8 Síntesis de la Factibilidad de Mercado (Sector Riobamba, Benchmarking, FODA y Acceso Remoto)
+   2.9 Síntesis de la Factibilidad Operacional (Reingeniería As-Is vs To-Be, BPMN y 83.1% de Eficiencia)
+   2.10 Síntesis de la Factibilidad de Tiempo (18 Semanas, 4 Sprints Quincenales y Holgura de 3 Semanas)
+3. SECCIÓN 12: RECOMENDACIONES Y APROBACIÓN (FORMATO OFICIAL ESPOCH)
+   3.1 Dictamen Técnico Consolidado de Viabilidad Multidimensional
+   3.2 Recomendaciones Técnicas y Metodológicas Mandatorias para la Fase de Construcción
+       - Recomendación 1: Operatividad del Servidor Staging AMD Ryzen 5 9600X con Docker
+       - Recomendación 2: Preservación de la Resiliencia Offline en Facturación SRI
+       - Recomendación 3: Blindaje de Solo Lectura (Read-Only Guard) en el Chatbot con IA
+       - Recomendación 4: Disciplina de Validación Preventiva Dióptrica OD/OI
+       - Recomendación 5: Rigor en las Ceremonias Scrum Quincenales y Security DoD
+   3.3 Factores Críticos de Éxito para la Adopción en Óptica Vista Visión
+   3.4 Acta Formal de Aprobación Institucional del Estudio de Factibilidad (Pliego de Firmas)
+4. MATRIZ MAESTRA DE CONSOLIDACIÓN Y TRAZABILIDAD DOCUMENTAL
+   4.1 Índice de Correspondencia entre Fases de Ejecución y Secciones del Formato ESPOCH
+   4.2 Catálogo Consolidado de Artefactos e Informes Técnicos del Estudio de Factibilidad
+   4.3 Declaración Formal de Cierre y Finiquito del Estudio de Factibilidad
+================================================================================
+
+
+================================================================================
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 10
+================================================================================
+
+1.1 PROPÓSITO Y ENFOQUE DE LA FASE DE CONSOLIDACIÓN FINAL
+La Fase 10 constituye el hito de culminación y cierre del Plan de Estudio de Factibilidad 
+para el Sistema de Gestión Optométrica (SGO). Su propósito central es doble: por un lado, 
+formalizar de manera rigurosa las dos secciones marco que abren y cierran el formato 
+institucional de la Escuela Superior Politécnica de Chimborazo (`FORMATO DE ESTUDIO DE FACTIBILIDAD 
+DE UN PROYECTO INFORMÁTICO.pdf`), correspondientes a la **Sección 1 (Resumen Ejecutivo)** y la 
+**Sección 12 (Recomendaciones y Aprobación)**; por otro lado, estructurar la matriz maestra de 
+consolidación que articula los hallazgos de las nueve fases previas en un cuerpo unificado, 
+demostrando de forma contundente e indiscutible que el proyecto reúne las condiciones óptimas 
+de viabilidad para autorizar de inmediato el inicio de la construcción del software.
+
+1.2 OBJETIVOS ESPECÍFICOS DE LA FASE 10
+1. Sintetizar transversalmente los hallazgos técnicos, económicos, jurídicos, organizacionales, 
+   comerciales, operacionales y temporales en el Resumen Ejecutivo oficial (Sección 1).
+2. Formular las recomendaciones técnicas y de ingeniería mandatorias para guiar la construcción 
+   ágil del software y asegurar el cumplimiento de los estándares de calidad fijados (Sección 12).
+3. Formalizar el protocolo de aprobación institucional mediante el acta formal de firmas 
+   (Autores, Director de Titulación, Asesor Técnico y Beneficiario).
+4. Establecer la matriz de correspondencia y trazabilidad que consolida los 10 informes 
+   técnicos generados en un compendio definitivo listo para su presentación y defensa.
+5. Declarar el cierre formal y exitoso del proceso de evaluación de factibilidad.
+
+1.3 TRAZABILIDAD TRANSVERSAL DE LAS 10 FASES EJECUTADAS
+El presente informe sintetiza y consolida la totalidad del trabajo desarrollado a lo largo de:
+- **Fase 1:** Auditoría de hardware, consolidación de requisitos (31 RF / 11 RNF) y presupuesto base.
+- **Fase 2:** Formalización de Antecedentes (Sec. 2), Descripción/Contexto (Sec. 3) y Alcance (Sec. 4).
+- **Fase 3:** Evaluación de Factibilidad Técnica y Arquitectura de Despliegue (Sec. 5).
+- **Fase 4:** Evaluación de Factibilidad Económica, Análisis Costo-Beneficio y ROI (Sec. 6).
+- **Fase 5:** Evaluación de Factibilidad Legal y Cumplimiento Normativo LOPDP/SRI/MSP (Sec. 7).
+- **Fase 6:** Evaluación de Factibilidad de Recursos y Organización Scrum (Sec. 8).
+- **Fase 7:** Evaluación de Factibilidad de Mercado, Benchmarking y Estrategia del Owner (Sec. 9).
+- **Fase 8:** Evaluación de Factibilidad Operacional, Modelado BPMN y Gestión del Cambio (Sec. 10).
+- **Fase 9:** Evaluación de Factibilidad de Tiempo, Cronograma de Sprints y Ruta Crítica (Sec. 11).
+- **Fase 10:** Resumen Ejecutivo (Sec. 1), Recomendaciones y Protocolo de Aprobación (Sec. 12).
+
+
+================================================================================
+2. SECCIÓN 1: RESUMEN EJECUTIVO (FORMATO OFICIAL ESPOCH)
+================================================================================
+
+2.1 DECLARACIÓN INSTITUCIONAL Y PROPÓSITO ESTRATÉGICO DEL SISTEMA SGO
+El Trabajo de Titulación de la Carrera de Software de la Escuela Superior Politécnica de 
+Chimborazo (ESPOCH), titulado "Desarrollo de un sistema informático de gestión clínica 
+optométrica utilizando la metodología ágil Scrum, garantizando la seguridad de los datos 
+de salud visual", surge como una respuesta científica y de ingeniería a las críticas carencias 
+tecnológicas, operativas y legales que experimentan los consultorios optométricos independientes 
+en la ciudad de Riobamba y la Región Central del Ecuador.
+
+El propósito estratégico del Sistema SGO es diseñar, construir e implantar en *Óptica Vista Visión* 
+una plataforma web progresiva (PWA) de alto rendimiento, mantenible y escalable, que unifique 
+en un flujo continuo la gestión demográfica de pacientes, la historia clínica refractiva 
+especializada (OD/OI), la confección técnica de recetas y certificados CIE-10, la emisión 
+disociada de pedidos a talleres ópticos externos bajo la LOPDP, el control de ventas y cobranzas 
+bajo transaccionalidad ACID, la facturación electrónica nativa y automática ante el Servicio de 
+Rentas Internas (SRI v1.1.0 offline con XAdES-BES) y la asistencia operativa inteligente mediante 
+un Chatbot conversacional de solo lectura.
+
+2.2 SÍNTESIS DE LA PROBLEMÁTICA Y OPORTUNIDAD DE INNOVACIÓN TECNOLÓGICA
+El relevamiento de campo evidenció que el establecimiento operaba bajo un sistema de escritorio 
+legado monolítico con arquitectura MDI, cuya deficiencia más grave era la sobreescritura destructiva 
+de los historiales de graduación de los pacientes, imposibilitando la trazabilidad clínica y 
+violando las normas del Ministerio de Salud Pública (MSP). Asimismo, los pedidos al laboratorio 
+se gestionaban en notas físicas de papel carbón o vía WhatsApp exponiendo datos sensibles, y la 
+facturación electrónica dependía de una lenta y tediosa doble digitación en el portal web del SRI.
+
+Frente a este escenario, el proyecto integra dos innovaciones cardinales:
+1. **Facturación Electrónica Nativa Resiliente:** Microservicio desacoplado que genera comprobantes 
+   XML bajo la Ficha Técnica v1.1.0 del SRI, calcula la clave de 49 dígitos con Módulo 11, firma 
+   criptográficamente con certificados PKCS#12 (.p12) mediante XAdES-BES y permite operar en modo 
+   offline local ininterrumpido en red LAN, encolando comprobantes ante caídas de internet.
+2. **Asistente Inteligente Operativo "Chatbot con los Datos":** Canal conversacional que permite 
+   al propietario realizar consultas ágiles de negocio (pedidos pendientes en taller, stock crítico, 
+   ingresos de caja) mediante lenguaje natural, blindado criptográfica y estructuralmente con un 
+   rol de base de datos restringido de solo lectura (`GRANT SELECT`), impidiendo alucinaciones 
+   destructivas y garantizando cero mutabilidad en la persistencia.
+
+2.3 SÍNTESIS DE REQUERIMENTACIÓN Y ALCANCE DEL SOFTWARE (7 MÓDULOS, 31 RFS, 11 RNFS)
+El sistema expande su alcance desde el MVP inicial de 5 módulos hacia una arquitectura 
+robusta de 7 módulos funcionales debidamente especificados bajo el estándar IEEE 830-1998:
+- **M1: Autenticación y RBAC (RF-01, RF-02):** JWT, bloqueo por intentos y 3 roles canónicos.
+- **M2: Gestión de Pacientes (RF-03 a RF-06):** Validación de cédula Módulo 10, menores y adjuntos.
+- **M3: Historia Clínica y Refracción (RF-07 a RF-15):** Examen OD/OI, Snellen pies, regla de adición 
+  para presbicia (>40 años), diagnóstico CIE-10, recetas PDF y preservación por Soft Delete.
+- **M4: Pedidos al Laboratorio Óptico (RF-16 a RF-19):** Órdenes disociadas anónimas (LOPDP Art. 25), 
+  máquina de 4 estados y registro de garantías por rectificación de lunas.
+- **M5: Ventas y Cobros Locales (RF-20 a RF-23):** Lotes de armazones, SKU consumibles, pagos mixtos, 
+  anticipos/saldos, transaccionalidad atómica ACID y arqueo de caja.
+- **M6: Facturación Electrónica SRI (RF-24 a RF-27):** XML v1.1.0, clave 49d M11, firma XAdES-BES, 
+  SOAP SRI, comprobante térmico POS / RIDE PDF y cola offline diferida.
+- **M7: Asistente Inteligente Chatbot (RF-28 a RF-31):** Enrutador local determinístico de consultas 
+  operativas con blindaje Read-Only Guard (`GRANT SELECT`) y auditoría inmutable.
+- **11 Requisitos No Funcionales (RNF-01 a RNF-11):** Alineados estrictamente a las características 
+  de la norma ISO/IEC 25010:2023 y etiquetados bajo el estándar de ciberseguridad Secure Scrum (S-Tags).
+
+2.4 SÍNTESIS DE LA FACTIBILIDAD TÉCNICA
+- **Hardware Auditado:** Se evaluaron las estaciones de trabajo de los desarrolladores. El equipo 
+  `DESKTOP-MO7Q55S` (AMD Ryzen 5 9600X, 6C/12T @ 5.4 GHz, 16 GB RAM DDR5) fue designado como 
+  **Servidor Local de Staging y Pruebas Concurrentes**, capaz de ejecutar Docker, microservicios 
+  y base de datos sin saturación; la estación `DESKTOP-ML70LGD` (Intel Core i5-7200U, 12 GB RAM) 
+  garantiza la codificación transaccional del backend.
+- **Tecnologías Seleccionadas:** Stack moderno, desacoplado y de código abierto sin costos de licencias: 
+  React 18 + Vite + Tailwind CSS (Frontend PWA), Laravel 10 + PHP 8.2 (API Core RESTful), NestJS 10 + 
+  TypeScript (Microservicio API-SRI) y PostgreSQL 16 relacional con transacciones ACID y JSONB.
+- **Escenarios de Despliegue:** Se validaron 3 esquemas: Escenario 1 (Staging en Ryzen 9600X con Docker), 
+  Escenario 2 (Operación Local Óptica en red LAN con resiliencia 99.5% sin internet) y Escenario 3 
+  (Producción Cloud en VPS `SERV_PRODUCCION`). Se emitió el Dictamen de Viabilidad Técnica Plena.
+
+2.5 SÍNTESIS DE LA FACTIBILIDAD ECONÓMICA
+- **Presupuesto Total del Proyecto:** $11,724.25 USD, distribuido en Bloque I: Construcción 
+  ($10,752.50 USD incluyendo honorarios de ingeniería por 4 meses, uso de hardware, software, servicios 
+  y contingencia del 15%) y Bloque II: Explotación ($971.75 USD para infraestructura VPS, soporte y contingencia).
+- **Autofinanciamiento:** El proyecto es 100% autofinanciado por los dos autores ($5,862.13 USD c/u) 
+  como parte de su titulación de grado, requiriendo de la óptica una inversión operativa de solo ~$250.00 USD.
+- **Análisis Costo-Beneficio para Óptica Vista Visión:**
+  * Ahorros Tangibles Cuantificados: **$2,824.00 USD/año** ($1,444.00 en tiempo de facturación SRI, 
+    $1,080.00 en eliminación de lunas fallidas por rectificación y $300.00 en papelería física).
+  * Indicadores Financieros Sobresalientes: **ROI = 969.6%** en el primer año; **Período de Recuperación 
+    (Payback) = 1.12 meses (34 días)**; **VAN a 3 años = +$6,958.42 USD** y **TIR = 1,029.6%**.
+- Se dictaminó una Rentabilidad y Viabilidad Económica Excepcional.
+
+2.6 SÍNTESIS DE LA FACTIBILIDAD LEGAL
+- **LOPDP Ecuador (Ley Orgánica de Protección de Datos Personales):** Cumplimiento estricto del Art. 25 
+  (datos sensibles de salud visual) mediante la disociación automática de identidad en las órdenes de 
+  laboratorio (M4), garantizando que los talleres externos no conozcan la identidad ni diagnósticos del paciente.
+- **Normativa Tributaria del SRI:** Adherencia plena a la Resolución NAC-DGERCGC18-00000233 y a la 
+  Ficha Técnica de Comprobantes Electrónicos v1.1.0; algoritmo Módulo 11 y restricción estricta de 
+  Consumidor Final ($\le \$40.00$ USD).
+- **Ley de Comercio Electrónico:** Firma digital avanzada con certificados PKCS#12 (.p12) bajo estándar 
+  XAdES-BES, asegurando integridad, autenticidad y no repudio legal con plena validez probatoria.
+- **Normativa Sanitaria MSP (Acuerdo 030-2020) y CIE-10:** Historia clínica inmutable con Soft Delete y 
+  codificación de patologías. Dictamen: Cero conflictos jurídicos; blindaje legal integral.
+
+2.7 SÍNTESIS DE LA FACTIBILIDAD DE RECURSOS Y ORGANIZACIÓN SCRUM
+- **Scrum Team del Proyecto:** Product Owner (Propietario / Optometrista de Óptica Vista Visión), 
+  Scrum Master (Ing. Jorge Ariel Menéndez Verdecia), Asesor Metodológico (Ing. Julio Roberto Santillán Castillo) 
+  y Developers (Omar Figueroa Díaz - Backend/SRI/Seguridad y Alexander Villalva Dumancela - Frontend/UX/IA).
+- **Suficiencia y Capacidad:** Velocity proyectada de 25 a 30 SP por Sprint. El equipo es **100% autosuficiente**; 
+  se demostró que **NO se requiere contratar personal externo** ni efectuar gastos onerosos adicionales.
+
+2.8 SÍNTESIS DE LA FACTIBILIDAD DE MERCADO
+- **Diagnóstico Sectorial:** Nicho de 45 a 60 ópticas en Riobamba, donde más del 75% son consultorios 
+  independientes desatendidos por ERPs genéricos (ciegos a la optometría) y software extranjero (incompatible con SRI/LOPDP).
+- **Propuesta de Valor:** Solución todo-en-uno, nativa ecuatoriana, clínicamente validada y sin suscripciones mensuales.
+- **Estrategia del Owner (`directrices.txt`):** Despliegues quincenales (Sprint Reviews) y acceso remoto 
+  continuo al servidor Staging mediante túneles seguros cifrados (*Cloudflare Zero Trust / Ngrok*), 
+  permitiendo al PO validar pantallas desde su tableta fuera del horario de atención.
+
+2.9 SÍNTESIS DE LA FACTIBILIDAD OPERACIONAL
+- **Reingeniería de Procesos:** Modelado BPMN de la cadena de valor completa. Reducción del tiempo total de 
+  ciclo de atención por paciente de **32.5 minutos a 5.5 minutos**, logrando un **incremento del 83.1% en eficiencia operacional**.
+- **Gestión del Cambio (ADKAR):** Plan de capacitación práctica de 12 horas diferenciadas por perfiles RBAC 
+  y guías de escritorio plastificadas de 1 página para consultorio y mostrador.
+- **Resiliencia Operativa:** Continuidad operativa del 99.5% en red local LAN con soporte offline completo.
+
+2.10 SÍNTESIS DE LA FACTIBILIDAD DE TIEMPO
+- **Cronograma de 18 Semanas Académicas (Septiembre 2026 a Enero 2027):** 4 Sprints quincenales 
+  (8 semanas efectivas de construcción ágil entre las Semanas 6 y 13) para implementar los 112 Story Points del sistema.
+- **Ruta Crítica y Amortiguadores:** Existencia de **3 semanas de holgura operativa** (Semanas 14 a 16) 
+  para pruebas de ciberseguridad y *Shadow Testing* en consultorio, protegiendo con absoluta certeza 
+  la fecha de graduación y titulación académica en la Semana 18.
+
+
+================================================================================
+3. SECCIÓN 12: RECOMENDACIONES Y APROBACIÓN (FORMATO OFICIAL ESPOCH)
+================================================================================
+
+3.1 DICTAMEN TÉCNICO CONSOLIDADO DE VIABILIDAD MULTIDIMENSIONAL
+Habiendo evaluado de forma exhaustiva y cuantitativa todas y cada una de las dimensiones 
+metodológicas exigidas por la reglamentación de titulación de la Escuela Superior Politécnica 
+de Chimborazo (FIE - Carrera de Software):
+
+SE DICTAMINA QUE EL PROYECTO DE DESARROLLO DEL SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL 
+OPTOMÉTRICA (SGO) ES PLENAMENTE FACTIBLE, ALTAMENTE RENTABLE, TÉCNICAMENTE SOLVENTE, JURÍDICAMENTE 
+BLINDADO Y OPERACIONALMENTE COMPATIBLE CON EL BENEFICIARIO, RECOMENDÁNDOSE UNÁNIMEMENTE SU APROBACIÓN 
+Y EL INICIO INMEDIATO DE LA FASE DE CONSTRUCCIÓN ÁGIL DEL SOFTWARE.
+
+3.2 RECOMENDACIONES TÉCNICAS Y METODOLÓGICAS MANDATORIAS PARA LA FASE DE CONSTRUCCIÓN
+Para asegurar que el proyecto mantenga los estándares de calidad comprometidos a lo largo 
+del ciclo de vida de desarrollo, el equipo de ingeniería y los directores formulan las siguientes directrices:
+
+1. **Recomendación 1: Centralización y Monitoreo del Entorno de Pruebas Staging:**
+   * Se debe mantener como servidor oficial de integración continua y Staging la estación de trabajo 
+     `DESKTOP-MO7Q55S` (AMD Ryzen 5 9600X con Docker), desplegando los contenedores de backend Laravel, 
+     microservicio NestJS SRI y PostgreSQL 16 para ejecutar pruebas de concurrencia y carga antes de cada Sprint Review.
+2. **Recomendación 2: Salvaguarda Inquebrantable de la Resiliencia Offline del SRI:**
+   * La emisión de ventas locales y la atención clínica NUNCA deben supeditarse a la disponibilidad 
+     en tiempo real de los WebServices del SRI. La arquitectura debe mantener activa la cola transaccional 
+     (`queue_sri`) para que, ante cualquier latencia superior a 3 segundos o pérdida de Internet, la venta 
+     se registre localmente y el comprobante XML se firme y envíe en diferido sin bloquear el negocio.
+3. **Recomendación 3: Preservación del Blindaje de Solo Lectura en el Asistente Inteligente:**
+   * El microservicio del Chatbot Operativo (M7) debe conectarse estrictamente a PostgreSQL mediante un 
+     usuario sin privilegios de escritura (`GRANT SELECT ON ALL TABLES`), quedando terminantemente prohibido 
+     conceder permisos INSERT, UPDATE o DELETE a dicho componente, eliminando cualquier riesgo de mutación 
+     indebida por inyección o alucinación de lenguaje natural.
+4. **Recomendación 4: Disciplina Estricta en la Validación Preventiva Dióptrica:**
+   * En el módulo de Historia Clínica (M3), el frontend React debe impedir la digitación de cilindros positivos 
+     (forzando la notación estándar con cilindro negativo) y debe calcular automáticamente la potencia de cerca 
+     sumando algebraicamente la Adición para evitar devoluciones de lentes por errores de cálculo.
+5. **Recomendación 5: Rigor en las Ceremonias Scrum Quincenales y Security DoD:**
+   * Se debe respetar estrictamente la cadencia de 14 días por Sprint, documentando las actas de Sprint Review 
+     con la firma del Product Owner y verificando que cada historia de usuario satisfaga la Definición de 
+     Terminado con Seguridad (Security Definition of Done - DoD), que incluye validación de inputs, logs 
+     de auditoría y protección RBAC.
+
+3.3 FACTORES CRÍTICOS DE ÉXITO PARA LA ADOPCIÓN EN ÓPTICA VISTA VISIÓN
+- Capacitación práctica temprana durante los Sprint Reviews para que el optometrista y la asistente 
+  desarrollen memoria muscular con las pantallas del sistema antes del despliegue final.
+- Ejecución rigurosa de los 10 días de *Shadow Testing* en paralelo con el sistema legado para afinar la impresión térmica POS.
+- Respaldo automatizado diario de la base de datos PostgreSQL en soportes físicos externos para mitigar contingencias.
+
+3.4 ACTA FORMAL DE APROBACIÓN INSTITUCIONAL DEL ESTUDIO DE FACTIBILIDAD
+Los firmantes, en su calidad de investigadores proyectistas, director de trabajo de titulación, 
+asesor técnico-metodológico y representante legal del establecimiento beneficiario, declaran que 
+han revisado y evaluado el contenido íntegro del presente Estudio de Factibilidad, expresando su 
+conformidad técnica y otorgando su AVAL Y APROBACIÓN DEFINITIVA para la ejecución del proyecto:
+
+
+Riobamba, 21 de Septiembre de 2026
+
+
+-------------------------------------------------       -------------------------------------------------
+Omar Santiago Figueroa Díaz                             Alexander Rafael Villalva Dumancela
+C.I. 1803391968 / Cód. 7253                             C.I. 0605351899 / Cód. 7135
+INVESTIGADOR / LÍDER BACKEND Y CIBERSEGURIDAD           INVESTIGADOR / LÍDER FRONTEND Y ASISTENTE IA
+
+
+
+-------------------------------------------------       -------------------------------------------------
+Ing. Jorge Ariel Menéndez Verdecia, Mgs.                Ing. Julio Roberto Santillán Castillo, Ph.D.
+DIRECTOR DE TRABAJO DE TITULACIÓN                       ASESOR TÉCNICO Y REVISOR METODOLÓGICO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA - ESPOCH          FACULTAD DE INFORMÁTICA Y ELECTRÓNICA - ESPOCH
+
+
+
+-------------------------------------------------
+PROPIETARIO / OPTOMETRISTA PRINCIPAL
+ÓPTICA VISTA VISIÓN (RIOBAMBA)
+PRODUCT OWNER / BENEFICIARIO DEL PROYECTO
+
+
+================================================================================
+4. MATRIZ MAESTRA DE CONSOLIDACIÓN Y TRAZABILIDAD DOCUMENTAL
+================================================================================
+
+4.1 ÍNDICE DE CORRESPONDENCIA ENTRE FASES Y SECCIONES DEL FORMATO ESPOCH
+A continuación se detalla la articulación perfecta entre las 10 fases ejecutadas y las 
+12 secciones canónicas exigidas por el formato oficial de la ESPOCH:
+
+TABLA 1: MATRIZ MAESTRA DE TRAZABILIDAD (FASES DE EJECUCIÓN VS. SECCIONES ESPOCH)
++----------+---------------------------------------------+------------------------------------+---------------+
+| FASE     | DOCUMENTO TÉCNICO GENERADO                  | SECCIÓN DEL FORMATO ESPOCH         | ESTADO        |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 1   | `informeEstudioFactibilidadf1.txt`          | Auditoría HW, 31 RFs/11 RNFs, Pres.| Aprobada      |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 2   | `informeEstudioFactibilidadf2.txt`          | Sección 2: Antecedentes            | Aprobada      |
+|          |                                             | Sección 3: Descripción y Contexto  |               |
+|          |                                             | Sección 4: Alcance del Estudio     |               |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 3   | `informeEstudioFactibilidadf3.txt`          | Sección 5: Factibilidad Técnica    | Aprobada      |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 4   | `informeEstudioFactibilidadf4.txt`          | Sección 6: Factibilidad Económica  | Aprobada      |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 5   | `informeEstudioFactibilidadf5.txt`          | Sección 7: Factibilidad Legal      | Aprobada      |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 6   | `informeEstudioFactibilidadf6.txt`          | Sección 8: Factibilidad de Recursos| Aprobada      |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 7   | `informeEstudioFactibilidadf7.txt`          | Sección 9: Factibilidad de Mercado | Aprobada      |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 8   | `informeEstudioFactibilidadf8.txt`          | Sección 10: Factibilidad Operaciona| Aprobada      |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 9   | `informeEstudioFactibilidadf9.txt`          | Sección 11: Factibilidad de Tiempo | Aprobada      |
++----------+---------------------------------------------+------------------------------------+---------------+
+| Fase 10  | `informeEstudioFactibilidadf10.txt`         | Sección 1: Resumen Ejecutivo       | Aprobada      |
+|          |                                             | Sección 12: Recomendaciones y Aval |               |
++----------+---------------------------------------------+------------------------------------+---------------+
+
+4.2 CATÁLOGO CONSOLIDADO DE ARTEFACTOS E INFORMES TÉCNICOS DEL ESTUDIO
+Todos los artefactos técnicos, matrices de requisitos, benchmarks de hardware y análisis 
+jurídico-económicos se encuentran archivados y accesibles en el repositorio local del proyecto:
+1. `ESTUDIO DE FACTIBILIDAD/PlanEstudioFactibilidad.txt` (Plan metodológico de 10 fases).
+2. `ESTUDIO DE FACTIBILIDAD/directrices.txt` (Directrices institucionales ESPOCH).
+3. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf1.txt` (Auditoría de HW y Matriz de Requisitos).
+4. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf2.txt` (Antecedentes, Contexto y Alcance).
+5. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf3.txt` (Factibilidad Técnica y Despliegue).
+6. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf4.txt` (Factibilidad Económica y ACB).
+7. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf5.txt` (Factibilidad Legal y LOPDP/SRI).
+8. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf6.txt` (Factibilidad de Recursos y Scrum).
+9. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf7.txt` (Factibilidad de Mercado y Estrategia PO).
+10. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf8.txt` (Factibilidad Operacional y BPMN).
+11. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf9.txt` (Factibilidad de Tiempo y Gantt).
+12. `ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf10.txt` (Resumen Ejecutivo, Recomendaciones y Aval).
+
+4.3 DECLARACIÓN FORMAL DE CIERRE Y FINIQUITO DEL ESTUDIO DE FACTIBILIDAD
+Habiendo cumplido a cabalidad, de manera secuencial, exhaustiva y con el más alto rigor 
+técnico y metodológico las diez fases prescritas en `PlanEstudioFactibilidad.txt`:
+
+SE DECLARA FORMALMENTE CONCLUIDO, APROBADO Y FINIQUITADO EL ESTUDIO DE FACTIBILIDAD 
+DEL SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO).
+
+QUEDA AUTORIZADO Y HABILITADO EL INICIO DE LAS ETAPAS SUBSECUENTES DE INGENIERÍA: 
+MODELADO DEL DIAGRAMA ENTIDAD-RELACIÓN (MER EXTENDIDO), DISEÑO DE LA ARQUITECTURA 
+TECNOLÓGICA Y CONSTRUCCIÓN DEL PRODUCTO MÍNIMO VIABLE A TRAVÉS DE LOS SPRINTS DE SCRUM.
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE EJECUCIÓN — FASE 10
+FIN DEL ESTUDIO DE FACTIBILIDAD INTEGRAL
+================================================================================

@@ -1,0 +1,417 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN: FASE 9
+EVALUACIÓN DE FACTIBILIDAD DE TIEMPO Y CRONOGRAMA DE SPRINTS
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase Ejecutada:  FASE 9: EVALUACIÓN DE FACTIBILIDAD DE TIEMPO Y CRONOGRAMA DE SPRINTS
+                 (Conforme a PlanEstudioFactibilidad.txt, directrices.txt y
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf)
+Sección del      SECCIÓN 11: FACTIBILIDAD DE TIEMPO
+Formato ESPOCH:  (Ventana de 18 semanas, plan de 4 Sprints, ruta crítica, holguras y Gantt)
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf9.txt
+Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
+Versión:         1.0 Definitiva y Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 9
+   1.1 Propósito y Enfoque de la Viabilidad Temporal en Trabajos de Titulación
+   1.2 Objetivos Específicos de la Fase 9
+   1.3 Marco de Referencia y Fuentes de Planificación Temporal
+2. ESTRUCTURA TEMPORAL GLOBAL: VENTANA DE 18 SEMANAS ACADÉMICAS (2026 - 2027)
+   2.1 Marco Temporal Institucional y Compromisos Académicos ESPOCH
+   2.2 Desglose Macro-Metodológico por Etapas de Ingeniería:
+       - Etapa I: Planificación, Elicitación y Factibilidad (Semanas 1 a 3)
+       - Etapa II: Arquitectura, Diseño de Base de Datos y Entornos (Semanas 4 a 5)
+       - Etapa III: Construcción Ágil Iterativa en 4 Sprints (Semanas 6 a 13 - 8 semanas efectivas)
+       - Etapa IV: Verificación de Calidad ISO/IEC 25010, Seguridad y Shadow Testing (Semanas 14 a 15)
+       - Etapa V: Despliegue en Producción, Capacitación y Transferencia (Semana 16)
+       - Etapa VI: Redacción del Informe Final de Grado, Revisiones y Sustentación (Semanas 17 a 18)
+3. PLANIFICACIÓN DETALLADA DE SPRINTS DE CONSTRUCCIÓN ÁGIL (8 SEMANAS EFECTIVAS)
+   3.1 Cadencia Quincenal y Capacidad Operativa del Scrum Team (Velocity)
+   3.2 Desglose Pormenorizado de Sprints y Mapeo de Requisitos:
+       - SPRINT 1 (Semanas 6 y 7): M1 (Autenticación/RBAC) y M2 (Gestión de Pacientes)
+       - SPRINT 2 (Semanas 8 y 9): M3 (Historia Clínica/Refracción) y M4 (Pedidos de Laboratorio)
+       - SPRINT 3 (Semanas 10 y 11): M5 (Ventas/Caja) y M6 (Facturación Electrónica SRI v1.1.0)
+       - SPRINT 4 (Semanas 12 y 13): M7 (Chatbot Operativo IA) y Pruebas Transversales ISO 25010
+4. CRONOGRAMA MAESTRO Y DIAGRAMA DE GANTT TEXTUAL DEL PROYECTO
+   4.1 Matriz Temporal Detallada Semana a Semana con Hitos y Responsables
+   4.2 Diagrama de Gantt en Formato Estructurado
+5. ANÁLISIS DE LA RUTA CRÍTICA (CPM), HOLGURAS Y GESTIÓN DE RIESGOS TEMPORALES
+   5.1 Identificación de la Ruta Crítica del Proyecto (Critical Path Method)
+   5.2 Cuantificación y Gestión de Holguras Temporales (Float Time)
+   5.3 Matriz de Riesgos de Cronograma y Planes de Mitigación Inmediata
+6. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD DE TIEMPO Y DECLARACIÓN DE CIERRE
+================================================================================
+
+
+================================================================================
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 9
+================================================================================
+
+1.1 PROPÓSITO Y ENFOQUE DE LA VIABILIDAD TEMPORAL EN TRABAJOS DE TITULACIÓN
+La factibilidad de tiempo evalúa la viabilidad estricta de completar todas las fases de 
+ingeniería de software, aseguramiento de la calidad, implantación en el beneficiario y 
+sustentación académica dentro de los plazos reglamentarios inamovibles fijados por la 
+Escuela Superior Politécnica de Chimborazo (ESPOCH). 
+
+En proyectos de titulación bajo la modalidad de desarrollo tecnológico, el cronograma 
+no admite prórrogas arbitrarias: los calendarios semestrales de la carrera de Software 
+establecen una ventana perentoria de 18 semanas académicas para el período 2026 - 2027. 
+Por ende, la evaluación de tiempo debe demostrar rigurosamente que el alcance extendido 
+del sistema (7 módulos funcionales, 31 requisitos funcionales, 11 requisitos no funcionales, 
+facturación electrónica SRI v1.1.0 y asistente inteligente operativo con IA) es perfectamente 
+ejecutable mediante la distribución estratégica de 4 Sprints quincenales de construcción 
+(8 semanas efectivas) y cuenta con holguras temporales suficientes para absorber contingencias 
+sin poner en riesgo la defensa de grado.
+
+1.2 OBJETIVOS ESPECÍFICOS DE LA FASE 9
+1. Desglosar la ventana global de 18 semanas académicas (Septiembre 2026 a Enero 2027), 
+   articulando las etapas de pre-desarrollo, construcción ágil, pruebas de campo y titulación.
+2. Detallar la planificación de los 4 Sprints quincenales de construcción (8 semanas de desarrollo 
+   efectivo), asignando los 7 módulos del sistema y las historias de usuario asociadas.
+3. Modelar el Cronograma Maestro del Proyecto y generar el Diagrama de Gantt textual con sus 
+   hitos cardinales de entrega al Product Owner y a la comisión revisora.
+4. Determinar la Ruta Crítica mediante el Método del Camino Crítico (CPM) y cuantificar el margen 
+   de holgura temporal disponible para contingencias técnicas o institucionales.
+5. Formular la matriz de riesgos temporales y sus protocolos preventivos de mitigación.
+6. Emitir el dictamen concluyente de viabilidad temporal conforme al formato oficial de la ESPOCH.
+
+1.3 MARCO DE REFERENCIA Y FUENTES DE PLANIFICACIÓN TEMPORAL
+La presente planificación temporal toma como insumos normativos y técnicos vinculantes:
+- `FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf` (Sección 11: Factibilidad de Tiempo).
+- `directrices.txt` (Lineamientos institucionales para el estudio de factibilidad).
+- `PlanEstudioFactibilidad.txt` (Secciones 4.9 y 5.11: Cronograma de 18 semanas y 4 Sprints).
+- `Anteproyecto.pdf` (Cronograma original aprobado por el Consejo Directivo de la FIE).
+- `plaDesarrolloRequisitos.txt` (Versión 2.0: Sección 8.2 Planificación por Sprints Quincenales).
+- `Especificacion de Requisitos_02.txt` (Alcance delimitado de RF-01 a RF-31 y RNF-01 a RNF-11).
+
+
+================================================================================
+2. ESTRUCTURA TEMPORAL GLOBAL: VENTANA DE 18 SEMANAS ACADÉMICAS (2026 - 2027)
+================================================================================
+
+2.1 MARCO TEMPORAL INSTITUCIONAL Y COMPROMISOS ACADÉMICOS ESPOCH
+El calendario académico de la ESPOCH para el semestre 2026 - 2027 delimita un período oficial 
+de 18 semanas que inicia formalmente en Septiembre de 2026 y culmina en Enero de 2027 con la 
+sustentación pública del trabajo de titulación. 
+
+Para compatibilizar los hitos académicos con el rigor de la ingeniería de software, el proyecto 
+adopta un enfoque híbrido: una etapa preparatoria de requisitos y arquitectura formal, seguida 
+de una fase central gobernada bajo el marco ágil Scrum (4 Sprints de 14 días calendario cada uno), 
+y una etapa de cierre pericial que abarca auditorías ISO/IEC 25010, redacción del documento 
+final de grado y sustentación ante el tribunal.
+
+2.2 DESGLOSE MACRO-METODOLÓGICO POR ETAPAS DE INGENIERÍA
+
+TABLA 1: DESGLOSE MACRO-TEMPORAL POR ETAPAS DEL PROYECTO (18 SEMANAS)
++----------+---------------------------------------------+-----------------+---------------------------------------------+
+| ETAPA    | DENOMINACIÓN DE LA ETAPA                    | VENTANA TEMPORAL| HITOS Y ENTREGABLES PRINCIPALES             |
++----------+---------------------------------------------+-----------------+---------------------------------------------+
+| Etapa I  | Planificación, Elicitación, Requisitos y    | Semanas 1 a 3   | - Fichas de entrevistas consolidadas.       |
+|          | Estudio de Factibilidad                     | (Septiembre)    | - Plan de Requisitos v2.0 y SRS IEEE 830.   |
+|          |                                             |                 | - Estudio de Factibilidad Aprobado.         |
++----------+---------------------------------------------+-----------------+---------------------------------------------+
+| Etapa II | Diseño de Arquitectura, Modelo Relacional   | Semanas 4 a 5   | - DER normalizado y esquema PostgreSQL.     |
+|          | de Datos y Configuración de Ambientes       | (Octubre)       | - Staging Docker configurado (Ryzen 9600X). |
+|          |                                             |                 | - Túnel seguro Cloudflare/Ngrok operativo.  |
++----------+---------------------------------------------+-----------------+---------------------------------------------+
+| Etapa III| Construcción Ágil Iterativa en 4 Sprints    | Semanas 6 a 13  | - 4 Incrementos de software funcionales.    |
+|          | (8 Semanas Efectivas de Desarrollo Scrum)   | (Octubre - Dic) | - 31 RFs implementados y validados con PO.  |
+|          |                                             |                 | - Integración completa de API SRI e IA.     |
++----------+---------------------------------------------+-----------------+---------------------------------------------+
+| Etapa IV | Aseguramiento de Calidad ISO/IEC 25010:2023,| Semanas 14 a 15 | - Informe de Pruebas de Ciberseguridad.     |
+|          | Auditoría de Ciberseguridad y Shadow Testing| (Diciembre)     | - Shadow Testing (10 días) en consultorio.  |
+|          | en Óptica Vista Visión                      |                 | - Matriz de trazabilidad 100% verificada.   |
++----------+---------------------------------------------+-----------------+---------------------------------------------+
+| Etapa V  | Despliegue en Producción, Transferencia     | Semana 16       | - Sistema instalado en LAN de la óptica.    |
+|          | Tecnológica y Capacitación de Usuarios      | (Enero)         | - 12 horas de capacitación completadas.     |
+|          |                                             |                 | - Acta de Entrega-Recepción y Aprobación PO.|
++----------+---------------------------------------------+-----------------+---------------------------------------------+
+| Etapa VI | Redacción del Informe Final de Grado,       | Semanas 17 a 18 | - Memoria técnica completa de titulación.   |
+|          | Dictamen de Revisor y Sustentación Pública  | (Enero)         | - Aval del Director y Asesor Técnico.       |
+|          |                                             |                 | - Defensa oral y obtención del título.      |
++----------+---------------------------------------------+-----------------+---------------------------------------------+
+
+
+================================================================================
+3. PLANIFICACIÓN DETALLADA DE SPRINTS DE CONSTRUCCIÓN ÁGIL (8 SEMANAS EFECTIVAS)
+================================================================================
+
+3.1 CADENCIA QUINCENAL Y CAPACIDAD OPERATIVA DEL SCRUM TEAM (VELOCITY)
+La fase central de construcción (Etapa III) se estructura en 4 Sprints de exactamente 
+dos semanas (14 días calendario / 10 días laborables) por iteración:
+- Capacidad de Entrega del Equipo (Velocity): Basado en la asignación de tiempo completo 
+  (40 horas semanales por desarrollador = 80 horas de ingeniería por semana del equipo), 
+  se estima una velocidad promedio de entre 25 y 30 Puntos de Historia (Story Points - SP) por Sprint.
+- Volumen Total del Product Backlog: El alcance delimitado en `Especificacion de Requisitos_02.txt` 
+  comprende un esfuerzo estimado de 112 Story Points, lo cual encaja con total precisión 
+  dentro de la capacidad productiva de 4 Sprints (4 x 28 SP promedio = 112 SP).
+
+3.2 DESGLOSE PORMENORIZADO DE SPRINTS Y MAPEO DE REQUISITOS
+
+--------------------------------------------------------------------------------
+SPRINT 1: IDENTIDAD, ACCESO RBAC Y PADRÓN DEMOGRÁFICO DE PACIENTES
+--------------------------------------------------------------------------------
+- Ventana Temporal: Semanas 6 y 7 (Días 1 a 14 del ciclo Scrum).
+- Esfuerzo Estimado: 26 Story Points.
+- Módulos Asignados:
+  * Módulo 1: Autenticación y Gestión de Usuarios (RF-01, RF-02).
+  * Módulo 2: Gestión de Pacientes (RF-03 a RF-06).
+- Historias de Usuario / Tareas de Ingeniería:
+  1. Configuración de autenticación stateless mediante JWT (RFC 7519) con revocación y blacklist.
+  2. Implementación de control de acceso basado en roles (RBAC) para 3 perfiles (Admin, Optometrista, Asistente).
+  3. Políticas de bloqueo automático por 5 intentos fallidos y expiración por inactividad de 20 minutos (S-TAG-AUT-01).
+  4. Formulario reactivo de captura demográfica con validación estricta del algoritmo Módulo 10 para cédulas ecuatorianas.
+  5. Manejo flexible de identificación para menores de edad vinculados a representantes.
+  6. Búsqueda predictiva con autocompletado en frontend por cédula o nombres para evitar duplicidades.
+  7. Almacenamiento seguro de adjuntos clínicos (PDF, PNG, JPG) con hash criptográfico SHA-256.
+- Ceremonias Scrum: Sprint Planning (Lunes sem. 6), Daily Scrum (diario), Sprint Review y Retrospective (Viernes sem. 7).
+- Entregable: Incremento Potencialmente Desplegable v0.1 (Login seguro y padrón demográfico operativo en Staging).
+
+--------------------------------------------------------------------------------
+SPRINT 2: NÚCLEO CLÍNICO REFRACTIVO Y CADENA DE SUMINISTRO A LABORATORIOS
+--------------------------------------------------------------------------------
+- Ventana Temporal: Semanas 8 y 9 (Días 15 a 28 del ciclo Scrum).
+- Esfuerzo Estimado: 30 Story Points.
+- Módulos Asignados:
+  * Módulo 3: Historia Clínica y Graduación (RF-07 a RF-15).
+  * Módulo 4: Pedidos al Laboratorio Óptico (RF-16 a RF-19).
+- Historias de Usuario / Tareas de Ingeniería:
+  1. Interfaz especializada para captura de refracción OD y OI: Esferas (-25.00 a +25.00 D), Cilindros 
+     negativos forzados (-10.00 a 0.00 D), Ejes (0° a 180°), Adición (+0.75 a +4.00 D) y AV Snellen en pies.
+  2. Automatización de la regla de adición algebraica para visión cercana en pacientes presbitas (>40 años).
+  3. Medición pupilocéntrica: Distancia Nasopupilar (DNP) monocular, altura pupilar y parámetros progresivos.
+  4. Comparativa simultánea en pantalla de la graduación actual frente a la historia previa y lente anterior.
+  5. Codificación de diagnósticos oftalmológicos internacionales CIE-10 (H52.1 Miopía, H52.2 Astigmatismo, etc.).
+  6. Inmutabilidad de registros clínicos mediante borrado lógico (Soft Delete con `deleted_at`) y auditoría inmutable.
+  7. Generación de Recetas y Certificados de Aptitud Visual en PDF estandarizado.
+  8. Emisión de Órdenes de Trabajo para talleres de manufactura externa con disociación técnica de datos (Art. 25 LOPDP).
+  9. Máquina de estados de la orden técnica (PENDIENTE -> ENVIADO -> RECIBIDO -> ENTREGADO) y gestión de garantías.
+- Ceremonias Scrum: Sprint Planning (Lunes sem. 8), Daily Scrum (diario), Sprint Review y Retrospective (Viernes sem. 9).
+- Entregable: Incremento v0.2 (Flujo clínico refractivo completo y órdenes técnicas disociadas validadas con el PO).
+
+--------------------------------------------------------------------------------
+SPRINT 3: TRANSACCIONALIDAD COMERCIAL Y FACTURACIÓN ELECTRÓNICA SRI
+--------------------------------------------------------------------------------
+- Ventana Temporal: Semanas 10 y 11 (Días 29 a 42 del ciclo Scrum).
+- Esfuerzo Estimado: 32 Story Points.
+- Módulos Asignados:
+  * Módulo 5: Ventas y Cobros Locales (RF-20 a RF-23).
+  * Módulo 6: Facturación Electrónica SRI (RF-24 a RF-27).
+- Historias de Usuario / Tareas de Ingeniería:
+  1. Modelo híbrido de inventario: agrupación por bandas homogéneas de precios en armazones y SKU en consumibles.
+  2. Registro de ventas con soporte de cobro de Anticipos y Saldos al retiro de lentes, admitiendo pagos mixtos.
+  3. Transaccionalidad atómica ACID en PostgreSQL: reversión segura de caja y stock ante anulación de comprobantes.
+  4. Emisión de comprobantes térmicos POS de 80 mm y módulo de apertura/cierre/arqueo diario de caja.
+  5. Construcción del microservicio NestJS para generación del XML de factura bajo esquema oficial v1.1.0 del SRI.
+  6. Cálculo algorítmico de la clave de acceso de 49 dígitos con verificación de integridad Módulo 11.
+  7. Firmado criptográfico digital conforme al estándar XAdES-BES utilizando certificados PKCS#12 (.p12) de la óptica.
+  8. Transmisión SOAP hacia WebServices de Recepción y Autorización del SRI, validando respuesta en <3 segundos.
+  9. Generación del RIDE PDF con código de barras Code128 y envío automatizado al correo del paciente vía SMTP.
+  10. Mecanismo de resiliencia y contingencia offline: encolado de transacciones locales en `queue_sri` ante caídas de red.
+- Ceremonias Scrum: Sprint Planning (Lunes sem. 10), Daily Scrum (diario), Sprint Review y Retrospective (Viernes sem. 11).
+- Entregable: Incremento v0.3 (Ventas, caja y facturación electrónica nativa SRI probada en ambiente de pruebas).
+
+--------------------------------------------------------------------------------
+SPRINT 4: ASISTENTE INTELIGENTE OPERATIVO (IA), BLINDAJE Y CIERRE DEL MVP
+--------------------------------------------------------------------------------
+- Ventana Temporal: Semanas 12 y 13 (Días 43 a 56 del ciclo Scrum).
+- Esfuerzo Estimado: 24 Story Points.
+- Módulos Asignados:
+  * Módulo 7: Asistente Inteligente Operativo "Chatbot con los Datos" (RF-28 a RF-31).
+  * Pruebas Integrales de Calidad ISO/IEC 25010:2023 y Ciberseguridad (RNF-01 a RNF-11).
+- Historias de Usuario / Tareas de Ingeniería:
+  1. Implementación del componente de interfaz conversacional embebido (UI Chatbot flotante con modo expandido).
+  2. Construcción del enrutador determinístico local (Node.js/PHP) para resolución de consultas operativas de negocio:
+     - Pedidos pendientes en laboratorio con días transcurridos.
+     - Consulta de inventario por rango de precio y material.
+     - Totales de venta diaria/mensual desglosados por método de pago.
+  3. Configuración del blindaje criptográfico y perfiles de base de datos: conexión exclusiva con rol `GRANT SELECT` (Read-Only Guard), bloqueando a nivel de motor cualquier operación INSERT, UPDATE o DELETE.
+  4. Modo híbrido de operación: resolución local autónoma en red LAN y conector opcional a LLM externo vía HTTPS.
+  5. Registro inmutable de consultas y auditoría forense en tabla `chatbot_audit_logs`.
+  6. Ejecución de pruebas integrales de seguridad (inyección SQL, XSS, CSRF, bypass de autenticación, S-Tags).
+  7. Pruebas de estrés y benchmarking de rendimiento (tiempos de respuesta <1.5 s en consultas y <3.0 s en firmado).
+- Ceremonias Scrum: Sprint Planning (Lunes sem. 12), Daily Scrum (diario), Sprint Review Final y Retrospective (Viernes sem. 13).
+- Entregable: Incremento v1.0 Release Candidate (Sistema SGO 100% terminado y listo para validación de campo).
+
+
+================================================================================
+4. CRONOGRAMA MAESTRO Y DIAGRAMA DE GANTT TEXTUAL DEL PROYECTO
+================================================================================
+
+4.1 MATRIZ TEMPORAL SEMANA A SEMANA CON HITOS Y RESPONSABLES
+
+TABLA 2: CRONOGRAMA MAESTRO DETALLADO SEMANA A SEMANA (18 SEMANAS)
++----+----------------------------------------------+---------+--------------------+------------------------+
+| S# | DESCRIPCIÓN DE ACTIVIDADES PRINCIPALES       | ETAPA   | RESPONSABLES       | HITO DE CONTROL        |
++----+----------------------------------------------+---------+--------------------+------------------------+
+| S1 | Elicitación en Óptica Vista Visión, análisis | Etapa I | Figueroa, Villalva,| Fichas de entrevistas  |
+|    | de sistema legado y auditoría preliminar.    |         | Menéndez, PO       | consolidadas.          |
+| S2 | Formulación del Plan de Requisitos v2.0,     | Etapa I | Figueroa, Villalva,| SRS v2.0 IEEE 830      |
+|    | especificación formal de 31 RFs y 11 RNFs.   |         | Santillán, Menéndez| formalizada.           |
+| S3 | Elaboración y aprobación del Estudio de      | Etapa I | Figueroa, Villalva,| Dictamen de            |
+|    | Factibilidad Integral (12 secciones ESPOCH). |         | Menéndez, Santillán| Factibilidad emitido.  |
+| S4 | Modelado de Base de Datos relacional DER en  | Etapa II| Figueroa, Villalva,| Modelo de BD validado  |
+|    | PostgreSQL 16 y definición de arquitectura.  |         | Santillán          | en 3FN.                |
+| S5 | Configuración de Staging Docker en Ryzen 9600X| Etapa II| Figueroa, Villalva,| Servidor de pruebas y  |
+|    | y habilitación de túnel Cloudflare para PO.  |         | Menéndez           | túnel remoto activos.  |
+| S6 | SPRINT 1: Construcción M1 (Auth RBAC / JWT)  | EtapaIII| Figueroa (Backend) | Inicio de construcción |
+|    | y M2 (Pacientes / Cédula M10 / Adjuntos).    |         | Villalva (Frontend)| de software.           |
+| S7 | SPRINT 1: Finalización M1/M2, pruebas de     | EtapaIII| Figueroa, Villalva,| Sprint Review 1:       |
+|    | integración local y despliegue en Staging.   |         | PO, Menéndez       | Incremento v0.1 con PO.|
+| S8 | SPRINT 2: Construcción M3 (Historia Clínica/ | EtapaIII| Figueroa (Backend) | Avance al núcleo       |
+|    | Refracción OD-OI) y M4 (Pedidos de Taller).  |         | Villalva (Frontend)| refractivo clínico.    |
+| S9 | SPRINT 2: Soft Delete, disociación LOPDP,    | EtapaIII| Figueroa, Villalva,| Sprint Review 2:       |
+|    | generación PDF recetas y revisión de estados.|         | PO, Menéndez       | Incremento v0.2 con PO.|
+| S10| SPRINT 3: Construcción M5 (Ventas / Caja)    | EtapaIII| Figueroa (Backend) | Integración tributaria |
+|    | y M6 (Facturación Electrónica SRI XML v1.1.0)|         | Villalva (Frontend)| con WebServices SRI.   |
+| S11| SPRINT 3: Firma XAdES-BES, SOAP SRI, RIDE PDF| EtapaIII| Figueroa, Villalva,| Sprint Review 3:       |
+|    | comprobante térmico POS y contingencia offlin|         | PO, Menéndez       | Incremento v0.3 con PO.|
+| S12| SPRINT 4: Construcción M7 (Asistente IA      | EtapaIII| Figueroa (Backend) | Incorporación del      |
+|    | Chatbot de datos) y blindaje Read-Only Guard.|         | Villalva (Frontend)| componente innovador.  |
+| S13| SPRINT 4: Pruebas globales de integración,   | EtapaIII| Figueroa, Villalva,| Sprint Review Final:   |
+|    | cierre del Product Backlog y DoD verificado. |         | PO, Menéndez, Ases.| Incremento v1.0 Release|
+| S14| Auditoría de Seguridad ISO 25010 (S-Tags)    | Etapa IV| Figueroa, Villalva,| Informe de calidad y   |
+|    | y corrección de observaciones periciales.    |         | Santillán          | seguridad aprobado.    |
+| S15| Pruebas de campo piloto (Shadow Testing de   | Etapa IV| Figueroa, Villalva,| 10 días de prueba con  |
+|    | 10 días laborables) en Óptica Vista Visión.  |         | PO (Optometrista)  | pacientes reales.      |
+| S16| Despliegue en red LAN local, configuración   | Etapa V | Figueroa, Villalva,| Acta de Entrega y      |
+|    | de periféricos y 12 h de capacitación.       |         | PO, Asistente      | Aprobación Definitiva. |
+| S17| Redacción final de la Memoria Técnica de     | Etapa VI| Figueroa, Villalva,| Documento de tesis     |
+|    | Titulación e informe pericial de resultados. |         | Menéndez, Santillán| entregado a revisión.  |
+| S18| Trámites administrativos, aprobación de      | Etapa VI| Figueroa, Villalva,| DEFENSA ORAL Y         |
+|    | revisores y SUSTENTACIÓN PÚBLICA DE GRADO.   |         | Tribunal ESPOCH    | TITULACIÓN ACADÉMICA.  |
++----+----------------------------------------------+---------+--------------------+------------------------+
+
+4.2 DIAGRAMA DE GANTT ESTRUCTURADO DEL PROYECTO (18 SEMANAS)
+
+```
+ACTIVIDAD / SEMANA               | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 |
+---------------------------------+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+1. Elicitación y Requisitos      |====|====|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+2. Estudio de Factibilidad       |    |    |====|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+3. Arquitectura y Modelo BD      |    |    |    |====|====|    |    |    |    |    |    |    |    |    |    |    |    |    |
+4. Staging y Túnel Cloudflare    |    |    |    |    |====|    |    |    |    |    |    |    |    |    |    |    |    |    |
+5. Sprint 1: M1 (Auth) & M2 (Pac)|    |    |    |    |    |====|====|    |    |    |    |    |    |    |    |    |    |    |
+6. Sprint 2: M3 (Hist) & M4 (Lab)|    |    |    |    |    |    |    |====|====|    |    |    |    |    |    |    |    |    |
+7. Sprint 3: M5 (Ven) & M6 (SRI) |    |    |    |    |    |    |    |    |    |====|====|    |    |    |    |    |    |    |
+8. Sprint 4: M7 (IA) & Cierre    |    |    |    |    |    |    |    |    |    |    |    |====|====|    |    |    |    |    |
+9. Pruebas Seguridad ISO 25010   |    |    |    |    |    |    |    |    |    |    |    |    |    |====|    |    |    |    |
+10. Shadow Testing Consultorio   |    |    |    |    |    |    |    |    |    |    |    |    |    |    |====|    |    |    |
+11. Despliegue y Capacitación    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |====|    |    |
+12. Memoria Técnica de Tesis     |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |====|    |
+13. Sustentación y Titulación    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |====|
+---------------------------------+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+Hitos Principales:               |    |    | *1 |    | *2 |    | *3 |    | *4 |    | *5 |    | *6 |    | *7 | *8 |    | *9 |
+Leyenda de Hitos:
+*1: Estudio Factibilidad Aprobado  | *4: Sprint Review 2 (M3/M4)      | *7: Cierre Pruebas Piloto Campo
+*2: Entorno Staging Operativo      | *5: Sprint Review 3 (M5/M6 SRI)  | *8: Acta de Entrega y Producción
+*3: Sprint Review 1 (M1/M2)        | *6: Release Candidate v1.0 (M7)  | *9: SUSTENTACIÓN ORAL Y GRADO
+```
+
+
+================================================================================
+5. ANÁLISIS DE LA RUTA CRÍTICA (CPM), HOLGURAS Y GESTIÓN DE RIESGOS TEMPORALES
+================================================================================
+
+5.1 IDENTIFICACIÓN DE LA RUTA CRÍTICA DEL PROYECTO (CRITICAL PATH METHOD)
+El Método de la Ruta Crítica (CPM) identifica la secuencia más larga de actividades dependientes 
+que determinan la duración mínima indispensable para culminar el proyecto. En el Sistema SGO, 
+la ruta crítica está conformada por:
+
+```
+[Elicitación y Requisitos] (Sem 1-2) 
+   --> [Estudio de Factibilidad] (Sem 3) 
+   --> [Modelo de BD Relacional y Arquitectura] (Sem 4-5) 
+   --> [Sprint 1: M1 Auth & M2 Pacientes] (Sem 6-7) 
+   --> [Sprint 2: M3 Historia & M4 Taller] (Sem 8-9) 
+   --> [Sprint 3: M5 Ventas & M6 Facturación SRI] (Sem 10-11) 
+   --> [Sprint 4: M7 Chatbot IA & Pruebas Globales] (Sem 12-13) 
+   --> [Shadow Testing Piloto en Consultorio] (Sem 15) 
+   --> [Despliegue y Capacitación LAN] (Sem 16) 
+   --> [Memoria de Grado y Sustentación] (Sem 17-18)
+```
+
+Duración Total de la Ruta Crítica: 18 Semanas Académicas. 
+Cualquier retraso no gestionado en alguno de los eslabones de esta cadena impactaría de forma 
+directa en la fecha final de sustentación, por lo que se implementan estrictos controles de holgura.
+
+5.2 CUANTIFICACIÓN Y GESTIÓN DE HOLGURAS TEMPORALES (FLOAT TIME)
+Para blindar el cumplimiento del cronograma ante imprevistos:
+1. Holgura de Construcción de Software: La fase de desarrollo efectivo en Scrum concluye al término 
+   de la Semana 13. El despliegue definitivo en el consultorio ocurre en la Semana 16. Esto genera 
+   un COLCHÓN DE HOLGURA DE 3 SEMANAS (Semanas 14 a 16) para absorber cualquier desvío en historias 
+   de usuario complejas o ajustes de la Ficha Técnica del SRI sin alterar la fecha de titulación.
+2. Holgura Académica y Administrativa: La memoria técnica final se redacta de manera incremental 
+   a lo largo de todo el proceso (cada informe de fase y cada Sprint Review aportan capítulos 
+   redactados), disponiendo de las Semanas 17 y 18 para formalidades de revisión y trámite de grado, 
+   lo que garantiza una holgura administrativa superior al 20% del tiempo total del proyecto.
+
+5.3 MATRIZ DE RIESGOS DE CRONOGRAMA Y PLANES DE MITIGACIÓN INMEDIATA
+
+TABLA 3: MATRIZ DE RIESGOS TEMPORALES Y PROTOCOLOS DE MITIGACIÓN
++-----------------------------------+--------------------+-----------------------------------------------------+
+| RIESGO TEMPORAL IDENTIFICADO      | PROBABILIDAD /     | PROTOCOLO DE MITIGACIÓN PREVENTIVA Y REACTIVA       |
+|                                   | IMPACTO            |                                                     |
++-----------------------------------+--------------------+-----------------------------------------------------+
+| R1: Inestabilidad o caídas del    | Media / Alto       | Mitigación: Uso del microservicio probado en        |
+|     WebService de pruebas del SRI |                    | `FACTURACION ELECTRONICA/` con emulador SOAP local; |
+|     durante el Sprint 3           |                    | validación sintáctica de XML sin depender de red.   |
++-----------------------------------+--------------------+-----------------------------------------------------+
+| R2: Disponibilidad limitada del   | Alta / Moderado    | Mitigación: Despliegue de versiones en Staging con  |
+|     Product Owner para revisiones |                    | túnel cifrado Cloudflare para validación asíncrona  |
+|     presenciales en días laborables|                   | nocturna y fines de semana desde su tableta.        |
++-----------------------------------+--------------------+-----------------------------------------------------+
+| R3: Curva de aprendizaje técnica  | Baja / Moderado    | Mitigación: Selección de stack tecnológico dominado |
+|     en el equipo de desarrollo    |                    | por los autores (Laravel, React, Node.js, PostgreS) |
+|                                   |                    | y adopción de microservicios aislados.              |
++-----------------------------------+--------------------+-----------------------------------------------------+
+| R4: Retrasos en trámites docentes | Media / Moderado   | Mitigación: Participación continua del Director     |
+|     y aprobación de informes      |                    | (Scrum Master) y Asesor en las revisiones de Sprint,|
+|                                   |                    | asegurando el aval simultáneo de los entregables.   |
++-----------------------------------+--------------------+-----------------------------------------------------+
+
+
+================================================================================
+6. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD DE TIEMPO Y DECLARACIÓN DE CIERRE
+================================================================================
+
+A partir de la planificación macro-temporal, la estructuración de los 4 Sprints quincenales, 
+el modelado de la Ruta Crítica y la cuantificación de las holguras de ingeniería:
+
+1. Se demuestra rigurosamente que el desarrollo del Sistema SGO es 100% REALIZABLE dentro de la 
+   ventana reglamentaria de 18 semanas académicas del período 2026 - 2027 de la ESPOCH.
+2. La asignación de 8 semanas efectivas de construcción ágil en Scrum (Semanas 6 a 13) proporciona 
+   el tiempo necesario para programar los 31 requisitos funcionales, garantizando una velocidad 
+   sostenible de 28 Story Points por Sprint sin sobrecargar a los desarrolladores.
+3. La existencia de una holgura de 3 semanas para pruebas de seguridad y validación piloto, sumada 
+   a las 2 semanas finales para trámites de titulación, brinda un blindaje robusto frente a 
+   contingencias externas del SRI, problemas de conectividad o demoras administrativas.
+4. Se verifica el cumplimiento irrestricto de los estándares metodológicos de la ESPOCH y del 
+   cronograma estipulado en el Anteproyecto de Titulación aprobado.
+
+Por lo expuesto, se emite formalmente el DICTAMEN DE VIABILIDAD TEMPORAL PLENA, declarándose 
+concluida y aprobada la FASE 9 y habilitándose la ejecución de la fase final: 
+**Fase 10: Consolidación Final del Estudio de Factibilidad (Sección 1: Resumen Ejecutivo, Sección 12: Recomendaciones y Aprobación, y Consolidación del Documento Integral)**.
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE EJECUCIÓN — FASE 9
+================================================================================

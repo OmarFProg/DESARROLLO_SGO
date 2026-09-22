@@ -1,0 +1,192 @@
+================================================================================
+          DESCRIPCIÓN DE LA ARQUITECTURA DEL SISTEMA - Versión 1 (v1)
+================================================================================
+Proyecto: api-sri (Backend NestJS)
+Ruta del Documento: PRACTICA\documentacion\Arquitectura\DescripcionArquitectura_v1.txt
+Fecha: 30 de Agosto de 2026
+Autor: Antigravity AI Pair Programmer
+================================================================================
+
+1. INTRODUCCIÓN Y PROPÓSITO
+---------------------------
+Este documento describe de forma exhaustiva la estructura, componentes y principios 
+de diseño que rigen el backend `api-sri`. El sistema está concebido para gestionar 
+la facturación electrónica en Ecuador (comunicación con el SRI), control de inventarios, 
+categorías de productos y gestión de clientes. 
+
+Para lograr un sistema escalable, mantenible y testeable, la base de código se diseñó 
+siguiendo los principios de la Arquitectura Limpia (Clean Architecture), combinándola 
+con técnicas de Diseño Guiado por el Dominio (DDD - Domain-Driven Design) y segregación 
+de responsabilidades de consulta y comando (CQRS).
+
+
+2. PRINCIPIOS DE ARQUITECTURA LIMPIA APLICADOS
+----------------------------------------------
+El diseño del sistema busca cumplir con las reglas fundamentales propuestas por Robert C. Martin:
+
+A. Independencia de Marcos de Trabajo (Framework Independent):
+   La lógica de negocio central (las reglas de facturación y firma) no depende de que el 
+   servidor web sea NestJS, Express o Fastify. El framework se comporta como un detalle de 
+   infraestructura.
+
+B. Testeabilidad (Testable):
+   Las reglas de negocio (como el cálculo de impuestos de la factura o el cálculo del dígito 
+   verificador del SRI) se pueden probar de forma aislada sin necesidad de levantar la base 
+   de datos, servidores web o servicios de red.
+
+C. Independencia de la Interfaz de Usuario (UI Independent):
+   Los endpoints HTTP y controladores actúan como simples puertos de entrada. La lógica de 
+   facturación podría ser ejecutada por una interfaz web, una CLI de consola o un proceso por 
+   lotes (cron) sin alterar el núcleo del sistema.
+
+D. Independencia de la Base de Datos (Database Independent):
+   La persistencia de datos está aislada en repositorios. Aunque actualmente se utiliza TypeORM 
+   con PostgreSQL, el núcleo de negocio no conoce los detalles de las conexiones de base de datos.
+
+E. Regla de Dependencia (The Dependency Rule):
+   El código fuente de las capas internas (Dominio y Aplicación) no conoce nada sobre las 
+   capas externas (Controladores, Base de Datos, Cliente SOAP). Las dependencias apuntan 
+   estrictamente hacia adentro.
+
+
+3. ESTRUCTURA DE CAPAS DEL SISTEMA
+----------------------------------
+El sistema se organiza en círculos concéntricos de dependencias, desde lo más abstracto 
+y central (Dominio) hasta lo más concreto y externo (Infraestructura):
+
+┌────────────────────────────────────────────────────────────────────────┐
+│ 1. CAPA DE DOMINIO (Núcleo del Negocio)                                │
+│    - Entidades base de auditoría (lib/alfajs/core/abstract-entities/*) │
+│    - Entidades de negocio (src/*/database/entities/*.entity.ts)       │
+│    - Servicios de dominio (src/*/domain/services/*.service.ts)         │
+├────────────────────────────────────────────────────────────────────────┤
+│ 2. CAPA DE APLICACIÓN (Casos de Uso)                                   │
+│    - Comandos y Consultas CQRS (api/commands/*, api/queries/*)         │
+│    - Handlers de Comandos/Consultas (domain/handlers/*)                │
+│    - Eventos de Dominio (domain/events/*)                              │
+├────────────────────────────────────────────────────────────────────────┤
+│ 3. CAPA DE ADAPTADORES DE INTERFAZ (Interface Adapters)                 │
+│    - Controladores HTTP (api/controllers/*)                            │
+│    - Repositorios de Persistencia (database/repositories/*)            │
+├────────────────────────────────────────────────────────────────────────┤
+│ 4. CAPA DE INFRAESTRUCTURA (Detalles Técnicos)                         │
+│    - Módulos de NestJS (app.module, etc.)                              │
+│    - Framework ORM (TypeORM y migraciones en lib/db/migrations)        │
+│    - Protocolo SOAP / Firma Digital (VoucherModule, SignService)       │
+│    - Sistema de archivos (Almacenamiento físico en files/alfasoft)    │
+└────────────────────────────────────────────────────────────────────────┘
+
+A. Capa de Dominio (Domain Layer)
+   Es el corazón de la aplicación. Define los conceptos del negocio.
+   * Entidades: Representan los objetos de negocio con su estado y reglas críticas 
+     (ej. `Invoice`, `Customer`, `Item`, `Category`). Poseen propiedades como subtotales, 
+     totales y claves de acceso.
+   * Servicios de Dominio: Implementan lógica de negocio compleja que no pertenece a una 
+     sola entidad (ej. `InvoiceDomainService` o `CategoryDomainService`).
+
+B. Capa de Aplicación (Application Layer / Use Cases)
+   Orquesta el flujo de datos desde y hacia las entidades de dominio. En esta capa se mapean 
+   las acciones del usuario (crear factura, consultar clientes).
+   * CQRS: En lugar de usar servicios monolíticos, el sistema utiliza commands (operaciones de 
+     escritura) y queries (operaciones de lectura).
+     - Ejemplo: `CreateInvoiceCommand` encapsula la intención de crear una factura. Su handler 
+       respectivo (`CreateInvoiceCommandHandler`) ejecuta las reglas correspondientes y persiste los cambios.
+   * Eventos: Al finalizar un caso de uso con éxito, se emite un evento de dominio 
+     (`InvoiceCreatedEvent`) al bus de eventos para desacoplar tareas secundarias (firma digital 
+     del SRI, envío de correos).
+
+C. Capa de Adaptadores de Interfaz (Interface Adapters Layer)
+   Traduce los datos del formato más conveniente para los casos de uso al formato más conveniente 
+   para agentes externos (HTTP, Bases de Datos).
+   * Controllers: Exponen los endpoints RESTful (ej. `InvoiceController`, `/invoices`). Validan 
+     la entrada usando DTOs y transforman los requests en Comandos/Consultas para el CommandBus.
+   * Repositorios concretos: Implementan las consultas y operaciones específicas de almacenamiento 
+     (`InvoiceRepository`, `CustomerRepository`) interactuando con TypeORM.
+
+D. Capa de Infraestructura (Infrastructure Layer)
+   Contiene todas las herramientas, bibliotecas y bases de datos externas necesarias para el 
+   funcionamiento físico del sistema.
+   * NestJS: Contenedor de inyección de dependencias (DI) que instancia y conecta los servicios.
+   * Base de datos: PostgreSQL, Redis y RabbitMQ.
+   * Servicios de Integración Externa: El modulo `VoucherModule` que implementa `SignService` 
+     (firmado XAdES-BES usando node-forge) y `SoapService` (conexión SOAP SRI offline).
+
+
+4. PATRÓN CQRS Y FLUJO DE EVENTOS (EVENT-DRIVEN)
+------------------------------------------------
+La adopción del patrón CQRS permite simplificar los casos de uso y desacoplar la lógica. 
+Al separar las acciones que cambian el estado del sistema de aquellas que solo devuelven información:
+
+1. Escritura (Commands):
+   Controllers envían comandos al `CommandBus`. Estos comandos son procesados por Handlers 
+   que modifican las entidades del dominio y graban en la base de datos.
+
+2. Lectura (Queries):
+   Controllers envían consultas al `QueryBus` para recuperar información en DTOs optimizados 
+   para la visualización, saltándose reglas de negocio complejas de escritura.
+
+3. Eventos de Dominio:
+   Tras guardar la factura, el `CreateInvoiceCommandHandler` publica `InvoiceCreatedEvent`.
+   * El módulo de integración (`SRI`) escucha este evento mediante `InvoiceCreatedEventHandler` 
+     e inicia el proceso de firmado XML y autorización SOAP de forma independiente al flujo 
+     HTTP principal del cliente.
+   * El módulo de correos (`Email`) escucha el mismo evento para notificar al cliente.
+
+Para una representación gráfica detallada de este flujo macro transaccional y la interacción 
+de las capas, por favor consulte el siguiente diagrama adjunto:
+[flujo_transaccion.jpg](file:///D:/USER/Desktop/CURSO%20FACTURACION%20ELECTRONICA/PRACTICA/documentacion/Arquitectura/flujo_transaccion.jpg)
+
+
+5. DESVIACIONES PRÁCTICAS Y COMPROMISOS (TRADE-OFFS)
+-----------------------------------------------------
+Aunque el sistema persigue una Arquitectura Limpia pura, se han realizado compromisos pragmáticos 
+habituales en entornos de desarrollo de TypeScript/NestJS:
+
+A. Acoplamiento de Entidades al ORM (TypeORM):
+   * Desviación: Las entidades del dominio (`src/invoice/database/entities/invoice.entity.ts`) 
+     contienen decoradores como `@Entity()`, `@Column()` y `@ManyToOne()`.
+   * Razón del compromiso: Mantener una separación pura requeriría definir una clase de Entidad de 
+     Dominio (limpia) y otra clase de Entidad de Persistencia (decorada para TypeORM), teniendo 
+     que mapear entre ambas constantemente. Se optó por una entidad unificada para reducir 
+     la cantidad de código repetitivo (boilerplate) a costa de acoplar ligeramente el dominio 
+     a la herramienta de persistencia.
+
+B. Dependencia Directa de Clases de Repositorio:
+   * Desviación: Los servicios de dominio importan directamente las clases concretas de repositorios 
+     (ej. `InvoiceDomainService` importa `InvoiceRepository` en lugar de una interfaz `IInvoiceRepository`).
+   * Razón del compromiso: En TypeScript, definir interfaces abstractas para la inyección de dependencias 
+     requiere el uso de tokens simbólicos personalizados (`@Inject('IInvoiceRepository')`), lo cual oscurece 
+     la legibilidad del código. Al usar NestJS, se inyecta directamente la clase repositorio concreta 
+     confiando en que el framework gestiona el ciclo de vida del componente.
+
+
+6. INTEGRACIÓN DE GATEWAYS Y SERVICIOS EXTERNOS (SRI)
+-----------------------------------------------------
+El diseño de la integración con el SRI ilustra adecuadamente la frontera de la Arquitectura Limpia:
+
+* El núcleo de facturación (`InvoiceModule`) no sabe qué es el SRI, qué es el firmado XAdES-BES, 
+  ni qué es el protocolo SOAP. Solo sabe que ha creado una factura e informa de ello al sistema 
+  emitiendo un evento.
+* `IntegrationModule` actúa como un adaptador de salida (driven adapter / gateway) que traduce 
+  el evento de dominio genérico a las especificidades requeridas por el SRI mediante dos servicios 
+  de infraestructura:
+  - `SignService`: Realiza el firmado criptográfico de archivos XML (XAdES-BES con node-forge).
+  - `SoapService`: Realiza el transporte de red SOAP para validación y autorización.
+* El resultado de la integración exterior actualiza el estado del Dominio llamando al repositorio 
+  para modificar campos de control en la factura (`accessKey`, `authorizationStatus`, `authorizationMessage`).
+
+
+7. INFRAESTRUCTURA Y SERVICIOS (DOCKER)
+---------------------------------------
+El sistema cuenta con una arquitectura de soporte dockerizada integrada por:
+* **api-sri-postgresql-1 (PostgreSQL 16)** (Puerto 5433 local / 5432 contenedor): Base de datos principal. 
+  Requiere extensión `uuid-ossp` o `pgcrypto` para autogenerar IDs en formato UUIDv4 definidos en 
+  la clase abstracta de auditoría `FullAuditedEntity`.
+* **api-sri-redis_db-1 (Redis)** (Puerto 6379): Utilizado para almacenamiento rápido en caché 
+  y manejo de colas temporales.
+* **api-sri-rabbitmq-1 (RabbitMQ)** (Puerto 5672): Message broker utilizado para distribuir 
+  e intercomunicar eventos asíncronos y desacoplados del sistema.
+
+================================================================================
+FIN DE LA DESCRIPCIÓN DE ARQUITECTURA (v1)
+================================================================================

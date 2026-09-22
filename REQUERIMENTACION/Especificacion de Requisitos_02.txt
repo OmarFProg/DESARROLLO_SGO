@@ -1,0 +1,1190 @@
+================================================================================
+ESPECIFICACIÓN DE REQUISITOS DE SOFTWARE (SRS) — VERSIÓN 2.0
+Conforme al estándar IEEE Std 830-1998 e ISO/IEC 25010:2023
+================================================================================
+Proyecto: Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Revisión: 2.0 Definitiva y Aprobada (Ampliación SRI e Innovación IA)
+Fecha:    21 de Septiembre de 2026
+Institución: Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Facultad de Informática y Electrónica — Carrera de Software
+================================================================================
+
+FICHA DEL DOCUMENTO
+--------------------------------------------------------------------------------
+Fecha de Emisión: 21/09/2026
+Revisión:         2.0 Definitiva
+Autores:
+  - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / Integración API-SRI)
+  - Villalva Dumancela, Alexander Rafael (Frontend / UX Clínica / Asistente IA)
+Verificado Departamento de Calidad / Asesoría Técnica ESPOCH:
+  - Ing. Menéndez Verdecia, Jorge Ariel (Director de Titulación / Scrum Master)
+  - Ing. Santillán Castillo, Julio Roberto (Revisor Técnico / Asesor Metodológico)
+
+Documento formalmente validado por las partes:
+Por el cliente / Beneficiario:
+  Fdo. Propietario / Optometrista Principal
+  Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+
+Por la empresa suministradora / Equipo de Desarrollo:
+  Fdo. Figueroa Díaz, Omar Santiago       Fdo. Villalva Dumancela, Alexander Rafael
+  Desarrollador Backend / Seguridad       Desarrollador Frontend / UX
+
+Insumos directos de referencia:
+  - plaDesarrolloRequisitos.txt (Plan de Requisitos v2.0)
+  - informeEntrevistasConsolidado.txt (Elicitación con Stakeholders)
+  - InformeImplementacionAppFacturacionElectronica.txt (API SRI NestJS / SOAP / XAdES-BES)
+  - informePropuestasInnovacion.txt (Propuesta 3: Chatbot con los Datos)
+  - Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.pdf
+  - directrices.txt (Estudio de Factibilidad)
+
+
+================================================================================
+CONTENIDO GENERAL
+================================================================================
+1. INTRODUCCIÓN
+   1.1 Propósito
+   1.2 Alcance (Línea Base Ampliada a 7 Módulos Funcionales)
+   1.3 Personal Involucrado
+   1.4 Definiciones, Acrónimos y Abreviaturas
+   1.5 Referencias
+   1.6 Resumen del Documento
+2. DESCRIPCIÓN GENERAL
+   2.1 Perspectiva del Producto (Arquitectura Híbrida y Desacoplada)
+   2.2 Funcionalidad del Producto (Catálogo de los 7 Módulos del Sistema)
+   2.3 Características de los Usuarios y Matriz de Roles
+   2.4 Restricciones de Diseño e Implementación
+   2.5 Suposiciones y Dependencias
+   2.6 Evolución Previsible del Sistema (Requisitos Futuros Actualizados)
+3. REQUISITOS ESPECÍFICOS
+   3.1 Requisitos Comunes de las Interfaces
+       3.1.1 Interfaces de Usuario
+       3.1.2 Interfaces de Hardware
+       3.1.3 Interfaces de Software
+       3.1.4 Interfaces de Comunicación
+   3.2 Requisitos Funcionales Formales (Tablas IEEE 830: RF-01 a RF-31)
+       3.2.1 Módulo 1: Autenticación y Gestión de Usuarios (RF-01 a RF-02)
+       3.2.2 Módulo 2: Gestión de Pacientes (RF-03 a RF-06)
+       3.2.3 Módulo 3: Historia Clínica y Graduación (RF-07 a RF-15)
+       3.2.4 Módulo 4: Pedidos al Laboratorio Óptico (RF-16 a RF-19)
+       3.2.5 Módulo 5: Ventas y Cobros Locales (RF-20 a RF-23)
+       3.2.6 Módulo 6: Facturación Electrónica SRI (RF-24 a RF-27)
+       3.2.7 Módulo 7: Asistente Inteligente Operativo "Chatbot con los Datos" (RF-28 a RF-31)
+   3.3 Requisitos No Funcionales (ISO/IEC 25010:2023 y S-Tags)
+       3.3.1 Requisitos de Rendimiento
+       3.3.2 Seguridad de la Información (Autenticidad, Integridad y Responsabilidad)
+       3.3.3 Fiabilidad y Tolerancia a Fallos
+       3.3.4 Disponibilidad y Resiliencia Operativa
+       3.3.5 Mantenibilidad y Modularidad
+       3.3.6 Portabilidad y Usabilidad
+   3.4 Otros Requisitos
+       3.4.1 Requisitos Legales y Normativos (LOPDP, SRI v1.1.0, Ley de Comercio Electrónico)
+       3.4.2 Requisitos Operativos, Fiscales y de Entorno Local
+4. APÉNDICES
+   Apéndice A: Matriz de Trazabilidad Integral de Requisitos (RF / RNF / S-Tags / ISO 25010)
+   Apéndice B: Catálogo de Requisitos Futuros Actualizado (RF-FUT-01 a RF-FUT-04)
+   Apéndice C: Glosario Técnico Extendido (Optometría, Facturación SRI, Inteligencia Artificial y Ciberseguridad)
+
+
+================================================================================
+1. INTRODUCCIÓN
+================================================================================
+
+La presente Especificación de Requisitos de Software (SRS v2.0) formaliza de manera 
+rigurosa, estructurada y verificable el conjunto de capacidades funcionales, 
+atributos de calidad y restricciones operativas del Sistema Informático de Gestión 
+Clínica y Comercial Optométrica (SGO), desarrollado para el establecimiento de salud 
+visual Óptica Vista Visión, radicado en la ciudad de Riobamba, Provincia de Chimborazo.
+
+1.1 PROPÓSITO
+El propósito de este documento es:
+a) Establecer la línea base técnica contractual y de ingeniería de software definitiva 
+   para el diseño de la base de datos relacional, la arquitectura de microservicios y 
+   la implementación en Sprints ágiles bajo la metodología Scrum.
+b) Servir de insumo primario e indispensable para la elaboración del Estudio de 
+   Factibilidad (`ESTUDIO DE FACTIBILIDAD/directrices.txt`), fundamentando sus análisis 
+   en las dimensiones técnica, económica, legal y operativa.
+c) Consolidar formalmente los dos nuevos requisitos estratégicos aprobados:
+   1. Facturación Electrónica con los Web Services del Servicio de Rentas Internas (SRI).
+   2. Componente de Innovación Tecnológica: Asistente Inteligente Operativo "Chatbot con los Datos".
+d) Establecer los criterios formales de verificación de seguridad conforme al estándar 
+   ISO/IEC 25010:2023 y el marco Secure Scrum (Pohl y Hof, 2015).
+Audiencia: Tribunal académico de titulación de la ESPOCH, director y asesor del proyecto, 
+equipo de desarrollo (backend/frontend) y personal directivo de Óptica Vista Visión.
+
+1.2 ALCANCE
+- Denominación del producto: Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO).
+- Descripción del sistema: Aplicación web responsiva de alta seguridad concebida bajo una 
+  arquitectura desacoplada. Integra el control integral de pacientes, refracción clínica 
+  asistida con validaciones dioptricas automáticas, emisión de órdenes técnicas para talleres 
+  ópticos externos con aislamiento de datos sensibles (cumplimiento LOPDP), ventas de mostrador, 
+  arqueo diario de caja, facturación electrónica nativa con el SRI y asistencia inteligente 
+  operativa mediante consultas en lenguaje natural con blindaje estricto de solo lectura.
+- Delimitación de los Siete Módulos Funcionales:
+  * Módulo 1 (M1): Autenticación y Gestión de Usuarios
+  * Módulo 2 (M2): Gestión de Pacientes
+  * Módulo 3 (M3): Historia Clínica y Graduación
+  * Módulo 4 (M4): Pedidos al Laboratorio Óptico
+  * Módulo 5 (M5): Ventas y Cobros Locales
+  * Módulo 6 (M6): Facturación Electrónica SRI (Firma XAdES-BES, SOAP, RIDE PDF y Correo)
+  * Módulo 7 (M7): Asistente Inteligente Operativo "Chatbot con los Datos" (Consultas Seguras)
+
+1.3 PERSONAL INVOLUCRADO
++-----------------------+---------------------+----------------------+-------------------------------+-----------------------------------+
+| Nombre                | Rol                 | Categoría Profesional| Responsabilidades             | Información de Contacto           |
++-----------------------+---------------------+----------------------+-------------------------------+-----------------------------------+
+| Omar Santiago         | Desarrollador       | Egresado Carrera de  | Arquitectura backend, modelo  | omar.figueroa@espoch.edu.ec       |
+| Figueroa Díaz         | Backend / Autor     | Software (ESPOCH)    | BD, API SRI, seguridad y logs | Telf: 0992714396                  |
+| Alexander Rafael      | Desarrollador       | Egresado Carrera de  | Interfaz de usuario (React),  | alexander.villalva@gmail.com      |
+| Villalva Dumancela    | Frontend / Autor    | Software (ESPOCH)    | UX clínica, chatbot e interfaz| Telf: 0958763979                  |
+| Ing. Jorge Ariel      | Director Trabajo de | Docente Ocasional    | Dirección metodológica Scrum, | jorge.menendez@espoch.edu.ec      |
+| Menéndez Verdecia     | Grado / Scrum Master| Titular Auxiliar FIE | supervisión de calidad y BD   | Telf: 0983689403                  |
+| Ing. Julio Roberto    | Revisor Técnico /   | Docente Titular      | Asesoría técnica en seguridad,| julio.santillan@espoch.edu.ec     |
+| Santillán Castillo    | Asesor Académico    | Agregado FIE         | criptografía, PWA y factibil. | Telf: FIE-ESPOCH                  |
+| Propietario /         | Stakeholder         | Licenciado en        | Validación de procesos de     | Óptica Vista Visión               |
+| Optometrista Principal| Principal / Cliente | Optometría           | óptica, requerimientos y tests| Riobamba, Ecuador                 |
++-----------------------+---------------------+----------------------+-------------------------------+-----------------------------------+
+
+1.4 DEFINICIONES, ACRÓNIMOS Y ABREVIATURAS
+- ACID: Atomicidad, Consistencia, Aislamiento y Durabilidad (garantías de persistencia relacional).
+- ATS: Anexo Transaccional Simplificado (reporte tributario oficial exigido por el SRI).
+- Clave de Acceso: Código numérico único de 49 dígitos con dígito verificador Módulo 11 para comprobantes SRI.
+- CQRS: Command Query Responsibility Segregation (patrón arquitectónico de separación comando/consulta).
+- DNP / DP: Distancia Nasopupilar / Distancia Interpupilar en milímetros (mm).
+- EventBus: Bus de eventos de dominio para comunicación reactiva asíncrona entre módulos.
+- IEEE: Institute of Electrical and Electronics Engineers.
+- ISO/IEC 25010:2023: Norma internacional de calidad y evaluación de producto software.
+- JWT: JSON Web Token (estándar abierto RFC 7519 para intercambio seguro de credenciales).
+- LLM: Large Language Model (modelo de lenguaje masivo para procesamiento de lenguaje natural).
+- LOPDP: Ley Orgánica de Protección de Datos Personales del Ecuador (Registro Oficial 459, 2021).
+- NLP: Natural Language Processing (procesamiento de lenguaje natural para el enrutamiento de intenciones).
+- PKCS#12 (.p12): Formato de contenedor criptográfico para almacenar llaves privadas y certificados X.509.
+- RBAC: Role-Based Access Control (control de acceso basado en roles).
+- RIDE: Representación Impresa de Documento Electrónico (formato PDF oficial regulado por el SRI).
+- SGO: Sistema de Gestión Optométrica.
+- SOAP: Simple Object Access Protocol (protocolo de intercambio XML sobre HTTP empleado por los Web Services del SRI).
+- Soft Delete: Borrado lógico mediante marcado temporal inactivo (`deleted_at`).
+- S-Tag: Secure Scrum Security Tag (etiqueta formal de trazabilidad de requisitos de seguridad).
+- XAdES-BES: XML Advanced Electronic Signatures - Basic Electronic Signature (perfil oficial de firma digital en Ecuador).
+
+1.5 REFERENCIAS
+[1] IEEE Std 830-1998, IEEE Recommended Practice for Software Requirements Specifications.
+[2] ISO/IEC 25010:2023, Systems and software Quality Requirements and Evaluation (SQuaRE) — Product quality model.
+[3] Servicio de Rentas Internas (SRI), Ficha Técnica de Comprobantes Electrónicos Esquema Offline v1.1.0, Ecuador.
+[4] Ley de Comercio Electrónico, Firmas Electrónicas y Mensajes de Datos (Ley N.° 2002-67, Congreso Nacional del Ecuador).
+[5] Ley Orgánica de Protección de Datos Personales (LOPDP), Registro Oficial Suplemento 459, Mayo 2021.
+[6] Informe Técnico de Implementación de la Aplicación de Facturación Electrónica (API-SRI), Septiembre 2026.
+[7] Informe Técnico de Análisis y Cartera de Propuestas de Innovación (informePropuestasInnovacion.txt), Septiembre 2026.
+[8] Anteproyecto del Trabajo de Titulación de Alexander Villalva y Omar Figueroa, ESPOCH, Mayo 2026.
+[9] Pohl, C., & Hof, H. J. (2015). Secure Scrum: Development of Secure Software with Scrum.
+
+1.6 RESUMEN DEL DOCUMENTO
+La Sección 2 detalla la perspectiva arquitectónica híbrida, los perfiles de usuario y las restricciones 
+del sistema. La Sección 3 formaliza los requisitos funcionales (RF-01 a RF-31) bajo plantillas estandarizadas 
+IEEE 830 y los requisitos no funcionales (RNF-01 a RNF-10) alineados a ISO/IEC 25010:2023. La Sección 4 
+presenta los apéndices de trazabilidad bidireccional, catálogo de requisitos futuros y glosario extendido.
+
+
+================================================================================
+2. DESCRIPCIÓN GENERAL
+================================================================================
+
+2.1 PERSPECTIVA DEL PRODUCTO
+El Sistema de Gestión Optométrica (SGO) es una solución integral, autónoma y distribuida 
+diseñada para modernizar y blindar operacionalmente a Óptica Vista Visión. Su arquitectura 
+se organiza en servicios especializados y desacoplados:
+- Capa de Presentación (Frontend): Single Page Application (SPA) responsiva en React con Vite, 
+  diseñada bajo criterios de ergonomía clínica y equipada con un widget interactivo para el asistente de IA.
+- Núcleo Transaccional Clínico-Comercial (Backend Core): API RESTful desarrollada sobre el 
+  framework Laravel 10+, encargada de la lógica clínica, recetas, órdenes técnicas, inventario y caja.
+- Microservicio de Facturación Electrónica (API SRI): Microservicio empresarial desarrollado en 
+  NestJS con TypeScript, TypeORM, CQRS y arquitectura orientada a eventos (EDA). Ejecuta el ciclo 
+  completo de emisión XML v1.1.0, firma digital avanzada XAdES-BES, enlace SOAP con el SRI, 
+  generación de RIDE en PDF vía Puppeteer y despacho por correo vía SMTP.
+- Motor del Asistente Inteligente ("Chatbot con los Datos"): Servicio híbrido acoplado a un 
+  enrutador de intenciones léxico-sintáctico (Regex/plantillas determinísticas para modo LAN local) 
+  y conector opcional a modelos LLM para contextualización comercial, conectado a PostgreSQL bajo 
+  un rol exclusivo de solo lectura (`GRANT SELECT`).
+- Capa de Persistencia: Base de datos relacional PostgreSQL 16 con soporte transaccional ACID, 
+  auditoría completa (`audit_logs`) y aislamiento de esquemas.
+
+2.2 FUNCIONALIDAD DEL PRODUCTO
+El sistema implementa de forma integrada siete módulos funcionales:
+1. Módulo de Autenticación y Gestión de Usuarios: Registro de operadores, control granular RBAC 
+   (Administrador, Optometrista, Asistente) y gestión segura de sesiones con tokens JWT firmados.
+2. Módulo de Gestión de Pacientes: Registro demográfico, validador de cédula ecuatoriana módulo 10 
+   con búsqueda predictiva anti-duplicados, soporte flexible para menores de edad y repositorio seguro de adjuntos.
+3. Módulo de Historia Clínica y Graduación: Examen refractivo independiente OD/OI (Esfera, Cilindro negativo, 
+   Eje, Adición con signo positivo forzado, DP/DNP, Snellen pies), parámetros de montura, anamnesis CIE-10, 
+   comparativa dinámica lente previo, emisión de certificados/recetas en PDF e inmutabilidad mediante Soft Delete.
+4. Módulo de Pedidos al Laboratorio Óptico: Órdenes de trabajo técnicas desprovistas de diagnósticos 
+   confidenciales (LOPDP), catálogo dinámico de lunas y tratamientos, máquina de estados finitos (4 estados) 
+   y control de garantías/rectificaciones.
+5. Módulo de Ventas y Cobros Locales: Emisión de comprobantes internos de venta, control híbrido de 
+   stock (lotes de armazones por precio y unitario para consumibles), cobros mixtos con anticipos/saldos 
+   bajo transacciones ACID y arqueo consolidado de caja diaria.
+6. Módulo de Facturación Electrónica SRI: Construcción automatizada de XML oficial, cálculo algorítmico 
+   de clave de acceso de 49 dígitos (Módulo 11), firma digital XAdES-BES con certificado PKCS#12, 
+   transmisión y consulta SOAP (RecepcionComprobantesOffline / AutorizacionComprobantesOffline), 
+   renderizado de RIDE PDF con código de barras Code128, despacho de correo y generación de ATS mensual.
+7. Módulo del Asistente Inteligente Operativo ("Chatbot con los Datos"): Interfaz conversacional 
+   en Dashboard para consultas en lenguaje natural sobre finanzas de caja, existencias de armazones y 
+   pedidos de taller pendientes, con filtro estricto por roles RBAC, modo autónomo LAN offline y solo lectura inviolable.
+
+2.3 CARACTERÍSTICAS DE LOS USUARIOS Y MATRIZ DE ROLES
++-----------------------+----------------------+--------------------+---------------------------------------------------------------+
+| Perfil de Usuario     | Formación Académica  | Destrezas Técnicas | Responsabilidades y Acciones Permitidas                       |
++-----------------------+----------------------+--------------------+---------------------------------------------------------------+
+| Administrador /       | Tercer nivel en      | Gestión empresarial| Acceso total al sistema, anulación de ventas con reversión,   |
+| Propietario           | Optometría / Admón.  | y finanzas clínicas| arqueo de caja, configuración SRI (.p12), consulta analítica  |
+|                       |                      |                    | completa en Chatbot (caja, finanzas, métricas de inventario).  |
++-----------------------+----------------------+--------------------+---------------------------------------------------------------+
+| Optometrista Clínico  | Licenciado / Tecnól. | Examen refractivo y| Gestión de pacientes, refracción clínica, emisión de recetas  |
+|                       | en Optometría        | diagnóstico ocular | y certificados, creación de pedidos de taller, consulta en    |
+|                       |                      |                    | Chatbot sobre estado de pedidos y stock de armazones.         |
++-----------------------+----------------------+--------------------+---------------------------------------------------------------+
+| Asistente Comercial   | Bachiller / Técnico  | Atención al cliente| Registro demográfico, ventas de mostrador, cobro de anticipos |
+| / Vendedor            | en Ventas            | y caja básica      | y saldos, entrega de trabajos, consulta en Chatbot restringida|
+|                       |                      |                    | a existencias de stock y estado de pedidos de clientes.       |
++-----------------------+----------------------+--------------------+---------------------------------------------------------------+
+
+2.4 RESTRICCIONES DE DISEÑO E IMPLEMENTACIÓN
+1. Restricción de Alcance y Tiempo: Desarrollo estructurado en 4 Sprints quincenales (8 semanas calendario).
+2. Restricción Tecnológica: Frontend en React 18, Backend Core en Laravel 10+, Microservicio SRI en 
+   NestJS 10+ con TypeScript, Gestor de Base de Datos PostgreSQL 16+.
+3. Restricción Criptográfica y de Certificación: Uso estricto de certificados digitales PKCS#12 (.p12) 
+   válidos emitidos por entidades certificadoras acreditadas en Ecuador; prohibición de almacenar 
+   contraseñas de firma en texto claro en repositorios.
+4. Restricción de Inviolabilidad de Datos en IA: Conexión exclusiva de solo lectura (`GRANT SELECT`) 
+   para el servicio del chatbot, garantizando la imposibilidad matemática de modificaciones accidentales.
+5. Restricción de Privacidad y Normativa Sanitaria: Cumplimiento imperativo de la Ley Orgánica de 
+   Protección de Datos Personales (LOPDP Ecuador), aislando historiales patológicos de las órdenes enviadas a laboratorios.
+6. Restricción de Autonomía Local: El sistema clínico debe ser 100% operativo en la red LAN del consultorio, 
+   asegurando que caídas de internet no impidan la atención a pacientes ni la venta de mostrador.
+
+2.5 SUPOSICIONES Y DEPENDENCIAS
+1. Conectividad Externa: Se asume servicio de internet en consultorio para la transmisión SOAP hacia el 
+   SRI, despacho de correos SMTP y modo contextual del chatbot; en caso de corte, el sistema conmuta a 
+   modo contingencia offline.
+2. Certificado Digital Vigente: Se asume que el emisor dispone de un certificado .p12 legalmente emitido y con vigencia activa.
+3. Compatibilidad de Navegadores: Clientes ejecutados en Google Chrome, Mozilla Firefox, Microsoft Edge o Safari con ES6+.
+4. Entorno de Impresión: Disponibilidad de impresoras térmicas de 80 mm para recibos locales e impresoras láser/inyección para RIDE y recetas A4.
+
+2.6 EVOLUCIÓN PREVISIBLE DEL SISTEMA (REQUISITOS FUTUROS)
+Habiéndose integrado la Facturación Electrónica SRI y el Chatbot de Innovación en esta Versión 2.0, 
+el catálogo de requisitos futuros se redefine para fases post-titulación:
+- RF-FUT-01: Notificaciones y envío automatizado de RIDE/recetas por WhatsApp Business Cloud API.
+- RF-FUT-02: Pipeline ETL para migración histórica de datos desde el archivo .BAK de SQL Server del software legado.
+- RF-FUT-03: Módulo de Agenda Médica con reservas en línea y recordatorios de turnos vía SMS/Web.
+- RF-FUT-04: Transacciones del Chatbot con Confirmación en Doble Factor (escritura asistida para reajuste de precios y bajas de stock).
+
+
+================================================================================
+3. REQUISITOS ESPECÍFICOS
+================================================================================
+
+3.1 REQUISITOS COMUNES DE LAS INTERFACES
+
+3.1.1 Interfaces de Usuario
+- Interfaz web Single Page Application (SPA) con arquitectura responsiva y navegación ergonómica.
+- Formularios optométricos en cuadrícula simétrica para OD y OI con desplazamiento fluido por teclado (Tab/Enter).
+- Pantalla dedicada para Facturación Electrónica con visualización de estado en tiempo real (AUTORIZADO, EN PROCESO, DEVUELTA), 
+  descarga de XML firmado y visualizador embebido del RIDE en PDF.
+- Widget flotante en esquina inferior del Dashboard para interacción conversacional con el Asistente Inteligente ("Chatbot con los Datos"), 
+  con presentación de respuestas enriquecidas mediante tarjetas de resumen y badges de estado.
+
+3.1.2 Interfaces de Hardware
+- Compatibilidad con PCs de escritorio y portátiles (mínimo CPU Intel Core i3 / AMD Ryzen 3, 8 GB RAM).
+- Soporte para tabletas táctiles (mínimo 1024x768 de resolución) para captura clínica en consultorio.
+- Impresoras térmicas de tickets POS (80 mm) e impresoras multifunción estándar (A4/Carta) para RIDE y recetas.
+
+3.1.3 Interfaces de Software
+- Motor de Base de Datos PostgreSQL 16+ con soporte JSONB y transacciones ACID.
+- API Core en Laravel 10+ (PHP 8.2) comunicada vía REST JSON.
+- Microservicio API-SRI en NestJS 10+ (Node.js 20+ LTS, TypeORM, @nestjs/cqrs).
+- Motor de Firma Digital: Librería 'node-forge' para parsing PKCS#12, canonicalización XML-C14N y digest SHA-1.
+- Generación de RIDE: Librería 'bwip-js' (código de barras Code128) y 'puppeteer' (renderizado PDF headless).
+- Servicio de Correo: 'nodemailer' con transporte SMTP cifrado TLS/SSL.
+- Conector de IA: Cliente HTTP seguro (Axios/cURL) para invocación de API LLM en modo aumentado.
+
+3.1.4 Interfaces de Comunicación
+- Protocolo de transporte HTTPS con cifrado obligatorio TLS 1.2 / TLS 1.3 en todas las conexiones cliente-servidor.
+- Comunicación SOAP 1.1 / 1.2 sobre HTTP con los Web Services oficiales del SRI:
+  * Pruebas: `https://celcer.sri.gob.ec/comprobantes-electronicos-ws/...`
+  * Producción: `https://cel.sri.gob.ec/comprobantes-electronicos-ws/...`
+- Intercambio de cargas útiles de datos en formato UTF-8 JSON entre React, Laravel y NestJS.
+
+
+3.2 REQUISITOS FUNCIONALES FORMALES (RF-01 A RF-31)
+
+A continuación se detalla cada requisito funcional conforme a la plantilla estandarizada IEEE Std 830-1998:
+
+--------------------------------------------------------------------------------
+3.2.1 MÓDULO 1: AUTENTICACIÓN Y GESTIÓN DE USUARIOS (M1)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-01                                                  |
+| NOMBRE DE REQUISITO:  Control de Acceso Basado en Roles (RBAC)               |
+| TIPO:                 Requisito de Seguridad / Autorización                  |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Anteproyecto ESPOCH                 |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe autenticar a los operadores y restringir el acceso a rutas,  |
+| vistas y endpoints de API según tres perfiles: Administrador (acceso total), |
+| Optometrista (pacientes, historias, recetas y taller) y Asistente (pacientes,|
+| ventas, cobros y entregas).                                                  |
+| ENTRADAS:                                                                    |
+| - Correo electrónico / nombre de usuario y contraseña cifrada.              |
+| PROCESO:                                                                     |
+| - Verificación de credenciales con hash bcrypt; verificación de rol y claims.|
+| - Emisión de token JWT con permisos; intercepción en middleware de rutas.    |
+| SALIDAS:                                                                     |
+| - Sesión autorizada según perfil o código HTTP 403 Forbidden ante denegación.|
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-AUTH-01]: Bloqueo irrestricto de acceso no autorizado en front y back.|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-02                                                  |
+| NOMBRE DE REQUISITO:  Gestión Segura de Sesiones y Expiración por Inactividad|
+| TIPO:                 Requisito de Seguridad / Sesiones                      |
+| FUENTE DEL REQUISITO: Entrevista 2 (Decisiones Técnicas), plaDesarrolloRequis.|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe gestionar sesiones mediante tokens JWT firmados (SHA-256),   |
+| forzando expiración automática tras 20 minutos de inactividad de teclado/mouse.|
+| ENTRADAS:                                                                    |
+| - Eventos de interacción del usuario o temporizador de inactividad en cliente.|
+| PROCESO:                                                                     |
+| - Al cumplirse 20 minutos sin eventos, se purga el token de memoria y se     |
+|   solicita su inclusión en la lista negra (blacklist) del backend.           |
+| SALIDAS:                                                                     |
+| - Redirección inmediata a pantalla de Login con bloqueo de datos clínicos.   |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-AUTH-02]: Invalidación total de peticiones con tokens caducados (401)|
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.2 MÓDULO 2: GESTIÓN DE PACIENTES (M2)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-03                                                  |
+| NOMBRE DE REQUISITO:  Registro Demográfico y Filiación del Paciente          |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Ficha de Atención Óptica            |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe capturar y mantener los datos de filiación del paciente:     |
+| nombres, apellidos, cédula/pasaporte, teléfono celular, fecha de nacimiento, |
+| ocupación y cálculo automático de edad cronológica.                          |
+| ENTRADAS:                                                                    |
+| - Datos demográficos digitados por el operador.                              |
+| PROCESO:                                                                     |
+| - Validación de formatos; cálculo dinámico de edad en años cumplidos.        |
+| - Inserción en base de datos con timestamps de creación y usuario creador.   |
+| SALIDAS:                                                                     |
+| - Ficha de paciente creada con identificador único (UUID).                   |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-01]: Validación de tipos de datos y persistencia íntegra en BD. |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-04                                                  |
+| NOMBRE DE REQUISITO:  Gestión Flexible de Menores de Edad                    |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevista 2 (Hallazgo M2), informeEntrevistasConsolid.|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir abrir expediente clínico a pacientes menores de 18  |
+| años sin exigir cédula de identidad obligatoria, admitiendo registrar de     |
+| forma opcional los datos del tutor legal o asignando un código temporal.    |
+| ENTRADAS:                                                                    |
+| - Checkbox "Menor de edad sin documento", datos del menor y tutor opcional.  |
+| PROCESO:                                                                     |
+| - Omisión de la validación de unicidad de cédula para el menor y generación  |
+|   de código provisorio con formato MEN-YYYYMMDD-XXXX.                        |
+| SALIDAS:                                                                     |
+| - Ficha pediátrica creada sin interrupción del flujo asistencial.            |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Creación exitosa de pacientes infantiles sin documento de identidad.       |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-05                                                  |
+| NOMBRE DE REQUISITO:  Búsqueda Predictiva y Validación Módulo 10 de Cédula   |
+| TIPO:                 Requisito Funcional / Integridad                       |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Normativa Registro Civil Ecuador    |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe validar el número de cédula ecuatoriana mediante algoritmo   |
+| módulo 10 y ofrecer búsqueda predictiva con autocompletado en tiempo real     |
+| por apellidos o cédula, bloqueando duplicados.                               |
+| ENTRADAS:                                                                    |
+| - Dígitos de cédula o caracteres de texto en barra de búsqueda (mínimo 2).   |
+| PROCESO:                                                                     |
+| - Verificación de código de provincia (01-24), tercer dígito y suma ponderada.|
+| - Consulta indexada con operadores ILIKE en PostgreSQL; detección duplicados.|
+| SALIDAS:                                                                     |
+| - Lista predictiva de coincidencias o alerta de cédula inválida/duplicada.   |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-01]: Bloqueo absoluto de números de cédula estructuralmente falsos|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-06                                                  |
+| NOMBRE DE REQUISITO:  Carga y Repositorio de Adjuntos Clínicos Digitales     |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevista 1, Requisitos Detectados                    |
+| PRIORIDAD:            Media / Deseable (Could Have)                          |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir adjuntar archivos digitales de exámenes externos    |
+| (topografías, retinografías, OCT) en formato PDF, JPG y PNG (máximo 10 MB). |
+| ENTRADAS:                                                                    |
+| - Archivo binario cargado por el usuario y descripción del estudio.          |
+| PROCESO:                                                                     |
+| - Validación del tipo MIME real; renombramiento seguro con UUIDv4 en storage.|
+| SALIDAS:                                                                     |
+| - Archivo vinculado a la ficha clínica y disponible para descarga segura.    |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-02]: Aislamiento y comprobación de integridad de archivos en BD.|
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.3 MÓDULO 3: HISTORIA CLÍNICA Y GRADUACIÓN (M3)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-07                                                  |
+| NOMBRE DE REQUISITO:  Examen Refractivo Estándar Ojo por Ojo (OD y OI)       |
+| TIPO:                 Requisito Funcional / Clínico                          |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Anteproyecto ESPOCH                 |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe registrar y validar de forma separada para Ojo Derecho (OD)  |
+| y Ojo Izquierdo (OI): Esfera (-25.00 a +20.00 D), Cilindro (0.00 a -10.00 D  |
+| en notación cilíndrica negativa obligatoria), Eje (0° a 180° enteros) y      |
+| Adición (+0.75 a +4.00 D), en pasos exactos de 0.25 dioptrías.               |
+| ENTRADAS:                                                                    |
+| - Valores numéricos ingresados en los campos de refracción.                  |
+| PROCESO:                                                                     |
+| - Validación dual (frontend y FormRequest en Laravel); rechazo de cilindros  |
+|   positivos forzando transposición o bloqueo según norma optométrica.        |
+| SALIDAS:                                                                     |
+| - Registro refractivo estructurado y persistido en la tabla de exámenes.     |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-01]: Restricciones CHECK en PostgreSQL que impiden datos erróneos|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-08                                                  |
+| NOMBRE DE REQUISITO:  Formateo Automático de Signo Positivo en Adición       |
+| TIPO:                 Requisito Funcional / Regla de Negocio                 |
+| FUENTE DEL REQUISITO: Entrevista 1, Validación Clínica Optométrica           |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe asumir automáticamente el signo positivo (+) en el campo     |
+| Adición; si el optometrista ingresa un valor sin signo (ej. "2" o "1.75"),   |
+| el sistema lo almacena y muestra con el prefijo "+" (ej. "+2.00").           |
+| ENTRADAS:                                                                    |
+| - Valor digitado en el campo de adición.                                     |
+| PROCESO:                                                                     |
+| - Normalización algorítmica de cadena e interpolación del carácter (+).      |
+| SALIDAS:                                                                     |
+| - Valor persistido y desplegado con signo positivo explícito.                |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-01]: Consistencia matemática de la adición en toda la BD.       |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-09                                                  |
+| NOMBRE DE REQUISITO:  Captura de Agudeza Visual en Notación Snellen Pies     |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevista 1, Estándares de la Práctica Optométrica    |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe registrar la agudeza visual lejana y cercana con y sin       |
+| corrección bajo la escala estándar de Snellen en pies (20/20, 20/25, 20/40,  |
+| 20/200, Cuenta Dedos, Movimiento de Manos, Percepción Luminosa).             |
+| ENTRADAS:                                                                    |
+| - Selección de lista desplegable con valores estándar de Snellen.            |
+| PROCESO:                                                                     |
+| - Asignación directa del valor cualitativo y cuantitativo fraccionario.      |
+| SALIDAS:                                                                     |
+| - Agudeza visual registrada en el historial clínico del paciente.            |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Almacenamiento homogéneo sin formatos arbitrarios de texto libre.          |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-10                                                  |
+| NOMBRE DE REQUISITO:  Captura de Parámetros Físico-Ópticos (DNP y Alturas)   |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Ficha de Laboratorio Óptico         |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe registrar la Distancia Pupilar (DP), Distancia Nasopupilar   |
+| monocular para OD y OI (rango 20 a 40 mm) y las Alturas Focales de montaje   |
+| en milímetros para la correcta confección de lentes en taller.               |
+| ENTRADAS:                                                                    |
+| - Valores numéricos de DNP y alturas por ojo.                                |
+| PROCESO:                                                                     |
+| - Validación de rangos anatómicos válidos (20 a 40 mm).                      |
+| SALIDAS:                                                                     |
+| - Medidas persistidas y transferibles a la orden técnica de laboratorio.     |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-01]: Verificación de límites numéricos para centrado pupilar.   |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-11                                                  |
+| NOMBRE DE REQUISITO:  Parámetros Avanzados para Progresivos y Monturas       |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevista 2 (Decisiones Menéndez), plaDesarrolloRequis.|
+| PRIORIDAD:            Media / Deseable (Should Have)                         |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir capturar parámetros biométricos avanzados: ángulo   |
+| pantoscópico (grados), ángulo panorámico, distancia al vértice (mm) y tipo   |
+| de montura (cerrada, al aire, ranurada), almacenados en estructura JSONB.    |
+| ENTRADAS:                                                                    |
+| - Parámetros digitados en la sección avanzada de lentes progresivos.         |
+| PROCESO:                                                                     |
+| - Validación de formato JSON y persistencia estructurada en columna JSONB.   |
+| SALIDAS:                                                                     |
+| - Ficha técnica completa de adaptación para lentes de gama alta.             |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-02]: Validación del esquema JSON antes del guardado en BD.      |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-12                                                  |
+| NOMBRE DE REQUISITO:  Comparativa Dinámica en Pantalla contra Lente Anterior |
+| TIPO:                 Requisito Funcional / Ergonomía Clínica                |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Observación en Consultorio          |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| Durante el registro de la refracción actual, el sistema debe desplegar en un |
+| panel lateral o superior los valores del último examen refractivo registrado,|
+| permitiendo al optometrista comparar variaciones dióptricas de forma directa.|
+| ENTRADAS:                                                                    |
+| - Identificador del paciente en consulta activa.                             |
+| PROCESO:                                                                     |
+| - Consulta indexada del último examen (`ORDER BY fecha DESC LIMIT 1`).       |
+| SALIDAS:                                                                     |
+| - Cuadrícula comparativa simultánea en la interfaz de usuario.               |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-02]: Presentación inmutable de lectura del registro anterior.   |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-13                                                  |
+| NOMBRE DE REQUISITO:  Registro de Anamnesis y Diagnósticos CIE-10            |
+| TIPO:                 Requisito Funcional / Normativa Sanitaria              |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Acuerdo Ministerial MSP             |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe registrar motivo de consulta, antecedentes patológicos       |
+| familiares/personales (diabetes, hipertensión) y diagnóstico codificado      |
+| según el estándar internacional CIE-10 (ej. H52.1 Miopía, H52.2 Astigmatismo)|
+| ENTRADAS:                                                                    |
+| - Formulario clínico y buscador interactivo de códigos CIE-10.               |
+| PROCESO:                                                                     |
+| - Búsqueda de códigos y asociación con la consulta clínica activa.           |
+| SALIDAS:                                                                     |
+| - Diagnóstico oficial registrado en el historial clínico del paciente.       |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Codificación normalizada compatible con reportes epidemiológicos del MSP.  |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-14                                                  |
+| NOMBRE DE REQUISITO:  Emisión e Impresión de Certificados y Recetas en PDF   |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Solicitud del Beneficiario          |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe generar documentos PDF listos para imprimir: Receta Óptica   |
+| para el paciente y Certificado de Aptitud Visual Laboral/Ocupacional, con    |
+| membrete de Óptica Vista Visión, datos del profesional y firma digitalizada. |
+| ENTRADAS:                                                                    |
+| - Solicitud de impresión desde el expediente clínico guardado.               |
+| PROCESO:                                                                     |
+| - Compilación de plantilla gráfica y renderizado a documento PDF.            |
+| SALIDAS:                                                                     |
+| - Documento PDF generado y descargado o previsualizado en el navegador.      |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Generación fiel de documentos con nitidez y márgenes adecuados para A4.    |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-15                                                  |
+| NOMBRE DE REQUISITO:  Inmutabilidad Histórica y Borrado Lógico (Soft Delete) |
+| TIPO:                 Requisito de Seguridad / Integridad                    |
+| FUENTE DEL REQUISITO: Entrevista 2 (Decisiones Técnicas), Secure Scrum       |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| Los registros de refracción e historias clínicas jamás deben ser eliminados  |
+| físicamente ni sobreescritos. Toda corrección crea un nuevo registro o se    |
+| marca como inactivo mediante borrado lógico (`deleted_at`), registrando log. |
+| ENTRADAS:                                                                    |
+| - Petición de anulación o reemplazo de registro clínico por optometrista.    |
+| PROCESO:                                                                     |
+| - Asignación de timestamp UTC a columna `deleted_at`; registro en audit_logs.|
+| SALIDAS:                                                                     |
+| - Registro oculto de vistas activas pero preservado para auditoría pericial. |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-03]: Prohibición estricta de sentencias SQL `DELETE` en historias|
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.4 MÓDULO 4: PEDIDOS AL LABORATORIO ÓPTICO (M4)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-16                                                  |
+| NOMBRE DE REQUISITO:  Emisión de Órdenes de Trabajo Técnicas para Taller     |
+| TIPO:                 Requisito Funcional / Privacidad (LOPDP)               |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Ley Orgánica de Protección de Datos |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe generar órdenes técnicas para talleres de manufactura de     |
+| lentes que incluyan únicamente: código del pedido, graduación (Sph, Cyl,     |
+| Axis, Add), medidas ópticas (DNP, alturas), tipo de luna y armazón, omitiendo|
+| estrictamente diagnósticos médicos y datos personales sensibles del paciente.|
+| ENTRADAS:                                                                    |
+| - Selección de prescripción clínica y especificaciones de confección.       |
+| PROCESO:                                                                     |
+| - Generación de documento técnico disociado de la identidad clínica (LOPDP). |
+| SALIDAS:                                                                     |
+| - Orden técnica imprimible en PDF o consultable por identificador de pedido. |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-01]: Aislamiento efectivo de PII clínica frente a terceros.     |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-17                                                  |
+| NOMBRE DE REQUISITO:  Catálogo Parametrizable de Lunas y Tratamientos Ópticos|
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Catálogos de Proveedores Ópticos    |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe disponer de un catálogo editable de materiales (CR-39,       |
+| Policarbonato, Alto Índice 1.67, Trivex), diseños (Monofocal, Bifocal Flat,  |
+| Progresivo Digital) y tratamientos (Antirreflejo verde/azul, Fotocromático). |
+| ENTRADAS:                                                                    |
+| - Gestión administrativa de catálogo de lunas y tratamientos.                |
+| PROCESO:                                                                     |
+| - Parametrización en base de datos; selección rápida mediante listas en orden.|
+| SALIDAS:                                                                     |
+| - Especificación técnica exacta asociada al pedido de manufactura.           |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Manejo fluido de opciones sin duplicación ni inconsistencias de catálogo.  |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-18                                                  |
+| NOMBRE DE REQUISITO:  Flujo y Máquina de Estados del Pedido de Laboratorio   |
+| TIPO:                 Requisito Funcional / Trazabilidad                     |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Anteproyecto ESPOCH                 |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe gobernar el ciclo de vida del pedido mediante una máquina    |
+| de estados finitos: PENDIENTE -> ENVIADO AL TALLER -> RECIBIDO EN ÓPTICA ->  |
+| ENTREGADO AL CLIENTE, impidiendo transiciones ilógicas y registrando trazas. |
+| ENTRADAS:                                                                    |
+| - Acción de cambio de estado ejecutada por el operador autorizado.           |
+| PROCESO:                                                                     |
+| - Validación de transición legal en máquina de estados y estampado temporal. |
+| SALIDAS:                                                                     |
+| - Estado actualizado en tablero kanban / listado; trazabilidad completa.    |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-RES-01]: Historial auditable con timestamp y usuario de cada cambio.|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-19                                                  |
+| NOMBRE DE REQUISITO:  Gestión de Garantías y Rectificaciones de Lunas        |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevista 2 (Hallazgo M4), Práctica de Laboratorio    |
+| PRIORIDAD:            Media / Deseable (Should Have)                         |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe permitir registrar pedidos derivados por garantía técnica    |
+| (rotura en biselado, fallo de tratamiento, error de laboratorio) o falta de  |
+| adaptación dióptrica, vinculando la re-orden a la orden matriz original.    |
+| ENTRADAS:                                                                    |
+| - Selección de "Reordenar por Garantía", motivo y selección de cambios.      |
+| PROCESO:                                                                     |
+| - Creación de orden técnica hija enlazada a la orden padre sin doble cobro.  |
+| SALIDAS:                                                                     |
+| - Nueva orden generada con flag de garantía y trazabilidad del proveedor.    |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-RES-01]: Registro estadístico de incidencias técnicas por taller.   |
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.5 MÓDULO 5: VENTAS Y COBROS LOCALES (M5)
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-20                                                  |
+| NOMBRE DE REQUISITO:  Emisión de Comprobante Interno de Venta y Recibos POS  |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Operación de Mostrador              |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe emitir recibos y comprobantes internos de venta con          |
+| numeración correlativa secuencial, detallando cliente, conceptos (lunas,     |
+| armazón, accesorios), total, monto abonado en anticipo y saldo pendiente.    |
+| ENTRADAS:                                                                    |
+| - Registro de venta en mostrador con selección de ítems y valores.           |
+| PROCESO:                                                                     |
+| - Cálculo de subtotales, asignación secuencial correlativa irrepetible.      |
+| SALIDAS:                                                                     |
+| - Recibo impreso en ticket térmico de 80 mm y saldo registrado en cuenta.    |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Secuencia numérica estricta sin saltos ni comprobantes duplicados.         |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-21                                                  |
+| NOMBRE DE REQUISITO:  Gestión Híbrida de Inventario (Lotes y Unidades)       |
+| TIPO:                 Requisito Funcional                                    |
+| FUENTE DEL REQUISITO: Entrevista 1, Entrevista 2 (Hallazgo M5)               |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe administrar inventario mediante un modelo dual:              |
+| a) Armazones: control y venta por categorías tarifarias de precio y material |
+|    sin obligatoriedad de código unitario de barras individual.               |
+| b) Consumibles (gotas, estuches, líquidos): control de existencias unitarias |
+|    con descuento automático en stock por cada transacción de venta.          |
+| ENTRADAS:                                                                    |
+| - Selección de armazón por grupo tarifario o accesorio por código.           |
+| PROCESO:                                                                     |
+| - Validación de existencias; deducción de stock físico en consumibles.       |
+| SALIDAS:                                                                     |
+| - Stock actualizado en tiempo real en la base de datos PostgreSQL.           |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-02]: Prevención de inconsistencias y stock negativo en BD.      |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-22                                                  |
+| NOMBRE DE REQUISITO:  Anulación con Reversión Atómica ACID de Caja y Stock   |
+| TIPO:                 Requisito de Seguridad / Transaccional                 |
+| FUENTE DEL REQUISITO: Entrevista 2 (Decisiones Menéndez), Anteproyecto ESPOCH|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| La anulación de una venta autorizada debe ejecutarse dentro de una           |
+| transacción atómica (BEGIN TRANSACTION / COMMIT) que revierta simultáneamente|
+| los asientos monetarios de caja y retorne las unidades físicas al stock.     |
+| ENTRADAS:                                                                    |
+| - Solicitud de anulación con motivo justificado por rol Administrador.       |
+| PROCESO:                                                                     |
+| - Bloqueo de registros, reversión de caja, reposición de inventario y log.   |
+| SALIDAS:                                                                     |
+| - Comprobante marcado ANULADO y balances consistentes sin datos huérfanos.   |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-02] [S-TAG-RES-01]: Atomicidad transaccional y registro en log. |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-23                                                  |
+| NOMBRE DE REQUISITO:  Cierre Diario de Caja y Arqueo Consolidado de Ventas   |
+| TIPO:                 Requisito Funcional / Finanzas                         |
+| FUENTE DEL REQUISITO: Entrevistas 1 y 2, Cierre Contable Óptica              |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe consolidar en tiempo real el flujo financiero diario,        |
+| desglosando cobros por método de pago (efectivo, transferencia bancaria),    |
+| total de anticipos recibidos, saldos pendientes y total global recaudado.    |
+| ENTRADAS:                                                                    |
+| - Solicitud de cuadre de jornada o selección de rango de fechas.             |
+| PROCESO:                                                                     |
+| - Agrupación y sumatoria indexada de los cobros efectivos de la jornada.     |
+| SALIDAS:                                                                     |
+| - Reporte consolidado de cierre de caja descargable e imprimible.            |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Coincidencia exacta (error cero) entre pagos registrados y arqueo de caja. |
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.6 MÓDULO 6: FACTURACIÓN ELECTRÓNICA SRI (M6) — [NUEVO REQUISITO INCORPORADO]
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-24                                                  |
+| NOMBRE DE REQUISITO:  Generación de Factura XML v1.1.0 y Clave de Acceso M11|
+| TIPO:                 Requisito Funcional / Tributario SRI                   |
+| FUENTE DEL REQUISITO: Ficha Técnica SRI v1.1.0, InformeImplementacionAppFact.|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe construir el archivo XML oficial de la Factura según el      |
+| esquema XSD v1.1.0 del SRI y generar la Clave de Acceso única de 49 dígitos  |
+| calculando el dígito verificador mediante el algoritmo Módulo 11 ponderado,   |
+| validando que ventas a Consumidor Final no excedan el límite legal de $40 USD.|
+| ENTRADAS:                                                                    |
+| - Datos de la venta, cliente (Cédula/RUC/Pasaporte), desglose de ítems, IVA.  |
+| PROCESO:                                                                     |
+| - Construcción de secciones <infoTributaria>, <infoFactura> y <detalles>.     |
+| - Generación de los primeros 48 dígitos (Fecha, Tipo, RUC, Ambiente, Serie,   |
+|   Secuencial, Código Numérico, Tipo Emisión); cálculo Módulo 11 ponderado    |
+|   de 2 a 7 para el dígito 49. Bloqueo si Consumidor Final > 40.00 USD.       |
+| SALIDAS:                                                                     |
+| - Documento XML canónico generado con clave de acceso válida de 49 dígitos.  |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-04]: Validación estricta del esquema XSD y algoritmo Módulo 11. |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-25                                                  |
+| NOMBRE DE REQUISITO:  Firma Electrónica Digital Avanzada XAdES-BES           |
+| TIPO:                 Requisito de Seguridad / Criptografía                  |
+| FUENTE DEL REQUISITO: Ley de Comercio Electrónico Ecuador, Informe API-SRI   |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe firmar digitalmente el XML de la factura bajo el estándar    |
+| XAdES-BES (enveloped) utilizando un certificado digital de persona natural   |
+| o jurídica en formato PKCS#12 (.p12 / .pfx) con algoritmo RSA-SHA1 y         |
+| canonicalización XML-C14N, incrustando el bloque <ds:Signature>.             |
+| ENTRADAS:                                                                    |
+| - Archivo binario de certificado .p12, contraseña de firma y XML generado.   |
+| PROCESO:                                                                     |
+| - Lectura con node-forge; extracción de certificado X.509 y llave privada.   |
+| - Conversión de número de serie con BigInt; cómputo de digests SHA-1.        |
+| - Generación de <etsi:SignedProperties>, <ds:KeyInfo>, <ds:SignedInfo> y     |
+|   cifrado RSA generando <ds:SignatureValue>; inserción en XML.               |
+| SALIDAS:                                                                     |
+| - Archivo XML legalmente firmado y persistido en almacenamiento seguro.      |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-AUTH-03] [S-TAG-RES-02]: Integridad criptográfica y no repudio legal.|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-26                                                  |
+| NOMBRE DE REQUISITO:  Transmisión y Consulta SOAP ante Web Services del SRI  |
+| TIPO:                 Requisito Funcional / Comunicación Externa             |
+| FUENTE DEL REQUISITO: Web Services SRI Ecuador, InformeImplementacionAppFact.|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe transmitir de forma asíncrona el comprobante firmado en      |
+| Base64 al servicio SOAP RecepcionComprobantesOffline del SRI y consultar el   |
+| estado de autorización en AutorizacionComprobantesOffline, soportando manejo |
+| de estados (RECIBIDA, AUTORIZADO, DEVUELTA, EN PROCESO) y reintentos.        |
+| ENTRADAS:                                                                    |
+| - Archivo XML firmado; Clave de Acceso de 49 dígitos.                        |
+| PROCESO:                                                                     |
+| - Llamada SOAP asíncrona a `validarComprobante`; evaluación de respuesta.    |
+| - Si RECIBIDA -> invocación a `autorizacionComprobante`; actualización en BD |
+|   de número de autorización, fecha/hora y mensajes emitidos por el SRI.      |
+| - Si EN PROCESO -> encolamiento para polling periódico o reintento manual.   |
+| SALIDAS:                                                                     |
+| - Factura actualizada con estado tributario formal en PostgreSQL.            |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-05]: Persistencia inmutable de autorización y traza SOAP.       |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-27                                                  |
+| NOMBRE DE REQUISITO:  Generación de RIDE (PDF Code128) y Despacho por Correo |
+| TIPO:                 Requisito Funcional / Documentación y Notificación     |
+| FUENTE DEL REQUISITO: Normativa SRI Comprobantes Electrónicos, Informe API-SRI|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| Tras la autorización del comprobante, el sistema debe generar el RIDE en PDF |
+| renderizando el código de barras Code128 de la clave de acceso vía bwip-js y |
+| Chromium headless (Puppeteer), y despacharlo automáticamente al correo del   |
+| cliente mediante transporte SMTP con los archivos XML y PDF adjuntos.        |
+| ENTRADAS:                                                                    |
+| - Factura autorizada por el SRI y dirección de correo electrónico del cliente.|
+| PROCESO:                                                                     |
+| - Compilación de plantilla Handlebars oficial con desglose de impuestos.     |
+| - Renderizado A4 a PDF con código de barras; despacho vía Nodemailer (SMTP).  |
+| SALIDAS:                                                                     |
+| - Archivo RIDE generado y correo de notificación entregado al adquirente.    |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - RIDE visualmente conforme a plantilla SRI y entrega de correo con adjuntos.|
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3.2.7 MÓDULO 7: ASISTENTE INTELIGENTE OPERATIVO "CHATBOT CON LOS DATOS" (M7) — [NUEVO REQUISITO INCORPORADO]
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-28                                                  |
+| NOMBRE DE REQUISITO:  Interfaz Conversacional y Enrutamiento de Intenciones  |
+| TIPO:                 Requisito Funcional / Innovación Tecnológica (IA)      |
+| FUENTE DEL REQUISITO: Stakeholder Técnico ESPOCH, informePropuestasInnovacion|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El sistema debe proveer una interfaz conversacional integrada en el Dashboard|
+| que permita a los operadores formular consultas en lenguaje natural sobre:   |
+| métricas de ventas y caja, existencias de inventario de armazones/insumos y  |
+| estado y tiempos de órdenes de laboratorio, enrutando la intención de forma  |
+| determinística sin requerir navegación exhaustiva por múltiples menús.       |
+| ENTRADAS:                                                                    |
+| - Pregunta o texto formulado por el usuario en el widget del chat.           |
+| PROCESO:                                                                     |
+| - Análisis léxico-sintáctico mediante expresiones regulares y clasificador   |
+|   de intenciones (Intent Router); extracción de entidades clave (fechas,     |
+|   estados de taller, rangos de precio, nombres de armazones o insumos).      |
+| SALIDAS:                                                                     |
+| - Respuesta estructurada con tarjeta visual de datos y enlaces de acción.    |
+| CRITERIO DE VERIFICACIÓN:                                                    |
+| - Clasificación correcta de intenciones operativas comunes con latencia < 1s.|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-29                                                  |
+| NOMBRE DE REQUISITO:  Ejecución Segura de Consultas de Solo Lectura (Guard)  |
+| TIPO:                 Requisito de Seguridad / Integridad                    |
+| FUENTE DEL REQUISITO: Directrices de Ciberseguridad ESPOCH, Propuesta 3 Innov.|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El motor del asistente inteligente debe operar bajo un blindaje estricto de  |
+| solo lectura (Read-Only Guard), utilizando un usuario de base de datos con   |
+| privilegios únicos de `GRANT SELECT`, impidiendo de forma inviolable la      |
+| ejecución de sentencias de modificación (INSERT, UPDATE, DELETE, DROP).      |
+| ENTRADAS:                                                                    |
+| - Intención clasificada y parámetros extraídos de la consulta del usuario.   |
+| PROCESO:                                                                     |
+| - Invocación de vistas precompiladas o consultas parametrizadas SELECT.       |
+| - Interceptación y rechazo tajante de cualquier comando que intente alterar   |
+|   datos o inyectar SQL, respondiendo con advertencia de seguridad.           |
+| SALIDAS:                                                                     |
+| - Dataset de solo lectura entregado al formateador de respuestas del chat.   |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-INT-06]: Imposibilidad técnica y matemática de alterar datos vía chat|
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-30                                                  |
+| NOMBRE DE REQUISITO:  Control de Acceso Estricto RBAC en Respuestas del Chat |
+| TIPO:                 Requisito de Seguridad / Autorización                  |
+| FUENTE DEL REQUISITO: informePropuestasInnovacion.txt, plaDesarrolloRequisitos|
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El chatbot debe filtrar las respuestas conforme al rol del usuario autenticado|
+| (RBAC): el Asistente Comercial tiene prohibido consultar balances financieros|
+| de caja, utilidades o historias clínicas de pacientes; el Optometrista solo  |
+| consulta pacientes, taller y stock; el Administrador tiene acceso total.     |
+| ENTRADAS:                                                                    |
+| - Token JWT del usuario remitente y categoría de la intención consultada.    |
+| PROCESO:                                                                     |
+| - Evaluación de permisos por rol en el middleware del Asistente Inteligente. |
+| - Si el rol no tiene privilegio -> denegación con mensaje cortés explicativo. |
+| SALIDAS:                                                                     |
+| - Datos presentados únicamente si el perfil cuenta con autorización formal.  |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-AUTH-04]: Bloqueo de fuga de información confidencial en el chat.   |
++------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| NÚMERO DE REQUISITO:  RF-31                                                  |
+| NOMBRE DE REQUISITO:  Modo Híbrido (LAN Offline / Online) y Bitácora de Chat |
+| TIPO:                 Requisito Funcional / Resiliencia y Auditoría          |
+| FUENTE DEL REQUISITO: Stakeholder Técnico ESPOCH, Propuesta 3 de Innovación  |
+| PRIORIDAD:            Alta / Esencial (Must Have)                            |
++------------------------------------------------------------------------------+
+| DESCRIPCIÓN:                                                                 |
+| El asistente inteligente debe soportar funcionamiento dual: modo autónomo    |
+| LAN offline (100% determinístico sin conexión a internet mediante plantillas |
+| SQL) y modo aumentado online (conexión opcional a API LLM para síntesis);    |
+| toda interacción debe registrarse inmutablemente en la bitácora audit_logs.  |
+| ENTRADAS:                                                                    |
+| - Petición de consulta del usuario y estado de conectividad de la red.       |
+| PROCESO:                                                                     |
+| - Conmutación automática: si no hay internet, resuelve por enrutador local.  |
+| - Persistencia en `audit_logs` de: user_id, timestamp, prompt original,      |
+|   intención detectada y tiempo de respuesta en milisegundos.                 |
+| SALIDAS:                                                                     |
+| - Respuesta continua sin caídas y registro histórico inmutable de consultas. |
+| CRITERIO DE VERIFICACIÓN / S-TAG:                                            |
+| - [S-TAG-RES-03]: Auditoría completa y operatividad garantizada sin internet.|
++------------------------------------------------------------------------------+
+
+
+3.3 REQUISITOS NO FUNCIONALES (ISO/IEC 25010:2023 Y S-TAGS)
+
+3.3.1 Rendimiento
+- RNF-08 (Eficiencia de Tiempos de Respuesta):
+  Las búsquedas predictivas de pacientes, historiales y resúmenes de caja diaria 
+  deben retornar en menos de 1.5 segundos en la red local. Las consultas operativas 
+  resueltas por el Asistente Inteligente en Modo LAN deben responder en un tiempo inferior a 1.0 segundo.
+- Capacidad Transaccional: El microservicio de Facturación Electrónica debe procesar 
+  la firma digital XAdES-BES en memoria en un tiempo medio inferior a 400 milisegundos.
+
+3.3.2 Seguridad de la Información (Alineada a ISO/IEC 25010:2023 y S-Tags)
+- RNF-01 [S-TAG-AUTH-01] (Autenticidad por Roles):
+  Verificación inequívoca de identidad mediante contraseñas cifradas con bcrypt (costo 12) 
+  y asignación estricta de privilegios RBAC en endpoints de Laravel y NestJS.
+- RNF-02 [S-TAG-AUTH-02] (Gestión Criptográfica de Sesiones):
+  Intercambio protegido por tokens JWT (RFC 7519) con firma criptográfica HMAC-SHA256 y vencimiento a 20 min.
+- RNF-03 [S-TAG-INT-01] (Integridad en Validación Dual):
+  Validación simétrica en cliente (React) y backend (FormRequests) para rangos dióptricos 
+  (pasos de 0.25, cilindro negativo obligatorio y adición positiva forzada).
+- RNF-04 [S-TAG-INT-02] (Integridad Relacional y Transaccional):
+  Transacciones ACID con aislamiento READ COMMITTED en PostgreSQL para ventas, cobranzas y movimientos de stock.
+- RNF-05 [S-TAG-INT-03] (Inmutabilidad Clínica):
+  Historiales médicos inalterables; prohibición de sobreescritura; adopción de borrado lógico (Soft Delete).
+- RNF-06 [S-TAG-RES-01] (Responsabilidad y Trazabilidad General):
+  Tabla inmutable `audit_logs` que captura user_id, timestamp UTC, dirección IP, tipo de evento, 
+  tabla afectada y estados anterior vs. nuevo en formato JSONB.
+- RNF-10 [S-TAG-AUTH-03, S-TAG-RES-02] (Seguridad Criptográfica y Firma Electrónica SRI):
+  Custodia estricta en memoria de contraseñas de certificados digitales .p12 durante la 
+  firma digital XAdES-BES, impidiendo el almacenamiento de claves privadas en texto claro o variables expuestas.
+- RNF-11 [S-TAG-INT-06] (Blindaje Transaccional de Inteligencia Artificial):
+  Aislamiento irrestricto de solo lectura para el asistente conversacional, vetando cualquier 
+  posibilidad de modificación o corrupción de datos clínicos y contables.
+
+3.3.3 Fiabilidad y Tolerancia a Fallos
+- RNF-09 (Resiliencia Asíncrona ante Caídas del SRI):
+  El sistema debe desacoplar el cobro de la venta local de la autorización fiscal externa. 
+  Si los Web Services del SRI presentan caídas o intermitencias, el comprobante se almacena 
+  en estado 'EN PROCESO' o 'PENDIENTE' para retransmisión asíncrona mediante tareas programadas (Crons).
+- Recuperabilidad: Respaldos automáticos diarios de la base de datos PostgreSQL mediante pg_dump.
+
+3.3.4 Disponibilidad y Resiliencia Operativa
+- Disponibilidad mínima del 99.5% durante el horario de atención de la óptica (lunes a sábado, 08:00 a 19:00).
+- Autonomía Local: Operatividad completa en red LAN para atención clínica, emisión de recetas, 
+  pedidos de taller, ventas y cobros locales, aun ante la pérdida total de acceso a internet.
+
+3.3.5 Mantenibilidad y Modularidad
+- Separación limpia entre capas (Frontend React, API Core Laravel, Microservicio NestJS y PostgreSQL).
+- Código tipado estricto en TypeScript y cumplimiento de estándares PSR-12 en PHP.
+
+3.3.6 Portabilidad y Usabilidad
+- RNF-07 (Soporte Multiplataforma y Diseño Responsivo):
+  Interfaz web responsiva con soporte en computadoras de escritorio y tabletas táctiles 
+  en navegadores modernos (Chrome, Firefox, Edge, Safari).
+
+
+3.4 OTROS REQUISITOS
+
+3.4.1 Requisitos Legales y Normativos
+- Cumplimiento de la Ley Orgánica de Protección de Datos Personales (LOPDP Ecuador):
+  Aislamiento estricto de la historia clínica en órdenes emitidas a talleres de lentes externos.
+- Ficha Técnica de Comprobantes Electrónicos Esquema Offline v1.1.0 del SRI:
+  Estructura XSD, Clave de Acceso Módulo 11 y formato oficial de RIDE.
+- Ley de Comercio Electrónico y Firmas Digitales:
+  Validez jurídica del firmado digital XAdES-BES mediante certificados válidos emitidos en Ecuador.
+
+3.4.2 Requisitos Operativos, Fiscales y de Entorno Local
+- Moneda oficial: Dólares de los Estados Unidos de América (USD).
+- Formato regional de fechas: dd/mm/aaaa.
+- Tarifa de Impuesto al Valor Agregado (IVA): Parametrizable conforme a la tasa legal vigente (15% general / 0% tarifa cero).
+- Restricción de Consumidor Final: Emisión máxima hasta 40.00 USD según resolución tributaria vigente del SRI.
+
+
+================================================================================
+4. APÉNDICES
+================================================================================
+
+APÉNDICE A: MATRIZ DE TRAZABILIDAD INTEGRAL DE REQUISITOS
+--------------------------------------------------------------------------------
++-----------+----------------------+--------------+---------------+--------------------------------------+
+| Requisito | Módulo Funcional     | Clasificac.  | S-Tag / Norma | Criterio de Verificación Principal   |
++-----------+----------------------+--------------+---------------+--------------------------------------+
+| RF-01     | M1: Autenticación    | Seguridad    | S-TAG-AUTH-01 | Verificación RBAC y bloqueo de rutas.|
+| RF-02     | M1: Autenticación    | Seguridad    | S-TAG-AUTH-02 | Sesión JWT con expiración temporal.  |
+| RF-03     | M2: Pacientes        | Funcional    | S-TAG-INT-01  | Algoritmo cédula y datos completos.  |
+| RF-04     | M2: Pacientes        | Funcional    | —             | Registro de menores sin cédula oblig.|
+| RF-05     | M2: Pacientes        | Funcional    | S-TAG-INT-01  | Búsqueda predictiva sin duplicados.  |
+| RF-06     | M2: Pacientes        | Funcional    | S-TAG-INT-02  | Repositorio seguro de PDFs/imágenes. |
+| RF-07     | M3: Historia Clínica | Funcional    | S-TAG-INT-01  | Rangos ópticos Sph/Cyl/Axis/Add.     |
+| RF-08     | M3: Historia Clínica | Funcional    | S-TAG-INT-01  | Formateo automático de signo (+).    |
+| RF-09     | M3: Historia Clínica | Funcional    | —             | Notación Snellen en pies (20/XX).    |
+| RF-10     | M3: Historia Clínica | Funcional    | S-TAG-INT-01  | Medidas de centrado DP y DNP en mm.  |
+| RF-11     | M3: Historia Clínica | Funcional    | S-TAG-INT-02  | Parámetros físicos montura (JSONB).  |
+| RF-12     | M3: Historia Clínica | Funcional    | S-TAG-INT-02  | Comparativa en pantalla vs. anterior.|
+| RF-13     | M3: Historia Clínica | Funcional    | —             | Registro anamnesis y CIE-10.         |
+| RF-14     | M3: Historia Clínica | Funcional    | —             | Emisión PDF certificado ocupacional. |
+| RF-15     | M3: Historia Clínica | Seguridad    | S-TAG-INT-03  | Soft delete con deleted_at y log.    |
+| RF-16     | M4: Laboratorio      | Funcional    | S-TAG-INT-01  | Orden sin datos sensibles de salud.  |
+| RF-17     | M4: Laboratorio      | Funcional    | —             | Catálogo editable lunas/tratamientos.|
+| RF-18     | M4: Laboratorio      | Funcional    | S-TAG-RES-01  | Trazabilidad de estados del pedido.  |
+| RF-19     | M4: Laboratorio      | Funcional    | S-TAG-RES-01  | Registro de garantía/rectificación.  |
+| RF-20     | M5: Ventas y Cobros  | Funcional    | —             | Comprobante secuencial correlativo.  |
+| RF-21     | M5: Ventas y Cobros  | Funcional    | S-TAG-INT-02  | Inventario híbrido (precio/unidad).  |
+| RF-22     | M5: Ventas y Cobros  | Seguridad    | S-TAG-INT-02  | Anulación atómica con reversa ACID.  |
+| RF-23     | M5: Ventas y Cobros  | Funcional    | —             | Cuadre de caja y saldos en tiempo real|
+| RF-24     | M6: Facturación SRI  | Fiscal/Func. | S-TAG-INT-04  | Esquema XML v1.1.0 y Clave Módulo 11.|
+| RF-25     | M6: Facturación SRI  | Criptografía | S-TAG-AUTH-03 | Firma XAdES-BES con certificado .p12.|
+| RF-26     | M6: Facturación SRI  | Comunicación | S-TAG-INT-05  | SOAP Recepción/Autorización SRI.     |
+| RF-27     | M6: Facturación SRI  | Notificación | —             | RIDE PDF Code128 y correo SMTP.      |
+| RF-28     | M7: Asistente IA     | Innovación   | —             | NLP y enrutador de intenciones chat.  |
+| RF-29     | M7: Asistente IA     | Seguridad    | S-TAG-INT-06  | Solo lectura estricta (Read-Only).   |
+| RF-30     | M7: Asistente IA     | Seguridad    | S-TAG-AUTH-04 | Filtro estricto RBAC en respuestas.  |
+| RF-31     | M7: Asistente IA     | Resiliencia  | S-TAG-RES-03  | Modo dual LAN/Online y log auditoría.|
+| RNF-01    | Transversal          | Seguridad    | S-TAG-AUTH-01 | Control de acceso estricto RBAC.     |
+| RNF-02    | Transversal          | Seguridad    | S-TAG-AUTH-02 | Tokens JWT cifrados y seguros.       |
+| RNF-03    | M3: Historia Clínica | Calidad/Seg. | S-TAG-INT-01  | Validación de rangos dióptricos.     |
+| RNF-04    | M5: Ventas y Cobros  | Calidad/Seg. | S-TAG-INT-02  | Transacciones ACID en PostgreSQL.    |
+| RNF-05    | M3: Historia Clínica | Calidad/Seg. | S-TAG-INT-03  | No sobreescritura de refracciones.   |
+| RNF-06    | Transversal          | Calidad/Seg. | S-TAG-RES-01  | Bitácora inmutable de auditoría.      |
+| RNF-07    | Transversal          | Portabilidad | ISO 25010     | Diseño responsivo Web/PWA.           |
+| RNF-08    | Transversal          | Rendimiento  | ISO 25010     | Latencia < 1.5s y chat local < 1.0s.  |
+| RNF-09    | M6: Facturación SRI  | Fiabilidad   | ISO 25010     | Desacoplamiento asíncrono y colas SRI.|
+| RNF-10    | M6: Facturación SRI  | Criptografía | S-TAG-AUTH-03 | Custodia segura de llaves en memoria. |
+| RNF-11    | M7: Asistente IA     | Seguridad    | S-TAG-INT-06  | Aislamiento de solo lectura para IA. |
++-----------+----------------------+--------------+---------------+--------------------------------------+
+
+
+APÉNDICE B: CATÁLOGO DE REQUISITOS FUTUROS (FUERA DEL ALCANCE DE LA VERSIÓN 2.0)
+--------------------------------------------------------------------------------
+1. RF-FUT-01: Notificaciones y Despacho Automatizado por WhatsApp Business Cloud API.
+2. RF-FUT-02: Pipeline ETL para Migración Automatizada de Base Legada (.BAK SQL Server).
+3. RF-FUT-03: Módulo Integral de Agenda Médica y Turnos en Línea para Pacientes.
+4. RF-FUT-04: Transacciones del Chatbot Asistidas con Confirmación en Doble Factor (2FA).
+
+
+APÉNDICE C: GLOSARIO TÉCNICO EXTENDIDO
+--------------------------------------------------------------------------------
+- Agudeza Visual (AV): Capacidad del sistema visual para discriminar detalles espaciales a distancia dada.
+- Anamnesis: Interrogatorio clínico sobre antecedentes patológicos y síntomas del paciente.
+- Anexo Transaccional Simplificado (ATS): Formato XML oficial del SRI para compras, ventas y retenciones.
+- Astigmatismo: Defecto refractivo en que los rayos de luz divergen debido a la asimetría corneal.
+- Autorización SRI: Acto tributario formal en que el SRI valida y sella electrónicamente una factura.
+- Clave de Acceso: Secuencia alfanumérica de 49 dígitos que identifica inequívocamente al comprobante fiscal.
+- Dioptría (D): Unidad cuantitativa que expresa el poder de refracción de una lente óptica.
+- Distancia Nasopupilar (DNP): Medida milimétrica desde el centro de la pupila hasta el tabique nasal.
+- Formato PKCS#12: Estándar para archivar objetos criptográficos en un solo archivo protegido con contraseña.
+- Large Language Model (LLM): Modelo de inteligencia artificial entrenado para interpretar y generar texto natural.
+- Presbicia: Condición fisiológica vinculada a la edad que reduce progresivamente la visión cercana.
+- RIDE: Representación Impresa de Documento Electrónico en formato PDF regulada por la autoridad tributaria.
+- Soft Delete: Mecanismo de persistencia que oculta un registro asignándole fecha de borrado sin eliminarlo físicamente.
+- Transposición Óptica: Procedimiento matemático para transformar una fórmula esferocilíndrica positiva a cilindro negativo.
+- XAdES-BES: Esquema de firma XML con estampado de tiempo y referencias criptográficas que garantiza autenticidad y no repudio.
+
+================================================================================
+FIN DE LA ESPECIFICACIÓN DE REQUISITOS DE SOFTWARE (VERSIÓN 2.0)
+================================================================================

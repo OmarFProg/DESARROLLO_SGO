@@ -1,0 +1,629 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+PLAN METODOLÓGICO PARA EL DESARROLLO DEL ESTUDIO DE FACTIBILIDAD
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+DOCUMENTO DE PLANIFICACIÓN, PRE-CONTENIDOS Y BASES DOCUMENTALES
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Instrucción:     Desarrollo secuencial y estructurado del documento formal conforme a:
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/PlanEstudioFactibilidad.txt
+Versión:         1.0 Definitiva y Aprobada
+Fecha:           Septiembre 2026 / Período Académico 2026 - 2027
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN Y OBJETIVOS DEL PLAN DE FACTIBILIDAD
+   1.1 Propósito y Justificación Metodológica
+   1.2 Objetivos del Plan
+   1.3 Alineación con el Anteproyecto de Titulación y Directrices Institucionales
+2. MARCO NORMATIVO Y ESTRUCTURA CANÓNICA DEL ESTUDIO DE FACTIBILIDAD
+   2.1 Formato Institucional ESPOCH (12 Secciones Oficiales)
+   2.2 Criterios de Rigor Metodológico y Calidad Técnica
+3. INVENTARIO Y MAPEO DE BASES DOCUMENTALES E INSUMOS PRIMARIOS
+   3.1 Matriz de Trazabilidad de Insumos Documentales por Sección
+   3.2 Caracterización de las Fuentes Técnicas y Legales Disponibles
+4. PLAN DE DESARROLLO POR FASES SECUENCIALES (FASE 1 A FASE 10)
+   4.1 Fase 1: Recopilación, Consolidación y Pre-procesamiento de Insumos Base
+   4.2 Fase 2: Formulación de Antecedentes, Visión, Contexto y Alcance del Estudio
+   4.3 Fase 3: Evaluación de Factibilidad Técnica y de Infraestructura
+   4.4 Fase 4: Evaluación de Factibilidad Económica y Análisis Costo-Beneficio
+   4.5 Fase 5: Evaluación de Factibilidad Legal y Cumplimiento Normativo
+   4.6 Fase 6: Evaluación de Factibilidad de Recursos y Organización Scrum
+   4.7 Fase 7: Evaluación de Factibilidad de Mercado y Estrategia de Despliegue
+   4.8 Fase 8: Evaluación de Factibilidad Operacional y de Procesos de Negocio
+   4.9 Fase 9: Evaluación de Factibilidad de Tiempo y Cronograma de Sprints
+   4.10 Fase 10: Síntesis Ejecutiva, Recomendaciones y Protocolo de Aprobación
+5. FICHAS METODOLÓGICAS Y GUÍA DE PRE-CONTENIDOS POR SECCIÓN
+   5.1 Sección 1: Resumen Ejecutivo
+   5.2 Sección 2: Antecedentes del Proyecto
+   5.3 Sección 3: Descripción del Proyecto y su Contexto
+   5.4 Sección 4: Alcance del Estudio de Factibilidad
+   5.5 Sección 5: Factibilidad Técnica (Hardware, Software y Escenarios de Despliegue)
+   5.6 Sección 6: Factibilidad Económica (Presupuesto Actualizado y ROI)
+   5.7 Sección 7: Factibilidad Legal (LOPDP, SRI, MSP y Comercio Electrónico)
+   5.8 Sección 8: Factibilidad de Recursos (Roles Scrum, Perfiles y Materiales)
+   5.9 Sección 9: Factibilidad de Mercado (Análisis del Sector y Estrategia Owner)
+   5.10 Sección 10: Factibilidad Operacional (Encaje de Procesos y Gestión del Cambio)
+   5.11 Sección 11: Factibilidad de Tiempo (Estimaciones y Ruta Crítica)
+   5.12 Sección 12: Recomendaciones y Aprobación
+6. CRONOGRAMA DE EJECUCIÓN, MATRIZ RACI Y RESPONSABILIDADES
+   6.1 Asignación de Roles y Responsabilidades (Omar Figueroa y Alexander Villalva)
+   6.2 Cronograma Temporal de Elaboración del Estudio de Factibilidad
+7. PROTOCOLO DE VERIFICACIÓN, VALIDACIÓN Y CRITERIOS DE ACEPTACIÓN
+8. CONCLUSIONES Y DIRECTRICES OPERATIVAS PARA LA REDACCIÓN FINAL
+
+
+================================================================================
+1. INTRODUCCIÓN Y OBJETIVOS DEL PLAN DE FACTIBILIDAD
+================================================================================
+
+1.1 PROPÓSITO Y JUSTIFICACIÓN METODOLÓGICA
+El presente documento establece el plan de trabajo secuencial, riguroso y reproducible 
+para la formulación y redacción integral del ESTUDIO DE FACTIBILIDAD del Sistema 
+Informático de Gestión Clínica y Comercial Optométrica (SGO). 
+
+El desarrollo de un sistema de software clínico-administrativo que incorpora tecnologías 
+avanzadas —como la firma digital con estándares del SRI (XAdES-BES) y un componente 
+innovador de inteligencia artificial operativa ("Chatbot con los datos")— demanda una 
+evaluación multidimensional que certifique su viabilidad antes de la ejecución a gran escala 
+de los Sprints de desarrollo. Este plan metodológico define las fases de extracción de 
+datos, los pre-contenidos analíticos, las bases documentales vinculantes y los criterios 
+de aprobación necesarios para elaborar el informe final conforme al estándar institucional 
+establecido en `FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf` y las 
+directrices de `ESTUDIO DE FACTIBILIDAD/directrices.txt`.
+
+1.2 OBJETIVOS DEL PLAN
+- Objetivo General:
+  Estructurar el proceso secuencial de recolección, análisis, estimación y documentación 
+  técnica, económica, legal, operativa, de mercado, temporal y de recursos, que permita 
+  redactar de forma exhaustiva el documento definitivo de Estudio de Factibilidad del SGO.
+- Objetivos Específicos:
+  1. Identificar, mapear y pre-procesar las bases documentales del proyecto (anteproyecto, 
+     especificación de requisitos v2.0, informes de implementación SRI, innovación y reportes DxDiag).
+  2. Definir las guías de pre-contenido y modelos matemáticos/financieros (análisis costo-beneficio, 
+     presupuesto actualizado y evaluación de hardware).
+  3. Establecer el cronograma de ejecución y la matriz RACI de responsabilidades entre los 
+     investigadores (Omar Figueroa y Alexander Villalva) y el equipo asesor (Ing. Jorge Menéndez e Ing. Julio Santillán).
+  4. Garantizar que el Estudio de Factibilidad resultante sirva como instrumento de decisión 
+     estratégica y sustento técnico-académico formal para la titulación en la ESPOCH.
+
+1.3 ALINEACIÓN CON EL ANTEPROYECTO Y DIRECTRICES INSTITUCIONALES
+El plan operacionaliza las directrices específicas acordadas para el proyecto:
+- Inclusión formal de la Facturación Electrónica SRI mediante microservicio desacoplado en NestJS.
+- Inclusión formal de la PROPUESTA 3 de innovación: Asistente Inteligente Operativo "Chatbot con los Datos" (consultas de negocio, stock y taller en lenguaje natural).
+- Análisis comparativo de hardware basado en las auditorías de equipos (`EQUIPOS/`): selección del 
+  equipo con procesador AMD Ryzen 5 9600X (16 GB RAM DDR5) como entorno local de pruebas y 
+  despliegue preliminar (Staging), y el equipo Intel Core i5-7200U (12 GB RAM) como estación 
+  de desarrollo backend y base de datos, complementado con el escenario de producción en nube (`SERV_PRODUCCION`).
+
+
+================================================================================
+2. MARCO NORMATIVO Y ESTRUCTURA CANÓNICA DEL ESTUDIO DE FACTIBILIDAD
+================================================================================
+
+2.1 FORMATO INSTITUCIONAL ESPOCH (12 SECCIONES OFICIALES)
+Conforme a `FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf`, el estudio 
+debe articularse obligatoriamente en doce (12) secciones estructuradas:
+1. Resumen ejecutivo: Síntesis condensada y de alto impacto para decisores estratégicos.
+2. Antecedentes del proyecto: Visión, orígenes, justificación y problemática en Riobamba.
+3. Descripción del proyecto y su contexto: Propósito, entregables (7 módulos), contexto organizacional y stakeholders.
+4. Alcance del estudio de factibilidad: Resultados esperados, actividades y procedimiento de aprobación.
+5. Factibilidad técnica: Hardware de desarrollo/pruebas, software, arquitectura y escenarios de despliegue.
+6. Factibilidad económica: Actualización del presupuesto del anteproyecto, costos y análisis costo-beneficio.
+7. Factibilidad legal: Cumplimiento de LOPDP, normativas SRI (v1.1.0), Ley de Comercio Electrónico y MSP.
+8. Factibilidad de recursos: Materiales, talento humano y roles bajo el marco ágil Scrum.
+9. Factibilidad de mercado: Caracterización del sector optométrico local y estrategia de validación con el Owner.
+10. Factibilidad operacional: Grado de ajuste con los procesos de Óptica Vista Visión y gestión del cambio.
+11. Factibilidad de tiempo: Estimación de plazos, cronograma de 4 Sprints quincenales y ruta crítica en 18 semanas.
+12. Recomendaciones y aprobación: Dictamen formal de viabilidad y protocolo de firmas.
+
+2.2 CRITERIOS DE RIGOR METODOLÓGICO Y CALIDAD TÉCNICA
+- Consistencia Numérica: Los valores de presupuesto, tiempos de respuesta, cotizaciones y 
+  plazos deben coincidir de forma unívoca con el Anteproyecto, la SRS v2.0 y el Plan de Requisitos.
+- Trazabilidad Bidireccional: Cada afirmación técnica debe sustentarse en un artefacto previo 
+  o informe de medición experimental (DxDiag, pruebas SOAP, cotizaciones de certificados).
+- Enfoque Propositivo: Demostrar que los riesgos detectados disponen de planes concretos de mitigación.
+
+
+================================================================================
+3. INVENTARIO Y MAPEO DE BASES DOCUMENTALES E INSUMOS PRIMARIOS
+================================================================================
+
+3.1 MATRIZ DE TRAZABILIDAD DE INSUMOS DOCUMENTALES POR SECCIÓN:
+
++----+----------------------------+---------------------------------------------------------+
+| N° | SECCIÓN DEL ESTUDIO        | BASES DOCUMENTALES E INSUMOS PRIMARIOS                  |
++----+----------------------------+---------------------------------------------------------+
+| 1  | Resumen Ejecutivo          | Consolidado de las Secciones 2 a 12 del propio estudio. |
+| 2  | Antecedentes del Proyecto  | - Anteproyecto ESPOCH (Capítulo I: Planteamiento, pp.1-8)|
+|    |                            | - directrices.txt (Líneas 13-31: visión y orígenes)     |
+|    |                            | - informeEntrevistasConsolidado.txt (Problemas legados) |
+| 3  | Descripción y Contexto     | - Especificacion de Requisitos_02.txt (Módulos M1 a M7) |
+|    |                            | - Anteproyecto ESPOCH (Caracterización de la óptica)   |
+|    |                            | - directrices.txt (Líneas 32-43: entregables)           |
+| 4  | Alcance del Estudio        | - directrices.txt (Líneas 44-50: procedimiento)         |
+|    |                            | - FORMATO DE ESTUDIO DE FACTIBILIDAD...pdf              |
+| 5  | Factibilidad Técnica       | - EQUIPOS/DxDiag.txt (AMD Ryzen 5 9600X, 16 GB DDR5)    |
+|    |                            | - EQUIPOS/DxDiagPcOmar.txt (Intel i5-7200U, 12 GB RAM)  |
+|    |                            | - EQUIPOS/DESKTOP-MO7Q55S.txt y DESKTOP-ML70LGD.txt     |
+|    |                            | - InformeImplementacionAppFacturacionElectronica.txt    |
+|    |                            | - informePropuestasInnovacion.txt (Propuesta 3 Chatbot) |
+|    |                            | - directrices.txt (Líneas 51-70: pruebas vs producción) |
+| 6  | Factibilidad Económica     | - Anteproyecto ESPOCH (pp. 28-30: Presupuesto base)     |
+|    |                            | - InformeImplementacionAppFacturacionElectronica.txt    |
+|    |                            |   (Costos firma .p12, endpoints, infraestructura)       |
+|    |                            | - informePropuestasInnovacion.txt (Costos tokens LLM)   |
+|    |                            | - Cotizaciones de certificados digitales (BCE / ANF)   |
+|    |                            | - directrices.txt (Líneas 71-75: actualización costos)  |
+| 7  | Factibilidad Legal         | - Ley Orgánica de Protección de Datos Personales (LOPDP)|
+|    |                            | - Ficha Técnica SRI Comprobantes Offline v1.1.0         |
+|    |                            | - Ley de Comercio Electrónico y Firmas Digitales        |
+|    |                            | - Acuerdo Ministerial MSP 030-2020 (Historias Clínicas) |
+|    |                            | - Anteproyecto ESPOCH (Marco legal y ético)             |
+| 8  | Factibilidad de Recursos   | - Anteproyecto ESPOCH (Sección 4.4.2.5: Roles Scrum)    |
+|    |                            | - plaDesarrolloRequisitos.txt (Matriz RACI v2.0)        |
+|    |                            | - directrices.txt (Líneas 78-80: roles y materiales)    |
+| 9  | Factibilidad de Mercado    | - Anteproyecto ESPOCH (Capítulo II: Marco Teórico)      |
+|    |                            | - directrices.txt (Líneas 81-86: estrategia con Owner)  |
+|    |                            | - Sondeos de software en centros optométricos Riobamba  |
+| 10 | Factibilidad Operacional   | - informeEntrevistasConsolidado.txt (Cadena asistencial)|
+|    |                            | - Orden_Metodologico_Implementacion_Sistema.txt         |
+|    |                            | - Casos de uso CUS en Especificacion de Requisitos_02   |
+| 11 | Factibilidad de Tiempo     | - Anteproyecto ESPOCH (Cronograma global de 18 semanas) |
+|    |                            | - plaDesarrolloRequisitos.txt (Plan de 4 Sprints)       |
+| 12 | Recomendaciones/Aprobación | - Directrices metodológicas de cierre y actas ESPOCH    |
++----+----------------------------+---------------------------------------------------------+
+
+3.2 CARACTERIZACIÓN DE FUENTES TÉCNICAS
+- Auditorías DxDiag (`EQUIPOS/`): Permiten contrastar objetivamente el poder de cómputo del 
+  equipo AMD Ryzen 5 9600X frente al Intel Core i5-7200U, justificando científicamente la 
+  asignación del primero como servidor de staging y pruebas intensivas de contenedores.
+- Informes de Implementación y Propuestas: Aportan métricas reales sobre el consumo de recursos 
+  de la firma XAdES-BES en Node.js/NestJS y los tiempos de inferencia del enrutador de intenciones del Chatbot.
+
+
+================================================================================
+4. PLAN DE DESARROLLO POR FASES SECUENCIALES (FASE 1 A FASE 10)
+================================================================================
+
+El desarrollo del Estudio de Factibilidad se estructura en diez (10) fases cronológicas:
+
+--------------------------------------------------------------------------------
+4.1 FASE 1: RECOPILACIÓN, CONSOLIDACIÓN Y PRE-PROCESAMIENTO DE INSUMOS BASE
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Extracción de métricas de hardware de `EQUIPOS/DxDiag.txt` y `EQUIPOS/DxDiagPcOmar.txt` (CPU, RAM, GPU, OS, almacenamiento).
+  2. Extracción y consolidación del catálogo de 31 Requisitos Funcionales y 11 Requisitos No Funcionales desde `Especificacion de Requisitos_02.txt`.
+  3. Extracción de tablas de presupuesto del Anteproyecto (pp. 28-30) y adición de los nuevos rubros de facturación electrónica y tokens de IA.
+  4. Revisión de las directrices institucionales en `ESTUDIO DE FACTIBILIDAD/directrices.txt`.
+- Entregable de la Fase: Repositorio de datos preliminares y matrices de cálculo listas para redacción.
+
+--------------------------------------------------------------------------------
+4.2 FASE 2: FORMULACIÓN DE ANTECEDENTES, VISIÓN, CONTEXTO Y ALCANCE DEL ESTUDIO
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Redacción de la Sección 2 (Antecedentes del Proyecto): contextualización de la problemática 
+     optométrica en Riobamba y análisis del software legado MDI.
+  2. Redacción de la Sección 3 (Descripción del Proyecto y Contexto): definición formal del 
+     propósito, caracterización de los 7 módulos y contexto organizacional de Óptica Vista Visión.
+  3. Redacción de la Sección 4 (Alcance del Estudio): delimitación de los resultados esperados, 
+     actividades de evaluación y protocolo de validación académica.
+- Entregable de la Fase: Bloque preliminar (Secciones 2, 3 y 4) consolidado y validado.
+
+--------------------------------------------------------------------------------
+4.3 FASE 3: EVALUACIÓN DE FACTIBILIDAD TÉCNICA Y DE INFRAESTRUCTURA
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Análisis comparativo de hardware disponible para desarrollo y pruebas:
+     * Evaluación de `DESKTOP-MO7Q55S` (AMD Ryzen 5 9600X, 6 núcleos / 12 hilos @ 3.9 GHz, 16 GB RAM DDR5): 
+       declarado entorno oficial de Staging, Pruebas y Despliegue Local preliminar.
+     * Evaluación de `DESKTOP-ML70LGD` (Intel Core i5-7200U, 2 núcleos / 4 hilos @ 2.5 GHz, 12 GB RAM): 
+       declarado estación de trabajo para desarrollo backend y pruebas de integración REST.
+  2. Análisis de software: evaluación de compatibilidad de la pila tecnológica (React 18 + Laravel 10 + NestJS 10 + PostgreSQL 16).
+  3. Análisis de infraestructura de despliegue:
+     * Escenario 1 (Local LAN Óptica): servidor local en consultorio, autonomía 99.5% offline.
+     * Escenario 2 (Producción Nube `SERV_PRODUCCION`): VPS en la nube (GCP/DigitalOcean) con 2 vCPU y 4 GB RAM.
+  4. Análisis del consumo computacional de la firma digital XAdES-BES y el motor del Chatbot (Regex local vs. API LLM).
+- Entregable de la Fase: Sección 5 (Factibilidad Técnica) con tablas comparativas de hardware y diagramas de despliegue.
+
+--------------------------------------------------------------------------------
+4.4 FASE 4: EVALUACIÓN DE FACTIBILIDAD ECONÓMICA Y ANÁLISIS COSTO-BENEFICIO
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Actualización integral del presupuesto del Anteproyecto:
+     * Bloque I (Construcción del Software): ajuste de salarios (2 desarrolladores / 4 meses = $5,800.00), 
+       hardware ($3,000.00), internet/energía ($220.00), materiales ($220.00), suscripciones de desarrollo ($80.00), 
+       e incorporación del rubro Certificado de Firma Digital PKCS#12 (.p12) por 1 año ($30.00). Subtotal + contingencia (15%).
+     * Bloque II (Explotación del Software): hosting VPS / dominio cloud ($120.00/año), certificado SSL ($0 Let's Encrypt), 
+       soporte post-implementación ($725.00) y contingencia (15%).
+  2. Estructuración del Análisis Costo-Beneficio (ACB):
+     * Beneficios Tangibles: ahorro en horas-hombre por digitación manual de facturas SRI (reducción de 10 min a 30 s por venta), 
+       reducción del 90% en devoluciones de lunas por rectificación de recetas, ahorro en insumos de papel.
+     * Beneficios Intangibles: cumplimiento fiscal ante el SRI (evitación de clausuras y multas de $30 a $1,500), 
+       fidelización de pacientes por recetas digitales y valor comercial del asistente conversacional.
+  3. Estimación de indicadores financieros para la óptica: Retorno de la Inversión (ROI) y Período de Recuperación (Payback).
+- Entregable de la Fase: Sección 6 (Factibilidad Económica) con cuadros presupuestarios consolidados y balances financieros.
+
+--------------------------------------------------------------------------------
+4.5 FASE 5: EVALUACIÓN DE FACTIBILIDAD LEGAL Y CUMPLIMIENTO NORMATIVO
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Análisis de cumplimiento de la Ley Orgánica de Protección de Datos Personales (LOPDP): 
+     tratamiento de datos de salud visual como categoría sensible y aislamiento en órdenes de laboratorio.
+  2. Análisis de cumplimiento de la Ficha Técnica de Comprobantes Electrónicos del SRI v1.1.0: 
+     validez del esquema XML, algoritmo Módulo 11 y restricción de $40 USD en Consumidor Final.
+  3. Análisis de la Ley de Comercio Electrónico, Firmas Electrónicas y Mensajes de Datos: no repudio de la firma XAdES-BES.
+  4. Revisión de normativas sanitarias del Ministerio de Salud Pública (MSP) para expedientes clínicos.
+- Entregable de la Fase: Sección 7 (Factibilidad Legal) con matriz de conformidad normativa y dictamen de no conflicto legal.
+
+--------------------------------------------------------------------------------
+4.6 FASE 6: EVALUACIÓN DE FACTIBILIDAD DE RECURSOS Y ORGANIZACIÓN SCRUM
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Definición de la estructura de talento humano bajo metodología Scrum:
+     * Product Owner: Propietario / Optometrista Principal de Óptica Vista Visión.
+     * Scrum Master / Director: Ing. Jorge Ariel Menéndez Verdecia.
+     * Revisor Técnico / Asesor Académico: Ing. Julio Roberto Santillán Castillo.
+     * Development Team: Omar Santiago Figueroa Díaz (Backend/SRI) y Alexander Rafael Villalva Dumancela (Frontend/IA).
+  2. Inventario de recursos materiales y logísticos (oficina, red local, equipos de prueba, tabletas e impresoras).
+  3. Evaluación de suficiencia de recursos: confirmación de que no se requiere contratar personal adicional para el desarrollo.
+- Entregable de la Fase: Sección 8 (Factibilidad de Recursos) con matriz de roles y capacidades del equipo.
+
+--------------------------------------------------------------------------------
+4.7 FASE 7: EVALUACIÓN DE FACTIBILIDAD DE MERCADO Y ESTRATEGIA DE DESPLIEGUE
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Análisis del mercado de software para establecimientos optométricos en Riobamba y Ecuador: 
+     identificación de falencias en sistemas extranjeros (Perú/Colombia) y paquetes genéricos sin módulo de refracción.
+  2. Determinación de la propuesta de valor diferenciadora del SGO (seguridad ISO 25010, SRI integrado y Chatbot de datos).
+  3. Formulación de la estrategia de validación y retroalimentación con el Owner:
+     * Despliegues continuos quincenales (Sprint Reviews) con acceso demostrativo remoto vía Ngrok/Cloudflare Tunnel.
+     * Pruebas de aceptación directa en consultorio con pacientes reales.
+- Entregable de la Fase: Sección 9 (Factibilidad de Mercado) con análisis FODA del producto y estrategia de adopción.
+
+--------------------------------------------------------------------------------
+4.8 FASE 8: EVALUACIÓN DE FACTIBILIDAD OPERACIONAL Y DE PROCESOS DE NEGOCIO
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Mapeo del ajuste procedimental entre el SGO y el flujo asistencial de Óptica Vista Visión: 
+     recepción -> examen refractivo -> selección de armazón/lunas -> orden a taller -> venta/cobro -> facturación SRI.
+  2. Análisis de compatibilidad con la cultura organizacional de una microempresa de salud visual.
+  3. Estrategia de gestión del cambio: plan de capacitación para el optometrista y asistente comercial, 
+     diseño de manuales interactivos y mitigación del temor a la transición digital.
+- Entregable de la Fase: Sección 10 (Factibilidad Operacional) con diagrama de flujo de procesos BPMN simplificado.
+
+--------------------------------------------------------------------------------
+4.9 FASE 9: EVALUACIÓN DE FACTIBILIDAD DE TIEMPO Y CRONOGRAMA DE SPRINTS
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Desglose temporal en el marco estricto de 18 semanas académicas del período 2026-2027.
+  2. Planificación de 4 Sprints quincenales (8 semanas efectivas de construcción):
+     * Sprint 1: M1 (Autenticación/RBAC) y M2 (Pacientes/Cédula M10).
+     * Sprint 2: M3 (Historia Clínica/Refracción OD-OI) y M4 (Pedidos al Taller).
+     * Sprint 3: M5 (Ventas/Caja) y M6 (Facturación Electrónica SRI).
+     * Sprint 4: M7 (Chatbot Operativo con los Datos) y Pruebas de Seguridad ISO 25010.
+  3. Identificación de la ruta crítica y análisis de holguras temporales para mitigar retrasos.
+- Entregable de la Fase: Sección 11 (Factibilidad de Tiempo) con diagrama de Gantt y cronograma por hitos.
+
+--------------------------------------------------------------------------------
+4.10 FASE 10: SÍNTESIS EJECUTIVA, RECOMENDACIONES Y PROTOCOLO DE APROBACIÓN
+--------------------------------------------------------------------------------
+- Actividades:
+  1. Redacción de la Sección 1 (Resumen Ejecutivo): síntesis transversal de todos los hallazgos 
+     técnicos, económicos, legales y operativos para las autoridades de titulación.
+  2. Redacción de la Sección 12 (Recomendaciones y Aprobación): formulación del dictamen técnico 
+     favorable que recomienda la ejecución inmediata del desarrollo del software.
+  3. Formalización del pliego de firmas de aprobación (Autores, Director de Titulación, Asesor Técnico y Beneficiario).
+- Entregable de la Fase: Documento consolidado y completo de Estudio de Factibilidad listo para entrega.
+
+
+================================================================================
+5. FICHAS METODOLÓGICAS Y GUÍA DE PRE-CONTENIDOS POR SECCIÓN
+================================================================================
+
+A continuación se detalla la guía técnica y los pre-contenidos obligatorios para cada 
+una de las doce secciones del estudio de factibilidad:
+
+--------------------------------------------------------------------------------
+5.1 SECCIÓN 1: RESUMEN EJECUTIVO
+--------------------------------------------------------------------------------
+- Objetivo: Proporcionar una visión integral, condensada y contundente sobre la viabilidad del proyecto.
+- Bases Documentales: Síntesis de las Secciones 2 a 12 del estudio.
+- Pre-Contenido Específico:
+  * Declaración del proyecto: desarrollo del sistema SGO para Óptica Vista Visión en Riobamba.
+  * Resumen de factibilidad técnica: viabilidad comprobada mediante arquitectura desacoplada 
+    (React + Laravel + NestJS + PostgreSQL), ejecución local de pruebas en equipo AMD Ryzen 5 9600X (16 GB RAM) 
+    y previsión de despliegue en servidor VPS en la nube (`SERV_PRODUCCION`).
+  * Resumen económico: presupuesto total de $12,415.75 autofinanciado al 50% por los proponentes, 
+    con relación beneficio/costo positiva y retorno tangible por automatización tributaria y clínica.
+  * Resumen legal y operacional: pleno cumplimiento de la LOPDP, estándares del SRI (v1.1.0) y alta receptividad de la óptica.
+  * Dictamen concluyente: recomendación unánime de aprobación y ejecución del software.
+
+--------------------------------------------------------------------------------
+5.2 SECCIÓN 2: ANTECEDENTES DEL PROYECTO
+--------------------------------------------------------------------------------
+- Objetivo: Contextualizar los orígenes y la visión estratégica del sistema informático.
+- Bases Documentales: `Anteproyecto.pdf` (pp. 1-8), `directrices.txt` (líneas 13-31), `informeEntrevistasConsolidado.txt`.
+- Pre-Contenido Específico:
+  * Orígenes del problema: diagnósticos en el sector optométrico de Riobamba que revelaron el uso 
+    generalizado de sistemas informáticos legados inadecuados (en su mayoría software peruano 
+    obsoleto con arquitectura MDI) que sobreescriben recetas previas, carecen de trazabilidad, 
+    no cumplen la LOPDP y ralentizan la atención al paciente.
+  * Visión del proyecto: construir una solución mantenible, modular y escalable que perdure en 
+    el tiempo, automatice los flujos críticos de Óptica Vista Visión y se convierta en un activo 
+    tecnológico estratégico para el establecimiento de salud.
+
+--------------------------------------------------------------------------------
+5.3 SECCIÓN 3: DESCRIPCIÓN DEL PROYECTO Y SU CONTEXTO
+--------------------------------------------------------------------------------
+- Objetivo: Delimitar el propósito, los entregables de software y el entorno de implantación.
+- Bases Documentales: `Especificacion de Requisitos_02.txt` (Módulos M1 a M7), `Anteproyecto.pdf` (pp. 8-11).
+- Pre-Contenido Específico:
+  * Propósito central: dotar a Óptica Vista Visión de una plataforma digital segura para gestión clínica y comercial.
+  * Catálogo de Entregables Principales (7 Módulos Funcionales):
+    1. Autenticación y RBAC (Admin, Optometrista, Asistente) y gestión segura JWT.
+    2. Gestión de Pacientes con validador de cédula ecuatoriana M10 y soporte flexible de menores.
+    3. Historia Clínica y Graduación con examen OD/OI, validaciones dióptricas e inmutabilidad (Soft Delete).
+    4. Pedidos a Laboratorios Ópticos con aislamiento de diagnósticos personales (LOPDP) y máquina de estados.
+    5. Ventas y Cobros Locales con inventario híbrido y reversión atómica ACID de caja y existencias.
+    6. Facturación Electrónica SRI: XML v1.1.0, clave acceso 49 dígitos M11, firma XAdES-BES, SOAP y RIDE PDF.
+    7. Asistente Inteligente Operativo "Chatbot con los Datos": consultas en lenguaje natural, blindaje read-only y RBAC.
+  * Contexto Organizacional y Cultural: establecimiento local representativo de Riobamba con 2 profesionales 
+    (optometrista principal y asistente), atención de 5 a 10 pacientes diarios y fuerte orientación a la confianza del paciente.
+  * Entes Externos: SRI (tributario), MSP (sanitario), laboratorios externos (talleres ópticos) y pacientes.
+
+--------------------------------------------------------------------------------
+5.4 SECCIÓN 4: ALCANCE DEL ESTUDIO DE FACTIBILIDAD
+--------------------------------------------------------------------------------
+- Objetivo: Formalizar los resultados esperados y el procedimiento de aprobación del estudio.
+- Bases Documentales: `directrices.txt` (líneas 44-50), `FORMATO DE ESTUDIO DE FACTIBILIDAD...pdf`.
+- Pre-Contenido Específico:
+  * Resultados esperados: evaluación cuantitativa y cualitativa de viabilidad para eliminar 
+    incertidumbre y fundamentar la inversión de tiempo y recursos.
+  * Actividades principales: análisis de capacidades computacionales, costeo presupuestario, 
+    auditoría regulatoria, verificación de compatibilidad operativa y diseño de cronograma.
+  * Procedimiento de aprobación: revisión por el Director de Titulación (Ing. Jorge Menéndez) 
+    y Asesor Técnico (Ing. Julio Santillán), culminando en la firma formal del acta de aprobación.
+
+--------------------------------------------------------------------------------
+5.5 SECCIÓN 5: FACTIBILIDAD TÉCNICA
+--------------------------------------------------------------------------------
+- Objetivo: Evaluar la disponibilidad y adecuación de hardware, software y esquemas de despliegue.
+- Bases Documentales: `EQUIPOS/DxDiag.txt`, `EQUIPOS/DxDiagPcOmar.txt`, `InformeImplementacionAppFacturacionElectronica.txt`, `informePropuestasInnovacion.txt`, `directrices.txt` (líneas 51-70).
+- Pre-Contenido Específico:
+  * Cuadro Comparativo de Hardware de Desarrollo y Pruebas:
+    - Equipo Alexander Villalva (`DESKTOP-MO7Q55S`): AMD Ryzen 5 9600X (6 cores / 12 threads @ 3.9-5.4 GHz), 
+      16 GB RAM DDR5, Windows 11 Pro 64-bit. Asignado como Servidor Local de Pruebas (Staging) 
+      para ejecución de Docker, microservicio NestJS API-SRI, base de datos y worker de IA.
+    - Equipo Omar Figueroa (`DESKTOP-ML70LGD`): Intel Core i5-7200U (2 cores / 4 threads @ 2.5-2.7 GHz), 
+      12 GB RAM, Windows 10 Home 64-bit. Asignado para desarrollo backend en Laravel 10 y pruebas transaccionales.
+  * Evaluación de Software y Tecnologías:
+    - Stack de presentación: React 18, Vite, Tailwind CSS, PWA (cero costo de licenciamiento).
+    - Stack backend core: Laravel 10+, PHP 8.2, Eloquent ORM (open-source).
+    - Stack facturación electrónica: NestJS 10, TypeScript, TypeORM, node-forge, Puppeteer headless, bwip-js.
+    - Gestor de persistencia: PostgreSQL 16 relacional con transacciones ACID y JSONB.
+    - Motor de IA: enrutador determinístico local en Node.js/PHP (Modo LAN) con conector seguro a LLM API.
+  * Escenarios de Despliegue Evaluados:
+    - Escenario 1 (Pruebas en Staging Local): despliegue en el equipo AMD Ryzen 5 9600X mediante contenedores Docker.
+    - Escenario 2 (Operación Local Óptica): miniserver o PC de consultorio conectada a intranet LAN con soporte offline.
+    - Escenario 3 (Producción en Servidor Contratado `SERV_PRODUCCION`): VPS en la nube (GCP / DigitalOcean) 
+      con arquitectura distribuida: API Core Laravel + Microservicio NestJS SRI + PostgreSQL + Worker de IA.
+  * Dictamen Técnico: Viabilidad técnica absoluta; recursos de cómputo y conectividad superan los requisitos mínimos.
+
+--------------------------------------------------------------------------------
+5.6 SECCIÓN 6: FACTIBILIDAD ECONÓMICA
+--------------------------------------------------------------------------------
+- Objetivo: Demostrar la viabilidad financiera mediante presupuesto actualizado y análisis costo-beneficio.
+- Bases Documentales: `Anteproyecto.pdf` (pp. 28-30), cotizaciones de certificados digitales (.p12), `directrices.txt` (líneas 71-75).
+- Pre-Contenido Específico:
+  * Estructura Presupuestaria Actualizada:
+    - Bloque I: Construcción del Software:
+      * Talento Humano: 2 Ingenieros de Software x 4 meses x $725/mes = $5,800.00.
+      * Hardware: Uso de laptops de desarrollo ($1,500.00 x 2 = $3,000.00).
+      * Software y Herramientas: Asistentes de desarrollo / tokens IA = $80.00.
+      * Servicios Operativos: Conectividad y energía = $220.00.
+      * Gastos Logísticos: Transporte y papelería = $220.00.
+      * Nuevo Rubro Tributario: Certificado de Firma Electrónica (.p12) Security Data / BCE = $30.00.
+      * Subtotal Bloque I: $9,350.00 + Contingencia 15% ($1,402.50) = $10,752.50.
+    - Bloque II: Explotación del Software:
+      * Infraestructura VPS y dominio en la nube: $120.00/año.
+      * Soporte y mantenimiento post-implementación (1 mes): $725.00.
+      * Subtotal Bloque II: $845.00 + Contingencia 15% ($126.75) = $971.75.
+    - Presupuesto Total del Proyecto: $11,724.25 (Autofinanciado: $5,862.13 por proponente).
+  * Análisis Costo-Beneficio (ACB):
+    - Beneficios Cuantificables para la Óptica:
+      * Ahorro en emisión de comprobantes SRI: reducción de 9.5 minutos por factura (ahorro estimado de $120.00/mes en tiempo operativo).
+      * Reducción de fallas en talla de lunas por errores manuales: ahorro de al menos 3 trabajos mensuales ($90.00/mes).
+      * Ahorro en papelería y recetarios físicos: $25.00/mes.
+      * Ahorro total anual estimado para la óptica: ~$2,820.00 / año.
+    - Beneficios Cualitativos: prevención de sanciones del SRI (multas de hasta $1,500), blindaje pericial por auditoría inmutable, imagen de modernidad y fidelización del cliente.
+    - Indicadores Financieros: Período de Recuperación de la Inversión operativa estimado en menos de 6 meses para el establecimiento.
+
+--------------------------------------------------------------------------------
+5.7 SECCIÓN 7: FACTIBILIDAD LEGAL
+--------------------------------------------------------------------------------
+- Objetivo: Verificar la conformidad del software con el marco jurídico ecuatoriano vigente.
+- Bases Documentales: LOPDP, Ficha Técnica SRI v1.1.0, Ley de Comercio Electrónico, Acuerdo Ministerial MSP 030-2020.
+- Pre-Contenido Específico:
+  * Ley Orgánica de Protección de Datos Personales (LOPDP Ecuador): conformidad estricta mediante el principio 
+    de minimización y disociación de datos (las órdenes técnicas de trabajo para talleres de lentes externos 
+    no contienen nombres completos, diagnósticos patológicos ni cédulas del paciente).
+  * Normativa Tributaria del SRI (Resolución NAC-DGERCGC18-00000233 y Ficha Técnica Offline v1.1.0): 
+    validez legal de comprobantes XML firmados, cálculo Módulo 11 y restricción estricta de Consumidor Final ($\le \$40.00$ USD).
+  * Ley de Comercio Electrónico, Firmas Electrónicas y Mensajes de Datos: garantía de no repudio legal y validez probatoria del estándar XAdES-BES.
+  * Ley Orgánica de Salud: preservación inmutable del expediente clínico optométrico mediante Soft Delete.
+  * Dictamen Legal: Ausencia absoluta de conflictos normativos; el proyecto promueve el cumplimiento legal de la óptica.
+
+--------------------------------------------------------------------------------
+5.8 SECCIÓN 8: FACTIBILIDAD DE RECURSOS
+--------------------------------------------------------------------------------
+- Objetivo: Detallar los perfiles de talento humano, materiales e infraestructura requerida.
+- Bases Documentales: `Anteproyecto.pdf` (Sección 4.4.2.5 Scrum), `plaDesarrolloRequisitos.txt`.
+- Pre-Contenido Específico:
+  * Estructura del Equipo de Proyecto (Marco Scrum):
+    - Product Owner: Propietario / Optometrista Principal de Óptica Vista Visión (validación de requerimientos clínicos y de negocio).
+    - Scrum Master: Ing. Jorge Ariel Menéndez Verdecia (supervisión metodológica, calidad de código y remoción de impedimentos).
+    - Asesor Metodológico y Técnico: Ing. Julio Roberto Santillán Castillo (revisor de arquitectura, accesibilidad y normas ISO).
+    - Equipo de Desarrollo (Developers):
+      * Omar Santiago Figueroa Díaz: Ingeniero de Software (Backend, Base de Datos PostgreSQL, API SRI y Seguridad).
+      * Alexander Rafael Villalva Dumancela: Ingeniero de Software (Frontend React, UX Clínica, Asistente Inteligente IA).
+  * Recursos Materiales y Físicos: consultorio optométrico para pruebas de campo, redes LAN/WLAN, 
+    tableta de captura clínica, impresoras térmicas e impresoras láser estándar.
+  * Dictamen de Recursos: Capacidad operativa plena y autosuficiente; no se requiere contratación de personal externo.
+
+--------------------------------------------------------------------------------
+5.9 SECCIÓN 9: FACTIBILIDAD DE MERCADO
+--------------------------------------------------------------------------------
+- Objetivo: Caracterizar la demanda del sector optométrico y definir la estrategia de adopción con el beneficiario.
+- Bases Documentales: `Anteproyecto.pdf` (Marco Teórico y Justificación), `directrices.txt` (líneas 81-86).
+- Pre-Contenido Específico:
+  * Diagnóstico del Mercado Sectorial: En la ciudad de Riobamba y la provincia de Chimborazo operan 
+    decenas de ópticas y consultorios optométricos que utilizan sistemas de escritorio desactualizados, 
+    hojas de cálculo o talonarios manuales. La ausencia de soluciones accesibles con facturación electrónica 
+    y gestión clínica especializada genera una oportunidad de mercado de alto valor.
+  * Estrategia de Abordaje y Validación Continua con el Owner:
+    - Entregas iterativas cada 15 días (Sprint Reviews) con demostraciones funcionales directas.
+    - Habilitación de entornos de acceso remoto seguro (Cloudflare Tunnels / Ngrok) para que el Owner 
+      valide las pantallas desde cualquier ubicación antes del paso a producción.
+    - Canales de retroalimentación inmediata para ajustes de interfaz y flujos clínicos.
+
+--------------------------------------------------------------------------------
+5.10 SECCIÓN 10: FACTIBILIDAD OPERACIONAL
+--------------------------------------------------------------------------------
+- Objetivo: Evaluar el grado de acoplamiento del software con las rutinas de trabajo de la óptica.
+- Bases Documentales: `FORMATO...pdf`, `informeEntrevistasConsolidado.txt`, `Orden_Metodologico_Implementacion_Sistema.txt`.
+- Pre-Contenido Específico:
+  * Encaje con los Procesos de Negocio Existentes: El sistema digitaliza exactamente la cadena de valor 
+    real del consultorio: (1) Registro de Paciente -> (2) Anamnesis y Refracción OD/OI -> (3) Generación de Receta -> 
+    (4) Emisión de Orden a Laboratorio -> (5) Venta de Armazón y Lunas -> (6) Cobro de Anticipo y Caja -> (7) Factura SRI.
+  * Compatibilidad con la Cultura Organizacional: Eliminación de la frustración provocada por la sobreescritura 
+    de historiales del software legado y la duplicación de tareas en la web del SRI.
+  * Plan de Gestión del Cambio y Capacitación:
+    - Jornadas de capacitación guiada para el Optometrista y el Asistente durante los Sprint Reviews.
+    - Interfaz gráfica simplificada, de alta legibilidad clínica y con ayudas contextuales en pantalla.
+    - Soporte técnico inmediato por parte de los desarrolladores durante el primer mes de implantación.
+
+--------------------------------------------------------------------------------
+5.11 SECCIÓN 11: FACTIBILIDAD DE TIEMPO
+--------------------------------------------------------------------------------
+- Objetivo: Demostrar que el proyecto es realizable en el plazo académico disponible.
+- Bases Documentales: `Anteproyecto.pdf` (Cronograma), `plaDesarrolloRequisitos.txt` (Plan de Sprints).
+- Pre-Contenido Específico:
+  * Ventana Temporal Total: 18 semanas calendario (Septiembre 2026 - Enero 2027).
+  * Distribución Temporal por Sprints de Construcción (8 semanas efectivas):
+    - Sprint 1 (Semanas 1-2): M1 (Autenticación y RBAC) y M2 (Gestión de Pacientes).
+    - Sprint 2 (Semanas 3-4): M3 (Historia Clínica y Refracción) y M4 (Pedidos al Taller).
+    - Sprint 3 (Semanas 5-6): M5 (Ventas y Caja) y M6 (Facturación Electrónica SRI).
+    - Sprint 4 (Semanas 7-8): M7 (Asistente Inteligente Chatbot) y Pruebas ISO/IEC 25010:2023.
+  * Fases de Cierre (Semanas 9-18): Evaluación de seguridad, redacción de informe final de grado y sustentación.
+  * Análisis de Holgura y Ruta Crítica: El cronograma cuenta con una holgura superior a 6 semanas 
+    para contingencias, asegurando la entrega puntual sin comprometer la titulación académica.
+
+--------------------------------------------------------------------------------
+5.12 SECCIÓN 12: RECOMENDACIONES Y APROBACIÓN
+--------------------------------------------------------------------------------
+- Objetivo: Emitir el dictamen formal sobre la conveniencia de ejecutar el proyecto y formalizar el aval.
+- Bases Documentales: `FORMATO DE ESTUDIO DE FACTIBILIDAD...pdf`, `directrices.txt`.
+- Pre-Contenido Específico:
+  * Dictamen Técnico Consolidado: Se concluye que el proyecto reúne condiciones sobresalientes de 
+    viabilidad en todas sus dimensiones (técnica, económica, legal, de recursos, mercado, operacional y tiempo).
+  * Recomendaciones Específicas:
+    1. Desplegar el entorno preliminar de pruebas (Staging) en el equipo AMD Ryzen 5 9600X para validar la concurrencia de microservicios.
+    2. Mantener la contingencia offline del SRI para salvaguardar la venta local ante caídas de internet.
+    3. Respetar estrictamente el blindaje de solo lectura (`GRANT SELECT`) para el Asistente Inteligente Operativo.
+  * Acta Formal de Aprobación: Estructura de firmas para Proponentes, Director de Titulación, Asesor Técnico y Beneficiario.
+
+
+================================================================================
+6. CRONOGRAMA DE EJECUCIÓN, MATRIZ RACI Y RESPONSABILIDADES
+================================================================================
+
+6.1 ASIGNACIÓN DE ROLES Y RESPONSABILIDADES (MATRIZ RACI):
++------------------------------------+-------+-------+-------+-------+-------+
+| SECCIÓN DEL ESTUDIO DE FACTIBILIDAD| BACK  | FRONT | PO    | DIR   | ASES  |
+|                                    | (OF)  | (AV)  | (Cli) | (JM)  | (JS)  |
++------------------------------------+-------+-------+-------+-------+-------+
+| S1: Resumen Ejecutivo              |   R   |   R   |   I   |   A   |   C   |
+| S2: Antecedentes del Proyecto      |   C   |   R   |   A   |   C   |   I   |
+| S3: Descripción y Contexto         |   R   |   R   |   A   |   C   |   C   |
+| S4: Alcance del Estudio            |   R   |   C   |   I   |   A   |   A   |
+| S5: Factibilidad Técnica           |   R   |   R   |   I   |   A   |   C   |
+| S6: Factibilidad Económica         |   R   |   C   |   A   |   A   |   C   |
+| S7: Factibilidad Legal             |   R   |   C   |   A   |   A   |   C   |
+| S8: Factibilidad de Recursos       |   C   |   R   |   I   |   A   |   I   |
+| S9: Factibilidad de Mercado        |   C   |   R   |   A   |   C   |   I   |
+| S10: Factibilidad Operacional      |   C   |   R   |   A   |   C   |   C   |
+| S11: Factibilidad de Tiempo        |   R   |   R   |   I   |   A   |   C   |
+| S12: Recomendaciones y Aprobación  |   R   |   R   |   A   |   A   |   A   |
++------------------------------------+-------+-------+-------+-------+-------+
+Leyenda RACI: R = Responsable de elaborar, A = Aprobador final, C = Consultado, I = Informado.
+- OF: Omar Santiago Figueroa Díaz
+- AV: Alexander Rafael Villalva Dumancela
+- Cli: Propietario / Optometrista (Óptica Vista Visión)
+- JM: Ing. Jorge Ariel Menéndez Verdecia (Director / Scrum Master)
+- JS: Ing. Julio Roberto Santillán Castillo (Asesor Académico)
+
+6.2 CRONOGRAMA DE ELABORACIÓN DEL DOCUMENTO DE FACTIBILIDAD (1 SEMANA INTENSIVA):
+- Día 1: Consolidación de pre-contenidos de Secciones 1 a 4 (Antecedentes, Contexto y Alcance).
+- Día 2: Redacción profunda de Sección 5 (Factibilidad Técnica: Hardware DxDiag, Software y Despliegue).
+- Día 3: Redacción de Sección 6 (Factibilidad Económica: Presupuesto actualizado, ROI y Beneficios).
+- Día 4: Redacción de Secciones 7 y 8 (Factibilidad Legal y Factibilidad de Recursos Scrum).
+- Día 5: Redacción de Secciones 9, 10 y 11 (Mercado, Operacional y Cronograma de Sprints).
+- Día 6: Redacción de Secciones 1 y 12 (Resumen Ejecutivo, Recomendaciones y Acta de Aprobación).
+- Día 7: Revisión cruzada de estilo, verificación de consistencia y entrega del documento final.
+
+
+================================================================================
+7. PROTOCOLO DE VERIFICACIÓN, VALIDACIÓN Y CRITERIOS DE ACEPTACIÓN
+================================================================================
+
+Antes de considerar formalmente terminado el documento de Estudio de Factibilidad, 
+se debe verificar el cumplimiento de la siguiente lista de control de calidad:
+
+[ ] 1. Estructura Canónica Completa: Contiene las 12 secciones exactas del formato institucional ESPOCH.
+[ ] 2. Integración de Requisitos Actualizados: Incorpora explícitamente el módulo de Facturación 
+       Electrónica SRI y la Propuesta 3 de Innovación (Chatbot con los datos).
+[ ] 3. Rigor en Datos de Hardware: Utiliza los datos reales de los reportes DxDiag de los equipos 
+       de desarrollo y argumenta la elección del AMD Ryzen 5 9600X para el entorno de Staging.
+[ ] 4. Presupuesto Consistente: Refleja los valores base del Anteproyecto ($11,551.75) actualizados 
+       con los nuevos rubros de firma digital y servicios, manteniendo el autofinanciamiento al 50%.
+[ ] 5. Rigor Normativo: Cita textualmente la Ley Orgánica de Protección de Datos Personales (LOPDP), 
+       la Ficha Técnica Offline v1.1.0 del SRI y la Ley de Comercio Electrónico.
+[ ] 6. Análisis Costo-Beneficio Concreto: Presenta estimaciones cuantitativas de ahorro para la óptica 
+       y reducción de riesgos tributarios.
+[ ] 7. Cronograma Sincronizado: Articula los 4 Sprints quincenales del Plan de Requisitos v2.0 con las 
+       18 semanas del calendario de titulación de la ESPOCH.
+[ ] 8. Protocolo de Aprobación: Dispone de los espacios formales para las cuatro firmas correspondientes.
+
+
+================================================================================
+8. CONCLUSIONES Y DIRECTRICES OPERATIVAS PARA LA REDACCIÓN FINAL
+================================================================================
+
+1. El presente Plan de Estudio de Factibilidad constituye la hoja de ruta metodológica 
+   y analítica para transformar los insumos dispersos del proyecto en un informe técnico 
+   de alto impacto, riguroso y académicamente incuestionable.
+2. La definición previa de bases documentales, pre-contenidos específicos y modelos de cálculo 
+   garantiza que la redacción del documento `EstudioFactibilidad.txt` se desarrolle de forma 
+   fluida, secuencial y sin vacíos de información.
+3. El equipo de ingeniería procederá de inmediato a la redacción integral y definitiva del 
+   Estudio de Factibilidad una vez que el presente plan sea formalizado en el entorno del proyecto.
+
+================================================================================
+FIN DEL PLAN METODOLÓGICO DEL ESTUDIO DE FACTIBILIDAD
+================================================================================

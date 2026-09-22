@@ -1,0 +1,436 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN: FASE 8
+EVALUACIÓN DE FACTIBILIDAD OPERACIONAL Y DE PROCESOS DE NEGOCIO
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase Ejecutada:  FASE 8: EVALUACIÓN DE FACTIBILIDAD OPERACIONAL Y DE PROCESOS DE NEGOCIO
+                 (Conforme a PlanEstudioFactibilidad.txt, directrices.txt y
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf)
+Sección del      SECCIÓN 10: FACTIBILIDAD OPERACIONAL
+Formato ESPOCH:  (Ajuste procedimental, reingeniería As-Is vs. To-Be, modelo BPMN y gestión del cambio)
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf8.txt
+Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
+Versión:         1.0 Definitiva y Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 8
+   1.1 Propósito y Enfoque de la Factibilidad Operacional en Salud Visual
+   1.2 Objetivos Específicos de la Fase 8
+   1.3 Marco Metodológico y Articulación con Directrices Institucionales
+2. DIAGNÓSTICO Y REINGENIERÍA DE PROCESOS: LÍNEA BASE AS-IS VS. MODELO TO-BE
+   2.1 Caracterización del Proceso Actual (As-Is) y Puntos Críticos de Fricción
+       - Sobreescritura destructiva de historiales clínicos refractivos
+       - Gestión manual de órdenes de laboratorio y pérdidas de recetas
+       - Duplicidad operativa en facturación SRI y dispersión de datos
+       - Descuadres contables e inconsistencias en la anulación de ventas
+   2.2 Diseño del Modelo Operacional Digitalizado Reingenierizado (To-Be)
+       - Subproceso 1: Admisión y Búsqueda Predictiva de Pacientes
+       - Subproceso 2: Anamnesis y Examen Refractivo Especializado OD/OI
+       - Subproceso 3: Emisión de Prescripción, Recetas PDF y Certificados CIE-10
+       - Subproceso 4: Generación y Seguimiento de Órdenes a Taller con Disociación LOPDP
+       - Subproceso 5: Venta Comercial por Lotes y Cobro Transaccional ACID
+       - Subproceso 6: Facturación Electrónica Nativa SRI v1.1.0 Offline
+       - Subproceso 7: Consulta Asistida por IA "Chatbot con los Datos" (Solo Lectura)
+3. MODELADO FORMAL DE PROCESOS DE NEGOCIO EN NOTACIÓN BPMN
+   3.1 Arquitectura de Carriles (Lanes) y Roles Participantes
+   3.2 Diagrama de Flujo Asistencial y Comercial To-Be (Notación Estándar)
+   3.3 Puntos de Control, Validaciones Automáticas y Transiciones de Estado
+4. EVALUACIÓN DE COMPATIBILIDAD CON LA CULTURA ORGANIZACIONAL
+   4.1 Perfil de los Usuarios Finales y Clima Laboral en Óptica Vista Visión
+   4.2 Análisis de Barreras Psicológicas y Temores ante la Digitalización
+       - Temor a la ralentización de la consulta médica por uso del teclado
+       - Temor a la complejidad tributaria y bloqueo por fallas del SRI o Internet
+   4.3 Estrategia de Gestión del Cambio Organizacional (Modelo ADKAR Adaptado)
+5. PLAN INTEGRAL DE CAPACITACIÓN, TRANSFERENCIA Y ADOPCIÓN DE USUARIOS
+   5.1 Talleres de Capacitación Práctica Diferenciada por Perfiles RBAC
+       - Módulo de Instrucción para el Optometrista Clínico
+       - Módulo de Instrucción para el Personal Auxiliar / Vendedor
+       - Módulo de Instrucción para el Administrador / Propietario
+   5.2 Materiales Didácticos de Acompañamiento y Ayudas Contextuales
+       - Guías plastificadas de escritorio de 1 página (Quick Reference Sheets)
+       - Sistema de micro-asistencias embebidas (Tooltips y validadores reactivos)
+       - Manual de usuario y catálogo de procedimientos estandarizados
+6. POLÍTICAS DE CONTINGENCIA, MANTENIMIENTO Y CONTINUIDAD OPERATIVA
+   6.1 Protocolos de Contingencia Operativa en Consultorio
+       - Contingencia A: Caída del servicio de Internet de banda ancha
+       - Contingencia B: Interrupción del suministro de energía eléctrica local
+       - Contingencia C: Falla imprevista de la estación de trabajo local
+   6.2 Plan de Acompañamiento y Soporte Técnico Post-Implementación
+7. MATRIZ CUANTITATIVA DE IMPACTO OPERACIONAL (MÉTRICAS DE RENDIMIENTO)
+8. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD OPERACIONAL Y DECLARACIÓN DE CIERRE
+================================================================================
+
+
+================================================================================
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS DE LA FASE 8
+================================================================================
+
+1.1 PROPÓSITO Y ENFOQUE DE LA FACTIBILIDAD OPERACIONAL EN SALUD VISUAL
+La evaluación de factibilidad operacional analiza la capacidad real de una organización 
+para asimilar, ejecutar y sostener en su rutina diaria el sistema informático desarrollado. 
+Un software puede ser técnicamente perfecto, financieramente rentable y jurídicamente 
+intachable, pero si entra en colisión con las costumbres laborales del personal, si ralentiza 
+la atención al paciente o si demanda destrezas informáticas ajenas a los profesionales de la 
+salud, el proyecto fracasará inevitablemente en su fase de implantación.
+
+En el contexto de *Óptica Vista Visión*, la factibilidad operacional se enfoca en demostrar 
+que el Sistema de Gestión Optométrica (SGO) no impone una carga burocrática adicional, sino que 
+simplifica radicalmente las tareas de consulta refractiva, confección de recetas, despacho de 
+lunas al taller, cobros transaccionales y facturación ante el SRI, garantizando un acoplamiento 
+armónico y fluido con la dinámica de atención clínica y comercial del establecimiento.
+
+1.2 OBJETIVOS ESPECÍFICOS DE LA FASE 8
+1. Contrastar el flujo de trabajo manual y legado actual (As-Is) frente al modelo digitalizado 
+   y reingenierizado (To-Be) que implementa el SGO, identificando la erradicación de cuellos de botella.
+2. Modelar formalmente la cadena de valor asistencial y comercial en notación estandarizada BPMN 
+   (Business Process Model and Notation), definiendo las responsabilidades de cada carril operativo.
+3. Evaluar la compatibilidad cultural y humana del personal de Óptica Vista Visión frente a la 
+   herramienta, estructurando un plan de gestión del cambio bajo el modelo ADKAR.
+4. Diseñar el programa de capacitación práctica por roles (Optometrista, Asistente, Administrador) 
+   y definir los materiales de soporte ergonómico (ayudas contextuales y guías rápidas).
+5. Formular los protocolos de contingencia operativa ante contingencias externas (caídas de internet, 
+   cortes de fluido eléctrico o fallos de hardware) que aseguren una disponibilidad del 99.5%.
+6. Medir el impacto operacional mediante una matriz cuantitativa de reducción de tiempos de ciclo.
+7. Emitir el dictamen concluyente de viabilidad operacional conforme al formato oficial de la ESPOCH.
+
+1.3 MARCO METODOLÓGICO Y ARTICULACIÓN CON DIRECTRICES INSTITUCIONALES
+La presente fase toma como insumos normativos y técnicos vinculantes:
+- `FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf` (Sección 10: Factibilidad Operacional).
+- `directrices.txt` (Lineamientos metodológicos de titulación).
+- `PlanEstudioFactibilidad.txt` (Secciones 4.8 y 5.10).
+- `informeEntrevistasConsolidado.txt` (Relevamiento empírico de las sesiones 1, 2 y 3 en consultorio).
+- `Orden_Metodologico_Implementacion_Sistema.txt` (Pautas de modelado de procesos, actores y flujos de negocio).
+
+
+================================================================================
+2. DIAGNÓSTICO Y REINGENIERÍA DE PROCESOS: LÍNEA BASE AS-IS VS. MODELO TO-BE
+================================================================================
+
+2.1 CARACTERIZACIÓN DEL PROCESO ACTUAL (AS-IS) Y PUNTOS CRÍTICOS DE FRICCIÓN
+A partir de la auditoría directa del sistema legado oftalmológico y las entrevistas sostenidas 
+con el personal del consultorio, se diagnosticaron los siguientes fallos operacionales críticos:
+
+1. Sobreescritura destructiva de historiales clínicos:
+   - En el sistema legado en uso, cuando un paciente regresa a una consulta de control anual, 
+     el optometrista se ve forzado a modificar la pantalla anterior, sobreescribiendo los valores 
+     de refracción previos. Esto destruye la serie histórica del paciente, impidiendo evaluar con 
+     rigor científico la progresión de patologías como miopía degenerativa, astigmatismo o presbicia.
+2. Gestión fragmentada de pedidos a talleres ópticos externos:
+   - La confección de órdenes de lentes se realiza rellenando a mano talonarios de papel carbón o 
+     enviando fotos por mensajería móvil instantánea (WhatsApp). 
+   - Consecuencia: Extravío frecuente de pedidos, ambigüedad en el signo del cilindro o la altura de 
+     montaje, desconocimiento del estado real del trabajo ("¿está tallándose, biselándose o listo?") 
+     y una alarmante exposición de datos sensibles del paciente ante el personal del taller externo.
+3. Doble digitación y saturación tributaria:
+   - El personal atiende la venta en el consultorio, entrega una nota de papel o comprobante informal 
+     al cliente y, posteriormente (al final de la jornada o en ratos libres), debe ingresar al portal 
+     web "SRI en Línea" a redigitar cédula, nombres, ítems y valores.
+   - Consecuencia: Si el portal del SRI presenta lentitud o caída de enlaces, el establecimiento 
+     acumula facturas pendientes por días, arriesgándose a sanciones tributarias graves.
+4. Descuadres contables en la anulación de ventas:
+   - Cuando un paciente cancelaba una compra, el software legado permitía borrar el registro monetario, 
+     pero el armazón oftálmico no se reintegraba al stock físico, provocando descuadres recurrentes 
+     entre el inventario teórico y la caja diaria.
+
+2.2 DISEÑO DEL MODELO OPERACIONAL DIGITALIZADO REINGENIERIZADO (TO-BE)
+El Sistema SGO reestructura integralmente la cadena de valor mediante un flujo cohesivo y unificado 
+dividido en siete subprocesos automatizados:
+
+- Subproceso 1: Admisión y Búsqueda Predictiva de Pacientes (M2 / RF-03 a RF-06):
+  * Al llegar el paciente a recepción, el asistente o el optometrista digita los primeros dígitos 
+    de su cédula o apellidos. Un componente React con autocompletado consulta en tiempo real la base 
+    de datos. Si el paciente ya existe, se cargan sus datos en menos de 1 segundo; si es nuevo, se valida 
+    el algoritmo Módulo 10 de la cédula ecuatoriana y se crea la ficha demográfica sin duplicidades.
+- Subproceso 2: Anamnesis y Examen Refractivo Especializado OD/OI (M3 / RF-07 a RF-12):
+  * El optometrista opera una interfaz clínica estructurada que replica el diseño universal de refracción. 
+    A medida que digita esferas (-25.00 a +25.00 D), cilindros (-10.00 a 0.00 D) y ejes (0° a 180°), 
+    el frontend valida rangos biológicos en tiempo real. En mayores de 40 años, el sistema calcula 
+    automáticamente la potencia para visión cercana sumando algebraicamente la Adición.
+  * Preservación Histórica: Cada examen se guarda con fecha, hora y usuario. El historial anterior 
+    queda bloqueado para modificación, garantizando inmutabilidad y comparativa evolutiva en pantalla.
+- Subproceso 3: Emisión de Prescripción, Recetas PDF y Certificados CIE-10 (M3 / RF-13 a RF-15):
+  * El sistema genera instantáneamente la receta optométrica o el certificado de aptitud visual en 
+    formato PDF estandarizado con el diagnóstico codificado según la Clasificación Internacional de 
+    Enfermedades (CIE-10), listo para ser impreso o enviado al correo del paciente con un solo clic.
+- Subproceso 4: Generación y Seguimiento de Órdenes a Taller con Disociación LOPDP (M4 / RF-16 a RF-19):
+  * Con base en la graduación clínica, se genera automáticamente la Orden de Laboratorio con código 
+    único anonimizado. Los datos personales del paciente (nombre, cédula, diagnóstico) se eliminan 
+    técnicamente de la orden enviada al taller, dando estricto cumplimiento al Art. 25 de la LOPDP.
+  * Máquina de Estados Finitos: El estado de la orden evoluciona de manera transparente y auditable: 
+    PENDIENTE -> ENVIADO AL TALLER -> RECIBIDO EN CONSULTORIO -> ENTREGADO AL PACIENTE.
+- Subproceso 5: Venta Comercial por Lotes y Cobro Transaccional ACID (M5 / RF-20 a RF-23):
+  * El asistente asocia la receta al armazón seleccionado (clasificado por bandas homogéneas de precio) 
+    y a los tratamientos ópticos. Se registra el cobro admitiendo pagos mixtos (efectivo y transferencia) 
+    y el esquema comercial de Anticipo y Saldo. Todas las transacciones operan bajo transaccionalidad 
+    ACID en PostgreSQL: si se produce una anulación autorizada, el asiento se reversa atómicamente y el stock se restaura.
+- Subproceso 6: Facturación Electrónica Nativa SRI v1.1.0 Offline (M6 / RF-24 a RF-27):
+  * Sin abrir aplicaciones externas, el SGO genera el archivo XML de factura bajo la Ficha Técnica v1.1.0, 
+    calcula la clave de acceso de 49 dígitos con Módulo 11, lo firma criptográficamente mediante XAdES-BES 
+    utilizando el certificado .p12 de la óptica y lo transmite al WebService del SRI. 
+  * Se imprime el comprobante térmico POS de 80 mm de entrega inmediata para el paciente con su código 
+    de barras Code128 y RIDE PDF. Si el internet se interrumpe, el sistema garantiza la venta local 
+    y encola el envío al SRI para ejecución automática en diferido.
+- Subproceso 7: Consulta Asistida por IA "Chatbot con los Datos" (M7 / RF-28 a RF-31):
+  * El propietario o administrador consulta en lenguaje natural desde cualquier pantalla: "¿Cuáles son 
+    los pedidos que tienen más de 3 días en el taller?" o "¿Cuál es el total de ventas cobradas hoy en efectivo?", 
+    obteniendo respuestas operativas en milisegundos mediante un enrutador local de solo lectura (`GRANT SELECT`).
+
+
+================================================================================
+3. MODELADO FORMAL DE PROCESOS DE NEGOCIO EN NOTACIÓN BPMN
+================================================================================
+
+3.1 ARQUITECTURA DE CARRILES (LANES) Y ROLES PARTICIPANTES
+El flujo de valor global del consultorio se distribuye en una Piscina Principal (Pool) denominada 
+"Atención Integral en Salud Visual y Gestión Comercial", segmentada en seis carriles (Swimlanes):
+1. Carril 1: Paciente / Cliente (Actor externo).
+2. Carril 2: Asistente Comercial / Recepcionista (Usuario interno RBAC).
+3. Carril 3: Optometrista Clínico (Usuario interno RBAC).
+4. Carril 4: Sistema Informático SGO (Automatismo transaccional y validaciones).
+5. Carril 5: Taller / Laboratorio Óptico Externo (Tercero prestador de manufactura).
+6. Carril 6: Servicio de Rentas Internas - SRI (Autoridad tributaria externa).
+
+3.2 DIAGRAMA DE FLUJO ASISTENCIAL Y COMERCIAL TO-BE (MODELO SIMPLIFICADO)
+
+```
++-------------------------------------------------------------------------------------------------------------------------------+
+| POOL: GESTIÓN INTEGRAL CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO) - ÓPTICA VISTA VISIÓN                                           |
++-------------------+-----------------------------------------------------------------------------------------------------------+
+| 1. PACIENTE       | (Inicio) -> [Solicita Atención] -----------------------------------------------------> [Recibe Lentes/RIDE] -> (Fin)
++-------------------+-----------------------------------------------------------------------------------------------------------+
+| 2. ASISTENTE      |             [Registra/Busca Ficha]                           [Registra Venta/Cobro]                        |
+|    COMERCIAL      |                     |                                                   ^                                 |
++-------------------+---------------------|---------------------------------------------------|---------------------------------+
+| 3. OPTOMETRISTA   |                     v                                                   |                                 |
+|    CLÍNICO        |            [Ejecuta Examen OD/OI] -> [Emite Receta/Orden Taller] --------+                                 |
++-------------------+-----------------------------------|-----------------------------------------------------------------------+
+| 4. SISTEMA SGO    |            [Valida Rangos Dióptr.]    [Genera Orden Disociada]        [Bloque Transaccional ACID]          |
+|    (CORE + SRI)   |            [Persiste Historial]       [Disocia Datos LOPDP Art.25]    [Genera XML v1.1.0 + Clave 49d M11]  |
+|                   |                                                   |                   [Firma Criptográfica XAdES-BES]      |
+|                   |                                                   |                                   |                   |
++-------------------+---------------------------------------------------|-----------------------------------|-------------------+
+| 5. TALLER EXTERNO |                                                   v                                   |                   |
+|    (LABORATORIO)  |                                        [Talla y Bisela Lunas]                         |                   |
+|                   |                                        [Retorna Lente Terminado]                      |                   |
++-------------------+---------------------------------------------------|-----------------------------------|-------------------+
+| 6. SRI ECUADOR    |                                                                                       v                   |
+|    (WEBSERVICE)   |                                                                          <¿Conexión SOAP Disponible?>     |
+|                   |                                                                           /              \                |
+|                   |                                                                    (Sí)  v                v  (No)         |
+|                   |                                                              [Autoriza XML Factura]  [Encola para Offline]|
++-------------------------------------------------------------------------------------------------------------------------------+
+```
+
+3.3 PUNTOS DE CONTROL, VALIDACIONES AUTOMÁTICAS Y TRANSICIONES DE ESTADO
+- Punto de Control 1 (Admisión): Validación algorítmica de la cédula de 10 dígitos (Módulo 10). Si falla, 
+  bloquea el registro demográfico para evitar duplicación y registros fantasma.
+- Punto de Control 2 (Clínico): Comprobación de signo algebraico. Si el optometrista introduce un valor 
+  positivo en cilindro, el sistema muestra advertencia y formatea automáticamente a notación optométrica estándar.
+- Punto de Control 3 (Taller): Generación de orden de manufactura disociada; el sistema valida que ningún 
+  campo de identificación personal del paciente sea enviado al taller externo.
+- Punto de Control 4 (Tributario): Evaluación de conectividad SOAP con el SRI. Si el endpoint no responde en 
+  3 segundos, se activa el modo de contingencia offline, garantizando que el paciente no espere en el mostrador.
+
+
+================================================================================
+4. EVALUACIÓN DE COMPATIBILIDAD CON LA CULTURA ORGANIZACIONAL
+================================================================================
+
+4.1 PERFIL DE LOS USUARIOS FINALES Y CLIMA LABORAL EN ÓPTICA VISTA VISIÓN
+Óptica Vista Visión opera como una microempresa de salud visual familiar y profesional, integrada por:
+- Usuario 1: Optometrista Principal y Propietario (Profesional de la salud visual con más de 10 años de 
+  experiencia, habituado a la exploración diagnóstica física, con destrezas informáticas intermedias).
+- Usuario 2: Asistente de Mostrador y Ventas (Personal comercial y administrativo encargado del cobro, 
+  atención al público, arqueo diario y entrega de productos, con habilidades de ofimática general).
+
+El clima laboral se caracteriza por una comunicación directa, alta cercanía con el paciente y un 
+ritmo de trabajo dinámico donde la rapidez y la amabilidad en la atención constituyen factores críticos de éxito.
+
+4.2 ANÁLISIS DE BARRERAS PSICOLÓGICAS Y TEMORES ANTE LA DIGITALIZACIÓN
+A través de las entrevistas se identificaron dos temores operativos principales:
+1. Temor a la ralentización de la consulta: El optometrista manifestó preocupación por "perder el contacto 
+   visual con el paciente por estar escribiendo en un teclado". 
+   - Solución Ergonómica: El diseño de la interfaz clínica React utiliza navegación por tabulación fluida 
+     (tecla Tab), campos predeterminados con valores comunes (ejes en 0°/180°, pasos de 0.25 D) y selección 
+     rápida mediante teclado numérico, requiriendo menos de 45 segundos para asentar la fórmula completa.
+2. Temor a fallas tecnológicas durante la venta: Preocupación de que "el sistema se caiga cuando hay clientes esperando".
+   - Solución Ergonómica: Operatividad garantizada en red de área local (LAN) offline; el software no depende 
+     de servidores externos para vender, cobrar o imprimir recetas.
+
+4.3 ESTRATEGIA DE GESTIÓN DEL CAMBIO ORGANIZACIONAL (MODELO ADKAR ADAPTADO)
+Para asegurar una transición exitosa, se estructura el proceso de cambio según las 5 etapas del modelo ADKAR:
+
+TABLA 1: MATRIZ DE GESTIÓN DEL CAMBIO ORGANIZACIONAL (MODELO ADKAR)
++---------------+-----------------------------------------------------------------------------------------------+
+| ETAPA ADKAR   | ACCIÓN ESPECÍFICA EN ÓPTICA VISTA VISIÓN                                                      |
++---------------+-----------------------------------------------------------------------------------------------+
+| Awareness     | Demostración directa al propietario y asistente de los graves riesgos legales (LOPDP y SRI)  |
+| (Conciencia)  | y las pérdidas económicas ($2,824/año) que produce el esquema manual y el sistema legado.    |
++---------------+-----------------------------------------------------------------------------------------------+
+| Desire        | Involucramiento del propietario como Product Owner en cada Sprint Review, haciéndolo coautor  |
+| (Deseo)       | de las decisiones de diseño de interfaz, lo que genera alto sentido de pertenencia y agrado.  |
++---------------+-----------------------------------------------------------------------------------------------+
+| Knowledge     | Capacitación guiada en el consultorio con datos de prueba, entregando manuales visuales breves|
+| (Conocimiento)| y ayudas contextuales embebidas en las pantallas de trabajo.                                  |
++---------------+-----------------------------------------------------------------------------------------------+
+| Ability       | Sesiones de simulación de atención clínica y comercial bajo supervisión de los desarrolladores|
+| (Habilidad)   | hasta que el personal logre una digitación ágil y autónoma.                                   |
++---------------+-----------------------------------------------------------------------------------------------+
+| Reinforcement | Acompañamiento presencial durante los primeros 30 días de operación real para resolver dudas |
+| (Refuerzo)    | inmediatas y celebrar la reducción de tiempos de cierre de caja y despacho de taller.         |
++---------------+-----------------------------------------------------------------------------------------------+
+
+
+================================================================================
+5. PLAN INTEGRAL DE CAPACITACIÓN, TRANSFERENCIA Y ADOPCIÓN DE USUARIOS
+================================================================================
+
+5.1 TALLERES DE CAPACITACIÓN PRÁCTICA DIFERENCIADA POR PERFILES RBAC
+Se ha diseñado un plan de adiestramiento de 12 horas pedagógicas totales, distribuidas en tres 
+módulos prácticos ejecutados en las instalaciones del consultorio:
+
+TABLA 2: PLAN DE CAPACITACIÓN OPERACIONAL POR ROLES
++-------------------+---------------------+---------------------------------------------------------------+
+| MÓDULO / PERFIL   | DURACIÓN Y HORARIO  | CONTENIDOS PRÁCTICOS Y CASOS DE USO                           |
++-------------------+---------------------+---------------------------------------------------------------+
+| Módulo Clínico    | 4 horas             | - Registro de nueva consulta refractiva OD/OI.                |
+| (Optometrista)    | (2 sesiones de 2 h) | - Visualización de historial evolutivo y comparativa previa.  |
+|                   |                     | - Emisión de recetas ópticas y certificados médicos CIE-10.   |
+|                   |                     | - Generación y envío de órdenes de laboratorio con LOPDP.     |
++-------------------+---------------------+---------------------------------------------------------------+
+| Módulo Comercial  | 4 horas             | - Búsqueda predictiva y registro de pacientes.                |
+| (Asistente/Ventas)| (2 sesiones de 2 h) | - Selección de armazones por lotes y lunas por tratamientos.  |
+|                   |                     | - Cobro de anticipos, registro de saldos y medios de pago.    |
+|                   |                     | - Facturación SRI nativa y emisión de ticket térmico POS.     |
+|                   |                     | - Arqueo de caja diario y control de ingresos.                |
++-------------------+---------------------+---------------------------------------------------------------+
+| Módulo Gerencial  | 4 horas             | - Control de usuarios, perfiles RBAC y permisos.              |
+| (Administrador/PO)| (2 sesiones de 2 h) | - Anulación transaccional de comprobantes bajo ACID.          |
+|                   |                     | - Auditoría inmutable de eventos (`audit_logs`).              |
+|                   |                     | - Consultas operativas al Chatbot con los Datos (IA SELECT).  |
++-------------------+---------------------+---------------------------------------------------------------+
+
+5.2 MATERIALES DIDÁCTICOS DE ACOMPAÑAMIENTO Y AYUDAS CONTEXTUALES
+Para que el personal no dependa de memorizar manuales densos:
+1. Guías Plastificadas de Escritorio (Quick Reference Sheets): Dos láminas de tamaño A4 plastificadas 
+   ubicadas junto a la computadora del consultorio y el mostrador de ventas, con diagramas paso a paso:
+   - Lámina 1: "Flujo Rápido de la Consulta Refractiva y Receta en 3 Pasos".
+   - Lámina 2: "Flujo de Venta, Cobro de Anticipo y Factura SRI en 4 Pasos".
+2. Ayudas Contextuales Embebidas (Tooltips y Validadores):
+   - Cada campo clínico contiene mensajes de ayuda que aparecen al pasar el cursor (ej. al ubicarse en 
+     'Cilindro', el sistema muestra: "Ingrese valor negativo entre 0.00 y -10.00 en pasos de 0.25").
+3. Manual Interactivo en PDF con Enlaces Internos: Documento de usuario digital accesible directamente 
+   desde el botón de ayuda de la barra superior del sistema.
+
+
+================================================================================
+6. POLÍTICAS DE CONTINGENCIA, MANTENIMIENTO Y CONTINUIDAD OPERATIVA
+================================================================================
+
+6.1 PROTOCOLOS DE CONTINGENCIA OPERATIVA EN CONSULTORIO
+Para asegurar que la operación de la óptica nunca se detenga ante factores externos imprevistos:
+
+- Contingencia A: Caída del servicio de Internet de banda ancha:
+  * Impacto As-Is: Parálisis de la facturación en el portal del SRI y pérdida de contacto con laboratorios.
+  * Solución SGO To-Be: El sistema opera 100% sobre la red LAN local. Las consultas clínicas, recetas, 
+    ventas y cobros se procesan localmente sin degradación. Las facturas electrónicas se firman con 
+    el archivo .p12 local y se almacenan en una cola transaccional en PostgreSQL (`queue_sri`), para ser 
+    transmitidas automáticamente al SRI en cuanto se restablezca la conectividad.
+- Contingencia B: Interrupción del suministro de energía eléctrica local:
+  * Impacto As-Is: Apagado abrupto de computadoras de escritorio y pérdida de datos en digitación.
+  * Solución SGO To-Be: La estación de trabajo principal cuenta con el respaldo de un mini-UPS con 
+    autonomía de 45 minutos para el switch de red y el equipo; adicionalmente, las estaciones de desarrollo 
+    y prueba son equipos portátiles con batería de entre 3 y 4 horas de duración, permitiendo concluir 
+    la atención de los pacientes presentes sin pérdida de información.
+- Contingencia C: Falla imprevista de hardware en la estación local:
+  * Impacto As-Is: Pérdida definitiva de la base de datos SQL Server por falta de copias de seguridad.
+  * Solución SGO To-Be: El sistema ejecuta un script cron de respaldo diario (`pg_dump`) que exporta 
+    la base de datos cifrada hacia una unidad de almacenamiento externa y hacia el repositorio remoto seguro. 
+    En caso de avería total de una máquina, los contenedores Docker se reinstalan en otra computadora en menos de 30 minutos.
+
+6.2 PLAN DE ACOMPAÑAMIENTO Y SOPORTE TÉCNICO POST-IMPLEMENTACIÓN
+- Soporte Técnico In Situ (Garantía de Titulación): Durante los primeros 30 días posteriores al despliegue, 
+  los desarrolladores (Omar Figueroa y Alexander Villalva) ofrecen soporte presencial directo en Riobamba 
+  para calibración de periféricos (impresoras térmicas de 80 mm e impresoras láser) y resolución inmediata de incidencias.
+- Mesa de Ayuda Digital: Canal de comunicación técnica directa para reporte de eventualidades fuera de horario de atención.
+
+
+================================================================================
+7. MATRIZ CUANTITATIVA DE IMPACTO OPERACIONAL (MÉTRICAS DE RENDIMIENTO)
+================================================================================
+
+TABLA 3: MATRIZ COMPARATIVA DE RENDIMIENTO OPERACIONAL (AS-IS VS. TO-BE)
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| ACTIVIDAD / PROCESO OPERATIVO      | TIEMPO PROMEDIO AS-IS | TIEMPO PROMEDIO TO-BE | IMPACTO CUANTITATIVO  |
+|                                    | (MANUAL / LEGADO)     | (SISTEMA SGO)         | (% DE MEJORA)         |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| Búsqueda y admisión de paciente    | 3.5 minutos           | 0.5 minutos (30 seg)  | 85.7% de reducción    |
+| (Prevención de duplicidad M10)     | (Búsqueda en papel)   | (Búsqueda predictiva) | en tiempo de espera   |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| Registro de examen refractivo      | 6.0 minutos           | 2.0 minutos           | 66.7% de ahorro       |
+| OD/OI y cálculo de presbicia       | (Escritura manual)    | (Formulario reactivo) | en consulta clínica   |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| Emisión de receta y certificado    | 4.0 minutos           | 0.5 minutos           | 87.5% de mejora en    |
+| médico optométrico en PDF          | (Llenado de recetario)| (PDF automático CIE10)| agilidad asistencial  |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| Confección de orden a taller con   | 5.0 minutos           | 0.5 minutos           | 90.0% de reducción y  |
+| disociación de datos LOPDP         | (Nota física carbón)  | (Generación digital)  | 100% blindaje legal   |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| Venta de armazón y cobro mixto     | 4.0 minutos           | 1.5 minutos           | 62.5% de agilidad     |
+| (Anticipo / Saldo en caja)         | (Cuaderno de ventas)  | (Transacción ACID)    | en mostrador          |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| Emisión de factura electrónica     | 10.0 minutos          | 0.5 minutos           | 95.0% de ahorro de    |
+| con el SRI (Firma XAdES-BES)       | (Digitación portal web)| (Nativa en segundo pl)| tiempo tributario     |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| Arqueo y conciliación de caja      | 25.0 minutos          | 2.0 minutos           | 92.0% de ahorro       |
+| al final de la jornada diaria      | (Cálculo manual papel)| (Cierre automatizado) | al cierre del negocio |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+| TIEMPO TOTAL DE CICLO POR PACIENTE | 32.5 minutos          | 5.5 minutos           | 83.1% DE EFICIENCIA   |
+| (Desde admisión hasta facturación) |                       |                       | OPERACIONAL GLOBAL    |
++------------------------------------+-----------------------+-----------------------+-----------------------+
+
+
+================================================================================
+8. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD OPERACIONAL Y DECLARACIÓN DE CIERRE
+================================================================================
+
+Con base en el análisis minucioso de compatibilidad procedimental, reingeniería de procesos 
+y evaluación humana:
+
+1. El Sistema SGO digitaliza y optimiza exactamente la cadena de valor real de Óptica Vista Visión, 
+   reduciendo el tiempo total de ciclo operativo por paciente de 32.5 a 5.5 minutos, lo que representa 
+   una MEJORA DE EFICIENCIA GLOBAL DEL 83.1%.
+2. Se erradica por completo la sobreescritura destructiva de historiales clínicos, la dispersión de 
+   órdenes de laboratorio en papel y la doble digitación tributaria ante el portal del SRI.
+3. El diseño de interfaz centrado en el usuario, ergonómico y dotado de validaciones preventivas, 
+   asegura una curva de aprendizaje mínima y una compatibilidad plena con el perfil del personal del consultorio.
+4. Los mecanismos de resiliencia operativa en red LAN y contingencia offline garantizan que el 
+   establecimiento mantenga una continuidad operativa del 99.5%, inmune a caídas de Internet o fallas del SRI.
+5. El plan de capacitación por roles y los materiales didácticos de escritorio minimizan cualquier 
+   riesgo de resistencia al cambio cultural.
+
+Por las razones expuestas, se emite formalmente el DICTAMEN DE VIABILIDAD OPERACIONAL PLENA, 
+declarándose concluida y aprobada la FASE 8 y habilitándose la ejecución de la 
+**Fase 9: Evaluación de Factibilidad de Tiempo y Cronograma de Sprints (Sección 11)**.
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE EJECUCIÓN — FASE 8
+================================================================================

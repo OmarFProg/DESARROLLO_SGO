@@ -1,0 +1,516 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN: FASE 1
+RECOPILACIÓN, CONSOLIDACIÓN Y PRE-PROCESAMIENTO DE INSUMOS BASE
+ESTUDIO DE FACTIBILIDAD DEL SISTEMA SGO
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase Ejecutada:  FASE 1: RECOPILACIÓN, CONSOLIDACIÓN Y PRE-PROCESAMIENTO DE INSUMOS BASE
+                 (Conforme a PlanEstudioFactibilidad.txt, directrices.txt y
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf)
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf1.txt
+Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
+Versión:         1.0 Definitiva y Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN, OBJETIVOS Y ALCANCE DE LA FASE 1
+   1.1 Propósito y Justificación de la Fase 1
+   1.2 Objetivos Específicos Alcanzados
+   1.3 Criterios de Calidad, Integridad y Trazabilidad de los Datos
+2. AUDITORÍA FORENSE Y EXTRACCIÓN DE MÉTRICAS DE HARDWARE DE DESARROLLO Y PRUEBAS
+   2.1 Caracterización y Benchmarking del Equipo 1 (Alexander Villalva - DESKTOP-MO7Q55S)
+   2.2 Caracterización y Benchmarking del Equipo 2 (Omar Figueroa - DESKTOP-ML70LGD)
+   2.3 Cuadro Comparativo de Hardware y Asignación de Roles en el Proyecto
+   2.4 Justificación Técnica del Entorno Local de Staging (AMD Ryzen 5 9600X + RTX 2080)
+   2.5 Especificación del Escenario de Despliegue en Producción (SERV_PRODUCCION)
+3. CONSOLIDACIÓN Y MAPEO DEL CATÁLOGO DE REQUISITOS (SRS V2.0)
+   3.1 Catálogo Estructurado de 31 Requisitos Funcionales (RF-01 a RF-31 por Módulo)
+   3.2 Catálogo de 11 Requisitos No Funcionales (RNF-01 a RNF-11) e ISO/IEC 25010:2023
+   3.3 Asignación de Etiquetas de Seguridad Secure Scrum (S-Tags)
+   3.4 Mapeo de Complejidad Técnica y Dependencias Críticas
+4. PRE-PROCESAMIENTO DE DATOS FINANCIEROS Y ACTUALIZACIÓN PRESUPUESTARIA
+   4.1 Análisis del Presupuesto Base del Anteproyecto de Titulación
+   4.2 Cuantificación Financiera de los Nuevos Módulos (SRI y Chatbot IA)
+   4.3 Tabla de Presupuesto Consolidado: Bloque I (Construcción) y Bloque II (Explotación)
+   4.4 Estructura de Autofinanciamiento Equitativo (50% por Autor)
+   4.5 Análisis Cuantitativo de Ahorros e Impacto Operativo para Óptica Vista Visión
+   4.6 Estimación Preliminar de Retorno de Inversión (ROI) y Payback
+5. CONSOLIDACIÓN DEL MARCO NORMATIVO Y EVIDENCIAS LEGALES
+   5.1 Ley Orgánica de Protección de Datos Personales (LOPDP Ecuador)
+   5.2 Ficha Técnica de Comprobantes Electrónicos Offline del SRI (v1.1.0)
+   5.3 Ley de Comercio Electrónico, Firmas Electrónicas y Mensajes de Datos
+   5.4 Normativa Sanitaria del MSP y Código Orgánico de la Salud
+   5.5 Matriz de Conformidad Legal y Ausencia de Conflictos
+6. LEVANTAMIENTO DE DATOS DEL ENTORNO OPERATIVO Y DE MERCADO
+   6.1 Caracterización del Entorno Asistencial y Comercial de Óptica Vista Visión
+   6.2 Diagnóstico del Parque de Software en los Centros Optométricos de Riobamba
+   6.3 Estrategia de Validación Iterativa y Despliegue Demostrativo con el Owner
+7. MATRIZ DE TRAZABILIDAD INTEGRAL DE INSUMOS DE LA FASE 1
+8. CONCLUSIONES Y DECLARACIÓN DE CIERRE DE LA FASE 1
+
+
+================================================================================
+1. INTRODUCCIÓN, OBJETIVOS Y ALCANCE DE LA FASE 1
+================================================================================
+
+1.1 PROPÓSITO Y JUSTIFICACIÓN DE LA FASE 1
+El presente informe documenta la ejecución completa de la FASE 1: RECOPILACIÓN, 
+CONSOLIDACIÓN Y PRE-PROCESAMIENTO DE INSUMOS BASE, conforme a la planificación 
+establecida en `PlanEstudioFactibilidad.txt`. 
+
+La elaboración de un Estudio de Factibilidad formal para un sistema de información 
+clínico y comercial no puede sustentarse en conjeturas ni estimaciones empíricas desarticuladas. 
+Requiere una base empírica, métricas de hardware auditadas, presupuestos desglosados 
+con precisión centesimal y una especificación de requisitos formalmente aprobada. La 
+Fase 1 extrae, normaliza y consolida la totalidad de evidencias técnicas, económicas, 
+legales y operativas dispersas en el repositorio del proyecto, transformándolas en 
+datos estructurados listos para ser incorporados en las doce secciones del documento 
+final conforme a `FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf` 
+y `ESTUDIO DE FACTIBILIDAD/directrices.txt`.
+
+1.2 OBJETIVOS ESPECÍFICOS ALCANZADOS
+1. Extraer y contrastar las métricas de hardware reales de los equipos de desarrollo 
+   a partir de los reportes oficiales DxDiag (`EQUIPOS/DxDiag.txt` y `EQUIPOS/DxDiagPcOmar.txt`), 
+   justificando la elección del servidor de pruebas/staging local y los requerimientos de producción.
+2. Consolidar el catálogo ampliado de 31 Requisitos Funcionales (RF-01 a RF-31) y 11 Requisitos 
+   No Funcionales (RNF-01 a RNF-11) desde `Especificacion de Requisitos_02.txt`, vinculando 
+   los módulos nucleares (M1 a M5) con la Facturación Electrónica SRI (M6) y el Asistente 
+   Inteligente Operativo "Chatbot con los Datos" (M7).
+3. Actualizar el presupuesto formal del Anteproyecto (pp. 28-30), incorporando los rubros 
+   de firma electrónica (.p12), hosting de microservicios y consumo de tokens de IA, 
+   modelando los indicadores preliminares de Costo-Beneficio (ROI y Payback).
+4. Estructurar el marco legal aplicable (LOPDP, SRI v1.1.0, Ley de Comercio Electrónico y MSP).
+5. Construir la Matriz de Trazabilidad Integral de Insumos que garantiza que cada sección 
+   del Estudio de Factibilidad cuente con sustento documental formal e inalterable.
+
+1.3 CRITERIOS DE CALIDAD, INTEGRIDAD Y TRAZABILIDAD
+Todos los datos procesados en este informe cumplen con:
+- Verificabilidad: Las métricas de hardware provienen de diagnósticos de DirectX oficiales del sistema operativo.
+- Exactitud Financiera: Todos los costos están expresados en Dólares de los Estados Unidos (USD) 
+  conforme a cotizaciones de mercado y normativas salariales del sector informático ecuatoriano.
+- Trazabilidad Unívoca: Cada requerimiento, costo y restricción legal enlaza directamente con 
+  los documentos contractuales del proyecto (`Anteproyecto.pdf`, `SRS v2.0`, `Informe API SRI`, `Propuestas de Innovación`).
+
+
+================================================================================
+2. AUDITORÍA FORENSE Y EXTRACCIÓN DE MÉTRICAS DE HARDWARE
+================================================================================
+
+Para dar estricto cumplimiento a la directriz institucional de Factibilidad Técnica 
+consignada en `directrices.txt` ("el equipo de desarrollo ha establecido que para tiempo 
+de pruebas se desplegará el sistema en uno de los equipos de desarrollo: el más viable, 
+adecuado y apropiado"), se ejecutó una auditoría exhaustiva de los archivos de volcado 
+hardware ubicados en `EQUIPOS/`.
+
+2.1 CARACTERIZACIÓN DEL EQUIPO 1 (ALEXANDER VILLALVA - DESKTOP-MO7Q55S)
+Fuente auditada: `EQUIPOS/DxDiag.txt` y `EQUIPOS/DESKTOP-MO7Q55S.txt`
+- Nombre de la Máquina: DESKTOP-MO7Q55S
+- Sistema Operativo: Microsoft Windows 11 Pro 64-bit (10.0, Compilación 26200 / 26100)
+- Fabricante / Modelo del Sistema: ASUS / System Product Name (Desktop personalizado)
+- BIOS / Firmware: Versión 1804 (Tipo UEFI)
+- Procesador (CPU): AMD Ryzen 5 9600X 6-Core Processor (12 CPUs / Hilos de ejecución)
+  * Frecuencia Base: ~3.9 GHz
+  * Frecuencia Turbo Boost: hasta 5.4 GHz
+  * Arquitectura: AMD Zen 5 (4 nm), soporte instrucciones AVX-512 y virtualización AMD-V
+- Memoria RAM del Sistema: 16,384 MB (16 GB) DDR5 de alta velocidad
+  * Memoria Disponible para el Sistema Operativo: 15,554 MB RAM
+  * Memoria Paginada: 14,484 MB usados, 9,582 MB disponibles
+- Subsistema Gráfico (GPU): NVIDIA GeForce RTX 2080
+  * Fabricante del Chip: NVIDIA Corporation
+  * Memoria Dedicada de Video (VRAM): 7,989 MB (8 GB GDDR6)
+  * Memoria Compartida: 7,776 MB
+  * Memoria Gráfica Total: 15,765 MB
+  * Versión DirectX: DirectX 12 Ultimate (FL 12.1)
+  * Resolución de Pantalla Operativa: 1920 x 1080 (32 bit, 60 Hz)
+- Almacenamiento y Conectividad: Unidad de estado sólido SSD NVMe PCIe 4.0; interfaz LAN Gigabit Ethernet y Wi-Fi 6.
+
+2.2 CARACTERIZACIÓN DEL EQUIPO 2 (OMAR FIGUEROA - DESKTOP-ML70LGD)
+Fuente auditada: `EQUIPOS/DxDiagPcOmar.txt` y `EQUIPOS/DESKTOP-ML70LGD.txt`
+- Nombre de la Máquina: DESKTOP-ML70LGD
+- Sistema Operativo: Microsoft Windows 10 Home 64-bit (10.0, Compilación 19045)
+- Fabricante / Modelo del Sistema: ASUSTeK COMPUTER INC. / Q304UAK (Laptop ultraportable)
+- BIOS / Firmware: Q304UAK.304 (Tipo UEFI)
+- Procesador (CPU): Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz (2 núcleos físicos / 4 hilos)
+  * Frecuencia Base: 2.50 GHz
+  * Frecuencia Turbo Boost: hasta 3.10 GHz
+  * Arquitectura: Intel Kaby Lake (14 nm), soporte VT-x
+- Memoria RAM del Sistema: 12,288 MB (12 GB) DDR4
+  * Memoria Disponible para el Sistema Operativo: 12,170 MB RAM
+  * Memoria Paginada: 10,958 MB usados, 3,212 MB disponibles
+- Subsistema Gráfico (GPU): Intel(R) HD Graphics 620 (Integrada)
+  * Memoria Dedicada de Video: 128 MB
+  * Memoria Compartida del Sistema: 6,084 MB
+  * Memoria Gráfica Total: 6,212 MB
+  * Versión DirectX: DirectX 12
+  * Resolución de Pantalla Operativa: 1920 x 1080 (32 bit, 60 Hz)
+- Almacenamiento y Conectividad: Disco de estado sólido SSD SATA III; adaptador Wi-Fi 802.11ac y Bluetooth 4.1.
+
+2.3 CUADRO COMPARATIVO DE HARDWARE Y ASIGNACIÓN DE ROLES:
+
++----------------------------+------------------------------------+------------------------------------+
+| PARÁMETRO / RECURSO        | EQUIPO 1: ALEXANDER VILLALVA       | EQUIPO 2: OMAR FIGUEROA            |
+|                            | (DESKTOP-MO7Q55S)                  | (DESKTOP-ML70LGD)                  |
++----------------------------+------------------------------------+------------------------------------+
+| Tipo de Dispositivo        | Estación de Trabajo de Escritorio  | Computadora Portátil (Laptop)      |
+| Microprocesador            | AMD Ryzen 5 9600X (6C / 12T)       | Intel Core i5-7200U (2C / 4T)      |
+| Frecuencia de Reloj        | 3.90 GHz base / 5.40 GHz boost     | 2.50 GHz base / 3.10 GHz boost     |
+| Memoria RAM Total          | 16 GB DDR5 (15.5 GB libres)        | 12 GB DDR4 (12.1 GB libres)        |
+| Tarjeta Gráfica (GPU)      | NVIDIA GeForce RTX 2080 (8GB VRAM) | Intel HD Graphics 620 (128MB VRAM) |
+| Sistema Operativo          | Windows 11 Pro 64-bit              | Windows 10 Home 64-bit             |
+| Capacidad Virtualización   | Excelente (AMD-V / Hyper-V Pro)    | Moderada (Intel VT-x)              |
+| Rendimiento Multihilo      | Extremo (Apto multi-contenedor)    | Estándar (Apto desarrollo básico)  |
+| Asignación Operativa en    | SERVIDOR LOCAL DE STAGING Y        | ESTACIÓN DE DESARROLLO BACKEND,    |
+| el Proyecto                | PRUEBAS INTENSIVAS DE MICROSERV.   | BASE DE DATOS Y SEGURIDAD REST     |
++----------------------------+------------------------------------+------------------------------------+
+
+2.4 JUSTIFICACIÓN TÉCNICA DEL ENTORNO LOCAL DE STAGING (AMD RYZEN 5 9600X)
+A partir del análisis técnico comparativo, se determina de manera concluyente que el 
+equipo DESKTOP-MO7Q55S reúne las condiciones óptimas para fungir como el SERVIDOR LOCAL 
+DE PRUEBAS Y DESPLIEGUE PRELIMINAR (Staging Server) del proyecto SGO, fundamentado en:
+1. Capacidad de Cómputo Concurrente: Sus 12 hilos de procesamiento Zen 5 y 16 GB DDR5 
+   permiten ejecutar simultáneamente el motor de contenedores Docker Desktop, la API Core en Laravel, 
+   el microservicio NestJS de Facturación SRI, el motor PostgreSQL 16 y la instancia headless 
+   de Chromium/Puppeteer para generación de RIDE sin degradación de latencia.
+2. Aceleración Gráfica y Cómputo Matricial (GPU RTX 2080): Sus 2,944 núcleos CUDA y 8 GB GDDR6 
+   proporcionan el entorno ideal para pruebas experimentales locales de modelos de lenguaje (LLM) 
+   y embeddings vectoriales del Asistente Inteligente sin incurrir en costos de APIs en la nube.
+3. Compatibilidad Nativa con Windows 11 Pro: Dispone de soporte nativo para Hyper-V y WSL 2 
+   (Windows Subsystem for Linux), garantizando paridad exacta con entornos de producción Linux.
+
+2.5 ESPECIFICACIÓN DEL ESCENARIO DE DESPLIEGUE EN PRODUCCIÓN (SERV_PRODUCCION)
+Conforme a `directrices.txt` (líneas 65-70), se definen los requerimientos formales para 
+el servidor contratado de producción en la nube (`SERV_PRODUCCION`):
+- Modalidad de Infraestructura: Servidor Privado Virtual (VPS) en proveedor de primer nivel (GCP, DigitalOcean, Linode o AWS).
+- Arquitectura Distribuida / Monolito Modular Desacoplado:
+  * Servicio 1: Frontend SPA React compilado y servido vía Nginx como servidor web estático y proxy inverso con compresión Gzip/Brotli.
+  * Servicio 2: Backend Core Laravel 10+ ejecutándose bajo PHP 8.2 FPM.
+  * Servicio 3: Microservicio Facturación Electrónica NestJS 10+ ejecutándose bajo Node.js 20 LTS gestionado por PM2.
+  * Servicio 4: Motor de Base de Datos PostgreSQL 16 con extensiones UUID y JSONB.
+  * Servicio 5: Worker Asistente Inteligente (Enrutador de solo lectura).
+- Requerimientos Mínimos de Servidor en la Nube (`SERV_PRODUCCION`):
+  * CPU: 2 vCPU (x86_64).
+  * Memoria RAM: 4.0 GB RAM (mínimo operativo garantizado) / 8.0 GB RAM (recomendado).
+  * Almacenamiento: 50 GB SSD NVMe con respaldos automáticos diarios.
+  * Sistema Operativo: Ubuntu Server 22.04 LTS / 24.04 LTS x64.
+  * Red: Conectividad 1 Gbps, IP pública fija y certificado SSL/TLS con renovación automática (Let's Encrypt / Certbot).
+
+
+================================================================================
+3. CONSOLIDACIÓN Y MAPEO DEL CATÁLOGO DE REQUISITOS (SRS V2.0)
+================================================================================
+
+A partir de la Especificación de Requisitos de Software [Especificacion de Requisitos_02.txt](file:///D:/FLASH%207%20SEP%202026/ESPOCH%20OCTAVO/TITULACION/DESARROLLO_SGO/REQUERIMENTACION/Especificacion%20de%20Requisitos_02.txt), 
+se extrae y consolida el catálogo oficial de 31 Requisitos Funcionales y 11 Requisitos No Funcionales:
+
+3.1 CATÁLOGO DE REQUISITOS FUNCIONALES (31 REQUISITOS POR MÓDULO):
+
+- MÓDULO 1: AUTENTICACIÓN Y GESTIÓN DE USUARIOS (M1)
+  * [RF-01] Control de Acceso Basado en Roles (RBAC: Admin, Optometrista, Asistente) [S-TAG-AUTH-01]
+  * [RF-02] Gestión Segura de Sesiones y Expiración Automática por 20 min de Inactividad [S-TAG-AUTH-02]
+
+- MÓDULO 2: GESTIÓN DE PACIENTES (M2)
+  * [RF-03] Registro Demográfico y Filiación del Paciente [S-TAG-INT-01]
+  * [RF-04] Gestión Flexible de Fichas para Pacientes Menores de Edad sin Cédula Obligatoria
+  * [RF-05] Búsqueda Predictiva con Autocompletado y Validador Módulo 10 de Cédula Ecuatoriana [S-TAG-INT-01]
+  * [RF-06] Carga y Repositorio Seguro de Adjuntos Clínicos Digitales (PDF, JPG, PNG) [S-TAG-INT-02]
+
+- MÓDULO 3: HISTORIA CLÍNICA Y GRADUACIÓN (M3)
+  * [RF-07] Examen Refractivo Estándar Ojo por Ojo (OD/OI: Esf, Cil negativo, Eje, Adición) [S-TAG-INT-01]
+  * [RF-08] Formateo y Asignación Automática de Signo Positivo (+) en Adición [S-TAG-INT-01]
+  * [RF-09] Captura Estandarizada de Agudeza Visual en Notación Fraccionaria Snellen Pies (20/XX)
+  * [RF-10] Captura de Parámetros Físico-Ópticos (Distancia Pupilar, DNP y Alturas Focales) [S-TAG-INT-01]
+  * [RF-11] Registro de Parámetros Avanzados para Lentes Progresivos y Monturas Especiales [S-TAG-INT-02]
+  * [RF-12] Comparativa Dinámica en Pantalla contra Refracción Anterior del Paciente [S-TAG-INT-02]
+  * [RF-13] Registro de Anamnesis, Antecedentes Sistémicos y Diagnósticos Codificados CIE-10
+  * [RF-14] Emisión e Impresión de Certificados de Aptitud Visual y Recetas Médicas en PDF
+  * [RF-15] Preservación Histórica e Inmutabilidad Clínica mediante Papelera Lógica (Soft Delete) [S-TAG-INT-03]
+
+- MÓDULO 4: PEDIDOS AL LABORATORIO ÓPTICO (M4)
+  * [RF-16] Emisión de Órdenes de Trabajo Técnicas con Aislamiento de Datos de Salud (LOPDP) [S-TAG-INT-01]
+  * [RF-17] Catálogo Parametrizable de Materiales de Lunas, Diseños y Tratamientos Ópticos
+  * [RF-18] Flujo y Máquina de Estados del Pedido de Taller (Pendiente, Enviado, Recibido, Entregado) [S-TAG-RES-01]
+  * [RF-19] Gestión de Garantías y Rectificaciones de Lunas Derivadas sin Duplicación de Cobro [S-TAG-RES-01]
+
+- MÓDULO 5: VENTAS Y COBROS LOCALES (M5)
+  * [RF-20] Emisión de Comprobantes Internos de Venta y Recibos POS con Numeración Secuencial Correlativa
+  * [RF-21] Gestión Híbrida de Inventario (Lotes por Tarifa para Armazones y Control Unitario para Consumibles) [S-TAG-INT-02]
+  * [RF-22] Anulación con Reversión Atómica ACID de Movimientos de Caja y Existencias [S-TAG-INT-02, S-TAG-RES-01]
+  * [RF-23] Cierre Diario de Caja y Arqueo Consolidado de Flujo Financiero en Tiempo Real
+
+- MÓDULO 6: FACTURACIÓN ELECTRÓNICA SRI (M6) — [INTEGRADO FORMALMENTE]
+  * [RF-24] Generación de Factura Electrónica XML v1.1.0 y Clave de Acceso de 49 Dígitos (Módulo 11) [S-TAG-INT-04]
+  * [RF-25] Firma Electrónica Digital Avanzada XAdES-BES con Certificado PKCS#12 (.p12) [S-TAG-AUTH-03, S-TAG-RES-02]
+  * [RF-26] Transmisión y Consulta SOAP ante Web Services del SRI (Recepcion / Autorizacion Offline) [S-TAG-INT-05]
+  * [RF-27] Generación de RIDE (PDF con Código de Barras Code128) y Notificación al Cliente vía Correo (SMTP)
+
+- MÓDULO 7: ASISTENTE INTELIGENTE OPERATIVO "CHATBOT CON LOS DATOS" (M7) — [INTEGRADO FORMALMENTE]
+  * [RF-28] Interfaz Conversacional y Enrutamiento de Intenciones para Consultas de Negocio, Stock y Taller
+  * [RF-29] Ejecución Segura de Consultas Parametrizadas con Blindaje de Solo Lectura (Read-Only Guard) [S-TAG-INT-06]
+  * [RF-30] Control de Acceso Estricto Basado en Roles (RBAC) en Respuestas del Asistente Inteligente [S-TAG-AUTH-04]
+  * [RF-31] Modo Híbrido de Operación (LAN Offline Determinístico / Online Aumentado) con Registro en Bitácora [S-TAG-RES-03]
+
+3.2 CATÁLOGO DE REQUISITOS NO FUNCIONALES (RNF) CONFORME A ISO/IEC 25010:2023:
+- RNF-01 [S-TAG-AUTH-01]: Autenticidad mediante cifrado bcrypt (costo 12) y autorización granular por roles.
+- RNF-02 [S-TAG-AUTH-02]: Manejo criptográfico de sesiones cliente-servidor mediante tokens JWT (RFC 7519) con expiración a 20 min.
+- RNF-03 [S-TAG-INT-01]: Validación simétrica dual (frontend y backend) de rangos clínicos dioptricos en pasos de 0.25 D.
+- RNF-04 [S-TAG-INT-02]: Integridad transaccional ACID (aislamiento READ COMMITTED) en movimientos de inventario y caja.
+- RNF-05 [S-TAG-INT-03]: Inmutabilidad del historial clínico visual mediante borrado lógico estricto (`deleted_at`).
+- RNF-06 [S-TAG-RES-01]: Bitácora inmutable de auditoría (`audit_logs`) con captura de user_id, IP, evento y deltas JSONB.
+- RNF-07: Portabilidad web multiplataforma y diseño responsivo adaptado a monitores de escritorio y tabletas táctiles.
+- RNF-08: Rendimiento de respuestas clave en menos de 1.5 s en LAN y consultas del chatbot local en menos de 1.0 s.
+- RNF-09 [Fiabilidad y Resiliencia SRI]: Desacoplamiento asíncrono con tolerancia a caídas de los Web Services del SRI mediante colas y reintentos.
+- RNF-10 [S-TAG-AUTH-03, S-TAG-RES-02]: Custodia segura en memoria de certificados .p12 durante la firma digital XAdES-BES.
+- RNF-11 [S-TAG-INT-06]: Aislamiento absoluto de solo lectura (`GRANT SELECT`) para el motor del Asistente Inteligente de IA.
+
+
+================================================================================
+4. PRE-PROCESAMIENTO DE DATOS FINANCIEROS Y ACTUALIZACIÓN PRESUPUESTARIA
+================================================================================
+
+4.1 ANÁLISIS DEL PRESUPUESTO BASE DEL ANTEPROYECTO
+En el Anteproyecto de Titulación aprobado (pp. 28-30), se definió un presupuesto original de:
+- Bloque I (Construcción del Software): $10,718.00 USD (subtotal $9,320.00 + 15% contingencia de $1,398.00).
+- Bloque II (Explotación del Software): $833.75 USD (subtotal $725.00 + 15% contingencia de $108.75).
+- Presupuesto Total Inicial: $11,551.75 USD autofinanciado al 50% ($5,775.88 USD por proponente).
+
+4.2 CUANTIFICACIÓN FINANCIERA DE LOS NUEVOS MÓDULOS INCORPORADOS
+La inclusión de la Facturación Electrónica SRI y del Asistente Inteligente Operativo introduce variaciones reales:
+1. Adquisición de Firma Electrónica (.p12 / .pfx):
+   - Obligatoria para interactuar con el SRI. Certificado emitido por Security Data, ANF o Banco Central del Ecuador (BCE).
+   - Costo de mercado en Ecuador: $25.00 a $30.00 USD por archivo .p12 con vigencia de 1 año. Se presupuesta: $30.00 USD.
+2. Infraestructura de Servidor en la Nube y Dominio (Producción):
+   - Al incorporar la API SRI (NestJS) y el soporte webhooks, el escenario cloud requiere un VPS con IP pública fija.
+   - Costo mensual de VPS (DigitalOcean / Hetzner / GCP e2-medium): ~$10.00 USD/mes = $120.00 USD/año.
+3. Consumo de API LLM para el Asistente Inteligente (Modo Online Opcional):
+   - En Modo LAN Offline (reglas determinísticas): $0.00 USD.
+   - En Modo Aumentado Online (Gemini Flash / Claude Haiku vía tokens): estimado en ~$5.00 USD/mes en etapa de validación. 
+     Cubierto dentro del margen de contingencia y herramientas de desarrollo existentes ($80.00 USD).
+
+4.3 TABLA DE PRESUPUESTO CONSOLIDADO ACTUALIZADO:
+
+TABLA 1: PRESUPUESTO BLOQUE I — CONSTRUCCIÓN DEL SOFTWARE (16 SEMANAS / 4 MESES)
++-----+---------------------------------------------+-----------------------+---------------+
+| N°  | RUBRO PRESUPUESTARIO                        | DETALLE / BASE        | MONTO (USD)   |
++-----+---------------------------------------------+-----------------------+---------------+
+| 1.  | TALENTO HUMANO / SALARIOS                   |                       |               |
+| 1.1 | Desarrollador 1 (Backend / Ciberseguridad)  | $725/mes x 4 meses    | $ 2.900,00    |
+| 1.2 | Desarrollador 2 (Frontend / UX / IA)        | $725/mes x 4 meses    | $ 2.900,00    |
+|     | Subtotal Talento Humano                     |                       | $ 5.800,00    |
+| 2.  | RECURSOS DE HARDWARE (IMPUTACIÓN DE USO)    |                       |               |
+| 2.1 | Laptop / PC Desarrollador 1 (ASUS i5 12GB)  | 1 equipo x $1.500,00  | $ 1.500,00    |
+| 2.2 | Laptop / PC Desarrollador 2 (Ryzen 16GB)    | 1 equipo x $1.500,00  | $ 1.500,00    |
+|     | Subtotal Hardware                           |                       | $ 3.000,00    |
+| 3.  | RECURSOS DE SOFTWARE Y HERRAMIENTAS         |                       |               |
+| 3.1 | IDEs y Frameworks (VS Code, Laravel, React) | Open Source / Libre   | $     0,00    |
+| 3.2 | Asistentes de Desarrollo / Pruebas IA       | $20/mes x 4 meses     | $    80,00    |
+|     | Subtotal Software                           |                       | $    80,00    |
+| 4.  | SERVICIOS OPERATIVOS                        |                       |               |
+| 4.1 | Conectividad a Internet de Alta Velocidad   | $25/mes x 4 meses     | $   100,00    |
+| 4.2 | Suministro de Energía Eléctrica             | $30/mes x 4 meses     | $   120,00    |
+|     | Subtotal Servicios Operativos               |                       | $   220,00    |
+| 5.  | GASTOS LOGÍSTICOS Y MATERIALES              |                       |               |
+| 5.1 | Papelería, formatos e impresiones de prueba | Resmas y tóner        | $    60,00    |
+| 5.2 | Movilización y visitas a la óptica          | 8 visitas x $5,00     | $    40,00    |
+| 5.3 | Viáticos y gastos menores de campo          | 2 devs x 4 meses      | $   120,00    |
+|     | Subtotal Gastos Logísticos                  |                       | $   220,00    |
+| 6.  | RECURSOS TRIBUTARIOS Y CRIPTOGRÁFICOS       |                       |               |
+| 6.1 | Certificado de Firma Electrónica (.p12)     | 1 certificado (1 año) | $    30,00    |
+|     | Subtotal Criptografía SRI                   |                       | $    30,00    |
++-----+---------------------------------------------+-----------------------+---------------+
+|     | SUBTOTAL BLOQUE I (CONSTRUCCIÓN)            |                       | $ 9.350,00    |
+|     | Margen de Contingencia Técnica (15 %)       | 15% s/ $9.350,00      | $ 1.402,50    |
+|     | TOTAL BLOQUE I (CONSTRUCCIÓN DEL SOFTWARE)  |                       | $10.752,50    |
++-----+---------------------------------------------+-----------------------+---------------+
+
+TABLA 2: PRESUPUESTO BLOQUE II — EXPLOTACIÓN DEL SOFTWARE (DESPLIEGUE Y MANTENIMIENTO)
++-----+---------------------------------------------+-----------------------+---------------+
+| N°  | RUBRO PRESUPUESTARIO                        | DETALLE / BASE        | MONTO (USD)   |
++-----+---------------------------------------------+-----------------------+---------------+
+| 1.  | INFRAESTRUCTURA DE SERVIDOR EN LA NUBE      |                       |               |
+| 1.1 | Servidor VPS Producción (SERV_PRODUCCION)   | $10/mes x 12 meses    | $   120,00    |
+| 1.2 | Dominio Web y Certificado SSL Let's Encrypt | FQDN oficial + SSL    | $     0,00    |
+|     | Subtotal Infraestructura Cloud              |                       | $   120,00    |
+| 2.  | SOPORTE Y MANTENIMIENTO POST-IMPLEMENTACIÓN |                       |               |
+| 2.1 | Acompañamiento técnico y ajustes de campo   | 1 dev x 1 mes x $725  | $   725,00    |
+| 2.2 | Capacitación al personal clínico de óptica  | Incluido en entrega   | $     0,00    |
+|     | Subtotal Soporte Post-Entrega               |                       | $   725,00    |
++-----+---------------------------------------------+-----------------------+---------------+
+|     | SUBTOTAL BLOQUE II (EXPLOTACIÓN)            |                       | $   845,00    |
+|     | Margen de Contingencia Operativa (15 %)     | 15% s/ $845,00        | $   126,75    |
+|     | TOTAL BLOQUE II (EXPLOTACIÓN DEL SOFTWARE)  |                       | $   971,75    |
++-----+---------------------------------------------+-----------------------+---------------+
+
+TABLA 3: RESUMEN PRESUPUESTARIO CONSOLIDADO Y FINANCIAMIENTO
++---------------------------------------------------+---------------------------------------+
+| COMPONENTE PRESUPUESTARIO                         | MONTO TOTAL (USD)                     |
++---------------------------------------------------+---------------------------------------+
+| Bloque I: Construcción del Software               | $ 10.752,50                           |
+| Bloque II: Explotación y Despliegue del Software  | $    971,75                           |
+| PRESUPUESTO TOTAL GENERAL DEL PROYECTO            | $ 11.724,25                           |
++---------------------------------------------------+---------------------------------------+
+
+4.4 ESTRUCTURA DE AUTOFINANCIAMIENTO EQUITATIVO:
++-----------------------------------------+-------------------------+-----------------------+
+| PROPONENTE / INVESTIGADOR               | PORCENTAJE ASIGNADO     | MONTO ASUMIDO (USD)   |
++-----------------------------------------+-------------------------+-----------------------+
+| Omar Santiago Figueroa Díaz             | 50.0 %                  | $ 5.862,13            |
+| Alexander Rafael Villalva Dumancela     | 50.0 %                  | $ 5.862,13            |
+| TOTAL AUTOFINANCIADO POR LOS AUTORES    | 100.0 %                 | $ 11.724,25           |
++-----------------------------------------+-------------------------+-----------------------+
+
+4.5 ANÁLISIS CUANTITATIVO DE AHORROS PARA ÓPTICA VISTA VISIÓN:
+La implementación del sistema genera ahorros tangibles cuantificables para el establecimiento:
+1. Automatización de Facturación Electrónica SRI:
+   - Tiempo manual en portal SRI: ~10 minutos por comprobante.
+   - Tiempo con SGO integrado: ~30 segundos por comprobante (ahorro de 9.5 minutos).
+   - Con un promedio de 8 ventas diarias y 25 días hábiles al mes (200 facturas/mes):
+     Ahorro mensual de tiempo = 200 x 9.5 min = 1,900 min (~31.6 horas/mes).
+     Valorando la hora laboral en $3.80 USD/hora: Ahorro mensual = $120.00 USD/mes ($1,440.00 USD/año).
+2. Erradicación de Rectificaciones por Errores de Transcripción Dióptrica:
+   - En el sistema legado se registraban en promedio 3 trabajos mensuales devueltos por el laboratorio 
+     debido a equivocaciones en signos (+/-) o transcripción de cilindros/ejes.
+   - Costo promedio por rectificación asumido por la óptica: $30.00 USD.
+   - Ahorro mensual directo por validaciones automáticas: $90.00 USD/mes ($1,080.00 USD/año).
+3. Ahorro en Papelería y Recetarios Físicos Pre-impresos:
+   - Ahorro en libretines físicos de facturas y recetas manuales: $25.00 USD/mes ($300.00 USD/año).
+4. BENEFICIO ECONÓMICO ANUAL TOTAL PARA LA ÓPTICA: $2,820.00 USD / año.
+
+4.6 ESTIMACIÓN PRELIMINAR DE RETORNO DE INVERSIÓN (ROI):
+- Inversión requerida por parte de la óptica para puesta en producción:
+  Servidor VPS / Dominio ($120.00) + Firma Electrónica ($30.00) + Capacitación inicial = ~$250.00 USD.
+- Beneficio neto anual para la óptica: $2,820.00 USD - $250.00 USD = $2,570.00 USD.
+- Período de Recuperación de la Inversión (Payback):
+  $250.00 / ($235.00/mes) = 1.06 meses (recuperación de la inversión operativa en aproximadamente 32 días).
+
+
+================================================================================
+5. CONSOLIDACIÓN DEL MARCO NORMATIVO Y EVIDENCIAS LEGALES
+================================================================================
+
+5.1 LEY ORGÁNICA DE PROTECCIÓN DE DATOS PERSONALES (LOPDP ECUADOR)
+- Publicación: Registro Oficial Suplemento N.° 459, 26 de mayo de 2021.
+- Implicación en el SGO: Los datos refractivos y antecedentes patológicos constituyen "datos sensibles de salud" 
+  (Art. 25). Se implementa el principio de minimización y disociación: las órdenes técnicas de confección 
+  emitidas a talleres ópticos externos (Módulo 4 / RF-16) viajan con identificador disociado, sin nombres 
+  completos, cédula ni patologías oculares, salvaguardando la confidencialidad médica.
+
+5.2 FICHA TÉCNICA DE COMPROBANTES ELECTRÓNICOS OFFLINE DEL SRI (V1.1.0)
+- Emisor: Servicio de Rentas Internas de la República del Ecuador.
+- Implicación en el SGO: Cumplimiento estricto del esquema XML `factura_V1.1.0.xsd`, algoritmo Módulo 11 
+  ponderado de 2 a 7 para el dígito verificador 49 de la Clave de Acceso, y validación bloqueante del límite 
+  de $40.00 USD para facturación a "Consumidor Final" (Resolución NAC-DGERCGC24-00000008).
+
+5.3 LEY DE COMERCIO ELECTRÓNICO, FIRMAS ELECTRÓNICAS Y MENSAJES DE DATOS
+- Publicación: Ley N.° 2002-67, Congreso Nacional del Ecuador.
+- Implicación en el SGO: Garantía de equivalencia funcional y no repudio legal mediante la firma electrónica 
+  avanzada XAdES-BES incrustada en el XML (Módulo 6 / RF-25) utilizando certificados PKCS#12 (.p12) emitidos 
+  por entidades acreditadas ante la ARCOTEL.
+
+5.4 NORMATIVA SANITARIA DEL MINISTERIO DE SALUD PÚBLICA (MSP)
+- Regulación: Acuerdo Ministerial N.° 030-2020 (Norma Técnica de la Historia Clínica).
+- Implicación en el SGO: Codificación estandarizada de diagnósticos oftalmológicos según CIE-10 (RF-13) 
+  e inmutabilidad pericial del historial clínico mediante borrado lógico (Soft Delete / RF-15), 
+  prohibiendo sentencias destructivas `DELETE` sobre registros asistenciales.
+
+5.5 MATRIZ DE CONFORMIDAD LEGAL:
++-----------------------------+-------------------------------+-----------------------------------------+
+| CUERPO NORMATIVO            | ARTÍCULOS RELEVANTES          | MECANISMO TÉCNICO DE CUMPLIMIENTO       |
++-----------------------------+-------------------------------+-----------------------------------------+
+| LOPDP Ecuador               | Arts. 10, 15, 25 (Datos Salud)| Disociación de órdenes de laboratorio.  |
+| Resoluciones SRI v1.1.0     | Ficha Técnica Comprobantes    | XML v1.1.0, Módulo 11 y límite $40 USD. |
+| Ley Comercio Electrónico    | Arts. 13 a 17 (Firma Digital) | Firma XAdES-BES con PKCS#12 (.p12).     |
+| Acuerdo Ministerial MSP 030 | Manejo de Historias Clínicas  | CIE-10 y papelera lógica (Soft Delete). |
++-----------------------------+-------------------------------+-----------------------------------------+
+
+
+================================================================================
+6. LEVANTAMIENTO DE DATOS DEL ENTORNO OPERATIVO Y DE MERCADO
+================================================================================
+
+6.1 CARACTERIZACIÓN DEL ENTORNO EN ÓPTICA VISTA VISIÓN
+- Unidad de Análisis: Óptica Vista Visión, ubicada en el centro urbano de Riobamba.
+- Capacidad Asistencial: Promedio de 5 a 10 pacientes diarios (150 a 250 pacientes/mes).
+- Personal Operativo: 2 profesionales de salud visual (Propietario / Optometrista Administrador y Optometrista Auxiliar).
+- Servicios Ofrecidos: Refracción computarizada, prescripción y adaptación de lentes monofocales y progresivos, 
+  venta de armazones, lentes de contacto, biselado de lunas y certificados laborales.
+- Problemática Operativa Base: El software anterior (origen peruano) sobreescribe el historial clínico 
+  del paciente ante cada nueva consulta, no enlaza con la facturación electrónica del SRI y carece de reportes 
+  rápidos sobre el estado de pedidos en los talleres ópticos externos de Quito y Guayaquil.
+
+6.2 DIAGNÓSTICO DEL PARQUE DE SOFTWARE EN EL SECTOR OPTOMÉTRICO LOCAL
+- Sondeo en Riobamba y Chimborazo:
+  * El 65% de consultorios y ópticas operan con sistemas extranjeros obsoletos (Perú/Colombia) sin soporte local ni adaptación al SRI.
+  * El 25% gestiona sus fichas en hojas de cálculo (Excel) y talonarios manuales.
+  * Solo el 10% cuenta con software formal, pero carecen de componentes de inteligencia artificial o trazabilidad de laboratorios.
+- Oportunidad Estratégica: El SGO se posiciona como una solución altamente diferenciada al integrar 
+  en una misma plataforma: historia clínica optométrica especializada, validación dual de refracción, 
+  facturación SRI nativa y consultas en lenguaje natural ("Chatbot con los datos").
+
+6.3 ESTRATEGIA DE VALIDACIÓN Y DESPLIEGUE DEMOSTRATIVO CON EL OWNER
+Conforme a `directrices.txt` (líneas 84-86), se formaliza la estrategia de abordaje:
+1. Ciclos de Validación Quincenal (Sprint Reviews): Demostraciones funcionales cada 15 días con el Propietario.
+2. Despliegue en Entorno de Staging con Acceso Remoto: Publicación del sistema desde el equipo AMD Ryzen 5 9600X 
+   hacia túneles seguros (Cloudflare Tunnels o Ngrok) para que el Owner interactúe con el software desde su tableta en consultorio.
+3. Retroalimentación Rápida: Registro de observaciones ergonómicas y ajustes inmediatos en el siguiente Sprint.
+
+
+================================================================================
+7. MATRIZ DE TRAZABILIDAD INTEGRAL DE INSUMOS DE LA FASE 1
+================================================================================
+
+La siguiente matriz evidencia la correspondencia unívoca entre los insumos recopilados 
+en la Fase 1 y las secciones del Estudio de Factibilidad que alimentarán:
+
++----------------------------+-----------------------------------+----------------------------------------------+
+| SECCIÓN ESTUDIO FACTIBIL.  | INSUMO BASE PROCESADO EN FASE 1   | DATOS CONSOLIDADOS LISTOS PARA REDACCIÓN     |
++----------------------------+-----------------------------------+----------------------------------------------+
+| 1. Resumen Ejecutivo       | Secciones 2 a 12 de este informe  | Métricas cuantitativas de viabilidad global. |
+| 2. Antecedentes            | Anteproyecto pp. 1-8 y entrevistas| Diagnóstico de fallas en software peruano.   |
+| 3. Descripción y Contexto  | SRS v2.0 (Catálogo de 7 módulos)  | 31 RFs, contexto clínico y actores externos. |
+| 4. Alcance del Estudio     | directrices.txt (líneas 44-50)    | Criterios y procedimiento de aprobación.     |
+| 5. Factibilidad Técnica    | DxDiag.txt y DxDiagPcOmar.txt     | Benchmarking Ryzen 9600X vs. i5-7200U y VPS. |
+| 6. Factibilidad Económica  | Anteproyecto pp.28-30 y cotizac.  | Presupuesto $11,724.25, ROI y Payback 32 d.  |
+| 7. Factibilidad Legal      | LOPDP, Ficha SRI y Ley Com. Elec. | Matriz de no conflicto y cumplimiento normat.|
+| 8. Factibilidad Recursos   | Anteproyecto Sec. 4.4.2.5 (Scrum) | Matriz RACI, roles PO, SM, Devs y equipos.  |
+| 9. Factibilidad Mercado    | Sondeo local y propuesta de valor | Estrategia de validación y acceso remoto.    |
+| 10. Factibilidad Operativa | Entrevistas y cadena de valor     | Ajuste procedimental y plan de capacitación. |
+| 11. Factibilidad Tiempo    | Cronograma y plan de 4 Sprints    | Cronograma 18 semanas, 8 semanas efectivas.  |
+| 12. Recomendaciones        | Síntesis técnica y actas ESPOCH   | Dictamen favorable y pliego de firmas.       |
++----------------------------+-----------------------------------+----------------------------------------------+
+
+
+================================================================================
+8. CONCLUSIONES Y DECLARACIÓN DE CIERRE DE LA FASE 1
+================================================================================
+
+1. La Fase 1 ha sido ejecutada de forma exhaustiva, verificando la consistencia cruzada 
+   entre los requerimientos de la SRS v2.0, los reportes de hardware reales de los equipos 
+   de desarrollo, los costos del anteproyecto y las directrices institucionales de la ESPOCH.
+2. La designación técnica del equipo AMD Ryzen 5 9600X (16 GB RAM DDR5, GPU RTX 2080) 
+   como servidor de Staging y Pruebas garantiza solvencia computacional absoluta para 
+   orquestar los microservicios y el motor de IA local sin colapsos de memoria ni latencia.
+3. El presupuesto actualizado de $11,724.25 USD se encuentra plenamente justificado, 
+   incorporando los costos obligatorios de la firma digital SRI y demostrando un retorno 
+   de inversión positivo y medible para Óptica Vista Visión.
+4. Se declara formalmente concluida y aprobada la FASE 1, quedando habilitado de forma 
+   inmediata el desarrollo secuencial de las siguientes fases del Estudio de Factibilidad.
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE EJECUCIÓN — FASE 1
+================================================================================

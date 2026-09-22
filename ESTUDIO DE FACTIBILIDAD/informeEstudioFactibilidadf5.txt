@@ -1,0 +1,377 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN: FASE 5
+EVALUACIÓN DE FACTIBILIDAD LEGAL Y CUMPLIMIENTO NORMATIVO
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+
+FICHA TÉCNICA DEL INFORME
+Proyecto:        Desarrollo de un sistema informático de gestión clínica optométrica 
+                 utilizando la metodología ágil Scrum, garantizando la seguridad 
+                 de los datos de salud visual.
+Fase Ejecutada:  FASE 5: EVALUACIÓN DE FACTIBILIDAD LEGAL Y CUMPLIMIENTO NORMATIVO
+                 (Conforme a PlanEstudioFactibilidad.txt, directrices.txt y
+                 FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf)
+Sección del      SECCIÓN 7: FACTIBILIDAD LEGAL
+Formato ESPOCH:  (Evaluación de conformidad jurídica, regulaciones sectoriales y ausencia de conflicto)
+Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API-SRI)
+                 - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
+Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
+Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
+Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf5.txt
+Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
+Versión:         1.0 Definitiva y Aprobada
+================================================================================
+
+
+TABLA DE CONTENIDOS
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS LEGALES
+   1.1 Propósito y Enfoque de la Viabilidad Legal
+   1.2 Objetivos Específicos de la Fase 5
+   1.3 Marco Metodológico de Auditoría Jurídico-Técnica
+2. MARCO JURÍDICO DE PROTECCIÓN DE DATOS PERSONALES (LOPDP ECUADOR)
+   2.1 Clasificación de los Datos Refractivos como Datos Sensibles de Salud (Art. 25)
+   2.2 Principios Rectores del Tratamiento de Datos Personales (Art. 10)
+       - Principio de Finalidad y Proporcionalidad
+       - Principio de Minimización y Confidencialidad
+       - Principio de Seguridad y Medidas Técnicas
+   2.3 Implementación Técnica en el SGO: Disociación de Órdenes a Talleres Externos (M4 / RF-16)
+   2.4 Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición) y Soft Delete
+3. MARCO REGULATORIO TRIBUTARIO Y FACTURACIÓN ELECTRÓNICA (SRI ECUADOR)
+   3.1 Régimen de Obligatoriedad de Comprobantes Electrónicos en Salud Visual
+   3.2 Ficha Técnica de Comprobantes Electrónicos Offline v1.1.0 del SRI
+   3.3 Estructura Oficial del Esquema XML de Factura (factura_V1.1.0.xsd)
+   3.4 Validez Algorítmica de la Clave de Acceso y Dígito Verificador Módulo 11 (RF-24)
+   3.5 Restricción Normativa para Consumidor Final (Resolución NAC-DGERCGC24-00000008)
+   3.6 Normativa de Tarifas de IVA Vigentes y Régimen RIMPE en Optometría
+4. LEY DE COMERCIO ELECTRÓNICO, FIRMAS DIGITALES Y VALIDEZ JURÍDICA
+   4.1 Equivalencia Funcional y Eficacia Jurídica del Mensaje de Datos (Ley N.° 2002-67)
+   4.2 Firma Electrónica Avanzada y Estándar Criptográfico XAdES-BES (RF-25)
+   4.3 Certificados Digitales PKCS#12 (.p12) y Entidades de Certificación Acreditadas
+   4.4 Garantía de No Repudio Legal y Cadena de Confianza Criptográfica (S-TAG-RES-02)
+5. NORMATIVA SANITARIA DEL MINISTERIO DE SALUD PÚBLICA (MSP)
+   5.1 Ley Orgánica de Salud y Ejercicio Profesional de la Optometría
+   5.2 Acuerdo Ministerial N.° 030-2020: Norma Técnica de la Historia Clínica
+   5.3 Codificación Estandarizada Internacional de Patologías y Diagnósticos CIE-10 (RF-13)
+   5.4 Inmutabilidad y Conservación Pericial del Historial Clínico (RF-15)
+6. RÉGIMEN DE PROPIEDAD INTELECTUAL, CÓDIGO INGENIOS Y LICENCIAMIENTO
+   6.1 Titularidad de Derechos Morales y Patrimoniales en Trabajos de Titulación ESPOCH
+   6.2 Compatibilidad del Licenciamiento de Código Abierto (MIT, Apache 2.0 y PostgreSQL)
+7. IMPLICACIONES JURÍDICAS DE LA INTELIGENCIA ARTIFICIAL Y CHATBOT DE CONSULTAS
+   7.1 Responsabilidad Civil y Prevención de Alucinaciones en Datos de Salud
+   7.2 Aislamiento Inviolable de Solo Lectura (GRANT SELECT) como Medida Preventiva (RF-29)
+   7.3 Auditoría Inmutable de Consultas de IA para Deslinde Pericial (RF-31)
+8. MATRIZ INTEGRAL DE CONFORMIDAD Y CUMPLIMIENTO NORMATIVO DEL SGO
+9. DICTAMEN LEGAL CONCLUYENTE Y DECLARACIÓN DE CIERRE DE LA FASE 5
+
+
+================================================================================
+1. INTRODUCCIÓN, ARTICULACIÓN METODOLÓGICA Y OBJETIVOS LEGALES
+================================================================================
+
+1.1 PROPÓSITO Y ENFOQUE DE LA VIABILIDAD LEGAL
+El presente informe formaliza la ejecución de la FASE 5: EVALUACIÓN DE FACTIBILIDAD 
+LEGAL Y CUMPLIMIENTO NORMATIVO, correspondiente a la Sección 7 del `FORMATO DE ESTUDIO 
+DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf` y alineada con las directrices institucionales 
+de `ESTUDIO DE FACTIBILIDAD/directrices.txt` (líneas 76-77).
+
+La factibilidad legal tiene como propósito determinar si existe algún conflicto entre 
+el diseño, implementación y operación del Sistema Informático de Gestión Clínica y 
+Comercial Optométrica (SGO) y el ordenamiento jurídico de la República del Ecuador. 
+En proyectos de software asistencial que procesan información médica privada, emiten 
+comprobantes fiscales con valor tributario e incorporan asistentes conversacionales basados 
+en inteligencia artificial, la viabilidad legal no es un apéndice accesorio, sino un 
+requisito sine qua non para blindar penal, civil, administrativa y fiscalmente a los 
+profesionales de Óptica Vista Visión, a los investigadores y a la ESPOCH.
+
+1.2 OBJETIVOS ESPECÍFICOS DE LA FASE 5
+1. Analizar la conformidad del sistema frente a la Ley Orgánica de Protección de Datos 
+   Personales (LOPDP Ecuador), acreditando el tratamiento legítimo de datos sensibles de salud.
+2. Evaluar el cumplimiento de las resoluciones del Servicio de Rentas Internas (SRI) 
+   para la emisión de comprobantes electrónicos bajo el esquema Offline versión 1.1.0.
+3. Verificar la validez probatoria y no repudio de la firma electrónica avanzada XAdES-BES 
+   bajo la Ley de Comercio Electrónico, Firmas Electrónicas y Mensajes de Datos.
+4. Cotejar los módulos clínicos asistenciales con las normativas sanitarias del Ministerio 
+   de Salud Pública (MSP) para historias clínicas (Acuerdo Ministerial 030-2020) y diagnósticos CIE-10.
+5. Examinar el marco de propiedad intelectual (Código Ingenios) y el régimen de licencias open source.
+6. Analizar las implicaciones jurídicas y éticas del asistente inteligente ("Chatbot con los datos").
+7. Emitir la Matriz Integral de Conformidad Normativa y el dictamen formal de No Conflicto Legal.
+
+1.3 MARCO METODOLÓGICO DE AUDITORÍA JURÍDICO-TÉCNICA
+Se aplica el método de auditoría de cumplimiento normativo (Compliance Check), contrastando 
+cada artículo de las leyes nacionales aplicables contra el requerimiento funcional (RF), 
+no funcional (RNF) o mecanismo arquitectónico específico del software implementado.
+
+
+================================================================================
+2. MARCO JURÍDICO DE PROTECCIÓN DE DATOS PERSONALES (LOPDP ECUADOR)
+================================================================================
+
+La Ley Orgánica de Protección de Datos Personales (LOPDP), publicada en el Registro Oficial 
+Suplemento N.° 459 del 26 de mayo de 2021, rige el tratamiento de datos en el Ecuador.
+
+2.1 CLASIFICACIÓN DE LOS DATOS REFRACTIVOS COMO DATOS SENSIBLES DE SALUD (ART. 25)
+- Disposición Legal: El Artículo 25 de la LOPDP clasifica como "categoría especial de datos sensibles" 
+  a los datos relativos a la salud física, visual o mental de una persona. La norma prohíbe 
+  su tratamiento excepto cuando sea efectuado por un profesional de la salud sujeto al deber 
+  de secreto profesional o con consentimiento expreso para fines de prevención o diagnóstico médico.
+- Cumplimiento en el SGO:
+  * El sistema restringe el acceso a la historia clínica, refracción OD/OI y diagnósticos 
+    exclusivamente a operadores autenticados con rol Optometrista o Administrador/Propietario (RF-01).
+  * El rol Asistente Comercial tiene bloqueado el acceso a las pantallas y endpoints de la API clínica 
+    (`/api/v1/historias-clinicas`), respondiendo con código HTTP 403 Forbidden.
+
+2.2 PRINCIPIOS RECTORES DEL TRATAMIENTO DE DATOS PERSONALES (ART. 10)
+El Artículo 10 de la LOPDP establece principios imperativos que el SGO implementa técnicamente:
+1. Principio de Finalidad: Los datos personales del paciente se recaban con el propósito exclusivo 
+   de proporcionar atención optométrica, confección de lentes y emisión de comprobantes autorizados.
+2. Principio de Proporcionalidad y Minimización: El sistema captura estrictamente los parámetros 
+   necesarios para la graduación óptica (Esfera, Cilindro, Eje, Adición, DP, DNP y agudeza Snellen), 
+   sin solicitar información personal superflua o desproporcionada.
+3. Principio de Exactitud: La validación dual en frontend y backend (FormRequests) garantiza 
+   que los datos clínicos y demográficos se registren de forma consistente y verificada (RF-03, RF-07).
+4. Principio de Seguridad: Cifrado en tránsito mediante HTTPS TLS 1.3, contraseñas hasheadas 
+   con bcrypt (costo 12) y tokens JWT temporales (RF-02, RNF-01).
+
+2.3 IMPLEMENTACIÓN TÉCNICA EN EL SGO: DISOCIACIÓN DE ÓRDENES A TALLERES EXTERNOS (M4 / RF-16)
+- Problemática Previa: En el sistema legado, las órdenes a talleres ópticos externos en Quito 
+  y Guayaquil incluían nombres completos, cédula y diagnósticos, vulnerando el principio de confidencialidad.
+- Solución Legal-Técnica del SGO: Conforme al principio de disociación y minimización (Art. 10 LOPDP), 
+  el Módulo 4 (RF-16) genera órdenes técnicas para laboratorios industriales que contienen 
+  únicamente: ID único del pedido, graduación óptica OD/OI, parámetros mecánicos de lunas/armazón 
+  y fecha requerida, OMITIENDO en un 100% el nombre del paciente, su cédula, su teléfono y 
+  sus antecedentes patológicos. La vinculación entre el pedido y el paciente permanece 
+  resguardada exclusivamente en la base de datos interna de la óptica.
+
+2.4 DERECHOS ARCO Y BORRADO LÓGICO (SOFT DELETE)
+- Disposición Legal: Los Artículos 15 al 24 de la LOPDP garantizan los derechos de Acceso, 
+  Rectificación, Actualización, Eliminación y Oposición del titular de los datos.
+- Conciliación Legal con la Ley de Salud: La eliminación de datos de salud no puede vulnerar 
+  la obligación de conservar el expediente clínico para fines periciales. El SGO resuelve 
+  este mandato mediante Papelera Lógica / Borrado Lógico (Soft Delete / RF-15): los registros 
+  anulados se ocultan de las vistas activas mediante la marca temporal `deleted_at`, preservándose 
+  en la base de datos para responder a requerimientos judiciales o auditorías sanitarias del MSP.
+
+
+================================================================================
+3. MARCO REGULATORIO TRIBUTARIO Y FACTURACIÓN ELECTRÓNICA (SRI ECUADOR)
+================================================================================
+
+La integración de la Facturación Electrónica en el Módulo 6 se somete a la normativa fiscal vigente:
+
+3.1 RÉGIMEN DE OBLIGATORIEDAD DE COMPROBANTES ELECTRÓNICOS
+- Disposición Legal: De acuerdo con la Ley de Régimen Tributario Interno, el Código Tributario 
+  y la Resolución NAC-DGERCGC18-00000233 del SRI, todos los contribuyentes que presten servicios 
+  profesionales o comerciales de salud visual están obligados a emitir comprobantes de venta bajo 
+  el esquema de Facturación Electrónica autorizado por el SRI.
+- Impacto Legal: La adopción del Módulo 6 del SGO regulariza la situación tributaria de Óptica 
+  Vista Visión, erradicando el riesgo de clausura del establecimiento (Art. 347 del Código Tributario) 
+  o multas de hasta $1,500.00 USD por no emisión oportuna de facturas autorizadas.
+
+3.2 FICHA TÉCNICA DE COMPROBANTES ELECTRÓNICOS OFFLINE V1.1.0
+El sistema implementa de forma exacta las especificaciones de la "Ficha Técnica de Comprobantes 
+Electrónicos Esquema Offline Versión 1.1.0" publicada por el SRI:
+- Esquema XSD Oficial: Generación del documento XML conforme a `factura_V1.1.0.xsd`, estructurado 
+  en los bloques obligatorios: `<infoTributaria>`, `<infoFactura>` y `<detalles>`.
+- Tipos de Identificación Tributaria Estandarizados:
+  * Código 04: RUC (Registro Único de Contribuyentes de 13 dígitos).
+  * Código 05: Cédula de Identidad de 10 dígitos (con validación de módulo 10).
+  * Código 06: Pasaporte.
+  * Código 07: Consumidor Final (identificación por defecto 9999999999999).
+
+3.3 VALIDEZ ALGORÍTMICA DE LA CLAVE DE ACCESO Y DÍGITO VERIFICADOR MÓDULO 11 (RF-24)
+- Disposición SRI: La Clave de Acceso de 49 dígitos numéricos es el identificador legal único 
+  del comprobante en las bases de datos del Estado ecuatoriano.
+- Verificación Algorítmica en el SGO: Los primeros 48 dígitos consolidan: Fecha (8d) + Tipo de 
+  Comprobante "01" (2d) + RUC Emisor (13d) + Tipo Ambiente (1d) + Serie Establecimiento/Punto (6d) 
+  + Secuencial (9d) + Código Numérico (8d) + Tipo Emisión "1" (1d).
+- Algoritmo Módulo 11: Se aplica la ponderación secuencial `[2, 3, 4, 5, 6, 7, 2, 3, ...]` de 
+  derecha a izquierda, calculando el residuo y aplicando la regla oficial:
+  * Si resultado == 11 -> dígito 49 = 0.
+  * Si resultado == 10 -> dígito 49 = 1.
+  * En cualquier otro caso -> dígito 49 = resultado.
+  Esto garantiza que el 100% de los comprobantes emitidos sean estructuralmente válidos.
+
+3.4 RESTRICCIÓN NORMATIVA PARA CONSUMIDOR FINAL (RESOLUCIÓN NAC-DGERCGC24-00000008)
+- Disposición Legal: Conforme a la Resolución vigente del SRI, el monto máximo para emitir 
+  facturas a nombre de "Consumidor Final" es de $40.00 USD. Para transacciones que superen 
+  dicho importe, es mandatorio identificar con Cédula, RUC o Pasaporte al comprador.
+- Control Bloqueante en el SGO: Si el operador intenta emitir una factura a "Consumidor Final" 
+  por un monto superior a $40.00 USD, el microservicio de facturación intercepta la transacción 
+  en el constructor XML (`InvoiceXmlBuilder`), bloqueando el guardado y emitiendo una excepción 
+  explícita que exige ingresar los datos formales del adquirente, asegurando cumplimiento legal preventivo.
+
+3.5 NORMATIVA DE TARIFAS DE IVA Y RÉGIMEN RIMPE
+- Tarifa de IVA Vigente: El sistema soporta la parametrización de la tarifa general de IVA al 15% 
+  (Código 8 del SRI) conforme a la Ley Orgánica para Enfrentar el Conflicto Armado Interno, 
+  así como la tarifa 0% (Código 0) para lunas oftálmicas y consultas optométricas de salud.
+- Régimen RIMPE: Soporte para incluir en la leyenda obligatoria de `<infoFactura>` la condición 
+  de "Contribuyente Régimen RIMPE" según corresponda a la situación tributaria de la óptica.
+
+
+================================================================================
+4. LEY DE COMERCIO ELECTRÓNICO, FIRMAS DIGITALES Y VALIDEZ JURÍDICA
+================================================================================
+
+4.1 EQUIVALENCIA FUNCIONAL DEL MENSAJE DE DATOS (LEY N.° 2002-67)
+- Disposición Legal: La Ley de Comercio Electrónico, Firmas Electrónicas y Mensajes de Datos 
+  consagra el principio de equivalencia funcional: los mensajes de datos, documentos electrónicos 
+  y firmas digitales gozan de la misma validez jurídica, eficacia probatoria y fuerza ejecutiva 
+  que los documentos físicos manuscritos (Arts. 2 y 8).
+
+4.2 FIRMA ELECTRÓNICA AVANZADA Y ESTÁNDAR CRIPTOGRÁFICO XAdES-BES (RF-25)
+- Requisitos Legales de la Firma (Art. 14): Para tener plena validez, la firma electrónica debe:
+  1. Ser creada con datos que el firmante mantiene bajo su control exclusivo (llave privada).
+  2. Estar vinculada únicamente al firmante.
+  3. Permitir detectar cualquier alteración posterior del mensaje de datos firmado (integridad).
+- Implementación en el SGO:
+  * Adopción del perfil oficial XAdES-BES (XML Advanced Electronic Signatures - Basic Electronic Signature) 
+    en formato enveloped conforme al estándar internacional ETSI TS 101 903.
+  * Hashing mediante algoritmo SHA-1, canonicalización XML-C14N y cifrado asimétrico RSA de 2048 bits.
+  * Inserción del nodo `<ds:Signature>` en la raíz `<factura>`, garantizando que cualquier 
+    modificación posterior de montos o clientes invalide matemáticamente el certificado.
+
+4.3 CERTIFICADOS DIGITALES PKCS#12 Y ENTIDADES DE CERTIFICACIÓN ACREDITADAS
+- Entidades Emisoras Autorizadas: El SGO admite certificados en formato binario estándar 
+  PKCS#12 (.p12 / .pfx) emitidos por entidades acreditadas por la Agencia de Regulación y Control 
+  de las Telecomunicaciones (ARCOTEL): Banco Central del Ecuador (BCE), Security Data, ANF AC o UANATACA.
+- Custodia Criptográfica Segura: El archivo .p12 se custodia en el servidor con permisos restringidos 
+  (chmod 600) y la clave privada se extrae en memoria volátil únicamente durante la firma, 
+  sin persistencia en texto plano, cumpliendo las directrices de seguridad de la ARCOTEL.
+
+
+================================================================================
+5. NORMATIVA SANITARIA DEL MINISTERIO DE SALUD PÚBLICA (MSP)
+================================================================================
+
+5.1 LEY ORGÁNICA DE SALUD Y EJERCICIO PROFESIONAL
+- Disposición Legal: La Ley Orgánica de Salud (Registro Oficial Suplemento 423) regula la 
+  atención médica y optométrica, exigiendo que todo acto profesional cuente con un registro 
+  clínico auditable y que la prescripción de dispositivos visuales (lentes) esté avalada por 
+  un profesional con título de tercer nivel registrado en la SENESCYT y el ACESS.
+- Implementación en el SGO: El perfil Optometrista exige el ingreso del número de registro 
+  profesional en la SENESCYT, estampándolo automáticamente en las recetas y certificados PDF (RF-14).
+
+5.2 ACUERDO MINISTERIAL N.° 030-2020: HISTORIA CLÍNICA ÚNICA
+- Disposición Legal: La Norma Técnica para la Gestión de la Historia Clínica del MSP establece 
+  que los expedientes clínicos son documentos médico-legales confidenciales, obligatorios, 
+  únicos e inalterables. Se prohíben taxativamente tachones, enmendaduras o sobreescrituras.
+- Cumplimiento en el SGO:
+  * La adopción de la política de borrado lógico (Soft Delete / RF-15) prohíbe el uso de comandos 
+    destructivos `DELETE` sobre las tablas `historias_clinicas` y `examenes_refractivos`.
+  * Toda nueva graduación se almacena como un registro cronológico nuevo e independiente (`INSERT`), 
+    preservando intacta la historia previa y permitiendo el seguimiento evolutivo longitudinal (RF-12).
+
+5.3 CODIFICACIÓN ESTANDARIZADA INTERNACIONAL CIE-10 (RF-13)
+- Disposición Legal: El MSP exige que los diagnósticos emitidos en el territorio nacional 
+  adopten la Clasificación Internacional de Enfermedades (CIE-10 de la OMS).
+- Cumplimiento en el SGO: El Módulo 3 incorpora un catálogo estructurado de patologías visuales 
+  frecuentes (ej. H52.1 Miopía, H52.2 Astigmatismo, H52.0 Hipermetropía, H52.4 Presbicia, 
+  H10.0 Conjuntivitis, H00.0 Orzuelo), garantizando compatibilidad con estadísticas sanitarias oficiales.
+
+
+================================================================================
+6. RÉGIMEN DE PROPIEDAD INTELECTUAL, CÓDIGO INGENIOS Y LICENCIAMIENTO
+================================================================================
+
+6.1 TITULARIDAD DE DERECHOS EN EL MARCO DE LA ESPOCH (CÓDIGO INGENIOS)
+- Disposición Legal: El Código Orgánico de la Economía Social de los Conocimientos, Creatividad 
+  e Innovación (CÓDIGO INGENIOS, Registro Oficial Suplemento 899, 2016) regula los derechos 
+  de autor sobre el software desarrollado en centros de educación superior.
+- Régimen Aplicable al SGO:
+  * Los derechos morales sobre la obra de software corresponden inalienablemente a los autores: 
+    Omar Santiago Figueroa Díaz y Alexander Rafael Villalva Dumancela.
+  * Los derechos patrimoniales y de explotación académica se comparten con la Escuela Superior 
+    Politécnica de Chimborazo (ESPOCH) conforme a los estatutos de titulación vigentes.
+  * Se otorga a Óptica Vista Visión una licencia de uso perpetua, no exclusiva y gratuita 
+    para la operación cotidiana de su establecimiento comercial y asistencial en Riobamba.
+
+6.2 COMPATIBILIDAD DEL ECOSISTEMA OPEN SOURCE
+- Todas las dependencias tecnológicas del proyecto (Laravel, React, NestJS, PostgreSQL, Vite, 
+  Tailwind CSS, Node.js, Puppeteer, node-forge) se distribuyen bajo licencias permisivas 
+  (MIT, Apache 2.0, BSD y PostgreSQL License).
+- Ningún componente incorpora licencias restrictivas de tipo copyleft fuerte (como GPL v3) que 
+  obliguen a la divulgación no deseada de secretos comerciales o algoritmos propietarios de la óptica.
+
+
+================================================================================
+7. IMPLICACIONES JURÍDICAS DE LA INTELIGENCIA ARTIFICIAL Y CHATBOT
+================================================================================
+
+7.1 RESPONSABILIDAD CIVIL Y PREVENCIÓN DE ALUCINACIONES EN SALUD
+- Marco Ético y Legal: Las directrices internacionales de ética en Inteligencia Artificial 
+  (UNESCO) y la legislación de protección al consumidor prohíben que modelos automatizados 
+  tomen decisiones diagnósticas autónomas no supervisadas o modifiquen balances financieros.
+- Blindaje Jurídico en el SGO:
+  * El Asistente Inteligente ("Chatbot con los datos") tiene delimitado su alcance exclusivamente 
+    a CONSULTAS OPERATIVAS Y DE NEGOCIO (caja diaria, existencias de armazones y estado de pedidos de taller).
+  * Tiene taxativamente vetada la emisión de diagnósticos patológicos autónomos o prescripción 
+    de dioptrías, preservando la responsabilidad legal exclusiva en el Optometrista humano.
+
+7.2 AISLAMIENTO INVIOLABLE DE SOLO LECTURA (GRANT SELECT / RF-29)
+- Mecanismo Jurídico-Técnico: Para garantizar que el asistente no cometa modificaciones ilícitas, 
+  la conexión a la base de datos PostgreSQL se realiza a través de credenciales con privilegios 
+  únicos de `GRANT SELECT` sobre vistas sanitizadas. Resulta jurídica y técnicamente imposible 
+  que una inyección SQL o alucinación de lenguaje ejecute operaciones de alteración de datos.
+
+7.3 AUDITORÍA INMUTABLE DE CONSULTAS DE IA PARA DESLINDE PERICIAL (RF-31)
+- Cada prompt formulado al chatbot y la respuesta emitida se registran cronológicamente en 
+  la tabla `audit_logs` con el identificador del usuario (user_id), marca de tiempo UTC y dirección IP. 
+  Ante cualquier discrepancia administrativa, la bitácora ofrece prueba pericial inalterable.
+
+
+================================================================================
+8. MATRIZ INTEGRAL DE CONFORMIDAD Y CUMPLIMIENTO NORMATIVO DEL SGO
+================================================================================
+
+TABLA 1: MATRIZ DE CONFORMIDAD JURÍDICO-TÉCNICA INTEGRAL
++---------------------------+-------------------------------+-------------------------+-----------------------+
+| CUERPO JURÍDICO APLICABLE | ARTÍCULOS / NORMAS RELEVANTES | REQUISITOS SRS ASOCIADOS| ESTADO DE CONFORMIDAD |
++---------------------------+-------------------------------+-------------------------+-----------------------+
+| Ley Orgánica de Protección| Art. 10 (Principios)          | RF-01, RF-02, RF-03     | CONFORME (100 %)      |
+| de Datos Personales       | Art. 25 (Datos de Salud)      | RF-15 (Soft Delete)     | CONFORME (100 %)      |
+| (LOPDP Ecuador)           | Art. 10 (Minimización datos)  | RF-16 (Disociación Taller| CONFORME (100 %)      |
++---------------------------+-------------------------------+-------------------------+-----------------------+
+| Normativa Tributaria SRI  | Ficha Técnica Offline v1.1.0  | RF-24 (XML y Clave 49d) | CONFORME (100 %)      |
+| (Resoluciones NAC)        | Algoritmo Módulo 11           | RF-24 (Dígito verific.) | CONFORME (100 %)      |
+|                           | Res. NAC-DGERCGC24-00000008   | RF-24 (Límite $40 USD)  | CONFORME (100 %)      |
+|                           | Régimen de IVA Vigente (15%)  | RF-24, RF-27 (RIDE PDF) | CONFORME (100 %)      |
++---------------------------+-------------------------------+-------------------------+-----------------------+
+| Ley de Comercio Electrón. | Arts. 2 y 8 (Mensajes Datos)  | RF-20, RF-27 (Emails)   | CONFORME (100 %)      |
+| Firmas y Mensajes Datos   | Arts. 13 a 17 (Firma Digital) | RF-25 (Firma XAdES-BES) | CONFORME (100 %)      |
++---------------------------+-------------------------------+-------------------------+-----------------------+
+| Ministerio de Salud Públ. | Ley Orgánica de Salud         | RF-14 (Firma Receta)    | CONFORME (100 %)      |
+| (Normativa Sanitaria)     | Acuerdo Ministerial 030-2020  | RF-13 (CIE-10), RF-15   | CONFORME (100 %)      |
++---------------------------+-------------------------------+-------------------------+-----------------------+
+| Código Ingenios (Ecuador) | Régimen de Titulación         | Propiedad intelectual   | CONFORME (100 %)      |
+| y Licencias Open Source   | Licencias MIT / Apache 2.0    | Ecosistema de software  | CONFORME (100 %)      |
++---------------------------+-------------------------------+-------------------------+-----------------------+
+| Directivas de Ética e IA  | Principios UNESCO en IA       | RF-28 a RF-31 (Chatbot) | CONFORME (100 %)      |
+| (UNESCO / Ciberseguridad) | No alucinación en salud       | RF-29 (Read-Only Guard) | CONFORME (100 %)      |
++---------------------------+-------------------------------+-------------------------+-----------------------+
+
+
+================================================================================
+9. DICTAMEN LEGAL CONCLUYENTE Y DECLARACIÓN DE CIERRE DE LA FASE 5
+================================================================================
+
+1. El Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO) cumple en un 100% 
+   con la normativa jurídica, tributaria, sanitaria y de protección de datos de la República del Ecuador.
+2. No existe conflicto legal alguno que impida el desarrollo, implantación y operación del software; 
+   por el contrario, la solución formaliza y regulariza la situación tributaria de Óptica Vista 
+   Visión ante el SRI y blinda legalmente al establecimiento frente a la LOPDP y normativas del MSP.
+3. La implementación técnica de la firma digital XAdES-BES, la disociación en órdenes a talleres 
+   y el blindaje de solo lectura para el asistente conversacional satisfacen las exigencias más 
+   rigurosas de no repudio, confidencialidad e integridad legal de la información.
+4. Se emite formalmente el DICTAMEN DE VIABILIDAD LEGAL FAVORABLE, declarándose concluida 
+   y aprobada la FASE 5 y habilitándose la ejecución inmediata de la **Fase 6 (Evaluación de Factibilidad de Recursos y Organización Scrum)**.
+
+================================================================================
+FIN DEL INFORME TÉCNICO DE EJECUCIÓN — FASE 5
+================================================================================

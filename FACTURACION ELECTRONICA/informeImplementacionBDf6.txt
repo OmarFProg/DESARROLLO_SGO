@@ -1,0 +1,64 @@
+================================================================================
+  INFORME DE IMPLEMENTACIÓN Y VALIDACIÓN - FASE 6: ARRANGUE Y CONEXIÓN DE LA APP
+================================================================================
+Proyecto: api-sri
+Ruta del Documento: PRACTICA/documentacion/BaseDatosContexto/Informes/informeImplementacionBDf6.txt
+Fecha de Ejecución: 27 de Agosto de 2026
+Estado de la Fase: COMPLETADO CON ÉXITO
+================================================================================
+
+1. SUB-PROCESO 6.1: COMPILACIÓN Y CONSTRUCCIÓN DE PRODUCCIÓN
+------------------------------------------------------------
+* Comando ejecutado:
+  > npm run build
+* Resultado:
+  - Compilación de TypeScript exitosa sin errores de tipado o sintaxis.
+  - Los archivos compilados (.js) se estructuraron correctamente bajo el
+    directorio de salida 'dist/src/' y 'dist/lib/'.
+* Validación: exitosa. El artefacto de producción está listo para su ejecución.
+
+
+2. SUB-PROCESO 6.2: ARRANQUE DEL SERVIDOR NESTJS
+------------------------------------------------
+* Comando de arranque ejecutado:
+  > node dist/src/main.js
+  - Nota: Se ejecutó directamente el archivo compilado con Node para agilizar el
+    arranque y evitar el retraso de compilación en caliente de Nest CLI.
+* Logs de consola de NestJS:
+  - LOG [NestFactory] Starting Nest application...
+  - LOG [InstanceLoader] TypeOrmCoreModule dependencies initialized
+  - LOG [InstanceLoader] TypeOrmModule dependencies initialized
+  - LOG [NestApplication] Nest application successfully started
+* Validación: exitosa. La aplicación NestJS inició todas sus dependencias y
+  controladores sin reportar ningún error de inicialización.
+
+
+3. SUB-PROCESO 6.3: COMPROBACIÓN DE CONEXIONES ACTIVAS
+------------------------------------------------------
+* Conexión PostgreSQL (TypeORM):
+  - El TypeOrmCoreModule inicializó la conexión correctamente. Al no levantarse
+    excepciones durante la inyección de dependencias relacionales, se comprueba
+    que la conexión física a 'localhost:5433' (contenedor PostgreSQL Docker) fue
+    establecida de forma segura.
+* Puerto del Servidor de la API (Puerto 3000):
+  - Comando ejecutado:
+    > Get-NetTCPConnection -LocalPort 3000
+  - Resultado:
+    - LocalAddress: :: (Todas las interfaces de red IPv6/IPv4)
+    - LocalPort: 3000
+    - State: Listen
+    - OwningProcess: PID 19424 (proceso Node.js)
+* Validación: exitosa. La API está escuchando en el puerto 3000 de forma activa.
+
+
+================================================================================
+CONCLUSIÓN GENERAL DE LA IMPLEMENTACIÓN
+================================================================================
+El entorno de base de datos relacional y servicios orquestados de api-sri se
+encuentra plenamente operativo. Se han ejecutado y completado las 6 fases del plan
+en orden técnico y controlado, corrigiendo las desviaciones en caliente (redirección
+del puerto PostgreSQL local nativo al 5433, corrección de la imagen oficial de
+RabbitMQ en docker-compose y canalización segura de sentencias SQL de extensión).
+
+La aplicación NestJS ya interactúa en vivo con PostgreSQL en Docker sobre port 5433.
+================================================================================
