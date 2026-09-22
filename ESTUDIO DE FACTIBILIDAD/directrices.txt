@@ -1,0 +1,90 @@
+Resumen ejecutivo
+Insumos: 
+requisitos actualizado con:
+    implementacion de facturacion electronica
+        insumo: Informe Implementacion Facturacion electronica
+
+    Innovacion: PROPUESTA 3: ASISTENTE INTELIGENTE OPERATIVO "CHATBOT CON LOS DATOS" 
+                 (CONSULTAS SEGURAS DE NEGOCIO, INVENTARIO Y ÓRDENES DE TALLER)
+                 insumo: D:\FLASH 7 SEP 2026\ESPOCH OCTAVO\TITULACION\DESARROLLO_SGO\INNOVACION\informePropuestasInnovacion.txt
+
+
+
+Antecedentes del proyecto
+    vision del proyecto
+        se busca que la aplicacion sea mantenible
+        que perdure a traves de nuevas actualizaciones
+        y crecer, funcionalidades, escalabilidad, que se conbierta en un activo importante para getion del negocio
+        cubri necesidades dela optica de estudio
+        para automatizar los procesos importantes
+    origenes
+        a traves de diversos estudios, y sondeos se determino
+         que la gran mayoria de de necocios locales del ambito de Optometria, 
+            y sevicios optometricos de la ciudad de riobanba, poseen/utilizan sistemas de gestion 
+            no adecuados, que ralentizan los procesos
+            ,desactualizados, 
+            con funcionalidades limitadas 
+            y poco afiazado a la realidad del negocio
+                asi surgio la necesidad de dar solucion a estas deficiencias operetivas mediante un sistema de gextion optometrica
+
+        INSUMO: D:\FLASH 7 SEP 2026\ESPOCH OCTAVO\TITULACION\DESARROLLO_SGO\ANTEPROYECTO\Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.pdf
+ 
+ Descripción del proyecto y su contexto: 
+    basarse en objetivos, entregables (modulos definidos en documento requisitos)
+        INSUMO: informe de requisitos actualizado con
+        requisitos nuevos:
+            facturacion eletronica
+            innovacion: chatobot con los datos
+            historias de usuario 
+
+         D:\FLASH 7 SEP 2026\ESPOCH OCTAVO\TITULACION\DESARROLLO_SGO\REQUERIMENTACION\fase3\informeFase4.txt
+    contexto organizacional y cultural en el cual se desenvuelve el proyecto
+        INSUMO: antecedentes de D:\FLASH 7 SEP 2026\ESPOCH OCTAVO\TITULACION\DESARROLLO_SGO\ANTEPROYECTO\Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.pdf
+
+Alcance del estudio de factibilidad:
+    Resultados que se esperan del estudio de factibilidad:
+        se busca obtener una evaluacion estructurada de los factores que pueden incidir en el exito o fracaso del proyecto
+        reducir insertidumbre y proporcionar informacion para tomar deciiones mas fundamentadas
+        saber si el proyecto es posible de implementar
+        actividades principales y procedimiento de aprobación.
+
+factibilidad tecnica:
+            evaluar si existen recursos 
+                tiempo, equipos, acceso tecnologias
+            evaluar capacid
+            determina si el proyecto puede realizarse desde una perpetiva tecnica general
+        revisar que la definicion componentes arquitectonicos, implicaciones tecnologicas
+        observar posibles escenarios/esquemas de implementacion
+        conocer limitantes tecnologicas/economicas
+        revisar especicacion de equipos: 
+        el equipo de desarrollo ha establecido que para tiempo de pruebas 
+        se despliegara el sistema en uno de los equipos de desarrollo(el mas viable, adecuado, apropiado) conforme a la 
+        Insumo: Declaracion de Arquitectura tecnologica (hardware y software) 
+            tanto para desarrollo (basarse en informe de equipos de desarrollo, 
+                
+            como para despliegue en produccion
+                    posibles escenarios: 
+                        desplieque en servidores contratados donde
+                        sistema ha sido distribuido
+                            SERV_PRODUCCION: aplicacion y base de datos, motor de IA
+
+Factibilidad económica
+        en base a lo anterior, actualizar presupuesto en anteprotecto
+         beneficios económicos del proyecto:
+            insumo: del anteproyecto: JUSTIFICACIÓN, presupuesto, factibilidad tecnica
+
+Factibilidad Legal
+    de anteproyecto extraer informacion acerca de las leyes que se utilizaran/referenciaran en el proyecto
+ Factibilidad de recursos
+    extraer roles scrum, 4.4.2.5 Scrum
+
+Factibilidad de mercado:
+    insumo: Marco teorico del anteproyecto
+    estrategia que se usará para abordar a los consumidores potenciales
+        entregables constantes para validacion/retroalimentacion porparte de el owner
+        se plantea entregas/acceso remoto a versiones del sistema mediante
+
+
+
+
+

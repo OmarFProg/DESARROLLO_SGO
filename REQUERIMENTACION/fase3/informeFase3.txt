@@ -451,6 +451,7 @@ Conforme a la norma ISO/IEC 25010:2023 y el marco metodológico del anteproyecto
     algorítmico mínimo de 12 iteraciones antes de persistir en PostgreSQL.
   * Cada petición a la API REST debe autenticarse validando la firma y vigencia temporal 
     de un token JWT emitido bajo estándar RFC 7519.
+
 - RNF-SEG-02 (Integridad):
   * Validación dual: El 100% de los campos clínicos y numéricos deben validarse tanto en 
     el cliente (React) como en el servidor (Laravel FormRequests).
@@ -458,8 +459,9 @@ Conforme a la norma ISO/IEC 25010:2023 y el marco metodológico del anteproyecto
     restricciones `CHECK` para rangos dióptricos (ej. `esfera BETWEEN -25.00 AND 20.00`) y claves foráneas `ON DELETE RESTRICT`.
   * Integridad transaccional: Las operaciones de venta y cobro deben ejecutarse con nivel 
     de aislamiento `READ COMMITTED` para prevenir lecturas sucias.
+
 - RNF-SEG-03 (Responsabilidad y No Repudio):
-  * El sistema debe registrar en la tabla `audit_logs` toda operación de creación (`CREATE`), 
+  * El sistema debe registrar  en la tabla `audit_logs` toda operación de creación (`CREATE`), 
     modificación (`UPDATE`) y borrado lógico (`SOFT_DELETE`) en pacientes, historias, pedidos y ventas.
   * La estructura del log capturará de forma inmutable: `id`, `user_id`, `ip_address`, 
     `event_type`, `table_name`, `record_id`, `old_values` (JSONB), `new_values` (JSONB) y `created_at` (UTC).
@@ -467,19 +469,34 @@ Conforme a la norma ISO/IEC 25010:2023 y el marco metodológico del anteproyecto
 3.2 RENDIMIENTO, DISPONIBILIDAD Y USABILIDAD
 - RNF-REN-01 (Tiempo de Respuesta): El tiempo medio de respuesta en consultas de búsqueda 
   de pacientes y guardado de refracciones debe ser inferior a 1.5 segundos en la red local.
+
 - RNF-DIS-01 (Disponibilidad Operativa en LAN): El sistema debe operar con una disponibilidad 
   del 99.5% en la red de área local del consultorio, permitiendo continuar con consultas 
   y ventas incluso ante cortes totales del servicio de internet público.
+
 - RNF-USA-01 (Ergonomía Visual y Usabilidad): Interfaz web progresiva (PWA) de página 
   única (SPA) limpia, eliminando ventanas flotantes MDI, optimizada para alto contraste 
   y operable con flujo ágil mediante tabulación de teclado en formularios clínicos.
 
-3.3 PORTABILIDAD Y CUMPLIMIENTO LEGAL
+  
+
+3.3 PORTABILIDAD (leer)
 - RNF-POR-01 (Compatibilidad Web): Operable de forma idéntica en navegadores modernos: 
   Google Chrome 110+, Microsoft Edge 110+, Mozilla Firefox 110+ y Safari 16+.
+
+
+3.4 CUMPLIMIENTO LEGAL
+que se hira en terminos de cumplimiento legal, q leyes apoyan la implementacion
+como es q se implementa el requisito
+
 - RNF-LEG-01 (Protección de Datos - LOPDP Ecuador): Cumplimiento estricto de la Ley 
   Orgánica de Protección de Datos Personales para la custodia confidencial de datos sensibles 
   de salud visual, aislamiento de diagnósticos en órdenes de taller y derecho de acceso auditado.
+
+3.5 DISPONIBILIDAD 24/7
+ ARQUITECTURA/DIAGRAMA DE DESPLIEGUE/
+
+
 
 
 ================================================================================

@@ -14,15 +14,21 @@ ORDEN BASE DE ELABORACIÓN
 
    Incluye, entre otros:
    - Requisitos funcionales.
+      descrbir como historias de us
+         Restricciones.
+         Reglas de negocio
    - Requisitos no funcionales.
-   - Usuarios o actores.
-   - Restricciones.
-   - Reglas de negocio.
+      describir como hisorias tecnicas
+   - Usuarios o actores(Roles de usuario).
+
 
    Ejemplo:
    "El sistema debe permitir al administrador registrar empleados."
 
-2. CASOS DE USO
+2. historias de usuario
+doc donde se describe el requisito
+   yo como neccesito para/especificaciones
+
    Detallan cómo los actores interactúan con las funcionalidades del
    sistema.
 
@@ -44,7 +50,14 @@ ORDEN BASE DE ELABORACIÓN
          +-- Validar información
          +-- Guardar empleado
 
-3. MER - MODELO ENTIDAD-RELACIÓN
+3. MER - MODELO ENTIDAD-RELACIÓN/diseno de la base de datos/fases
+tareas de ingenieria:
+
+obtener entidades y relaciones->DER
+NORMALIZAR->obten modelo logico
+IMPLEMENTAR BD->modelo fisico
+DOCUMENTAR->diccionario de datos
+
    Define la información que debe almacenar la base de datos.
 
    A partir de los requisitos y casos de uso se identifican:
@@ -192,6 +205,11 @@ REQUISITOS
      |
      v
 CASOS DE USO
+fase de exploracion
+
+ir armando manual tecnico
+cada red documentado como historia de us/hitoria tec
+
      |
      v
 +----+----------------+----------------+
