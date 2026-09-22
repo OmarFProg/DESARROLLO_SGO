@@ -338,7 +338,7 @@ La óptica beneficiaria asume únicamente el costo directo de consumibles y cert
 4. Normativa Sanitaria del MSP y Código Ingenios:
 - Acuerdo Ministerial MSP 030-2020: Respeto a la norma técnica del expediente clínico y codificación CIE-10.
 - Código Ingenios: La titularidad de derechos morales corresponde a los investigadores (Omar Figueroa y 
-  Alexander Villalva), cediendo a Óptica Vista Visión una licencia de uso perpetua e intransferible.
+  Alexander Villalva), cediendo a la Óptica de Estudio una licencia de uso perpetua e intransferible.
 - Dictamen Legal: Conformidad Jurídica Plena; Cero Conflictos Normativos.
 
 
@@ -347,7 +347,7 @@ La óptica beneficiaria asume únicamente el costo directo de consumibles y cert
 ================================================================================
 
 1. Estructura del Talento Humano bajo Metodología Scrum:
-- **Product Owner (PO):** Propietario y Optometrista Principal de Óptica Vista Visión. Custodio de la visión 
+- **Product Owner (PO):** Propietario y Optometrista Principal de Óptica de estudio. Custodio de la visión 
   del negocio, priorización de requisitos clínicos y validación en Sprint Reviews.
 - **Scrum Master / Director de Titulación:** Ing. Jorge Ariel Menéndez Verdecia, Mgs. Facilitador ágil, 
   auditor de calidad de código y garante del cumplimiento metodológico institucional.
