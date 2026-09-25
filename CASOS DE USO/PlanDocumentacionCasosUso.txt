@@ -1,0 +1,495 @@
+================================================================================
+PLAN MAESTRO DE DOCUMENTACIÓN DE CASOS DE USO POR FASES
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+Proyecto:           Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Organización:       Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Marco Académico:    Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Metodología:        Scrum / Secure Scrum integrado con Estándar UML 2.5 e ISO/IEC 25010:2023
+Plantilla Guía:     PMOInformatica — Plantilla Estándar de Especificación de Casos de Uso
+Insumos Clave:      1. Documento Técnico de Especificación de Casos de Uso (CasosDeUsoSGO.txt)
+                    2. Especificación de Requisitos de Software (SRS v2.0 - IEEE 830)
+                    3. Transcripción de Audio de Consulta y Venta Real (Septiembre 2026)
+                    4. Teoría y Guía Metodológica de Casos de Uso (CasosUsoTeoria.txt)
+Autores del Plan:   Figueroa Díaz Omar Santiago, Villalva Dumancela Alexander Rafael
+Tutor / Director:   Ing. Jorge Ariel Menéndez Verdecia
+Fecha de Emisión:   25 de Septiembre de 2026
+Versión del Plan:   1.0 Definitiva
+Archivo Destino:    CASOS DE USO/PlanDocumentacionCasosUso.txt
+================================================================================
+
+
+TABLA DE CONTENIDO DEL PLAN
+--------------------------------------------------------------------------------
+1. INFORMACIÓN GENERAL Y OBJETIVOS DEL PLAN
+   1.1 Propósito
+   1.2 Objetivos Específicos
+   1.3 Alcance y Cobertura Documental
+2. ESTÁNDAR Y LINEAMIENTOS DE PLANTILLA (PMOINFORMATICA APLICADA A SGO)
+   2.1 Estructura del Documento Final según PMOInformatica
+   2.2 Estructura y Reglas para la Ficha de Descripción de Actores
+   2.3 Estructura y Reglas para la Ficha de Especificación de Casos de Uso
+   2.4 Adaptación e Integración de S-Tags de Seguridad (ISO/IEC 25010)
+3. INVENTARIO COMPLETO DE CASOS DE USO A DOCUMENTAR (LÍNEA BASE SGO)
+   3.1 Distribución por Paquetes / Subsistemas Funcionales (M1 a M7)
+   3.2 Tabla Maestra de Casos de Uso, Tipología y Priorización MoSCoW
+4. PLAN DE DOCUMENTACIÓN POR FASES (DESGLOSE TEMPORAL Y OPERATIVO)
+   4.1 Fase 0: Estandarización de Fichas Maestras, Glosario y Modelado de Actores
+   4.2 Fase 1: Documentación de Módulos Base (M1: Seguridad y M2: Pacientes)
+   4.3 Fase 2: Documentación del Núcleo Clínico y Refracción Integral (M3)
+   4.4 Fase 3: Documentación de Taller, Laboratorio y Ventas en Mostrador (M4 y M5)
+   4.5 Fase 4: Documentación del Subsistema de Facturación Electrónica SRI (M6)
+   4.6 Fase 5: Documentación de Asistente IA, Auditoría y Consolidación Maestro (M7)
+5. CRONOGRAMA DE TRABAJO, ESTIMACIÓN DE ESFUERZO E HITOS
+   5.1 Matriz de Asignación Temporal y Carga Horaria por Fase
+   5.2 Hitos Críticos de Entrega y Criterios de Transición
+6. MATRIZ DE ASIGNACIÓN DE RESPONSABILIDADES (RACI)
+7. CRITERIOS DE CALIDAD, REVISIÓN Y APROBACIÓN (DEFINITION OF DONE)
+   7.1 Criterios de Aceptación Documental PMOInformatica
+   7.2 Protocolo de Revisión Cruzada y Homologación Clínica
+8. GESTIÓN DE RIESGOS DOCUMENTALES Y MITIGACIONES
+================================================================================
+
+
+================================================================================
+1. INFORMACIÓN GENERAL Y OBJETIVOS DEL PLAN
+================================================================================
+
+1.1 PROPÓSITO
+El presente documento establece el Plan Operativo y Metodológico para la redacción, 
+especificación formal, validación y consolidación de los Casos de Uso (CU) del 
+Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO). 
+
+El plan organiza la documentación en FASES PROGRESIVAS Y ARTICULADAS con el marco de 
+trabajo ágil Scrum, garantizando que el 100% de los requisitos funcionales del sistema 
+(SRS v2.0) y los hallazgos operativos extraídos de la práctica clínica real (audio de 
+atención en Óptica Vista Visión) queden rigurosamente especificados conforme a las 
+directrices de la "Plantilla de Casos de Uso de PMOInformatica".
+
+1.2 OBJETIVOS ESPECÍFICOS
+1. Estandarizar la Especificación Funcional: Adoptar y hacer cumplir los lineamientos 
+   estructurales de la plantilla PMOInformatica para cada uno de los 23 casos de uso 
+   identificados en el sistema SGO.
+2. Formalizar Brechas Clínicas y Comerciales: Integrar en las fichas los casos de uso 
+   derivados del audio real: lensometría previa (CU-CLI-02), queratometría/autorrefractometría 
+   (CU-CLI-03), confort ambulatorio en marcha (CU-CLI-04), pterigión en polo anterior 
+   (CU-CLI-06), cotas de reducción de biselado (CU-LAB-01), venta de combos promocionales 
+   (CU-VEN-02) y cobro de anticipo con orden física de retiro (CU-VEN-03).
+3. Asegurar Trazabilidad Bidireccional: Vincular de forma unívoca cada Caso de Uso 
+   con los Requisitos Funcionales (RF), las Reglas de Negocio (RN), las etiquetas de 
+   seguridad (S-Tags bajo ISO/IEC 25010) y los futuros Casos de Prueba (UAT).
+4. Establecer un Ritmo Incremental de Entregas: Distribuir el esfuerzo de documentación 
+   en 6 fases secuenciales e incrementales (Fase 0 a Fase 5) directamente sincronizadas 
+   con los Sprints de desarrollo y revisión con los interesados clínicos.
+
+1.3 ALCANCE Y COBERTURA DOCUMENTAL
+El plan abarca la totalidad del sistema SGO, estructurado en 7 paquetes/subsistemas:
+- Paquete 1 (M1): Gestión de Acceso y Seguridad RBAC.
+- Paquete 2 (M2): Gestión Demográfica y Filiación de Pacientes.
+- Paquete 3 (M3): Atención Clínica, Refracción Subjetiva y Patología Ocular.
+- Paquete 4 (M4): Taller Óptico, Biselado y Órdenes de Producción.
+- Paquete 5 (M5): Ventas en Mostrador, Anticipos, Caja y Arqueo Diario.
+- Paquete 6 (M6): Facturación Electrónica e Integración con Web Services SRI.
+- Paquete 7 (M7): Asistente Inteligente Conversacional (Read-Only Guard).
+
+
+================================================================================
+2. ESTÁNDAR Y LINEAMIENTOS DE PLANTILLA (PMOINFORMATICA APLICADA A SGO)
+================================================================================
+
+2.1 ESTRUCTURA DEL DOCUMENTO FINAL SEGÚN PMOINFORMATICA
+Cada entregable de especificación documental generado bajo este plan respetará de 
+forma estricta las secciones normadas por la plantilla de PMOInformatica:
+
+1. Portada Oficial:
+   - Título: Especificación de Casos de Uso - Sistema de Gestión Optométrica (SGO)
+   - Subtítulo: [Nombre del Módulo / Paquete de Casos de Uso]
+   - Fecha y Código del Documento.
+2. Historial de Versiones:
+   - Tabla con: Fecha | Versión | Autor | Organización | Descripción de Cambios.
+3. Información del Proyecto:
+   - Empresa / Organización: Óptica Vista Visión.
+   - Proyecto: Sistema de Gestión Optométrica (SGO).
+   - Fecha de Preparación: Septiembre 2026.
+   - Cliente: Propietario / Optometrista Titular de Óptica Vista Visión.
+   - Patrocinador Principal: ESPOCH / Dirección de Titulación.
+   - Líder de Proyecto / Líder de Desarrollo: Autores del Software.
+4. Aprobaciones:
+   - Nombre y Apellido | Cargo | Departamento u Organización | Fecha | Firma.
+5. Resumen Ejecutivo:
+   - Descripción de procesos y subprocesos de negocio abordados en el paquete.
+   - Áreas organizacionales involucradas (Consultorio, Mostrador, Taller, Facturación).
+   - Módulos de software vinculados.
+6. Diagrama de Casos de Uso:
+   - Diagrama formal UML 2.5 por paquete.
+   - Delimitación del Límite del Sistema (System Boundary).
+   - Actores, Casos de Uso y Relaciones explícitas:
+     * Asociación (comunicación directa actor-sistema).
+     * Inclusión (<<include>>) para subprocesos compartidos y obligatorios.
+     * Extensión (<<extend>>) con especificación de Puntos de Extensión (Extension Points).
+     * Generalización / Herencia (de actores y de casos de uso).
+7. Descripción de Actores:
+   - Fichas individuales estructuradas para cada actor participante en el paquete.
+8. Especificación Detallada de Casos de Uso:
+   - Fichas individuales completas para cada caso de uso del paquete.
+
+2.2 ESTRUCTURA Y REGLAS PARA LA FICHA DE DESCRIPCIÓN DE ACTORES
+Por directriz de PMOInformatica, cada actor del sistema debe poseer una ficha descriptiva 
+con la siguiente composición obligatoria:
+- Nombre del Actor: Denominación formal del rol (ej. Optometrista Clínico).
+- Identificador Único: Código correlativo (ej. ACT-01, ACT-02).
+- Descripción: Función de alto nivel y razón de interactuar con el sistema.
+- Características: Nivel técnico, periodicidad de uso, permisos y ubicación física.
+- Relación: Dependencia o generalización con otros actores (ej. herencia de 'Usuario Autenticado').
+- Referencias: Lista exhaustiva de Casos de Uso en los que interviene.
+- Atributos del Actor:
+  Tabla tipada con los campos asociados al actor en el sistema:
+  * Nombre del Atributo (ej. cedula_identidad, registro_msp, token_jwt).
+  * Descripción funcional del atributo.
+  * Tipo de Dato (ej. Varchar(10), Integer, UUID).
+- Comentarios: Notas sobre seguridad, no repudio o particularidades ergonómicas.
+
+2.3 ESTRUCTURA Y REGLAS PARA LA FICHA DE ESPECIFICACIÓN DE CASOS DE USO
+Cada caso de uso debe redactarse sin ambigüedad y con el nivel de abstracción 
+establecido en `CasosUsoTeoria.txt` (caja negra, sin jerga de base de datos o HTML):
+- Caso de Uso: Nombre formal en infinitivo (Verbo + Objeto directo).
+- Identificador: Código alfanumérico unívoco (ej. CU-CLI-02).
+- Actores: Lista de actores principales (iniciadores) y secundarios/externos.
+- Tipo: Clasificación formal: Primario (vital para el negocio), Secundario o Opcional.
+- Referencias: 
+  * Requerimientos funcionales contractuales del SRS v2.0 (ej. RF-07, RF-12).
+  * Hallazgos del audio clínico de atención (si aplica).
+  * Casos de uso vinculados (<<include>> o <<extend>>).
+- Precondición: Estado verificable del sistema antes de admitir la ejecución del caso.
+- Postcondición: Estado verificable garantizado tras la ejecución exitosa.
+- Descripción: Párrafo conceptual del alcance y valor observable generado.
+- Resumen: Resumen de alto nivel del flujo transaccional.
+- Curso Normal (Flujo Básico):
+  Tabla estructurada de pasos secuenciales y numerados:
+  * Nro. de Paso: 1, 2, 3...
+  * Ejecutor: Actor específico o 'Sistema SGO'.
+  * Paso o Actividad: Frase corta y activa en lenguaje natural orientado a intenciones.
+- Cursos Alternos (Flujos Excepcionales y Extensiones):
+  Tabla estructurada de derivaciones:
+  * Nro. de Referencia: Paso del curso normal donde se bifurca (ej. 2a, 5b).
+  * Condición de Activación: Causa que detona el flujo alterno.
+  * Secuencia de Acciones Alternas: Pasos detallados de respuesta o recuperación.
+
+2.4 ADAPTACIÓN E INTEGRACIÓN DE S-TAGS DE SEGURIDAD (ISO/IEC 25010)
+Para asegurar el rigor del trabajo de titulación y la protección de datos médicos 
+personales (LOPDP Ecuador), se incorpora a la plantilla PMOInformatica un acápite final 
+obligatorio por ficha denominado "Requisitos de Seguridad y Calidad Asociados (S-Tags)":
+- S-TAG-AUTH: Mecanismos de autenticación y control de acceso (RBAC).
+- S-TAG-INT: Reglas de validación matemática y consistencia física de datos.
+- S-TAG-ACC: Pistas de auditoría inmutables para no repudio en transacciones clínicas/caja.
+
+
+================================================================================
+3. INVENTARIO COMPLETO DE CASOS DE USO A DOCUMENTAR (LÍNEA BASE SGO)
+================================================================================
+
+3.1 DISTRIBUCIÓN POR PAQUETES / SUBSISTEMAS FUNCIONALES
+El sistema se compone de 23 Casos de Uso consolidados y distribuidos en 7 módulos:
+
+PAQUETE 1: GESTIÓN DE ACCESO Y SEGURIDAD (M1)
+  - CU-SEG-01: Iniciar Sesión y Validar Credenciales RBAC
+  - CU-SEG-02: Cerrar Sesión por Inactividad o Petición
+
+PAQUETE 2: GESTIÓN DEMOGRÁFICA DE PACIENTES (M2)
+  - CU-PAC-01: Registrar Paciente con Validación Módulo 10
+  - CU-PAC-02: Registrar Menor de Edad sin Documento de Identidad
+  - CU-PAC-03: Búsqueda Predictiva de Pacientes
+
+PAQUETE 3: ATENCIÓN CLÍNICA Y REFRACCIÓN (M3)
+  - CU-CLI-01: Registrar Anamnesis y Motivo de Consulta
+  - CU-CLI-02: Registrar Lensometría y Estado de Gafas Previas [AUDIO REAL]
+  - CU-CLI-03: Registrar Pruebas Objetivas y Queratometría [AUDIO REAL]
+  - CU-CLI-04: Realizar Examen Refractivo Subjetivo y Confort Ambulatorio [AUDIO REAL]
+  - CU-CLI-05: Emitir Receta Óptica y Certificado Visual
+  - CU-CLI-06: Registrar Evaluación de Polo Anterior y Seguimiento Patológico [AUDIO REAL]
+
+PAQUETE 4: TALLER Y LABORATORIO ÓPTICO (M4)
+  - CU-LAB-01: Generar Orden Técnica de Taller con Parámetros Geométricos [AUDIO REAL]
+  - CU-LAB-02: Gestionar Ciclo de Estados del Pedido de Laboratorio
+  - CU-LAB-03: Registrar Incidencia o Garantía Técnica
+
+PAQUETE 5: VENTAS, CAJA Y MOSTREADOR (M5)
+  - CU-VEN-01: Registrar Venta con Descuento Híbrido de Inventario
+  - CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales [AUDIO REAL]
+  - CU-VEN-03: Registrar Cobro de Anticipo y Generar Orden de Retiro [AUDIO REAL]
+  - CU-VEN-04: Registrar Cobro de Saldo y Entrega de Producto
+  - CU-VEN-05: Realizar Cierre Diario y Arqueo Consolidado de Caja
+  - CU-VEN-06: Anular Venta con Reversión Atómica ACID
+
+PAQUETE 6: FACTURACIÓN ELECTRÓNICA SRI (M6)
+  - CU-SRI-01: Generar XML v1.1.0 y Clave de Acceso Módulo 11
+  - CU-SRI-02: Firmar Digitalmente Factura con Certificado PKCS#12 (XAdES-BES)
+  - CU-SRI-03: Transmitir y Consultar Comprobante ante Web Services SRI
+  - CU-SRI-04: Generar RIDE PDF Code128 y Despachar por Correo SMTP
+
+PAQUETE 7: ASISTENTE INTELIGENTE CONVERSACIONAL (M7)
+  - CU-IA-01: Consultar Métricas y Existencias en Lenguaje Natural (Read-Only Guard)
+
+3.2 TABLA MAESTRA DE CASOS DE USO, TIPOLOGÍA Y PRIORIZACIÓN MOSCOW
+
++------------+--------------------------------------------+-----------+--------------+--------------+---------+
+| Código CU  | Nombre del Caso de Uso                     | Tipo PMO  | Actor Ppal.  | Complejidad  | MoSCoW  |
++------------+--------------------------------------------+-----------+--------------+--------------+---------+
+| CU-SEG-01  | Iniciar Sesión y Validar Credenciales RBAC | Primario  | Todos (User) | Media        | MUST    |
+| CU-SEG-02  | Cerrar Sesión por Inactividad o Petición   | Secundario| Todos (User) | Baja         | MUST    |
+| CU-PAC-01  | Registrar Paciente con Validación M10      | Primario  | Asistente    | Media        | MUST    |
+| CU-PAC-02  | Registrar Menor de Edad sin Documento      | Opcional  | Asistente    | Baja         | SHOULD  |
+| CU-PAC-03  | Búsqueda Predictiva de Pacientes           | Primario  | Todos (User) | Media        | MUST    |
+| CU-CLI-01  | Registrar Anamnesis y Motivo de Consulta   | Primario  | Optometrista | Baja         | MUST    |
+| CU-CLI-02  | Registrar Lensometría y Estado Gafas Prev. | Primario  | Optometrista | Media        | MUST    |
+| CU-CLI-03  | Registrar Pruebas Objetivas y Queratometría| Primario  | Optometrista | Media        | MUST    |
+| CU-CLI-04  | Examen Refractivo y Confort Ambulatorio    | Primario  | Optometrista | Alta         | MUST    |
+| CU-CLI-05  | Emitir Receta Óptica y Certificado Visual  | Primario  | Optometrista | Media        | MUST    |
+| CU-CLI-06  | Evaluación Polo Anterior y Seguimiento Pat.| Secundario| Optometrista | Media        | SHOULD  |
+| CU-LAB-01  | Generar Orden Taller con Ajuste Geométrico | Primario  | Optom./Asist.| Alta         | MUST    |
+| CU-LAB-02  | Gestionar Ciclo de Estados del Pedido      | Secundario| Asistente    | Media        | MUST    |
+| CU-LAB-03  | Registrar Incidencia o Garantía Técnica    | Opcional  | Optom./Asist.| Media        | COULD   |
+| CU-VEN-01  | Registrar Venta con Descuento Híbrido      | Primario  | Asistente    | Alta         | MUST    |
+| CU-VEN-02  | Cotizar y Aplicar Paquetes Promocionales   | Primario  | Asistente    | Media        | MUST    |
+| CU-VEN-03  | Registrar Cobro Anticipo y Orden Retiro    | Primario  | Asistente    | Alta         | MUST    |
+| CU-VEN-04  | Registrar Cobro Saldo y Entrega Producto   | Primario  | Asistente    | Media        | MUST    |
+| CU-VEN-05  | Realizar Cierre Diario y Arqueo de Caja    | Primario  | Administrador| Alta         | MUST    |
+| CU-VEN-06  | Anular Venta con Reversión Atómica ACID    | Secundario| Administrador| Alta         | SHOULD  |
+| CU-SRI-01  | Generar XML v1.1.0 y Clave Acceso M11      | Primario  | API-SRI      | Alta         | MUST    |
+| CU-SRI-02  | Firmar Factura con PKCS#12 (XAdES-BES)     | Primario  | API-SRI      | Alta         | MUST    |
+| CU-SRI-03  | Transmitir y Consultar ante WS del SRI     | Primario  | API-SRI      | Alta         | MUST    |
+| CU-SRI-04  | Generar RIDE PDF Code128 y Envío SMTP      | Secundario| API-SRI      | Media        | SHOULD  |
+| CU-IA-01   | Consultar Métricas/Stock en Lenguaje Nat.  | Secundario| Administrador| Alta         | COULD   |
++------------+--------------------------------------------+-----------+--------------+--------------+---------+
+
+
+================================================================================
+4. PLAN DE DOCUMENTACIÓN POR FASES (DESGLOSE TEMPORAL Y OPERATIVO)
+================================================================================
+
+El plan se ejecuta a través de 6 fases sistemáticas diseñadas para garantizar 
+la completitud técnica y la consistencia con la plantilla de PMOInformatica:
+
+--------------------------------------------------------------------------------
+4.1 FASE 0: ESTANDARIZACIÓN DE FICHAS MAESTRAS, GLOSARIO Y MODELADO DE ACTORES
+--------------------------------------------------------------------------------
+- Objetivo: Establecer la plantilla operativa base, unificar la nomenclatura técnica 
+  y documentar de forma exhaustiva las fichas de los 5 actores del sistema.
+- Actividades Clave:
+  1. Configurar el archivo plantilla base en formato estándar conforme a PMOInformatica.
+  2. Redactar el Glosario de Términos Optométricos y de Facturación (Lensometría, 
+     Queratometría K1/K2, DNP, Altura Focal, Biselado Ranurado/Semialaire, XAdES-BES, ACID).
+  3. Elaborar las fichas completas de especificación de los 5 Actores:
+     * ACT-01: Administrador / Propietario (incluyendo tabla de atributos de auditoría).
+     * ACT-02: Optometrista Clínico (incluyendo registro MSP y atributos profesionales).
+     * ACT-03: Asistente Comercial / Recepcionista (incluyendo atributos de caja asignada).
+     * ACT-04: Web Services SRI (actor externo: endpoints SOAP, esquemas XSD y certificados).
+     * ACT-05: Taller Óptico / Laboratorio Externo (actor secundario: atributos de disociación).
+- Entregable de la Fase 0:
+  * Documento "00_Actores_y_Marco_Normativo_SGO.doc/txt" aprobado.
+
+--------------------------------------------------------------------------------
+4.2 FASE 1: DOCUMENTACIÓN DE MÓDULOS BASE (M1: SEGURIDAD Y M2: PACIENTES)
+--------------------------------------------------------------------------------
+- Objetivo: Documentar los casos de uso correspondientes a los paquetes de soporte 
+  transversal e identificación de usuarios y clientes.
+- Casos de Uso a Especificar:
+  * CU-SEG-01: Iniciar Sesión y Validar Credenciales RBAC.
+  * CU-SEG-02: Cerrar Sesión por Inactividad o Petición.
+  * CU-PAC-01: Registrar Paciente con Validación Módulo 10 de Cédula.
+  * CU-PAC-02: Registrar Menor de Edad sin Documento de Identidad (Representante Legal).
+  * CU-PAC-03: Búsqueda Predictiva de Pacientes (Cédula, Nombres, Teléfono).
+- Aspectos Críticos de Negocio a Documentar:
+  * Regla RN-SEG-01: Máximo 3 intentos fallidos antes de bloqueo de cuenta.
+  * Regla RN-PAC-01: Algoritmo Módulo 10 para cédulas ecuatorianas y provincia válida.
+  * Diagrama de Casos de Uso del Paquete de Seguridad y Pacientes en UML formal.
+- Entregable de la Fase 1:
+  * Documento "01_CasosUso_Seguridad_Pacientes_PMO.doc/txt".
+
+--------------------------------------------------------------------------------
+4.3 FASE 2: DOCUMENTACIÓN DEL NÚCLEO CLÍNICO Y REFRACCIÓN INTEGRAL (M3)
+--------------------------------------------------------------------------------
+- Objetivo: Documentar minuciosamente el paquete médico-optométrico, incorporando los 
+  hallazgos clínicos de la sesión real de atención analizada.
+- Casos de Uso a Especificar:
+  * CU-CLI-01: Registrar Anamnesis y Motivo de Consulta.
+  * CU-CLI-02: Registrar Lensometría y Estado de Gafas Previas (Insumo Audio).
+  * CU-CLI-03: Registrar Pruebas Objetivas y Queratometría (Insumo Audio).
+  * CU-CLI-04: Realizar Examen Refractivo Subjetivo y Confort Ambulatorio (Insumo Audio).
+  * CU-CLI-05: Emitir Receta Óptica y Certificado Visual.
+  * CU-CLI-06: Registrar Evaluación de Polo Anterior y Seguimiento Patológico (Insumo Audio).
+- Aspectos Críticos de Negocio a Documentar:
+  * Regla RN-CLI-01: Rangos de dioptrías, cilindro con signo estrictamente negativo (-).
+  * Regla RN-CLI-02: Test de confort en marcha (validación sin mareo previa a persistencia).
+  * Regla RN-CLI-03: Inmutabilidad de la historia clínica persistida y control Soft Delete.
+  * Diagrama de Casos de Uso del Paquete Clínico (incluyendo <<include>> con Auditoría).
+- Entregable de la Fase 2:
+  * Documento "02_CasosUso_Modulo_Clinico_PMO.doc/txt".
+
+--------------------------------------------------------------------------------
+4.4 FASE 3: DOCUMENTACIÓN DE TALLER, LABORATORIO Y VENTAS EN MOSTRADOR (M4 Y M5)
+--------------------------------------------------------------------------------
+- Objetivo: Documentar los procesos operativos de producción técnica, venta de 
+  combos promocionales, anticipos financieros, entrega y cierre de caja.
+- Casos de Uso a Especificar:
+  * CU-LAB-01: Generar Orden Técnica de Taller con Parámetros Geométricos (Biselado).
+  * CU-LAB-02: Gestionar Ciclo de Estados del Pedido de Laboratorio (Máquina de Estados).
+  * CU-LAB-03: Registrar Incidencia o Garantía Técnica.
+  * CU-VEN-01: Registrar Venta con Descuento Híbrido de Inventario.
+  * CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales (Insumo Audio: Combo $99).
+  * CU-VEN-03: Registrar Cobro de Anticipo y Generar Orden de Retiro (Insumo Audio).
+  * CU-VEN-04: Registrar Cobro de Saldo y Entrega de Producto.
+  * CU-VEN-05: Realizar Cierre Diario y Arqueo Consolidado de Caja.
+  * CU-VEN-06: Anular Venta con Reversión Atómica ACID.
+- Aspectos Críticos de Negocio a Documentar:
+  * Disociación de datos médicos al emitir la orden técnica de taller (cumplimiento LOPDP).
+  * Parámetros estructurados de corte: altura de armazón vs. reducción milimétrica de biselado.
+  * Contrato de la Orden de Retiro: fecha de entrega a 2 días hábiles y desglose de abonos.
+  * Diagramas de Casos de Uso de Taller y Ventas.
+- Entregable de la Fase 3:
+  * Documento "03_CasosUso_Taller_Ventas_Caja_PMO.doc/txt".
+
+--------------------------------------------------------------------------------
+4.5 FASE 4: DOCUMENTACIÓN DEL SUBSISTEMA DE FACTURACIÓN ELECTRÓNICA SRI (M6)
+--------------------------------------------------------------------------------
+- Objetivo: Especificar formalmente la interacción del sistema con los esquemas tributarios 
+  del Servicio de Rentas Internas del Ecuador (SRI) y el microservicio de firma.
+- Casos de Uso a Especificar:
+  * CU-SRI-01: Generar Factura XML v1.1.0 y Clave de Acceso Módulo 11.
+  * CU-SRI-02: Firmar Digitalmente Factura con Certificado PKCS#12 (XAdES-BES).
+  * CU-SRI-03: Transmitir y Consultar Comprobante ante Web Services SRI.
+  * CU-SRI-04: Generar RIDE PDF Code128 y Despachar por Correo Electrónico SMTP.
+- Aspectos Críticos de Negocio a Documentar:
+  * Regla RN-SRI-01: Estructuración matemática ponderada de la clave de 49 dígitos.
+  * Regla RN-SRI-02: Manejo de contingencia offline y reintentos asíncronos en background.
+  * Manejo de la firma criptográfica RSA-SHA1 enveloped sin bloquear el frontend de venta.
+- Entregable de la Fase 4:
+  * Documento "04_CasosUso_Facturacion_SRI_PMO.doc/txt".
+
+--------------------------------------------------------------------------------
+4.6 FASE 5: DOCUMENTACIÓN DE ASISTENTE IA, AUDITORÍA Y CONSOLIDACIÓN MAESTRO (M7)
+--------------------------------------------------------------------------------
+- Objetivo: Documentar el asistente conversacional con directiva de seguridad Read-Only 
+  y unificar toda la documentación de casos de uso en el Documento Definitivo Maestro.
+- Casos de Uso y Tareas a Especificar:
+  * CU-IA-01: Consultar Métricas y Existencias en Lenguaje Natural (Read-Only Guard).
+  * Documentación transversal de Logs de Auditoría Inmutable (S-TAG-ACC-01).
+  * Elaboración de la Matriz de Trazabilidad Cruzada: Requisitos Funcionales vs. Casos de Uso.
+  * Consolidación final del expediente completo de casos de uso.
+  * Sesión de firma y aprobación formal con los interesados del proyecto.
+- Entregable de la Fase 5:
+  * Documento "05_CasosUso_IA_Auditoria_PMO.doc/txt".
+  * Documento Integrado "DOCUMENTO_MAESTRO_ESPECIFICACION_CASOS_DE_USO_SGO.doc/txt".
+
+
+================================================================================
+5. CRONOGRAMA DE TRABAJO, ESTIMACIÓN DE ESFUERZO E HITOS
+================================================================================
+
+5.1 MATRIZ DE ASIGNACIÓN TEMPORAL Y CARGA HORARIA POR FASE
+El cronograma considera una dedicación técnica distribuida a lo largo de 6 semanas:
+
++------+-------------------------------------------+---------+-----------+----------------------+
+| Fase | Denominación de la Fase                   | Duración| Esfuerzo  | Período Programado   |
++------+-------------------------------------------+---------+-----------+----------------------+
+| F-0  | Estandarización de Plantilla y Actores    | Sem. 1  | 16 Horas  | 28/Sep/26 - 02/Oct/26|
+| F-1  | Módulos Base: Seguridad y Pacientes (M1-M2)| Sem. 2  | 24 Horas  | 05/Oct/26 - 09/Oct/26|
+| F-2  | Núcleo Clínico y Refracción Integral (M3) | Sem. 3  | 36 Horas  | 12/Oct/26 - 16/Oct/26|
+| F-3  | Taller Óptico, Ventas y Caja (M4 - M5)    | Sem. 4  | 34 Horas  | 19/Oct/26 - 23/Oct/26|
+| F-4  | Facturación Electrónica SRI (M6)          | Sem. 5  | 26 Horas  | 26/Oct/26 - 30/Oct/26|
+| F-5  | Asistente IA, Consolidación y Aprobación  | Sem. 6  | 20 Horas  | 02/Nov/26 - 06/Nov/26|
++------+-------------------------------------------+---------+-----------+----------------------+
+| TOTAL ESFUERZO ESTIMADO DE DOCUMENTACIÓN:        | 6 Sem.  | 156 Horas |                      |
++------+-------------------------------------------+---------+-----------+----------------------+
+
+5.2 HITOS CRÍTICOS DE ENTREGA Y CRITERIOS DE TRANSICIÓN
+- HITO 1 (Fin Semana 1): Catálogo de Actores y Plantilla Homologada aprobados por el Tutor.
+- HITO 2 (Fin Semana 3): Especificación de Refracción Clínica y Pruebas Ambulatorias validadas 
+  por el Optometrista Titular de Óptica Vista Visión.
+- HITO 3 (Fin Semana 4): Flujo completo de Órdenes de Retiro, Anticipos y Cotizaciones de 
+  Taller validado por el personal de Mostrador.
+- HITO 4 (Fin Semana 5): Especificación del ciclo de firma y autorización SRI validada contra 
+  ficha técnica del SRI v1.1.0.
+- HITO 5 (Fin Semana 6): Entrega del Documento Maestro de Casos de Uso con matriz de 
+  trazabilidad 100% libre de vacíos y firmas de aprobación formal.
+
+
+================================================================================
+6. MATRIZ DE ASIGNACIÓN DE RESPONSABILIDADES (RACI)
+================================================================================
+Convención:
+- R: Responsable de la elaboración directa (Responsible).
+- A: Aprobador final y responsable del resultado (Accountable).
+- C: Consultado para aportar información técnica o clínica (Consulted).
+- I: Informado sobre el avance del documento (Informed).
+
++-------------------------------------+-----------+-----------+------------+------------+---------+
+| Entregable / Actividad              | O. Fig.   | A. Vil.   | Tutor Acad.| Optometrist| Asist.  |
+|                                     | (Líder 1) | (Líder 2) | (ESPOCH)   | (Cliente)  | Mostrad.|
++-------------------------------------+-----------+-----------+------------+------------+---------+
+| Adaptación Plantilla PMOInformatica | R         | R         | A          | I          | I       |
+| Fichas de Actores y Atributos       | R         | R         | A          | C          | C       |
+| Especificación CU Seguridad (M1)    | R         | R         | A          | I          | I       |
+| Especificación CU Pacientes (M2)    | R         | R         | A          | C          | C       |
+| Especificación CU Clínicos (M3)     | R         | R         | A          | C (Clave)  | I       |
+| Especificación CU Taller/Lab (M4)   | R         | R         | A          | C          | C       |
+| Especificación CU Ventas/Caja (M5)  | R         | R         | A          | C          | C (Clave|
+| Especificación CU Facturación (M6)  | R         | R         | A          | I          | I       |
+| Especificación CU Asistente IA (M7) | R         | R         | A          | I          | I       |
+| Consolidación y Trazabilidad        | R         | R         | A          | I          | I       |
+| Aprobación Final de Casos de Uso    | R         | R         | A          | A          | I       |
++-------------------------------------+-----------+-----------+------------+------------+---------+
+
+
+================================================================================
+7. CRITERIOS DE CALIDAD, REVISIÓN Y APROBACIÓN (DEFINITION OF DONE)
+================================================================================
+
+7.1 CRITERIOS DE ACEPTACIÓN DOCUMENTAL PMOINFORMATICA
+Para considerar que un Caso de Uso está "DOCUMENTADO Y TERMINADO" (Done), debe cumplir:
+1. Conformidad de Formato: Presentar la totalidad de campos de la ficha PMOInformatica sin 
+   omisiones ni campos en blanco.
+2. Nivel de Abstracción Adecuado: Redacción estricta en lenguaje de intención de negocio, 
+   respetando el principio de "Caja Negra" (sin sentencias SQL, llamadas a funciones o 
+   detalles de widgets gráficos).
+3. Cobertura de Cursos Alternos: Cada validación de precondición o entrada de usuario debe 
+   poseer al menos un escenario alterno explícito numerado (ej. 3a, 3b).
+4. Trazabilidad con Requisitos: Declaración explícita del RF del SRS v2.0 al que satisface.
+5. Inclusión de S-Tags de Seguridad: Declaración de requisitos no funcionales de integridad, 
+   responsabilidad y autenticidad conforme a ISO/IEC 25010.
+
+7.2 PROTOCOLO DE REVISIÓN CRUZADA Y HOMOLOGACIÓN CLÍNICA
+- Revisión por Pares (Peer Review): Todo caso de uso redactado por uno de los autores del 
+  software debe ser revisado y aprobado por el otro autor antes de remitirse al cliente.
+- Homologación Clínica: Los casos de uso del módulo clínico (M3) y taller (M4) se revisarán en 
+  sesiones presenciales de 45 minutos con el Optometrista de Óptica Vista Visión para certificar 
+  que reflejan la realidad médica y el confort visual del paciente.
+
+
+================================================================================
+8. GESTIÓN DE RIESGOS DOCUMENTALES Y MITIGACIONES
+================================================================================
+
+1. Riesgo: Discrepancias entre la terminología clínica del optometrista y la del equipo de software.
+   - Probabilidad: Media | Impacto: Alto
+   - Mitigación: Uso obligatorio del glosario técnico acordado en la Fase 0; validación de 
+     fórmulas y campos optométricos en sesiones de homologación clínica presencial.
+
+2. Riesgo: Ambigüedades en la máquina de estados del pedido de taller óptico.
+   - Probabilidad: Media | Impacto: Medio
+   - Mitigación: Modelar diagramas de estados UML complementarios en la ficha de CU-LAB-02 
+     especificando transiciones válidas e inválidas.
+
+3. Riesgo: Modificaciones normativas o cambios en los esquemas XSD de comprobantes del SRI.
+   - Probabilidad: Baja | Impacto: Alto
+   - Mitigación: Parametrizar la versión del esquema XML en la especificación de CU-SRI-01 
+     conforme a la ficha técnica oficial v1.1.0 vigente.
+
+4. Riesgo: Desfase entre la velocidad de redacción de casos de uso y los sprints de desarrollo.
+   - Probabilidad: Media | Impacto: Alto
+   - Mitigación: Mantener la documentación de cada fase un sprint por delante de la codificación 
+     (principio de Definition of Ready en Scrum).
+
+================================================================================
+FIN DEL PLAN DE DOCUMENTACIÓN DE CASOS DE USO (PlanDocumentacionCasosUso.txt)
+================================================================================
