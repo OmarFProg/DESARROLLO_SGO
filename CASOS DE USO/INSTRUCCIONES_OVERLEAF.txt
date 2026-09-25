@@ -1,0 +1,51 @@
+================================================================================
+GUÍA DE USO EN OVERLEAF: DOCUMENTO FINAL DE CASOS DE USO (SGO)
+================================================================================
+Proyecto:  Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Archivo:   CASOS DE USO/documento_final_casos_de_uso_sgo.tex
+================================================================================
+
+PASOS PARA COMPILAR EN OVERLEAF:
+--------------------------------------------------------------------------------
+1. Iniciar sesión en https://www.overleaf.com/
+2. Crear un nuevo proyecto ("New Project" -> "Blank Project") y nombrarlo:
+   "Casos_de_Uso_SGO_Vista_Vision"
+3. Copiar y pegar el contenido de `documento_final_casos_de_uso_sgo.tex` en el 
+   archivo principal `main.tex` (o subir el archivo directamente y renombrarlo a main.tex).
+4. Crear una carpeta dentro de Overleaf llamada exactamente:
+   pictures
+5. Subir las imágenes correspondientes a la carpeta `pictures/` con los siguientes nombres:
+
+LISTA DE IMÁGENES REQUERIDAS (CARPETA pictures/):
+--------------------------------------------------------------------------------
+1.  pictures/logo_espoch.png
+    -> Logotipo oficial de la Escuela Superior Politécnica de Chimborazo.
+2.  pictures/logo_vista_vision.png
+    -> Logotipo de Óptica Vista Visión.
+3.  pictures/diagrama_general_paquetes.png
+    -> Diagrama general de paquetes de casos de uso (M1 a M7).
+4.  pictures/diagrama_cu_seguridad_pacientes.png
+    -> Diagrama de casos de uso de Seguridad (M1) y Pacientes (M2).
+5.  pictures/diagrama_cu_clinico.png
+    -> Diagrama de casos de uso del Gabinete Clínico y Refracción (M3).
+6.  pictures/diagrama_cu_taller_ventas.png
+    -> Diagrama de casos de uso de Taller Óptico (M4) y Ventas en Mostrador (M5).
+7.  pictures/maquina_estados_taller.png
+    -> Diagrama de máquina de estados finita del pedido de taller óptico.
+8.  pictures/diagrama_cu_sri_ia.png
+    -> Diagrama de casos de uso de Facturación SRI (M6) y Asistente IA (M7).
+9.  pictures/arquitectura_readonly_guard.png
+    -> Diagrama de arquitectura del Read-Only Guard (PostgreSQL GRANT SELECT).
+10. pictures/muestra_receta_optica_qr.png
+    -> Imagen de muestra de la prescripción óptica con código QR y CIE-10.
+11. pictures/muestra_ticket_orden_retiro.png
+    -> Imagen de muestra del ticket térmico de 80 mm con anticipo y saldo.
+12. pictures/muestra_ride_factura_sri.png
+    -> Imagen de muestra del comprobante RIDE PDF oficial con código Code128.
+
+NOTA DE COMPILACIÓN:
+--------------------------------------------------------------------------------
+El archivo está configurado para compilar con el compilador estándar "pdfLaTeX" 
+de Overleaf con codificación UTF-8 y soporte completo para idioma español 
+(acentos, eñes y tablas estilo PMOInformatica).
+================================================================================
