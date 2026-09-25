@@ -1,0 +1,564 @@
+================================================================================
+ESPECIFICACIÓN DE CASOS DE USO — SISTEMA DE GESTIÓN OPTOMÉTRICA (SGO)
+PAQUETE 6: FACTURACIÓN ELECTRÓNICA E INTEGRACIÓN CON SRI (M6)
+================================================================================
+Documento:       Fase 4 — Especificación de Casos de Uso (M6: Facturación Electrónica SRI)
+Proyecto:        Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Cliente:         Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Marco Académico: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Metodología:     PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
+Referencia:      PlanDocumentacionCasosUso.txt (Fase 4) / SRS v2.0 / Ficha Técnica SRI v1.1.0
+Fecha:           25 de Septiembre de 2026
+Versión:         1.0 Definitiva
+Archivo:         CASOS DE USO/04_CasosUso_Facturacion_SRI_PMO.txt
+================================================================================
+
+
+TABLA DE CONTENIDO
+--------------------------------------------------------------------------------
+1. HISTORIAL DE VERSIONES
+2. INFORMACIÓN DEL PROYECTO
+3. APROBACIONES
+4. RESUMEN EJECUTIVO (PAQUETE M6)
+   4.1 Procesos Tributarios y Escenarios de Negocio Cubiertos
+   4.2 Marco Legal y Normativa Técnica del SRI (Ecuador)
+   4.3 Arquitectura del Microservicio de Facturación Electrónica (NestJS API-SRI)
+5. DIAGRAMAS DE CASOS DE USO (REPRESENTACIÓN TEXTUAL FORMAL UML 2.5)
+   5.1 Diagrama del Paquete 6: Facturación Electrónica SRI (M6)
+   5.2 Relaciones de Inclusión (<<include>>) y Extensión (<<extend>>)
+   5.3 Diagrama de Flujo del Ciclo de Vida del Comprobante Fiscal
+6. DESCRIPCIÓN DETALLADA DE ACTORES (FICHAS PMOINFORMATICA)
+   6.1 ACT-04: Web Services SRI (Actor Externo del Sistema)
+   6.2 ACT-03: Asistente Comercial / Emisor de Factura
+   6.3 ACT-01: Administrador / Propietario (Gestión de Certificados PKCS#12)
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO (FICHAS PMOINFORMATICA)
+   7.1 CU-SRI-01: Generar Factura XML v1.1.0 y Clave de Acceso Módulo 11
+   7.2 CU-SRI-02: Firmar Digitalmente Factura con Certificado PKCS#12 (XAdES-BES)
+   7.3 CU-SRI-03: Transmitir y Consultar Comprobante ante Web Services SRI
+   7.4 CU-SRI-04: Generar RIDE PDF Code128 y Despachar por Correo Electrónico SMTP
+8. MATRIZ DE REGLAS DE NEGOCIO TRIBUTARIAS (RN-SRI)
+9. REQUISITOS DE CALIDAD Y SEGURIDAD ASOCIADOS (S-TAGS ISO/IEC 25010)
+================================================================================
+
+
+================================================================================
+1. HISTORIAL DE VERSIONES
+================================================================================
+
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| Fecha      | Versión | Autor                             | Organización       | Descripción del Cambio                |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| 25/09/2026 | 1.0     | Figueroa Omar / Villalva Alex.   | ESPOCH / SGO       | Emisión formal de especificaciones de |
+|            |         |                                   |                    | Facturación Electrónica SRI (M6)      |
+|            |         |                                   |                    | conforme a la Ficha Técnica v1.1.0.   |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+
+
+================================================================================
+2. INFORMACIÓN DEL PROYECTO
+================================================================================
+
+Empresa / Organización:                   Óptica Vista Visión
+Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Fecha de Preparación:                     25 de Septiembre de 2026
+Cliente:                                  Óptica Vista Visión — Riobamba, Ecuador
+Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
+Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
+Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
+Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
+
+
+================================================================================
+3. APROBACIONES
+================================================================================
+
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Nombre y Apellido              | Cargo                      | Departamento / Org.   | Fecha      | Firma      |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
+| Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Propietario Vista Visión       | Representante Legal        | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+
+
+================================================================================
+4. RESUMEN EJECUTIVO (PAQUETE M6)
+================================================================================
+
+4.1 PROCESOS TRIBUTARIOS Y ESCENARIOS DE NEGOCIO CUBIERTOS
+El Paquete 6 (M6) modela la automatización del cumplimiento fiscal de Óptica Vista Visión 
+conforme al esquema de Comprobantes Electrónicos Fuera de Línea (Offline) exigido por el 
+Servicio de Rentas Internas (SRI) del Ecuador. Abarca:
+1. Generación Canónica del XML v1.1.0: Ensamblaje estructural de las etiquetas tributarias 
+   y cálculo algorítmico ponderado de la Clave de Acceso de 49 dígitos ponderada por Módulo 11.
+2. Firma Electrónica Avanzada XAdES-BES: Cifrado asimétrico y firma digital sobre el archivo XML 
+   empleando el archivo de firma electrónica en formato PKCS#12 (.p12) custodiado en memoria.
+3. Transmisión SOAP y Protocolo de Contingencia: Consumo de los endpoints SOAP oficiales de 
+   Recepción y Autorización del SRI, implementando colas asíncronas con reintentos para 
+   asegurar que caídas del enlace de internet no paralicen el despacho físico de los lentes.
+4. Generación y Distribución del RIDE: Construcción del PDF legal conforme a la ficha técnica 
+   con código de barras Code128 y despacho automatizado por correo SMTP al paciente/cliente.
+
+4.2 MARCO LEGAL Y NORMATIVA TÉCNICA DEL SRI (ECUADOR)
+- Esquema XSD: Factura versión 1.1.0 oficial.
+- Formato de Firma: XAdES-BES Enveloped conforme a la Decisión 510 de la Comunidad Andina y 
+  la Ley de Comercio Electrónico y Firmas Digitales del Ecuador.
+- Clave de Acceso: Cadena numérica de 49 dígitos calculada mediante Módulo 11 con ponderadores de 2 a 7.
+- Límite de Consumidor Final: Resolución NAC-DGERCGC: prohibición de emitir a Consumidor Final 
+  por transacciones superiores a $50.00 USD (el sistema aplica umbral de control estricto).
+
+4.3 ARQUITECTURA DEL MICROSERVICIO DE FACTURACIÓN (API-SRI)
+El subsistema opera desacoplado del frontend mediante un microservicio interno desarrollado 
+en NestJS y TypeScript, el cual procesa los eventos de venta en segundo plano utilizando 
+RabbitMQ/Redis para la gestión de colas, garantizando una respuesta al cajero menor a 500 ms.
+
+
+================================================================================
+5. DIAGRAMAS DE CASOS DE USO (REPRESENTACIÓN TEXTUAL FORMAL UML 2.5)
+================================================================================
+
+5.1 DIAGRAMA DEL PAQUETE 6: FACTURACIÓN ELECTRÓNICA SRI (M6)
+
+  +-------------------------------------------------------------------------------+
+  | LÍMITE DEL SISTEMA: SUBSISTEMA DE FACTURACIÓN ELECTRÓNICA SRI (M6)            |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-SRI-01: Generar Factura XML v1.1.0 y      |                 |
+  |             |             Clave de Acceso Módulo 11         |                 |
+  |             +-----------------------------------------------+                 |
+  |                   |                                                           |
+  |              <<include>>                                                      |
+  |                   v                                                           |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-SRI-02: Firmar Factura con Certificado     |                 |
+  |             |             PKCS#12 (XAdES-BES)               |                 |
+  |             +-----------------------------------------------+                 |
+  |                   |                             ^                             |
+  |              <<include>>                    <<extend>> (Pt. Ext: Caída SRI)   |
+  |                   v                             |                             |
+  |             +------------------+          +---------------------------------+ |
+  |             | CU-SRI-03:       |          | Cola de Contingencia y Reintento| |
+  |             | Transmitir y     |          | Asíncrono en Background         | |
+  |             | Consultar al SRI |          +---------------------------------+ |
+  |             +------------------+                                              |
+  |                   |                                                           |
+  |              <<include>> (Factura Autorizada)                                 |
+  |                   v                                                           |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-SRI-04: Generar RIDE PDF Code128 y        |                 |
+  |             |             Despachar por Correo SMTP         |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  +-------------------------------------------------------------------------------+
+         ^                                           ^
+         |                                           |
+   [Asistente Comercial]                       [Web Services SRI]
+   (ACT-03: Emisor Local)                      (ACT-04: Ente Fiscal Exterior)
+
+
+5.2 DIAGRAMA DE FLUJO DEL CICLO DE VIDA DEL COMPROBANTE FISCAL
+  [VENTA_LIQUIDADA]
+         |
+         v
+  [GENERANDO_XML] ----(Cálculo Módulo 11)----> [XML_CANONICO_CREADO]
+                                                      |
+                                                      v
+  [EN_COLA_CONTINGENCIA] <--(Timeout/Red)-- [FIRMADO_XAdES_BES]
+         |                                            |
+  (Reintento Cron)                            (Transmisión SOAP)
+         |                                            v
+         +---------------------------------> [RECEPCIÓN_SRI_RECIBIDA]
+                                                      |
+                                              (Consulta Autorización)
+                                                      v
+  [SRI_DEVUELTA] <----(Error Validación)---- [SRI_AUTORIZADO]
+                                                      |
+                                                      v
+                                            [RIDE_GENERADO_Y_ENVIADO]
+
+
+================================================================================
+6. DESCRIPCIÓN DETALLADA DE ACTORES (FICHAS PMOINFORMATICA)
+================================================================================
+
+--------------------------------------------------------------------------------
+6.1 ACTOR: WEB SERVICES SRI (ACTOR EXTERNO DEL SISTEMA)
+--------------------------------------------------------------------------------
+Actor:          Web Services SRI (Servicio de Rentas Internas)
+Identificador:  ACT-04
+Descripción:    Servidores gubernamentales del Servicio de Rentas Internas del Ecuador que 
+                exponen servicios web SOAP para la recepción, validación de esquemas y 
+                autorización legal de comprobantes electrónicos tributarios fuera de línea.
+Características:Servicio web SOAP externo, seguro bajo protocolo TLS 1.2 / 1.3. Opera en dos 
+                ambientes independientes: Pruebas (Celeste) y Producción.
+Relación:       Ninguna (Actor externo / Sistema de destino fiscal).
+Referencias:    CU-SRI-03.
+
+Atributos Técnicos del Actor:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| url_recepcion_soap| Endpoint de validación de comprobantes recibidos  | Varchar(255)       |
+| url_autoriz_soap  | Endpoint de autorización y consulta de clave      | Varchar(255)       |
+| version_xsd_sri   | Versión del esquema XSD exigido por la autoridad  | Varchar(10) (1.1.0)|
+| codigo_ambiente   | 1: Pruebas / Sandbox | 2: Producción Oficial       | Char(1)            |
++-------------------+---------------------------------------------------+--------------------+
+Comentarios:    Sujeto a intermitencias de red y mantenimientos programados de la autoridad fiscal.
+
+--------------------------------------------------------------------------------
+6.2 ACTOR: ASISTENTE COMERCIAL / EMISOR DE FACTURA
+--------------------------------------------------------------------------------
+Actor:          Asistente Comercial / Emisor de Factura
+Identificador:  ACT-03
+Descripción:    Operador de la terminal POS que, tras completar el cobro de la venta o saldo, 
+                solicita la emisión del comprobante electrónico al cliente.
+Características:Personal de mostrador con credenciales autorizadas para facturación comercial.
+Relación:       Hereda de ACT-00 (Usuario Autenticado).
+Referencias:    CU-SRI-01, CU-SRI-04.
+
+Atributos en el Subsistema Tributario:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| punto_emision_sri | Código de 3 dígitos del punto de emisión (ej. 001)| Char(3)            |
+| estab_sri         | Código de 3 dígitos del establecimiento (ej. 001) | Char(3)            |
++-------------------+---------------------------------------------------+--------------------+
+
+--------------------------------------------------------------------------------
+6.3 ACTOR: ADMINISTRADOR / PROPIETARIO (CUSTODIO DE FIRMA DIGITAL)
+--------------------------------------------------------------------------------
+Actor:          Administrador / Propietario
+Identificador:  ACT-01
+Descripción:    Representante legal del establecimiento responsable de custodiar el certificado 
+                digital de firma electrónica PKCS#12 (.p12), parametrizar la serie de emisión y 
+                gestionar las credenciales ante el SRI.
+Características:Rol directivo con acceso a la configuración criptográfica del sistema.
+Relación:       Hereda de ACT-00 (Usuario Autenticado).
+Referencias:    CU-SRI-01, CU-SRI-02.
+
+Atributos Específicos:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| ruc_contribuyente | RUC de 13 dígitos de Óptica Vista Visión          | Varchar(13)        |
+| path_certificado  | Ruta cifrada del archivo .p12 en el servidor      | Varchar(255)       |
+| password_cert_hash| Hash simétrico en AES-256 de la clave del .p12     | Varchar(255)       |
+| fecha_caducidad_p1| Fecha límite de validez del certificado digital   | Date               |
++-------------------+---------------------------------------------------+--------------------+
+
+
+================================================================================
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO (FICHAS PMOINFORMATICA)
+================================================================================
+
+================================================================================
+7.1 CASO DE USO: CU-SRI-01 — GENERAR FACTURA XML v1.1.0 Y CLAVE M11
+================================================================================
+Caso de Uso:        Generar Factura XML v1.1.0 y Clave de Acceso Módulo 11
+Identificador:      CU-SRI-01
+Actores:            Asistente Comercial (ACT-03), Microservicio API-SRI.
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-24.
+                    Reglas de Negocio: RN-SRI-01, RN-SRI-03.
+                    Seguridad: S-TAG-INT-07, S-TAG-ACC-07 (ISO/IEC 25010).
+Precondición:       1. Venta liquidada en CU-VEN-01 o CU-VEN-04.
+                    2. Datos del adquirente ingresados (Cédula/RUC o Consumidor Final <= $50).
+Postcondición:      1. Estructura XML canónica v1.1.0 generada en memoria conforme a XSD.
+                    2. Clave de Acceso de 49 dígitos ponderada por Módulo 11 calculada y validada.
+                    3. Registro creado en la tabla `facturas_electronicas` con estado 'GENERADA'.
+Descripción:        Construye el documento XML canónico de facturación electrónica conforme a la 
+                    ficha técnica oficial v1.1.0 del SRI. El sistema parametriza la información 
+                    tributaria, valida los datos del cliente, calcula los 49 dígitos de la Clave 
+                    de Acceso aplicando el algoritmo Módulo 11 con ponderadores cíclicos de 2 a 7, 
+                    y serializa el comprobante listo para el proceso criptográfico de firma digital.
+Resumen:            El operador solicita la factura; el sistema extrae los ítems de venta; valida 
+                    que compras > $50 no vayan a Consumidor Final; genera la clave de 49 dígitos; 
+                    crea el archivo XML canónico y lo envía al componente de firma digital.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | En la venta concluida, pulsa "Emitir Factura Electrónica".      |
+| 2    | Sistema SGO           | Recupera el detalle de ítems, cantidades, precios unitarios,   |
+|      |                       | subtotales con tarifa 15% / 0% IVA e información del cliente.   |
+| 3    | Sistema SGO           | Valida los datos fiscales del cliente:                          |
+|      |                       | - Si es Cédula: aplica validador Módulo 10.                     |
+|      |                       | - Si es RUC: aplica validador de sociedad o persona natural M11.|
+|      |                       | - Si es Consumidor Final (9999999999999): valida Total <= $50.00|
+| 4    | Sistema SGO           | Obtiene el siguiente secuencial correlativo de 9 dígitos.       |
+| 5    | Sistema SGO           | Construye los primeros 48 dígitos de la Clave de Acceso:        |
+|      |                       | 1. Fecha Emisión (8 dígitos: ddmmaaaa, ej. 25092026).           |
+|      |                       | 2. Tipo Comprobante (2 dígitos: "01" para Factura).             |
+|      |                       | 3. RUC del Emisor (13 dígitos: ej. 0601234567001).              |
+|      |                       | 4. Tipo de Ambiente (1 dígito: "1" Pruebas / "2" Producción).   |
+|      |                       | 5. Serie (6 dígitos: Establecimiento 001 + Punto Emisión 001).  |
+|      |                       | 6. Secuencial de la Factura (9 dígitos: ej. 000000142).         |
+|      |                       | 7. Código Numérico Aleatorio de 8 dígitos (ej. 12345678).       |
+|      |                       | 8. Tipo de Emisión (1 dígito: "1" Normal).                      |
+| 6    | Sistema SGO           | [<<include>>] Aplica algoritmo Módulo 11 sobre los 48 dígitos:  |
+|      |                       | a. Multiplica cada dígito por factores ponderados de 2 a 7      |
+|      |                       |    recorriendo de derecha a izquierda.                          |
+|      |                       | b. Suma los productos y obtiene el residuo ($Suma \pmod{11}$).  |
+|      |                       | c. Calcula el Dígito Verificador: $DV = 11 - Residuo$.          |
+|      |                       | d. Si $DV = 11 \to 0$; si $DV = 10 \to 1$.                      |
+| 7    | Sistema SGO           | Concatena el $DV$ obteniendo la Clave de Acceso de 49 dígitos.  |
+| 8    | Sistema SGO           | Ensambla el árbol XML con los nodos <infoTributaria>,           |
+|      |                       | <infoFactura>, <detalles> e <infoAdicional>.                    |
+| 9    | Sistema SGO           | Valida la conformidad estructural del XML contra el XSD v1.1.0. |
+| 10   | Sistema SGO           | Persiste la factura en `facturas_electronicas` con estado        |
+|      |                       | 'GENERADA' y deriva de inmediato a CU-SRI-02 (Firma Digital).   |
+| 11   | Sistema SGO           | Notifica al operador: "Factura estructurada exitosamente".      |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Consumidor Final con  | 3a.1. El importe total de la venta supera los $50.00 USD        |
+|      | monto superior a $50  |       (ej. el combo promocional de $99.00 USD).                 |
+|      |                       | 3a.2. El sistema bloquea la emisión a Consumidor Final:         |
+|      |                       |       "Disposición SRI: Transacciones mayores a $50.00 USD      |
+|      |                       |       exigen identificación con Cédula o RUC del adquirente".   |
+|      |                       | 3a.3. Solicita digitar los datos del paciente para continuar.   |
++------+-----------------------+-----------------------------------------------------------------+
+| 3b   | Cédula o RUC inválido | 3b.1. El validador algorítmico detecta inconsistencia en el RUC.|
+|      | en datos de cliente   | 3b.2. El sistema rechaza el proceso y resalta el campo erróneo. |
+|      |                       | 3b.3. El operador corrige los datos fiscales del paciente.      |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.2 CASO DE USO: CU-SRI-02 — FIRMAR FACTURA CON CERTIFICADO PKCS#12
+================================================================================
+Caso de Uso:        Firmar Digitalmente Factura con Certificado PKCS#12 (XAdES-BES)
+Identificador:      CU-SRI-02
+Actores:            Microservicio API-SRI (NestJS), Administrador (ACT-01).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-25.
+                    Seguridad: S-TAG-AUTH-03, S-TAG-INT-07 (ISO/IEC 25010).
+Precondición:       1. XML canónico v1.1.0 generado en CU-SRI-01.
+                    2. Certificado digital .p12 cargado en el almacén seguro de claves del servidor.
+Postcondición:      1. Archivo XML firmado digitalmente bajo el estándar XAdES-BES Enveloped.
+                    2. Bloque <ds:Signature> inyectado con los valores SignedInfo y SignedProperties.
+                    3. Estado de la factura actualizado a 'FIRMADA' en la base de datos.
+Descripción:        Aplica la firma digital avanzada con valor probatorio no repudiable al XML 
+                    de la factura. El servicio desencripta el certificado PKCS#12 utilizando la 
+                    clave maestra custodiada, extrae la llave privada RSA y el certificado X.509, 
+                    ejecuta la canonicalización XML-C14N, calcula el digest criptográfico SHA-1, 
+                    firma los datos y ensambla el documento final garantizando su inalterabilidad.
+Resumen:            El microservicio toma el XML sin firmar; lee el almacén de claves en memoria; 
+                    aplica la canonicalización y calcula el resumen SHA-1; cifra con la llave 
+                    privada; ensambla la firma XAdES-BES y almacena el XML legal firmado.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Microservicio API-SRI | Recibe el XML generado de CU-SRI-01 y la Clave de Acceso.       |
+| 2    | Microservicio API-SRI | Lee el archivo .p12 desde la bóveda de claves en memoria segura.|
+| 3    | Microservicio API-SRI | Desencripta el almacén PKCS#12 con la contraseña custodiada.    |
+| 4    | Microservicio API-SRI | Extrae la clave privada RSA y la cadena de certificados X.509.  |
+| 5    | Microservicio API-SRI | Convierte el número de serie X.509 a precisión entera (BigInt). |
+| 6    | Microservicio API-SRI | Realiza la canonicalización C14N del XML y calcula digest SHA-1.|
+| 7    | Microservicio API-SRI | Genera el nodo <etsi:SignedProperties> con fecha UTC y emisor.  |
+| 8    | Microservicio API-SRI | Construye el nodo <ds:SignedInfo> conteniendo las referencias.  |
+| 9    | Microservicio API-SRI | Cifra el digest del SignedInfo con la clave privada generando   |
+|      |                       | el bloque de firma <ds:SignatureValue>.                         |
+| 10   | Microservicio API-SRI | Ensambla el nodo <ds:Signature> al final del comprobante XML.   |
+| 11   | Microservicio API-SRI | Valida la integridad estructural del XML firmado resultante.    |
+| 12   | Microservicio API-SRI | Actualiza la tabla `facturas_electronicas` a estado 'FIRMADA'.  |
+| 13   | Microservicio API-SRI | Dispara de inmediato la invocación a CU-SRI-03. Fin del caso.   |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Contraseña del .p12   | 3a.1. Falla la apertura del almacén de certificados por clave.  |
+|      | incorrecta o corrupta | 3a.2. El sistema marca la factura como 'ERROR_FIRMA'.          |
+|      |                       | 3a.3. Dispara alerta crítica al Administrador por correo.       |
+|      |                       | 3a.4. Coloca la factura en cola de espera administrativa.       |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Certificado digital   | 4a.1. La fecha actual es superior a la fecha de caducidad.      |
+|      | caducado (vencido)    | 4a.2. El servicio aborta la firma y notifica: "El certificado   |
+|      |                       |       de firma electrónica ha expirado. Requiere renovación".   |
+|      |                       | 4a.3. Detiene la transmisión externa para evitar penalidades.   |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.3 CASO DE USO: CU-SRI-03 — TRANSMITIR Y CONSULTAR COMPROBANTE ANTE SRI
+================================================================================
+Caso de Uso:        Transmitir y Consultar Comprobante ante Web Services SRI
+Identificador:      CU-SRI-03
+Actores:            Microservicio API-SRI, Web Services SRI (ACT-04).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-26.
+                    Reglas de Negocio: RN-SRI-02, RN-SRI-04.
+                    Seguridad: S-TAG-DISP-01, S-TAG-ACC-07 (ISO/IEC 25010).
+Precondición:       XML firmado electrónicamente en CU-SRI-02.
+Postcondición:      1. Comprobante recibido y autorizado por el SRI con número y fecha fiscal.
+                    2. XML oficial enriquecido con el nodo de autorización del SRI.
+                    3. Estado actualizado a 'AUTORIZADO' en la base de datos PostgreSQL.
+                    4. Evento de dominio emitido para generación de RIDE y envío por correo.
+Descripción:        Realiza el ciclo de comunicación SOAP de dos pasos con los servidores del SRI: 
+                    1) Envía el XML firmado en Base64 al servicio `RecepcionComprobantesOffline` 
+                    obteniendo estado 'RECIBIDA'; 2) Tras una ventana técnica de procesamiento, 
+                    invoca `AutorizacionComprobantesOffline` enviando la Clave de Acceso para 
+                    obtener el estado 'AUTORIZADO'. Incluye manejo de contingencia asíncrona ante caídas.
+Resumen:            El servicio envía el XML al Web Service del SRI; recibe acuse de recibido; 
+                    consulta la autorización; el SRI devuelve el sello fiscal; el sistema guarda 
+                    la autorización y dispara la generación del RIDE.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Microservicio API-SRI | Codifica el XML firmado en Base64.                              |
+| 2    | Microservicio API-SRI | Construye el sobre SOAP para el método `validarComprobante`.     |
+| 3    | Microservicio API-SRI | Envía la petición HTTP POST al WS RecepcionComprobantesOffline. |
+| 4    | Web Services SRI      | Procesa el documento y responde: `<estado>RECIBIDA</estado>`.   |
+| 5    | Microservicio API-SRI | Registra en bitácora el estado intermedio 'RECIBIDA'.           |
+| 6    | Microservicio API-SRI | Aguarda una ventana de espera técnica de 2.5 segundos.          |
+| 7    | Microservicio API-SRI | Construye el sobre SOAP para `autorizacionComprobante`          |
+|      |                       | suministrando la Clave de Acceso de 49 dígitos.                 |
+| 8    | Microservicio API-SRI | Envía la petición HTTP POST al WS AutorizacionComprobantesOfflin|
+| 9    | Web Services SRI      | Responde con estado: `<estado>AUTORIZADO</estado>`, conteniendo:|
+|      |                       | - Número de Autorización (idéntico a la Clave de Acceso).       |
+|      |                       | - Fecha y hora oficial de autorización (Timestamp SRI).         |
+|      |                       | - XML autorizado con nodo `<autorizacion>`.                     |
+| 10   | Microservicio API-SRI | Persiste el XML autorizado en PostgreSQL y marca 'AUTORIZADO'.  |
+| 11   | Microservicio API-SRI | Dispara el evento `FacturaAutorizadaEvent` para CU-SRI-04.      |
+| 12   | Microservicio API-SRI | Finaliza exitosamente el ciclo fiscal. Fin del caso.            |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Caída de internet o   | 3a.1. Se produce un timeout de conexión (> 10 seg) o fallo HTTP.|
+|      | indisponibilidad SRI  | 3a.2. [<<extend>>] El sistema activa la COLA DE CONTINGENCIA:   |
+|      |                       |       - Marca la factura en estado 'EN_PROCESO_OFFLINE'.        |
+|      |                       |       - NO bloquea al usuario en mostrador; permite la entrega. |
+|      |                       |       - La tarea Cron de fondo reprograma el reintento cada     |
+|      |                       |         15 minutos hasta lograr autorización sin duplicar clave.|
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | SRI responde          | 4a.1. El SRI detecta inconsistencia en montos o esquemas.       |
+|      | 'DEVUELTA' con errores| 4a.2. El sistema extrae los códigos y mensajes de error del SRI.|
+|      | de validación         | 4a.3. Marca la factura como 'DEVUELTA' en base de datos.        |
+|      |                       | 4a.4. Notifica en el panel al operador para rectificación.      |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.4 CASO DE USO: CU-SRI-04 — GENERAR RIDE PDF Y DESPACHO SMTP
+================================================================================
+Caso de Uso:        Generar RIDE PDF Code128 y Despachar por Correo SMTP
+Identificador:      CU-SRI-04
+Actores:            Microservicio API-SRI, Asistente Comercial (ACT-03), Paciente (ACT-NEG-01).
+Tipo:               Secundario
+Referencias:        SRS v2.0: RF-27.
+                    Reglas de Negocio: RN-SRI-05.
+                    Seguridad: S-TAG-INT-07, S-TAG-ACC-07 (ISO/IEC 25010).
+Precondición:       Factura en estado 'AUTORIZADO' con XML oficial completo.
+Postcondición:      1. Documento RIDE generado en formato PDF conforme al estándar del SRI.
+                    2. Código de barras lineal Code128 incrustado con la clave de 49 dígitos.
+                    3. Correo electrónico despachado al cliente con el PDF y el XML adjuntos.
+                    4. Registro de despacho exitoso en la tabla `notificaciones_tributarias`.
+Descripción:        Construye la Representación Impresa del Documento Electrónico (RIDE) en 
+                    formato PDF, integrando el logotipo de Óptica Vista Visión, los datos 
+                    fiscales, el desglose de productos/lunas, el número de autorización fiscal y 
+                    el código de barras Code128 de alta resolución. Automáticamente despacha un 
+                    correo electrónico transaccional vía SMTP al paciente con ambos comprobantes.
+Resumen:            El sistema captura el evento de autorización; compila la plantilla PDF del RIDE; 
+                    dibuja el código de barras Code128; adjunta el XML y el PDF en un correo; 
+                    lo envía al paciente y habilita la impresión local si el cliente la solicita.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Microservicio API-SRI | Captura el evento `FacturaAutorizadaEvent`.                     |
+| 2    | Microservicio API-SRI | Carga los datos del XML autorizado en la plantilla PDF del RIDE.|
+| 3    | Microservicio API-SRI | Renderiza el código de barras Code128 con la Clave de 49 dígitos|
+| 4    | Microservicio API-SRI | Compila el documento PDF oficial en resolución de 300 DPI.      |
+| 5    | Microservicio API-SRI | Almacena el PDF en el servidor local de archivos seguros.       |
+| 6    | Microservicio API-SRI | Obtiene el correo electrónico del cliente desde la ficha M2.    |
+| 7    | Microservicio API-SRI | Ensambla el correo SMTP con plantilla institucional:            |
+|      |                       | - Asunto: "Comprobante Electrónico — Óptica Vista Visión".      |
+|      |                       | - Archivos Adjuntos: Factura.pdf (RIDE) y Factura.xml (SRI).    |
+| 8    | Microservicio API-SRI | Envía el correo mediante el servidor SMTP corporativo.          |
+| 9    | Microservicio API-SRI | Registra en base de datos: `notificacion_enviada = TRUE`.       |
+| 10   | Asistente Comercial   | Si el cliente solicita copia física en mostrador, pulsa         |
+|      |                       | "Imprimir RIDE" y entrega la hoja impresa. Fin del caso.        |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Paciente no posee     | 6a.1. El sistema detecta que el campo de email está vacío.       |
+|      | correo electrónico    | 6a.2. Omite el despacho SMTP sin arrojar error.                 |
+|      | registrado            | 6a.3. Envía automáticamente el RIDE a la impresora de mostrador.|
+|      |                       | 6a.4. El flujo finaliza en el paso 10.                          |
++------+-----------------------+-----------------------------------------------------------------+
+| 8a   | Fallo en servidor SMTP| 8a.1. El servidor de correo no responde (error de conexión).    |
+|      | al despachar email    | 8a.2. El sistema almacena la notificación en cola de reintento. |
+|      |                       | 8a.3. La venta y autorización ante el SRI no son afectadas.     |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+8. MATRIZ DE REGLAS DE NEGOCIO TRIBUTARIAS (RN-SRI)
+================================================================================
+
++-------------+----------------------------------------------------------------------------------+
+| Código RN   | Descripción Formal de la Regla de Negocio Tributaria                             |
++-------------+----------------------------------------------------------------------------------+
+| RN-SRI-01   | Ponderación de Clave de Acceso mediante Algoritmo Módulo 11:                    |
+|             | Los primeros 48 dígitos se someten a factores de ponderación cíclicos (7,6,5,4,  |
+|             | 3,2). El residuo de la división por 11 determina el dígito verificador 49.      |
+|             | Si el resultado es 10, el dígito es 1; si es 11, el dígito verificador es 0.     |
++-------------+----------------------------------------------------------------------------------+
+| RN-SRI-02   | Política de Contingencia Fuera de Línea (Offline) No Bloqueante:                 |
+|             | Ninguna intermitencia en los servidores del SRI o en la conexión a internet debe|
+|             | paralizar la operación comercial en el punto de venta. La transacción local se   |
+|             | liquida y la factura se almacena en cola de contingencia para despacho asíncrono.|
++-------------+----------------------------------------------------------------------------------+
+| RN-SRI-03   | Umbral Mandatorio para Consumidor Final:                                         |
+|             | Conforme a la legislación del SRI, toda venta cuyo importe total supere los      |
+|             | $50.00 USD tiene prohibida la emisión a "Consumidor Final" (9999999999999),      |
+|             | exigiendo de manera obligatoria la cédula o RUC del adquirente.                  |
++-------------+----------------------------------------------------------------------------------+
+| RN-SRI-04   | Secuencialidad Estricta y No Duplicidad:                                         |
+|             | Los números secuenciales de 9 dígitos por establecimiento y punto de emisión no  |
+|             | admiten saltos ni duplicaciones bajo ninguna circunstancia contable.             |
++-------------+----------------------------------------------------------------------------------+
+| RN-SRI-05   | Estándar de Representación Gráfica (RIDE):                                       |
+|             | Todo RIDE debe incluir obligatoriamente el código de barras en simbología        |
+|             | Code128 de la clave de acceso de 49 dígitos, garantizando su legibilidad con    |
+|             | lectores ópticos de pistola para trámites tributarios del cliente.              |
++-------------+----------------------------------------------------------------------------------+
+
+
+================================================================================
+9. REQUISITOS DE CALIDAD Y SEGURIDAD ASOCIADOS (S-TAGS ISO/IEC 25010)
+================================================================================
+
+1. Subcaracterística de Autenticidad y Firma Criptográfica (S-TAG-AUTH-03):
+   - Uso obligatorio del estándar XAdES-BES Enveloped con clave privada RSA y algoritmo 
+     de resumen SHA-1 / SHA-256 para asegurar la identidad jurídica no repudiable de Vista Visión.
+
+2. Subcaracterística de Integridad Documental (S-TAG-INT-07):
+   - Validación estricta del esquema XSD v1.1.0 antes de la firma. Cualquier alteración de un 
+     solo byte en el XML firmado invalida el digest criptográfico impidiendo su aceptación.
+
+3. Subcaracterística de Disponibilidad y Tolerancia a Fallos (S-TAG-DISP-01):
+   - Desacoplamiento asíncrono del módulo de facturación mediante colas de mensajes (RabbitMQ/Redis) 
+     para que las caídas de los Web Services del SRI no degraden la experiencia de usuario.
+
+================================================================================
+FIN DE LA ESPECIFICACIÓN DE CASOS DE USO — FASE 4 (FACTURACIÓN SRI M6)
+================================================================================

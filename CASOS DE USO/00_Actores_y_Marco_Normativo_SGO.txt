@@ -1,0 +1,257 @@
+================================================================================
+ESPECIFICACIÓN DE CASOS DE USO — SISTEMA DE GESTIÓN OPTOMÉTRICA (SGO)
+FASE 0: ESTANDARIZACIÓN DE FICHAS MAESTRAS, GLOSARIO Y MODELADO DE ACTORES
+================================================================================
+Documento:       Fase 0 — Marco Normativo, Glosario y Catálogo Canónico de Actores
+Proyecto:        Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Cliente:         Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Marco Académico: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Metodología:     PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
+Referencia:      PlanDocumentacionCasosUso.txt (Fase 0) / SRS v2.0 / CasosUsoTeoria.txt
+Fecha:           25 de Septiembre de 2026
+Versión:         1.0 Definitiva
+Archivo:         CASOS DE USO/00_Actores_y_Marco_Normativo_SGO.txt
+================================================================================
+
+
+TABLA DE CONTENIDO
+--------------------------------------------------------------------------------
+1. HISTORIAL DE VERSIONES
+2. INFORMACIÓN DEL PROYECTO
+3. APROBACIONES
+4. RESUMEN EJECUTIVO (MARCO NORMATIVO Y FUNDAMENTOS)
+   4.1 Filosofía de Modelado Centrado en el Usuario (Caja Negra)
+   4.2 Estándares Rectores: PMOInformatica, UML 2.5 e ISO/IEC 25010:2023
+5. GLOSARIO TÉCNICO INTERDISCIPLINARIO (OPTOMÉTRICO, TALLER Y FACTURACIÓN)
+6. CATÁLOGO MAESTRO CANÓNICO DE ACTORES (FICHAS PMOINFORMATICA)
+   6.1 ACT-00: Usuario Autenticado (Actor Abstracto / Generalización)
+   6.2 ACT-01: Administrador / Propietario
+   6.3 ACT-02: Optometrista Clínico
+   6.4 ACT-03: Asistente Comercial / Recepcionista
+   6.5 ACT-04: Web Services SRI (Actor Externo)
+   6.6 ACT-05: Taller Óptico / Laboratorio Externo (Actor Secundario)
+   6.7 ACT-NEG-01: Paciente / Cliente (Beneficiario Pasivo)
+7. REGLAS Y CONVENCIONES DE REDACCIÓN DE CASOS DE USO
+================================================================================
+
+
+================================================================================
+1. HISTORIAL DE VERSIONES
+================================================================================
+
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| Fecha      | Versión | Autor                             | Organización       | Descripción del Cambio                |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| 25/09/2026 | 1.0     | Figueroa Omar / Villalva Alex.   | ESPOCH / SGO       | Formalización del marco normativo,    |
+|            |         |                                   |                    | glosario y catálogo maestro de        |
+|            |         |                                   |                    | actores conforme a PMOInformatica.    |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+
+
+================================================================================
+2. INFORMACIÓN DEL PROYECTO
+================================================================================
+
+Empresa / Organización:                   Óptica Vista Visión
+Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Fecha de Preparación:                     25 de Septiembre de 2026
+Cliente:                                  Óptica Vista Visión — Riobamba, Ecuador
+Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
+Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
+Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
+Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
+
+
+================================================================================
+3. APROBACIONES
+================================================================================
+
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Nombre y Apellido              | Cargo                      | Departamento / Org.   | Fecha      | Firma      |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
+| Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Lic. Optom. Titular            | Especialista Clínico       | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+
+
+================================================================================
+4. RESUMEN EJECUTIVO (MARCO NORMATIVO Y FUNDAMENTOS)
+================================================================================
+
+4.1 FILOSOFÍA DE MODELADO CENTRADO EN EL USUARIO (CAJA NEGRA)
+Este documento sienta los cimientos semánticos y estructurales para la especificación 
+de todos los casos de uso del Sistema de Gestión Optométrica (SGO). 
+Bajo el principio arquitectónico de "Caja Negra", cada caso de uso se enfoca en el QUÉ 
+hace el sistema ante los estímulos del usuario para entregar un resultado observable de 
+valor, independizándose de los detalles de codificación o almacenamiento interno.
+
+4.2 ESTÁNDARES RECTORES
+- PMOInformatica: Estructura estandarizada de fichas técnicas para actores y casos de uso.
+- UML 2.5: Notación formal para modelado de casos de uso, inclusiones y extensiones.
+- ISO/IEC 25010:2023: Subcaracterísticas de Autenticidad, Integridad y Responsabilidad.
+- LOPDP Ecuador: Ley Orgánica de Protección de Datos Personales en el ámbito de la salud.
+
+
+================================================================================
+5. GLOSARIO TÉCNICO INTERDISCIPLINARIO
+================================================================================
+
+1. Lensometría: Medición física de las dioptrías (esfera, cilindro, eje y adición) de una 
+   lente oftálmica previa mediante un lensómetro o frontocofómetro.
+2. Queratometría: Evaluación computarizada de los radios de curvatura de la superficie anterior 
+   de la córnea. Mide el meridiano más plano (K1) y el más curvo (K2) en dioptrías (D) o mm.
+3. Foróptero: Instrumento óptico que contiene lentes refractivas móviles para determinar la 
+   corrección subjetiva óptima del paciente ante una cartilla optométrica Snellen.
+4. Confort Ambulatorio (Prueba de Marcha): Evaluación dinámica biomecánica donde el paciente 
+   camina con montura de prueba para verificar que no experimente desniveles o mareos.
+5. Distancia Nasopupilar (DNP): Distancia milimétrica anatómica medida desde el centro del 
+   puente nasal hasta el centro de cada pupila individualmente (DNP OD / OI).
+6. Armazón Semialaire (Ranurado): Montura cuyo aro sostiene la luna en la parte superior y 
+   mediante un hilo de nylon transparente alojado en una ranura perimetral en la inferior.
+7. XAdES-BES Enveloped: Estándar internacional de firma electrónica XML avanzada que asegura 
+   integridad, no repudio y sellado de tiempo exigido por el SRI en Ecuador.
+8. Clave de Acceso SRI: Secuencia obligatoria de 49 dígitos ponderada por Módulo 11 que 
+   identifica unívocamente a cada comprobante fiscal electrónico.
+9. Read-Only Guard: Mecanismo de blindaje de software que asegura que el motor de IA opere 
+   exclusivamente bajo una conexión PostgreSQL con privilegio `GRANT SELECT`.
+
+
+================================================================================
+6. CATÁLOGO MAESTRO CANÓNICO DE ACTORES (FICHAS PMOINFORMATICA)
+================================================================================
+
+--------------------------------------------------------------------------------
+6.1 ACTOR: USUARIO AUTENTICADO (ACTOR ABSTRACTO BASE)
+--------------------------------------------------------------------------------
+Actor:          Usuario Autenticado
+Identificador:  ACT-00
+Descripción:    Generalización abstracta de todo operador humano institucional que posee una 
+                cuenta activa y un token criptográfico de sesión en el sistema SGO.
+Características:Personal de la óptica con estación asignada. Heredado por ACT-01, ACT-02 y ACT-03.
+Relación:       Generalización base.
+Referencias:    CU-SEG-01, CU-SEG-02, CU-PAC-03, CU-IA-01.
+
+Atributos Principales del Actor:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| user_id           | Identificador universal único del usuario         | UUID               |
+| username          | Nombre de cuenta de inicio de sesión              | Varchar(50)        |
+| password_hash     | Resumen hash criptográfico en Argon2id            | Varchar(255)       |
+| rol_id            | Identificador de rol para control de acceso RBAC  | Enum / Integer     |
+| estado_activo     | Bandera de operatividad de la cuenta (True/False) | Boolean            |
+| intentos_fallidos | Contador sucesivo de intentos erróneos de acceso  | Smallint           |
+| ultimo_login      | Marca de tiempo UTC del último acceso exitoso     | Timestamp UTC      |
++-------------------+---------------------------------------------------+--------------------+
+
+--------------------------------------------------------------------------------
+6.2 ACTOR: ADMINISTRADOR / PROPIETARIO
+--------------------------------------------------------------------------------
+Actor:          Administrador / Propietario
+Identificador:  ACT-01
+Descripción:    Máxima autoridad del centro óptico, responsable de la gestión comercial, 
+                configuración tributaria, arqueo de caja y reversión atómica de transacciones.
+Características:Acceso sin restricciones a métricas analíticas y pistas de auditoría.
+Relación:       Especialización de ACT-00.
+Referencias:    CU-SEG-01, CU-VEN-05, CU-VEN-06, CU-SRI-02, CU-IA-01, CU-AUD-01.
+
+Atributos Específicos:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| ruc_contribuyente | RUC de Óptica Vista Visión                        | Varchar(13)        |
+| pin_autorizacion  | Clave maestra encriptada para reversiones ACID    | Varchar(255)       |
+| email_notificac   | Correo corporativo para alertas críticas          | Varchar(100)       |
++-------------------+---------------------------------------------------+--------------------+
+
+--------------------------------------------------------------------------------
+6.3 ACTOR: OPTOMETRISTA CLÍNICO
+--------------------------------------------------------------------------------
+Actor:          Optometrista Clínico
+Identificador:  ACT-02
+Descripción:    Facultativo de salud visual que realiza anamnesis, lensometría, pruebas 
+                objetivas, refracción subjetiva, test de marcha y emisión de prescripciones.
+Características:Profesional habilitado por el MSP con firma digital certificada.
+Relación:       Especialización de ACT-00.
+Referencias:    CU-CLI-01 a CU-CLI-06, CU-LAB-01, CU-PAC-01.
+
+Atributos Específicos:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| registro_msp      | Código de registro oficial emitido por el MSP     | Varchar(25)        |
+| especialidad      | Grado profesional habilitante                     | Varchar(100)       |
+| firma_digital_id  | Identificador de certificado digital para recetas | UUID               |
++-------------------+---------------------------------------------------+--------------------+
+
+--------------------------------------------------------------------------------
+6.4 ACTOR: ASISTENTE COMERCIAL / RECEPCIONISTA
+--------------------------------------------------------------------------------
+Actor:          Asistente Comercial / Recepcionista
+Identificador:  ACT-03
+Descripción:    Personal de atención al cliente encargado de la filiación del paciente, 
+                cotización de promociones, cobro de anticipos, entrega y facturación en caja.
+Características:Operador ágil en terminal de mostrador (POS).
+Relación:       Especialización de ACT-00.
+Referencias:    CU-PAC-01 a CU-PAC-03, CU-VEN-01 a CU-VEN-04, CU-SRI-01.
+
+Atributos Específicos:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| punto_emision_pos | Código SRI del punto de emisión de caja (001)     | Char(3)            |
+| caja_sesion_id    | Identificador de la sesión de caja abierta activa | UUID               |
++-------------------+---------------------------------------------------+--------------------+
+
+--------------------------------------------------------------------------------
+6.5 ACTOR: WEB SERVICES SRI (ACTOR EXTERNO)
+--------------------------------------------------------------------------------
+Actor:          Web Services SRI (Servicio de Rentas Internas)
+Identificador:  ACT-04
+Descripción:    Servidores gubernamentales que reciben comprobantes XML firmados y emiten 
+                la autorización fiscal con número y sello digital fuera de línea.
+Características:Servicio web SOAP seguro (TLS 1.2/1.3) con endpoints de recepción y autorización.
+Relación:       Ninguna (Actor externo).
+Referencias:    CU-SRI-03.
+
+--------------------------------------------------------------------------------
+6.6 ACTOR: TALLER ÓPTICO / LABORATORIO EXTERNO (ACTOR SECUNDARIO)
+--------------------------------------------------------------------------------
+Actor:          Taller Óptico / Laboratorio Externo
+Identificador:  ACT-05
+Descripción:    Proveedor técnico que realiza el biselado, tallado y tratamiento de lunas 
+                a partir de órdenes de producción desprovistas de datos médicos (LOPDP).
+Características:Actor externo secundario receptor de fichas técnicas milimétricas.
+Relación:       Ninguna (Actor externo).
+Referencias:    CU-LAB-01, CU-LAB-02, CU-LAB-03.
+
+--------------------------------------------------------------------------------
+6.7 ACTOR: PACIENTE / CLIENTE (ACTOR DE NEGOCIO / BENEFICIARIO PASIVO)
+--------------------------------------------------------------------------------
+Actor:          Paciente / Cliente
+Identificador:  ACT-NEG-01
+Descripción:    Ciudadano que acude a la óptica para evaluación visual y compra de anteojos. 
+                Es el titular de los datos protegidos por la LOPDP y receptor de los bienes.
+Características:Beneficiario pasivo en el software; sus respuestas guían el confort visual.
+Relación:       Ninguna (Actor de negocio).
+Referencias:    CU-CLI-04, CU-CLI-05, CU-VEN-03, CU-VEN-04.
+
+
+================================================================================
+7. REGLAS Y CONVENCIONES DE REDACCIÓN DE CASOS DE USO
+================================================================================
+
+1. Convención del Verbo Activo en Infinitivo: Todos los casos de uso deben iniciar con un 
+   verbo de acción orientado a metas discretas del usuario (ej. 'Registrar', 'Emitir', 'Cotizar').
+2. Inclusión Estricta (<<include>>): Utilizada exclusivamente para subprocesos compartidos y 
+   obligatorios (ej. Validación Módulo 10, Registro en Auditoría).
+3. Extensión Condicional (<<extend>>): Empleada para flujos excepcionales u opcionales que 
+   se disparan solo al cumplirse una condición específica (ej. Alerta de Queratocono, Contingencia SRI).
+4. Numeración Correlativa Tabular: Cada paso del curso normal y cada curso alterno debe 
+   mantener trazabilidad numérica estricta para mapear a casos de prueba funcionales (UAT).
+
+================================================================================
+FIN DE LA ESPECIFICACIÓN — FASE 0 (MARCO NORMATIVO Y CATÁLOGO DE ACTORES)
+================================================================================

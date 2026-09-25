@@ -1,0 +1,869 @@
+================================================================================
+ESPECIFICACIÓN DE CASOS DE USO — SISTEMA DE GESTIÓN OPTOMÉTRICA (SGO)
+PAQUETES 4 Y 5: TALLER ÓPTICO (M4) Y VENTAS, CAJA Y MOSTRADOR (M5)
+================================================================================
+Documento:       Fase 3 — Especificación de Casos de Uso (M4: Taller y M5: Ventas y Caja)
+Proyecto:        Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Cliente:         Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Marco Académico: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Metodología:     PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
+Referencia:      PlanDocumentacionCasosUso.txt (Fase 3) / SRS v2.0 / Audio Clínico y Comercial
+Fecha:           25 de Septiembre de 2026
+Versión:         1.0 Definitiva
+Archivo:         CASOS DE USO/03_CasosUso_Taller_Ventas_Caja_PMO.txt
+================================================================================
+
+
+TABLA DE CONTENIDO
+--------------------------------------------------------------------------------
+1. HISTORIAL DE VERSIONES
+2. INFORMACIÓN DEL PROYECTO
+3. APROBACIONES
+4. RESUMEN EJECUTIVO (PAQUETES M4 Y M5)
+   4.1 Procesos de Negocio en Producción Técnica de Taller (M4)
+   4.2 Procesos de Negocio en Ventas, Cobros y Caja (M5)
+   4.3 Hallazgos Elicitados del Audio de Mostrador y Negociación Comercial
+   4.4 Áreas Organizacionales Involucradas
+5. DIAGRAMAS DE CASOS DE USO (REPRESENTACIÓN TEXTUAL FORMAL UML 2.5)
+   5.1 Diagrama del Paquete 4: Taller y Laboratorio Óptico (M4)
+   5.2 Diagrama del Paquete 5: Ventas, Caja y Mostrador (M5)
+   5.3 Máquina de Estados del Pedido de Taller
+6. DESCRIPCIÓN DETALLADA DE ACTORES (FICHAS PMOINFORMATICA)
+   6.1 ACT-01: Administrador / Propietario (Supervisión y Reversión ACID)
+   6.2 ACT-03: Asistente Comercial / Recepcionista (Operador de Mostrador)
+   6.3 ACT-05: Taller Óptico / Laboratorio Externo (Actor Secundario)
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO — SUBSISTEMA DE TALLER (M4)
+   7.1 CU-LAB-01: Generar Orden Técnica de Taller con Parámetros Geométricos [AUDIO REAL]
+   7.2 CU-LAB-02: Gestionar Ciclo de Estados del Pedido de Laboratorio
+   7.3 CU-LAB-03: Registrar Incidencia o Garantía Técnica
+8. ESPECIFICACIÓN DETALLADA DE CASOS DE USO — SUBSISTEMA DE VENTAS Y CAJA (M5)
+   8.1 CU-VEN-01: Registrar Venta con Descuento Híbrido de Inventario
+   8.2 CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales [AUDIO REAL]
+   8.3 CU-VEN-03: Registrar Cobro de Anticipo y Generar Orden de Retiro [AUDIO REAL]
+   8.4 CU-VEN-04: Registrar Cobro de Saldo y Entrega de Producto
+   8.5 CU-VEN-05: Realizar Cierre Diario y Arqueo Consolidado de Caja
+   8.6 CU-VEN-06: Anular Venta con Reversión Atómica ACID
+9. MATRIZ DE REGLAS DE NEGOCIO (RN-LAB Y RN-VEN)
+10. REQUISITOS DE CALIDAD Y SEGURIDAD ASOCIADOS (S-TAGS ISO/IEC 25010)
+================================================================================
+
+
+================================================================================
+1. HISTORIAL DE VERSIONES
+================================================================================
+
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| Fecha      | Versión | Autor                             | Organización       | Descripción del Cambio                |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| 25/09/2026 | 1.0     | Figueroa Omar / Villalva Alex.   | ESPOCH / SGO       | Emisión formal de especificaciones de |
+|            |         |                                   |                    | Taller (M4) y Ventas/Caja (M5),      |
+|            |         |                                   |                    | incorporando reducciones de biselado, |
+|            |         |                                   |                    | combos de $99 y órdenes de retiro.    |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+
+
+================================================================================
+2. INFORMACIÓN DEL PROYECTO
+================================================================================
+
+Empresa / Organización:                   Óptica Vista Visión
+Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Fecha de Preparación:                     25 de Septiembre de 2026
+Cliente:                                  Óptica Vista Visión — Riobamba, Ecuador
+Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
+Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
+Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
+Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
+
+
+================================================================================
+3. APROBACIONES
+================================================================================
+
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Nombre y Apellido              | Cargo                      | Departamento / Org.   | Fecha      | Firma      |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
+| Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Propietario Vista Visión       | Administrador de Negocio   | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+
+
+================================================================================
+4. RESUMEN EJECUTIVO (PAQUETES M4 Y M5)
+================================================================================
+
+4.1 PROCESOS DE NEGOCIO EN PRODUCCIÓN TÉCNICA DE TALLER (M4)
+El subsistema de Taller Óptico gestiona la interface técnica entre la prescripción clínica 
+y la manufactura física de los anteojos. Garantiza:
+1. Generación y Disociación de la Orden de Trabajo: Extracción de parámetros ópticos 
+   (dioptrías, DNP monocular, alturas pupilares) suprimiendo diagnósticos médicos y datos 
+   sensibles del paciente en cumplimiento con la LOPDP del Ecuador.
+2. Especificaciones Geométricas de Biselado: Instrucciones milimétricas para corte y ranurado 
+   en armazones semialaire (nylon) y al aire (perforados).
+3. Trazabilidad del Ciclo de Vida: Máquina de estados finita que controla el flujo de 
+   producción desde el envío hasta la recepción y control de calidad en el establecimiento.
+
+4.2 PROCESOS DE NEGOCIO EN VENTAS, COBROS Y CAJA (M5)
+El subsistema comercial administra los ingresos financieros y la logística de entrega:
+1. Cotización Dinámica y Combos Promocionales: Aplicación de promociones mensuales de precio fijo.
+2. Cobro Fraccionado (Anticipo y Saldo): Recepción de abono inicial para mandar a tallar, 
+   emisión de la "Orden de Retiro" física y liquidación al momento de la entrega.
+3. Consistencia Financiera: Arqueo diario por punto de emisión y anulación atómica ACID con 
+   reintegro automático al stock de inventario.
+
+4.3 HALLAZGOS ELICITADOS DEL AUDIO DE MOSTRADOR Y NEGOCIACIÓN COMERCIAL
+En el audio real de atención se identificaron tres vacíos que el SRS v2.0 omitía:
+- Reducción Milimétrica de Biselado (CU-LAB-01): El optometrista tomó la regla milimétrica, 
+  midió la montura semialaire de muestra (38 mm original) y especificó una reducción vertical 
+  de 11 mm para dejar la luna final en 27 mm.
+- Paquete Promocional "Combo $99" (CU-VEN-02): Venta conjunta de armazón metálico semialaire 
+  más lunas de policarbonato con filtro azul por $99.00 USD (frente a tarifa regular de $130-$140).
+- Orden de Retiro con Anticipo (CU-VEN-03): Pago de abono inicial, compromiso de entrega en 
+  2 días laborables (viernes) e impresión de ticket con número correlativo y saldo pendiente.
+
+4.4 ÁREAS ORGANIZACIONALES INVOLUCRADAS
+- Mostrador de Ventas y Recepción: Atención, cotización, cobranza y entrega final.
+- Taller Interno / Laboratorio Externo: Biselado, tallado y montaje de lentes oftálmicas.
+- Administración y Contabilidad: Arqueos de caja, conciliación bancaria y anulación de notas.
+
+
+================================================================================
+5. DIAGRAMAS DE CASOS DE USO (REPRESENTACIÓN TEXTUAL FORMAL UML 2.5)
+================================================================================
+
+5.1 DIAGRAMA DEL PAQUETE 4: TALLER Y LABORATORIO ÓPTICO (M4)
+
+  +-------------------------------------------------------------------------------+
+  | LÍMITE DEL SISTEMA: SUBSISTEMA DE TALLER Y LABORATORIO ÓPTICO (M4)            |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-LAB-01: Generar Orden Técnica de Taller   |                 |
+  |             |             con Parámetros Geométricos        |                 |
+  |             +-----------------------------------------------+                 |
+  |                   |                             ^                             |
+  |              <<include>>                    <<extend>> (Pt. Ext: Defecto)     |
+  |                   v                             |                             |
+  |             +------------------+          +---------------------------------+ |
+  |             | Disociar Datos   |          | CU-LAB-03: Registrar Incidencia | |
+  |             | Médicos (LOPDP)  |          | o Garantía Técnica              | |
+  |             +------------------+          +---------------------------------+ |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-LAB-02: Gestionar Ciclo de Estados del    |                 |
+  |             |             Pedido de Laboratorio             |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  +-------------------------------------------------------------------------------+
+         ^                                           ^
+         |                                           |
+   [Optometrista / Asistente]                 [Taller Externo]
+   (ACT-02 / ACT-03)                          (ACT-05: Receptor Técnico)
+
+
+5.2 DIAGRAMA DEL PAQUETE 5: VENTAS, CAJA Y MOSTRADOR (M5)
+
+  +-------------------------------------------------------------------------------+
+  | LÍMITE DEL SISTEMA: SUBSISTEMA DE VENTAS, CAJA Y MOSTRADOR (M5)               |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-VEN-01: Registrar Venta con Descuento     |                 |
+  |             |             Híbrido de Inventario             |                 |
+  |             +-----------------------------------------------+                 |
+  |                   ^                             ^                             |
+  |                   |                             |                             |
+  |              <<extend>> (Combo Activo)      <<extend>> (Abono Parcial)        |
+  |                   |                             |                             |
+  |             +------------------+          +---------------------------------+ |
+  |             | CU-VEN-02:       |          | CU-VEN-03: Registrar Cobro de   | |
+  |             | Cotizar y Aplicar|          | Anticipo y Orden de Retiro      | |
+  |             | Paquetes Promoc. |          +---------------------------------+ |
+  |             +------------------+                        |                     |
+  |                                                    <<extend>> (Retiro)        |
+  |                                                         v                     |
+  |                                           +---------------------------------+ |
+  |                                           | CU-VEN-04: Registrar Cobro de   | |
+  |                                           | Saldo y Entrega de Producto     | |
+  |                                           +---------------------------------+ |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-VEN-05: Realizar Cierre Diario y Arqueo   |                 |
+  |             |             Consolidado de Caja               |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-VEN-06: Anular Venta con Reversión        |                 |
+  |             |             Atómica ACID                      |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  +-------------------------------------------------------------------------------+
+         ^                                           ^
+         |                                           |
+   [Asistente Comercial]                       [Administrador]
+   (ACT-03: Operador Mostrador)                (ACT-01: Control y Reversión)
+
+
+5.3 MÁQUINA DE ESTADOS DEL PEDIDO DE TALLER
+  [REGISTRADO] --(Cobro Anticipo)--> [ENVIADO_A_TALLER] --(Transporte)--> [EN_LABORATORIO]
+                                                                                |
+  [ENTREGADO_CLIENTE] <--(Liquidación Saldo)-- [RECIBIDO_EN_OPTICA] <--(Control Calidad OK)--+
+
+
+================================================================================
+6. DESCRIPCIÓN DETALLADA DE ACTORES (FICHAS PMOINFORMATICA)
+================================================================================
+
+--------------------------------------------------------------------------------
+6.1 ACTOR: ADMINISTRADOR / PROPIETARIO
+--------------------------------------------------------------------------------
+Actor:          Administrador / Propietario
+Identificador:  ACT-01
+Descripción:    Responsable de la supervisión contable y financiera de la óptica. Ejecuta 
+                el arqueo de cierre y es el único autorizado para anular ventas con reversión ACID.
+Características:Rol con privilegios máximos en los módulos de venta y caja.
+Relación:       Hereda de ACT-00 (Usuario Autenticado).
+Referencias:    CU-VEN-05, CU-VEN-06.
+
+Atributos en el Subsistema Comercial:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| admin_id          | Identificador único de usuario administrador      | UUID               |
+| pin_autorizacion  | Clave numérica encriptada para autorizar reversión| Varchar(255)       |
+| acceso_caja_fuerte| Indicador de custodia de valores globales         | Boolean            |
++-------------------+---------------------------------------------------+--------------------+
+
+--------------------------------------------------------------------------------
+6.2 ACTOR: ASISTENTE COMERCIAL / RECEPCIONISTA
+--------------------------------------------------------------------------------
+Actor:          Asistente Comercial / Recepcionista
+Identificador:  ACT-03
+Descripción:    Operador de mostrador encargado de las transacciones de cotización, venta, 
+                recaudación de anticipos y entrega de anteojos terminados.
+Características:Usuario ágil de terminal POS con caja chica física asignada por turno.
+Relación:       Hereda de ACT-00 (Usuario Autenticado).
+Referencias:    CU-LAB-01, CU-LAB-02, CU-VEN-01, CU-VEN-02, CU-VEN-03, CU-VEN-04.
+
+Atributos en el Subsistema Comercial:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| caja_sesion_id    | Identificador de la sesión de caja abierta activa | UUID               |
+| monto_apertura    | Fondo inicial asignado para cambio en efectivo    | Numeric(10,2)      |
+| punto_emision_pos | Código SRI del punto de mostrador (ej. 001)       | Char(3)            |
++-------------------+---------------------------------------------------+--------------------+
+
+--------------------------------------------------------------------------------
+6.3 ACTOR: TALLER ÓPTICO / LABORATORIO EXTERNO (ACTOR SECUNDARIO)
+--------------------------------------------------------------------------------
+Actor:          Taller Óptico / Laboratorio Externo
+Identificador:  ACT-05
+Descripción:    Entidad externa tercerizada encargada del corte, desbaste, biselado de 
+                lunas y tratamientos de laboratorio (filtro azul, antirreflejo).
+Características:Actor secundario que recibe órdenes técnicas disociadas y reporta estados.
+Relación:       Ninguna (Actor del sistema externo / secundario).
+Referencias:    CU-LAB-01, CU-LAB-02, CU-LAB-03.
+
+Atributos del Actor:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| laboratorio_id    | Identificador del proveedor de biselado en el SGO | UUID               |
+| razon_social_lab  | Nombre de la empresa de laboratorio óptico        | Varchar(120)       |
+| tiempo_promedio_d | Días laborables comprometidos de entrega (ej. 2)  | Smallint           |
+| canal_transmision | Modalidad de envío (Hoja física / API / PDF)     | Enum / Varchar(20) |
++-------------------+---------------------------------------------------+--------------------+
+
+
+================================================================================
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO — SUBSISTEMA DE TALLER (M4)
+================================================================================
+
+================================================================================
+7.1 CASO DE USO: CU-LAB-01 — GENERAR ORDEN TÉCNICA CON AJUSTE GEOMÉTRICO
+================================================================================
+Caso de Uso:        Generar Orden Técnica de Taller con Parámetros Geométricos [AUDIO REAL]
+Identificador:      CU-LAB-01
+Actores:            Optometrista Clínico (ACT-02), Asistente Comercial (ACT-03).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-10, RF-11, RF-16, RF-17.
+                    Insumo: Audio de atención real (Montura semialaire 38 mm reducida a 27 mm).
+                    Reglas de Negocio: RN-LAB-01, RN-LAB-02.
+                    Seguridad: S-TAG-CONF-03, S-TAG-INT-05 (ISO/IEC 25010).
+Precondición:       Examen refractivo completado (CU-CLI-04); armazón y lunas seleccionadas.
+Postcondición:      1. Orden técnica de producción creada con identificador único y estado 'PENDIENTE'.
+                    2. Parámetros médicos disociados (sin diagnósticos CIE-10 ni anamnesis).
+                    3. Parámetros milimétricos de altura original y reducción de biselado guardados.
+                    4. Hoja técnica de taller impresa o enviada digitalmente al laboratorio.
+Descripción:        Genera la ficha técnica para el laboratorio de biselado. Incluye la graduación 
+                    óptica final, DNP monocular, alturas pupilares, tipo de material de luna 
+                    (policarbonato con filtro azul), tipo de armazón (semialaire ranurado con hilo 
+                    de nylon) e instrucciones milimétricas de corte (altura original del armazón de 
+                    38 mm reducida a 27 mm verticalmente) para cumplir con el diseño estético pactado.
+Resumen:            El usuario abre la orden técnica; el sistema importa la fórmula y disocia datos 
+                    médicos; el usuario ingresa medidas de reducción milimétrica de biselado; 
+                    el sistema valida cotas, emite el documento disociado y cambia el estado.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista / Asist. | Selecciona la prescripción activa y pulsa "Crear Orden Taller". |
+| 2    | Sistema SGO           | [<<include>>] Ejecuta la disociación LOPDP: extrae únicamente   |
+|      |                       | graduación, DNP y alturas, suprimiendo diagnósticos y notas.    |
+| 3    | Sistema SGO           | Asigna número correlativo único de taller (ej. `ORD-2026-0842`).|
+| 4    | Optometrista / Asist. | Selecciona el tipo de armazón en el selector:                   |
+|      |                       | [x] Semialaire metálico (ranurado inferior con hilo de nylon).  |
+| 5    | Optometrista / Asist. | Selecciona el material y tratamientos de lunas:                 |
+|      |                       | - Material: Policarbonato alto índice.                          |
+|      |                       | - Tratamiento: Filtro de Luz Azul con antirreflejo verde.       |
+| 6    | Optometrista / Asist. | Carga las medidas anatómicas: DNP OD (31.5 mm), OI (32.0 mm),   |
+|      |                       | Altura focal OD (18 mm), OI (18 mm).                            |
+| 7    | Optometrista / Asist. | En la sección "Ajustes Geométricos de Biselado", especifica:    |
+|      |                       | - Altura vertical original del aro de montura: 38 mm.           |
+|      |                       | - Altura vertical final requerida de la luna biselada: 27 mm.   |
+|      |                       | - Observación técnica para operario de taller: "Reducir altura  |
+|      |                       |   de luna a 27 mm manteniendo diseño estético según plantilla".|
+| 8    | Sistema SGO           | Calcula el diferencial de reducción: $\Delta h = 27 - 38 = -11\text{ mm}$. |
+| 9    | Sistema SGO           | Valida que la altura final (27 mm) sea suficiente para alojar   |
+|      |                       | la altura focal pupilar calculada (18 mm + margen inferior).    |
+| 10   | Optometrista / Asist. | Pulsa "Confirmar y Emitir Orden de Taller".                     |
+| 11   | Sistema SGO           | Persiste la orden en `ordenes_taller` con estado 'PENDIENTE'.   |
+| 12   | Sistema SGO           | Genera la Ficha Técnica de Taller para impresión térmica o A5.  |
+| 13   | Optometrista / Asist. | Envía la montura física junto a la orden a taller. Fin del caso.|
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Armazón de aro        | 4a.1. El usuario selecciona "Armazón Completo / Cerrado".       |
+|      | cerrado estándar      | 4a.2. El sistema deshabilita los campos de reducción vertical de|
+|      |                       |       luna, asumiendo el corte conforme a la plantilla fija.   |
+|      |                       | 4a.3. El flujo continúa en el paso 10.                          |
++------+-----------------------+-----------------------------------------------------------------+
+| 9a   | Reducción excesiva de | 9a.1. La altura final indicada (ej. 20 mm) corta el centro focal|
+|      | luna invade centro    |       o no deja margen pupilar mínimo inferior (< 8 mm).        |
+|      | óptico pupilar        | 9a.2. El sistema bloquea el guardado: "La altura de corte       |
+|      |                       |       de 20 mm mutila el centro óptico requerido (18 mm)".      |
+|      |                       | 9a.3. El operador rectifica la cota milimétrica; flujo al 7.    |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.2 CASO DE USO: CU-LAB-02 — GESTIONAR CICLO DE ESTADOS DEL PEDIDO DE TALLER
+================================================================================
+Caso de Uso:        Gestionar Ciclo de Estados del Pedido de Laboratorio
+Identificador:      CU-LAB-02
+Actores:            Asistente Comercial (ACT-03), Taller Óptico Externo (ACT-05).
+Tipo:               Secundario
+Referencias:        SRS v2.0: RF-18, RF-19.
+                    Seguridad: S-TAG-INT-05, S-TAG-ACC-05 (ISO/IEC 25010).
+Precondición:       Orden de taller creada previamente en CU-LAB-01.
+Postcondición:      1. Estado de la orden actualizado en la base de datos de acuerdo a la máquina 
+                       de estados oficial.
+                    2. Fecha y hora de recepción y control de calidad registradas.
+                    3. Alerta automática generada para contactar al cliente cuando el trabajo 
+                       llega a estado 'RECIBIDO_EN_OPTICA'.
+Descripción:        Permite monitorear y actualizar las transiciones de estado del trabajo óptico 
+                    (PENDIENTE -> ENVIADO_A_TALLER -> RECIBIDO_EN_OPTICA -> CONTROL_CALIDAD_OK). 
+                    Al recibir el encargo del taller, el operador verifica con lensómetro que las 
+                    lunas cumplan con las dioptrías solicitadas y que el biselado ajuste sin holguras.
+Resumen:            El asistente busca la orden por código de barras; actualiza su estado conforme 
+                    avanza el flujo; valida la calidad física al recibir el producto terminado; 
+                    el sistema habilita la orden para entrega al cliente.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | Accede a la bandeja de "Seguimiento de Órdenes de Taller".      |
+| 2    | Asistente Comercial   | Escanea el código de barras de la orden recibida del mensajero. |
+| 3    | Sistema SGO           | Recupera los datos de la orden en estado 'ENVIADO_A_TALLER'.    |
+| 4    | Asistente Comercial   | Cambia el estado a 'RECIBIDO_EN_OPTICA'.                        |
+| 5    | Asistente Comercial   | Realiza el control de calidad físico en gabinete:               |
+|      |                       | - Verifica graduación de lunas en lensómetro vs. orden técnica. |
+|      |                       | - Inspecciona ausencia de rayaduras o aberraciones de bisel.    |
+|      |                       | - Verifica que la altura reducida mida exactamente 27 mm.       |
+| 6    | Asistente Comercial   | Marca el checkbox: "[x] Control de Calidad Satisfactorio".      |
+| 7    | Sistema SGO           | Transiciona el estado a 'LISTO_PARA_ENTREGA'.                   |
+| 8    | Sistema SGO           | Dispara notificación SMS / WhatsApp al paciente:                |
+|      |                       | "Estimado(a) [Nombre], sus lentes están listos para retiro en    |
+|      |                       | Óptica Vista Visión. Presentar su comprobante de anticipo".     |
+| 9    | Sistema SGO           | Coloca la orden en la gaveta de entrega y finaliza el caso.     |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Falla en control de   | 6a.1. El operador detecta que la graduación difiere en 0.50 D   |
+|      | calidad (luna errónea |       o la altura fue cortada incorrectamente.                  |
+|      | o rayada)             | 6a.2. [<<extend>>] Activa el caso de uso derivado:               |
+|      |                       |       CU-LAB-03: Registrar Incidencia o Garantía Técnica.       |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.3 CASO DE USO: CU-LAB-03 — REGISTRAR INCIDENCIA O GARANTÍA TÉCNICA
+================================================================================
+Caso de Uso:        Registrar Incidencia o Garantía Técnica
+Identificador:      CU-LAB-03
+Actores:            Asistente Comercial (ACT-03), Optometrista Clínico (ACT-02).
+Tipo:               Opcional / Excepción
+Referencias:        SRS v2.0: RF-19.
+                    Seguridad: S-TAG-ACC-05 (ISO/IEC 25010).
+Precondición:       Orden de taller en estado 'RECIBIDO_EN_OPTICA' o producto retornado por cliente.
+Postcondición:      1. Incidencia técnica documentada con causa raíz (error de taller o defecto de fábrica).
+                    2. Re-orden de fabricación generada a costo cero para el cliente.
+                    3. Registro en auditoría para evaluación trimestral de proveedores.
+Descripción:        Permite gestionar las no-conformidades técnicas en los trabajos de óptica, 
+                    ya sea por lunas astilladas durante el montaje, descentramiento óptico respecto 
+                    a la DNP, desprendimiento de tratamientos antirreflejantes o quejas por falta de 
+                    adaptación, disparando la reposición prioritaria sin cobros indebidos.
+Resumen:            El operador registra el motivo del rechazo; adjunta evidencia del fallo; 
+                    el sistema genera la re-orden vinculada y notifica al taller para reposición.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | En la ficha de la orden, selecciona "Registrar Incidencia".     |
+| 2    | Asistente Comercial   | Selecciona la causa raíz en el catálogo de no-conformidades:    |
+|      |                       | - Error de biselado (holgura en aro o deformación de forma).    |
+|      |                       | - Graduación fuera de tolerancia en lensometría.               |
+|      |                       | - Defecto en recubrimiento de filtro azul (burbujas/rayas).     |
+| 3    | Asistente Comercial   | Redacta la descripción del reclamo técnico.                     |
+| 4    | Asistente Comercial   | Pulsa "Re-ordenar Trabajo a Taller sin Costo".                  |
+| 5    | Sistema SGO           | Genera una orden vinculada con sufijo `-GAR` y prioridad ALTA.  |
+| 6    | Sistema SGO           | Marca la orden original como 'EN_GARANTIA_REPOSICION'.          |
+| 7    | Sistema SGO           | Notifica al laboratorio óptico del re-trabajo exigido. Fin caso.|
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS: No aplican variaciones adicionales.
+
+
+================================================================================
+8. ESPECIFICACIÓN DETALLADA DE CASOS DE USO — SUBSISTEMA DE VENTAS Y CAJA (M5)
+================================================================================
+
+================================================================================
+8.1 CASO DE USO: CU-VEN-01 — REGISTRAR VENTA CON DESCUENTO HÍBRIDO
+================================================================================
+Caso de Uso:        Registrar Venta con Descuento Híbrido de Inventario
+Identificador:      CU-VEN-01
+Actores:            Asistente Comercial (ACT-03).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-20, RF-21.
+                    Reglas de Negocio: RN-VEN-01, RN-VEN-04.
+                    Seguridad: S-TAG-INT-06, S-TAG-ACC-06 (ISO/IEC 25010).
+Precondición:       Sesión de caja abierta en estado activo; productos disponibles en stock.
+Postcondición:      1. Asiento de venta registrado en estado 'PAGADA' o 'CON_ANTICIPO'.
+                    2. Stock físico de productos descontado de forma atómica en PostgreSQL.
+                    3. Comprobante de venta generado.
+Descripción:        Permite registrar la comercialización de artículos independientes (gafas de sol, 
+                    estuches, soluciones de lentes de contacto) o servicios de consulta, aplicando 
+                    descuentos de inventario híbridos y admitiendo pagos mixtos (efectivo/transferencia).
+Resumen:            El asistente agrega ítems al carrito; el sistema descuenta existencias; 
+                    se procesa el pago; el sistema emite el recibo y actualiza el saldo de caja.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | Accede al módulo de "Punto de Venta / Mostrador".               |
+| 2    | Asistente Comercial   | Escanea código de barras del producto o busca por descripción.  |
+| 3    | Sistema SGO           | Verifica disponibilidad de stock en el almacén de la tienda.    |
+| 4    | Sistema SGO           | Añade el producto a la lista con precio unitario e IVA desglosad|
+| 5    | Asistente Comercial   | Selecciona la forma de pago (Efectivo / Transferencia Pichincha)|
+| 6    | Asistente Comercial   | Pulsa "Cobrar y Finalizar Venta".                               |
+| 7    | Sistema SGO           | Ejecuta transacción atómica ACID:                               |
+|      |                       | - Resta la cantidad vendida en la tabla `inventario_stock`.     |
+|      |                       | - Inserta registro de cobro en `movimientos_caja`.              |
+|      |                       | - Persiste la factura/recibo en la tabla `ventas`.              |
+| 8    | Sistema SGO           | Imprime ticket de venta en ticketera de 80 mm. Fin del caso.    |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Stock insuficiente en | 3a.1. El sistema advierte: "Stock no disponible en tienda".      |
+|      | inventario físico     | 3a.2. Bloquea el cobro del producto hasta ingresar stock.       |
+|      |                       | 3a.3. El operador elimina el ítem o solicita reposición bodega. |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+8.2 CASO DE USO: CU-VEN-02 — COTIZAR Y APLICAR PAQUETES PROMOCIONALES
+================================================================================
+Caso de Uso:        Cotizar y Aplicar Paquetes Promocionales [ELICITADO DE AUDIO]
+Identificador:      CU-VEN-02
+Actores:            Asistente Comercial (ACT-03), Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-20 (Ampliación por Práctica Real).
+                    Insumo: Audio de atención comercial (Promoción Armazón + Lunas Filtro Azul por $99).
+                    Reglas de Negocio: RN-VEN-02.
+                    Seguridad: S-TAG-INT-06 (ISO/IEC 25010).
+Precondición:       Cotización en proceso con armazón y tratamiento de lunas seleccionados.
+Postcondición:      1. El sistema recalcula el total fijando la tarifa plana del combo promocional ($99.00).
+                    2. Desglose interno contable asignado a cada ítem para cuadre de inventario.
+                    3. Presupuesto presentado al cliente para proceder al pago del anticipo.
+Descripción:        Permite aplicar paquetes promocionales vigentes configurados en el sistema 
+                    (ej. "Combo Promocional Mensual Vista Visión: Armazón de gama seleccionada + 
+                    Lunas de Policarbonato con Filtro Azul y Antirreflejo por $99.00 USD"). 
+                    El sistema absorbe la diferencia respecto al precio regular de lista ($130-$140) 
+                    y desglosa el costo para control contable e inventario.
+Resumen:            El operador agrega armazón de $55 y lunas de $80 al carrito (subtotal $135); 
+                    aplica el combo promocional de $99; el sistema recalcula el total a $99.00 fijos; 
+                    el cliente aprueba el presupuesto para pagar el abono inicial.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | En la pantalla de cotización, agrega el armazón seleccionado    |
+|      |                       | por el cliente (Precio normal de lista: $55.00 USD).            |
+| 2    | Asistente Comercial   | Agrega las lunas de Policarbonato con Filtro Azul (Precio: $80) |
+| 3    | Sistema SGO           | Presenta el subtotal acumulado de lista: $135.00 USD.           |
+| 4    | Asistente Comercial   | Pulsa el botón "Aplicar Paquete / Combo Promocional".           |
+| 5    | Sistema SGO           | Despliega las promociones activas vigentes.                     |
+| 6    | Asistente Comercial   | Selecciona: "Combo Mensual Vista Visión ($99.00 Tarifa Plana)". |
+| 7    | Sistema SGO           | Valida que los productos califiquen para la promoción.          |
+| 8    | Sistema SGO           | Aplica descuento comercial automático de -$36.00 USD.           |
+| 9    | Sistema SGO           | Fija el valor final neto a pagar en $99.00 USD.                 |
+| 10   | Sistema SGO           | Desglosa internamente la asignación contable ponderada:         |
+|      |                       | - Armazón semialaire: $40.00 USD.                               |
+|      |                       | - Lunas policarbonato filtro azul: $59.00 USD.                  |
+| 11   | Asistente Comercial   | Muestra la cotización final al cliente.                         |
+| 12   | Asistente Comercial   | El cliente acepta el presupuesto. Fin del caso.                 |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 7a   | Armazón de gama alta  | 7a.1. El sistema detecta que el armazón seleccionado no         |
+|      | no clasifica al combo |       pertenece al catálogo de la promoción de $99 (ej. titanio)|
+|      | de $99                | 7a.2. Advierte: "El producto seleccionado requiere abono de     |
+|      |                       |       diferencia de gama de +$25.00 USD sobre el paquete".      |
+|      |                       | 7a.3. Si el cliente acepta, fija el combo en $124.00 USD.       |
+|      |                       | 7a.4. Si no acepta, el operador cambia el armazón por uno válido|
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+8.3 CASO DE USO: CU-VEN-03 — REGISTRAR COBRO DE ANTICIPO Y ORDEN DE RETIRO
+================================================================================
+Caso de Uso:        Registrar Cobro de Anticipo y Generar Orden de Retiro [ELICITADO DE AUDIO]
+Identificador:      CU-VEN-03
+Actores:            Asistente Comercial (ACT-03), Optometrista Clínico (ACT-02), Paciente (ACT-NEG-01).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-20, RF-22, RF-23 (Ampliación por Práctica Real).
+                    Insumo: Audio de atención comercial (Pago de abono y ticket con entrega el viernes).
+                    Reglas de Negocio: RN-VEN-03, RN-VEN-05.
+                    Seguridad: S-TAG-INT-06, S-TAG-ACC-06 (ISO/IEC 25010).
+Precondición:       Cotización de combo o receta óptica enlazada a la orden de taller.
+Postcondición:      1. Asiento contable de ingreso en caja por el valor exacto del anticipo pagado.
+                    2. Estado de la venta actualizado a 'CON_ANTICIPO', registrando el saldo pendiente.
+                    3. Orden de taller transicionada automáticamente a estado 'ENVIADO_A_TALLER'.
+                    4. Fecha de retiro calculada automáticamente a dos (2) días laborables (ej. viernes).
+                    5. Impresión física de la "Orden de Retiro / Comprobante de Abono" en 80 mm.
+Descripción:        Registra el cobro parcial monetario (abono/anticipo) indispensable para ordenar 
+                    la fabricación de los lentes al laboratorio. El sistema formaliza la fecha 
+                    comprometida de entrega (calculada en 2 días laborables hábiles) e imprime el 
+                    documento físico vinculante para el cliente, el cual contiene el desglose 
+                    financiero (Total, Abono, Saldo) y las condiciones de retiro.
+Resumen:            El asistente registra el anticipo entregado por el cliente; el sistema ejecuta 
+                    la transacción atómica en base de datos; calcula la fecha estimada de retiro; 
+                    imprime el ticket térmico con código correlativo; el cliente firma y conserva recibo.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | En la cotización aprobada ($99.00 USD), pulsa "Cobrar Anticipo".|
+| 2    | Sistema SGO           | Despliega la ventana de cobro fraccionado:                      |
+|      |                       | - Total de la Orden: $99.00 USD.                                |
+|      |                       | - Anticipo Mínimo Sugerido (50%): $50.00 USD.                   |
+| 3    | Asistente Comercial   | Ingresa el monto entregado por el cliente (ej. $50.00 USD abono)|
+| 4    | Asistente Comercial   | Selecciona el método de pago: Efectivo / Transferencia bancaria.|
+| 5    | Sistema SGO           | Calcula el saldo remanente: Saldo = $99.00 - $50.00 = $49.00 USD|
+| 6    | Sistema SGO           | Calcula la fecha prometida de entrega:                          |
+|      |                       | Fecha Actual + 2 días hábiles (ej. Miércoles -> Viernes).       |
+| 7    | Asistente Comercial   | Pulsa "Confirmar Anticipo y Emitir Orden de Retiro".           |
+| 8    | Sistema SGO           | Ejecuta transacción atómica ACID en PostgreSQL:                 |
+|      |                       | - Registra el ingreso de $50.00 en la caja de la sesión actual. |
+|      |                       | - Actualiza la venta a estado 'CON_ANTICIPO' con saldo $49.00.  |
+|      |                       | - Transiciona la orden técnica de taller a 'ENVIADO_A_TALLER'.  |
+| 9    | Sistema SGO           | Imprime en la ticketera térmica de 80 mm el comprobante:        |
+|      |                       | * Encabezado con RUC, Razón Social y Teléfono de Vista Visión.  |
+|      |                       | * "ORDEN DE RETIRO / COMPROBANTE DE ANTICIPO # OR-2026-00481".  |
+|      |                       | * Nombre del Paciente y Cédula de Identidad.                    |
+|      |                       | * Detalle: Armazón semialaire + Lunas Policarbonato Filtro Azul.|
+|      |                       | * Resumen Económico: Total $99.00 | Anticipo $50.00 | Saldo $49.|
+|      |                       | * FECHA PROGRAMADA DE ENTREGA: VIERNES 27/SEP/2026.             |
+|      |                       | * Cláusula: "Indispensable presentar este ticket para retiro".  |
+|      |                       | * Código de barras Code128 para lectura rápida en mostrador.    |
+| 10   | Asistente Comercial   | Entrega el comprobante impreso al cliente.                      |
+| 11   | Paciente              | Guarda el ticket para el día de la entrega. Fin del caso.       |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Cliente cancela el    | 3a.1. El cliente entrega la totalidad del importe ($99.00 USD). |
+|      | 100% de la orden      | 3a.2. El sistema fija el saldo pendiente en $0.00 USD.          |
+|      | anticipadamente       | 3a.3. Marca la venta como 'TOTALMENTE_PAGADA_PENDIENTE_ENTREGA'.|
+|      |                       | 3a.4. El ticket de retiro imprime leyenda: "ORDEN PAGADA".      |
+|      |                       | 3a.5. El flujo continúa en el paso 6.                           |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Pago por transferencia| 4a.1. El operador selecciona "Transferencia Bancaria".          |
+|      | electrónica inmediata | 4a.2. El sistema exige ingresar el número de comprobante/lote.  |
+|      |                       | 4a.3. Valida que el número de comprobante no haya sido usado    |
+|      |                       |       en otra venta para evitar fraudes por doble asiento.      |
+|      |                       | 4a.4. El flujo continúa en el paso 5.                           |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+8.4 CASO DE USO: CU-VEN-04 — REGISTRAR COBRO DE SALDO Y ENTREGA DE PRODUCTO
+================================================================================
+Caso de Uso:        Registrar Cobro de Saldo y Entrega de Producto
+Identificador:      CU-VEN-04
+Actores:            Asistente Comercial (ACT-03), Paciente (ACT-NEG-01).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-20, RF-23.
+                    Reglas de Negocio: RN-VEN-03.
+                    Seguridad: S-TAG-INT-06, S-TAG-ACC-06 (ISO/IEC 25010).
+Precondición:       Trabajo en estado 'LISTO_PARA_ENTREGA'; paciente presenta ticket de retiro.
+Postcondición:      1. Saldo monetario pendiente liquidado en su totalidad (Saldo = $0.00).
+                    2. Asiento de ingreso por el saldo registrado en la caja diaria.
+                    3. Estado final de la venta y del pedido actualizado a 'ENTREGADO_AL_CLIENTE'.
+                    4. Emisión de comprobante de liquidación final o factura electrónica SRI.
+Descripción:        Permite efectuar el cobro del saldo adeudado cuando el cliente acude a la óptica 
+                    a retirar sus gafas confeccionadas, validar físicamente el ajuste en el rostro 
+                    del paciente y cerrar formalmente el ciclo del pedido en el sistema.
+Resumen:            El cliente presenta su orden de retiro; el asistente lee el código de barras; 
+                    el sistema muestra el saldo de $49; el cliente cancela en efectivo; se liquida 
+                    el saldo, se entregan los lentes con su estuche y se cierra la transacción.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | Solicita la Orden de Retiro al cliente en el mostrador.         |
+| 2    | Asistente Comercial   | Lee el código de barras del ticket con el lector óptico.        |
+| 3    | Sistema SGO           | Localiza la orden y despliega en pantalla:                      |
+|      |                       | - Paciente: [Nombres].                                          |
+|      |                       | - Estado Físico: Lentes recibidos de taller y verificados OK.   |
+|      |                       | - Estado Contable: Total $99.00 | Anticipo $50.00 | Saldo: $49. |
+| 4    | Asistente Comercial   | Informa al cliente el valor pendiente de liquidar ($49.00 USD). |
+| 5    | Paciente              | Entrega el importe monetario del saldo en caja.                 |
+| 6    | Asistente Comercial   | Registra el pago del saldo y pulsa "Liquidar y Entregar".       |
+| 7    | Sistema SGO           | Ejecuta transacción atómica:                                    |
+|      |                       | - Registra el ingreso de $49.00 en la caja de la sesión actual. |
+|      |                       | - Pone saldo en 0.00 y marca venta 'TOTALMENTE_PAGADA'.         |
+|      |                       | - Transiciona el pedido a 'ENTREGADO_AL_CLIENTE'.               |
+| 8    | Sistema SGO           | Imprime ticket final de finiquito de saldo.                     |
+| 9    | Asistente Comercial   | Entrega los lentes en su estuche con paño de microfibra.        |
+| 10   | Paciente              | Prueba sus lentes nuevos y se retira conforme. Fin del caso.    |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 2a   | Cliente extravió el   | 2a.1. El operador solicita la cédula de identidad del paciente. |
+|      | ticket de retiro      | 2a.2. Ejecuta CU-PAC-03 (Búsqueda Predictiva) y ubica la orden. |
+|      | físico                | 2a.3. Solicita firma de acta de entrega por pérdida de ticket.  |
+|      |                       | 2a.4. El flujo continúa en el paso 3.                           |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Orden previamente     | 3a.1. La orden ya tenía saldo $0.00 al haberse pagado el 100%.  |
+|      | cancelada en su total | 3a.2. El sistema omite la solicitud de cobro.                   |
+|      |                       | 3a.3. El flujo salta directamente al paso 7 (entrega física).   |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+8.5 CASO DE USO: CU-VEN-05 — REALIZAR CIERRE DIARIO Y ARQUEO DE CAJA
+================================================================================
+Caso de Uso:        Realizar Cierre Diario y Arqueo Consolidado de Caja
+Identificador:      CU-VEN-05
+Actores:            Administrador / Propietario (ACT-01), Asistente Comercial (ACT-03).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-23.
+                    Reglas de Negocio: RN-VEN-05.
+                    Seguridad: S-TAG-INT-06, S-TAG-ACC-06 (ISO/IEC 25010).
+Precondición:       Jornada comercial finalizada; terminal de ventas operativa.
+Postcondición:      1. Sesión de caja cerrada inmutablemente en la base de datos.
+                    2. Arqueo ciego confrontado: valores contables del sistema vs. dinero físico.
+                    3. Reporte de arqueo consolidado impreso con desglose de medios de pago.
+Descripción:        Permite realizar el cuadre financiero al término del día. El sistema totaliza 
+                    los cobros de ventas directas, cobros de anticipos y liquidaciones de saldos, 
+                    desglosándolos por método de pago (efectivo y transferencias) y contrastándolos 
+                    con el dinero físico reportado para identificar sobrantes o faltantes.
+Resumen:            El operador cuenta el efectivo en gaveta; digita el monto en el sistema; 
+                    el sistema compara contra las ventas registradas; emite el reporte de cierre 
+                    y bloquea la caja para nuevas transacciones hasta el día siguiente.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente / Admin     | Accede a la opción "Cierre Diario de Caja / Arqueo".            |
+| 2    | Asistente Comercial   | Realiza el recuento físico de billetes y monedas en gaveta.     |
+| 3    | Asistente Comercial   | Digita el desglose de efectivo contado (Arqueo ciego).          |
+| 4    | Sistema SGO           | Realiza la consolidación contable de la sesión:                 |
+|      |                       | - Fondo Inicial de Apertura: $50.00 USD.                        |
+|      |                       | - Ventas Directas en Efectivo: +$85.00 USD.                     |
+|      |                       | - Anticipos Cobrados en Efectivo: +$150.00 USD.                 |
+|      |                       | - Saldos Cobrados en Efectivo: +$120.00 USD.                    |
+|      |                       | - Total Esperado en Efectivo: $405.00 USD.                      |
+|      |                       | - Total en Transferencias Bancarias (verificadas): $220.00 USD. |
+| 5    | Sistema SGO           | Compara el total contado físicamente contra el total esperado.  |
+| 6    | Sistema SGO           | Determina que la diferencia es $0.00 (Caja Cuadrada Exacta).    |
+| 7    | Administrador         | Revisa la conciliación y pulsa "Cerrar Caja Oficialmente".      |
+| 8    | Sistema SGO           | Actualiza la tabla `sesiones_caja` a estado 'CERRADA'.          |
+| 9    | Sistema SGO           | Imprime en ticketera la "Sábana de Cierre Diario Consolidado".  |
+| 10   | Administrador         | Firma el comprobante junto con el operador. Fin del caso.       |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Diferencia detectada  | 6a.1. El efectivo contado es menor (Faltante) o mayor (Sobrante)|
+|      | (Descuadre de caja)   |       al valor esperado en el sistema.                          |
+|      |                       | 6a.2. El sistema resalta el descuadre en rojo.                  |
+|      |                       | 6a.3. Exige ingresar un campo obligatorio de "Justificación de  |
+|      |                       |       Diferencia de Arqueo" (ej. "Error en vuelto de $1.00").   |
+|      |                       | 6a.4. Registra la diferencia en auditoría contable.             |
+|      |                       | 6a.5. El flujo continúa en el paso 7.                           |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+8.6 CASO DE USO: CU-VEN-06 — ANULAR VENTA CON REVERSIÓN ATÓMICA ACID
+================================================================================
+Caso de Uso:        Anular Venta con Reversión Atómica ACID
+Identificador:      CU-VEN-06
+Actores:            Administrador / Propietario (ACT-01).
+Tipo:               Secundario / Auditoría
+Referencias:        SRS v2.0: RF-22.
+                    Reglas de Negocio: RN-VEN-04.
+                    Seguridad: S-TAG-AUTH-04, S-TAG-ACC-06 (ISO/IEC 25010).
+Precondición:       Administrador autenticado; venta previamente liquidada o con anticipo.
+Postcondición:      1. Venta marcada como 'ANULADA' de forma lógica (`soft_delete = TRUE`).
+                    2. Reversión atómica integral en PostgreSQL (COMMIT o ROLLBACK global):
+                       - Restitución inmediata del stock físico al inventario.
+                       - Generación de asiento contable de egreso / contra-asiento en caja.
+                       - Cancelación automática de la orden técnica de taller asociada.
+                    3. Registro inmutable en `audit_logs` con la justificación del Administrador.
+Descripción:        Permite cancelar una venta errónea o devuelta por el cliente, garantizando 
+                    que todos los subsistemas impactados (inventario, contabilidad de caja y taller) 
+                    regresen a su estado previo sin inconsistencias ni pérdidas de stock.
+Resumen:            El Administrador busca la venta; digita su clave maestra de seguridad y el 
+                    motivo de la anulación; el sistema ejecuta la reversión ACID completa y emite 
+                    la nota de crédito o anulación interna.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Administrador         | Accede a la consola de "Ventas Realizadas" y pulsa "Anular".    |
+| 2    | Sistema SGO           | Solicita confirmación y clave maestra de autorización.          |
+| 3    | Administrador         | Ingresa su clave maestra y redacta el motivo formal de anulación|
+| 4    | Sistema SGO           | [<<include>>] Valida credencial de seguridad del Administrador. |
+| 5    | Sistema SGO           | Inicia transacción atómica de base de datos (`BEGIN TRANSACTION`):|
+|      |                       | a. Actualiza estado de venta a 'ANULADA'.                       |
+|      |                       | b. Re-incrementa el stock en `inventario_stock` de los ítems.   |
+|      |                       | c. Inserta contra-movimiento en `movimientos_caja` por egreso.  |
+|      |                       | d. Pone la orden de taller asociada en 'CANCELADA'.             |
+|      |                       | e. Registra el evento en `audit_logs` con fecha, IP y user_id.  |
+| 6    | Sistema SGO           | Ejecuta `COMMIT TRANSACTION` en PostgreSQL.                     |
+| 7    | Sistema SGO           | Emite comprobante de anulación contable.                        |
+| 8    | Administrador         | Visualiza la confirmación de la reversión exitosa. Fin del caso.|
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Clave maestra de      | 4a.1. La contraseña ingresada no coincide con el hash del Admin.|
+|      | autorización errónea  | 4a.2. El sistema rechaza la anulación y aborta la transacción.  |
+|      |                       | 4a.3. Registra intento de anulación no autorizado en seguridad. |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | Error en base de datos| 5a.1. Ocurre una falla de red o bloqueo de tabla durante el     |
+|      | durante la reversión  |       proceso de restitución.                                   |
+|      |                       | 5a.2. El motor ejecuta `ROLLBACK TRANSACTION` automático.       |
+|      |                       | 5a.3. Ninguna tabla es modificada (propiedad de Atomicidad).    |
+|      |                       | 5a.4. Notifica error y solicita reintentar.                     |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+9. MATRIZ DE REGLAS DE NEGOCIO (RN-LAB Y RN-VEN)
+================================================================================
+
++-------------+----------------------------------------------------------------------------------+
+| Código RN   | Descripción Formal de la Regla de Negocio                                        |
++-------------+----------------------------------------------------------------------------------+
+| RN-LAB-01   | Aislamiento y Disociación LOPDP en Órdenes de Producción:                        |
+|             | Toda orden emitida para laboratorio externo debe omitir diagnósticos CIE-10,     |
+|             | notas de anamnesis o antecedentes médicos, limitándose a datos estrictamente     |
+|             | necesarios para el corte óptico (graduación, DNP, alturas y cotas de bisel).     |
++-------------+----------------------------------------------------------------------------------+
+| RN-LAB-02   | Validación Geométrica de Reducción de Altura de Montura:                         |
+|             | En armazones ranurados / semialaire con reducción vertical milimétrica, la altura|
+|             | resultante no podrá ser inferior a la altura focal pupilar calculada + 8 mm de  |
+|             | margen inferior para garantizar la integridad visual del centro óptico.          |
++-------------+----------------------------------------------------------------------------------+
+| RN-VEN-01   | Control de Stock Híbrido en Tiempo Real:                                         |
+|             | No se permite facturar ni cobrar ningún producto de inventario (armazón o acces.)|
+|             | cuyo stock físico registrado en sistema sea igual o menor a cero (0).            |
++-------------+----------------------------------------------------------------------------------+
+| RN-VEN-02   | Ponderación Contable de Paquetes Promocionales:                                  |
+|             | Al aplicar combos de tarifa plana (ej. $99.00 USD), el sistema debe desglosar    |
+|             | internamente el ingreso asignando un valor proporcional a cada ítem para cuadre  |
+|             | de costo de ventas y valoración contable del stock.                              |
++-------------+----------------------------------------------------------------------------------+
+| RN-VEN-03   | Emisión Mandatoria de la Orden de Retiro con Anticipo:                           |
+|             | Toda orden técnica enviada al laboratorio exige un cobro de anticipo mínimo del  |
+|             | 50% (salvo autorización expresa del Administrador). Es obligatoria la impresión  |
+|             | del ticket de retiro con número correlativo, código de barras y saldo restante.  |
++-------------+----------------------------------------------------------------------------------+
+| RN-VEN-04   | Reversión Atómica ACID Exclusiva del Administrador:                              |
+|             | Los asistentes de mostrador tienen estrictamente denegada la anulación de ventas.|
+|             | Toda anulación exige rol de Administrador y se ejecuta bajo una transacción      |
+|             | ACID indivisible (reversión de inventario, caja y orden de taller en simultáneo).|
++-------------+----------------------------------------------------------------------------------+
+| RN-VEN-05   | Política de Arqueo Ciego de Caja:                                                |
+|             | Al cierre diario, el operador debe ingresar el dinero contado físicamente sin     |
+|             | conocer previamente el saldo calculado por el sistema, previniendo manipulaciones.|
++-------------+----------------------------------------------------------------------------------+
+
+
+================================================================================
+10. REQUISITOS DE CALIDAD Y SEGURIDAD ASOCIADOS (S-TAGS ISO/IEC 25010)
+================================================================================
+
+1. Confidencialidad y Cumplimiento Normativo (S-TAG-CONF-03):
+   - Disociación médica total de las fichas técnicas enviadas a proveedores externos de 
+     taller óptico, preservando el secreto profesional bajo la LOPDP de Ecuador.
+
+2. Integridad Transaccional y Consistencia ACID (S-TAG-INT-05 / S-TAG-INT-06):
+   - Garantía de atomicidad mediante transacciones PostgreSQL: ante cualquier falla en el 
+     asiento de caja o actualización de inventario, se ejecuta un rollback inmediato sin 
+     dejar estados financieros intermedios.
+   - Restricción de unicidad en comprobantes de transferencias para evitar doble contabilidad.
+
+3. Responsabilidad y Trazabilidad Comercial (S-TAG-ACC-06):
+   - Todo cobro, abono de anticipo, cierre de sesión de caja y anulación registra de 
+     forma inmutable el operador responsable, la fecha UTC, la terminal IP y el motivo.
+
+================================================================================
+FIN DE LA ESPECIFICACIÓN DE CASOS DE USO — FASE 3 (TALLER M4 Y VENTAS/CAJA M5)
+================================================================================

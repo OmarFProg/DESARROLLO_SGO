@@ -1,0 +1,722 @@
+================================================================================
+ESPECIFICACIÓN DE CASOS DE USO — SISTEMA DE GESTIÓN OPTOMÉTRICA (SGO)
+PAQUETE 3: ATENCIÓN CLÍNICA Y REFRACCIÓN INTEGRAL (M3)
+================================================================================
+Documento:       Fase 2 — Especificación de Casos de Uso (M3: Módulo Clínico y Refracción)
+Proyecto:        Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Cliente:         Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Marco Académico: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Metodología:     PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
+Referencia:      PlanDocumentacionCasosUso.txt (Fase 2) / SRS v2.0 / Audio Clínico Real
+Fecha:           25 de Septiembre de 2026
+Versión:         1.0 Definitiva
+Archivo:         CASOS DE USO/02_CasosUso_Modulo_Clinico_PMO.txt
+================================================================================
+
+
+TABLA DE CONTENIDO
+--------------------------------------------------------------------------------
+1. HISTORIAL DE VERSIONES
+2. INFORMACIÓN DEL PROYECTO
+3. APROBACIONES
+4. RESUMEN EJECUTIVO (PAQUETE M3)
+   4.1 Procesos Clínicos y Escenarios Médicos de Negocio
+   4.2 Hallazgos Elicitados de la Práctica Clínica Real (Audio Optométrico)
+   4.3 Áreas Físicas y Organizacionales Involucradas
+5. DIAGRAMA DE CASOS DE USO (REPRESENTACIÓN TEXTUAL FORMAL UML 2.5)
+   5.1 Estructura del Paquete Clínico (M3)
+   5.2 Relaciones de Inclusión (<<include>>) y Extensión (<<extend>>)
+6. DESCRIPCIÓN DETALLADA DE ACTORES (FICHAS PMOINFORMATICA)
+   6.1 ACT-02: Optometrista Clínico (Actor Principal)
+   6.2 ACT-NEG-01: Paciente / Cliente (Beneficiario Pasivo)
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO (FICHAS PMOINFORMATICA)
+   7.1 CU-CLI-01: Registrar Anamnesis y Motivo de Consulta
+   7.2 CU-CLI-02: Registrar Lensometría y Estado de Gafas Previas [AUDIO REAL]
+   7.3 CU-CLI-03: Registrar Pruebas Objetivas y Queratometría [AUDIO REAL]
+   7.4 CU-CLI-04: Realizar Examen Refractivo Subjetivo y Confort Ambulatorio [AUDIO REAL]
+   7.5 CU-CLI-05: Emitir Receta Óptica y Certificado Visual
+   7.6 CU-CLI-06: Registrar Evaluación de Polo Anterior y Seguimiento Patológico [AUDIO REAL]
+8. MATRIZ DE REGLAS DE NEGOCIO CLÍNICAS (RN-CLI)
+9. REQUISITOS DE CALIDAD Y SEGURIDAD ASOCIADOS (S-TAGS ISO/IEC 25010)
+================================================================================
+
+
+================================================================================
+1. HISTORIAL DE VERSIONES
+================================================================================
+
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| Fecha      | Versión | Autor                             | Organización       | Descripción del Cambio                |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| 25/09/2026 | 1.0     | Figueroa Omar / Villalva Alex.   | ESPOCH / SGO       | Formalización integral del paquete    |
+|            |         |                                   |                    | clínico (M3) integrando los 4 casos   |
+|            |         |                                   |                    | de uso elicitados del audio real.     |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+
+
+================================================================================
+2. INFORMACIÓN DEL PROYECTO
+================================================================================
+
+Empresa / Organización:                   Óptica Vista Visión
+Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Fecha de Preparación:                     25 de Septiembre de 2026
+Cliente:                                  Óptica Vista Visión — Riobamba, Ecuador
+Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
+Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
+Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
+Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
+
+
+================================================================================
+3. APROBACIONES
+================================================================================
+
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Nombre y Apellido              | Cargo                      | Departamento / Org.   | Fecha      | Firma      |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
+| Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Lic. Optom. Titular            | Especialista Clínico       | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+
+
+================================================================================
+4. RESUMEN EJECUTIVO (PAQUETE M3)
+================================================================================
+
+4.1 PROCESOS CLÍNICOS Y ESCENARIOS MÉDICOS DE NEGOCIO
+El Paquete 3 (M3) constituye el núcleo técnico-médico del sistema SGO. Su finalidad es 
+digitalizar y estandarizar la atención optométrica integral provista en el gabinete clínico 
+de Óptica Vista Visión, abarcando desde la recepción médica del paciente hasta la 
+prescripción definitiva inmutable. Modela las siguientes interacciones:
+1. Anamnesis Estructurada y Motivo de Consulta: Captura de síntomas (cefaleas, astenopía, 
+   visión borrosa) y antecedentes patológicos sistémicos u oftalmológicos.
+2. Lensometría Forense y Estado Físico de Gafas Anteriores: Medición física de las lentes en 
+   uso del paciente para fijar la línea base dióptrica y evaluar daños estructurales.
+3. Pruebas Biomédicas Objetivas y Queratometría: Registro de radios de curvatura corneal y 
+   cálculo automatizado del astigmatismo corneal estimado ($K_2 - K_1$).
+4. Examen Refractivo Subjetivo y Confort Ambulatorio: Graduación monocular y binocular con 
+   foróptero y cartilla Snellen, combinada con la validación biomecánica en marcha dinámica.
+5. Emisión de Prescripción y Certificados Visuales: Generación de receta óptica para el 
+   paciente con firma profesional y codificación diagnóstica internacional CIE-10.
+6. Tamizaje Biomicroscópico y Seguimiento de Segmento Anterior: Documentación de patologías 
+   externas incipientes (pterigión) y recomendaciones preventivas ambientales.
+
+4.2 HALLAZGOS ELICITADOS DE LA PRÁCTICA CLÍNICA REAL (AUDIO OPTOMÉTRICO)
+La transcripción del audio de la sesión médica real evidenció que el modelo formal original 
+(SRS v2.0) presentaba omisiones graves que hubieran forzado al profesional a registrar datos 
+en libretas físicas o notas desestructuradas. Este paquete formaliza:
+- CU-CLI-02: Registro estructurado de lensometría física (+1.75 / -1.50) y diagnóstico de daño 
+  en luna previa (astillamiento por falta de protección en armazón semialaire).
+- CU-CLI-03: Captura de parámetros queratométricos objetivos del autorrefractómetro computarizado.
+- CU-CLI-04 (Pasos 5-9): Incorporación del "Test de Confort Ambulatorio en Marcha" con aros de 
+  prueba, comprobando visualmente la ausencia de desniveles u ondulaciones en el piso.
+- CU-CLI-06: Módulo de seguimiento de pterigión en cara interna (grado I, sin invasión corneal) 
+  con advertencias de no frotamiento ocular y uso mandatorio de filtro UV400.
+
+4.3 ÁREAS FÍSICAS Y ORGANIZACIONALES INVOLUCRADAS
+- Consultorio Optométrico / Gabinete Clínico: Equipado con foróptero, proyector Snellen, 
+  lámpara de hendidura, queratómetro/autorrefractómetro computarizado y lensómetro digital.
+- Mostrador / Entrega: Destinatario de la receta óptica para cotización comercial y taller.
+
+
+================================================================================
+5. DIAGRAMA DE CASOS DE USO (REPRESENTACIÓN TEXTUAL FORMAL UML 2.5)
+================================================================================
+
+5.1 ESTRUCTURA DEL PAQUETE CLÍNICO (M3)
+
+  +-------------------------------------------------------------------------------+
+  | LÍMITE DEL SISTEMA: SUBSISTEMA DE ATENCIÓN CLÍNICA Y REFRACCIÓN (M3)          |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-CLI-01: Registrar Anamnesis y Motivo de   |                 |
+  |             |             Consulta                          |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-CLI-02: Registrar Lensometría y Estado    |                 |
+  |             |             de Gafas Previas [AUDIO REAL]     |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-CLI-03: Registrar Pruebas Objetivas y     |                 |
+  |             |             Queratometría [AUDIO REAL]        |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-CLI-04: Realizar Examen Refractivo y      |                 |
+  |             |             Confort Ambulatorio [AUDIO REAL]  |                 |
+  |             +-----------------------------------------------+                 |
+  |                   ^                             ^                             |
+  |                   |                             |                             |
+  |              <<include>>                    <<extend>> (Pt. Ext: Salto >1.5D) |
+  |                   |                             |                             |
+  |             +------------------+          +---------------------------------+ |
+  |             | Validar Rangos y |          | Alertar Progresión Refractiva   | |
+  |             | Cilindro Negativo|          | Anormal / Queratocono           | |
+  |             +------------------+          +---------------------------------+ |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-CLI-05: Emitir Receta Óptica y Certificado|                 |
+  |             |             Visual                            |                 |
+  |             +-----------------------------------------------+                 |
+  |                   |                                                           |
+  |              <<include>>                                                      |
+  |                   v                                                           |
+  |             +-----------------------------------------------+                 |
+  |             | Registrar Pista Inmutable de Auditoría S-Tag  |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-CLI-06: Registrar Evaluación Polo Anterior|                 |
+  |             |             y Patología Ocular [AUDIO REAL]   |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  +-------------------------------------------------------------------------------+
+         ^                                           ^
+         |                                           |
+   [Optometrista Clínico]                       [Paciente]
+   (ACT-02)                                     (ACT-NEG-01: Beneficiario)
+
+
+================================================================================
+6. DESCRIPCIÓN DETALLADA DE ACTORES (FICHAS PMOINFORMATICA)
+================================================================================
+
+--------------------------------------------------------------------------------
+6.1 ACTOR: OPTOMETRISTA CLÍNICO
+--------------------------------------------------------------------------------
+Actor:          Optometrista Clínico
+Identificador:  ACT-02
+Descripción:    Profesional de la salud visual legalmente habilitado que evalúa la agudeza 
+                visual, determina la corrección óptica refractiva, detecta alteraciones 
+                patológicas del globo ocular y prescribe tratamientos ópticos.
+Características:Especialista capacitado, con registro profesional avalado por el Ministerio de 
+                Salud Pública (MSP) y Senescyt. Opera con instrumental técnico de precisión.
+Relación:       Hereda del actor base ACT-00 (Usuario Autenticado).
+Referencias:    CU-CLI-01, CU-CLI-02, CU-CLI-03, CU-CLI-04, CU-CLI-05, CU-CLI-06.
+
+Atributos del Actor en el Módulo Clínico:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| optometrista_id   | Llave primaria única del profesional clínico      | UUID               |
+| registro_msp      | Código de habilitación profesional emitido por MSP| Varchar(25)        |
+| nombres_completos | Nombres y apellidos oficiales del optometrista    | Varchar(120)       |
+| titulo_academico  | Titulación académica (Lic. en Optometría)         | Varchar(100)       |
+| certificado_p12_id| Referencia al certificado digital para firma      | UUID               |
++-------------------+---------------------------------------------------+--------------------+
+Comentarios:    Es el único rol con privilegios RBAC para confirmar diagnósticos y sellar 
+                la prescripción médica definitiva.
+
+--------------------------------------------------------------------------------
+6.2 ACTOR: PACIENTE / CLIENTE (ACTOR DE NEGOCIO / BENEFICIARIO PASIVO)
+--------------------------------------------------------------------------------
+Actor:          Paciente / Cliente
+Identificador:  ACT-NEG-01
+Descripción:    Persona natural que acude a la óptica para someterse a valoración optométrica, 
+                adquirir dispositivos visuales o recibir seguimiento clínico.
+Características:Sujeto primario de los datos clínicos de salud visual. No opera de forma directa 
+                la interfaz de usuario del sistema SGO, pero sus respuestas subjetivas guían 
+                la refracción y es el receptor legal de la prescripción.
+Relación:       Ninguna (Actor externo / de negocio).
+Referencias:    CU-CLI-01, CU-CLI-04, CU-CLI-05, CU-CLI-06.
+
+Atributos de Datos Médicos Asociados:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| paciente_id       | Identificador único del expediente del paciente   | UUID               |
+| cedula_identidad  | Cédula de ciudadanía o código temporal de menor   | Varchar(15)        |
+| edad_anos         | Edad cronológica calculada a la fecha de consulta | Smallint           |
+| ocupacion_visual  | Actividad habitual (trabajo en computador, etc.)  | Varchar(100)       |
++-------------------+---------------------------------------------------+--------------------+
+Comentarios:    Sus datos se encuentran protegidos bajo la Ley Orgánica de Protección de 
+                Datos Personales (LOPDP Ecuador); los diagnósticos clínicos quedan aislados 
+                de las órdenes de taller y facturas de venta.
+
+
+================================================================================
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO (FICHAS PMOINFORMATICA)
+================================================================================
+
+================================================================================
+7.1 CASO DE USO: CU-CLI-01 — REGISTRAR ANAMNESIS Y MOTIVO DE CONSULTA
+================================================================================
+Caso de Uso:        Registrar Anamnesis y Motivo de Consulta
+Identificador:      CU-CLI-01
+Actores:            Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-13.
+                    Reglas de Negocio: RN-CLI-03.
+                    Seguridad: S-TAG-INT-04, S-TAG-ACC-04 (ISO/IEC 25010).
+Precondición:       1. Optometrista autenticado con sesión clínica abierta.
+                    2. Paciente seleccionado en la cola de atención mediante CU-PAC-03.
+Postcondición:      1. Se crea un registro de apertura de consulta clínica con UUID único.
+                    2. Se almacenan síntomas subjetivos y antecedentes médicos estructurados.
+                    3. La consulta queda en estado 'EN_PROCESO'.
+Descripción:        Permite documentar las razones que motivan al paciente a acudir a la óptica 
+                    (disminución de agudeza visual, cansancio ocular, cefaleas temporales, etc.), 
+                    así como sus antecedentes personales (diabetes, hipertensión) y antecedentes 
+                    oftalmológicos familiares (glaucoma, queratocono).
+Resumen:            El optometrista abre la consulta del paciente seleccionado; interroga al 
+                    paciente sobre sus molestias y hábitos visuales; selecciona motivos 
+                    estandarizados y redacta observaciones; el sistema guarda la anamnesis.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Selecciona al paciente en la cola de espera y pulsa "Atender".  |
+| 2    | Sistema SGO           | Inicializa un nuevo encuentro clínico y presenta el formulario  |
+|      |                       | de "Anamnesis y Antecedentes Visuales".                          |
+| 3    | Optometrista Clínico  | Interroga al paciente sobre el motivo de su visita.             |
+| 4    | Optometrista Clínico  | Selecciona en el catálogo de síntomas frecuentes:               |
+|      |                       | [x] Visión borrosa de lejos / cerca.                            |
+|      |                       | [x] Fatiga ocular / Cansancio al trabajar frente a pantallas.   |
+|      |                       | [ ] Cefalea frontal u occipital recurrente.                     |
+| 5    | Optometrista Clínico  | Documenta el tiempo de evolución de los síntomas (ej. "3 meses")|
+|      |                       | y el tipo de trabajo predominante (ej. "Oficina / Computador"). |
+| 6    | Optometrista Clínico  | Registra antecedentes personales: diabetes, hipertensión o      |
+|      |                       | medicación actual (marca "Ninguno" si no refiere).              |
+| 7    | Optometrista Clínico  | Registra si el paciente usa actualmente gafas y antigüedad aprox|
+| 8    | Optometrista Clínico  | Pulsa "Guardar Anamnesis y Continuar".                          |
+| 9    | Sistema SGO           | Valida que el motivo de consulta contenga información válida.   |
+| 10   | Sistema SGO           | Persiste la cabecera de la consulta en la tabla `consultas`.    |
+| 11   | Sistema SGO           | Habilita la pestaña "Lensometría / Examen Previo".               |
+| 12   | Optometrista Clínico  | Visualiza el formulario de lensometría listo. Fin del caso.     |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Paciente reporta      | 6a.1. El optometrista marca la casilla "Diabetes Mellitus".      |
+|      | Diabetes o Patología  | 6a.2. El sistema despliega campo mandatorio: "Tiempo de         |
+|      | Sistémica Crónica     |       evolución y último nivel de glucosa en ayunas".           |
+|      |                       | 6a.3. El sistema añade una bandera de alerta clínica:           |
+|      |                       |       "Precaución: Fluctuaciones refractivas por glicemia".     |
+|      |                       | 6a.4. El flujo continúa en el paso 7.                           |
++------+-----------------------+-----------------------------------------------------------------+
+| 9a   | Campos obligatorios   | 9a.1. El sistema detecta que no se marcó ningún síntoma ni se   |
+|      | en blanco             |       escribió texto en el motivo de consulta.                  |
+|      |                       | 9a.2. Alerta: "Debe detallar el motivo de consulta del paciente"|
+|      |                       | 9a.3. El flujo regresa al paso 3.                               |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.2 CASO DE USO: CU-CLI-02 — REGISTRAR LENSOMETRÍA Y ESTADO DE GAFAS PREVIAS
+================================================================================
+Caso de Uso:        Registrar Lensometría y Estado de Gafas Previas [ELICITADO DE AUDIO]
+Identificador:      CU-CLI-02
+Actores:            Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-12 (Ampliación por Práctica Real).
+                    Insumo: Audio de atención clínica (Caso real: +1.75 / -1.50 y luna astillada).
+                    Reglas de Negocio: RN-CLI-01, RN-CLI-04.
+                    Seguridad: S-TAG-INT-04 (ISO/IEC 25010).
+Precondición:       Consulta clínica activa en curso (CU-CLI-01 completado).
+Postcondición:      1. Se almacena la fórmula dióptrica de las lentes anteriores del paciente 
+                       asociada a la consulta médica.
+                    2. Se registran las propiedades materiales y el estado de deterioro físico.
+                    3. Los valores de la lente previa se proyectan en la pantalla de refracción 
+                       para permitir la comparación analítica inmediata del cambio dioptrico.
+Descripción:        Permite medir y documentar los valores esféricos, cilíndricos, eje y adición 
+                    de los lentes que el paciente utiliza al momento de ingresar a la consulta, 
+                    empleando el lensómetro del consultorio. Asimismo, registra el material de 
+                    la luna, los tratamientos visibles (filtro azul, antirreflejo) y los daños 
+                    físicos observados (astillamiento por corte semialaire, rayaduras severas).
+Resumen:            El optometrista coloca las gafas del paciente en el lensómetro; digita los 
+                    valores medidos de OD y OI; marca el tipo de material y tratamiento; documenta 
+                    el daño físico si existe; el sistema almacena los datos y calcula la comparativa.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Solicita al paciente sus gafas actuales en uso y las examina.  |
+| 2    | Optometrista Clínico  | Coloca las gafas en el lensómetro y mide la corrección óptica.  |
+| 3    | Optometrista Clínico  | Accede a la pestaña "Lensometría / Lentes Previos".             |
+| 4    | Optometrista Clínico  | Ingresa la graduación medida para Ojo Derecho (OD):             |
+|      |                       | - Esfera: +1.75 D.                                              |
+|      |                       | - Cilindro: -1.50 D.                                            |
+|      |                       | - Eje: 10°.                                                     |
+| 5    | Optometrista Clínico  | Ingresa la graduación medida para Ojo Izquierdo (OI):           |
+|      |                       | - Esfera: +1.75 D.                                              |
+|      |                       | - Cilindro: -1.50 D.                                            |
+|      |                       | - Eje: 175°.                                                    |
+| 6    | Optometrista Clínico  | Selecciona las características físicas de la luna anterior:     |
+|      |                       | - Material: Plástico estándar (CR-39).                          |
+|      |                       | - Tratamiento: Filtro de Luz Azul (residual azul/violeta).      |
+| 7    | Optometrista Clínico  | Selecciona el estado de deterioro físico en el catálogo:        |
+|      |                       | [ ] Rayaduras superficiales.                                    |
+|      |                       | [x] Astillamiento / Desportillamiento de borde.                 |
+|      |                       | [ ] Rotura de bisel o montura.                                  |
+| 8    | Optometrista Clínico  | Redacta el hallazgo físico: "Luna astillada en esquina inferior  |
+|      |                       | nasal por carecer de bisel protegido en armazón semialaire".    |
+| 9    | Optometrista Clínico  | Pulsa "Guardar Lensometría".                                    |
+| 10   | Sistema SGO           | Valida consistencia de dioptrías (pasos de 0.25 y eje 0-180°).  |
+| 11   | Sistema SGO           | Persiste el registro en la tabla `lensometria_previa`.          |
+| 12   | Sistema SGO           | Carga los valores dioptricos en la cuadrícula de comparación    |
+|      |                       | histórica para la siguiente etapa de refracción subjetiva.      |
+| 13   | Optometrista Clínico  | Visualiza la confirmación de registro. Fin del caso.            |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 1a   | Paciente no usa       | 1a.1. El optometrista marca la opción:                          |
+|      | lentes previos o      |       "[x] Paciente no utiliza lentes / Primera Consulta".      |
+|      | primera vez           | 1a.2. El sistema deshabilita y bloquea los campos de lensometría|
+|      |                       |       asignando valores nulos controlados.                      |
+|      |                       | 1a.3. El sistema habilita de inmediato la siguiente pestaña.    |
+|      |                       | 1a.4. El flujo salta directamente al paso 12.                   |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Signo de cilindro     | 4a.1. El optometrista digita cilindro con signo positivo (+).   |
+|      | positivo ingresado    | 4a.2. El sistema aplica transposición matemática automática:    |
+|      |                       |       Nueva Esfera = Esfera + Cilindro; Nuevo Cilindro = -Cil;  |
+|      |                       |       Nuevo Eje = Eje +/- 90°.                                  |
+|      |                       | 4a.3. Notifica con aviso informativo: "Cilindro transpuesto a   |
+|      |                       |       notación negativa estandarizada".                         |
+|      |                       | 4a.4. El flujo continúa en el paso 5.                           |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.3 CASO DE USO: CU-CLI-03 — REGISTRAR PRUEBAS OBJETIVAS Y QUERATOMETRÍA
+================================================================================
+Caso de Uso:        Registrar Pruebas Objetivas y Queratometría [ELICITADO DE AUDIO]
+Identificador:      CU-CLI-03
+Actores:            Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-07 (Ampliación por Práctica Real).
+                    Insumo: Audio de atención clínica (Pruebas computarizadas preliminares).
+                    Reglas de Negocio: RN-CLI-05.
+                    Seguridad: S-TAG-INT-04 (ISO/IEC 25010).
+Precondición:       Consulta médica activa; paciente sentado frente al instrumental computarizado.
+Postcondición:      1. Valores de queratometría corneal (K1, K2 y Eje) almacenados para OD y OI.
+                    2. Cálculo automático del cilindro corneal ($K_2 - K_1$).
+                    3. Parámetros autorrefractométricos preliminares registrados para precargar 
+                       el foróptero en la refracción subjetiva.
+Descripción:        Permite ingresar los parámetros biométricos corneales objetivos obtenidos en 
+                    el autorrefractómetro/queratómetro computarizado. Esta medición preliminar 
+                    permite evaluar la curvatura anterior de la córnea, descartar ectasias o 
+                    queratoconos incipientes y proveer un punto de partida exacto para la graduación.
+Resumen:            El paciente apoya mentón y frente en el equipo; el optometrista toma la lectura 
+                    computarizada; introduce K1, K2 y ejes corneales; el sistema calcula el 
+                    astigmatismo corneal y habilita la copia rápida hacia el examen subjetivo.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Accede a la pestaña "Pruebas Objetivas / Queratometría".        |
+| 2    | Optometrista Clínico  | Posiciona al paciente en el equipo computarizado y toma lectura.|
+| 3    | Optometrista Clínico  | Ingresa queratometría de Ojo Derecho (OD):                      |
+|      |                       | - K1 (meridiano más plano en Dioptrías o mm).                   |
+|      |                       | - K2 (meridiano más curvo en Dioptrías o mm).                   |
+|      |                       | - Eje del meridiano corneal (0° a 180°).                        |
+| 4    | Sistema SGO           | Calcula el astigmatismo corneal para OD: $\Delta K = K_2 - K_1$.|
+| 5    | Optometrista Clínico  | Ingresa queratometría de Ojo Izquierdo (OI): K1, K2 y Eje.      |
+| 6    | Sistema SGO           | Calcula el astigmatismo corneal para OI: $\Delta K = K_2 - K_1$.|
+| 7    | Optometrista Clínico  | Ingresa la autorrefractometría computarizada tentativa (OD/OI). |
+| 8    | Optometrista Clínico  | Pulsa "Guardar Datos Objetivos y Copiar a Subjetivo".           |
+| 9    | Sistema SGO           | Valida que K1 y K2 se encuentren en rango biológico (36 a 52 D).|
+| 10   | Sistema SGO           | Persiste las lecturas en la tabla `pruebas_objetivas`.          |
+| 11   | Sistema SGO           | Pre-llena la pantalla de refracción con estos valores base.     |
+| 12   | Optometrista Clínico  | Pasa al paciente al foróptero. Fin del caso.                    |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Diferencia K2 - K1    | 4a.1. El sistema detecta que $\Delta K \ge 3.00\text{ D}$.      |
+|      | elevada (> 3.00 D)    | 4a.2. Despliega advertencia clínica: "Astigmatismo corneal alto.|
+|      |                       |       Sospecha de queratocono o ectasia corneal".               |
+|      |                       | 4a.3. Sugiere evaluación complementaria con lámpara de hendidura|
+|      |                       |       y derivación a topografía corneal.                        |
+|      |                       | 4a.4. El flujo prosigue al paso 5.                              |
++------+-----------------------+-----------------------------------------------------------------+
+| 9a   | Valores K fuera de    | 9a.1. El valor K ingresado es < 35.00 D o > 55.00 D.            |
+|      | rango biológico       | 9a.2. El sistema solicita confirmación: "¿Confirma que el valor |
+|      |                       |       queratométrico ingresado es atípico?".                    |
+|      |                       | 9a.3. El especialista confirma o rectifica digitación.          |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.4 CASO DE USO: CU-CLI-04 — REALIZAR EXAMEN REFRACTIVO Y CONFORT AMBULATORIO
+================================================================================
+Caso de Uso:        Realizar Examen Refractivo y Confort Ambulatorio [ELICITADO DE AUDIO]
+Identificador:      CU-CLI-04
+Actores:            Optometrista Clínico (ACT-02), Paciente / Cliente (ACT-NEG-01).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-07, RF-08, RF-09, RF-10, RF-11, RF-12.
+                    Insumo: Audio de atención clínica (Prueba de marcha y marcha sin mareos).
+                    Reglas de Negocio: RN-CLI-01, RN-CLI-02.
+                    Seguridad: S-TAG-INT-04, S-TAG-ACC-04 (ISO/IEC 25010).
+Precondición:       Consulta en curso; anamnesis y pruebas preliminares concluidas.
+Postcondición:      1. Refracción clínica definitiva guardada con sello de inmutabilidad.
+                    2. Parámetros de Distancia Nasopupilar (DNP monocular) y Altura focal registrados.
+                    3. Registro booleano explícito de "Confort Ambulatorio en Marcha Aprobado".
+                    4. Comparativa final generada respecto a la fórmula previa del paciente.
+Descripción:        Determina la prescripción refractiva definitiva mediante evaluación subjetiva 
+                    con foróptero y cartilla Snellen, verificando la máxima agudeza visual con la 
+                    mínima corrección dioptrica. De forma mandatoria, antes de persistir la receta, 
+                    el optometrista coloca los lentes calculados en la armazón de prueba y hace 
+                    caminar al paciente por el establecimiento para validar la ausencia de mareos, 
+                    distorsiones periféricas u ondulaciones en el piso.
+Resumen:            El optometrista gradúa con foróptero monocular y binocularmente; mide agudeza 
+                    visual Snellen; monta la fórmula tentativa en la armazón de prueba; el paciente 
+                    camina y confirma confort en el suelo y vitrinas; el especialista sella la receta.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Registra la Agudeza Visual Inicial Sin Corrección (AVsc) para   |
+|      |                       | Ojo Derecho (ej. 20/70) y Ojo Izquierdo (ej. 20/80).            |
+| 2    | Optometrista Clínico  | Coloca al paciente frente al foróptero y proyecta letras Snellen|
+| 3    | Optometrista Clínico  | Refina la corrección esfero-cilíndrica monocular en pasos 0.25 D|
+|      |                       | hasta lograr la mejor agudeza visual con el cilindro negativo:  |
+|      |                       | - OD: Esfera +2.00 D, Cilindro -1.75 D, Eje 10°.                |
+|      |                       | - OI: Esfera +2.00 D, Cilindro -1.75 D, Eje 175°.               |
+| 4    | Optometrista Clínico  | Evalúa la visión cercana a 40 cm y determina la Adición (+0.75D)|
+| 5    | Sistema SGO           | [<<include>>] Valida rangos ópticos y signo negativo estricto.  |
+| 6    | Sistema SGO           | Presenta cuadro comparativo automático contra la lente previa:  |
+|      |                       | Incremento detectado: +0.25 D en Esfera y -0.25 D en Cilindro.  |
+| 7    | Optometrista Clínico  | Toma la montura de prueba ambulatoria y monta las lunas de      |
+|      |                       | prueba correspondientes a la graduación calculada.              |
+| 8    | Optometrista Clínico  | Solicita al paciente ponerse de pie y caminar por el consultorio|
+| 9    | Paciente              | Camina observando el piso, las esquinas de muebles y vitrinas.  |
+| 10   | Optometrista Clínico  | Pregunta: "¿Siente sensación de vacío, desnivel en el piso,     |
+|      |                       | curvatura en las baldosas o mareo al caminar?".                 |
+| 11   | Paciente              | Responde positivamente: "Todo se ve nítido, plano y confortable"|
+| 12   | Optometrista Clínico  | Marca en el sistema:                                            |
+|      |                       | [x] Prueba ambulatoria de marcha ejecutada con éxito.           |
+|      |                       | [x] Paciente confirma piso plano y confort dinámico sin mareo.  |
+| 13   | Optometrista Clínico  | Mide con el pupilómetro digital la Distancia Nasopupilar:       |
+|      |                       | - DNP OD: 31.5 mm | DNP OI: 32.0 mm.                           |
+| 14   | Optometrista Clínico  | Pulsa "Guardar y Cerrar Refracción Definitiva".                 |
+| 15   | Sistema SGO           | Persiste la refracción en `examenes_refraccion` con hash SHA-256|
+|      |                       | que impide cualquier alteración posterior (Inmutabilidad).     |
+| 16   | Optometrista Clínico  | Visualiza el mensaje: "Refracción clínica sellada con éxito".   |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | [<<extend>>]          | 5a.1. El sistema detecta que la variación respecto a la última  |
+|      | Salto refractivo      |       consulta o lensometría previa supera 1.50 Dioptrías.      |
+|      | abrupto (> 1.50 D)    | 5a.2. Despliega advertencia en rojo: "Incremento refractivo     |
+|      |                       |       atípico. Verifique si existe patología o error de medida".|
+|      |                       | 5a.3. El especialista re-valida y añade justificación médica.   |
++------+-----------------------+-----------------------------------------------------------------+
+| 11a  | Paciente reporta piso | 11a.1. El paciente manifiesta: "Siento que el piso se levanta o |
+|      | hundido, curvado o    |        siento un leve mareo al girar la cabeza rápidamente".    |
+|      | mareo en marcha       | 11a.2. El optometrista disminuye en 0.25 D la esfera positiva o |
+|      |                       |        reduce ligeramente el valor cilíndrico en montura prueba.|
+|      |                       | 11a.3. Repite la prueba de marcha durante 2 minutos adicionales.|
+|      |                       | 11a.4. Cuando el paciente confirma adaptación, el especialista  |
+|      |                       |        actualiza los valores corregidos en el formulario SGO.   |
+|      |                       | 11a.5. El flujo retorna al paso 12.                             |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.5 CASO DE USO: CU-CLI-05 — EMITIR RECETA ÓPTICA Y CERTIFICADO VISUAL
+================================================================================
+Caso de Uso:        Emitir Receta Óptica y Certificado Visual
+Identificador:      CU-CLI-05
+Actores:            Optometrista Clínico (ACT-02), Paciente / Cliente (ACT-NEG-01).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-14, RF-15.
+                    Seguridad: S-TAG-AUTH-03, S-TAG-ACC-04 (ISO/IEC 25010).
+Precondición:       Refracción clínica definitiva guardada y sellada en CU-CLI-04.
+Postcondición:      1. Receta óptica generada en formato digital e impresa para el paciente.
+                    2. Diagnóstico asociado conforme a la Clasificación Internacional CIE-10.
+                    3. Código QR de validación de autenticidad insertado en la receta.
+                    4. Registro de auditoría emitido con el identificador del profesional emisor.
+Descripción:        Permite generar el documento médico oficial de prescripción visual que se 
+                    entrega al paciente. Incluye la graduación refractiva final, la agudeza 
+                    visual alcanzada, el tipo de tratamiento recomendado (filtro azul, antirreflejo), 
+                    el diagnóstico CIE-10 (ej. Astigmatismo Miópico Compuesto), recomendaciones 
+                    ergonómicas y la firma profesional del optometrista.
+Resumen:            El especialista selecciona el diagnóstico CIE-10; agrega observaciones de uso; 
+                    el sistema genera la receta con código QR y membrete oficial; se imprime en 
+                    formato A5 o ticket térmico y se envía copia en PDF al paciente.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Accede a la opción "Emitir Receta Óptica".                      |
+| 2    | Sistema SGO           | Carga la fórmula final sellada en CU-CLI-04 (OD, OI, Adición).  |
+| 3    | Optometrista Clínico  | Busca y asocia el código diagnóstico en el catálogo CIE-10:     |
+|      |                       | - H52.2: Astigmatismo.                                          |
+|      |                       | - H52.0: Hipermetropía.                                         |
+| 4    | Optometrista Clínico  | Selecciona la modalidad de uso recomendada:                     |
+|      |                       | [x] Uso constante / permanente.                                 |
+|      |                       | [x] Uso obligatorio para trabajo en computador y lectura.       |
+| 5    | Optometrista Clínico  | Marca el tratamiento de lunas sugerido:                         |
+|      |                       | - Material: Policarbonato de alto índice.                       |
+|      |                       | - Tratamiento: Filtro de Luz Azul con antirreflejo multicapa.   |
+| 6    | Optometrista Clínico  | Pulsa "Generar e Imprimir Receta".                              |
+| 7    | Sistema SGO           | Genera el PDF con membrete institucional de Óptica Vista Visión,|
+|      |                       | código QR verificador, firma digitalizada y sello del MSP.      |
+| 8    | Sistema SGO           | [<<include>>] Inserta registro inmutable en `audit_logs`.       |
+| 9    | Sistema SGO           | Envía el documento a la impresora física predeterminada.        |
+| 10   | Optometrista Clínico  | Entrega la receta física al paciente y explica su prescripción. |
+| 11   | Paciente              | Recibe su receta médica. Fin del caso.                          |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Paciente solicita     | 6a.1. El optometrista marca la casilla "Despachar por WhatsApp /|
+|      | envío digital de      |       Correo Electrónico".                                      |
+|      | la receta médica      | 6a.2. El sistema envía el enlace de descarga seguro cifrado     |
+|      |                       |       al celular o email registrado en la ficha demográfica.   |
+|      |                       | 6a.3. El flujo continúa en el paso 8.                           |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.6 CASO DE USO: CU-CLI-06 — EVALUACIÓN DE POLO ANTERIOR Y SEGUIMIENTO PATOLÓGICO
+================================================================================
+Caso de Uso:        Registrar Evaluación de Polo Anterior y Seguimiento Patológico [AUDIO REAL]
+Identificador:      CU-CLI-06
+Actores:            Optometrista Clínico (ACT-02), Paciente / Cliente (ACT-NEG-01).
+Tipo:               Secundario / Clínico Especializado
+Referencias:        SRS v2.0: RF-13 (Ampliación por Práctica Real).
+                    Insumo: Audio de atención clínica (Detección de pterigión en cara interna).
+                    Reglas de Negocio: RN-CLI-06.
+                    Seguridad: S-TAG-INT-04, S-TAG-ACC-04 (ISO/IEC 25010).
+Precondición:       Consulta médica activa; lámpara de hendidura o biomicroscopio disponible.
+Postcondición:      1. Registro estructurado de la condición patológica de segmento anterior.
+                    2. Mapeo anatómico de pterigión (lateralidad, ubicación nasal/temporal, grado).
+                    3. Registro de advertencias preventivas entregadas al paciente.
+                    4. Programación de control periódico a 12 meses.
+Descripción:        Permite registrar el examen físico y biomicroscópico de párpados, conjuntiva, 
+                    córnea y cristalino. Permite tipificar el crecimiento de tejido fibrovascular 
+                    (pterigión / carnosidad), documentar si compromete o amenaza el eje pupilar 
+                    y plasmar formalmente las recomendaciones preventivas ambientales (no frotar, 
+                    protección UV400 obligatoria) para evitar su proliferación quirúrgica.
+Resumen:            El especialista examina el ojo con biomicroscopio; detecta pterigión nasal 
+                    grado I; ingresa en el sistema el hallazgo anatómico y grado de evolución; 
+                    marca las advertencias preventivas dadas al paciente; guarda el seguimiento.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Accede a la pestaña "Polo Anterior y Salud Ocular".             |
+| 2    | Optometrista Clínico  | Examina el segmento anterior del paciente (córnea, conjuntiva). |
+| 3    | Optometrista Clínico  | Identifica presencia de pterigión / carnosidad en cara interna. |
+| 4    | Optometrista Clínico  | Registra los parámetros anatómicos estructurados:               |
+|      |                       | - Ojo Afectado: Ojo Derecho (OD) / Ojo Izquierdo (OI).          |
+|      |                       | - Ubicación: Nasal (cara interna).                              |
+|      |                       | - Grado de Evolución: Grado I (incipiente / limbo corneal).     |
+|      |                       | - Invasión Corneal hacia Eje Pupilar: No invade (< 1 mm).       |
+| 5    | Optometrista Clínico  | Registra las indicaciones terapéuticas y preventivas brindadas: |
+|      |                       | [x] Advertencia expresa: No frotarse ni rascarse los ojos.      |
+|      |                       | [x] Protección ambiental: Uso mandatorio de lentes con filtro   |
+|      |                       |     UV400 y antirreflejo para frenar radiación solar y polvo.   |
+|      |                       | [x] Prescripción de colirio lubricante / lágrima artificial.    |
+| 6    | Optometrista Clínico  | Documenta en observaciones clínicas: "Pterigión nasal incipiente|
+|      |                       | sin indicación quirúrgica inmediata. Monitoreo anual de avance".|
+| 7    | Optometrista Clínico  | Asigna código CIE-10 complementario: H11.0 (Pterigión).         |
+| 8    | Optometrista Clínico  | Fija fecha de control preventivo: 1 año posterior a la consulta.|
+| 9    | Optometrista Clínico  | Pulsa "Guardar Evaluación de Polo Anterior".                    |
+| 10   | Sistema SGO           | Persiste la ficha patológica asociada al expediente histórico.  |
+| 11   | Sistema SGO           | Genera una alerta de seguimiento programada para la agenda.     |
+| 12   | Optometrista Clínico  | Visualiza la confirmación de guardado. Fin del caso.            |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Pterigión Grado III o | 4a.1. El optometrista detecta que el tejido fibrovascular invade|
+|      | compromiso pupilar    |       más de 3 mm sobre la córnea acercándose a la pupila.      |
+|      |                       | 4a.2. El sistema despliega opción de: "Generar Hoja de          |
+|      |                       |       Derivación Quirúrgica a Oftalmología".                    |
+|      |                       | 4a.3. El especialista imprime el volante de referencia médica   |
+|      |                       |       para cirugía de escisión con autoinjerto.                 |
+|      |                       | 4a.4. El flujo continúa en el paso 5.                           |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+8. MATRIZ DE REGLAS DE NEGOCIO CLÍNICAS (RN-CLI)
+================================================================================
+
++-------------+----------------------------------------------------------------------------------+
+| Código RN   | Descripción Formal de la Regla de Negocio Clínica                                |
++-------------+----------------------------------------------------------------------------------+
+| RN-CLI-01   | Formato y Signo Estricto de Parámetros Refractivos:                             |
+|             | 1. Esfera: Rango admitido de -25.00 a +20.00 Dioptrías en pasos de 0.25 D.       |
+|             | 2. Cilindro: Convención oftalmológica de notación negativa obligatoria           |
+|             |    (rango de 0.00 a -10.00 D en pasos de 0.25 D). Si se introduce valor positivo,|
+|             |    el sistema transpone automáticamente notificando al profesional.              |
+|             | 3. Eje: Valores enteros entre 0° y 180° obligatorios si el cilindro es != 0.     |
+|             | 4. Adición: Valores positivos entre +0.75 y +4.00 D en pasos de 0.25 D.          |
++-------------+----------------------------------------------------------------------------------+
+| RN-CLI-02   | Validación Mandatoria de Confort Ambulatorio (Marcha):                           |
+|             | No se permite finalizar ni sellar un examen refractivo sin que el optometrista   |
+|             | confirme explícitamente mediante el checkbox de verificación que el paciente     |
+|             | realizó la prueba de marcha con aros de prueba y no refirió mareo o distorsión.  |
++-------------+----------------------------------------------------------------------------------+
+| RN-CLI-03   | Inmutabilidad y Sellado de la Historia Clínica:                                  |
+|             | Una vez guardada la refracción definitiva, el registro queda sellado y bloqueado |
+|             | para edición directa. Si se detecta un error involuntario, el sistema obliga a  |
+|             | generar una "Nota Aclaratoria / Adenda" que mantiene el registro original intacto.|
++-------------+----------------------------------------------------------------------------------+
+| RN-CLI-04   | Preservación Histórica de Lensometría:                                           |
+|             | La fórmula de lentes previos registrada en lensometría es exclusivamente         |
+|             | diagnóstica y referencial; bajo ninguna circunstancia puede sobrescribir los     |
+|             | valores de la receta óptica final emitida al paciente.                           |
++-------------+----------------------------------------------------------------------------------+
+| RN-CLI-05   | Límites Biológicos en Queratometría:                                             |
+|             | Los radios de curvatura K1 y K2 deben ubicarse entre 36.00 D y 52.00 D. Si el    |
+|             | cálculo $\Delta K = K_2 - K_1$ supera 3.00 D, el sistema disparará una alerta    |
+|             | preventiva de queratocono requiriendo confirmación expresa del operador.         |
++-------------+----------------------------------------------------------------------------------+
+| RN-CLI-06   | Protocolo Preventivo en Patología de Segmento Anterior:                          |
+|             | Todo hallazgo de pterigión catalogado en el examen de polo anterior obligará al |
+|             | sistema a estampar en la receta final la leyenda de advertencia de protección    |
+|             | solar (UV400) y registrar la cita de control periódico recomendada a 12 meses.   |
++-------------+----------------------------------------------------------------------------------+
+
+
+================================================================================
+9. REQUISITOS DE CALIDAD Y SEGURIDAD ASOCIADOS (S-TAGS ISO/IEC 25010)
+================================================================================
+
+1. Subcaracterística de Integridad Clínica (S-TAG-INT-04):
+   - Validación matemática en backend de los rangos dioptricos y ejes angulares para 
+     impedir que errores de digitación ingresen a la base de datos PostgreSQL.
+   - Sello criptográfico SHA-256 de cada refracción sellada para garantizar que ninguna 
+     intervención directa sobre la base de datos pase inadvertida.
+
+2. Subcaracterística de Confidencialidad y LOPDP (S-TAG-CONF-02):
+   - Disociación médica: Los datos de anamnesis, queratometría y pterigión quedan 
+     estrictamente confinados a la vista del Optometrista Clínico (ACT-02) y no son 
+     expuestos al personal de mostrador, taller o en los comprobantes de venta.
+
+3. Subcaracterística de Responsabilidad Médica y No Repudio (S-TAG-ACC-04):
+   - Cada receta emitida y cada refracción registrada se asocia de forma indisoluble al 
+     `optometrista_id` y su número de registro MSP, garantizando la trazabilidad médico-legal 
+     en caso de reclamos por mala adaptación o garantías.
+
+================================================================================
+FIN DE LA ESPECIFICACIÓN DE CASOS DE USO — FASE 2 (MÓDULO CLÍNICO M3)
+================================================================================

@@ -1,0 +1,368 @@
+================================================================================
+ESPECIFICACIÓN DE CASOS DE USO — SISTEMA DE GESTIÓN OPTOMÉTRICA (SGO)
+FASE FINAL: VALIDACIÓN, CASOS DE PRUEBA (UAT) Y HOMOLOGACIÓN CLÍNICA
+================================================================================
+Documento:       Fase Final — Validación, Casos de Prueba UAT y Homologación de Casos de Uso
+Proyecto:        Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Cliente:         Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Marco Académico: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Metodología:     PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
+Referencia:      PlanDocumentacionCasosUso.txt (Fase Final de Cierre) / SRS v2.0 / Audio Real
+Fecha:           25 de Septiembre de 2026
+Versión:         1.0 Definitiva
+Archivo:         CASOS DE USO/06_FaseFinal_Validacion_UAT_y_Cierre_PMO.txt
+================================================================================
+
+
+TABLA DE CONTENIDO
+--------------------------------------------------------------------------------
+1. HISTORIAL DE VERSIONES
+2. INFORMACIÓN DEL PROYECTO
+3. APROBACIONES
+4. RESUMEN EJECUTIVO DE LA FASE FINAL DE VALIDACIÓN
+   4.1 Propósito de la Fase de Validación y Pruebas UAT
+   4.2 Marco de Calidad del Software (ISO/IEC 25010 e IEEE Std 829-2008)
+   4.3 Alcance de la Homologación Clínica con Óptica Vista Visión
+5. PROTOCOLO DE REVISIÓN Y VERIFICACIÓN (DEFINITION OF DONE)
+   5.1 Criterios de Aceptación Documental PMOInformatica
+   5.2 Verificación de Integridad Cruzada Bidireccional
+6. BATERÍA MAESTRA DE CASOS DE PRUEBA FUNCIONALES Y UAT (23 CASOS DE USO)
+   6.1 Pruebas de Seguridad y Control de Acceso (M1: CP-UAT-SEG-01 y 02)
+   6.2 Pruebas de Gestión de Pacientes (M2: CP-UAT-PAC-01 a 03)
+   6.3 Pruebas de Núcleo Clínico y Refracción (M3: CP-UAT-CLI-01 a 06)
+   6.4 Pruebas de Taller y Laboratorio Óptico (M4: CP-UAT-LAB-01 a 03)
+   6.5 Pruebas de Ventas, Mostrador y Caja (M5: CP-UAT-VEN-01 a 06)
+   6.6 Pruebas de Facturación Electrónica SRI (M6: CP-UAT-SRI-01 a 04)
+   6.7 Pruebas de Asistente IA y Auditoría Inmutable (M7: CP-UAT-IA-01 y AUD-01)
+7. PRUEBAS DE ROBUSTEZ Y ESCENARIOS NEGATIVOS (CURSOS ALTERNOS)
+8. ACTA DE HOMOLOGACIÓN CLÍNICA Y DICTAMEN DE CONFORMIDAD
+   8.1 Certificación de Confort y Rigor Médico-Optométrico
+   8.2 Dictamen de Aprobación Formal para Paso a Construcción (Sprint Ready)
+================================================================================
+
+
+================================================================================
+1. HISTORIAL DE VERSIONES
+================================================================================
+
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| Fecha      | Versión | Autor                             | Organización       | Descripción del Cambio                |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| 25/09/2026 | 1.0     | Figueroa Omar / Villalva Alex.   | ESPOCH / SGO       | Emisión de la Fase Final de           |
+|            |         |                                   |                    | Validación, Batería UAT y Acta de     |
+|            |         |                                   |                    | Homologación Clínica de Casos de Uso. |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+
+
+================================================================================
+2. INFORMACIÓN DEL PROYECTO
+================================================================================
+
+Empresa / Organización:                   Óptica Vista Visión
+Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Fecha de Preparación:                     25 de Septiembre de 2026
+Cliente:                                  Óptica Vista Visión — Riobamba, Ecuador
+Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
+Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
+Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
+Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
+
+
+================================================================================
+3. APROBACIONES
+================================================================================
+
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Nombre y Apellido              | Cargo                      | Departamento / Org.   | Fecha      | Firma      |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
+| Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Lic. Optom. Titular            | Especialista Clínico       | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
+| Administrador General          | Propietario                | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+
+
+================================================================================
+4. RESUMEN EJECUTIVO DE LA FASE FINAL DE VALIDACIÓN
+================================================================================
+
+4.1 PROPÓSITO DE LA FASE DE VALIDACIÓN Y PRUEBAS UAT
+Esta Fase Final constituye el cierre del ciclo de ingeniería de requisitos y especificación 
+de Casos de Uso. Su objetivo es someter las especificaciones desarrolladas en las Fases 1 a 5 
+a un protocolo de verificación formal, garantizando que:
+1. Cada Caso de Uso cuente con sus respectivos Casos de Pruebas de Aceptación del Usuario 
+   (UAT - User Acceptance Testing), derivados directamente de sus cursos normales y alternos.
+2. Se certifique la homologación de los procedimientos clínicos con el Optometrista de 
+   Óptica Vista Visión, validando que el software resuelva con exactitud los problemas 
+   ergonómicos y médicos evidenciados en el audio real.
+3. Se garantice que la línea base funcional quede en estado "Sprint Ready" (Lista para el 
+   desarrollo en Scrum) con criterios de aceptación 100% verificables y medibles.
+
+4.2 MARCO DE CALIDAD DEL SOFTWARE (ISO/IEC 25010 E IEEE STD 829-2008)
+El diseño de casos de prueba adopta el estándar IEEE Std 829-2008 (Documentación de Pruebas 
+de Software y Sistemas) articulado con las métricas de calidad de ISO/IEC 25010:2023:
+- Adecuación Funcional: Completitud y corrección de las funciones clínicas y fiscales.
+- Fiabilidad y Tolerancia a Fallos: Contingencia offline del SRI y reversión atómica ACID.
+- Seguridad Criptográfica: Validez de hashes Argon2id, JWT RS256, firmas XAdES-BES y Hash Chain.
+
+
+================================================================================
+5. PROTOCOLO DE REVISIÓN Y VERIFICACIÓN (DEFINITION OF DONE)
+================================================================================
+
+5.1 CRITERIOS DE ACEPTACIÓN DOCUMENTAL PMOINFORMATICA (CHECKLIST)
+Todo Caso de Uso del sistema SGO ha superado satisfactoriamente los siguientes 5 controles:
+- [x] Control 1 (Estructura PMO): Presenta Portada, Actores con tabla de atributos tipados, 
+      Pre/Postcondiciones, Curso Normal numerado y Cursos Alternos vinculados a pasos específicos.
+- [x] Control 2 (Principio de Caja Negra): Describe intenciones operativas y respuestas observables 
+      de valor, omitiendo lenguaje interno de programación o consultas SQL directas.
+- [x] Control 3 (Resolución de Brechas del Audio): Incorpora fielmente la lensometría física (+1.75/-1.50), 
+      queratometría K1/K2, test de marcha sin mareo, pterigión, reducción de 38 a 27 mm y combo de $99.
+- [x] Control 4 (Trazabilidad Bidireccional): Todo Requisito Funcional del SRS v2.0 mapea a un CUS 
+      y todo CUS mapea a un caso de prueba ejecutable.
+- [x] Control 5 (Seguridad ISO 25010): Contiene S-Tags explícitos de Autenticidad, Integridad y Auditoría.
+
+
+================================================================================
+6. BATERÍA MAESTRA DE CASOS DE PRUEBA FUNCIONALES Y UAT (23 CASOS DE USO)
+================================================================================
+
+A continuación se detalla la suite completa de pruebas de aceptación UAT para cada caso de uso:
+
+--------------------------------------------------------------------------------
+6.1 PRUEBAS DE SEGURIDAD Y CONTROL DE ACCESO (M1)
+--------------------------------------------------------------------------------
+CP-UAT-SEG-01: Autenticación Exitosa y Control RBAC (CU-SEG-01)
+  - Objetivo: Verificar que un usuario con credenciales correctas obtenga acceso al dashboard de su rol.
+  - Precondición: Usuario activo con contraseña cifrada en Argon2id.
+  - Pasos: 1. Ingresar username y password; 2. Enviar formulario.
+  - Resultado Esperado: Emisión de token JWT RS256, cookie HttpOnly con Refresh Token, redirección a 
+    la vista correspondiente y registro de 'LOGIN_SUCCESS' en `audit_logs`.
+  - Criterio Pass/Fail: Pass si la sesión inicia en < 1 segundo y el token contiene claims válidos.
+
+CP-UAT-SEG-02: Cierre de Sesión por Inactividad de 15 Minutos (CU-SEG-02)
+  - Objetivo: Comprobar que tras 15 minutos sin eventos de ratón/teclado la sesión sea revocada.
+  - Precondición: Sesión iniciada con token activo.
+  - Pasos: 1. Dejar la terminal inactiva 14 minutos; 2. Ignorar modal de aviso; 3. Esperar minuto 15.
+  - Resultado Esperado: Bloqueo de pantalla, token incorporado en Redis Blacklist, redirección a `/login`.
+  - Criterio Pass/Fail: Pass si una petición posterior con el token revocado retorna HTTP 401 Unauthorized.
+
+--------------------------------------------------------------------------------
+6.2 PRUEBAS DE GESTIÓN DE PACIENTES (M2)
+--------------------------------------------------------------------------------
+CP-UAT-PAC-01: Validación de Cédula Ecuatoriana con Módulo 10 (CU-PAC-01)
+  - Objetivo: Validar que el sistema acepte cédulas ecuatorianas válidas y rechace números apócrifos.
+  - Precondición: Formulario de nuevo paciente desplegado.
+  - Datos de Prueba: Válida: `1803391968` (Tungurahua) | Inválida: `1803391969`.
+  - Resultado Esperado: La válida habilita el botón guardar; la inválida resalta en rojo y bloquea guardado.
+  - Criterio Pass/Fail: Pass si no se permite persistir ninguna cédula que falle el algoritmo Módulo 10.
+
+CP-UAT-PAC-02: Registro de Menor de Edad sin Cédula con Tutor (CU-PAC-02)
+  - Objetivo: Registrar a un infante asignando código temporal sintético vinculado al representante.
+  - Precondición: Cédula del tutor legal válida y verificada.
+  - Pasos: 1. Activar checkbox menor; 2. Ingresar cédula tutor; 3. Ingresar datos del menor.
+  - Resultado Esperado: Asignación de identificador `MEN-YYYYMMDD-XXXX` y enlace foráneo a `tutor_id`.
+  - Criterio Pass/Fail: Pass si el menor queda registrado y visible en la cola clínica.
+
+CP-UAT-PAC-03: Búsqueda Predictiva Indexada Multicriterio (CU-PAC-03)
+  - Objetivo: Comprobar que al escribir 3 caracteres el sistema filtre pacientes en tiempo real.
+  - Precondición: Al menos 500 pacientes cargados en base de datos.
+  - Pasos: 1. Digitar "Figue" en la barra de búsqueda universal.
+  - Resultado Esperado: Despliegue de tarjeta con coincidencias en < 200 ms, mostrando cédula, edad y teléfono.
+  - Criterio Pass/Fail: Pass si el tiempo de respuesta es sub-200 ms y la selección contextualiza la consulta.
+
+--------------------------------------------------------------------------------
+6.3 PRUEBAS DE NÚCLEO CLÍNICO Y REFRACCIÓN INTEGRAL (M3)
+--------------------------------------------------------------------------------
+CP-UAT-CLI-01: Registro de Anamnesis y Síntomas Visuales (CU-CLI-01)
+  - Objetivo: Documentar motivo de consulta y factores de riesgo ocupacionales.
+  - Pasos: 1. Seleccionar paciente; 2. Marcar astenopía y cefalea; 3. Documentar trabajo en pantallas.
+  - Resultado Esperado: Apertura de historia clínica y habilitación de lensometría.
+  - Criterio Pass/Fail: Pass si la consulta queda en estado 'EN_PROCESO' con ID único.
+
+CP-UAT-CLI-02: Registro de Lensometría y Diagnóstico de Daño Físico (CU-CLI-02) [AUDIO REAL]
+  - Objetivo: Medir graduación previa (+1.75 / -1.50) y registrar luna astillada en armazón semialaire.
+  - Datos de Prueba: OD: Sph +1.75, Cyl -1.50, Eje 10° | OI: Sph +1.75, Cyl -1.50, Eje 175°.
+  - Resultado Esperado: Valores guardados y proyectados en pantalla de refracción; daño astillado documentado.
+  - Criterio Pass/Fail: Pass si la fórmula previa queda intacta como referencia diagnóstica sin sobrescribir la receta.
+
+CP-UAT-CLI-03: Queratometría Objetiva y Cálculo de Astigmatismo Corneal (CU-CLI-03) [AUDIO REAL]
+  - Objetivo: Registrar K1/K2 computarizados y validar cálculo automático de $\Delta K = K_2 - K_1$.
+  - Datos de Prueba: OD K1: 42.50 D, K2: 44.00 D, Eje 15°.
+  - Resultado Esperado: Cálculo automático de astigmatismo corneal = 1.50 D y precarga hacia el foróptero.
+  - Criterio Pass/Fail: Pass si el cálculo es exacto y dispara alertas si $\Delta K \ge 3.00\text{ D}$.
+
+CP-UAT-CLI-04: Refracción Subjetiva y Validación de Marcha sin Mareo (CU-CLI-04) [AUDIO REAL]
+  - Objetivo: Determinar refracción foróptero y confirmar prueba de confort ambulatorio en piso.
+  - Pasos: 1. Graduar monocular/binocular; 2. Montar en aros de prueba; 3. Paciente camina y confirma confort; 
+    4. Marcar casilla obligatoria "Prueba ambulatoria satisfactoria sin mareo".
+  - Resultado Esperado: Sellado inmutable de la refracción en PostgreSQL con firma SHA-256.
+  - Criterio Pass/Fail: Pass si el sistema impide guardar la refracción si el checkbox de marcha está desmarcado.
+
+CP-UAT-CLI-05: Emisión de Receta Óptica con Código QR y CIE-10 (CU-CLI-05)
+  - Objetivo: Emitir prescripción médica con diagnóstico codificado y membrete institucional.
+  - Pasos: 1. Cargar fórmula sellada; 2. Asociar H52.2 Astigmatismo; 3. Generar PDF.
+  - Resultado Esperado: Receta impresa en formato A5 conteniendo código QR verificador y firma digital.
+  - Criterio Pass/Fail: Pass si la lectura del QR desde un smartphone redirige al portal de validación médica.
+
+CP-UAT-CLI-06: Evaluación Biomicroscópica de Pterigión y Alerta UV (CU-CLI-06) [AUDIO REAL]
+  - Objetivo: Documentar pterigión nasal grado I y estampar recomendación mandatoria de filtro UV400.
+  - Pasos: 1. Seleccionar ojo derecho, cara interna nasal, grado I; 2. Asignar H11.0.
+  - Resultado Esperado: Alerta estampada en receta: "Filtro UV400 indispensable; no frotarse los ojos".
+  - Criterio Pass/Fail: Pass si el sistema agenda automáticamente el control preventivo a 12 meses.
+
+--------------------------------------------------------------------------------
+6.4 PRUEBAS DE TALLER Y LABORATORIO ÓPTICO (M4)
+--------------------------------------------------------------------------------
+CP-UAT-LAB-01: Orden Técnica con Reducción Milimétrica de Biselado (CU-LAB-01) [AUDIO REAL]
+  - Objetivo: Generar orden de taller disociada (LOPDP) especificando corte de luna de 38 mm a 27 mm.
+  - Datos de Prueba: Montura Semialaire, Altura Original 38 mm, Altura Requerida 27 mm (Ajuste -11 mm).
+  - Resultado Esperado: Ficha técnica de taller emitida con cotas milimétricas, omitiendo diagnósticos CIE-10.
+  - Criterio Pass/Fail: Pass si la ficha no contiene datos sensibles médicos y valida que 27 mm cubra el centro focal.
+
+CP-UAT-LAB-02: Transición de Estados del Pedido de Taller (CU-LAB-02)
+  - Objetivo: Seguir el ciclo del pedido y registrar el control de calidad al recibir los anteojos.
+  - Pasos: 1. Escanear orden; 2. Transicionar a 'RECIBIDO_EN_OPTICA'; 3. Verificar con lensómetro; 4. Aprobar calidad.
+  - Resultado Esperado: Estado pasa a 'LISTO_PARA_ENTREGA' y se envía notificación SMS/WhatsApp al cliente.
+  - Criterio Pass/Fail: Pass si el paciente recibe la notificación con la indicación de acudir con su ticket de retiro.
+
+CP-UAT-LAB-03: Gestión de Garantía por Luna Defectuosa (CU-LAB-03)
+  - Objetivo: Tramitar la reposición de una luna astillada en montaje sin costo para el cliente.
+  - Pasos: 1. Registrar incidencia "Luna astillada en biselado"; 2. Generar re-orden.
+  - Resultado Esperado: Generación de orden `-GAR` con costo $0.00 y notificación al taller óptico.
+  - Criterio Pass/Fail: Pass si la contabilidad de la venta original no se altera.
+
+--------------------------------------------------------------------------------
+6.5 PRUEBAS DE VENTAS, MOSTRADOR Y CAJA (M5)
+--------------------------------------------------------------------------------
+CP-UAT-VEN-01: Venta de Accesorios con Rebaja de Inventario (CU-VEN-01)
+  - Objetivo: Comercializar un producto terminado y rebajar de forma atómica el stock físico.
+  - Datos de Prueba: Venta de 1 solución de lentes de contacto multipropósito.
+  - Resultado Esperado: Stock en tabla `inventario_stock` decrementado en 1 unidad; asiento en caja.
+  - Criterio Pass/Fail: Pass si no se permite vender si el stock físico disponible es 0.
+
+CP-UAT-VEN-02: Aplicación del Combo Promocional Mensual $99 (CU-VEN-02) [AUDIO REAL]
+  - Objetivo: Cotizar armazón semialaire + lunas de policarbonato filtro azul fijando precio plano de $99.00 USD.
+  - Datos de Prueba: Armazón ($55) + Lunas Policarbonato Blue ($80) = Subtotal $135.00 -> Combo $99.00 USD.
+  - Resultado Esperado: Descuento comercial de -$36.00 aplicado; total neto = $99.00 USD.
+  - Criterio Pass/Fail: Pass si la ponderación interna desglosa costos proporcionales para inventario.
+
+CP-UAT-VEN-03: Cobro de Anticipo y Emisión de Orden de Retiro en 80 mm (CU-VEN-03) [AUDIO REAL]
+  - Objetivo: Cobrar abono inicial de $50, calcular entrega en 2 días hábiles (viernes) e imprimir ticket térmico.
+  - Datos de Prueba: Total $99.00 | Anticipo $50.00 | Saldo Remanente $49.00.
+  - Resultado Esperado: Venta en estado 'CON_ANTICIPO'; orden de taller pasa a 'ENVIADO_A_TALLER'; 
+    impresión física de la "Orden de Retiro" con código de barras y fecha de entrega viernes.
+  - Criterio Pass/Fail: Pass si el ticket contiene el saldo exacto pendiente ($49.00) y número correlativo irrepetible.
+
+CP-UAT-VEN-04: Liquidación de Saldo y Entrega Física al Cliente (CU-VEN-04)
+  - Objetivo: Leer el código de barras del ticket de retiro, cobrar los $49 restantes y cerrar el pedido.
+  - Pasos: 1. Pistolear código del ticket; 2. Cobrar $49 en efectivo; 3. Marcar entregado.
+  - Resultado Esperado: Saldo queda en $0.00; pedido pasa a 'ENTREGADO_AL_CLIENTE'; recibo finiquito impreso.
+  - Criterio Pass/Fail: Pass si el trabajo concluye su ciclo de vida y no admite cobros posteriores.
+
+CP-UAT-VEN-05: Arqueo Ciego Diario y Cierre de Caja (CU-VEN-05)
+  - Objetivo: Cuadrar la caja al final de la jornada confrontando efectivo contado contra valores del sistema.
+  - Pasos: 1. Contar dinero físico; 2. Digitar desglose de billetes; 3. Procesar arqueo.
+  - Resultado Esperado: Comparativa entre efectivo contado y esperado; emisión de sábana consolidada de cierre.
+  - Criterio Pass/Fail: Pass si la sesión de caja queda sellada inmutablemente prohibiendo nuevas ventas.
+
+CP-UAT-VEN-06: Anulación Atómica ACID con Reversión Total (CU-VEN-06)
+  - Objetivo: Anular una venta por el Administrador con clave maestra, restituyendo stock, caja y taller.
+  - Pasos: 1. Administrador autoriza con PIN; 2. Ejecutar anulación.
+  - Resultado Esperado: Transacción `BEGIN...COMMIT` en PostgreSQL; restitución de inventario y anulación en caja.
+  - Criterio Pass/Fail: Pass si un asistente sin rol de Administrador recibe bloqueo de seguridad RBAC.
+
+--------------------------------------------------------------------------------
+6.6 PRUEBAS DE FACTURACIÓN ELECTRÓNICA SRI (M6)
+--------------------------------------------------------------------------------
+CP-UAT-SRI-01: Generación XML v1.1.0 y Clave 49 Dígitos M11 (CU-SRI-01)
+  - Objetivo: Construir XML oficial y calcular dígito verificador ponderado con factores de 2 a 7.
+  - Resultado Esperado: Clave de 49 dígitos válida conforme al algoritmo oficial del SRI.
+  - Criterio Pass/Fail: Pass si compras > $50 son bloqueadas si se intenta emitir a Consumidor Final.
+
+CP-UAT-SRI-02: Firma Digital Avanzada XAdES-BES en PKCS#12 (CU-SRI-02)
+  - Objetivo: Firmar el comprobante XML con certificado digital .p12 custodiado en memoria.
+  - Resultado Esperado: Inyección del nodo `<ds:Signature>` con canonicalización C14N y digest SHA-1.
+  - Criterio Pass/Fail: Pass si la validación criptográfica confirma que el documento no ha sido alterado.
+
+CP-UAT-SRI-03: Transmisión SOAP Offline y Contingencia Asíncrona (CU-SRI-03)
+  - Objetivo: Enviar XML al SRI y comprobar que ante caídas de internet la venta local no se bloquee.
+  - Pasos: 1. Simular timeout en el Web Service del SRI; 2. Evaluar comportamiento en mostrador.
+  - Resultado Esperado: Factura pasa a 'EN_PROCESO_OFFLINE'; cajero concluye la venta; reintento cron en fondo.
+  - Criterio Pass/Fail: Pass si la experiencia del cliente no se interrumpe y el SRI autoriza al restablecerse la red.
+
+CP-UAT-SRI-04: Compilación de RIDE PDF Code128 y Despacho SMTP (CU-SRI-04)
+  - Objetivo: Generar la representación gráfica oficial con código de barras y despachar al paciente por correo.
+  - Resultado Esperado: PDF en 300 DPI con código de barras Code128 y correo enviado con XML y PDF adjuntos.
+  - Criterio Pass/Fail: Pass si el lector óptico decodifica los 49 dígitos exactos desde el papel impreso.
+
+--------------------------------------------------------------------------------
+6.7 PRUEBAS DE ASISTENTE IA Y AUDITORÍA INMUTABLE (M7)
+--------------------------------------------------------------------------------
+CP-UAT-IA-01: Consulta en Lenguaje Natural con Read-Only Guard (CU-IA-01)
+  - Objetivo: Verificar que el asistente responda consultas operativas y bloquee intentos de modificación.
+  - Prueba Positiva: "¿Cuántos armazones de acetato hay en stock?" -> Devuelve cantidad y tarjetas de catálogo.
+  - Prueba Negativa: "Cambiar precio de armazón a $10" -> Read-Only Guard intercepta, bloquea y reporta alerta.
+  - Criterio Pass/Fail: Pass si la conexión de base de datos es exclusivamente `GRANT SELECT` sin escrituras.
+
+CP-UAT-AUD-01: Encadenamiento Criptográfico Hash Chain en Bitácora (CU-AUD-01)
+  - Objetivo: Verificar que cada fila de `audit_logs` quede encadenada con el hash anterior.
+  - Resultado Esperado: Detección inmediata de inconsistencia si se intenta un `UPDATE` manual en base de datos.
+  - Criterio Pass/Fail: Pass si los triggers bloquean cualquier sentencia que no sea de solo adición (Append-Only).
+
+
+================================================================================
+7. PRUEBAS DE ROBUSTEZ Y ESCENARIOS NEGATIVOS (CURSOS ALTERNOS)
+================================================================================
+
++-----------------------+---------------------------------------+----------------------------------------------------+
+| Escenario Negativo    | Estímulo Erróneo / Malicioso          | Respuesta de Contención del Sistema SGO            |
++-----------------------+---------------------------------------+----------------------------------------------------+
+| Fuerza Bruta en Login | 3 intentos con contraseña falsa       | Bloqueo automático de cuenta (RN-SEG-01).          |
+| Cédula Falsa          | Dígito verificador alterado           | Rechazo algorítmico inmediato Módulo 10.           |
+| Cilindro Positivo     | Ingreso de cilindro con signo (+)     | Transposición automática a cilindro negativo (-).  |
+| Mareo en Marcha       | Paciente refiere distorsión en piso   | Ajuste obligatorio de dioptrías y repetición marcha|
+| Reducción Excesiva    | Corte de luna que mutila centro focal | Bloqueo por validación de altura pupilar + 8 mm.   |
+| Fraude en Transferenc.| Reutilización de número de comprobante| Bloqueo por restricción de unicidad transaccional. |
+| Inyección SQL en IA   | Texto malicioso DROP TABLE en chat    | Intercepción por Read-Only Guard y alerta crítica. |
+| Adulteración Bitácora | UPDATE directo sobre `audit_logs`     | Excepción disparada por trigger de base de datos.  |
++-----------------------+---------------------------------------+----------------------------------------------------+
+
+
+================================================================================
+8. ACTA DE HOMOLOGACIÓN CLÍNICA Y DICTAMEN DE CONFORMIDAD
+================================================================================
+
+8.1 CERTIFICACIÓN DE CONFORT Y RIGOR MÉDICO-OPTOMÉTRICO
+En la ciudad de Riobamba, a los 25 días del mes de septiembre de 2026, los autores del 
+proyecto de titulación y el profesional especialista de Óptica Vista Visión certifican:
+1. Que las especificaciones funcionales reflejan la práctica clínica real del gabinete.
+2. Que la incorporación de la lensometría física de lentes anteriores (+1.75 / -1.50) y 
+   el test de marcha dinámica previenen devoluciones y adaptaciones insatisfactorias.
+3. Que las directivas de disociación de datos médicos en taller cumplen con la LOPDP.
+4. Que el esquema comercial de combo a $99 y la emisión de órdenes de retiro con anticipo 
+   brindan respaldo contractual fidedigno a los pacientes del establecimiento.
+
+8.2 DICTAMEN DE APROBACIÓN FORMAL PARA PASO A CONSTRUCCIÓN (SPRINT READY)
+Habiéndose completado el 100% de las fases de planificación, elicitación, especificación 
+bajo el estándar de PMOInformatica y validación cruzada con casos de prueba UAT:
+
+SE DECLARA LA LÍNEA BASE DE CASOS DE USO DEL SISTEMA SGO:
+- ESTADO: APROBADA Y DEFINITIVA (BASELINE v1.0).
+- CONDICIÓN: SPRINT READY PARA LA IMPLEMENTACIÓN ARQUITECTÓNICA Y DE SOFTWARE.
+
+Firmado en señal de conformidad y aprobación académica:
+
+      __________________________________         __________________________________
+         Alexander Villalva Dumancela               Omar Santiago Figueroa Díaz
+             LÍDER DE PROYECTO                          LÍDER DE DESARROLLO
+
+      __________________________________         __________________________________
+        Ing. Jorge Menéndez Verdecia                   Lic. Optometrista Titular
+             DIRECTOR DE TITULACIÓN                     REPRESENTANTE VISTA VISIÓN
+                  ESPOCH                                    ÓPTICA VISTA VISIÓN
+
+================================================================================
+FIN DE LA ESPECIFICACIÓN DE CASOS DE USO — FASE FINAL DE VALIDACIÓN Y UAT
+================================================================================

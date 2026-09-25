@@ -1,0 +1,759 @@
+================================================================================
+ESPECIFICACIÓN DE CASOS DE USO — SISTEMA DE GESTIÓN OPTOMÉTRICA (SGO)
+PAQUETES 1 Y 2: GESTIÓN DE ACCESO Y SEGURIDAD (M1) Y DEMOGRÁFICA DE PACIENTES (M2)
+================================================================================
+Documento:       Fase 1 — Especificación de Casos de Uso (M1: Seguridad y M2: Pacientes)
+Proyecto:        Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Cliente:         Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Marco Académico: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Metodología:     PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
+Referencia:      PlanDocumentacionCasosUso.txt (Fase 1) / SRS v2.0 / Audio Clínico
+Fecha:           25 de Septiembre de 2026
+Versión:         1.0 Definitiva
+Archivo:         CASOS DE USO/01_CasosUso_Seguridad_Pacientes_PMO.txt
+================================================================================
+
+
+TABLA DE CONTENIDO
+--------------------------------------------------------------------------------
+1. HISTORIAL DE VERSIONES
+2. INFORMACIÓN DEL PROYECTO
+3. APROBACIONES
+4. RESUMEN EJECUTIVO (PAQUETES M1 Y M2)
+   4.1 Procesos y Escenarios de Negocio Cubiertos
+   4.2 Áreas Organizacionales Involucradas
+   4.3 Módulos del Sistema Descritos
+5. DIAGRAMAS DE CASOS DE USO (REPRESENTACIÓN TEXTUAL FORMAL UML 2.5)
+   5.1 Diagrama del Paquete 1: Gestión de Acceso y Seguridad (M1)
+   5.2 Diagrama del Paquete 2: Gestión Demográfica de Pacientes (M2)
+   5.3 Relaciones de Inclusión (<<include>>) y Extensión (<<extend>>)
+6. DESCRIPCIÓN DETALLADA DE ACTORES (FICHAS PMOINFORMATICA)
+   6.1 ACT-00: Usuario Autenticado (Actor Abstracto)
+   6.2 ACT-01: Administrador / Propietario
+   6.3 ACT-02: Optometrista Clínico
+   6.4 ACT-03: Asistente Comercial / Recepcionista
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO (FICHAS PMOINFORMATICA)
+   7.1 CU-SEG-01: Iniciar Sesión y Validar Credenciales RBAC
+   7.2 CU-SEG-02: Cerrar Sesión por Inactividad o Petición
+   7.3 CU-PAC-01: Registrar Paciente con Validación Módulo 10
+   7.4 CU-PAC-02: Registrar Menor de Edad sin Documento de Identidad
+   7.5 CU-PAC-03: Búsqueda Predictiva de Pacientes
+8. MATRIZ DE REGLAS DE NEGOCIO ASOCIADAS
+9. REQUISITOS DE CALIDAD Y SEGURIDAD ASOCIADOS (S-TAGS ISO/IEC 25010)
+================================================================================
+
+
+================================================================================
+1. HISTORIAL DE VERSIONES
+================================================================================
+
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| Fecha      | Versión | Autor                             | Organización       | Descripción del Cambio                |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| 25/09/2026 | 1.0     | Figueroa Omar / Villalva Alex.   | ESPOCH / SGO       | Emisión inicial y formalización de    |
+|            |         |                                   |                    | casos de uso de Seguridad y Pacientes |
+|            |         |                                   |                    | según plantilla PMOInformatica.       |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+
+
+================================================================================
+2. INFORMACIÓN DEL PROYECTO
+================================================================================
+
+Empresa / Organización:                   Óptica Vista Visión
+Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Fecha de Preparación:                     25 de Septiembre de 2026
+Cliente:                                  Óptica Vista Visión — Riobamba, Ecuador
+Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
+Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
+Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
+Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
+
+
+================================================================================
+3. APROBACIONES
+================================================================================
+
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Nombre y Apellido              | Cargo                      | Departamento / Org.   | Fecha      | Firma      |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
+| Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Representante Vista Visión     | Propietario / Optometrista | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+
+
+================================================================================
+4. RESUMEN EJECUTIVO (PAQUETES M1 Y M2)
+================================================================================
+
+4.1 PROCESOS Y ESCENARIOS DE NEGOCIO CUBIERTOS
+El presente documento describe los procesos iniciales y transversales de interacción con 
+el sistema SGO dentro del establecimiento Óptica Vista Visión:
+1. Control de Acceso y Salvaguarda de la Identidad: Acceso biométrico o mediante credenciales 
+   criptográficas protegidas, discriminación de funciones por perfil (Control de Acceso Basado 
+   en Roles - RBAC) y caducidad de sesión por inactividad operativa para mitigar la fuga de 
+   información médica y financiera en terminales compartidas.
+2. Afiliación y Registro Demográfico de Pacientes: Recepción en mostrador, captura fidedigna de 
+   datos personales, validación algorítmica de la cédula de ciudadanía ecuatoriana en tiempo 
+   real para prevenir duplicidades y errores contables, e incorporación del flujo de excepción 
+   para menores de edad no cedulados bajo amparo de su representante legal.
+3. Localización Rápida y Precisa de Historias: Indexación y búsqueda predictiva tolerante a 
+   múltiples parámetros (cédula, nombres, apellidos, teléfono), garantizando un tiempo de 
+   respuesta menor a 200 ms durante el pico de atención en recepción.
+
+4.2 ÁREAS ORGANIZACIONALES INVOLUCRADAS
+- Recepción / Mostrador Comercial: Punto primario de interacción para el registro de nuevos 
+  pacientes, validación de cédulas y búsqueda de expedientes previos.
+- Consultorio Optométrico: Acceso médico a la búsqueda predictiva para apertura de consulta.
+- Administración y Gerencia: Supervisión de cuentas, revocación de credenciales y auditoría de accesos.
+
+4.3 MÓDULOS DEL SISTEMA DESCRITOS
+- Paquete 1: Módulo 1 (M1) — Gestión de Acceso, Autenticación y Seguridad (RBAC).
+- Paquete 2: Módulo 2 (M2) — Gestión Demográfica y Filiación de Pacientes.
+
+
+================================================================================
+5. DIAGRAMAS DE CASOS DE USO (REPRESENTACIÓN TEXTUAL FORMAL UML 2.5)
+================================================================================
+
+5.1 DIAGRAMA DEL PAQUETE 1: GESTIÓN DE ACCESO Y SEGURIDAD (M1)
+
+  +-------------------------------------------------------------------------------+
+  | LÍMITE DEL SISTEMA: SUBSISTEMA DE ACCESO Y SEGURIDAD (M1)                     |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-SEG-01: Iniciar Sesión y Validar          |                 |
+  |             |             Credenciales RBAC                 |                 |
+  |             +-----------------------------------------------+                 |
+  |                   ^                             ^                             |
+  |                   |                             |                             |
+  |             <<include>>                     <<include>>                       |
+  |                   |                             |                             |
+  |             +---------------+             +---------------+                   |
+  |             | Validar Hash  |             | Registrar Log |                   |
+  |             | Argon2id      |             | de Acceso     |                   |
+  |             +---------------+             +---------------+                   |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-SEG-02: Cerrar Sesión por Inactividad     |                 |
+  |             |             o Petición                        |                 |
+  |             +-----------------------------------------------+                 |
+  |                   ^                                                           |
+  |                   |                                                           |
+  |              <<extend>> (Punto de Extensión: Inactividad > 15 min)             |
+  |                   |                                                           |
+  |             +-----------------------------------------------+                 |
+  |             | Temporizador de Inactividad del Sistema       |                 |
+  |             +-----------------------------------------------+                 |
+  |                                                                               |
+  +-------------------------------------------------------------------------------+
+         ^                                           ^
+         |                                           |
+   [Usuario Autenticado]                       [Sistema SGO]
+   (ACT-01, ACT-02, ACT-03)                    (Temporizador / Daemon)
+
+
+5.2 DIAGRAMA DEL PAQUETE 2: GESTIÓN DEMOGRÁFICA DE PACIENTES (M2)
+
+  +-------------------------------------------------------------------------------+
+  | LÍMITE DEL SISTEMA: SUBSISTEMA DE PACIENTES (M2)                              |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-PAC-01: Registrar Paciente con            |                 |
+  |             |             Validación Módulo 10              |                 |
+  |             +-----------------------------------------------+                 |
+  |                   ^                             ^                             |
+  |                   |                             |                             |
+  |              <<include>>                    <<extend>> (Pt. Ext: Sin Cédula)  |
+  |                   |                             |                             |
+  |             +------------------+          +---------------------------------+ |
+  |             | Validar Algoritmo|          | CU-PAC-02: Registrar Menor de   | |
+  |             | Módulo 10 Cédula |          | Edad sin Documento Identidad    | |
+  |             +------------------+          +---------------------------------+ |
+  |                                                         |                     |
+  |                                                    <<include>>                |
+  |                                                         v                     |
+  |                                           +---------------------------------+ |
+  |                                           | Vincular Cédula Representante   | |
+  |                                           +---------------------------------+ |
+  |                                                                               |
+  |             +-----------------------------------------------+                 |
+  |             |  CU-PAC-03: Búsqueda Predictiva de Pacientes  |                 |
+  |             +-----------------------------------------------+                 |
+  |                   |                                                           |
+  |              <<extend>> (Punto de Extensión: Paciente No Encontrado)          |
+  |                   v                                                           |
+  |             [Deriva a CU-PAC-01 para Alta Inmediata]                          |
+  |                                                                               |
+  +-------------------------------------------------------------------------------+
+         ^
+         |
+   [Usuario Operativo]
+   (ACT-02: Optometrista / ACT-03: Asistente Comercial)
+
+
+================================================================================
+6. DESCRIPCIÓN DETALLADA DE ACTORES (FICHAS PMOINFORMATICA)
+================================================================================
+
+--------------------------------------------------------------------------------
+6.1 ACTOR: USUARIO AUTENTICADO (ACTOR ABSTRACTO / BASE)
+--------------------------------------------------------------------------------
+Actor:          Usuario Autenticado
+Identificador:  ACT-00
+Descripción:    Entidad abstracta que engloba a todo usuario del personal operativo 
+                o directivo que interactúa de manera interactiva con la aplicación SGO 
+                tras haber superado un proceso de autenticación.
+Características:Personal de la óptica con estación de trabajo asignada. No se instancia 
+                directamente; sus atributos y permisos son heredados por ACT-01, ACT-02 y ACT-03.
+Relación:       Generalización base de los actores ACT-01, ACT-02 y ACT-03.
+Referencias:    CU-SEG-01, CU-SEG-02, CU-PAC-03.
+
+Atributos del Actor:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| user_id           | Identificador universal único del usuario         | UUID               |
+| username          | Nombre único de inicio de sesión                  | Varchar(50)        |
+| password_hash     | Resumen criptográfico de la clave en Argon2id     | Varchar(255)       |
+| rol_id            | Perfil de autorización asignado (RBAC)            | Integer / Enum     |
+| estado_activo     | Estado operativo de la cuenta (Activo/Bloqueado)  | Boolean            |
+| intentos_fallidos | Contador de intentos fallidos de autenticación    | Smallint           |
+| ultimo_login      | Marca temporal del último acceso concedido        | Timestamp UTC      |
++-------------------+---------------------------------------------------+--------------------+
+Comentarios:    Garantiza el cumplimiento del principio de menor privilegio (Least Privilege).
+
+--------------------------------------------------------------------------------
+6.2 ACTOR: ADMINISTRADOR / PROPIETARIO
+--------------------------------------------------------------------------------
+Actor:          Administrador / Propietario
+Identificador:  ACT-01
+Descripción:    Máxima autoridad administrativa y propietaria del centro óptico. Ejerce el 
+                gobierno total de la plataforma informática.
+Características:Usuario avanzado, acceso irrestricto a parámetros tributarios, configuración de 
+                roles, logs de auditoría, reversión de comprobantes y cierre consolidado.
+Relación:       Hereda de ACT-00 (Usuario Autenticado).
+Referencias:    CU-SEG-01, CU-SEG-02, CU-PAC-01, CU-PAC-03.
+
+Atributos Específicos del Actor:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| ruc_establecim    | RUC de la persona natural o jurídica propietaria  | Varchar(13)        |
+| clave_maestra_sec | Huella de autorización para anulaciones atómicas  | Varchar(255)       |
+| email_notificac   | Correo para alertas de seguridad y bloqueos       | Varchar(100)       |
++-------------------+---------------------------------------------------+--------------------+
+Comentarios:    Sus acciones generan eventos auditados con sello estricto de no repudio.
+
+--------------------------------------------------------------------------------
+6.3 ACTOR: OPTOMETRISTA CLÍNICO
+--------------------------------------------------------------------------------
+Actor:          Optometrista Clínico
+Identificador:  ACT-02
+Descripción:    Profesional de la salud visual facultado para atender al paciente, registrar 
+                antecedentes, prescribir correcciones refractivas y autorizar órdenes de taller.
+Características:Especialista médico con credenciales profesionales validadas ante el MSP. 
+                Opera principalmente dentro del consultorio clínico.
+Relación:       Hereda de ACT-00 (Usuario Autenticado).
+Referencias:    CU-SEG-01, CU-SEG-02, CU-PAC-01, CU-PAC-02, CU-PAC-03.
+
+Atributos Específicos del Actor:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| registro_msp      | Número de registro profesional en el Min. Salud   | Varchar(20)        |
+| especialidad      | Título habilitante (Licenciatura en Optometría)    | Varchar(100)       |
+| firma_digital_id  | Referencia al certificado digital para recetas    | UUID               |
++-------------------+---------------------------------------------------+--------------------+
+Comentarios:    Posee restricciones RBAC que le impiden modificar valores contables de caja.
+
+--------------------------------------------------------------------------------
+6.4 ACTOR: ASISTENTE COMERCIAL / RECEPCIONISTA
+--------------------------------------------------------------------------------
+Actor:          Asistente Comercial / Recepcionista
+Identificador:  ACT-03
+Descripción:    Personal de atención al cliente en mostrador, encargado de la filiación del 
+                paciente, asignación de turnos, cotización de combos, cobro y despacho de órdenes.
+Características:Usuario de ventanilla con alta velocidad de captura de datos, manejo de 
+                cobros en efectivo y transferencias, y búsqueda constante de registros.
+Relación:       Hereda de ACT-00 (Usuario Autenticado).
+Referencias:    CU-SEG-01, CU-SEG-02, CU-PAC-01, CU-PAC-02, CU-PAC-03.
+
+Atributos Específicos del Actor:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| codigo_punto_emi  | Punto de emisión asignado para ventas/caja (001)  | Char(3)            |
+| limite_descuento  | Porcentaje máximo de descuento manual autorizado  | Numeric(5,2)       |
++-------------------+---------------------------------------------------+--------------------+
+Comentarios:    No posee permisos de acceso a la edición de diagnósticos clínicos reservados.
+
+
+================================================================================
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO (FICHAS PMOINFORMATICA)
+================================================================================
+
+================================================================================
+7.1 CASO DE USO: CU-SEG-01 — INICIAR SESIÓN Y VALIDAR CREDENCIALES RBAC
+================================================================================
+Caso de Uso:        Iniciar Sesión y Validar Credenciales RBAC
+Identificador:      CU-SEG-01
+Actores:            Usuario Autenticado (ACT-01 Administrador, ACT-02 Optometrista, ACT-03 Asistente).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-01, RF-02.
+                    Reglas de Negocio: RN-SEG-01, RN-SEG-02.
+                    Seguridad: S-TAG-AUTH-01, S-TAG-ACC-01 (ISO/IEC 25010).
+Precondición:       1. La estación de trabajo cuenta con conectividad activa al backend del SGO.
+                    2. La cuenta de usuario existe y se encuentra en estado 'ACTIVO'.
+                    3. No existe una sesión activa abierta en el navegador actual.
+Postcondición:      1. El sistema genera un JSON Web Token (JWT) firmado con algoritmo RS256, 
+                       conteniendo los claims del rol y un tiempo de vida (TTL) de 8 horas.
+                    2. Se inserta un registro inmutable en la tabla de auditoría `audit_logs`.
+                    3. El contador de intentos fallidos de la cuenta se restablece a cero (0).
+                    4. El usuario es redirigido a la vista inicial autorizada para su rol.
+Descripción:        Permite a un miembro del personal de la óptica ingresar sus credenciales 
+                    (nombre de usuario y contraseña) para ser autenticado por el sistema, 
+                    validar la integridad de su contraseña contra el algoritmo hash Argon2id, 
+                    y recibir los privilegios de navegación correspondientes a su perfil RBAC.
+Resumen:            El usuario ingresa usuario y contraseña en la interfaz de acceso; el 
+                    sistema valida el estado de la cuenta, calcula el hash, verifica 
+                    la correspondencia, crea la sesión criptográfica y abre el panel operativo.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Usuario Autenticado   | Accede a la URL del sistema y visualiza la pantalla de login.   |
+| 2    | Usuario Autenticado   | Introduce su nombre de usuario y su contraseña secreta.         |
+| 3    | Usuario Autenticado   | Pulsa el botón "Iniciar Sesión".                                |
+| 4    | Sistema SGO           | Captura las credenciales y sanitiza los campos de entrada.      |
+| 5    | Sistema SGO           | Consulta en base de datos la existencia del usuario ingresado.  |
+| 6    | Sistema SGO           | Verifica que la cuenta se encuentre con estado_activo = TRUE    |
+|      |                       | y con un contador de intentos_fallidos < 3.                     |
+| 7    | Sistema SGO           | [<<include>>] Ejecuta la función de verificación Argon2id       |
+|      |                       | contrastando el texto plano con el password_hash almacenado.    |
+| 8    | Sistema SGO           | Comprueba que el hash coincide satisfactoriamente.             |
+| 9    | Sistema SGO           | Restablece el contador `intentos_fallidos` a 0 y actualiza la   |
+|      |                       | fecha de `ultimo_login` con la marca temporal UTC actual.        |
+| 10   | Sistema SGO           | Genera el token de acceso JWT y el Refresh Token seguro (HttpOnly|
+|      |                       | cookie con flag SameSite=Strict).                               |
+| 11   | Sistema SGO           | [<<include>>] Registra en `audit_logs` el evento 'LOGIN_SUCCESS'|
+|      |                       | capturando user_id, dirección IP del cliente y User-Agent.      |
+| 12   | Sistema SGO           | Determina el rol RBAC y redirige al dashboard correspondiente:  |
+|      |                       | - Administrador: Panel de Control Ejecutivo y Métricas.         |
+|      |                       | - Optometrista: Agenda Clínica y Cola de Pacientes.             |
+|      |                       | - Asistente Comercial: Punto de Venta / Recepción de Pacientes. |
+| 13   | Usuario Autenticado   | Visualiza su interfaz operativa de trabajo. Fin del caso.      |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | Nombre de usuario no  | 5a.1. El sistema simula un tiempo de cómputo equivalente a un   |
+|      | existe en el sistema  |       hashing real (para prevenir ataques de temporización).   |
+|      |                       | 5a.2. El sistema despliega el mensaje genérico: "Credenciales   |
+|      |                       |       de acceso incorrectas. Verifique e intente nuevamente".   |
+|      |                       | 5a.3. Registra intento fallido anónimo en logs de seguridad.    |
+|      |                       | 5a.4. El flujo retorna al paso 2.                               |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Cuenta bloqueada por  | 6a.1. El sistema constata que intentos_fallidos >= 3 o que      |
+|      | superación de intentos|       estado_activo = FALSE.                                    |
+|      | o baja administrativa | 6a.2. El sistema deniega el acceso sin evaluar contraseña y     |
+|      |                       |       despliega: "Cuenta bloqueada por seguridad. Contacte al   |
+|      |                       |       Administrador para el desbloqueo institucional".          |
+|      |                       | 6a.3. Registra evento 'LOGIN_BLOCKED_ATTEMPT' en auditoría.     |
+|      |                       | 6a.4. Se aborta la operación de ingreso.                        |
++------+-----------------------+-----------------------------------------------------------------+
+| 8a   | Contraseña incorrecta | 8a.1. El sistema incrementa en uno (+1) el campo                |
+|      | (Hash no coincide)    |       `intentos_fallidos` del usuario en la base de datos.      |
+|      |                       | 8a.2. Si el contador alcanza 3:                                 |
+|      |                       |       - El sistema marca estado_activo = FALSE.                 |
+|      |                       |       - Registra 'USER_LOCKED_OUT' en `audit_logs`.             |
+|      |                       |       - Muestra: "Ha superado los 3 intentos permitidos. Su     |
+|      |                       |         cuenta ha sido bloqueada preventivamente".              |
+|      |                       | 8a.3. Si el contador es < 3:                                    |
+|      |                       |       - Muestra: "Credenciales incorrectas. Le quedan [N]       |
+|      |                       |         intentos antes del bloqueo".                            |
+|      |                       | 8a.4. El flujo retorna al paso 2.                               |
++------+-----------------------+-----------------------------------------------------------------+
+| 10a  | Contraseña caducada o | 10a.1. El sistema detecta que la cuenta tiene activo el flag    |
+|      | primer inicio sesión  |        `debe_cambiar_password = TRUE`.                          |
+|      |                       | 10a.2. Emite un JWT provisional de alcance restringido.         |
+|      |                       | 10a.3. Redirige obligatoriamente al formulario de cambio de     |
+|      |                       |        contraseña, bloqueando el acceso al resto del sistema    |
+|      |                       |        hasta completar la actualización.                        |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.2 CASO DE USO: CU-SEG-02 — CERRAR SESIÓN POR INACTIVIDAD O PETICIÓN
+================================================================================
+Caso de Uso:        Cerrar Sesión por Inactividad o Petición
+Identificador:      CU-SEG-02
+Actores:            Usuario Autenticado (ACT-01, ACT-02, ACT-03), Temporizador del Sistema.
+Tipo:               Secundario
+Referencias:        SRS v2.0: RF-01, RF-02.
+                    Seguridad: S-TAG-AUTH-02, S-TAG-ACC-02 (ISO/IEC 25010).
+Precondición:       Existe una sesión activa y autenticada con token JWT válido en el cliente.
+Postcondición:      1. El identificador único del JWT (jti) es incorporado en la lista negra 
+                       (Blacklist en Redis) con tiempo de expiración idéntico al remanente del token.
+                    2. La cookie HttpOnly del Refresh Token es borrada del navegador.
+                    3. La memoria local (caché / storage del navegador) es purgada por completo.
+                    4. Se registra el evento de salida en la tabla `audit_logs`.
+                    5. La interfaz retorna a la pantalla inicial de inicio de sesión.
+Descripción:        Permite la finalización segura de la sesión operativa de un usuario, ya 
+                    sea de forma deliberada al pulsar el botón de salida, o de forma 
+                    automática por la expiración de un temporizador de inactividad de 15 
+                    minutos, garantizando que terceros no puedan acceder a datos clínicos.
+Resumen:            El usuario solicita el cierre de sesión o transcurren 15 minutos sin eventos 
+                    de teclado/ratón; el sistema revoca el token, registra la pista de auditoría 
+                    y limpia la terminal de trabajo.
+
+CURSO NORMAL (Flujo Básico - Salida Voluntaria a Petición del Usuario):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Usuario Autenticado   | Pulsa el botón "Cerrar Sesión" ubicado en el menú superior.     |
+| 2    | Sistema SGO           | Muestra un diálogo modal: "¿Está seguro de cerrar la sesión?".  |
+| 3    | Usuario Autenticado   | Confirma la acción pulsando "Aceptar".                          |
+| 4    | Sistema SGO           | Captura el encabezado Authorization (Bearer Token).             |
+| 5    | Sistema SGO           | Extrae el claim `jti` y lo almacena en la lista negra de Redis  |
+|      |                       | para invalidar su reutilización inmediata.                      |
+| 6    | Sistema SGO           | Invalida y sobrescribe la cookie que contenía el Refresh Token. |
+| 7    | Sistema SGO           | [<<include>>] Registra en `audit_logs` el evento                |
+|      |                       | 'LOGOUT_VOLUNTARY' con user_id y marca de tiempo UTC.           |
+| 8    | Sistema SGO           | Emite directiva al cliente web para eliminar el estado reactivo |
+|      |                       | y variables de memoria de la historia clínica en edición.       |
+| 9    | Sistema SGO           | Redirige la pantalla del navegador a `/login`.                 |
+| 10   | Usuario Autenticado   | Visualiza la pantalla de bienvenida y login. Fin del caso.     |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 1a   | [<<extend>>]          | 1a.1. El temporizador Javascript en segundo plano detecta que no|
+|      | Inactividad prolongada|       ha habido interacción en pantalla durante 14 minutos.     |
+|      | en terminal (15 min)  | 1a.2. Muestra ventana modal con cuenta regresiva de 60 segundos: |
+|      |                       |       "Su sesión caducará pronto por inactividad. ¿Desea        |
+|      |                       |       continuar trabajando?".                                   |
+|      |                       | 1a.3. Si el usuario pulsa "Continuar": se reinicia el contador. |
+|      |                       | 1a.4. Si transcurren los 60 segundos sin respuesta:             |
+|      |                       |       - El sistema invoca automáticamente la ruta de logout.    |
+|      |                       |       - Registra 'LOGOUT_TIMEOUT' en la auditoría del sistema.  |
+|      |                       |       - Bloquea la pantalla y muestra: "Sesión cerrada por      |
+|      |                       |         inactividad para resguardar la confidencialidad".       |
+|      |                       |       - El flujo converge al paso 5 del curso normal.           |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Fallo de red al       | 4a.1. Si el cliente no logra comunicarse con el servidor, la    |
+|      | solicitar el logout   |       aplicación web ejecuta la purga de tokens en local.       |
+|      |                       | 4a.2. Almacena en almacenamiento local una bandera para purga   |
+|      |                       |       en servidor una vez restablecida la conectividad.         |
+|      |                       | 4a.3. Redirige a la pantalla de login.                          |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.3 CASO DE USO: CU-PAC-01 — REGISTRAR PACIENTE CON VALIDACIÓN MÓDULO 10
+================================================================================
+Caso de Uso:        Registrar Paciente con Validación Módulo 10
+Identificador:      CU-PAC-01
+Actores:            Asistente Comercial / Recepcionista (ACT-03), Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-03, RF-05.
+                    Reglas de Negocio: RN-PAC-01 (Módulo 10), RN-PAC-03 (Campos Obligatorios).
+                    Seguridad: S-TAG-INT-01, S-TAG-ACC-03 (ISO/IEC 25010).
+Precondición:       1. El usuario se encuentra autenticado con un rol facultado (Asistente/Optometrista).
+                    2. El paciente no se encuentra previamente registrado en la base de datos.
+Postcondición:      1. Se crea un nuevo registro en la tabla `pacientes` con ID de tipo UUID.
+                    2. La cédula queda indexada de forma única (`unique constraint`).
+                    3. El paciente queda habilitado inmediatamente para asignarle turnos, 
+                       abrir su historia clínica o emitirle una cotización.
+                    4. Se genera un registro inmutable en `audit_logs` con la acción 'PACIENTE_CREATED'.
+Descripción:        Permite el enrolamiento demográfico y legal de una persona en la base de datos 
+                    del centro óptico. El sistema aplica en tiempo real el algoritmo matemático 
+                    de Módulo 10 a la cédula de ciudadanía ecuatoriana para validar su autenticidad, 
+                    garantizando la consistencia tributaria para la posterior facturación electrónica.
+Resumen:            El operador digita la cédula; el sistema valida el código provincial y el 
+                    dígito verificador; si es válida, el operador completa nombres, contacto 
+                    y fecha de nacimiento; el sistema guarda la ficha y asigna el identificador.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | Accede a la opción "Nuevo Paciente" desde el menú de recepción. |
+| 2    | Sistema SGO           | Presenta el formulario en blanco de registro de paciente.       |
+| 3    | Asistente Comercial   | Introduce el número de cédula de identidad de 10 dígitos.       |
+| 4    | Sistema SGO           | [<<include>>] Ejecuta el algoritmo de validación Módulo 10:     |
+|      |                       | a. Verifica que la longitud sea de exactamente 10 dígitos.      |
+|      |                       | b. Comprueba que los dos primeros dígitos correspondan a una    |
+|      |                       |    provincia válida del Ecuador (01 al 24 o 30 especial).       |
+|      |                       | c. Comprueba que el tercer dígito sea menor a 6 (persona natural)|
+|      |                       | d. Aplica coeficientes (2, 1, 2, 1, 2, 1, 2, 1, 2) a los 9      |
+|      |                       |    primeros dígitos; a resultados >= 10 les resta 9.            |
+|      |                       | e. Suma los productos y obtiene el residuo de la decena superior|
+|      |                       | f. Valida que el residuo coincida con el décimo dígito.         |
+| 5    | Sistema SGO           | Comprueba en la base de datos que la cédula no esté registrada. |
+| 6    | Sistema SGO           | Marca el campo con un indicador visual verde de validez.        |
+| 7    | Asistente Comercial   | Ingresa los datos personales requeridos:                        |
+|      |                       | - Nombres y Apellidos completos.                                |
+|      |                       | - Fecha de Nacimiento (dd/mm/aaaa).                             |
+|      |                       | - Sexo biológico (Masculino / Femenino).                        |
+|      |                       | - Teléfono celular de contacto (10 dígitos).                    |
+|      |                       | - Correo electrónico para envío de facturas y recetas.          |
+|      |                       | - Dirección domiciliaria o cantón de procedencia.               |
+|      |                       | - Ocupación o actividad visual predominante.                    |
+| 8    | Sistema SGO           | Calcula dinámicamente la edad exacta en años cumplidos.         |
+| 9    | Asistente Comercial   | Pulsa el botón "Guardar Paciente".                              |
+| 10   | Sistema SGO           | Valida completitud de campos no nulos y formato de email.       |
+| 11   | Sistema SGO           | Persiste la transacción en base de datos con soft_delete = FALSE|
+| 12   | Sistema SGO           | [<<include>>] Inserta registro en `audit_logs` con el user_id   |
+|      |                       | del operador, IP, fecha y datos del paciente creado.           |
+| 13   | Sistema SGO           | Despliega mensaje de éxito: "Paciente registrado exitosamente"   |
+|      |                       | y ofrece accesos directos: "Iniciar Consulta" o "Nueva Venta".  |
+| 14   | Asistente Comercial   | Visualiza la ficha consolidada del paciente. Fin del caso.      |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Cédula inválida por   | 4a.1. El sistema resalta el campo de la cédula en color rojo.   |
+|      | algoritmo Módulo 10   | 4a.2. Muestra: "Número de cédula inválido. Verifique los        |
+|      |                       |       dígitos de la provincia o el dígito verificador".         |
+|      |                       | 4a.3. Inhabilita el botón de guardado.                          |
+|      |                       | 4a.4. El operador revisa el documento físico y corrige el dato; |
+|      |                       |       el flujo retorna al paso 3.                               |
++------+-----------------------+-----------------------------------------------------------------+
+| 4b   | Paciente extranjero   | 4b.1. El operador selecciona tipo de documento "Pasaporte /     |
+|      | con Pasaporte         |       DNI Extranjero".                                          |
+|      |                       | 4b.2. El sistema omite la validación de Módulo 10 y aplica      |
+|      |                       |       validación alfanumérica estándar de 6 a 15 caracteres.    |
+|      |                       | 4b.3. El flujo continúa en el paso 7.                           |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | Cédula ya registrada  | 5a.1. El sistema detecta coincidencia con un paciente existente.|
+|      | previamente en el SGO | 5a.2. Despliega alerta: "El paciente con cédula [X] ya se       |
+|      |                       |       encuentra registrado como: [Nombres y Apellidos]".        |
+|      |                       | 5a.3. Proporciona un botón de acción rápida: "Cargar Ficha      |
+|      |                       |       Existente".                                               |
+|      |                       | 5a.4. Si el operador pulsa el botón, el sistema carga el perfil |
+|      |                       |       del paciente registrado y finaliza la creación.           |
++------+-----------------------+-----------------------------------------------------------------+
+| 7a   | Paciente menor de edad| 7a.1. El operador constata que el menor no posee cédula física. |
+|      | sin cédula de identidad| 7a.2. [<<extend>>] Activa el caso de uso derivado:               |
+|      |                       |       CU-PAC-02: Registrar Menor de Edad sin Documento.         |
++------+-----------------------+-----------------------------------------------------------------+
+| 10a  | Teléfono celular o    | 10a.1. El sistema detecta formato de correo erróneo o teléfono   |
+|      | correo con sintaxis   |        con longitud diferente a 10 dígitos.                     |
+|      | incorrecta            | 10a.2. Indica el error puntual: "El celular debe iniciar con 09 |
+|      |                       |        y contener 10 dígitos numéricos".                        |
+|      |                       | 10a.3. El operador rectifica el campo; el flujo vuelve al 9.    |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.4 CASO DE USO: CU-PAC-02 — REGISTRAR MENOR DE EDAD SIN DOCUMENTO DE IDENTIDAD
+================================================================================
+Caso de Uso:        Registrar Menor de Edad sin Documento de Identidad
+Identificador:      CU-PAC-02
+Actores:            Asistente Comercial / Recepcionista (ACT-03), Optometrista Clínico (ACT-02).
+Tipo:               Opcional / Extensión
+Referencias:        SRS v2.0: RF-04.
+                    Reglas de Negocio: RN-PAC-02 (Tutor Legal Obligatorio).
+                    Seguridad: S-TAG-INT-02, S-TAG-ACC-03 (ISO/IEC 25010).
+Precondición:       1. Operador en el formulario de alta de paciente.
+                    2. Paciente físicamente menor de edad que carece de documento de identidad oficial.
+Postcondición:      1. Se genera un registro de paciente pediátrico con identificador de cédula 
+                       temporal sintético bajo la convención `MEN-YYYYMMDD-XXXX`.
+                    2. El registro queda vinculado obligatoriamente a la llave foránea del 
+                       representante legal (`tutor_id`), quien debe poseer cédula verificada.
+                    3. La ficha queda etiquetada con la marca `requiere_regularizacion_cedula = TRUE`.
+Descripción:        Permite registrar a niños o infantes que acuden a evaluación visual y aún no 
+                    han sido cedulados o no portan su documento, garantizando la continuidad de 
+                    la atención clínica sin vulnerar la integridad referencial ni la LOPDP.
+Resumen:            El operador activa la casilla de menor sin documento; el sistema solicita 
+                    la cédula y datos del tutor o representante; si el tutor es válido, genera 
+                    un código alfanumérico provisional único para el menor y guarda la ficha vinculada.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | En la pantalla de registro, marca el checkbox:                  |
+|      |                       | "[ ] Menor de edad sin documento de identidad".                 |
+| 2    | Sistema SGO           | Oculta la validación de Módulo 10 sobre el campo de cédula del  |
+|      |                       | menor y despliega la sección: "Datos del Representante Legal".  |
+| 3    | Asistente Comercial   | Solicita la cédula de ciudadanía al padre, madre o tutor legal. |
+| 4    | Asistente Comercial   | Ingresa la cédula del representante en el campo correspondiente.|
+| 5    | Sistema SGO           | [<<include>>] Ejecuta la validación Módulo 10 sobre la cédula   |
+|      |                       | del representante legal.                                        |
+| 6    | Sistema SGO           | Verifica si el representante ya existe en la base de datos:     |
+|      |                       | - Si existe: autocompleta nombres, teléfono y correo del tutor. |
+|      |                       | - Si no existe: habilita los campos para registrarlo in situ.   |
+| 7    | Asistente Comercial   | Ingresa los datos propios del menor: Nombres, Apellidos, Sexo   |
+|      |                       | y Fecha de Nacimiento exacta.                                   |
+| 8    | Asistente Comercial   | Selecciona el parentesco: Padre, Madre, Abuelo/a, Tutor Legal.   |
+| 9    | Asistente Comercial   | Pulsa el botón "Registrar Paciente Pediátrico".                 |
+| 10   | Sistema SGO           | Genera de forma algorítmica la clave temporal:                  |
+|      |                       | `MEN-` + Fecha Nacimiento (AAAAMMDD) + Correlativo (4 dígitos). |
+| 11   | Sistema SGO           | Persiste al menor en `pacientes` asignando el código sintético   |
+|      |                       | y enlazando `tutor_id` con el ID del representante.             |
+| 12   | Sistema SGO           | Establece una alerta preventiva en la ficha médica:             |
+|      |                       | "Atención a menor de edad bajo consentimiento del tutor legal". |
+| 13   | Sistema SGO           | [<<include>>] Registra el evento en `audit_logs`.               |
+| 14   | Asistente Comercial   | Visualiza la confirmación de guardado. Fin del caso.           |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | Cédula del tutor      | 5a.1. El sistema detecta que la cédula del representante no es  |
+|      | resulta inválida por  |       válida según el algoritmo Módulo 10.                      |
+|      | Módulo 10             | 5a.2. Bloquea el registro: "Para afiliar a un menor de edad es  |
+|      |                       |       estrictamente obligatoria la cédula válida del tutor".    |
+|      |                       | 5a.3. El operador solicita documento del acompañante o corrige. |
++------+-----------------------+-----------------------------------------------------------------+
+| 7a   | Fecha de nacimiento   | 7a.1. El sistema calcula que la fecha de nacimiento ingresada   |
+|      | corresponde a mayor   |       corresponde a una edad >= 18 años.                        |
+|      | de 18 años            | 7a.2. Rechaza la excepción: "La fecha indica mayoría de edad.   |
+|      |                       |       Debe registrarse con su propia cédula de ciudadanía".     |
+|      |                       | 7a.3. Desmarca el checkbox de menor y retorna al formulario base.|
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+7.5 CASO DE USO: CU-PAC-03 — BÚSQUEDA PREDICTIVA DE PACIENTES
+================================================================================
+Caso de Uso:        Búsqueda Predictiva de Pacientes
+Identificador:      CU-PAC-03
+Actores:            Usuario Autenticado (ACT-01 Administrador, ACT-02 Optometrista, ACT-03 Asistente).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-05.
+                    Seguridad: S-TAG-INT-03, S-TAG-AUTH-01 (ISO/IEC 25010).
+Precondición:       Usuario autenticado con sesión válida en cualquier pantalla que requiera 
+                    asociar un paciente (Recepción, Consulta Clínica, Ventas, Cotizaciones).
+Postcondición:      1. El sistema devuelve en menos de 200 ms la lista de coincidencias ordenadas 
+                       por relevancia (coincidencia exacta en cédula primero, luego apellidos).
+                    2. Al seleccionar un paciente, su identificador único (UUID) y sus datos 
+                       básicos se cargan en el estado global de la sesión de trabajo.
+                    3. No se alteran datos en la base de datos (operación de solo lectura).
+Descripción:        Permite localizar a un paciente registrado mediante autocompletado en tiempo 
+                    real a partir de 3 caracteres digitados en la caja de búsqueda universal. 
+                    El motor efectúa una búsqueda indexada combinada por número de cédula, 
+                    nombres, apellidos o número telefónico, discriminando registros activos.
+Resumen:            El usuario digita caracteres en el buscador; el sistema realiza una consulta 
+                    optimizada; muestra una lista desplegable con datos relevantes; el usuario 
+                    selecciona un registro y el sistema carga la información correspondiente.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Usuario Autenticado   | Se posiciona en la barra de búsqueda universal o pulsa Ctrl + B.|
+| 2    | Usuario Autenticado   | Digita al menos 3 caracteres (ej. "1712", "Figue", "0998").     |
+| 3    | Sistema SGO           | Detecta el evento de entrada y aplica un debounce de 250 ms      |
+|      |                       | para no saturar el servidor con peticiones por cada tecla.      |
+| 4    | Sistema SGO           | Ejecuta una consulta indexada ILIKE / Trigram sobre las columnas|
+|      |                       | `cedula`, `apellidos`, `nombres` y `telefono`, filtrando        |
+|      |                       | únicamente registros donde `soft_delete = FALSE`.              |
+| 5    | Sistema SGO           | Limita los resultados a un máximo de 8 coincidencias.           |
+| 6    | Sistema SGO           | Despliega el menú flotante con tarjetas resumidas mostrando:    |
+|      |                       | - Cédula destacada con coincidencia en negrita.                 |
+|      |                       | - Apellidos y Nombres completos.                                |
+|      |                       | - Edad actual calculada y Número de Celular.                    |
+|      |                       | - Fecha de la última consulta clínica realizada (si existe).    |
+| 7    | Usuario Autenticado   | Selecciona el paciente deseado haciendo clic o navegando con las|
+|      |                       | flechas del teclado y pulsando Enter.                           |
+| 8    | Sistema SGO           | Cierra el menú desplegable y vincula al paciente seleccionado:  |
+|      |                       | - En Consultorio: Carga la historia clínica y refracciones previas|
+|      |                       | - En Ventas: Carga el cliente en el punto de cobro / cotización |
+| 9    | Usuario Autenticado   | Continúa su labor con el paciente contextualizado. Fin del caso.|
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 2a   | Entrada con menos de  | 2a.1. El sistema no dispara la petición al servidor.            |
+|      | 3 caracteres          | 2a.2. Muestra un tooltip sutil: "Digite al menos 3 caracteres   |
+|      |                       |       para iniciar la búsqueda predictiva".                     |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Búsqueda sin ninguna  | 6a.1. La consulta en base de datos retorna cero (0) registros.   |
+|      | coincidencia en BD    | 6a.2. El sistema despliega en la lista: "No se encontraron      |
+|      |                       |       pacientes con los términos ingresados".                   |
+|      |                       | 6a.3. Muestra un botón directo: "+ Registrar Nuevo Paciente".   |
+|      |                       | 6a.4. [<<extend>>] Si el usuario pulsa el botón, el sistema     |
+|      |                       |       deriva automáticamente a CU-PAC-01 prellenando el campo   |
+|      |                       |       de cédula o nombres con el texto previamente digitado.    |
++------+-----------------------+-----------------------------------------------------------------+
+| 8a   | Paciente marcado como | 8a.1. El sistema detecta que el registro tiene flag              |
+|      | 'Inactivo' temporal   |       `estado = INACTIVO`.                                      |
+|      |                       | 8a.2. Pregunta al operador: "El paciente está marcado inactivo. |
+|      |                       |       ¿Desea reactivarlo para esta atención?".                  |
+|      |                       | 8a.3. Si el usuario confirma, actualiza el estado y prosigue.   |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+8. MATRIZ DE REGLAS DE NEGOCIO ASOCIADAS (RN)
+================================================================================
+
++-------------+----------------------------------------------------------------------------------+
+| Código RN   | Descripción Formal de la Regla de Negocio                                        |
++-------------+----------------------------------------------------------------------------------+
+| RN-SEG-01   | Bloqueo Criptográfico por Reintentos Fallidos: Toda cuenta de usuario que       |
+|             | acumule 3 intentos sucesivos fallidos de autenticación en un rango menor a 15     |
+|             | minutos quedará bloqueada en estado inactivo. Solo el Administrador (ACT-01)     |
+|             | podrá levantar el bloqueo mediante consola o reseteo de credenciales.           |
++-------------+----------------------------------------------------------------------------------+
+| RN-SEG-02   | Algoritmo Criptográfico de Contraseñas: Las contraseñas no se almacenan nunca en|
+|             | texto plano ni con cifrado simétrico reversible. Es mandatorio el uso del        |
+|             | algoritmo Argon2id con parámetros mínimos: memoria 64MB, 3 iteraciones y 1 hilo |
+|             | de paralelismo, garantizando resistencia a ataques de diccionario y GPU.          |
++-------------+----------------------------------------------------------------------------------+
+| RN-PAC-01   | Validador Módulo 10 para Cédulas Ecuatorianas: Todo registro de paciente nacional|
+|             | debe aprobar estrictamente el algoritmo Módulo 10. Los dos primeros dígitos deben|
+|             | estar entre 01 y 24 (provincias) o 30 (especial ecuatorianos exterior). El tercer|
+|             | dígito debe ser menor a 6. Si no satisface la regla, el registro es rechazado.   |
++-------------+----------------------------------------------------------------------------------+
+| RN-PAC-02   | Tutela Obligatoria para Pacientes Menores No Cedulados: No se admitirá en el     |
+|             | sistema ningún paciente menor de edad sin cédula propia que no se encuentre      |
+|             | vinculado a la cédula de identidad plenamente validada de su representante legal.|
++-------------+----------------------------------------------------------------------------------+
+| RN-PAC-03   | Integridad y Soft Delete: Los registros de pacientes jamás se eliminan de forma  |
+|             | física (DELETE en SQL) para proteger la trazabilidad histórica de consultas y   |
+|             | ventas. Toda anulación debe operar mediante eliminación lógica (`soft_delete`).  |
++-------------+----------------------------------------------------------------------------------+
+
+
+================================================================================
+9. REQUISITOS DE CALIDAD Y SEGURIDAD ASOCIADOS (S-TAGS ISO/IEC 25010)
+================================================================================
+
+Conforme a la norma ISO/IEC 25010:2023 y la metodología Secure Scrum definida en el 
+marco del trabajo de titulación, los casos de uso de la Fase 1 garantizan:
+
+1. Subcaracterística de Autenticidad (S-TAG-AUTH):
+   - S-TAG-AUTH-01: Verificación de identidad con tokens JSON Web Token firmados con par de 
+     claves asimétricas RS256. Prohibición absoluta de credenciales fijas o cookies desprotegidas.
+   - S-TAG-AUTH-02: Revocación forzosa en lista negra (Redis Blacklist) y expiración por inactividad.
+
+2. Subcaracterística de Integridad (S-TAG-INT):
+   - S-TAG-INT-01: Validación de Módulo 10 en la capa cliente (UX inmediata) y re-validación 
+     estricta en la capa backend (NestJS Pipes con class-validator) previa a persistir en PostgreSQL.
+   - S-TAG-INT-02: Garantía de llaves foráneas no nulas en relaciones menor-tutor.
+   - S-TAG-INT-03: Sanitización estricta de parámetros en búsquedas para neutralizar inyecciones SQL.
+
+3. Subcaracterística de Responsabilidad y No Repudio (S-TAG-ACC):
+   - S-TAG-ACC-01: Toda sesión iniciada o denegada se persiste en `audit_logs` con IP, fecha y rol.
+   - S-TAG-ACC-02: Cierres de sesión voluntarios o por inactividad son sellados cronológicamente.
+   - S-TAG-ACC-03: Todo alta, reactivación o modificación demográfica registra el ID del operador.
+
+================================================================================
+FIN DE LA ESPECIFICACIÓN DE CASOS DE USO — FASE 1 (M1 Y M2)
+================================================================================

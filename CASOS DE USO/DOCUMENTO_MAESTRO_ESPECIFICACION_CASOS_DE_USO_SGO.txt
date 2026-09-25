@@ -1,0 +1,289 @@
+================================================================================
+DOCUMENTO MAESTRO DE ESPECIFICACIÓN DE CASOS DE USO (COMPENDIO INTEGRAL)
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+Proyecto:           Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Organización:       Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Marco Académico:    Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
+Metodología:        PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
+Autores:            Figueroa Díaz Omar Santiago, Villalva Dumancela Alexander Rafael
+Tutor / Director:   Ing. Jorge Ariel Menéndez Verdecia
+Fecha de Cierre:    25 de Septiembre de 2026
+Versión Consolidada:1.0 Definitiva
+Archivo Maestro:    CASOS DE USO/DOCUMENTO_MAESTRO_ESPECIFICACION_CASOS_DE_USO_SGO.txt
+================================================================================
+
+
+TABLA DE CONTENIDO GENERAL
+--------------------------------------------------------------------------------
+1. HISTORIAL DE VERSIONES CONSOLIDADO
+2. INFORMACIÓN INTEGRAL DEL PROYECTO
+3. ACTA FORMAL DE APROBACIONES
+4. RESUMEN EJECUTIVO GENERAL DEL SISTEMA SGO
+   4.1 Justificación y Alcance Integral del Software
+   4.2 Los 7 Módulos Funcionales del Sistema (M1 a M7)
+   4.3 Incorporación de las Brechas Elicitadas en la Práctica Clínica Real (Audio)
+5. CATÁLOGO CONSOLIDADO DE ACTORES DEL SISTEMA (FICHAS PMOINFORMATICA)
+   5.1 ACT-00: Usuario Autenticado (Actor Abstracto Base)
+   5.2 ACT-01: Administrador / Propietario
+   5.3 ACT-02: Optometrista Clínico
+   5.4 ACT-03: Asistente Comercial / Recepcionista
+   5.5 ACT-04: Web Services SRI (Actor Externo)
+   5.6 ACT-05: Taller Óptico / Laboratorio Externo (Actor Secundario)
+   5.7 ACT-NEG-01: Paciente / Cliente (Beneficiario Pasivo / LOPDP)
+6. MAPA GLOBAL DE PAQUETES Y CASOS DE USO (UML 2.5)
+7. COMPENDIO MAESTRO DE LOS 23 CASOS DE USO ESPECIFICADOS
+   7.1 Paquete 1: Gestión de Acceso y Seguridad RBAC (M1)
+   7.2 Paquete 2: Gestión Demográfica de Pacientes (M2)
+   7.3 Paquete 3: Atención Clínica y Refracción Integral (M3)
+   7.4 Paquete 4: Taller Óptico y Laboratorio (M4)
+   7.5 Paquete 5: Ventas, Caja y Mostrador (M5)
+   7.6 Paquete 6: Facturación Electrónica e Integración con SRI (M6)
+   7.7 Paquete 7: Asistente Conversacional IA y Auditoría Inmutable (M7)
+8. MATRIZ DE TRAZABILIDAD INTEGRAL CRUZADA (SRS v2.0 vs. AUDIO vs. CUS vs. PRUEBAS)
+9. DECLARACIÓN DE CUMPLIMIENTO METODOLÓGICO Y CIERRE DEL PLAN
+================================================================================
+
+
+================================================================================
+1. HISTORIAL DE VERSIONES CONSOLIDADO
+================================================================================
+
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| Fecha      | Versión | Autor                             | Organización       | Descripción del Cambio                |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+| 25/09/2026 | 1.0     | Figueroa Omar / Villalva Alex.   | ESPOCH / SGO       | Consolidación final del Documento     |
+|            |         |                                   |                    | Maestro de Casos de Uso integrando    |
+|            |         |                                   |                    | las 6 fases del plan PMOInformatica.  |
++------------+---------+-----------------------------------+--------------------+---------------------------------------+
+
+
+================================================================================
+2. INFORMACIÓN INTEGRAL DEL PROYECTO
+================================================================================
+
+Empresa / Organización:                   Óptica Vista Visión
+Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Fecha de Preparación:                     25 de Septiembre de 2026
+Cliente:                                  Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
+Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
+Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
+Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
+
+
+================================================================================
+3. ACTA FORMAL DE APROBACIONES
+================================================================================
+
+El presente documento maestro representa la línea base funcional oficial y no ambigua 
+para la implementación del software SGO, contando con la validación académica y de negocio:
+
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Nombre y Apellido              | Cargo                      | Departamento / Org.   | Fecha      | Firma      |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+| Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
+| Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
+| Lic. Optom. Representante      | Propietario / Optometrista | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
++--------------------------------+----------------------------+-----------------------+------------+------------+
+
+
+================================================================================
+4. RESUMEN EJECUTIVO GENERAL DEL SISTEMA SGO
+================================================================================
+
+4.1 JUSTIFICACIÓN Y ALCANCE INTEGRAL DEL SOFTWARE
+El Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO) es una solución 
+integral diseñada para erradicar las vulnerabilidades operativas, la duplicidad de registros, 
+la pérdida de trazabilidad en pedidos de taller y los riesgos de fuga de información sensible 
+en centros ópticos independientes del Ecuador. Implementa la arquitectura Secure Scrum e 
+ISO/IEC 25010:2023, asegurando la confidencialidad médica y la consistencia tributaria ante el SRI.
+
+4.2 LOS 7 MÓDULOS FUNCIONALES DEL SISTEMA
+1. M1 — Seguridad y Control de Acceso: Autenticación robusta con hash Argon2id, tokens JWT RS256 
+   y caducidad por inactividad operativa de 15 minutos.
+2. M2 — Gestión Demográfica de Pacientes: Validación Módulo 10 de cédula, enrolamiento de 
+   menores con código sintético y búsqueda predictiva sub-200 ms.
+3. M3 — Atención Clínica y Refracción: Anamnesis, graduación foróptero, queratometría, 
+   prueba ambulatoria en marcha, prescripción CIE-10 y seguimiento de patologías de polo anterior.
+4. M4 — Taller Óptico y Laboratorio: Generación de órdenes de taller disociadas bajo LOPDP y 
+   especificación de cotas milimétricas para biselado de monturas al aire/semialaire.
+5. M5 — Ventas, Mostrador y Caja: Combos promocionales de precio fijo, cobro de anticipos con 
+   ticket de retiro en 2 días hábiles, liquidación de saldos y arqueos ciegos de caja.
+6. M6 — Facturación Electrónica SRI: Generación XML v1.1.0, clave de 49 dígitos M11, firma 
+   digital XAdES-BES en PKCS#12, transmisión SOAP offline y RIDE Code128 con despacho SMTP.
+7. M7 — Asistente IA y Auditoría Inmutable: Consultas en lenguaje natural blindadas con 
+   conexión `GRANT SELECT` (Read-Only Guard) y encadenamiento criptográfico Hash Chain en `audit_logs`.
+
+4.3 BRECHAS CRÍTICAS DE LA PRÁCTICA REAL FORMALIZADAS (AUDIO OPTOMÉTRICO)
+A diferencia de los modelos teóricos genéricos, el SGO formaliza las 6 realidades operativas 
+detectadas en la grabación clínica del 25 de septiembre de 2026:
+1. Lensometría previa y caracterización física de daño en gafas anteriores (CU-CLI-02).
+2. Queratometría computarizada K1/K2 y cálculo de astigmatismo corneal (CU-CLI-03).
+3. Prueba ambulatoria con aros de prueba y confirmación de ausencia de mareo en piso (CU-CLI-04).
+4. Tamizaje de pterigión en cara interna con advertencias ambientales de filtro UV400 (CU-CLI-06).
+5. Instrucciones de taller con reducción vertical milimétrica de 38 mm a 27 mm (CU-LAB-01).
+6. Comercialización de combo mensual a $99 y emisión de Orden de Retiro con anticipo (CU-VEN-02/03).
+
+
+================================================================================
+5. CATÁLOGO CONSOLIDADO DE ACTORES DEL SISTEMA (FICHAS PMOINFORMATICA)
+================================================================================
+
++----------+-----------------------------+-----------------+-------------------------------------------------+
+| Código   | Nombre del Actor            | Tipo de Actor   | Responsabilidad Primaria en el Software         |
++----------+-----------------------------+-----------------+-------------------------------------------------+
+| ACT-00   | Usuario Autenticado         | Abstracto Base  | Sesión activa, token JWT y privilegios RBAC.    |
+| ACT-01   | Administrador / Propietario | Humano Interno  | Gobierno global, anulación atómica y arqueo.    |
+| ACT-02   | Optometrista Clínico        | Humano Interno  | Refracción, prescripción, diagnóstico CIE-10.   |
+| ACT-03   | Asistente Comercial         | Humano Interno  | Filiación, ventas, cobro de anticipo y entrega. |
+| ACT-04   | Web Services SRI            | Externo Fiscal  | Validación SOAP y autorización de facturas.     |
+| ACT-05   | Taller Óptico Externo       | Externo Secund. | Manufactura física, corte y biselado de lunas.  |
+| ACT-NEG  | Paciente / Cliente          | Beneficiario    | Sujeto de datos médicos y adquirente comercial. |
++----------+-----------------------------+-----------------+-------------------------------------------------+
+
+TABLA MAESTRA DE ATRIBUTOS TIPADOS DE LOS ACTORES:
+- ACT-00: user_id (UUID), username (Varchar 50), password_hash (Argon2id), rol_id (Enum), intentos_fallidos (Smallint).
+- ACT-01: ruc_establecimiento (Varchar 13), clave_maestra_sec (Varchar 255), email_alertas (Varchar 100).
+- ACT-02: registro_msp (Varchar 25), especialidad (Varchar 100), firma_digital_id (UUID).
+- ACT-03: punto_emision_pos (Char 3), caja_sesion_id (UUID), limite_descuento (Numeric 5,2).
+- ACT-04: url_recepcion_soap (Varchar 255), url_autorizacion_soap (Varchar 255), version_xsd (1.1.0).
+- ACT-05: laboratorio_id (UUID), razon_social_lab (Varchar 120), tiempo_entrega_dias (Smallint).
+- ACT-NEG: paciente_id (UUID), cedula (Varchar 15), edad (Smallint), ocupacion (Varchar 100).
+
+
+================================================================================
+6. MAPA GLOBAL DE PAQUETES Y CASOS DE USO (UML 2.5)
+================================================================================
+
+  =============================================================================
+  SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+  =============================================================================
+  [PAQUETE 1: SEGURIDAD (M1)]          [PAQUETE 2: PACIENTES (M2)]
+  * CU-SEG-01 Iniciar Sesión RBAC      * CU-PAC-01 Registrar Paciente Módulo 10
+  * CU-SEG-02 Cerrar Sesión Inactiv.   * CU-PAC-02 Registrar Menor sin Cédula
+                                       * CU-PAC-03 Búsqueda Predictiva Pacientes
+  -----------------------------------------------------------------------------
+  [PAQUETE 3: NÚCLEO CLÍNICO Y REFRACCIÓN INTEGRAL (M3)]
+  * CU-CLI-01 Registrar Anamnesis y Motivo Consulta
+  * CU-CLI-02 Registrar Lensometría y Estado Gafas Previas [AUDIO REAL]
+  * CU-CLI-03 Registrar Pruebas Objetivas y Queratometría [AUDIO REAL]
+  * CU-CLI-04 Examen Refractivo y Confort Ambulatorio en Marcha [AUDIO REAL]
+  * CU-CLI-05 Emitir Receta Óptica Digital y Certificado Visual
+  * CU-CLI-06 Evaluación Polo Anterior y Seguimiento Patológico [AUDIO REAL]
+  -----------------------------------------------------------------------------
+  [PAQUETE 4: TALLER ÓPTICO (M4)]      [PAQUETE 5: VENTAS Y CAJA (M5)]
+  * CU-LAB-01 Orden Taller Biselado    * CU-VEN-01 Venta Descuento Híbrido
+    (Reducción Milimétrica) [AUDIO]    * CU-VEN-02 Cotizar Combo $99 [AUDIO]
+  * CU-LAB-02 Ciclo Estados Pedido     * CU-VEN-03 Cobro Anticipo y Orden Retiro [AUDIO]
+  * CU-LAB-03 Incidencia / Garantía    * CU-VEN-04 Cobro Saldo y Entrega Producto
+                                       * CU-VEN-05 Cierre Diario y Arqueo Caja
+                                       * CU-VEN-06 Anulación Venta Atómica ACID
+  -----------------------------------------------------------------------------
+  [PAQUETE 6: FACTURACIÓN SRI (M6)]    [PAQUETE 7: IA Y AUDITORÍA (M7)]
+  * CU-SRI-01 Generar XML v1.1.0 M11   * CU-IA-01 Consulta Lenguaje Natural (Read-Only)
+  * CU-SRI-02 Firma XAdES-BES .p12     * CU-AUD-01 Pista Auditoría Hash Chain
+  * CU-SRI-03 Transmisión WS Offline
+  * CU-SRI-04 Generar RIDE Code128
+  =============================================================================
+
+
+================================================================================
+7. COMPENDIO MAESTRO DE LOS 23 CASOS DE USO ESPECIFICADOS
+================================================================================
+
+Las especificaciones detalladas de los 23 casos de uso, incluyendo cursos normales 
+paso a paso, cursos alternos tabulados, precondiciones y postcondiciones, se 
+encuentran formalizadas en los documentos de entrega de cada fase:
+
+1. [Fase 1] CASOS DE USO/01_CasosUso_Seguridad_Pacientes_PMO.txt:
+   - CU-SEG-01: Iniciar Sesión y Validar Credenciales RBAC (Argon2id, RS256, 3 intentos).
+   - CU-SEG-02: Cerrar Sesión por Inactividad o Petición (Redis Blacklist, 15 min timeout).
+   - CU-PAC-01: Registrar Paciente con Validación Módulo 10 (Validación provincial y M10).
+   - CU-PAC-02: Registrar Menor de Edad sin Documento (Código sintético `MEN-YYYYMMDD-XXXX`).
+   - CU-PAC-03: Búsqueda Predictiva de Pacientes (Indexación Trigram, tiempo < 200 ms).
+
+2. [Fase 2] CASOS DE USO/02_CasosUso_Modulo_Clinico_PMO.txt:
+   - CU-CLI-01: Registrar Anamnesis y Motivo de Consulta (Síntomas, hábitos y patologías).
+   - CU-CLI-02: Registrar Lensometría y Gafas Previas (Medición in situ +1.75/-1.50 y astillado).
+   - CU-CLI-03: Registrar Pruebas Objetivas y Queratometría (K1, K2 y astigmatismo corneal).
+   - CU-CLI-04: Examen Refractivo y Confort Ambulatorio (Marcha obligatoria sin mareo).
+   - CU-CLI-05: Emitir Receta Óptica y Certificado Visual (Código QR y CIE-10).
+   - CU-CLI-06: Evaluación Polo Anterior y Seguimiento Patológico (Pterigión nasal y UV400).
+
+3. [Fase 3] CASOS DE USO/03_CasosUso_Taller_Ventas_Caja_PMO.txt:
+   - CU-LAB-01: Orden Técnica de Taller con Parámetros Geométricos (Corte 38 mm a 27 mm).
+   - CU-LAB-02: Gestionar Ciclo de Estados del Pedido (Máquina finita de 5 estados).
+   - CU-LAB-03: Registrar Incidencia o Garantía Técnica (Reposición sin costo).
+   - CU-VEN-01: Registrar Venta con Descuento Híbrido de Inventario (Control atómico de stock).
+   - CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales (Combo mensual de $99.00 USD).
+   - CU-VEN-03: Cobro de Anticipo y Generar Orden de Retiro (Ticket térmico a 2 días hábiles).
+   - CU-VEN-04: Cobro de Saldo y Entrega de Producto (Liquidación en mostrador y finiquito).
+   - CU-VEN-05: Realizar Cierre Diario y Arqueo Consolidado de Caja (Arqueo ciego).
+   - CU-VEN-06: Anular Venta con Reversión Atómica ACID (Restitución total en PostgreSQL).
+
+4. [Fase 4] CASOS DE USO/04_CasosUso_Facturacion_SRI_PMO.txt:
+   - CU-SRI-01: Generar XML v1.1.0 y Clave Acceso Módulo 11 (Bloqueo Consumidor Final > $50).
+   - CU-SRI-02: Firmar Digitalmente Factura con PKCS#12 (XAdES-BES enveloped con RSA-SHA1).
+   - CU-SRI-03: Transmitir y Consultar Comprobante ante SRI (SOAP offline y contingencia).
+   - CU-SRI-04: Generar RIDE PDF Code128 y Despachar por Correo SMTP (Resolución 300 DPI).
+
+5. [Fase 5] CASOS DE USO/05_CasosUso_IA_Auditoria_PMO.txt:
+   - CU-IA-01: Consultar Métricas y Existencias en Lenguaje Natural (Read-Only Guard).
+   - CU-AUD-01: Registro Transversal Inmutable de Auditoría (Hash Chain SHA-256 encadenado).
+
+
+================================================================================
+8. MATRIZ DE TRAZABILIDAD INTEGRAL CRUZADA
+================================================================================
+
++-----------------------+-----------------------------+---------------------+---------+---------------------+-------------------+
+| Origen del Requisito  | Requisito / Hallazgo Audio  | Caso de Uso (CUS)   | Módulo  | Seguridad ISO 25010 | Caso Prueba (UAT) |
++-----------------------+-----------------------------+---------------------+---------+---------------------+-------------------+
+| SRS v2.0 (M1)         | RF-01: Login y Autenticac.  | CU-SEG-01           | M1      | S-TAG-AUTH-01       | CP-UAT-SEG-01     |
+| SRS v2.0 (M1)         | RF-02: Cierre Sesión y RBAC | CU-SEG-02           | M1      | S-TAG-AUTH-02       | CP-UAT-SEG-02     |
+| SRS v2.0 (M2)         | RF-03: Cédula Módulo 10     | CU-PAC-01           | M2      | S-TAG-INT-01        | CP-UAT-PAC-01     |
+| SRS v2.0 (M2)         | RF-04: Menores sin Cédula   | CU-PAC-02           | M2      | S-TAG-INT-02        | CP-UAT-PAC-02     |
+| SRS v2.0 (M2)         | RF-05: Búsqueda Predictiva  | CU-PAC-03           | M2      | S-TAG-INT-03        | CP-UAT-PAC-03     |
+| SRS v2.0 (M3)         | RF-13: Anamnesis / CIE-10   | CU-CLI-01           | M3      | S-TAG-INT-04        | CP-UAT-CLI-01     |
+| Audio Clínico Real    | Lensometría y Daño Previo   | CU-CLI-02 [NUEVO]   | M3      | S-TAG-INT-04        | CP-UAT-CLI-02     |
+| Audio Clínico Real    | Queratometría / Auto-ref    | CU-CLI-03 [NUEVO]   | M3      | S-TAG-INT-04        | CP-UAT-CLI-03     |
+| Audio Clínico Real    | Test Marcha sin Mareo       | CU-CLI-04 (Pasos 5) | M3      | S-TAG-INT-04        | CP-UAT-CLI-04     |
+| SRS v2.0 (M3)         | RF-07 a RF-12: Refracción   | CU-CLI-04           | M3      | S-TAG-INT-04        | CP-UAT-CLI-05     |
+| SRS v2.0 (M3)         | RF-14, RF-15: Receta Óptica | CU-CLI-05           | M3      | S-TAG-AUTH-03       | CP-UAT-CLI-06     |
+| Audio Clínico Real    | Pterigión Polo Anterior     | CU-CLI-06 [NUEVO]   | M3      | S-TAG-INT-04        | CP-UAT-CLI-07     |
+| Audio Mostrador       | Reducción Altura Biselado   | CU-LAB-01 [AMPLIADO]| M4      | S-TAG-CONF-03       | CP-UAT-LAB-01     |
+| SRS v2.0 (M4)         | RF-10, 11, 16, 17: Taller   | CU-LAB-01           | M4      | S-TAG-CONF-03       | CP-UAT-LAB-02     |
+| SRS v2.0 (M4)         | RF-18: Ciclo Estados Taller | CU-LAB-02           | M4      | S-TAG-INT-05        | CP-UAT-LAB-03     |
+| SRS v2.0 (M4)         | RF-19: Garantía Técnica     | CU-LAB-03           | M4      | S-TAG-ACC-05        | CP-UAT-LAB-04     |
+| SRS v2.0 (M5)         | RF-20, 21: Venta Inventario | CU-VEN-01           | M5      | S-TAG-INT-06        | CP-UAT-VEN-01     |
+| Audio Comercial Real  | Combo Promocional $99       | CU-VEN-02 [NUEVO]   | M5      | S-TAG-INT-06        | CP-UAT-VEN-02     |
+| Audio Comercial Real  | Anticipo y Orden de Retiro  | CU-VEN-03 [NUEVO]   | M5      | S-TAG-INT-06        | CP-UAT-VEN-03     |
+| SRS v2.0 (M5)         | RF-23: Cobro Saldo/Entrega  | CU-VEN-04           | M5      | S-TAG-INT-06        | CP-UAT-VEN-04     |
+| SRS v2.0 (M5)         | RF-23: Cierre Caja Diario   | CU-VEN-05           | M5      | S-TAG-INT-06        | CP-UAT-VEN-05     |
+| SRS v2.0 (M5)         | RF-22: Reversión ACID Venta | CU-VEN-06           | M5      | S-TAG-AUTH-04        | CP-UAT-VEN-06     |
+| SRS v2.0 (M6)         | RF-24: XML v1.1.0 Clave M11 | CU-SRI-01           | M6      | S-TAG-INT-07        | CP-UAT-SRI-01     |
+| SRS v2.0 (M6)         | RF-25: Firma XAdES-BES .p12 | CU-SRI-02           | M6      | S-TAG-AUTH-03        | CP-UAT-SRI-02     |
+| SRS v2.0 (M6)         | RF-26: Transmisión WS SRI   | CU-SRI-03           | M6      | S-TAG-DISP-01        | CP-UAT-SRI-03     |
+| SRS v2.0 (M6)         | RF-27: RIDE PDF y SMTP      | CU-SRI-04           | M6      | S-TAG-INT-07        | CP-UAT-SRI-04     |
+| SRS v2.0 (M7)         | RF-28 a RF-30: Asistente IA | CU-IA-01            | M7      | S-TAG-AUTH-05        | CP-UAT-IA-01      |
+| SRS v2.0 (M7)         | RF-31: Auditoría Inmutable   | CU-AUD-01           | M7      | S-TAG-ACC-08        | CP-UAT-AUD-01     |
++-----------------------+-----------------------------+---------------------+---------+---------------------+-------------------+
+
+
+================================================================================
+9. DECLARACIÓN DE CUMPLIMIENTO METODOLÓGICO Y CIERRE DEL PLAN
+================================================================================
+
+Con la emisión de este Documento Maestro, se declara formalmente cumplido el 100% de 
+los objetivos establecidos en el "Plan Maestro de Documentación de Casos de Uso por Fases":
+1. Adopción Estricta de PMOInformatica: Todas las especificaciones siguen la estructura canónica.
+2. Integración de la Realidad Operativa (Audio Real): Ningún vacío clínico o de taller quedó excluido.
+3. Cobertura Normativa Legal y Fiscal: Cumplimiento de la LOPDP del Ecuador y Ficha SRI v1.1.0.
+4. Trazabilidad Completa: Cada Requisito Funcional, Regla de Negocio y S-Tag cuenta con su 
+   correspondiente Caso de Uso y Caso de Prueba UAT asociado.
+
+================================================================================
+FIN DEL DOCUMENTO MAESTRO DE ESPECIFICACIÓN DE CASOS DE USO (SGO)
+================================================================================
