@@ -1,0 +1,501 @@
+================================================================================
+DOCUMENTO TÉCNICO DE ESPECIFICACIÓN DE CASOS DE USO (CU)
+SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+Proyecto:    Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
+Cliente:     Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Referencia:  Especificación de Requisitos de Software (SRS v2.0 - IEEE 830 / ISO 25010)
+Insumo:      Transcripción de Sesión Real de Atención Integral Optométrica
+Fecha:       25 de Septiembre de 2026
+Versión:     1.0 Definitiva
+================================================================================
+
+--------------------------------------------------------------------------------
+1. INTRODUCCIÓN Y ALCANCE
+--------------------------------------------------------------------------------
+El presente documento formaliza los Casos de Uso (CU) del Sistema de Gestión 
+Optométrica (SGO). Este modelo integra los requisitos funcionales contractuales 
+definidos en la "Especificación de Requisitos_02" junto con aquellos casos de uso y 
+reglas de negocio operativas que fueron detectados en la práctica real a través del 
+audio de consulta clínica y mostrador, los cuales se encontraban omitidos o 
+excluidos de la línea base original.
+
+--------------------------------------------------------------------------------
+2. ANÁLISIS DE CASOS DE USO Y FUNCIONALIDADES EXCLUIDAS DETECTADAS EN LOS AUDIOS
+--------------------------------------------------------------------------------
+Del análisis exhaustivo de la sesión de atención entre el optometrista y el paciente 
+(Omar Santiago Figueroa Díaz), se identificaron las siguientes brechas y casos de uso 
+que deben ser formalizados en el sistema para evitar vacíos operativos:
+
+1. Lensometría de Lentes Anteriores (Examen Físico Previo):
+   - Evidencia en Audio: El optometrista coloca las gafas usadas del paciente en el 
+     lensómetro para determinar la graduación histórica base (+1.75 / -1.50) y el tipo 
+     de filtro previo (filtro azul en plástico con signos de astillamiento).
+   - Situación en SRS v2.0: El RF-12 solo contempla la lectura del último examen 
+     almacenado en la base de datos local, omitiendo el registro de una fórmula previa 
+     medida in situ en pacientes nuevos o que acuden con lentes de otros centros.
+   - Caso de Uso Derivado: CU-CLI-02 (Registro de Lensometría y Estado de Gafas Previas).
+
+2. Captura de Datos de Queratometría / Autorrefractometría Objetiva:
+   - Evidencia en Audio: El especialista sienta al paciente en el equipo computarizado 
+     (mentonera/frente), solicita fijar la vista en la imagen de fondo y toma parámetros 
+     objetivos de córnea (queratometría para radios corneales y autorrefractometría referencial).
+   - Situación en SRS v2.0: No existe un campo explícito para parámetros queratométricos 
+     ni valores objetivos preliminares de autorrefractometría; solo se pasa directo al RF-07.
+   - Caso de Uso Derivado: CU-CLI-03 (Registro de Pruebas Objetivas y Queratometría).
+
+3. Tamizaje y Registro de Patologías Externas / Polo Anterior (Pterigión):
+   - Evidencia en Audio: Inspección visual de carnosidad incipiente (pterigión en cara 
+     interna), indicación de cirugía futura si invade córnea, y advertencias de no frotarse 
+     los ojos ni sobreexponerse a rayos UV/polvo.
+   - Situación en SRS v2.0: El RF-13 registra anamnesis y diagnósticos CIE-10, pero carece 
+     de campos estructurados para la evolución y seguimiento de pterigión/carnosidades.
+   - Caso de Uso Derivado: CU-CLI-06 (Evaluación de Segmento Anterior y Recomendaciones Clínicas).
+
+4. Prueba Ambulatoria con Montura de Prueba (Test de Marcha y Visión Dinámica):
+   - Evidencia en Audio: Colocación de aros de prueba con la fórmula tentativa (+0.25 / +0.50 y 
+     cilindro a 1.75 / 2.00), desplazamiento del paciente por el consultorio, verificación 
+     de desniveles en piso, vitrinas y lectura de cerca sin mareos.
+   - Situación en SRS v2.0: Excluido del flujo formal; no existe confirmación de confort 
+     ambulatorio previa al guardado definitivo de la prescripción.
+   - Caso de Uso Derivado: Integrado como paso de validación en CU-CLI-04.
+
+5. Parámetros Técnicos de Taller: Altura de Montaje y Reducción Milimétrica de Biselado:
+   - Evidencia en Audio: El optometrista toma la regla milimétrica, mide la montura al aire 
+     (38 mm original) y especifica reducir 3 a 4 mm verticalmente para dejar la luna en 27 mm. 
+     Se discute si este campo debe ser un texto libre o campos estructurados para el laboratorio.
+   - Situación en SRS v2.0: El RF-10 y RF-11 registran DNP y alturas estándar, pero no 
+     contemplan instrucciones de modificación geométrica (recorte vertical de luna para armazones al aire/semialaire).
+   - Caso de Uso Derivado: CU-LAB-01 (Emisión de Orden Técnica con Ajuste Geométrico de Biselado).
+
+6. Gestión de Promociones / Combos Comerciales y Emisión de Orden de Retiro con Anticipo:
+   - Evidencia en Audio: Cotización de armazón + lunas policarbonato filtro azul bajo promoción 
+     mensual ($99 paquete promocional vs. $130 regular). Registro de anticipo (abono) y 
+     generación de comprobante impreso de orden de retiro con fecha estimada de entrega (viernes / 2 días laborables).
+   - Situación en SRS v2.0: El RF-20 contempla recibo de venta y el RF-23 cobros mixtos, pero 
+     no formaliza la aplicación de paquetes promocionales ni el documento operativo de retiro para el cliente.
+   - Casos de Uso Derivados: CU-VEN-02 (Aplicación de Promociones) y CU-VEN-03 (Registro de Anticipo y Orden de Retiro).
+
+--------------------------------------------------------------------------------
+3. ACTORES DEL SISTEMA
+--------------------------------------------------------------------------------
+1. ACT-01: Administrador / Propietario
+   - Acceso irrestricto al sistema, anulación de transacciones con reversión ACID, 
+     auditoría, cierre consolidado de caja, configuración tributaria SRI y consultas analíticas.
+2. ACT-02: Optometrista Clínico
+   - Responsable del flujo médico: registro de filiación, lensometría, queratometría, 
+     refracción subjetiva, confort ambulatorio, prescripción, diagnósticos y emisión de órdenes técnicas.
+3. ACT-03: Asistente Comercial / Recepcionista
+   - Atención al cliente, registro demográfico de pacientes, cotización de productos/combos, 
+     facturación y cobro de anticipos/saldos, impresión de órdenes de retiro y entrega de trabajos.
+4. ACT-04: Web Services SRI (Actor Externo)
+   - Servidores de recepción y autorización de comprobantes electrónicos fuera de línea del SRI.
+5. ACT-05: Taller Óptico / Laboratorio Externo (Actor Secundario)
+   - Receptor de las órdenes de trabajo disociadas para corte, biselado y tratamiento de lunas.
+
+--------------------------------------------------------------------------------
+4. DIAGRAMA TEXTUAL DE PAQUETES DE CASOS DE USO
+--------------------------------------------------------------------------------
+[PAQUETE 1: GESTIÓN DE ACCESO Y SEGURIDAD (M1)]
+   - CU-SEG-01: Iniciar Sesión y Validar Credenciales RBAC
+   - CU-SEG-02: Cerrar Sesión por Inactividad o Petición
+
+[PAQUETE 2: GESTIÓN DEMOGRÁFICA DE PACIENTES (M2)]
+   - CU-PAC-01: Registrar Paciente con Validación Módulo 10
+   - CU-PAC-02: Registrar Menor de Edad sin Documento de Identidad
+   - CU-PAC-03: Búsqueda Predictiva de Pacientes
+
+[PAQUETE 3: ATENCIÓN CLÍNICA Y REFRACCIÓN (M3)]
+   - CU-CLI-01: Registrar Anamnesis y Motivo de Consulta
+   - CU-CLI-02: Registrar Lensometría y Estado de Gafas Previas [DETECTADO EN AUDIO]
+   - CU-CLI-03: Registrar Pruebas Objetivas y Queratometría [DETECTADO EN AUDIO]
+   - CU-CLI-04: Realizar Examen Refractivo Subjetivo y Confort Ambulatorio
+   - CU-CLI-05: Emitir Receta Óptica y Certificado Visual
+   - CU-CLI-06: Registrar Evaluación de Polo Anterior y Seguimiento Patológico [DETECTADO EN AUDIO]
+
+[PAQUETE 4: TALLER Y LABORATORIO ÓPTICO (M4)]
+   - CU-LAB-01: Generar Orden Técnica de Taller con Parámetros Geométricos [AMPLIADO POR AUDIO]
+   - CU-LAB-02: Gestionar Ciclo de Estados del Pedido de Laboratorio
+   - CU-LAB-03: Registrar Incidencia o Garantía Técnica
+
+[PAQUETE 5: VENTAS, CAJA Y MOSTREADOR (M5)]
+   - CU-VEN-01: Registrar Venta con Descuento Híbrido de Inventario
+   - CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales [DETECTADO EN AUDIO]
+   - CU-VEN-03: Registrar Cobro de Anticipo y Generar Orden de Retiro [DETECTADO EN AUDIO]
+   - CU-VEN-04: Registrar Cobro de Saldo y Entrega de Producto
+   - CU-VEN-05: Realizar Cierre Diario y Arqueo Consolidado de Caja
+   - CU-VEN-06: Anular Venta con Reversión Atómica ACID
+
+[PAQUETE 6: FACTURACIÓN ELECTRÓNICA SRI (M6)]
+   - CU-SRI-01: Generar XML v1.1.0 y Clave de Acceso Módulo 11
+   - CU-SRI-02: Firmar Digitalmente Factura con Certificado PKCS#12 (XAdES-BES)
+   - CU-SRI-03: Transmitir y Consultar Comprobante ante Web Services SRI
+   - CU-SRI-04: Generar RIDE PDF Code128 y Despachar por Correo SMTP
+
+[PAQUETE 7: ASISTENTE INTELIGENTE CONVERSACIONAL (M7)]
+   - CU-IA-01: Consultar Métricas y Existencias en Lenguaje Natural (Read-Only Guard)
+
+--------------------------------------------------------------------------------
+5. ESPECIFICACIÓN DETALLADA DE CASOS DE USO CRÍTICOS Y RELEVANTES
+--------------------------------------------------------------------------------
+
+================================================================================
+CASO DE USO: CU-CLI-02 — REGISTRAR LENSOMETRÍA Y ESTADO DE GAFAS PREVIAS
+================================================================================
+Actores:           Optometrista Clínico.
+Propósito:         Capturar la graduación física de los lentes actuales del paciente, 
+                   sus características físicas y su estado de deterioro para evaluar 
+                   la progresión refractiva y justificar el cambio de material.
+Precondiciones:    Paciente seleccionado en pantalla de atención clínica.
+Entradas:          Esfera OD/OI, Cilindro OD/OI, Eje OD/OI, Adición (si aplica), tipo 
+                   de filtro detectado (neutro, antirreflejo verde, filtro azul), 
+                   material previo (plástico CR-39, policarbonato, mineral), estado 
+                   físico de la luna (rayado, astillado, trizado, óptimo).
+Flujo Principal:
+  1. El optometrista selecciona la opción "Lensometría / Lentes Previos".
+  2. El optometrista ingresa los valores medidos en el lensómetro para OD y OI.
+  3. El optometrista selecciona en el selector múltiple las propiedades de la luna previa:
+     - Material: Plástico (CR-39).
+     - Tratamiento: Filtro de Luz Azul.
+  4. El optometrista documenta el daño estructural observado: "Luna astillada en esquina 
+     inferior por falta de protección en armazón semialaire (ranurado)".
+  5. El sistema almacena el registro y lo vincula a la consulta actual.
+  6. El sistema proyecta estos valores en la cuadrícula comparativa para la refracción.
+Flujos Alternos:
+  2a. Paciente no usa lentes previos o es primera consulta:
+      - El optometrista activa el checkbox "Sin lentes previos (Primera vez)".
+      - El sistema inhabilita los campos de lensometría y registra valor nulo.
+Postcondiciones:   Graduación previa persistida para comparación diagnóstica clínica (RF-12).
+Reglas de Negocio: RN-CLI-01: Los valores de lensometría no pueden sobrescribir la 
+                   prescripción final emitida.
+================================================================================
+
+================================================================================
+CASO DE USO: CU-CLI-03 — REGISTRAR PRUEBAS OBJETIVAS Y QUERATOMETRÍA
+================================================================================
+Actores:           Optometrista Clínico.
+Propósito:         Registrar los parámetros corneales objetivos y autorrefractométricos 
+                   obtenidos mediante instrumental computarizado previo al examen subjetivo.
+Precondiciones:    Paciente activo en consulta; equipo computarizado disponible.
+Entradas:          Queratometría OD/OI (K1 meridiano plano en dioptrías o mm, K2 
+                   meridiano curvo, Eje corneal); Autorrefractometría referencial 
+                   (Esfera, Cilindro, Eje estimado).
+Flujo Principal:
+  1. El optometrista accede a la pestaña "Pruebas Objetivas".
+  2. El optometrista ingresa los datos queratométricos de OD (K1, K2 y Eje).
+  3. El optometrista ingresa los datos queratométricos de OI (K1, K2 y Eje).
+  4. El sistema calcula automáticamente el astigmatismo corneal estimado ($K_2 - K_1$).
+  5. El optometrista registra los valores sugeridos por el autorrefractómetro.
+  6. El sistema valida rangos físicos razonables y habilita la copia de valores 
+     preliminares hacia el formulario de refracción subjetiva con foróptero.
+Postcondiciones:   Valores biométricos corneales guardados en la historia clínica.
+================================================================================
+
+================================================================================
+CASO DE USO: CU-CLI-04 — REALIZAR EXAMEN REFRACTIVO Y CONFORT AMBULATORIO
+================================================================================
+Actores:           Optometrista Clínico.
+Propósito:         Determinar la refracción subjetiva definitiva mediante foróptero y 
+                   pantalla Snellen, validando el confort visual dinámico mediante 
+                   prueba de marcha antes de emitir la receta.
+Precondiciones:    Paciente registrado; anamnesis y pruebas preliminares completadas.
+Entradas:          Esfera (-25.00 a +20.00 D), Cilindro (0.00 a -10.00 D, signo negativo), 
+                   Eje (0° a 180°), Adición (+0.75 a +4.00 D), Agudeza Visual Snellen (20/XX), 
+                   Confirmación de confort en marcha (checkbox booleano y observaciones).
+Flujo Principal:
+  1. El optometrista registra la agudeza visual inicial sin corrección para OD y OI.
+  2. El optometrista ajusta la refracción monocular y binocular con foróptero y cartilla Snellen:
+     - Ingresa Esfera y Cilindro en pasos de 0.25 D.
+     - Ingresa Eje en grados enteros.
+  3. El sistema valida que el cilindro sea negativo y que la adición mantenga el signo (+).
+  4. El sistema muestra simultáneamente la comparativa con la lente previa (+0.25 D de 
+     incremento en esfera y -0.25 D de incremento en cilindro según audio).
+  5. El optometrista monta las lunas de prueba en la armazón de prueba ambulatoria.
+  6. El paciente camina por el consultorio observando el piso, muebles y vitrinas.
+  7. El optometrista pregunta si percibe desniveles, ondulaciones o mareos en el piso.
+  8. El paciente confirma confort excelente ("todo plano y nítido").
+  9. El optometrista marca la casilla "Prueba ambulatoria satisfactoria sin mareo".
+  10. El optometrista verifica agudeza visual cercana (lectura de cartilla a 40 cm).
+  11. El sistema persiste el examen con Soft Delete activo (RF-15) y genera ID único.
+Flujos Alternos:
+  3a. El optometrista ingresa cilindro con signo positivo:
+      - El sistema rechaza el valor o aplica transposición automática notificando al usuario.
+  7a. El paciente reporta distorsión de piso o mareo:
+      - El optometrista reduce en 0.25 D la esfera o ajusta el eje del cilindro.
+      - Se repite la prueba de marcha hasta lograr adaptación biomecánica.
+Postcondiciones:   Refracción clínica definitiva guardada con sello de inmutabilidad.
+================================================================================
+
+================================================================================
+CASO DE USO: CU-CLI-06 — EVALUACIÓN DE POLO ANTERIOR Y SEGUIMIENTO PATOLÓGICO
+================================================================================
+Actores:           Optometrista Clínico.
+Propósito:         Documentar hallazgos biomicroscópicos en segmento anterior (pterigión, 
+                   cataratas, conjuntivitis) y proveer recomendaciones terapéuticas 
+                   preventivas y criterios de derivación quirúrgica.
+Precondiciones:    Consulta clínica activa.
+Entradas:          Estructura ocular evaluada (Córnea, Conjuntiva), Presencia de Pterigión 
+                   (Ojo Derecho/Izquierdo, nasal o temporal, grado I/II/III), invasión 
+                   corneal (Sí/No), recomendaciones preventivas (gafas con protección UV, 
+                   no frotarse los ojos, lubricación ocular, uso de gorra/sombrero).
+Flujo Principal:
+  1. El optometrista examina la cara interna del ojo del paciente a simple vista o lámpara de hendidura.
+  2. Registra presencia de pterigión nasal incipiente (Grado I, sin compromiso de eje pupilar).
+  3. Ingresa advertencia de riesgo mecánico: "Evitar frotarse los ojos vigorosamente para no 
+     aumentar la deformación corneal astigmática ni inflamar la carnosidad".
+  4. Ingresa prescripción de protección ambiental: "Filtro UV400 indispensable para frenar el 
+     crecimiento por radiación solar y polvo".
+  5. Asocia el código CIE-10 (H11.0 Pterigión) en la ficha médica.
+  6. El sistema guarda la evolución clínica con fecha de control sugerida a 1 año.
+Postcondiciones:   Registro patológico registrado en historia clínica (RF-13).
+================================================================================
+
+================================================================================
+CASO DE USO: CU-LAB-01 — GENERAR ORDEN TÉCNICA CON AJUSTE GEOMÉTRICO DE BISELADO
+================================================================================
+Actores:           Optometrista Clínico, Asistente Comercial.
+Propósito:         Generar la orden de producción técnica para el laboratorio óptico 
+                   externo, garantizando el aislamiento de datos médicos (LOPDP) y 
+                   especificando las cotas milimétricas exactas de corte y biselado.
+Precondiciones:    Examen refractivo completado; armazón y lunas seleccionadas por el cliente.
+Entradas:          Código del paciente/orden, Fórmula refractiva final (Sph, Cyl, Axis, Add), 
+                   Medidas anatómicas (DNP monocular OD/OI en mm, Alturas focales en mm), 
+                   Material de luna (Policarbonato), Tratamiento (Filtro Azul + Antirreflejo), 
+                   Tipo de armazón (Ranurado / Semialaire metálico), Parámetro de biselado: 
+                   Reducción vertical de luna (Altura original de montura: 38 mm; Altura 
+                   requerida para biselado de luna: 27 mm; Ajuste: -11 mm).
+Flujo Principal:
+  1. El usuario selecciona la prescripción clínica y crea una "Orden de Taller".
+  2. El sistema disocia el documento: elimina diagnósticos CIE-10, anamnesis y antecedentes.
+  3. El usuario selecciona el material de luna del catálogo: Policarbonato con Filtro Azul.
+  4. El sistema carga automáticamente las medidas de DNP.
+  5. En la sección "Instrucciones de Taller / Modificaciones de Montura", el usuario ingresa:
+     - Tipo de Montaje: Semialaire (nylon inferior).
+     - Altura vertical requerida de luna: 27 mm.
+     - Indicación de biselado: "Reducir altura de luna a 27 mm manteniendo diseño estético 
+       según muestra de plantilla física".
+  6. El sistema valida que los campos estén estructurados numéricamente y emite la orden técnica.
+  7. El sistema coloca el pedido en estado 'PENDIENTE' e imprime la ficha de taller.
+Flujos Alternos:
+  5a. Armazón cerrado estándar:
+      - No se especifican reducciones milimétricas; se asume el aro perimetral completo.
+Postcondiciones:   Orden técnica creada con parámetros de taller sin datos sensibles (RF-16).
+================================================================================
+
+================================================================================
+CASO DE USO: CU-VEN-02 — COTIZAR Y APLICAR PAQUETES PROMOCIONALES
+================================================================================
+Actores:           Asistente Comercial, Optometrista Clínico.
+Propósito:         Permitir al operador aplicar combos comerciales vigentes (armazón de 
+                   gama seleccionada + lunas de policarbonato con filtro azul por precio fijo), 
+                   reflejando el descuento en la cotización y venta.
+Precondiciones:    Promociones activas configuradas en el sistema por el Administrador.
+Entradas:          Selección de armazón de exhibición, tipo de tratamiento de luna, 
+                   código de promoción activa ("Combo Mensual Vista Visión $99").
+Flujo Principal:
+  1. El operador ingresa a la interfaz de cotización/venta en mostrador.
+  2. Agrega el armazón metálico semialaire seleccionado por el cliente (Precio normal: $50 - $60).
+  3. Agrega las lunas de Policarbonato con Filtro Azul (Precio de lista: $75 - $80).
+  4. El subtotal sin descuento marca $130 - $140.
+  5. El operador selecciona el combo promocional: "Promoción Armazón + Lunas Filtro Azul".
+  6. El sistema recalcula el valor total a la tarifa fija autorizada de $99.00 USD.
+  7. El sistema desglosa internamente la asignación contable de los ítems para inventario.
+  8. El cliente acepta la cotización para proceder al pago del anticipo.
+Postcondiciones:   Cotización lista para pasar a transacción de cobro y orden de retiro.
+================================================================================
+
+================================================================================
+CASO DE USO: CU-VEN-03 — REGISTRAR COBRO DE ANTICIPO Y GENERAR ORDEN DE RETIRO
+================================================================================
+Actores:           Asistente Comercial, Optometrista Clínico.
+Propósito:         Registrar el cobro parcial inicial (anticipo) para enviar a elaborar 
+                   los lentes al laboratorio, generando un comprobante físico para el 
+                   cliente que sirve como documento de retiro.
+Precondiciones:    Venta/cotización creada; orden técnica de laboratorio enlazada.
+Entradas:          Monto del anticipo (ej. abono parcial en efectivo o transferencia), 
+                   método de pago, fecha estimada de entrega (calculada en 2 días laborables).
+Flujo Principal:
+  1. El operador pulsa "Registrar Pago / Anticipo".
+  2. El sistema muestra: Total Venta ($99.00), Anticipo Ingresado, Saldo Restante.
+  3. El cliente efectúa el pago del abono pactado.
+  4. El sistema ejecuta una transacción ACID en PostgreSQL (RF-22):
+     - Inserta asiento en la tabla de pagos/caja por el monto del anticipo.
+     - Actualiza el estado de la venta a 'CON_ANTICIPO' y registra el saldo pendiente.
+     - Asocia el cobro a la orden de laboratorio, cambiando su estado a 'ENVIADO AL TALLER'.
+  5. El sistema calcula la fecha de retiro: Fecha actual + 2 días laborables (ej. viernes).
+  6. El sistema imprime en la ticketera térmica de 80 mm la "Orden de Retiro / Comprobante 
+     de Anticipo", conteniendo:
+     - Datos del establecimiento, fecha y número correlativo irrepetible.
+     - Nombre del paciente y teléfono.
+     - Descripción de la orden (Lunas policarbonato filtro azul + Armazón).
+     - Desglose financiero: Total, Anticipo Pagado y Saldo Pendiente de Cancelar.
+     - Fecha programada de retiro y leyenda de advertencia de retiro con comprobante.
+  7. El cliente firma una copia del recibo y conserva el original.
+Postcondiciones:   Caja cuadrada con el ingreso real; orden enviada a taller con entrega programada.
+================================================================================
+
+================================================================================
+CASO DE USO: CU-VEN-04 — REGISTRAR COBRO DE SALDO Y ENTREGA DE PRODUCTO
+================================================================================
+Actores:           Asistente Comercial, Optometrista Clínico.
+Propósito:         Liquidar el saldo monetario pendiente cuando el paciente retira sus 
+                   lentes terminados, cambiando el estado del trabajo a 'ENTREGADO'.
+Precondiciones:    Lentes recibidos del taller óptico en estado 'RECIBIDO EN ÓPTICA'. 
+                   Comprobante de venta en estado 'CON_ANTICIPO'.
+Entradas:          Código de orden o cédula del paciente, monto del saldo a liquidar, método de pago.
+Flujo Principal:
+  1. El cliente presenta la Orden de Retiro en mostrador.
+  2. El operador busca la orden mediante el lector de código de barras o búsqueda predictiva (RF-05).
+  3. El sistema muestra el saldo pendiente de cobro.
+  4. El cliente entrega el valor del saldo en efectivo o transferencia.
+  5. El sistema procesa la transacción atómica:
+     - Registra el cobro en caja del saldo restante.
+     - Marca la venta como 'TOTALMENTE_PAGADA'.
+     - Transiciona el estado del pedido en la máquina de estados a 'ENTREGADO AL CLIENTE'.
+  6. Emite ticket final de venta liquidada o deriva a Facturación Electrónica si el cliente lo requiere.
+  7. El operador entrega físicamente los lentes revisados al cliente.
+Postcondiciones:   Saldo en cero; trabajo concluido; trazabilidad histórica cerrada.
+================================================================================
+
+================================================================================
+CASO DE USO: CU-SRI-01 — GENERAR FACTURA XML v1.1.0 Y CLAVE DE ACCESO M11
+================================================================================
+Actores:           Asistente Comercial, Administrador, Microservicio API-SRI.
+Propósito:         Construir el documento XML canónico de facturación electrónica con 
+                   su correspondiente clave de acceso de 49 dígitos ponderada por Módulo 11.
+Precondiciones:    Venta local autorizada y liquidada; datos fiscales del adquirente ingresados.
+Entradas:          Identificador de la venta, RUC/Cédula del cliente, detalle de ítems, 
+                   precios unitarios, base imponible e impuestos.
+Flujo Principal:
+  1. El operador solicita la emisión de Factura Electrónica para la venta.
+  2. El microservicio valida los datos fiscales (validador módulo 10 para cédulas, 
+     módulo 11 para RUC; rechaza Consumidor Final si el monto supera los $40.00 USD).
+  3. El sistema estructura la sección <infoTributaria> y <infoFactura>.
+  4. El sistema construye los primeros 48 dígitos de la Clave de Acceso:
+     - Fecha de emisión (8 dígitos ddmmaaaa).
+     - Tipo de comprobante (2 dígitos: 01 para Factura).
+     - RUC del emisor (13 dígitos).
+     - Tipo de ambiente (1 dígito: 1 Pruebas / 2 Producción).
+     - Serie establecimiento y punto de emisión (6 dígitos).
+     - Secuencial correlativo (9 dígitos).
+     - Código numérico aleatorio (8 dígitos).
+     - Tipo de emisión (1 dígito: 1 Normal).
+  5. El microservicio aplica el algoritmo ponderado Módulo 11 (factores de 2 a 7) para 
+     calcular el dígito 49 (dígito verificador).
+  6. El sistema serializa el árbol de datos a XML conforme al esquema XSD v1.1.0.
+Postcondiciones:   Archivo XML oficial generado en memoria listo para la firma digital.
+================================================================================
+
+================================================================================
+CASO DE USO: CU-SRI-02 — FIRMAR FACTURA CON CERTIFICADO PKCS#12 (XAdES-BES)
+================================================================================
+Actores:           Microservicio API-SRI (NestJS).
+Propósito:         Aplicar la firma digital avanzada XAdES-BES enveloped al XML de la 
+                   factura utilizando la llave privada y certificado .p12 custodiado.
+Precondiciones:    XML de factura canónico generado; certificado .p12 cargado con clave válida.
+Entradas:          XML no firmado, buffer binario del archivo PKCS#12, contraseña de desencriptación.
+Flujo Principal:
+  1. El servicio lee el almacén de claves en memoria utilizando 'node-forge'.
+  2. Extrae el certificado X.509 de la entidad certificadora y la llave privada RSA.
+  3. Convierte el número de serie X.509 a entero de precisión arbitraria mediante BigInt.
+  4. Realiza la canonicalización XML-C14N del nodo de comprobante y calcula el digest SHA-1.
+  5. Construye los nodos <etsi:SignedProperties>, <ds:KeyInfo> y <ds:SignedInfo>.
+  6. Cifra el digest del bloque SignedInfo con la llave privada RSA generando <ds:SignatureValue>.
+  7. Ensambla e inserta el bloque completo <ds:Signature> dentro del documento XML.
+  8. Valida la integridad estructural del documento firmado y lo persiste en base de datos.
+Postcondiciones:   XML firmado legalmente con valor probatorio no repudiable (S-TAG-AUTH-03).
+================================================================================
+
+================================================================================
+CASO DE USO: CU-SRI-03 — TRANSMITIR Y CONSULTAR COMPROBANTE ANTE EL SRI
+================================================================================
+Actores:           Microservicio API-SRI, Web Services SRI.
+Propósito:         Enviar el XML firmado al Web Service del SRI para su recepción y 
+                   solicitar la autorización fiscal correspondiente.
+Precondiciones:    XML firmado electrónicamente; conexión a internet activa.
+Entradas:          XML firmado en Base64; Clave de Acceso de 49 dígitos.
+Flujo Principal:
+  1. El microservicio invoca el método SOAP `validarComprobante` en RecepcionComprobantesOffline.
+  2. El SRI responde con estado 'RECIBIDA'.
+  3. El microservicio aguarda la ventana de espera técnica y realiza la petición SOAP a 
+     `autorizacionComprobante` en AutorizacionComprobantesOffline enviando la Clave de Acceso.
+  4. El SRI retorna estado 'AUTORIZADO', junto con el número de autorización, fecha/hora 
+     de autorización y XML con el nodo de autorización del SRI.
+  5. El sistema actualiza la factura a estado 'AUTORIZADO' en PostgreSQL.
+  6. Se dispara el evento de dominio `FacturaAutorizadaEvent` para generar el RIDE.
+Flujos Alternos:
+  1a. Fallo de red o timeout del SRI:
+      - El sistema marca el comprobante como 'EN PROCESO' en la cola de contingencia.
+      - La tarea cron reprograma el reintento asíncrono sin bloquear la venta local (RNF-09).
+  2a. El SRI responde 'DEVUELTA' con errores de validación:
+      - El sistema almacena los mensajes de error en la base de datos y marca estado 'DEVUELTA'.
+      - Notifica al operador con el código y detalle emitido por el SRI.
+Postcondiciones:   Factura legalmente autorizada y registrada con sello fiscal oficial.
+================================================================================
+
+================================================================================
+CASO DE USO: CU-IA-01 — CONSULTAR MÉTRICAS Y EXISTENCIAS EN LENGUAJE NATURAL
+================================================================================
+Actores:           Administrador, Optometrista Clínico, Asistente Comercial.
+Propósito:         Permitir al personal consultar información operativa inmediata 
+                   mediante lenguaje natural en el Dashboard, blindando la base de 
+                   datos con un rol exclusivo de solo lectura (Read-Only Guard).
+Precondiciones:    Usuario autenticado en el sistema; widget conversacional activo.
+Entradas:          Texto libre digitado en el chat (ej. "¿Cuántos armazones de acetato 
+                   tenemos en stock?", "¿Cuál es el cierre de caja de hoy?", "¿Qué 
+                   órdenes de taller están pendientes para entrega el viernes?").
+Flujo Principal:
+  1. El usuario escribe una consulta en el widget del asistente inteligente.
+  2. El middleware verifica el rol del usuario mediante los claims de su token JWT (RF-30):
+     - Asistente Comercial: Restringido únicamente a inventario y estado de pedidos.
+     - Optometrista: Acceso a pacientes, refracción, pedidos de taller y stock.
+     - Administrador: Acceso completo, incluyendo finanzas, costos y caja.
+  3. El motor enruta la intención (Intent Router) mediante análisis léxico determinístico:
+     - Detecta entidades: fechas, rangos de precio, tipos de armazón, estados de taller.
+  4. El servicio invoca la consulta SQL a través de la conexión aislada `GRANT SELECT` (RF-29).
+  5. El motor recibe el dataset de solo lectura e interpola los datos en una plantilla estructurada.
+  6. El widget presenta la respuesta enriquecida con tarjetas informativas y enlaces de acción rápida.
+  7. El evento queda registrado de forma inmutable en `audit_logs` (RF-31).
+Flujos Alternos:
+  2a. Asistente Comercial solicita datos financieros (ej. "Monto recaudado en el día"):
+      - El sistema bloquea la consulta y responde cortésmente denegando el acceso por políticas RBAC.
+  4a. Intención de modificación detectada en el texto (ej. "Cambiar precio de armazón a $20"):
+      - El Read-Only Guard intercepta la petición, bloquea la ejecución y advierte que el 
+        asistente opera exclusivamente en modo consulta de lectura.
+Postcondiciones:   Respuesta oportuna entregada al usuario sin alteración alguna de la BD.
+================================================================================
+
+--------------------------------------------------------------------------------
+6. MATRIZ DE TRAZABILIDAD: REQUISITOS (SRS v2.0 / AUDIO) vs. CASOS DE USO
+--------------------------------------------------------------------------------
++-----------------------+-----------------------------+------------------------+
+| Origen del Requisito  | Requisito / Hallazgo Audio  | Caso de Uso Asociado   |
++-----------------------+-----------------------------+------------------------+
+| SRS v2.0 (M1)         | RF-01, RF-02                | CU-SEG-01, CU-SEG-02   |
+| SRS v2.0 (M2)         | RF-03, RF-05                | CU-PAC-01, CU-PAC-03   |
+| SRS v2.0 (M2)         | RF-04                       | CU-PAC-02              |
+| Audio Clínico         | Lensometría previa          | CU-CLI-02 (Excluido)   |
+| Audio Clínico         | Queratometría / Auto-ref    | CU-CLI-03 (Excluido)   |
+| Audio Clínico         | Test Confort Ambulatorio    | CU-CLI-04 (Paso 5-9)   |
+| SRS v2.0 (M3)         | RF-07, RF-08, RF-09, RF-12  | CU-CLI-04              |
+| SRS v2.0 (M3)         | RF-13                       | CU-CLI-01              |
+| Audio Clínico         | Pterigión / Segmento Ant.   | CU-CLI-06 (Excluido)   |
+| SRS v2.0 (M3)         | RF-14                       | CU-CLI-05              |
+| Audio Mostrador       | Reducción Altura Biselado   | CU-LAB-01 (Ampliación) |
+| SRS v2.0 (M4)         | RF-16, RF-17, RF-10         | CU-LAB-01              |
+| SRS v2.0 (M4)         | RF-18, RF-19                | CU-LAB-02, CU-LAB-03   |
+| Audio Comercial       | Combos y Promociones ($99)  | CU-VEN-02 (Excluido)   |
+| Audio Comercial       | Anticipo y Orden de Retiro  | CU-VEN-03 (Excluido)   |
+| SRS v2.0 (M5)         | RF-20, RF-21                | CU-VEN-01              |
+| SRS v2.0 (M5)         | RF-22                       | CU-VEN-06              |
+| SRS v2.0 (M5)         | RF-23                       | CU-VEN-04, CU-VEN-05   |
+| SRS v2.0 (M6)         | RF-24                       | CU-SRI-01              |
+| SRS v2.0 (M6)         | RF-25                       | CU-SRI-02              |
+| SRS v2.0 (M6)         | RF-26                       | CU-SRI-03              |
+| SRS v2.0 (M6)         | RF-27                       | CU-SRI-04              |
+| SRS v2.0 (M7)         | RF-28, RF-29, RF-30, RF-31  | CU-IA-01               |
++-----------------------+-----------------------------+------------------------+
+
+================================================================================
+FIN DEL DOCUMENTO TÉCNICO DE CASOS DE USO (CasosDeUsoSGO.txt)
+================================================================================
