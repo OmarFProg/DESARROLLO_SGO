@@ -1,47 +1,80 @@
 ================================================================================
-DOCUMENTO MAESTRO DE ESPECIFICACIÓN DE CASOS DE USO (COMPENDIO INTEGRAL)
-SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
-================================================================================
-Proyecto:           Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
-Organización:       Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
-Marco Académico:    Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
-Metodología:        PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
-Autores:            Figueroa Díaz Omar Santiago, Villalva Dumancela Alexander Rafael
-Tutor / Director:   Ing. Jorge Ariel Menéndez Verdecia
-Fecha de Cierre:    25 de Septiembre de 2026
-Versión Consolidada:1.0 Definitiva
-Archivo Maestro:    CASOS DE USO/DOCUMENTO_MAESTRO_ESPECIFICACION_CASOS_DE_USO_SGO.txt
+                      LA OFICINA DE PROYECTOS DE INFORMÁTICA
+                             www.pmoinformatica.com
 ================================================================================
 
+                        ESPECIFICACIÓN DE CASOS DE USO
+                             [Documento Maestro Integral]
+     SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
 
-TABLA DE CONTENIDO GENERAL
---------------------------------------------------------------------------------
-1. HISTORIAL DE VERSIONES CONSOLIDADO
-2. INFORMACIÓN INTEGRAL DEL PROYECTO
-3. ACTA FORMAL DE APROBACIONES
-4. RESUMEN EJECUTIVO GENERAL DEL SISTEMA SGO
+                        Fecha de Emisión: 25/09/2026
+                        Versión: 1.0 Definitiva Consolidada
+     Beneficiario: Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+     Marco: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo
+     Autores: Figueroa Díaz Omar Santiago, Villalva Dumancela Alexander Rafael
+     Director / Tutor: Ing. Jorge Ariel Menéndez Verdecia
+
+================================================================================
+TABLA DE CONTENIDO
+================================================================================
+1. Historial de Versiones Consolidado
+2. Información Integral del Proyecto
+3. Acta Formal de Aprobaciones
+4. Resumen Ejecutivo General del Sistema SGO
    4.1 Justificación y Alcance Integral del Software
    4.2 Los 7 Módulos Funcionales del Sistema (M1 a M7)
    4.3 Incorporación de las Brechas Elicitadas en la Práctica Clínica Real (Audio)
-5. CATÁLOGO CONSOLIDADO DE ACTORES DEL SISTEMA (FICHAS PMOINFORMATICA)
-   5.1 ACT-00: Usuario Autenticado (Actor Abstracto Base)
-   5.2 ACT-01: Administrador / Propietario
-   5.3 ACT-02: Optometrista Clínico
-   5.4 ACT-03: Asistente Comercial / Recepcionista
-   5.5 ACT-04: Web Services SRI (Actor Externo)
-   5.6 ACT-05: Taller Óptico / Laboratorio Externo (Actor Secundario)
-   5.7 ACT-NEG-01: Paciente / Cliente (Beneficiario Pasivo / LOPDP)
-6. MAPA GLOBAL DE PAQUETES Y CASOS DE USO (UML 2.5)
-7. COMPENDIO MAESTRO DE LOS 23 CASOS DE USO ESPECIFICADOS
+5. Diagramas de Casos de Uso (UML 2.5) y Catálogo de Gráficos
+   5.1 Diagrama Global del Sistema SGO (Arquitectura por Paquetes)
+   5.2 Diagrama Paquetes 1 y 2: Gestión de Acceso, Seguridad y Pacientes (M1 & M2)
+   5.3 Diagrama Paquete 3: Atención Clínica y Refracción Integral (M3)
+   5.4 Diagrama Paquetes 4 y 5: Taller Óptico, Ventas, Anticipos y Caja (M4 & M5)
+   5.5 Diagrama Paquetes 6 y 7: Facturación SRI, Inteligencia Artificial y Auditoría (M6 & M7)
+   5.6 Catálogo de Archivos de Imágenes Generadas en Alta Resolución
+6. Descripción Consolidada de Actores del Sistema (Fichas PMOInformatica)
+   6.1 ACT-00: Usuario Autenticado (Actor Abstracto Base)
+   6.2 ACT-01: Administrador / Propietario
+   6.3 ACT-02: Optometrista Clínico
+   6.4 ACT-03: Asistente Comercial / Recepcionista
+   6.5 ACT-04: Web Services SRI (Actor Externo)
+   6.6 ACT-05: Taller Óptico / Laboratorio Externo (Actor Secundario)
+   6.7 ACT-NEG-01: Paciente / Cliente (Beneficiario Pasivo / LOPDP)
+7. Especificación Detallada de Casos de Uso (Fichas PMOInformatica)
    7.1 Paquete 1: Gestión de Acceso y Seguridad RBAC (M1)
-   7.2 Paquete 2: Gestión Demográfica de Pacientes (M2)
+       7.1.1 CU-SEG-01: Iniciar Sesión y Validar Credenciales RBAC
+       7.1.2 CU-SEG-02: Cerrar Sesión por Inactividad o Petición
+   7.2 Paquete 2: Gestión Demográfica y Filiación de Pacientes (M2)
+       7.2.1 CU-PAC-01: Registrar Paciente con Validación Módulo 10
+       7.2.2 CU-PAC-02: Registrar Menor de Edad sin Documento de Identidad
+       7.2.3 CU-PAC-03: Búsqueda Predictiva de Pacientes
    7.3 Paquete 3: Atención Clínica y Refracción Integral (M3)
+       7.3.1 CU-CLI-01: Registrar Anamnesis y Motivo de Consulta
+       7.3.2 CU-CLI-02: Registrar Lensometría y Estado de Gafas Previas [AUDIO REAL]
+       7.3.3 CU-CLI-03: Registrar Pruebas Objetivas y Queratometría [AUDIO REAL]
+       7.3.4 CU-CLI-04: Realizar Examen Refractivo Subjetivo y Confort Ambulatorio [AUDIO REAL]
+       7.3.5 CU-CLI-05: Emitir Receta Óptica Digital y Certificado Visual
+       7.3.6 CU-CLI-06: Registrar Evaluación de Polo Anterior y Seguimiento Patológico [AUDIO REAL]
    7.4 Paquete 4: Taller Óptico y Laboratorio (M4)
-   7.5 Paquete 5: Ventas, Caja y Mostrador (M5)
+       7.4.1 CU-LAB-01: Generar Orden Técnica de Taller con Parámetros Geométricos [AUDIO REAL]
+       7.4.2 CU-LAB-02: Gestionar Ciclo de Estados del Pedido de Laboratorio
+       7.4.3 CU-LAB-03: Registrar Incidencia o Garantía Técnica
+   7.5 Paquete 5: Ventas, Mostrador y Caja (M5)
+       7.5.1 CU-VEN-01: Registrar Venta con Descuento Híbrido de Inventario
+       7.5.2 CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales [AUDIO REAL]
+       7.5.3 CU-VEN-03: Registrar Cobro de Anticipo y Generar Orden de Retiro [AUDIO REAL]
+       7.5.4 CU-VEN-04: Registrar Cobro de Saldo y Entrega de Producto Terminado
+       7.5.5 CU-VEN-05: Realizar Cierre Diario y Arqueo Consolidado de Caja
+       7.5.6 CU-VEN-06: Anular Venta con Reversión Atómica ACID
    7.6 Paquete 6: Facturación Electrónica e Integración con SRI (M6)
+       7.6.1 CU-SRI-01: Generar Factura XML v1.1.0 y Clave de Acceso Módulo 11
+       7.6.2 CU-SRI-02: Firmar Digitalmente Factura con Certificado PKCS#12 (XAdES-BES)
+       7.6.3 CU-SRI-03: Transmitir y Consultar Comprobante ante Web Services SRI
+       7.6.4 CU-SRI-04: Generar RIDE PDF Code128 y Despachar por Correo Electrónico SMTP
    7.7 Paquete 7: Asistente Conversacional IA y Auditoría Inmutable (M7)
-8. MATRIZ DE TRAZABILIDAD INTEGRAL CRUZADA (SRS v2.0 vs. AUDIO vs. CUS vs. PRUEBAS)
-9. DECLARACIÓN DE CUMPLIMIENTO METODOLÓGICO Y CIERRE DEL PLAN
+       7.7.1 CU-IA-01: Consultar Métricas y Existencias en Lenguaje Natural (Read-Only Guard)
+       7.7.2 CU-AUD-01: Registro Transversal Inmutable de Auditoría y No Repudio
+8. Matriz de Trazabilidad Integral Cruzada (SRS v2.0 vs. Audio vs. CUS vs. S-Tags vs. UAT)
+9. Declaración de Cumplimiento Metodológico y Cierre del Plan
 ================================================================================
 
 
@@ -126,113 +159,1497 @@ detectadas en la grabación clínica del 25 de septiembre de 2026:
 5. Instrucciones de taller con reducción vertical milimétrica de 38 mm a 27 mm (CU-LAB-01).
 6. Comercialización de combo mensual a $99 y emisión de Orden de Retiro con anticipo (CU-VEN-02/03).
 
-
 ================================================================================
-5. CATÁLOGO CONSOLIDADO DE ACTORES DEL SISTEMA (FICHAS PMOINFORMATICA)
-================================================================================
-
-+----------+-----------------------------+-----------------+-------------------------------------------------+
-| Código   | Nombre del Actor            | Tipo de Actor   | Responsabilidad Primaria en el Software         |
-+----------+-----------------------------+-----------------+-------------------------------------------------+
-| ACT-00   | Usuario Autenticado         | Abstracto Base  | Sesión activa, token JWT y privilegios RBAC.    |
-| ACT-01   | Administrador / Propietario | Humano Interno  | Gobierno global, anulación atómica y arqueo.    |
-| ACT-02   | Optometrista Clínico        | Humano Interno  | Refracción, prescripción, diagnóstico CIE-10.   |
-| ACT-03   | Asistente Comercial         | Humano Interno  | Filiación, ventas, cobro de anticipo y entrega. |
-| ACT-04   | Web Services SRI            | Externo Fiscal  | Validación SOAP y autorización de facturas.     |
-| ACT-05   | Taller Óptico Externo       | Externo Secund. | Manufactura física, corte y biselado de lunas.  |
-| ACT-NEG  | Paciente / Cliente          | Beneficiario    | Sujeto de datos médicos y adquirente comercial. |
-+----------+-----------------------------+-----------------+-------------------------------------------------+
-
-TABLA MAESTRA DE ATRIBUTOS TIPADOS DE LOS ACTORES:
-- ACT-00: user_id (UUID), username (Varchar 50), password_hash (Argon2id), rol_id (Enum), intentos_fallidos (Smallint).
-- ACT-01: ruc_establecimiento (Varchar 13), clave_maestra_sec (Varchar 255), email_alertas (Varchar 100).
-- ACT-02: registro_msp (Varchar 25), especialidad (Varchar 100), firma_digital_id (UUID).
-- ACT-03: punto_emision_pos (Char 3), caja_sesion_id (UUID), limite_descuento (Numeric 5,2).
-- ACT-04: url_recepcion_soap (Varchar 255), url_autorizacion_soap (Varchar 255), version_xsd (1.1.0).
-- ACT-05: laboratorio_id (UUID), razon_social_lab (Varchar 120), tiempo_entrega_dias (Smallint).
-- ACT-NEG: paciente_id (UUID), cedula (Varchar 15), edad (Smallint), ocupacion (Varchar 100).
-
-
-================================================================================
-6. MAPA GLOBAL DE PAQUETES Y CASOS DE USO (UML 2.5)
+5. DIAGRAMAS DE CASOS DE USO (UML 2.5) Y CATÁLOGO DE GRÁFICOS
 ================================================================================
 
+El modelo de casos de uso del Sistema SGO se representa mediante la notación formal 
+establecida por UML 2.5 (Unified Modeling Language), organizándose en subsistemas 
+cohesivos que delimitan la interacción entre los actores de negocio y el sistema.
+A continuación se presentan las especificaciones formales y los diagramas estructurales, 
+así como el inventario de diagramas de alta resolución generados para el proyecto.
+
+--------------------------------------------------------------------------------
+5.1 DIAGRAMA GLOBAL DEL SISTEMA SGO (ARQUITECTURA POR PAQUETES)
+--------------------------------------------------------------------------------
+Archivo Gráfico de Alta Resolución:
+`CASOS DE USO/diagramas/01_diagrama_global_sgo.png`
+
+Estructura Arquitectónica:
   =============================================================================
-  SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+  LÍMITE DEL SISTEMA: SUITE DE GESTIÓN OPTOMÉTRICA (SGO)
   =============================================================================
-  [PAQUETE 1: SEGURIDAD (M1)]          [PAQUETE 2: PACIENTES (M2)]
-  * CU-SEG-01 Iniciar Sesión RBAC      * CU-PAC-01 Registrar Paciente Módulo 10
-  * CU-SEG-02 Cerrar Sesión Inactiv.   * CU-PAC-02 Registrar Menor sin Cédula
-                                       * CU-PAC-03 Búsqueda Predictiva Pacientes
-  -----------------------------------------------------------------------------
-  [PAQUETE 3: NÚCLEO CLÍNICO Y REFRACCIÓN INTEGRAL (M3)]
-  * CU-CLI-01 Registrar Anamnesis y Motivo Consulta
-  * CU-CLI-02 Registrar Lensometría y Estado Gafas Previas [AUDIO REAL]
-  * CU-CLI-03 Registrar Pruebas Objetivas y Queratometría [AUDIO REAL]
-  * CU-CLI-04 Examen Refractivo y Confort Ambulatorio en Marcha [AUDIO REAL]
-  * CU-CLI-05 Emitir Receta Óptica Digital y Certificado Visual
-  * CU-CLI-06 Evaluación Polo Anterior y Seguimiento Patológico [AUDIO REAL]
-  -----------------------------------------------------------------------------
-  [PAQUETE 4: TALLER ÓPTICO (M4)]      [PAQUETE 5: VENTAS Y CAJA (M5)]
-  * CU-LAB-01 Orden Taller Biselado    * CU-VEN-01 Venta Descuento Híbrido
-    (Reducción Milimétrica) [AUDIO]    * CU-VEN-02 Cotizar Combo $99 [AUDIO]
-  * CU-LAB-02 Ciclo Estados Pedido     * CU-VEN-03 Cobro Anticipo y Orden Retiro [AUDIO]
-  * CU-LAB-03 Incidencia / Garantía    * CU-VEN-04 Cobro Saldo y Entrega Producto
-                                       * CU-VEN-05 Cierre Diario y Arqueo Caja
-                                       * CU-VEN-06 Anulación Venta Atómica ACID
-  -----------------------------------------------------------------------------
-  [PAQUETE 6: FACTURACIÓN SRI (M6)]    [PAQUETE 7: IA Y AUDITORÍA (M7)]
-  * CU-SRI-01 Generar XML v1.1.0 M11   * CU-IA-01 Consulta Lenguaje Natural (Read-Only)
-  * CU-SRI-02 Firma XAdES-BES .p12     * CU-AUD-01 Pista Auditoría Hash Chain
-  * CU-SRI-03 Transmisión WS Offline
-  * CU-SRI-04 Generar RIDE Code128
+  [ACTORES INTERNOS]                                       [ACTORES EXTERNOS]
+  ACT-01 Administrador ----+                            +---- ACT-04 Web Services SRI
+                           |                            |
+  ACT-02 Optometrista -----+---> [M1: Seguridad RBAC]   |
+                           |---> [M2: Pacientes Demog]  |
+  ACT-03 Asistente --------+---> [M3: Clínica y Refrac] |
+                           |---> [M4: Taller y Lab] ----+---- ACT-05 Taller Externo
+                           |---> [M5: Ventas y Caja]    |
+                           |---> [M6: Facturación SRI] -+
+                           +---> [M7: IA y Auditoría]   +---- ACT-NEG-01 Paciente
   =============================================================================
 
+--------------------------------------------------------------------------------
+5.2 DIAGRAMA PAQUETES 1 Y 2: SEGURIDAD, ACCESO Y PACIENTES (M1 & M2)
+--------------------------------------------------------------------------------
+Archivo Gráfico de Alta Resolución:
+`CASOS DE USO/diagramas/02_diagrama_seguridad_pacientes_m1_m2.png`
+
+Relaciones de Inclusión y Extensión:
+* CU-SEG-01 (Iniciar Sesión RBAC):
+  - <<include>> Validar Hash Argon2id
+  - <<include>> Registrar Log de Acceso Seguro
+* CU-SEG-02 (Cerrar Sesión por Inactividad o Petición):
+  - <<extend>> Temporizador de Inactividad (Punto de Extensión: Inactividad > 15 min)
+* CU-PAC-01 (Registrar Paciente con Validación Módulo 10):
+  - <<include>> Validar Algoritmo Módulo 10 Cédula
+  - <<extend>> CU-PAC-02 Registrar Menor sin Cédula (Punto de Extensión: Paciente Menor sin Identificación)
+* CU-PAC-03 (Búsqueda Predictiva de Pacientes):
+  - Consulta optimizada sub-200 ms sobre índices trigram PostgreSQL.
+
+--------------------------------------------------------------------------------
+5.3 DIAGRAMA PAQUETE 3: ATENCIÓN CLÍNICA Y REFRACCIÓN INTEGRAL (M3)
+--------------------------------------------------------------------------------
+Archivo Gráfico de Alta Resolución:
+`CASOS DE USO/diagramas/03_diagrama_modulo_clinico_m3.png`
+
+Relaciones y Hallazgos Elicitados en Audio Clínico Real:
+* CU-CLI-01 (Registrar Anamnesis y Motivo de Consulta): Antecedentes oculares y sistémicos.
+* CU-CLI-02 (Registrar Lensometría y Estado de Gafas Previas):
+  - Medición in situ (+1.75 / -1.50) y evaluación de astillamiento en micas usadas.
+* CU-CLI-03 (Registrar Pruebas Objetivas y Queratometría):
+  - Captura K1, K2 y cilindro corneal desde autorrefractómetro computarizado.
+* CU-CLI-04 (Examen Refractivo y Confort Ambulatorio en Marcha):
+  - <<include>> Test de Marcha en Piso y Ausencia de Mareo / Deformación de Suelo.
+* CU-CLI-05 (Emitir Receta Óptica Digital y Certificado Visual):
+  - <<include>> Codificación CIE-10 (H52) y Sello de Responsabilidad Profesional.
+* CU-CLI-06 (Evaluación de Polo Anterior y Seguimiento Patológico):
+  - Registro de pterigión en cara interna sin invasión corneal y prescripción de filtro UV400.
+
+--------------------------------------------------------------------------------
+5.4 DIAGRAMA PAQUETES 4 Y 5: TALLER ÓPTICO, VENTAS, ANTICIPOS Y CAJA (M4 & M5)
+--------------------------------------------------------------------------------
+Archivo Gráfico de Alta Resolución:
+`CASOS DE USO/diagramas/04_diagrama_taller_ventas_caja_m4_m5.png`
+
+Relaciones Industriales y Comerciales:
+* CU-LAB-01 (Generar Orden Técnica de Taller con Parámetros Geométricos):
+  - Formaliza la reducción vertical milimétrica de 38 mm a 27 mm en monturas al aire.
+  - <<include>> Disociación Técnica LOPDP (envío exclusivamente de código token y cotas).
+* CU-LAB-02 (Gestionar Ciclo de Estados del Pedido de Laboratorio): Máquina finita de 5 estados.
+* CU-LAB-03 (Registrar Incidencia o Garantía Técnica): Reposición de micas con defecto.
+* CU-VEN-01 (Registrar Venta con Descuento Híbrido de Inventario).
+* CU-VEN-02 (Cotizar y Aplicar Paquetes Promocionales): Formaliza el Combo Mensual de $99.00 USD.
+* CU-VEN-03 (Registrar Cobro de Anticipo y Generar Orden de Retiro): Ticket térmico a 2 días hábiles.
+* CU-VEN-04 (Registrar Cobro de Saldo y Entrega de Producto Terminado): Finiquito contra entrega física.
+* CU-VEN-05 (Realizar Cierre Diario y Arqueo Consolidado de Caja): Arqueo ciego de doble vía.
+* CU-VEN-06 (Anular Venta con Reversión Atómica ACID): Restitución de saldos e inventario.
+
+--------------------------------------------------------------------------------
+5.5 DIAGRAMA PAQUETES 6 Y 7: FACTURACIÓN SRI, IA Y AUDITORÍA (M6 & M7)
+--------------------------------------------------------------------------------
+Archivo Gráfico de Alta Resolución:
+`CASOS DE USO/diagramas/05_diagrama_facturacion_sri_ia_auditoria_m6_m7.png`
+
+Relaciones Fiscales y de Ciberseguridad:
+* CU-SRI-01 (Generar Factura XML v1.1.0 y Clave de Acceso Módulo 11):
+  - Control de Consumidor Final (límite $50.00 USD) y validación de esquema XSD.
+* CU-SRI-02 (Firmar Digitalmente Factura con Certificado PKCS#12):
+  - Sellado criptográfico XAdES-BES enveloped mediante NestJS 10 y `node-forge`.
+* CU-SRI-03 (Transmitir y Consultar Comprobante ante Web Services SRI):
+  - Transmisión SOAP con tolerancia a fallos; <<extend>> Encolar en Contingencia Offline.
+* CU-SRI-04 (Generar RIDE PDF Code128 y Despachar por Correo Electrónico SMTP).
+* CU-IA-01 (Consultar Métricas y Existencias en Lenguaje Natural):
+  - <<include>> Blindaje Read-Only Guard (`GRANT SELECT` exclusivo para el Chatbot).
+* CU-AUD-01 (Registro Transversal Inmutable de Auditoría):
+  - Encadenamiento criptográfico Hash Chain (SHA-256) sobre la tabla `audit_logs`.
+
+--------------------------------------------------------------------------------
+5.6 CATÁLOGO DE ARCHIVOS DE IMÁGENES GENERADAS EN ALTA RESOLUCIÓN
+--------------------------------------------------------------------------------
+Los diagramas oficiales de casos de uso se encuentran renderizados en alta 
+resolución (300 DPI) listos para publicación e inserción directa en el informe:
+1. `diagramas/01_diagrama_global_sgo.png` (876 KB) — Mapa global de actores y subsistemas.
+2. `diagramas/02_diagrama_seguridad_pacientes_m1_m2.png` (610 KB) — Módulos M1 y M2.
+3. `diagramas/03_diagrama_modulo_clinico_m3.png` (685 KB) — Módulo clínico M3 y audio real.
+4. `diagramas/04_diagrama_taller_ventas_caja_m4_m5.png` (786 KB) — Taller M4 y Ventas M5.
+5. `diagramas/05_diagrama_facturacion_sri_ia_auditoria_m6_m7.png` (623 KB) — SRI M6 e IA/Auditoría M7.
+
 
 ================================================================================
-7. COMPENDIO MAESTRO DE LOS 23 CASOS DE USO ESPECIFICADOS
+6. DESCRIPCIÓN CONSOLIDADA DE ACTORES DEL SISTEMA (FICHAS PMOINFORMATICA)
 ================================================================================
 
-Las especificaciones detalladas de los 23 casos de uso, incluyendo cursos normales 
-paso a paso, cursos alternos tabulados, precondiciones y postcondiciones, se 
-encuentran formalizadas en los documentos de entrega de cada fase:
+--------------------------------------------------------------------------------
+6.1 ACTOR: USUARIO AUTENTICADO (ACTOR ABSTRACTO BASE)
+--------------------------------------------------------------------------------
+Actor:          Usuario Autenticado
+Identificador:  ACT-00
+Descripción:    Generalización abstracta de todo operador humano institucional que posee una 
+                cuenta activa y un token criptográfico de sesión en el sistema SGO.
+Características:Personal de la óptica con estación asignada. Heredado por ACT-01, ACT-02 y ACT-03.
+Relación:       Generalización base.
+Referencias:    CU-SEG-01, CU-SEG-02, CU-PAC-03, CU-IA-01.
 
-1. [Fase 1] CASOS DE USO/01_CasosUso_Seguridad_Pacientes_PMO.txt:
-   - CU-SEG-01: Iniciar Sesión y Validar Credenciales RBAC (Argon2id, RS256, 3 intentos).
-   - CU-SEG-02: Cerrar Sesión por Inactividad o Petición (Redis Blacklist, 15 min timeout).
-   - CU-PAC-01: Registrar Paciente con Validación Módulo 10 (Validación provincial y M10).
-   - CU-PAC-02: Registrar Menor de Edad sin Documento (Código sintético `MEN-YYYYMMDD-XXXX`).
-   - CU-PAC-03: Búsqueda Predictiva de Pacientes (Indexación Trigram, tiempo < 200 ms).
+Atributos Principales del Actor:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| user_id           | Identificador universal único del usuario         | UUID               |
+| username          | Nombre de cuenta de inicio de sesión              | Varchar(50)        |
+| password_hash     | Resumen hash criptográfico en Argon2id            | Varchar(255)       |
+| rol_id            | Identificador de rol para control de acceso RBAC  | Enum / Integer     |
+| estado_activo     | Bandera de operatividad de la cuenta (True/False) | Boolean            |
+| intentos_fallidos | Contador sucesivo de intentos erróneos de acceso  | Smallint           |
+| ultimo_login      | Marca de tiempo UTC del último acceso exitoso     | Timestamp UTC      |
++-------------------+---------------------------------------------------+--------------------+
 
-2. [Fase 2] CASOS DE USO/02_CasosUso_Modulo_Clinico_PMO.txt:
-   - CU-CLI-01: Registrar Anamnesis y Motivo de Consulta (Síntomas, hábitos y patologías).
-   - CU-CLI-02: Registrar Lensometría y Gafas Previas (Medición in situ +1.75/-1.50 y astillado).
-   - CU-CLI-03: Registrar Pruebas Objetivas y Queratometría (K1, K2 y astigmatismo corneal).
-   - CU-CLI-04: Examen Refractivo y Confort Ambulatorio (Marcha obligatoria sin mareo).
-   - CU-CLI-05: Emitir Receta Óptica y Certificado Visual (Código QR y CIE-10).
-   - CU-CLI-06: Evaluación Polo Anterior y Seguimiento Patológico (Pterigión nasal y UV400).
+--------------------------------------------------------------------------------
+6.2 ACTOR: ADMINISTRADOR / PROPIETARIO
+--------------------------------------------------------------------------------
+Actor:          Administrador / Propietario
+Identificador:  ACT-01
+Descripción:    Máxima autoridad del centro óptico, responsable de la gestión comercial, 
+                configuración tributaria, arqueo de caja y reversión atómica de transacciones.
+Características:Acceso sin restricciones a métricas analíticas y pistas de auditoría.
+Relación:       Especialización de ACT-00.
+Referencias:    CU-SEG-01, CU-VEN-05, CU-VEN-06, CU-SRI-02, CU-IA-01, CU-AUD-01.
 
-3. [Fase 3] CASOS DE USO/03_CasosUso_Taller_Ventas_Caja_PMO.txt:
-   - CU-LAB-01: Orden Técnica de Taller con Parámetros Geométricos (Corte 38 mm a 27 mm).
-   - CU-LAB-02: Gestionar Ciclo de Estados del Pedido (Máquina finita de 5 estados).
-   - CU-LAB-03: Registrar Incidencia o Garantía Técnica (Reposición sin costo).
-   - CU-VEN-01: Registrar Venta con Descuento Híbrido de Inventario (Control atómico de stock).
-   - CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales (Combo mensual de $99.00 USD).
-   - CU-VEN-03: Cobro de Anticipo y Generar Orden de Retiro (Ticket térmico a 2 días hábiles).
-   - CU-VEN-04: Cobro de Saldo y Entrega de Producto (Liquidación en mostrador y finiquito).
-   - CU-VEN-05: Realizar Cierre Diario y Arqueo Consolidado de Caja (Arqueo ciego).
-   - CU-VEN-06: Anular Venta con Reversión Atómica ACID (Restitución total en PostgreSQL).
+Atributos Específicos:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| ruc_contribuyente | RUC de Óptica Vista Visión                        | Varchar(13)        |
+| pin_autorizacion  | Clave maestra encriptada para reversiones ACID    | Varchar(255)       |
+| email_notificac   | Correo corporativo para alertas críticas          | Varchar(100)       |
++-------------------+---------------------------------------------------+--------------------+
 
-4. [Fase 4] CASOS DE USO/04_CasosUso_Facturacion_SRI_PMO.txt:
-   - CU-SRI-01: Generar XML v1.1.0 y Clave Acceso Módulo 11 (Bloqueo Consumidor Final > $50).
-   - CU-SRI-02: Firmar Digitalmente Factura con PKCS#12 (XAdES-BES enveloped con RSA-SHA1).
-   - CU-SRI-03: Transmitir y Consultar Comprobante ante SRI (SOAP offline y contingencia).
-   - CU-SRI-04: Generar RIDE PDF Code128 y Despachar por Correo SMTP (Resolución 300 DPI).
+--------------------------------------------------------------------------------
+6.3 ACTOR: OPTOMETRISTA CLÍNICO
+--------------------------------------------------------------------------------
+Actor:          Optometrista Clínico
+Identificador:  ACT-02
+Descripción:    Facultativo de salud visual que realiza anamnesis, lensometría, pruebas 
+                objetivas, refracción subjetiva, test de marcha y emisión de prescripciones.
+Características:Profesional habilitado por el MSP con firma digital certificada.
+Relación:       Especialización de ACT-00.
+Referencias:    CU-CLI-01 a CU-CLI-06, CU-LAB-01, CU-PAC-01.
 
-5. [Fase 5] CASOS DE USO/05_CasosUso_IA_Auditoria_PMO.txt:
-   - CU-IA-01: Consultar Métricas y Existencias en Lenguaje Natural (Read-Only Guard).
-   - CU-AUD-01: Registro Transversal Inmutable de Auditoría (Hash Chain SHA-256 encadenado).
+Atributos Específicos:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| registro_msp      | Código de registro oficial emitido por el MSP     | Varchar(25)        |
+| especialidad      | Grado profesional habilitante                     | Varchar(100)       |
+| firma_digital_id  | Identificador de certificado digital para recetas | UUID               |
++-------------------+---------------------------------------------------+--------------------+
 
+--------------------------------------------------------------------------------
+6.4 ACTOR: ASISTENTE COMERCIAL / RECEPCIONISTA
+--------------------------------------------------------------------------------
+Actor:          Asistente Comercial / Recepcionista
+Identificador:  ACT-03
+Descripción:    Personal de atención al cliente encargado de la filiación del paciente, 
+                cotización de promociones, cobro de anticipos, entrega y facturación en caja.
+Características:Operador ágil en terminal de mostrador (POS).
+Relación:       Especialización de ACT-00.
+Referencias:    CU-PAC-01 a CU-PAC-03, CU-VEN-01 a CU-VEN-04, CU-SRI-01.
+
+Atributos Específicos:
++-------------------+---------------------------------------------------+--------------------+
+| Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
++-------------------+---------------------------------------------------+--------------------+
+| punto_emision_pos | Código SRI del punto de emisión de caja (001)     | Char(3)            |
+| caja_sesion_id    | Identificador de la sesión de caja abierta activa | UUID               |
++-------------------+---------------------------------------------------+--------------------+
+
+--------------------------------------------------------------------------------
+6.5 ACTOR: WEB SERVICES SRI (ACTOR EXTERNO)
+--------------------------------------------------------------------------------
+Actor:          Web Services SRI (Servicio de Rentas Internas)
+Identificador:  ACT-04
+Descripción:    Servidores gubernamentales que reciben comprobantes XML firmados y emiten 
+                la autorización fiscal con número y sello digital fuera de línea.
+Características:Servicio web SOAP seguro (TLS 1.2/1.3) con endpoints de recepción y autorización.
+Relación:       Ninguna (Actor externo).
+Referencias:    CU-SRI-03.
+
+--------------------------------------------------------------------------------
+6.6 ACTOR: TALLER ÓPTICO / LABORATORIO EXTERNO (ACTOR SECUNDARIO)
+--------------------------------------------------------------------------------
+Actor:          Taller Óptico / Laboratorio Externo
+Identificador:  ACT-05
+Descripción:    Proveedor técnico que realiza el biselado, tallado y tratamiento de lunas 
+                a partir de órdenes de producción desprovistas de datos médicos (LOPDP).
+Características:Actor externo secundario receptor de fichas técnicas milimétricas.
+Relación:       Ninguna (Actor externo).
+Referencias:    CU-LAB-01, CU-LAB-02, CU-LAB-03.
+
+--------------------------------------------------------------------------------
+6.7 ACTOR: PACIENTE / CLIENTE (ACTOR DE NEGOCIO / BENEFICIARIO PASIVO)
+--------------------------------------------------------------------------------
+Actor:          Paciente / Cliente
+Identificador:  ACT-NEG-01
+Descripción:    Ciudadano que acude a la óptica para evaluación visual y compra de anteojos. 
+                Es el titular de los datos protegidos por la LOPDP y receptor de los bienes.
+Características:Beneficiario pasivo en el software; sus respuestas guían el confort visual.
+Relación:       Ninguna (Actor de negocio).
+Referencias:    CU-CLI-04, CU-CLI-05, CU-VEN-03, CU-VEN-04.
+
+================================================================================
+7. ESPECIFICACIÓN DETALLADA DE CASOS DE USO (FICHAS PMOINFORMATICA)
+================================================================================
+
+A continuación se presentan las especificaciones canónicas de los 26 casos de uso 
+que conforman la totalidad funcional del Sistema SGO, organizados por paquetes de dominio.
+Cada caso de uso sigue estrictamente los lineamientos estructurales de PMOInformatica:
+Ficha General del Caso de Uso, Curso Normal de Eventos tabulado y Cursos Alternos tabulados.
+
+--------------------------------------------------------------------------------
+7.1 PAQUETE 1: GESTIÓN DE ACCESO Y SEGURIDAD RBAC (MÓDULO M1)
+--------------------------------------------------------------------------------
+
+7.1.1 CASO DE USO: CU-SEG-01 — INICIAR SESIÓN Y VALIDAR CREDENCIALES RBAC
+================================================================================
+Caso de Uso:        Iniciar Sesión y Validar Credenciales RBAC
+Identificador:      CU-SEG-01
+Actores:            Usuario Autenticado (ACT-01 Administrador, ACT-02 Optometrista, ACT-03 Asistente).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-01, RF-02.
+                    Reglas de Negocio: RN-SEG-01, RN-SEG-02.
+                    Seguridad: S-TAG-AUTH-01, S-TAG-ACC-01 (ISO/IEC 25010).
+Precondición:       1. La estación de trabajo cuenta con conectividad activa al backend del SGO.
+                    2. La cuenta de usuario existe y se encuentra en estado 'ACTIVO'.
+                    3. No existe una sesión activa abierta en el navegador actual.
+Postcondición:      1. El sistema genera un JSON Web Token (JWT) firmado con algoritmo RS256, 
+                       conteniendo los claims del rol y un tiempo de vida (TTL) de 8 horas.
+                    2. Se inserta un registro inmutable en la tabla de auditoría `audit_logs`.
+                    3. El contador de intentos fallidos de la cuenta se restablece a cero (0).
+                    4. El usuario es redirigido a la vista inicial autorizada para su rol.
+Descripción:        Permite a un miembro del personal de la óptica ingresar sus credenciales 
+                    (nombre de usuario y contraseña) para ser autenticado por el sistema, 
+                    validar la integridad de su contraseña contra el algoritmo hash Argon2id, 
+                    y recibir los privilegios de navegación correspondientes a su perfil RBAC.
+Resumen:            El usuario ingresa usuario y contraseña en la interfaz de acceso; el 
+                    sistema valida el estado de la cuenta, calcula el hash, verifica 
+                    la correspondencia, crea la sesión criptográfica y abre el panel operativo.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Usuario Autenticado   | Accede a la URL del sistema y visualiza la pantalla de login.   |
+| 2    | Usuario Autenticado   | Introduce su nombre de usuario y su contraseña secreta.         |
+| 3    | Usuario Autenticado   | Pulsa el botón "Iniciar Sesión".                                |
+| 4    | Sistema SGO           | Captura las credenciales y sanitiza los campos de entrada.      |
+| 5    | Sistema SGO           | Consulta en base de datos la existencia del usuario ingresado.  |
+| 6    | Sistema SGO           | Verifica que la cuenta se encuentre con estado_activo = TRUE    |
+|      |                       | y con un contador de intentos_fallidos < 3.                     |
+| 7    | Sistema SGO           | [<<include>>] Ejecuta la función de verificación Argon2id       |
+|      |                       | contrastando el texto plano con el password_hash almacenado.    |
+| 8    | Sistema SGO           | Comprueba que el hash coincide satisfactoriamente.             |
+| 9    | Sistema SGO           | Restablece el contador `intentos_fallidos` a 0 y actualiza la   |
+|      |                       | fecha de `ultimo_login` con la marca temporal UTC actual.        |
+| 10   | Sistema SGO           | Genera el token de acceso JWT y el Refresh Token seguro (HttpOnly|
+|      |                       | cookie con flag SameSite=Strict).                               |
+| 11   | Sistema SGO           | [<<include>>] Registra en `audit_logs` el evento 'LOGIN_SUCCESS'|
+|      |                       | capturando user_id, dirección IP del cliente y User-Agent.      |
+| 12   | Sistema SGO           | Determina el rol RBAC y redirige al dashboard correspondiente:  |
+|      |                       | - Administrador: Panel de Control Ejecutivo y Métricas.         |
+|      |                       | - Optometrista: Agenda Clínica y Cola de Pacientes.             |
+|      |                       | - Asistente Comercial: Punto de Venta / Recepción de Pacientes. |
+| 13   | Usuario Autenticado   | Visualiza su interfaz operativa de trabajo. Fin del caso.      |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | Nombre de usuario no  | 5a.1. El sistema simula un tiempo de cómputo equivalente a un   |
+|      | existe en el sistema  |       hashing real (para prevenir ataques de temporización).   |
+|      |                       | 5a.2. El sistema despliega el mensaje genérico: "Credenciales   |
+|      |                       |       de acceso incorrectas. Verifique e intente nuevamente".   |
+|      |                       | 5a.3. Registra intento fallido anónimo en logs de seguridad.    |
+|      |                       | 5a.4. El flujo retorna al paso 2.                               |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Cuenta bloqueada por  | 6a.1. El sistema constata que intentos_fallidos >= 3 o que      |
+|      | superación de intentos|       estado_activo = FALSE.                                    |
+|      | o baja administrativa | 6a.2. El sistema deniega el acceso sin evaluar contraseña y     |
+|      |                       |       despliega: "Cuenta bloqueada por seguridad. Contacte al   |
+|      |                       |       Administrador para el desbloqueo institucional".          |
+|      |                       | 6a.3. Registra evento 'LOGIN_BLOCKED_ATTEMPT' en auditoría.     |
+|      |                       | 6a.4. Se aborta la operación de ingreso.                        |
++------+-----------------------+-----------------------------------------------------------------+
+| 8a   | Contraseña incorrecta | 8a.1. El sistema incrementa en uno (+1) el campo                |
+|      | (Hash no coincide)    |       `intentos_fallidos` del usuario en la base de datos.      |
+|      |                       | 8a.2. Si el contador alcanza 3:                                 |
+|      |                       |       - El sistema marca estado_activo = FALSE.                 |
+|      |                       |       - Registra 'USER_LOCKED_OUT' en `audit_logs`.             |
+|      |                       |       - Muestra: "Ha superado los 3 intentos permitidos. Su     |
+|      |                       |         cuenta ha sido bloqueada preventivamente".              |
+|      |                       | 8a.3. Si el contador es < 3:                                    |
+|      |                       |       - Muestra: "Credenciales incorrectas. Le quedan [N]       |
+|      |                       |         intentos antes del bloqueo".                            |
+|      |                       | 8a.4. El flujo retorna al paso 2.                               |
++------+-----------------------+-----------------------------------------------------------------+
+| 10a  | Contraseña caducada o | 10a.1. El sistema detecta que la cuenta tiene activo el flag    |
+|      | primer inicio sesión  |        `debe_cambiar_password = TRUE`.                          |
+|      |                       | 10a.2. Emite un JWT provisional de alcance restringido.         |
+|      |                       | 10a.3. Redirige obligatoriamente al formulario de cambio de     |
+|      |                       |        contraseña, bloqueando el acceso al resto del sistema    |
+|      |                       |        hasta completar la actualización.                        |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.1.2 CASO DE USO: CU-SEG-02 — CERRAR SESIÓN POR INACTIVIDAD O PETICIÓN
+================================================================================
+Caso de Uso:        Cerrar Sesión por Inactividad o Petición
+Identificador:      CU-SEG-02
+Actores:            Usuario Autenticado (ACT-01, ACT-02, ACT-03), Temporizador del Sistema.
+Tipo:               Secundario
+Referencias:        SRS v2.0: RF-01, RF-02.
+                    Seguridad: S-TAG-AUTH-02, S-TAG-ACC-02 (ISO/IEC 25010).
+Precondición:       Existe una sesión activa y autenticada con token JWT válido en el cliente.
+Postcondición:      1. El identificador único del JWT (jti) es incorporado en la lista negra 
+                       (Blacklist en Redis) con tiempo de expiración idéntico al remanente del token.
+                    2. La cookie HttpOnly del Refresh Token es borrada del navegador.
+                    3. La memoria local (caché / storage del navegador) es purgada por completo.
+                    4. Se registra el evento de salida en la tabla `audit_logs`.
+                    5. La interfaz retorna a la pantalla inicial de inicio de sesión.
+Descripción:        Permite la finalización segura de la sesión operativa de un usuario, ya 
+                    sea de forma deliberada al pulsar el botón de salida, o de forma 
+                    automática por la expiración de un temporizador de inactividad de 15 
+                    minutos, garantizando que terceros no puedan acceder a datos clínicos.
+Resumen:            El usuario solicita el cierre de sesión o transcurren 15 minutos sin eventos 
+                    de teclado/ratón; el sistema revoca el token, registra la pista de auditoría 
+                    y limpia la terminal de trabajo.
+
+CURSO NORMAL (Flujo Básico - Salida Voluntaria a Petición del Usuario):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Usuario Autenticado   | Pulsa el botón "Cerrar Sesión" ubicado en el menú superior.     |
+| 2    | Sistema SGO           | Muestra un diálogo modal: "¿Está seguro de cerrar la sesión?".  |
+| 3    | Usuario Autenticado   | Confirma la acción pulsando "Aceptar".                          |
+| 4    | Sistema SGO           | Captura el encabezado Authorization (Bearer Token).             |
+| 5    | Sistema SGO           | Extrae el claim `jti` y lo almacena en la lista negra de Redis  |
+|      |                       | para invalidar su reutilización inmediata.                      |
+| 6    | Sistema SGO           | Invalida y sobrescribe la cookie que contenía el Refresh Token. |
+| 7    | Sistema SGO           | [<<include>>] Registra en `audit_logs` el evento                |
+|      |                       | 'LOGOUT_VOLUNTARY' con user_id y marca de tiempo UTC.           |
+| 8    | Sistema SGO           | Emite directiva al cliente web para eliminar el estado reactivo |
+|      |                       | y variables de memoria de la historia clínica en edición.       |
+| 9    | Sistema SGO           | Redirige la pantalla del navegador a `/login`.                 |
+| 10   | Usuario Autenticado   | Visualiza la pantalla de bienvenida y login. Fin del caso.     |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 1a   | [<<extend>>]          | 1a.1. El temporizador Javascript en segundo plano detecta que no|
+|      | Inactividad prolongada|       ha habido interacción en pantalla durante 14 minutos.     |
+|      | en terminal (15 min)  | 1a.2. Muestra ventana modal con cuenta regresiva de 60 segundos: |
+|      |                       |       "Su sesión caducará pronto por inactividad. ¿Desea        |
+|      |                       |       continuar trabajando?".                                   |
+|      |                       | 1a.3. Si el usuario pulsa "Continuar": se reinicia el contador. |
+|      |                       | 1a.4. Si transcurren los 60 segundos sin respuesta:             |
+|      |                       |       - El sistema invoca automáticamente la ruta de logout.    |
+|      |                       |       - Registra 'LOGOUT_TIMEOUT' en la auditoría del sistema.  |
+|      |                       |       - Bloquea la pantalla y muestra: "Sesión cerrada por      |
+|      |                       |         inactividad para resguardar la confidencialidad".       |
+|      |                       |       - El flujo converge al paso 5 del curso normal.           |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Fallo de red al       | 4a.1. Si el cliente no logra comunicarse con el servidor, la    |
+|      | solicitar el logout   |       aplicación web ejecuta la purga de tokens en local.       |
+|      |                       | 4a.2. Almacena en almacenamiento local una bandera para purga   |
+|      |                       |       en servidor una vez restablecida la conectividad.         |
+|      |                       | 4a.3. Redirige a la pantalla de login.                          |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+--------------------------------------------------------------------------------
+7.2 PAQUETE 2: GESTIÓN DEMOGRÁFICA Y FILIACIÓN DE PACIENTES (MÓDULO M2)
+--------------------------------------------------------------------------------
+
+7.2.1 CASO DE USO: CU-PAC-01 — REGISTRAR PACIENTE CON VALIDACIÓN MÓDULO 10
+================================================================================
+Caso de Uso:        Registrar Paciente con Validación Módulo 10
+Identificador:      CU-PAC-01
+Actores:            Asistente Comercial / Recepcionista (ACT-03), Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-03, RF-05.
+                    Reglas de Negocio: RN-PAC-01 (Módulo 10), RN-PAC-03 (Campos Obligatorios).
+                    Seguridad: S-TAG-INT-01, S-TAG-ACC-03 (ISO/IEC 25010).
+Precondición:       1. El usuario se encuentra autenticado con un rol facultado (Asistente/Optometrista).
+                    2. El paciente no se encuentra previamente registrado en la base de datos.
+Postcondición:      1. Se crea un nuevo registro en la tabla `pacientes` con ID de tipo UUID.
+                    2. La cédula queda indexada de forma única (`unique constraint`).
+                    3. El paciente queda habilitado inmediatamente para asignarle turnos, 
+                       abrir su historia clínica o emitirle una cotización.
+                    4. Se genera un registro inmutable en `audit_logs` con la acción 'PACIENTE_CREATED'.
+Descripción:        Permite el enrolamiento demográfico y legal de una persona en la base de datos 
+                    del centro óptico. El sistema aplica en tiempo real el algoritmo matemático 
+                    de Módulo 10 a la cédula de ciudadanía ecuatoriana para validar su autenticidad, 
+                    garantizando la consistencia tributaria para la posterior facturación electrónica.
+Resumen:            El operador digita la cédula; el sistema valida el código provincial y el 
+                    dígito verificador; si es válida, el operador completa nombres, contacto 
+                    y fecha de nacimiento; el sistema guarda la ficha y asigna el identificador.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | Accede a la opción "Nuevo Paciente" desde el menú de recepción. |
+| 2    | Sistema SGO           | Presenta el formulario en blanco de registro de paciente.       |
+| 3    | Asistente Comercial   | Introduce el número de cédula de identidad de 10 dígitos.       |
+| 4    | Sistema SGO           | [<<include>>] Ejecuta el algoritmo de validación Módulo 10:     |
+|      |                       | a. Verifica que la longitud sea de exactamente 10 dígitos.      |
+|      |                       | b. Comprueba que los dos primeros dígitos correspondan a una    |
+|      |                       |    provincia válida del Ecuador (01 al 24 o 30 especial).       |
+|      |                       | c. Comprueba que el tercer dígito sea menor a 6 (persona natural)|
+|      |                       | d. Aplica coeficientes (2, 1, 2, 1, 2, 1, 2, 1, 2) a los 9      |
+|      |                       |    primeros dígitos; a resultados >= 10 les resta 9.            |
+|      |                       | e. Suma los productos y obtiene el residuo de la decena superior|
+|      |                       | f. Valida que el residuo coincida con el décimo dígito.         |
+| 5    | Sistema SGO           | Comprueba en la base de datos que la cédula no esté registrada. |
+| 6    | Sistema SGO           | Marca el campo con un indicador visual verde de validez.        |
+| 7    | Asistente Comercial   | Ingresa los datos personales requeridos:                        |
+|      |                       | - Nombres y Apellidos completos.                                |
+|      |                       | - Fecha de Nacimiento (dd/mm/aaaa).                             |
+|      |                       | - Sexo biológico (Masculino / Femenino).                        |
+|      |                       | - Teléfono celular de contacto (10 dígitos).                    |
+|      |                       | - Correo electrónico para envío de facturas y recetas.          |
+|      |                       | - Dirección domiciliaria o cantón de procedencia.               |
+|      |                       | - Ocupación o actividad visual predominante.                    |
+| 8    | Sistema SGO           | Calcula dinámicamente la edad exacta en años cumplidos.         |
+| 9    | Asistente Comercial   | Pulsa el botón "Guardar Paciente".                              |
+| 10   | Sistema SGO           | Valida completitud de campos no nulos y formato de email.       |
+| 11   | Sistema SGO           | Persiste la transacción en base de datos con soft_delete = FALSE|
+| 12   | Sistema SGO           | [<<include>>] Inserta registro en `audit_logs` con el user_id   |
+|      |                       | del operador, IP, fecha y datos del paciente creado.           |
+| 13   | Sistema SGO           | Despliega mensaje de éxito: "Paciente registrado exitosamente"   |
+|      |                       | y ofrece accesos directos: "Iniciar Consulta" o "Nueva Venta".  |
+| 14   | Asistente Comercial   | Visualiza la ficha consolidada del paciente. Fin del caso.      |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Cédula inválida por   | 4a.1. El sistema resalta el campo de la cédula en color rojo.   |
+|      | algoritmo Módulo 10   | 4a.2. Muestra: "Número de cédula inválido. Verifique los        |
+|      |                       |       dígitos de la provincia o el dígito verificador".         |
+|      |                       | 4a.3. Inhabilita el botón de guardado.                          |
+|      |                       | 4a.4. El operador revisa el documento físico y corrige el dato; |
+|      |                       |       el flujo retorna al paso 3.                               |
++------+-----------------------+-----------------------------------------------------------------+
+| 4b   | Paciente extranjero   | 4b.1. El operador selecciona tipo de documento "Pasaporte /     |
+|      | con Pasaporte         |       DNI Extranjero".                                          |
+|      |                       | 4b.2. El sistema omite la validación de Módulo 10 y aplica      |
+|      |                       |       validación alfanumérica estándar de 6 a 15 caracteres.    |
+|      |                       | 4b.3. El flujo continúa en el paso 7.                           |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | Cédula ya registrada  | 5a.1. El sistema detecta coincidencia con un paciente existente.|
+|      | previamente en el SGO | 5a.2. Despliega alerta: "El paciente con cédula [X] ya se       |
+|      |                       |       encuentra registrado como: [Nombres y Apellidos]".        |
+|      |                       | 5a.3. Proporciona un botón de acción rápida: "Cargar Ficha      |
+|      |                       |       Existente".                                               |
+|      |                       | 5a.4. Si el operador pulsa el botón, el sistema carga el perfil |
+|      |                       |       del paciente registrado y finaliza la creación.           |
++------+-----------------------+-----------------------------------------------------------------+
+| 7a   | Paciente menor de edad| 7a.1. El operador constata que el menor no posee cédula física. |
+|      | sin cédula de identidad| 7a.2. [<<extend>>] Activa el caso de uso derivado:               |
+|      |                       |       CU-PAC-02: Registrar Menor de Edad sin Documento.         |
++------+-----------------------+-----------------------------------------------------------------+
+| 10a  | Teléfono celular o    | 10a.1. El sistema detecta formato de correo erróneo o teléfono   |
+|      | correo con sintaxis   |        con longitud diferente a 10 dígitos.                     |
+|      | incorrecta            | 10a.2. Indica el error puntual: "El celular debe iniciar con 09 |
+|      |                       |        y contener 10 dígitos numéricos".                        |
+|      |                       | 10a.3. El operador rectifica el campo; el flujo vuelve al 9.    |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.2.2 CASO DE USO: CU-PAC-02 — REGISTRAR MENOR DE EDAD SIN DOCUMENTO DE IDENTIDAD
+================================================================================
+Caso de Uso:        Registrar Menor de Edad sin Documento de Identidad
+Identificador:      CU-PAC-02
+Actores:            Asistente Comercial / Recepcionista (ACT-03), Optometrista Clínico (ACT-02).
+Tipo:               Opcional / Extensión
+Referencias:        SRS v2.0: RF-04.
+                    Reglas de Negocio: RN-PAC-02 (Tutor Legal Obligatorio).
+                    Seguridad: S-TAG-INT-02, S-TAG-ACC-03 (ISO/IEC 25010).
+Precondición:       1. Operador en el formulario de alta de paciente.
+                    2. Paciente físicamente menor de edad que carece de documento de identidad oficial.
+Postcondición:      1. Se genera un registro de paciente pediátrico con identificador de cédula 
+                       temporal sintético bajo la convención `MEN-YYYYMMDD-XXXX`.
+                    2. El registro queda vinculado obligatoriamente a la llave foránea del 
+                       representante legal (`tutor_id`), quien debe poseer cédula verificada.
+                    3. La ficha queda etiquetada con la marca `requiere_regularizacion_cedula = TRUE`.
+Descripción:        Permite registrar a niños o infantes que acuden a evaluación visual y aún no 
+                    han sido cedulados o no portan su documento, garantizando la continuidad de 
+                    la atención clínica sin vulnerar la integridad referencial ni la LOPDP.
+Resumen:            El operador activa la casilla de menor sin documento; el sistema solicita 
+                    la cédula y datos del tutor o representante; si el tutor es válido, genera 
+                    un código alfanumérico provisional único para el menor y guarda la ficha vinculada.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | En la pantalla de registro, marca el checkbox:                  |
+|      |                       | "[ ] Menor de edad sin documento de identidad".                 |
+| 2    | Sistema SGO           | Oculta la validación de Módulo 10 sobre el campo de cédula del  |
+|      |                       | menor y despliega la sección: "Datos del Representante Legal".  |
+| 3    | Asistente Comercial   | Solicita la cédula de ciudadanía al padre, madre o tutor legal. |
+| 4    | Asistente Comercial   | Ingresa la cédula del representante en el campo correspondiente.|
+| 5    | Sistema SGO           | [<<include>>] Ejecuta la validación Módulo 10 sobre la cédula   |
+|      |                       | del representante legal.                                        |
+| 6    | Sistema SGO           | Verifica si el representante ya existe en la base de datos:     |
+|      |                       | - Si existe: autocompleta nombres, teléfono y correo del tutor. |
+|      |                       | - Si no existe: habilita los campos para registrarlo in situ.   |
+| 7    | Asistente Comercial   | Ingresa los datos propios del menor: Nombres, Apellidos, Sexo   |
+|      |                       | y Fecha de Nacimiento exacta.                                   |
+| 8    | Asistente Comercial   | Selecciona el parentesco: Padre, Madre, Abuelo/a, Tutor Legal.   |
+| 9    | Asistente Comercial   | Pulsa el botón "Registrar Paciente Pediátrico".                 |
+| 10   | Sistema SGO           | Genera de forma algorítmica la clave temporal:                  |
+|      |                       | `MEN-` + Fecha Nacimiento (AAAAMMDD) + Correlativo (4 dígitos). |
+| 11   | Sistema SGO           | Persiste al menor en `pacientes` asignando el código sintético   |
+|      |                       | y enlazando `tutor_id` con el ID del representante.             |
+| 12   | Sistema SGO           | Establece una alerta preventiva en la ficha médica:             |
+|      |                       | "Atención a menor de edad bajo consentimiento del tutor legal". |
+| 13   | Sistema SGO           | [<<include>>] Registra el evento en `audit_logs`.               |
+| 14   | Asistente Comercial   | Visualiza la confirmación de guardado. Fin del caso.           |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | Cédula del tutor      | 5a.1. El sistema detecta que la cédula del representante no es  |
+|      | resulta inválida por  |       válida según el algoritmo Módulo 10.                      |
+|      | Módulo 10             | 5a.2. Bloquea el registro: "Para afiliar a un menor de edad es  |
+|      |                       |       estrictamente obligatoria la cédula válida del tutor".    |
+|      |                       | 5a.3. El operador solicita documento del acompañante o corrige. |
++------+-----------------------+-----------------------------------------------------------------+
+| 7a   | Fecha de nacimiento   | 7a.1. El sistema calcula que la fecha de nacimiento ingresada   |
+|      | corresponde a mayor   |       corresponde a una edad >= 18 años.                        |
+|      | de 18 años            | 7a.2. Rechaza la excepción: "La fecha indica mayoría de edad.   |
+|      |                       |       Debe registrarse con su propia cédula de ciudadanía".     |
+|      |                       | 7a.3. Desmarca el checkbox de menor y retorna al formulario base.|
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.2.3 CASO DE USO: CU-PAC-03 — BÚSQUEDA PREDICTIVA DE PACIENTES
+================================================================================
+Caso de Uso:        Búsqueda Predictiva de Pacientes
+Identificador:      CU-PAC-03
+Actores:            Usuario Autenticado (ACT-01 Administrador, ACT-02 Optometrista, ACT-03 Asistente).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-05.
+                    Seguridad: S-TAG-INT-03, S-TAG-AUTH-01 (ISO/IEC 25010).
+Precondición:       Usuario autenticado con sesión válida en cualquier pantalla que requiera 
+                    asociar un paciente (Recepción, Consulta Clínica, Ventas, Cotizaciones).
+Postcondición:      1. El sistema devuelve en menos de 200 ms la lista de coincidencias ordenadas 
+                       por relevancia (coincidencia exacta en cédula primero, luego apellidos).
+                    2. Al seleccionar un paciente, su identificador único (UUID) y sus datos 
+                       básicos se cargan en el estado global de la sesión de trabajo.
+                    3. No se alteran datos en la base de datos (operación de solo lectura).
+Descripción:        Permite localizar a un paciente registrado mediante autocompletado en tiempo 
+                    real a partir de 3 caracteres digitados en la caja de búsqueda universal. 
+                    El motor efectúa una búsqueda indexada combinada por número de cédula, 
+                    nombres, apellidos o número telefónico, discriminando registros activos.
+Resumen:            El usuario digita caracteres en el buscador; el sistema realiza una consulta 
+                    optimizada; muestra una lista desplegable con datos relevantes; el usuario 
+                    selecciona un registro y el sistema carga la información correspondiente.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Usuario Autenticado   | Se posiciona en la barra de búsqueda universal o pulsa Ctrl + B.|
+| 2    | Usuario Autenticado   | Digita al menos 3 caracteres (ej. "1712", "Figue", "0998").     |
+| 3    | Sistema SGO           | Detecta el evento de entrada y aplica un debounce de 250 ms      |
+|      |                       | para no saturar el servidor con peticiones por cada tecla.      |
+| 4    | Sistema SGO           | Ejecuta una consulta indexada ILIKE / Trigram sobre las columnas|
+|      |                       | `cedula`, `apellidos`, `nombres` y `telefono`, filtrando        |
+|      |                       | únicamente registros donde `soft_delete = FALSE`.              |
+| 5    | Sistema SGO           | Limita los resultados a un máximo de 8 coincidencias.           |
+| 6    | Sistema SGO           | Despliega el menú flotante con tarjetas resumidas mostrando:    |
+|      |                       | - Cédula destacada con coincidencia en negrita.                 |
+|      |                       | - Apellidos y Nombres completos.                                |
+|      |                       | - Edad actual calculada y Número de Celular.                    |
+|      |                       | - Fecha de la última consulta clínica realizada (si existe).    |
+| 7    | Usuario Autenticado   | Selecciona el paciente deseado haciendo clic o navegando con las|
+|      |                       | flechas del teclado y pulsando Enter.                           |
+| 8    | Sistema SGO           | Cierra el menú desplegable y vincula al paciente seleccionado:  |
+|      |                       | - En Consultorio: Carga la historia clínica y refracciones previas|
+|      |                       | - En Ventas: Carga el cliente en el punto de cobro / cotización |
+| 9    | Usuario Autenticado   | Continúa su labor con el paciente contextualizado. Fin del caso.|
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 2a   | Entrada con menos de  | 2a.1. El sistema no dispara la petición al servidor.            |
+|      | 3 caracteres          | 2a.2. Muestra un tooltip sutil: "Digite al menos 3 caracteres   |
+|      |                       |       para iniciar la búsqueda predictiva".                     |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Búsqueda sin ninguna  | 6a.1. La consulta en base de datos retorna cero (0) registros.   |
+|      | coincidencia en BD    | 6a.2. El sistema despliega en la lista: "No se encontraron      |
+|      |                       |       pacientes con los términos ingresados".                   |
+|      |                       | 6a.3. Muestra un botón directo: "+ Registrar Nuevo Paciente".   |
+|      |                       | 6a.4. [<<extend>>] Si el usuario pulsa el botón, el sistema     |
+|      |                       |       deriva automáticamente a CU-PAC-01 prellenando el campo   |
+|      |                       |       de cédula o nombres con el texto previamente digitado.    |
++------+-----------------------+-----------------------------------------------------------------+
+| 8a   | Paciente marcado como | 8a.1. El sistema detecta que el registro tiene flag              |
+|      | 'Inactivo' temporal   |       `estado = INACTIVO`.                                      |
+|      |                       | 8a.2. Pregunta al operador: "El paciente está marcado inactivo. |
+|      |                       |       ¿Desea reactivarlo para esta atención?".                  |
+|      |                       | 8a.3. Si el usuario confirma, actualiza el estado y prosigue.   |
++------+-----------------------+-----------------------------------------------------------------+
+--------------------------------------------------------------------------------
+7.3 PAQUETE 3: ATENCIÓN CLÍNICA Y REFRACCIÓN INTEGRAL (MÓDULO M3)
+--------------------------------------------------------------------------------
+
+7.3.1 CASO DE USO: CU-CLI-01 — REGISTRAR ANAMNESIS Y MOTIVO DE CONSULTA
+================================================================================
+Caso de Uso:        Registrar Anamnesis y Motivo de Consulta
+Identificador:      CU-CLI-01
+Actores:            Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-13.
+                    Reglas de Negocio: RN-CLI-03.
+                    Seguridad: S-TAG-INT-04, S-TAG-ACC-04 (ISO/IEC 25010).
+Precondición:       1. Optometrista autenticado con sesión clínica abierta.
+                    2. Paciente seleccionado en la cola de atención mediante CU-PAC-03.
+Postcondición:      1. Se crea un registro de apertura de consulta clínica con UUID único.
+                    2. Se almacenan síntomas subjetivos y antecedentes médicos estructurados.
+                    3. La consulta queda en estado 'EN_PROCESO'.
+Descripción:        Permite documentar las razones que motivan al paciente a acudir a la óptica 
+                    (disminución de agudeza visual, cansancio ocular, cefaleas temporales, etc.), 
+                    así como sus antecedentes personales (diabetes, hipertensión) y antecedentes 
+                    oftalmológicos familiares (glaucoma, queratocono).
+Resumen:            El optometrista abre la consulta del paciente seleccionado; interroga al 
+                    paciente sobre sus molestias y hábitos visuales; selecciona motivos 
+                    estandarizados y redacta observaciones; el sistema guarda la anamnesis.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Selecciona al paciente en la cola de espera y pulsa "Atender".  |
+| 2    | Sistema SGO           | Inicializa un nuevo encuentro clínico y presenta el formulario  |
+|      |                       | de "Anamnesis y Antecedentes Visuales".                          |
+| 3    | Optometrista Clínico  | Interroga al paciente sobre el motivo de su visita.             |
+| 4    | Optometrista Clínico  | Selecciona en el catálogo de síntomas frecuentes:               |
+|      |                       | [x] Visión borrosa de lejos / cerca.                            |
+|      |                       | [x] Fatiga ocular / Cansancio al trabajar frente a pantallas.   |
+|      |                       | [ ] Cefalea frontal u occipital recurrente.                     |
+| 5    | Optometrista Clínico  | Documenta el tiempo de evolución de los síntomas (ej. "3 meses")|
+|      |                       | y el tipo de trabajo predominante (ej. "Oficina / Computador"). |
+| 6    | Optometrista Clínico  | Registra antecedentes personales: diabetes, hipertensión o      |
+|      |                       | medicación actual (marca "Ninguno" si no refiere).              |
+| 7    | Optometrista Clínico  | Registra si el paciente usa actualmente gafas y antigüedad aprox|
+| 8    | Optometrista Clínico  | Pulsa "Guardar Anamnesis y Continuar".                          |
+| 9    | Sistema SGO           | Valida que el motivo de consulta contenga información válida.   |
+| 10   | Sistema SGO           | Persiste la cabecera de la consulta en la tabla `consultas`.    |
+| 11   | Sistema SGO           | Habilita la pestaña "Lensometría / Examen Previo".               |
+| 12   | Optometrista Clínico  | Visualiza el formulario de lensometría listo. Fin del caso.     |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Paciente reporta      | 6a.1. El optometrista marca la casilla "Diabetes Mellitus".      |
+|      | Diabetes o Patología  | 6a.2. El sistema despliega campo mandatorio: "Tiempo de         |
+|      | Sistémica Crónica     |       evolución y último nivel de glucosa en ayunas".           |
+|      |                       | 6a.3. El sistema añade una bandera de alerta clínica:           |
+|      |                       |       "Precaución: Fluctuaciones refractivas por glicemia".     |
+|      |                       | 6a.4. El flujo continúa en el paso 7.                           |
++------+-----------------------+-----------------------------------------------------------------+
+| 9a   | Campos obligatorios   | 9a.1. El sistema detecta que no se marcó ningún síntoma ni se   |
+|      | en blanco             |       escribió texto en el motivo de consulta.                  |
+|      |                       | 9a.2. Alerta: "Debe detallar el motivo de consulta del paciente"|
+|      |                       | 9a.3. El flujo regresa al paso 3.                               |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.3.2 CASO DE USO: CU-CLI-02 — REGISTRAR LENSOMETRÍA Y ESTADO DE GAFAS PREVIAS
+================================================================================
+Caso de Uso:        Registrar Lensometría y Estado de Gafas Previas [ELICITADO DE AUDIO]
+Identificador:      CU-CLI-02
+Actores:            Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-12 (Ampliación por Práctica Real).
+                    Insumo: Audio de atención clínica (Caso real: +1.75 / -1.50 y luna astillada).
+                    Reglas de Negocio: RN-CLI-01, RN-CLI-04.
+                    Seguridad: S-TAG-INT-04 (ISO/IEC 25010).
+Precondición:       Consulta clínica activa en curso (CU-CLI-01 completado).
+Postcondición:      1. Se almacena la fórmula dióptrica de las lentes anteriores del paciente 
+                       asociada a la consulta médica.
+                    2. Se registran las propiedades materiales y el estado de deterioro físico.
+                    3. Los valores de la lente previa se proyectan en la pantalla de refracción 
+                       para permitir la comparación analítica inmediata del cambio dioptrico.
+Descripción:        Permite medir y documentar los valores esféricos, cilíndricos, eje y adición 
+                    de los lentes que el paciente utiliza al momento de ingresar a la consulta, 
+                    empleando el lensómetro del consultorio. Asimismo, registra el material de 
+                    la luna, los tratamientos visibles (filtro azul, antirreflejo) y los daños 
+                    físicos observados (astillamiento por corte semialaire, rayaduras severas).
+Resumen:            El optometrista coloca las gafas del paciente en el lensómetro; digita los 
+                    valores medidos de OD y OI; marca el tipo de material y tratamiento; documenta 
+                    el daño físico si existe; el sistema almacena los datos y calcula la comparativa.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Solicita al paciente sus gafas actuales en uso y las examina.  |
+| 2    | Optometrista Clínico  | Coloca las gafas en el lensómetro y mide la corrección óptica.  |
+| 3    | Optometrista Clínico  | Accede a la pestaña "Lensometría / Lentes Previos".             |
+| 4    | Optometrista Clínico  | Ingresa la graduación medida para Ojo Derecho (OD):             |
+|      |                       | - Esfera: +1.75 D.                                              |
+|      |                       | - Cilindro: -1.50 D.                                            |
+|      |                       | - Eje: 10°.                                                     |
+| 5    | Optometrista Clínico  | Ingresa la graduación medida para Ojo Izquierdo (OI):           |
+|      |                       | - Esfera: +1.75 D.                                              |
+|      |                       | - Cilindro: -1.50 D.                                            |
+|      |                       | - Eje: 175°.                                                    |
+| 6    | Optometrista Clínico  | Selecciona las características físicas de la luna anterior:     |
+|      |                       | - Material: Plástico estándar (CR-39).                          |
+|      |                       | - Tratamiento: Filtro de Luz Azul (residual azul/violeta).      |
+| 7    | Optometrista Clínico  | Selecciona el estado de deterioro físico en el catálogo:        |
+|      |                       | [ ] Rayaduras superficiales.                                    |
+|      |                       | [x] Astillamiento / Desportillamiento de borde.                 |
+|      |                       | [ ] Rotura de bisel o montura.                                  |
+| 8    | Optometrista Clínico  | Redacta el hallazgo físico: "Luna astillada en esquina inferior  |
+|      |                       | nasal por carecer de bisel protegido en armazón semialaire".    |
+| 9    | Optometrista Clínico  | Pulsa "Guardar Lensometría".                                    |
+| 10   | Sistema SGO           | Valida consistencia de dioptrías (pasos de 0.25 y eje 0-180°).  |
+| 11   | Sistema SGO           | Persiste el registro en la tabla `lensometria_previa`.          |
+| 12   | Sistema SGO           | Carga los valores dioptricos en la cuadrícula de comparación    |
+|      |                       | histórica para la siguiente etapa de refracción subjetiva.      |
+| 13   | Optometrista Clínico  | Visualiza la confirmación de registro. Fin del caso.            |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 1a   | Paciente no usa       | 1a.1. El optometrista marca la opción:                          |
+|      | lentes previos o      |       "[x] Paciente no utiliza lentes / Primera Consulta".      |
+|      | primera vez           | 1a.2. El sistema deshabilita y bloquea los campos de lensometría|
+|      |                       |       asignando valores nulos controlados.                      |
+|      |                       | 1a.3. El sistema habilita de inmediato la siguiente pestaña.    |
+|      |                       | 1a.4. El flujo salta directamente al paso 12.                   |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Signo de cilindro     | 4a.1. El optometrista digita cilindro con signo positivo (+).   |
+|      | positivo ingresado    | 4a.2. El sistema aplica transposición matemática automática:    |
+|      |                       |       Nueva Esfera = Esfera + Cilindro; Nuevo Cilindro = -Cil;  |
+|      |                       |       Nuevo Eje = Eje +/- 90°.                                  |
+|      |                       | 4a.3. Notifica con aviso informativo: "Cilindro transpuesto a   |
+|      |                       |       notación negativa estandarizada".                         |
+|      |                       | 4a.4. El flujo continúa en el paso 5.                           |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.3.3 CASO DE USO: CU-CLI-03 — REGISTRAR PRUEBAS OBJETIVAS Y QUERATOMETRÍA
+================================================================================
+Caso de Uso:        Registrar Pruebas Objetivas y Queratometría [ELICITADO DE AUDIO]
+Identificador:      CU-CLI-03
+Actores:            Optometrista Clínico (ACT-02).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-07 (Ampliación por Práctica Real).
+                    Insumo: Audio de atención clínica (Pruebas computarizadas preliminares).
+                    Reglas de Negocio: RN-CLI-05.
+                    Seguridad: S-TAG-INT-04 (ISO/IEC 25010).
+Precondición:       Consulta médica activa; paciente sentado frente al instrumental computarizado.
+Postcondición:      1. Valores de queratometría corneal (K1, K2 y Eje) almacenados para OD y OI.
+                    2. Cálculo automático del cilindro corneal ($K_2 - K_1$).
+                    3. Parámetros autorrefractométricos preliminares registrados para precargar 
+                       el foróptero en la refracción subjetiva.
+Descripción:        Permite ingresar los parámetros biométricos corneales objetivos obtenidos en 
+                    el autorrefractómetro/queratómetro computarizado. Esta medición preliminar 
+                    permite evaluar la curvatura anterior de la córnea, descartar ectasias o 
+                    queratoconos incipientes y proveer un punto de partida exacto para la graduación.
+Resumen:            El paciente apoya mentón y frente en el equipo; el optometrista toma la lectura 
+                    computarizada; introduce K1, K2 y ejes corneales; el sistema calcula el 
+                    astigmatismo corneal y habilita la copia rápida hacia el examen subjetivo.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Accede a la pestaña "Pruebas Objetivas / Queratometría".        |
+| 2    | Optometrista Clínico  | Posiciona al paciente en el equipo computarizado y toma lectura.|
+| 3    | Optometrista Clínico  | Ingresa queratometría de Ojo Derecho (OD):                      |
+|      |                       | - K1 (meridiano más plano en Dioptrías o mm).                   |
+|      |                       | - K2 (meridiano más curvo en Dioptrías o mm).                   |
+|      |                       | - Eje del meridiano corneal (0° a 180°).                        |
+| 4    | Sistema SGO           | Calcula el astigmatismo corneal para OD: $\Delta K = K_2 - K_1$.|
+| 5    | Optometrista Clínico  | Ingresa queratometría de Ojo Izquierdo (OI): K1, K2 y Eje.      |
+| 6    | Sistema SGO           | Calcula el astigmatismo corneal para OI: $\Delta K = K_2 - K_1$.|
+| 7    | Optometrista Clínico  | Ingresa la autorrefractometría computarizada tentativa (OD/OI). |
+| 8    | Optometrista Clínico  | Pulsa "Guardar Datos Objetivos y Copiar a Subjetivo".           |
+| 9    | Sistema SGO           | Valida que K1 y K2 se encuentren en rango biológico (36 a 52 D).|
+| 10   | Sistema SGO           | Persiste las lecturas en la tabla `pruebas_objetivas`.          |
+| 11   | Sistema SGO           | Pre-llena la pantalla de refracción con estos valores base.     |
+| 12   | Optometrista Clínico  | Pasa al paciente al foróptero. Fin del caso.                    |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Diferencia K2 - K1    | 4a.1. El sistema detecta que $\Delta K \ge 3.00\text{ D}$.      |
+|      | elevada (> 3.00 D)    | 4a.2. Despliega advertencia clínica: "Astigmatismo corneal alto.|
+|      |                       |       Sospecha de queratocono o ectasia corneal".               |
+|      |                       | 4a.3. Sugiere evaluación complementaria con lámpara de hendidura|
+|      |                       |       y derivación a topografía corneal.                        |
+|      |                       | 4a.4. El flujo prosigue al paso 5.                              |
++------+-----------------------+-----------------------------------------------------------------+
+| 9a   | Valores K fuera de    | 9a.1. El valor K ingresado es < 35.00 D o > 55.00 D.            |
+|      | rango biológico       | 9a.2. El sistema solicita confirmación: "¿Confirma que el valor |
+|      |                       |       queratométrico ingresado es atípico?".                    |
+|      |                       | 9a.3. El especialista confirma o rectifica digitación.          |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.3.4 CASO DE USO: CU-CLI-04 — REALIZAR EXAMEN REFRACTIVO Y CONFORT AMBULATORIO
+================================================================================
+Caso de Uso:        Realizar Examen Refractivo y Confort Ambulatorio [ELICITADO DE AUDIO]
+Identificador:      CU-CLI-04
+Actores:            Optometrista Clínico (ACT-02), Paciente / Cliente (ACT-NEG-01).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-07, RF-08, RF-09, RF-10, RF-11, RF-12.
+                    Insumo: Audio de atención clínica (Prueba de marcha y marcha sin mareos).
+                    Reglas de Negocio: RN-CLI-01, RN-CLI-02.
+                    Seguridad: S-TAG-INT-04, S-TAG-ACC-04 (ISO/IEC 25010).
+Precondición:       Consulta en curso; anamnesis y pruebas preliminares concluidas.
+Postcondición:      1. Refracción clínica definitiva guardada con sello de inmutabilidad.
+                    2. Parámetros de Distancia Nasopupilar (DNP monocular) y Altura focal registrados.
+                    3. Registro booleano explícito de "Confort Ambulatorio en Marcha Aprobado".
+                    4. Comparativa final generada respecto a la fórmula previa del paciente.
+Descripción:        Determina la prescripción refractiva definitiva mediante evaluación subjetiva 
+                    con foróptero y cartilla Snellen, verificando la máxima agudeza visual con la 
+                    mínima corrección dioptrica. De forma mandatoria, antes de persistir la receta, 
+                    el optometrista coloca los lentes calculados en la armazón de prueba y hace 
+                    caminar al paciente por el establecimiento para validar la ausencia de mareos, 
+                    distorsiones periféricas u ondulaciones en el piso.
+Resumen:            El optometrista gradúa con foróptero monocular y binocularmente; mide agudeza 
+                    visual Snellen; monta la fórmula tentativa en la armazón de prueba; el paciente 
+                    camina y confirma confort en el suelo y vitrinas; el especialista sella la receta.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Registra la Agudeza Visual Inicial Sin Corrección (AVsc) para   |
+|      |                       | Ojo Derecho (ej. 20/70) y Ojo Izquierdo (ej. 20/80).            |
+| 2    | Optometrista Clínico  | Coloca al paciente frente al foróptero y proyecta letras Snellen|
+| 3    | Optometrista Clínico  | Refina la corrección esfero-cilíndrica monocular en pasos 0.25 D|
+|      |                       | hasta lograr la mejor agudeza visual con el cilindro negativo:  |
+|      |                       | - OD: Esfera +2.00 D, Cilindro -1.75 D, Eje 10°.                |
+|      |                       | - OI: Esfera +2.00 D, Cilindro -1.75 D, Eje 175°.               |
+| 4    | Optometrista Clínico  | Evalúa la visión cercana a 40 cm y determina la Adición (+0.75D)|
+| 5    | Sistema SGO           | [<<include>>] Valida rangos ópticos y signo negativo estricto.  |
+| 6    | Sistema SGO           | Presenta cuadro comparativo automático contra la lente previa:  |
+|      |                       | Incremento detectado: +0.25 D en Esfera y -0.25 D en Cilindro.  |
+| 7    | Optometrista Clínico  | Toma la montura de prueba ambulatoria y monta las lunas de      |
+|      |                       | prueba correspondientes a la graduación calculada.              |
+| 8    | Optometrista Clínico  | Solicita al paciente ponerse de pie y caminar por el consultorio|
+| 9    | Paciente              | Camina observando el piso, las esquinas de muebles y vitrinas.  |
+| 10   | Optometrista Clínico  | Pregunta: "¿Siente sensación de vacío, desnivel en el piso,     |
+|      |                       | curvatura en las baldosas o mareo al caminar?".                 |
+| 11   | Paciente              | Responde positivamente: "Todo se ve nítido, plano y confortable"|
+| 12   | Optometrista Clínico  | Marca en el sistema:                                            |
+|      |                       | [x] Prueba ambulatoria de marcha ejecutada con éxito.           |
+|      |                       | [x] Paciente confirma piso plano y confort dinámico sin mareo.  |
+| 13   | Optometrista Clínico  | Mide con el pupilómetro digital la Distancia Nasopupilar:       |
+|      |                       | - DNP OD: 31.5 mm | DNP OI: 32.0 mm.                           |
+| 14   | Optometrista Clínico  | Pulsa "Guardar y Cerrar Refracción Definitiva".                 |
+| 15   | Sistema SGO           | Persiste la refracción en `examenes_refraccion` con hash SHA-256|
+|      |                       | que impide cualquier alteración posterior (Inmutabilidad).     |
+| 16   | Optometrista Clínico  | Visualiza el mensaje: "Refracción clínica sellada con éxito".   |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | [<<extend>>]          | 5a.1. El sistema detecta que la variación respecto a la última  |
+|      | Salto refractivo      |       consulta o lensometría previa supera 1.50 Dioptrías.      |
+|      | abrupto (> 1.50 D)    | 5a.2. Despliega advertencia en rojo: "Incremento refractivo     |
+|      |                       |       atípico. Verifique si existe patología o error de medida".|
+|      |                       | 5a.3. El especialista re-valida y añade justificación médica.   |
++------+-----------------------+-----------------------------------------------------------------+
+| 11a  | Paciente reporta piso | 11a.1. El paciente manifiesta: "Siento que el piso se levanta o |
+|      | hundido, curvado o    |        siento un leve mareo al girar la cabeza rápidamente".    |
+|      | mareo en marcha       | 11a.2. El optometrista disminuye en 0.25 D la esfera positiva o |
+|      |                       |        reduce ligeramente el valor cilíndrico en montura prueba.|
+|      |                       | 11a.3. Repite la prueba de marcha durante 2 minutos adicionales.|
+|      |                       | 11a.4. Cuando el paciente confirma adaptación, el especialista  |
+|      |                       |        actualiza los valores corregidos en el formulario SGO.   |
+|      |                       | 11a.5. El flujo retorna al paso 12.                             |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.3.5 CASO DE USO: CU-CLI-05 — EMITIR RECETA ÓPTICA Y CERTIFICADO VISUAL
+================================================================================
+Caso de Uso:        Emitir Receta Óptica y Certificado Visual
+Identificador:      CU-CLI-05
+Actores:            Optometrista Clínico (ACT-02), Paciente / Cliente (ACT-NEG-01).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-14, RF-15.
+                    Seguridad: S-TAG-AUTH-03, S-TAG-ACC-04 (ISO/IEC 25010).
+Precondición:       Refracción clínica definitiva guardada y sellada en CU-CLI-04.
+Postcondición:      1. Receta óptica generada en formato digital e impresa para el paciente.
+                    2. Diagnóstico asociado conforme a la Clasificación Internacional CIE-10.
+                    3. Código QR de validación de autenticidad insertado en la receta.
+                    4. Registro de auditoría emitido con el identificador del profesional emisor.
+Descripción:        Permite generar el documento médico oficial de prescripción visual que se 
+                    entrega al paciente. Incluye la graduación refractiva final, la agudeza 
+                    visual alcanzada, el tipo de tratamiento recomendado (filtro azul, antirreflejo), 
+                    el diagnóstico CIE-10 (ej. Astigmatismo Miópico Compuesto), recomendaciones 
+                    ergonómicas y la firma profesional del optometrista.
+Resumen:            El especialista selecciona el diagnóstico CIE-10; agrega observaciones de uso; 
+                    el sistema genera la receta con código QR y membrete oficial; se imprime en 
+                    formato A5 o ticket térmico y se envía copia en PDF al paciente.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Accede a la opción "Emitir Receta Óptica".                      |
+| 2    | Sistema SGO           | Carga la fórmula final sellada en CU-CLI-04 (OD, OI, Adición).  |
+| 3    | Optometrista Clínico  | Busca y asocia el código diagnóstico en el catálogo CIE-10:     |
+|      |                       | - H52.2: Astigmatismo.                                          |
+|      |                       | - H52.0: Hipermetropía.                                         |
+| 4    | Optometrista Clínico  | Selecciona la modalidad de uso recomendada:                     |
+|      |                       | [x] Uso constante / permanente.                                 |
+|      |                       | [x] Uso obligatorio para trabajo en computador y lectura.       |
+| 5    | Optometrista Clínico  | Marca el tratamiento de lunas sugerido:                         |
+|      |                       | - Material: Policarbonato de alto índice.                       |
+|      |                       | - Tratamiento: Filtro de Luz Azul con antirreflejo multicapa.   |
+| 6    | Optometrista Clínico  | Pulsa "Generar e Imprimir Receta".                              |
+| 7    | Sistema SGO           | Genera el PDF con membrete institucional de Óptica Vista Visión,|
+|      |                       | código QR verificador, firma digitalizada y sello del MSP.      |
+| 8    | Sistema SGO           | [<<include>>] Inserta registro inmutable en `audit_logs`.       |
+| 9    | Sistema SGO           | Envía el documento a la impresora física predeterminada.        |
+| 10   | Optometrista Clínico  | Entrega la receta física al paciente y explica su prescripción. |
+| 11   | Paciente              | Recibe su receta médica. Fin del caso.                          |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Paciente solicita     | 6a.1. El optometrista marca la casilla "Despachar por WhatsApp /|
+|      | envío digital de      |       Correo Electrónico".                                      |
+|      | la receta médica      | 6a.2. El sistema envía el enlace de descarga seguro cifrado     |
+|      |                       |       al celular o email registrado en la ficha demográfica.   |
+|      |                       | 6a.3. El flujo continúa en el paso 8.                           |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.3.6 CASO DE USO: CU-CLI-06 — EVALUACIÓN DE POLO ANTERIOR Y SEGUIMIENTO PATOLÓGICO
+================================================================================
+Caso de Uso:        Registrar Evaluación de Polo Anterior y Seguimiento Patológico [AUDIO REAL]
+Identificador:      CU-CLI-06
+Actores:            Optometrista Clínico (ACT-02), Paciente / Cliente (ACT-NEG-01).
+Tipo:               Secundario / Clínico Especializado
+Referencias:        SRS v2.0: RF-13 (Ampliación por Práctica Real).
+                    Insumo: Audio de atención clínica (Detección de pterigión en cara interna).
+                    Reglas de Negocio: RN-CLI-06.
+                    Seguridad: S-TAG-INT-04, S-TAG-ACC-04 (ISO/IEC 25010).
+Precondición:       Consulta médica activa; lámpara de hendidura o biomicroscopio disponible.
+Postcondición:      1. Registro estructurado de la condición patológica de segmento anterior.
+                    2. Mapeo anatómico de pterigión (lateralidad, ubicación nasal/temporal, grado).
+                    3. Registro de advertencias preventivas entregadas al paciente.
+                    4. Programación de control periódico a 12 meses.
+Descripción:        Permite registrar el examen físico y biomicroscópico de párpados, conjuntiva, 
+                    córnea y cristalino. Permite tipificar el crecimiento de tejido fibrovascular 
+                    (pterigión / carnosidad), documentar si compromete o amenaza el eje pupilar 
+                    y plasmar formalmente las recomendaciones preventivas ambientales (no frotar, 
+                    protección UV400 obligatoria) para evitar su proliferación quirúrgica.
+Resumen:            El especialista examina el ojo con biomicroscopio; detecta pterigión nasal 
+                    grado I; ingresa en el sistema el hallazgo anatómico y grado de evolución; 
+                    marca las advertencias preventivas dadas al paciente; guarda el seguimiento.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Optometrista Clínico  | Accede a la pestaña "Polo Anterior y Salud Ocular".             |
+| 2    | Optometrista Clínico  | Examina el segmento anterior del paciente (córnea, conjuntiva). |
+| 3    | Optometrista Clínico  | Identifica presencia de pterigión / carnosidad en cara interna. |
+| 4    | Optometrista Clínico  | Registra los parámetros anatómicos estructurados:               |
+|      |                       | - Ojo Afectado: Ojo Derecho (OD) / Ojo Izquierdo (OI).          |
+|      |                       | - Ubicación: Nasal (cara interna).                              |
+|      |                       | - Grado de Evolución: Grado I (incipiente / limbo corneal).     |
+|      |                       | - Invasión Corneal hacia Eje Pupilar: No invade (< 1 mm).       |
+| 5    | Optometrista Clínico  | Registra las indicaciones terapéuticas y preventivas brindadas: |
+|      |                       | [x] Advertencia expresa: No frotarse ni rascarse los ojos.      |
+|      |                       | [x] Protección ambiental: Uso mandatorio de lentes con filtro   |
+|      |                       |     UV400 y antirreflejo para frenar radiación solar y polvo.   |
+|      |                       | [x] Prescripción de colirio lubricante / lágrima artificial.    |
+| 6    | Optometrista Clínico  | Documenta en observaciones clínicas: "Pterigión nasal incipiente|
+|      |                       | sin indicación quirúrgica inmediata. Monitoreo anual de avance".|
+| 7    | Optometrista Clínico  | Asigna código CIE-10 complementario: H11.0 (Pterigión).         |
+| 8    | Optometrista Clínico  | Fija fecha de control preventivo: 1 año posterior a la consulta.|
+| 9    | Optometrista Clínico  | Pulsa "Guardar Evaluación de Polo Anterior".                    |
+| 10   | Sistema SGO           | Persiste la ficha patológica asociada al expediente histórico.  |
+| 11   | Sistema SGO           | Genera una alerta de seguimiento programada para la agenda.     |
+| 12   | Optometrista Clínico  | Visualiza la confirmación de guardado. Fin del caso.            |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Pterigión Grado III o | 4a.1. El optometrista detecta que el tejido fibrovascular invade|
+|      | compromiso pupilar    |       más de 3 mm sobre la córnea acercándose a la pupila.      |
+|      |                       | 4a.2. El sistema despliega opción de: "Generar Hoja de          |
+|      |                       |       Derivación Quirúrgica a Oftalmología".                    |
+|      |                       | 4a.3. El especialista imprime el volante de referencia médica   |
+|      |                       |       para cirugía de escisión con autoinjerto.                 |
+|      |                       | 4a.4. El flujo continúa en el paso 5.                           |
++------+-----------------------+-----------------------------------------------------------------+
+--------------------------------------------------------------------------------
+7.4 PAQUETE 4: TALLER ÓPTICO Y LABORATORIO (MÓDULO M4)
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+7.5 PAQUETE 5: VENTAS, MOSTRADOR Y CAJA (MÓDULO M5)
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+7.6 PAQUETE 6: FACTURACIÓN ELECTRÓNICA E INTEGRACIÓN CON SRI (MÓDULO M6)
+--------------------------------------------------------------------------------
+
+7.6.1 CASO DE USO: CU-SRI-01 — GENERAR FACTURA XML v1.1.0 Y CLAVE M11
+================================================================================
+Caso de Uso:        Generar Factura XML v1.1.0 y Clave de Acceso Módulo 11
+Identificador:      CU-SRI-01
+Actores:            Asistente Comercial (ACT-03), Microservicio API-SRI.
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-24.
+                    Reglas de Negocio: RN-SRI-01, RN-SRI-03.
+                    Seguridad: S-TAG-INT-07, S-TAG-ACC-07 (ISO/IEC 25010).
+Precondición:       1. Venta liquidada en CU-VEN-01 o CU-VEN-04.
+                    2. Datos del adquirente ingresados (Cédula/RUC o Consumidor Final <= $50).
+Postcondición:      1. Estructura XML canónica v1.1.0 generada en memoria conforme a XSD.
+                    2. Clave de Acceso de 49 dígitos ponderada por Módulo 11 calculada y validada.
+                    3. Registro creado en la tabla `facturas_electronicas` con estado 'GENERADA'.
+Descripción:        Construye el documento XML canónico de facturación electrónica conforme a la 
+                    ficha técnica oficial v1.1.0 del SRI. El sistema parametriza la información 
+                    tributaria, valida los datos del cliente, calcula los 49 dígitos de la Clave 
+                    de Acceso aplicando el algoritmo Módulo 11 con ponderadores cíclicos de 2 a 7, 
+                    y serializa el comprobante listo para el proceso criptográfico de firma digital.
+Resumen:            El operador solicita la factura; el sistema extrae los ítems de venta; valida 
+                    que compras > $50 no vayan a Consumidor Final; genera la clave de 49 dígitos; 
+                    crea el archivo XML canónico y lo envía al componente de firma digital.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Asistente Comercial   | En la venta concluida, pulsa "Emitir Factura Electrónica".      |
+| 2    | Sistema SGO           | Recupera el detalle de ítems, cantidades, precios unitarios,   |
+|      |                       | subtotales con tarifa 15% / 0% IVA e información del cliente.   |
+| 3    | Sistema SGO           | Valida los datos fiscales del cliente:                          |
+|      |                       | - Si es Cédula: aplica validador Módulo 10.                     |
+|      |                       | - Si es RUC: aplica validador de sociedad o persona natural M11.|
+|      |                       | - Si es Consumidor Final (9999999999999): valida Total <= $50.00|
+| 4    | Sistema SGO           | Obtiene el siguiente secuencial correlativo de 9 dígitos.       |
+| 5    | Sistema SGO           | Construye los primeros 48 dígitos de la Clave de Acceso:        |
+|      |                       | 1. Fecha Emisión (8 dígitos: ddmmaaaa, ej. 25092026).           |
+|      |                       | 2. Tipo Comprobante (2 dígitos: "01" para Factura).             |
+|      |                       | 3. RUC del Emisor (13 dígitos: ej. 0601234567001).              |
+|      |                       | 4. Tipo de Ambiente (1 dígito: "1" Pruebas / "2" Producción).   |
+|      |                       | 5. Serie (6 dígitos: Establecimiento 001 + Punto Emisión 001).  |
+|      |                       | 6. Secuencial de la Factura (9 dígitos: ej. 000000142).         |
+|      |                       | 7. Código Numérico Aleatorio de 8 dígitos (ej. 12345678).       |
+|      |                       | 8. Tipo de Emisión (1 dígito: "1" Normal).                      |
+| 6    | Sistema SGO           | [<<include>>] Aplica algoritmo Módulo 11 sobre los 48 dígitos:  |
+|      |                       | a. Multiplica cada dígito por factores ponderados de 2 a 7      |
+|      |                       |    recorriendo de derecha a izquierda.                          |
+|      |                       | b. Suma los productos y obtiene el residuo ($Suma \pmod{11}$).  |
+|      |                       | c. Calcula el Dígito Verificador: $DV = 11 - Residuo$.          |
+|      |                       | d. Si $DV = 11 \to 0$; si $DV = 10 \to 1$.                      |
+| 7    | Sistema SGO           | Concatena el $DV$ obteniendo la Clave de Acceso de 49 dígitos.  |
+| 8    | Sistema SGO           | Ensambla el árbol XML con los nodos <infoTributaria>,           |
+|      |                       | <infoFactura>, <detalles> e <infoAdicional>.                    |
+| 9    | Sistema SGO           | Valida la conformidad estructural del XML contra el XSD v1.1.0. |
+| 10   | Sistema SGO           | Persiste la factura en `facturas_electronicas` con estado        |
+|      |                       | 'GENERADA' y deriva de inmediato a CU-SRI-02 (Firma Digital).   |
+| 11   | Sistema SGO           | Notifica al operador: "Factura estructurada exitosamente".      |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Consumidor Final con  | 3a.1. El importe total de la venta supera los $50.00 USD        |
+|      | monto superior a $50  |       (ej. el combo promocional de $99.00 USD).                 |
+|      |                       | 3a.2. El sistema bloquea la emisión a Consumidor Final:         |
+|      |                       |       "Disposición SRI: Transacciones mayores a $50.00 USD      |
+|      |                       |       exigen identificación con Cédula o RUC del adquirente".   |
+|      |                       | 3a.3. Solicita digitar los datos del paciente para continuar.   |
++------+-----------------------+-----------------------------------------------------------------+
+| 3b   | Cédula o RUC inválido | 3b.1. El validador algorítmico detecta inconsistencia en el RUC.|
+|      | en datos de cliente   | 3b.2. El sistema rechaza el proceso y resalta el campo erróneo. |
+|      |                       | 3b.3. El operador corrige los datos fiscales del paciente.      |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.6.2 CASO DE USO: CU-SRI-02 — FIRMAR FACTURA CON CERTIFICADO PKCS#12
+================================================================================
+Caso de Uso:        Firmar Digitalmente Factura con Certificado PKCS#12 (XAdES-BES)
+Identificador:      CU-SRI-02
+Actores:            Microservicio API-SRI (NestJS), Administrador (ACT-01).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-25.
+                    Seguridad: S-TAG-AUTH-03, S-TAG-INT-07 (ISO/IEC 25010).
+Precondición:       1. XML canónico v1.1.0 generado en CU-SRI-01.
+                    2. Certificado digital .p12 cargado en el almacén seguro de claves del servidor.
+Postcondición:      1. Archivo XML firmado digitalmente bajo el estándar XAdES-BES Enveloped.
+                    2. Bloque <ds:Signature> inyectado con los valores SignedInfo y SignedProperties.
+                    3. Estado de la factura actualizado a 'FIRMADA' en la base de datos.
+Descripción:        Aplica la firma digital avanzada con valor probatorio no repudiable al XML 
+                    de la factura. El servicio desencripta el certificado PKCS#12 utilizando la 
+                    clave maestra custodiada, extrae la llave privada RSA y el certificado X.509, 
+                    ejecuta la canonicalización XML-C14N, calcula el digest criptográfico SHA-1, 
+                    firma los datos y ensambla el documento final garantizando su inalterabilidad.
+Resumen:            El microservicio toma el XML sin firmar; lee el almacén de claves en memoria; 
+                    aplica la canonicalización y calcula el resumen SHA-1; cifra con la llave 
+                    privada; ensambla la firma XAdES-BES y almacena el XML legal firmado.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Microservicio API-SRI | Recibe el XML generado de CU-SRI-01 y la Clave de Acceso.       |
+| 2    | Microservicio API-SRI | Lee el archivo .p12 desde la bóveda de claves en memoria segura.|
+| 3    | Microservicio API-SRI | Desencripta el almacén PKCS#12 con la contraseña custodiada.    |
+| 4    | Microservicio API-SRI | Extrae la clave privada RSA y la cadena de certificados X.509.  |
+| 5    | Microservicio API-SRI | Convierte el número de serie X.509 a precisión entera (BigInt). |
+| 6    | Microservicio API-SRI | Realiza la canonicalización C14N del XML y calcula digest SHA-1.|
+| 7    | Microservicio API-SRI | Genera el nodo <etsi:SignedProperties> con fecha UTC y emisor.  |
+| 8    | Microservicio API-SRI | Construye el nodo <ds:SignedInfo> conteniendo las referencias.  |
+| 9    | Microservicio API-SRI | Cifra el digest del SignedInfo con la clave privada generando   |
+|      |                       | el bloque de firma <ds:SignatureValue>.                         |
+| 10   | Microservicio API-SRI | Ensambla el nodo <ds:Signature> al final del comprobante XML.   |
+| 11   | Microservicio API-SRI | Valida la integridad estructural del XML firmado resultante.    |
+| 12   | Microservicio API-SRI | Actualiza la tabla `facturas_electronicas` a estado 'FIRMADA'.  |
+| 13   | Microservicio API-SRI | Dispara de inmediato la invocación a CU-SRI-03. Fin del caso.   |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Contraseña del .p12   | 3a.1. Falla la apertura del almacén de certificados por clave.  |
+|      | incorrecta o corrupta | 3a.2. El sistema marca la factura como 'ERROR_FIRMA'.          |
+|      |                       | 3a.3. Dispara alerta crítica al Administrador por correo.       |
+|      |                       | 3a.4. Coloca la factura en cola de espera administrativa.       |
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | Certificado digital   | 4a.1. La fecha actual es superior a la fecha de caducidad.      |
+|      | caducado (vencido)    | 4a.2. El servicio aborta la firma y notifica: "El certificado   |
+|      |                       |       de firma electrónica ha expirado. Requiere renovación".   |
+|      |                       | 4a.3. Detiene la transmisión externa para evitar penalidades.   |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.6.3 CASO DE USO: CU-SRI-03 — TRANSMITIR Y CONSULTAR COMPROBANTE ANTE SRI
+================================================================================
+Caso de Uso:        Transmitir y Consultar Comprobante ante Web Services SRI
+Identificador:      CU-SRI-03
+Actores:            Microservicio API-SRI, Web Services SRI (ACT-04).
+Tipo:               Primario
+Referencias:        SRS v2.0: RF-26.
+                    Reglas de Negocio: RN-SRI-02, RN-SRI-04.
+                    Seguridad: S-TAG-DISP-01, S-TAG-ACC-07 (ISO/IEC 25010).
+Precondición:       XML firmado electrónicamente en CU-SRI-02.
+Postcondición:      1. Comprobante recibido y autorizado por el SRI con número y fecha fiscal.
+                    2. XML oficial enriquecido con el nodo de autorización del SRI.
+                    3. Estado actualizado a 'AUTORIZADO' en la base de datos PostgreSQL.
+                    4. Evento de dominio emitido para generación de RIDE y envío por correo.
+Descripción:        Realiza el ciclo de comunicación SOAP de dos pasos con los servidores del SRI: 
+                    1) Envía el XML firmado en Base64 al servicio `RecepcionComprobantesOffline` 
+                    obteniendo estado 'RECIBIDA'; 2) Tras una ventana técnica de procesamiento, 
+                    invoca `AutorizacionComprobantesOffline` enviando la Clave de Acceso para 
+                    obtener el estado 'AUTORIZADO'. Incluye manejo de contingencia asíncrona ante caídas.
+Resumen:            El servicio envía el XML al Web Service del SRI; recibe acuse de recibido; 
+                    consulta la autorización; el SRI devuelve el sello fiscal; el sistema guarda 
+                    la autorización y dispara la generación del RIDE.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Microservicio API-SRI | Codifica el XML firmado en Base64.                              |
+| 2    | Microservicio API-SRI | Construye el sobre SOAP para el método `validarComprobante`.     |
+| 3    | Microservicio API-SRI | Envía la petición HTTP POST al WS RecepcionComprobantesOffline. |
+| 4    | Web Services SRI      | Procesa el documento y responde: `<estado>RECIBIDA</estado>`.   |
+| 5    | Microservicio API-SRI | Registra en bitácora el estado intermedio 'RECIBIDA'.           |
+| 6    | Microservicio API-SRI | Aguarda una ventana de espera técnica de 2.5 segundos.          |
+| 7    | Microservicio API-SRI | Construye el sobre SOAP para `autorizacionComprobante`          |
+|      |                       | suministrando la Clave de Acceso de 49 dígitos.                 |
+| 8    | Microservicio API-SRI | Envía la petición HTTP POST al WS AutorizacionComprobantesOfflin|
+| 9    | Web Services SRI      | Responde con estado: `<estado>AUTORIZADO</estado>`, conteniendo:|
+|      |                       | - Número de Autorización (idéntico a la Clave de Acceso).       |
+|      |                       | - Fecha y hora oficial de autorización (Timestamp SRI).         |
+|      |                       | - XML autorizado con nodo `<autorizacion>`.                     |
+| 10   | Microservicio API-SRI | Persiste el XML autorizado en PostgreSQL y marca 'AUTORIZADO'.  |
+| 11   | Microservicio API-SRI | Dispara el evento `FacturaAutorizadaEvent` para CU-SRI-04.      |
+| 12   | Microservicio API-SRI | Finaliza exitosamente el ciclo fiscal. Fin del caso.            |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 3a   | Caída de internet o   | 3a.1. Se produce un timeout de conexión (> 10 seg) o fallo HTTP.|
+|      | indisponibilidad SRI  | 3a.2. [<<extend>>] El sistema activa la COLA DE CONTINGENCIA:   |
+|      |                       |       - Marca la factura en estado 'EN_PROCESO_OFFLINE'.        |
+|      |                       |       - NO bloquea al usuario en mostrador; permite la entrega. |
+|      |                       |       - La tarea Cron de fondo reprograma el reintento cada     |
+|      |                       |         15 minutos hasta lograr autorización sin duplicar clave.|
++------+-----------------------+-----------------------------------------------------------------+
+| 4a   | SRI responde          | 4a.1. El SRI detecta inconsistencia en montos o esquemas.       |
+|      | 'DEVUELTA' con errores| 4a.2. El sistema extrae los códigos y mensajes de error del SRI.|
+|      | de validación         | 4a.3. Marca la factura como 'DEVUELTA' en base de datos.        |
+|      |                       | 4a.4. Notifica en el panel al operador para rectificación.      |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.6.4 CASO DE USO: CU-SRI-04 — GENERAR RIDE PDF Y DESPACHO SMTP
+================================================================================
+Caso de Uso:        Generar RIDE PDF Code128 y Despachar por Correo SMTP
+Identificador:      CU-SRI-04
+Actores:            Microservicio API-SRI, Asistente Comercial (ACT-03), Paciente (ACT-NEG-01).
+Tipo:               Secundario
+Referencias:        SRS v2.0: RF-27.
+                    Reglas de Negocio: RN-SRI-05.
+                    Seguridad: S-TAG-INT-07, S-TAG-ACC-07 (ISO/IEC 25010).
+Precondición:       Factura en estado 'AUTORIZADO' con XML oficial completo.
+Postcondición:      1. Documento RIDE generado en formato PDF conforme al estándar del SRI.
+                    2. Código de barras lineal Code128 incrustado con la clave de 49 dígitos.
+                    3. Correo electrónico despachado al cliente con el PDF y el XML adjuntos.
+                    4. Registro de despacho exitoso en la tabla `notificaciones_tributarias`.
+Descripción:        Construye la Representación Impresa del Documento Electrónico (RIDE) en 
+                    formato PDF, integrando el logotipo de Óptica Vista Visión, los datos 
+                    fiscales, el desglose de productos/lunas, el número de autorización fiscal y 
+                    el código de barras Code128 de alta resolución. Automáticamente despacha un 
+                    correo electrónico transaccional vía SMTP al paciente con ambos comprobantes.
+Resumen:            El sistema captura el evento de autorización; compila la plantilla PDF del RIDE; 
+                    dibuja el código de barras Code128; adjunta el XML y el PDF en un correo; 
+                    lo envía al paciente y habilita la impresión local si el cliente la solicita.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Microservicio API-SRI | Captura el evento `FacturaAutorizadaEvent`.                     |
+| 2    | Microservicio API-SRI | Carga los datos del XML autorizado en la plantilla PDF del RIDE.|
+| 3    | Microservicio API-SRI | Renderiza el código de barras Code128 con la Clave de 49 dígitos|
+| 4    | Microservicio API-SRI | Compila el documento PDF oficial en resolución de 300 DPI.      |
+| 5    | Microservicio API-SRI | Almacena el PDF en el servidor local de archivos seguros.       |
+| 6    | Microservicio API-SRI | Obtiene el correo electrónico del cliente desde la ficha M2.    |
+| 7    | Microservicio API-SRI | Ensambla el correo SMTP con plantilla institucional:            |
+|      |                       | - Asunto: "Comprobante Electrónico — Óptica Vista Visión".      |
+|      |                       | - Archivos Adjuntos: Factura.pdf (RIDE) y Factura.xml (SRI).    |
+| 8    | Microservicio API-SRI | Envía el correo mediante el servidor SMTP corporativo.          |
+| 9    | Microservicio API-SRI | Registra en base de datos: `notificacion_enviada = TRUE`.       |
+| 10   | Asistente Comercial   | Si el cliente solicita copia física en mostrador, pulsa         |
+|      |                       | "Imprimir RIDE" y entrega la hoja impresa. Fin del caso.        |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 6a   | Paciente no posee     | 6a.1. El sistema detecta que el campo de email está vacío.       |
+|      | correo electrónico    | 6a.2. Omite el despacho SMTP sin arrojar error.                 |
+|      | registrado            | 6a.3. Envía automáticamente el RIDE a la impresora de mostrador.|
+|      |                       | 6a.4. El flujo finaliza en el paso 10.                          |
++------+-----------------------+-----------------------------------------------------------------+
+| 8a   | Fallo en servidor SMTP| 8a.1. El servidor de correo no responde (error de conexión).    |
+|      | al despachar email    | 8a.2. El sistema almacena la notificación en cola de reintento. |
+|      |                       | 8a.3. La venta y autorización ante el SRI no son afectadas.     |
++------+-----------------------+-----------------------------------------------------------------+
+--------------------------------------------------------------------------------
+7.7 PAQUETE 7: ASISTENTE CONVERSACIONAL IA Y AUDITORÍA INMUTABLE (MÓDULO M7)
+--------------------------------------------------------------------------------
+
+7.7.1 CASO DE USO: CU-IA-01 — CONSULTAR MÉTRICAS EN LENGUAJE NATURAL
+================================================================================
+Caso de Uso:        Consultar Métricas y Existencias en Lenguaje Natural (Read-Only Guard)
+Identificador:      CU-IA-01
+Actores:            Usuario Autenticado (ACT-01, ACT-02, ACT-03), Motor IA (ACT-SIS-01).
+Tipo:               Secundario / Analítica
+Referencias:        SRS v2.0: RF-28, RF-29, RF-30, RF-31.
+                    Reglas de Negocio: RN-IA-01, RN-IA-02.
+                    Seguridad: S-TAG-AUTH-05, S-TAG-INT-08, S-TAG-ACC-08 (ISO/IEC 25010).
+Precondición:       1. Usuario autenticado con token JWT válido.
+                    2. Widget del asistente conversacional desplegado en el Dashboard.
+Postcondición:      1. Respuesta estructurada proyectada en la interfaz de chat en < 800 ms.
+                    2. Tarjetas informativas interactivas con enlaces rápidos mostradas.
+                    3. Ninguna tabla de la base de datos es alterada (Cero escrituras).
+                    4. Registro inmutable de la consulta y respuesta almacenado en `audit_logs`.
+Descripción:        Permite formular preguntas operativas en lenguaje natural (ej. "¿Cuántos 
+                    armazones metálicos semialaire tenemos en stock?", "¿Qué órdenes de taller 
+                    deben entregarse el viernes?", "¿Cuál es el arqueo recaudado en caja hoy?"). 
+                    El sistema valida los permisos RBAC del usuario, analiza léxicamente la 
+                    intención, consulta la base de datos a través de una conexión de solo lectura 
+                    estricta y retorna la respuesta redactada junto con tarjetas visuales de apoyo.
+Resumen:            El usuario escribe una consulta en el chat; el sistema verifica sus privilegios; 
+                    bloquea cualquier intento de modificación; consulta la base de datos en modo 
+                    lectura; devuelve los datos formateados y registra la auditoría.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Usuario Autenticado   | Abre el widget del Asistente en la esquina inferior del panel.  |
+| 2    | Usuario Autenticado   | Digita la consulta: "¿Cuántos armazones de acetato hay en stock?"|
+| 3    | Usuario Autenticado   | Pulsa "Enviar" o presiona la tecla Enter.                       |
+| 4    | Motor IA (ACT-SIS-01) | Captura la petición y extrae el token JWT del encabezado.       |
+| 5    | Motor IA (ACT-SIS-01) | [<<include>>] Verifica que los claims de rol autoricen acceso   |
+|      |                       | al dominio de datos solicitado (Inventario).                    |
+| 6    | Motor IA (ACT-SIS-01) | El analizador de intenciones clasifica la solicitud:            |
+|      |                       | - Intención: `CONSULTAR_STOCK`.                                 |
+|      |                       | - Entidades: Categoría = 'Armazón', Material = 'Acetato'.       |
+| 7    | Motor IA (ACT-SIS-01) | El Read-Only Guard valida que no existan cláusulas de mutación  |
+|      |                       | (`INSERT`, `UPDATE`, `DELETE`, `DROP`, `ALTER`, `GRANT`).       |
+| 8    | Motor IA (ACT-SIS-01) | Ejecuta la consulta SQL mediante la conexión de usuario         |
+|      |                       | `sgo_readonly` restringida exclusivamente a `GRANT SELECT`.     |
+| 9    | Motor IA (ACT-SIS-01) | Recibe el dataset tabular de resultados desde PostgreSQL.       |
+| 10   | Motor IA (ACT-SIS-01) | Interpola los datos en una respuesta contextual estructurada:   |
+|      |                       | "Actualmente disponemos de 34 armazones de acetato en stock,    |
+|      |                       | distribuidos en 12 modelos de marcas Vista y OptiStyle".        |
+| 11   | Motor IA (ACT-SIS-01) | Genera tarjetas interactivas con botones de acceso directo:     |
+|      |                       | [Ver Modelos en Catálogo] [Descargar Listado PDF].              |
+| 12   | Motor IA (ACT-SIS-01) | [<<include>>] Registra en `audit_logs` la consulta ejecutada.   |
+| 13   | Usuario Autenticado   | Visualiza la respuesta inmediata en la ventana de chat. Fin.    |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 5a   | Consulta denegada por | 5a.1. El Asistente Comercial consulta: "¿Cuánto dinero hay en   |
+|      | políticas RBAC        |       caja fuerte o cuál es la ganancia del mes?".              |
+|      |                       | 5a.2. El filtro RBAC detecta violación de perfil de seguridad.  |
+|      |                       | 5a.3. El asistente responde cortésmente: "No dispone de         |
+|      |                       |       privilegios autorizados para consultar información        |
+|      |                       |       financiera o de utilidades. Contacte al Administrador".   |
+|      |                       | 5a.4. Registra intento de acceso restringido en auditoría.      |
+|      |                       | 5a.5. Fin de la interacción sin invocar la base de datos.       |
++------+-----------------------+-----------------------------------------------------------------+
+| 7a   | Detección de intención| 7a.1. El usuario introduce texto de mutación (ej. "Modificar    |
+|      | de modificación o     |       precio de armazón X a $10" o "Eliminar paciente Y").      |
+|      | ataque de inyección   | 7a.2. El Read-Only Guard intercepta y bloquea la instrucción.   |
+|      |                       | 7a.3. Responde con advertencia de seguridad: "El Asistente opera|
+|      |                       |       exclusivamente en modalidad de consulta protegida (Read-  |
+|      |                       |       Only). No está facultado para modificar o borrar datos".  |
+|      |                       | 7a.4. Registra alerta de seguridad `SECURITY_INJECTION_ALERT`.  |
+|      |                       | 7a.5. Aborta la ejecución de forma inmediata.                   |
++------+-----------------------+-----------------------------------------------------------------+
+| 9a   | Consulta ambigua o sin| 9a.1. La intención no logra mapear ninguna entidad de catálogo. |
+|      | resultados en BD      | 9a.2. El sistema responde: "No encontré resultados que coincidan|
+|      |                       |       con su búsqueda. ¿Desea consultar armazones o lunas?".    |
+|      |                       | 9a.3. Ofrece sugerencias guiadas de preguntas frecuentes.       |
++------+-----------------------+-----------------------------------------------------------------+
+
+
+================================================================================
+
+7.7.2 CASO DE USO: CU-AUD-01 — REGISTRO TRANSVERSAL DE AUDITORÍA Y NO REPUDIO
+================================================================================
+Caso de Uso:        Registro Transversal Inmutable de Auditoría y No Repudio
+Identificador:      CU-AUD-01
+Actores:            Sistema SGO (Actor Transversal Automático), Administrador (ACT-01).
+Tipo:               Primario / Seguridad Transversal
+Referencias:        SRS v2.0: RF-31.
+                    Seguridad: S-TAG-ACC-01 a S-TAG-ACC-08 (ISO/IEC 25010:2023).
+Precondición:       Cualquier evento de dominio transaccional ejecutado en el sistema 
+                    (login, creación de paciente, venta, sellado de receta, anulación o IA).
+Postcondición:      1. Asiento persistido en la tabla `audit_logs` con sello de tiempo UTC.
+                    2. Hash criptográfico encadenado calculado ($Hash_n = \text{SHA-256}(Hash_{n-1} + Registro_n)$).
+                    3. Registro protegido contra modificación o borrado mediante triggers de BD.
+Descripción:        Provee el mecanismo centralizado de auditoría y no repudio del sistema SGO. 
+                    Cada operación sensible registra el usuario responsable, su rol, la 
+                    dirección IP de origen, el agente de usuario, el valor previo y el valor nuevo. 
+                    La tabla implementa un encadenamiento criptográfico que imposibilita la 
+                    alteración manual de bitácoras por parte de administradores o atacantes.
+Resumen:            El sistema captura el evento disparado por cualquier caso de uso; recopila 
+                    metadatos de red y usuario; calcula el hash criptográfico encadenado; 
+                    inserta el registro inmutable y garantiza la trazabilidad legal del software.
+
+CURSO NORMAL (Flujo Básico):
++------+-----------------------+-----------------------------------------------------------------+
+| Paso | Ejecutor              | Actividad o Paso del Proceso                                    |
++------+-----------------------+-----------------------------------------------------------------+
+| 1    | Sistema SGO           | Intercepta el evento de dominio exitoso (ej. `VentaCreada`).    |
+| 2    | Sistema SGO           | Extrae los metadatos de contexto:                               |
+|      |                       | - `user_id` del token JWT activo.                               |
+|      |                       | - Dirección IP del cliente y User-Agent del navegador.          |
+|      |                       | - Marca temporal de alta precisión en UTC (`TIMESTAMPTZ`).      |
+|      |                       | - Tipo de Evento / Módulo (ej. 'VENTAS_COBRO_ANTICIPO').        |
+|      |                       | - Datos de la transacción (JSON con valores anteriores/nuevos). |
+| 3    | Sistema SGO           | Recupera el hash criptográfico del último registro de auditoría |
+|      |                       | persistido en la tabla (`previous_hash`).                       |
+| 4    | Sistema SGO           | Concatena los metadatos actuales junto con el `previous_hash`.  |
+| 5    | Sistema SGO           | Calcula el nuevo hash criptográfico SHA-256 (`current_hash`).   |
+| 6    | Sistema SGO           | Inserta el registro en la tabla `audit_logs`.                   |
+| 7    | Sistema SGO           | El trigger de base de datos `prevent_audit_tampering` bloquea   |
+|      |                       | cualquier sentencia posterior de `UPDATE` o `DELETE` en la tabla|
+| 8    | Sistema SGO           | Concluye la persistencia del log de auditoría. Fin del caso.    |
++------+-----------------------+-----------------------------------------------------------------+
+
+CURSOS ALTERNOS (Excepciones y Variaciones):
++------+-----------------------+-----------------------------------------------------------------+
+| Ref. | Condición Detonante   | Secuencia de Acciones Alternas                                  |
++------+-----------------------+-----------------------------------------------------------------+
+| 7a   | Intento de alteración | 7a.1. Un usuario intenta ejecutar un `UPDATE` directo sobre     |
+|      | manual de auditoría   |       la tabla `audit_logs` en PostgreSQL.                      |
+|      | en base de datos      | 7a.2. El trigger dispara una excepción `RAISE EXCEPTION`:       |
+|      |                       |       "Violación de Seguridad: Los registros de auditoría son   |
+|      |                       |       estrictamente de solo inserción (Append-Only)".           |
+|      |                       | 7a.3. La base de datos aborta la transacción maliciosa.         |
++------+-----------------------+-----------------------------------------------------------------+
 
 ================================================================================
 8. MATRIZ DE TRAZABILIDAD INTEGRAL CRUZADA
@@ -271,7 +1688,6 @@ encuentran formalizadas en los documentos de entrega de cada fase:
 | SRS v2.0 (M7)         | RF-31: Auditoría Inmutable   | CU-AUD-01           | M7      | S-TAG-ACC-08        | CP-UAT-AUD-01     |
 +-----------------------+-----------------------------+---------------------+---------+---------------------+-------------------+
 
-
 ================================================================================
 9. DECLARACIÓN DE CUMPLIMIENTO METODOLÓGICO Y CIERRE DEL PLAN
 ================================================================================
@@ -284,6 +1700,9 @@ los objetivos establecidos en el "Plan Maestro de Documentación de Casos de Uso
 4. Trazabilidad Completa: Cada Requisito Funcional, Regla de Negocio y S-Tag cuenta con su 
    correspondiente Caso de Uso y Caso de Prueba UAT asociado.
 
+
+================================================================================
+           La Oficina de Proyectos de Informática (http://www.pmoinformatica.com)
 ================================================================================
 FIN DEL DOCUMENTO MAESTRO DE ESPECIFICACIÓN DE CASOS DE USO (SGO)
 ================================================================================

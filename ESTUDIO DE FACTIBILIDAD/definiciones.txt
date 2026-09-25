@@ -1,0 +1,357 @@
+================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA
+CARRERA DE SOFTWARE
+TRABAJO DE TITULACIÓN — INGENIERÍA EN SOFTWARE
+PROYECTO: SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+================================================================================
+GLOSARIO TÉCNICO DE DEFINICIONES Y CONCEPTUALIZACIÓN APLICADA
+Documento complementario al Estudio de Factibilidad (EstudioFactibilidad_SGO.txt)
+Beneficiario: Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Autores: Omar Santiago Figueroa Díaz | Alexander Rafael Villalva Dumancela
+================================================================================
+
+El presente glosario establece las definiciones formales y normativas de los quince 
+(15) términos técnicos, clínicos, arquitectónicos y financieros listados en el 
+documento maestro del proyecto SGO, integrando fuentes académicas e internacionales 
+validadas con su aplicación directa en el contexto del sistema a implementar.
+
+--------------------------------------------------------------------------------
+1. RBAC CON JWT
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Combinación de dos estándares fundamentales de seguridad informática:
+  * RBAC (Role-Based Access Control / Control de Acceso Basado en Roles): Modelo 
+    formalizado por el Instituto Nacional de Estándares y Tecnología de EE. UU. 
+    (NIST SP 800-162 / ANSI INCITS 359-2004) que restringe el acceso a recursos 
+    computacionales basándose en las responsabilidades y privilegios asignados a roles 
+    organizacionales, en lugar de a identidades individuales.
+  * JWT (JSON Web Token): Estándar abierto autónomo y compacto definido en el 
+    IETF RFC 7519 para transmitir de forma segura información entre partes como un 
+    objeto JSON firmado criptográficamente (mediante algoritmos simétricos HMAC o 
+    asimétricos RSA/ECDSA). Facilita una arquitectura de autenticación sin estado 
+    (stateless) donde el servidor valida la firma del token sin consultar la base de 
+    datos en cada petición.
+- Contexto y Aplicación en el SGO:
+  En el Módulo 1 (Autenticación y Gestión de Usuarios, RF-01 y RF-02), la interacción 
+  entre el frontend (React 18) y el backend (Laravel 10 / NestJS 10) se gobierna 
+  mediante tokens JWT transmitidos vía encabezado `Authorization: Bearer <token>`. 
+  El sistema aplica RBAC estricto clasificando al personal en tres roles de dominio: 
+  "Administrador" (control gerencial, auditoría y parametrización), "Optometrista" 
+  (acceso exclusivo a historias clínicas, refracción y prescripciones) y "Asistente 
+  Comercial" (recepción de pacientes, gestión de pedidos y cobros). Esto impide que 
+  personal asistencial o de caja pueda ver o alterar fichas clínicas confidenciales.
+
+--------------------------------------------------------------------------------
+2. HISTORIA CLÍNICA OD/OI
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  * Historia Clínica: Expediente médico-legal único, obligatorio y reservado según 
+    la Norma Técnica del Expediente Clínico del Ministerio de Salud Pública del Ecuador 
+    (MSP, Acuerdo Ministerial 030-2020) y estándares de la Organización Mundial de 
+    la Salud (OMS). Registra cronológicamente la atención integral, antecedentes y 
+    evolución de la salud de un paciente.
+  * OD / OI: Abreviaciones latinas estándar adoptadas universalmente en optometría y 
+    oftalmología (ISO 13666; World Council of Optometry - WCO; American Optometric 
+    Association - AOA):
+    - OD (Oculus Dexter): Ojo Derecho.
+    - OI (Oculus Sinister): Ojo Izquierdo.
+    Cada ojo posee anatomía, curvatura corneal y refracción diferenciadas, midiéndose 
+    de manera independiente en variables dioptricas: Esfera (Sph), Cilindro (Cyl), 
+    Eje (Axis en grados), Adición (Add), Distancia Nasopupilar (DNP) y Agudeza Visual 
+    (escala Snellen en pies, e.g., 20/20).
+- Contexto y Aplicación en el SGO:
+  En el Módulo 3 (Historia Clínica y Graduación, RF-07 a RF-15), la interfaz médica 
+  permite el registro independiente y estructurado de los exámenes refractivos para 
+  OD y OI. El SGO subsana el problema crítico del software legado de Óptica Vista 
+  Visión (que sobreescribía los exámenes de control), proveyendo trazabilidad evolutiva 
+  completa en pantalla para comparar la degradación o estabilización visual del ojo 
+  derecho e izquierdo a lo largo de los años, cumpliendo los lineamientos del MSP y ACESS.
+
+--------------------------------------------------------------------------------
+3. PRESBICIA
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Trastorno de la refracción y de la acomodación clasificado en la Clasificación 
+  Internacional de Enfermedades de la OMS (CIE-10: código H52.4; CIE-11: código 9D00.0). 
+  Según la American Academy of Ophthalmology (AAO) y guías clínicas optométricas, es 
+  la pérdida fisiológica, progresiva e irreversible de la capacidad del ojo para enfocar 
+  objetos cercanos (visión próxima), ocasionada por la esclerosis y pérdida gradual de 
+  elasticidad del cristalino y el debilitamiento relativo del músculo ciliar, 
+  manifestándose sintomáticamente a partir de los 40 a 45 años de edad.
+- Contexto y Aplicación en el SGO:
+  En el Módulo 3 (RF-08, RF-09), el SGO implementa una regla de negocio y validación 
+  algebraica automatizada: cuando la fecha de nacimiento del paciente indica una edad 
+  mayor o igual a 40 años y se reporta astenopia o pérdida de agudeza en visión cercana, 
+  el sistema activa y valida el campo dioptrico de "Adición" (+1.00 D a +3.00 D en pasos 
+  de 0.25 D). El sistema computa la potencia esférica final de cerca ($Esfera_{cerca} = 
+  Esfera_{lejos} + Adición$) y preconfigura la receta técnica para lunas bifocales o 
+  progresivas, evitando errores de cálculo manual en el consultorio.
+
+--------------------------------------------------------------------------------
+4. CIE-10 Y SOFT DELETE
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  * CIE-10 (Clasificación Estadística Internacional de Enfermedades y Problemas 
+    Relacionados con la Salud, Décima Revisión): Sistema de codificación taxonómica 
+    alfanumérica universal respaldado por la Organización Mundial de la Salud (OMS/OPS). 
+    En salud visual ecuatoriana, el Acuerdo Ministerial MSP 030-2020 exige su uso 
+    para registrar diagnósticos de refracción (e.g., H52.0 Hipermetropía, H52.1 Miopía, 
+    H52.2 Astigmatismo, H52.4 Presbicia).
+  * Soft Delete (Borrado Lógico): Patrón de diseño arquitectónico de persistencia de 
+    datos (Martin Fowler, *Patterns of Enterprise Application Architecture*) en el cual 
+    un registro nunca es eliminado físicamente de la base de datos con una sentencia 
+    `DELETE FROM`. En su lugar, se actualiza un atributo de control temporal (como la 
+    columna `deleted_at IS NOT NULL`), de modo que el motor ORM lo omite en consultas 
+    ordinarias, pero el dato permanece intacto para auditoría y respaldo.
+- Contexto y Aplicación en el SGO:
+  En el Módulo 3 (RF-11, RF-15), el SGO enlaza cada consulta clínica a los códigos 
+  oficiales CIE-10 para estandarizar las patologías de la visión. Para cumplir con la 
+  custodia legal del expediente médico impuesta por el MSP (prohibición de destruir 
+  expedientes por un mínimo de 5 a 10 años) y garantizar el derecho a la rectificación 
+  de la LOPDP, los registros clínicos, graduaciones y recetas aplican Soft Delete 
+  mediante Eloquent en PostgreSQL 16. Ningún usuario u operador puede borrar 
+  físicamente una historia clínica, previniendo fraudes y asegurando inmutabilidad.
+
+--------------------------------------------------------------------------------
+5. DISOCIACIÓN TÉCNICA LOPDP
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Técnica y principio de protección de datos regulado en el Art. 4 y Art. 25 de la 
+  Ley Orgánica de Protección de Datos Personales del Ecuador (LOPDP, Registro Oficial 
+  Suplemento 459 del 26 de mayo de 2021) y concordante con los estándares de privacidad 
+  ISO/IEC 27701 y RGPD europeo. Consiste en someter la información personal a un proceso 
+  técnico por el cual se desvincula cualquier dato sensible de salud (categoría especial 
+  según LOPDP) de la identidad directa del titular (nombres, número de cédula, teléfono), 
+  de forma tal que el destinatario no pueda determinar quién es el paciente sin 
+  disponer de una llave o base de datos separada y protegida.
+- Contexto y Aplicación en el SGO:
+  Eje primordial de la viabilidad legal implementado en el Módulo 4 (Pedidos al 
+  Laboratorio Óptico, RF-16 a RF-19). Al encargar el biselado y tallado de lunas a 
+  talleres externos situados en Riobamba, Quito o Guayaquil, el SGO no transmite 
+  nombres ni cédulas del paciente. La orden de trabajo enviada contiene un código 
+  alfanumérico anónimo (hash/token) junto con los parámetros puramente industriales 
+  (curva base, esfera, cilindro, eje, DNP, material, tipo de bisel y tratamientos). 
+  La relación entre el código y la persona física permanece aislada dentro de la base 
+  de datos local del consultorio, protegiendo la confidencialidad médica y blindando 
+  a la óptica contra infracciones sancionatorias de la LOPDP.
+
+--------------------------------------------------------------------------------
+6. COBROS ACID
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Conjunto de cuatro propiedades teóricas fundamentales formuladas para sistemas de 
+  gestión de bases de datos transaccionales (Jim Gray, 1981; Haerder & Reuter, 1983; 
+  estándar ISO/IEC 9075 SQL):
+  * Atomicidad (Atomicity): Principio del "todo o nada"; cada transacción se ejecuta 
+    como una unidad indivisible. Si alguna instrucción intermedia falla, se realiza 
+    un `ROLLBACK` devolviendo el sistema al estado original.
+  * Consistencia (Consistency): Asegura que una transacción mueva la base de datos 
+    únicamente de un estado válido a otro, cumpliendo todas las restricciones de 
+    integridad, claves foráneas y reglas de balance.
+  * Aislamiento (Isolation): Múltiples transacciones concurrentes operan de forma 
+    independiente sin interferir entre sí, evitando condiciones de carrera o lecturas 
+    fantasma.
+  * Durabilidad (Durability): Garantiza que, una vez que una transacción ha sido 
+    confirmada (`COMMIT`), los cambios persisten de manera permanente incluso si 
+    ocurre una falla eléctrica o una caída del servidor.
+- Contexto y Aplicación en el SGO:
+  En el Módulo 5 (Ventas y Cobros Locales, RF-20 a RF-23), la actividad comercial de 
+  Óptica Vista Visión involucra ventas por lotes de armazones, cobro de anticipos 
+  (e.g., 50% al ordenar) y cobro de saldos al entregar el trabajo, aceptando pagos 
+  mixtos (efectivo, tarjeta o transferencia). El SGO encapsula estas operaciones en 
+  bloques transaccionales ACID sobre PostgreSQL 16: el registro del pago, la 
+  modificación del saldo deudor del cliente, la reserva/descuento de stock en inventario 
+  y la actualización de la caja diaria se ejecutan atómicamente, imposibilitando 
+  descuadres contables o stock fantasma ante fallos de red.
+
+--------------------------------------------------------------------------------
+7. BLINDAJE READ-ONLY GUARD
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Patrón de arquitectura de seguridad y defensa en profundidad fundamentado en el 
+  Principio de Menor Privilegio (Principle of Least Privilege - Saltzer & Schroeder, 
+  IEEE 1975) y en las guías OWASP Top 10 para Aplicaciones LLM (vulnerabilidad LLM06: 
+  Exceso de Agencia / Inyección de Prompts). Establece una barrera técnica irrompible 
+  a nivel de motor de base de datos y middleware mediante la cual un servicio de 
+  consulta o asistente conversacional se conecta usando un usuario que solo dispone 
+  de privilegios de lectura (`GRANT SELECT`), teniendo revocadas todas las operaciones 
+  de mutación (`INSERT`, `UPDATE`, `DELETE`, `DROP`, `ALTER`, `EXECUTE`).
+- Contexto y Aplicación en el SGO:
+  Incorporado en el Módulo 7 (Asistente Inteligente Operativo "Chatbot con los Datos", 
+  RF-28 a RF-31). El chatbot analiza el lenguaje natural para responder preguntas 
+  gerenciales del propietario (e.g., pedidos pendientes en laboratorio, volumen de 
+  ventas diario o productos críticos por agotarse). Para evitar riesgos de manipulación 
+  o ejecución accidental de sentencias destructivas generadas por un modelo semántico, 
+  el componente de IA está confinado por el blindaje *Read-Only Guard*: jamás puede 
+  escribir ni modificar la base de datos, garantizando una inocuidad operativa del 100% 
+  sobre los datos clínicos y tributarios.
+
+--------------------------------------------------------------------------------
+8. NESTJS 10
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Versión mayor del framework progresivo de servidor para Node.js desarrollado bajo 
+  TypeScript y arquitectura modular inspirada en Angular y Clean Architecture 
+  (Kamil Myśliwiec, NestJS Documentation). NestJS 10 integra compatibilidad plena 
+  con Node.js 18/20 LTS, compilación acelerada con SWC, inyección de dependencias 
+  nativa, soporte para microservicios y protocolos de comunicación desacoplados. Es 
+  reconocido por su alta concurrencia orientada a eventos e I/O no bloqueante.
+- Contexto y Aplicación en el SGO:
+  Utilizado para el desarrollo del microservicio independiente de Facturación 
+  Electrónica SRI (Módulo 6, RF-24 a RF-27). Aísla y ejecuta las tareas criptográficas 
+  y computacionalmente demandantes: construcción del XML conforme al esquema SRI v1.1.0, 
+  sellado criptográfico XAdES-BES utilizando la librería `node-forge` con certificados 
+  digitales PKCS#12 (.p12), generación de códigos de barras bidimensionales con 
+  `bwip-js` y renderizado automatizado de comprobantes RIDE PDF mediante Puppeteer. Al 
+  operar en NestJS 10, no sobrecarga el ciclo de vida del backend transaccional en PHP.
+
+--------------------------------------------------------------------------------
+9. BACKEND TRANSACCIONAL
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Capa de la arquitectura de software del lado del servidor (Pressman & Maxim, 
+  *Software Engineering: A Practitioner's Approach*; Fowler, *Enterprise Application 
+  Architecture*) encargada de coordinar y procesar la lógica de negocio nuclear, 
+  validar las reglas de dominio, gestionar la sesión de usuario y orquestar las 
+  transacciones sobre el almacén de datos persistente, asegurando consistencia e 
+  integridad referencial en entornos multiusuario.
+- Contexto y Aplicación en el SGO:
+  En el SGO, el backend transaccional está implementado en Laravel 10 (PHP 8.2) con 
+  PostgreSQL 16 y desplegado localmente en la estación asignada (`DESKTOP-ML70LGD`, 
+  Intel Core i5-7200U, 12 GB RAM). Es el responsable de procesar la lógica de historias 
+  clínicas, la gestión demográfica de pacientes, la validación del algoritmo Módulo 10 
+  en cédulas ecuatorianas, el arqueo de caja y la gestión de la máquina de estados 
+  finitos de los pedidos al taller, fungiendo como núcleo integrador del sistema.
+
+--------------------------------------------------------------------------------
+10. INVERSIÓN OPERATIVA
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  En evaluación de proyectos y finanzas corporativas (Gitman & Zutter, *Principios de 
+  Administración Financiera*; Horngren, *Contabilidad de Costos*; PMI - PMBOK Guide), 
+  corresponde a los gastos de operación y desembolsos directos necesarios para poner en 
+  marcha y sostener un activo en su etapa productiva y cotidiana (OpEx / Costos 
+  Operativos), diferenciándose de la inversión de capital en desarrollo de ingeniería 
+  e investigación y desarrollo (CapEx / Costos de Construcción).
+- Contexto y Aplicación en el SGO:
+  En el Estudio de Factibilidad (Sección 6.1 y 6.2), el costo total de construcción 
+  del software ($10,752.50 USD) es asumido y autofinanciado al 100% por los dos 
+  estudiantes investigadores como trabajo de graduación de la ESPOCH. Para la entidad 
+  beneficiaria (Óptica Vista Visión), la inversión operativa directa para entrar a 
+  producción en el Año 1 es mínima: únicamente **~$250.00 USD - $264.00 USD**, 
+  desglosados en: certificado digital de firma electrónica .p12 de Security Data 
+  ($30.00 USD), provisión anual de rollos de papel térmico para tickets POS ($114.00 
+  USD) y reserva de hosting VPS/dominio opcional ($120.00 USD).
+
+--------------------------------------------------------------------------------
+11. ROI DE 969.6%
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  El Retorno sobre la Inversión (ROI - Return on Investment) es la métrica financiera 
+  estándar (Brealey, Myers & Allen, *Principios de Finanzas Corporativas*; IEEE Std 1062) 
+  que cuantifica la rentabilidad económica generada por un proyecto en comparación con 
+  el capital invertido. Se formula algebraicamente como:
+  $$ROI = \frac{\text{Beneficio Neto Operativo Anual}}{\text{Inversión Directa Realizada}} \times 100\%$$
+- Contexto y Aplicación en el SGO:
+  En la Sección 6.3 del estudio, se cuantificó que el SGO produce un ahorro operativo 
+  anual de **$2,824.00 USD** para Óptica Vista Visión:
+  * Ahorro de 31.6 horas/mes por automatización de facturación SRI: $1,444.00 USD/año.
+  * Eliminación de pérdidas por recetas erróneas a talleres externos: $1,080.00 USD/año.
+  * Ahorro en papelería física, talonarios y notas carbón: $300.00 USD/año.
+  Deduciendo la inversión operativa del Año 1 ($264.00 USD), el beneficio neto anual 
+  es de $2,560.00 USD. Aplicando la fórmula:
+  $$ROI = \frac{\$2,824.00 - \$264.00}{\$264.00} \times 100\% = \frac{\$2,560.00}{\$264.00} \times 100\% = 969.69\% \approx 969.6\%$$
+  Un ROI de 969.6% certifica una rentabilidad excepcional, devolviendo casi 10 veces 
+  el capital operativo desembolsado por la óptica en su primer año de uso.
+
+--------------------------------------------------------------------------------
+12. PAYBACK
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  El Período de Recuperación de la Inversión (Payback Period; Sapag Chain, *Preparación 
+  y Evaluación de Proyectos*; Brigham & Ehrhardt, *Financial Management*) es la técnica 
+  presupuestaria que determina el lapso temporal exacto (expresado en meses o días) que 
+  tardan los flujos netos positivos o ahorros acumulados generados por un proyecto en 
+  recuperar el desembolso inicial de la inversión:
+  $$\text{Payback} = \frac{\text{Inversión Inicial Directa}}{\text{Flujo de Ahorro Mensual Promedio}}$$
+- Contexto y Aplicación en el SGO:
+  En el Estudio de Factibilidad (Sección 6.3), la inversión directa de la óptica es 
+  de $264.00 USD y el ahorro operativo mensual promedio alcanzado asciende a $235.33 USD 
+  ($2,824.00 USD / 12 meses):
+  $$\text{Payback} = \frac{\$264.00}{\$235.33/\text{mes}} \approx 1.12 \text{ meses} \approx 34 \text{ días}$$
+  El período de retorno es de apenas 34 días naturales de operación comercial, lo que 
+  significa que en el segundo mes de puesta en producción la solución ya se amortizó 
+  íntegramente, anulando el riesgo financiero para la microempresa.
+
+--------------------------------------------------------------------------------
+13. VAN (VALOR ACTUAL NETO)
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  El Valor Actual Neto (VAN o NPV - Net Present Value; Brealey, Myers & Allen; 
+  Sapag Chain) es el criterio financiero fundamental para la toma de decisiones de 
+  inversión de capital. Trae al valor del dinero en el presente (tiempo cero) la suma 
+  de todos los flujos de caja netos futuros proyectados ($F_t$), descontándolos a una 
+  tasa de corte o costo de oportunidad ($r$), restando la inversión inicial ($I_0$):
+  $$VAN = \sum_{t=1}^{n} \frac{F_t}{(1 + r)^t} - I_0$$
+  Un $VAN > 0$ certifica matemáticamente que el proyecto no solo recupera el capital 
+  y la tasa exigida, sino que crea riqueza líquida para la organización.
+- Contexto y Aplicación en el SGO:
+  En la Sección 6.3, el VAN del SGO se calculó para un horizonte de evaluación de 3 
+  años, empleando una tasa de descuento conservadora del 8% anual ($r = 0.08$) con una 
+  inversión inicial $I_0 = \$264.00 \text{ USD}$ y flujos netos anuales constantes de 
+  $F_t = \$2,560.00 \text{ USD}$ (ahorro anual menos gastos operativos):
+  $$VAN = \frac{\$2,560}{(1.08)^1} + \frac{\$2,560}{(1.08)^2} + \frac{\$2,560}{(1.08)^3} - \$264.00 = +\$6,958.42 \text{ USD}$$
+  Complementado por una Tasa Interna de Retorno (TIR) del 1,029.6%, el VAN de 
+  +$6,958.42 USD demuestra la solvencia y viabilidad económica del sistema informático.
+
+--------------------------------------------------------------------------------
+14. RESILIENCIA OFFLINE DEL 99.5%
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Atributo de calidad de software comprendido en la norma internacional ISO/IEC 
+  25010:2023 (Ingeniería de Software — Modelos de Calidad del Producto, subcaracterísticas 
+  de Confiabilidad, Tolerancia a Fallos y Disponibilidad) y lineamientos de 
+  arquitectura *Offline-First*. Mide la capacidad de un sistema para mantener su 
+  operatividad crítica y ejecución de procesos esenciales sin degradarse ni detenerse 
+  durante el 99.5% del tiempo útil, soportando caídas de enlace de red externa, 
+  microcortes o latencias prolongadas de servicios web de terceros.
+- Contexto y Aplicación en el SGO:
+  Evaluada en la Factibilidad Técnica y Operacional (Secciones 5.4 y 10.3). En Riobamba 
+  son frecuentes las intermitencias del servicio de Internet y los colapsos por alta 
+  demanda en los servidores SOAP del SRI. El SGO fue diseñado bajo resiliencia offline: 
+  la atención en consultorio, el registro clínico, la emisión de prescripciones, la 
+  venta de armazones y la impresión de comprobantes de caja operan al 100% en la red de 
+  área local (LAN). La facturación electrónica se firma digitalmente con el token .p12 
+  en el microservicio local y se encola en `queue_sri`, realizándose la transmisión y 
+  autorización tributaria en segundo plano cuando la conectividad se restablece, evitando 
+  paralizar la atención del paciente.
+
+--------------------------------------------------------------------------------
+15. ARQUITECTURA PWA (PROGRESSIVE WEB APPLICATION)
+--------------------------------------------------------------------------------
+- Definición Formal y Fuentes Válidas:
+  Estándar de arquitectura de software web promovido por el World Wide Web Consortium 
+  (W3C) y Google Developers (Alex Russell, 2015). Combina el alcance universal y la 
+  facilidad de despliegue de las aplicaciones web con las capacidades de rendimiento, 
+  seguridad e interfaz inmersiva de las aplicaciones nativas de escritorio o móviles. 
+  Se sustenta en tres pilares tecnológicos:
+  * Service Workers: Scripts que se ejecutan en segundo plano en el navegador de 
+    forma independiente a la página web, interceptando peticiones de red y administrando 
+    el almacenamiento en caché inteligente.
+  * Web App Manifest: Archivo JSON que define el comportamiento del sistema como 
+    aplicación independiente (pantalla completa, nombre, iconos, color temático), 
+    permitiendo la instalación directa sin pasar por tiendas de software propietarias.
+  * Almacenamiento local avanzado: Uso de Cache Storage e IndexedDB para persistencia 
+    y funcionamiento sin conexión.
+- Contexto y Aplicación en el SGO:
+  Adoptada para la Capa de Presentación (Frontend, Sección 5.2) construida con 
+  React 18, Vite, Tailwind CSS y TypeScript. La arquitectura PWA permite instalar el 
+  SGO directamente en los equipos del consultorio y mostrador de Óptica Vista Visión, 
+  ejecutándose en ventanas independientes sin barras de navegador web, garantizando 
+  carga casi instantánea de vistas, renderizado reactivo de graduaciones visuales y 
+  plena operabilidad en tabletas o laptops durante jornadas médicas visuales.
+
+================================================================================
+FIN DEL GLOSARIO TÉCNICO DE DEFINICIONES — SISTEMA SGO
+================================================================================

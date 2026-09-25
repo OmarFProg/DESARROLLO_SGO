@@ -21,7 +21,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (C.I. 1803391968, Código: 7253
                    Líder de Frontend, Experiencia de Usuario (UX) y Asistente IA
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel, Mgs. (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto, Ph.D. (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Provincia de Chimborazo, Ecuador)
+Beneficiario:    Óptica de Estudio(Riobamba, Provincia de Chimborazo, Ecuador)
 Representante:   Propietario / Optometrista Principal (Product Owner)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/EstudioFactibilidad_SGO.txt
 Fecha de Emisión:21 de Septiembre de 2026 / Período Académico 2026 - 2027
@@ -54,7 +54,7 @@ El presente documento constituye el Estudio de Factibilidad técnico, económico
 legal, de recursos, de mercado, operacional y temporal para el desarrollo e implantación 
 del "Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)", diseñado 
 específicamente para satisfacer las demandas asistenciales y administrativas de la 
-microempresa de salud visual *Óptica Vista Visión*, ubicada en la ciudad de Riobamba.
+microempresa de salud visual *Óptica de estudio*, ubicada en la ciudad de Riobamba.
 
 1. Problema Diagnosticado:
 El establecimiento operaba mediante un software de escritorio legado monolítico (arquitectura MDI) 
@@ -67,9 +67,11 @@ hasta 10 minutos por paciente y riesgos de sanciones tributarias.
 2. Solución e Innovación del SGO:
 El SGO unifica la cadena de valor en una Plataforma Web Progresiva (PWA) de 7 módulos funcionales 
 (31 Requisitos Funcionales y 11 Requisitos No Funcionales bajo ISO/IEC 25010:2023):
-- M1 (Autenticación y RBAC con JWT), M2 (Gestión de Pacientes con cédula Módulo 10), 
+- M1 (Autenticación y RBAC con JWT), 
+  M2 (Gestión de Pacientes), 
   M3 (Historia Clínica OD/OI con regla de adición para presbicia, CIE-10 y Soft Delete), 
-  M4 (Pedidos de Laboratorio con disociación técnica LOPDP), M5 (Ventas por lotes y cobros ACID), 
+  M4 (Pedidos de Laboratorio con disociación técnica LOPDP), 
+  M5 (Ventas por lotes y cobros ACID), 
   M6 (Facturación Electrónica SRI v1.1.0 nativa offline con firma XAdES-BES) y 
   M7 (Asistente Inteligente Operativo "Chatbot con los Datos" con blindaje Read-Only Guard).
 

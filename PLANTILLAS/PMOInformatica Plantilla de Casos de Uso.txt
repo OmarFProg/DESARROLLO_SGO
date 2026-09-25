@@ -1,0 +1,252 @@
+================================================================================
+                      LA OFICINA DE PROYECTOS DE INFORMÁTICA
+                             www.pmoinformatica.com
+================================================================================
+
+                        ESPECIFICACIÓN DE CASOS DE USO
+                             [Nombre del Proyecto]
+
+                             Fecha: [dd/mm/aaaa]
+
+================================================================================
+TABLA DE CONTENIDO
+================================================================================
+1. Historial de Versiones ..................................................... 2
+2. Información del Proyecto ................................................... 3
+3. Aprobaciones ............................................................... 3
+4. Resumen Ejecutivo .......................................................... 3
+5. Diagrama de Casos de Uso ................................................... 4
+6. Descripción de Actores ..................................................... 5
+   6.1. [Nombre de Actor 1] ................................................... 6
+7. Especificación de Casos de Uso ............................................. 6
+   7.1. [Nombre de Caso de Uso Nro. 1] ........................................ 7
+        7.1.1. Ficha General del Caso de Uso .................................. 7
+        7.1.2. Curso Normal ................................................... 7
+        7.1.3. Cursos Alternos ................................................ 8
+================================================================================
+
+
+================================================================================
+1. HISTORIAL DE VERSIONES
+================================================================================
+
++------------+-----------+---------------+--------------------+--------------------------------+
+| Fecha      | Versión   | Autor         | Organización       | Descripción                    |
++------------+-----------+---------------+--------------------+--------------------------------+
+|            |           |               |                    |                                |
++------------+-----------+---------------+--------------------+--------------------------------+
+|            |           |               |                    |                                |
++------------+-----------+---------------+--------------------+--------------------------------+
+|            |           |               |                    |                                |
++------------+-----------+---------------+--------------------+--------------------------------+
+|            |           |               |                    |                                |
++------------+-----------+---------------+--------------------+--------------------------------+
+
+
+================================================================================
+2. INFORMACIÓN DEL PROYECTO
+================================================================================
+
++---------------------------------------------+------------------------------------------------+
+| Campo                                       | Detalle                                        |
++---------------------------------------------+------------------------------------------------+
+| Empresa / Organización                      |                                                |
++---------------------------------------------+------------------------------------------------+
+| Proyecto                                    |                                                |
++---------------------------------------------+------------------------------------------------+
+| Fecha de preparación                        |                                                |
++---------------------------------------------+------------------------------------------------+
+| Cliente                                     |                                                |
++---------------------------------------------+------------------------------------------------+
+| Patrocinador principal                      |                                                |
++---------------------------------------------+------------------------------------------------+
+| Gerente / Líder de Proyecto                 |                                                |
++---------------------------------------------+------------------------------------------------+
+| Gerente / Líder de Desarrollo de Software   |                                                |
++---------------------------------------------+------------------------------------------------+
+
+
+================================================================================
+3. APROBACIONES
+================================================================================
+
++---------------------+---------------+------------------------------+------------+------------+
+| Nombre y Apellido   | Cargo         | Departamento u Organización  | Fecha      | Firma      |
++---------------------+---------------+------------------------------+------------+------------+
+|                     |               |                              |            |            |
++---------------------+---------------+------------------------------+------------+------------+
+|                     |               |                              |            |            |
++---------------------+---------------+------------------------------+------------+------------+
+|                     |               |                              |            |            |
++---------------------+---------------+------------------------------+------------+------------+
+|                     |               |                              |            |            |
++---------------------+---------------+------------------------------+------------+------------+
+
+
+================================================================================
+4. RESUMEN EJECUTIVO
+================================================================================
+
+Aquí se presenta una introducción sobre cuales procesos o escenarios de negocio 
+se están describiendo con este caso de uso, o grupos de casos de uso agrupados en el 
+documento. Debe indicarse: Procesos, subprocesos, áreas organizacionales 
+involucradas y cuales módulos del nuevo sistema se están describiendo.
+
+
+================================================================================
+5. DIAGRAMA DE CASOS DE USO
+================================================================================
+
+El Diagrama debe seguir la notación para casos de uso establecida por UML, 
+incluyendo los elementos del modelo de casos de uso, es decir:
+* Actores.
+* Casos de Uso.
+* Relaciones.
+
+Las relaciones de Actores con casos de usos se denominan "Asociaciones".
+Las relaciones entre casos de uso se denominan "Generalizaciones" y pueden ser 
+de dos tipos: de uso (Uses) o de herencia (Extends).
+
+Según el número de casos de uso se puede usar un diagrama, o varios según los 
+módulos o funcionalidad.
+
+Leyenda:
+[Insertar aquí la imagen o diagrama de Casos de Uso UML y su correspondiente leyenda]
+
+
+================================================================================
+6. DESCRIPCIÓN DE ACTORES
+================================================================================
+
+Un actor es cualquier entidad externa al sistema modelado que interactúa con él.
+
+No necesariamente coincide con los usuarios, pues un mismo usuario puede 
+desempeñar distintos roles que correspondan con varios actores. Además, un mismo 
+actor puede desempeñar varios papeles según el caso de uso con que interactúa.
+
+Para cada uno de los actores involucrados en el documento y representados en el 
+diagrama, debe completarse la siguiente ficha. Si existe más de un actor, se 
+copia el título (Nombre del Actor) y la ficha tantas veces sea necesario.
+
+--------------------------------------------------------------------------------
+6.1. [Nombre de Actor 1]
+--------------------------------------------------------------------------------
+
++-------------------+--------------------------------------------------------------------------+
+| FICHA DE ACTOR                                                                               |
++-------------------+--------------------------------------------------------------------------+
+| Actor             | [Nombre del Actor]                                                       |
+| Identificador     | [Identificador único]                                                    |
++-------------------+--------------------------------------------------------------------------+
+| Descripción       | [Breve descripción del Actor]                                            |
++-------------------+--------------------------------------------------------------------------+
+| Características   | [Características que describen al actor]                                 |
++-------------------+--------------------------------------------------------------------------+
+| Relación          | [Describe la relación de este actor con otros actores del sistema]       |
++-------------------+--------------------------------------------------------------------------+
+| Referencias       | [Elementos del desarrollo en los cuales este actor interviene,           |
+|                   | incluyendo por ejemplo Casos de Uso, Diagramas de Secuencia, otros.]     |
++-------------------+--------------------------------------------------------------------------+
+
+TABLA DE ATRIBUTOS DEL ACTOR:
++----------------------+----------------------+------------------------------------------------+
+| Nombre               | Tipo                 | Descripción                                    |
++----------------------+----------------------+------------------------------------------------+
+|                      |                      |                                                |
++----------------------+----------------------+------------------------------------------------+
+|                      |                      |                                                |
++----------------------+----------------------+------------------------------------------------+
+|                      |                      |                                                |
++----------------------+----------------------+------------------------------------------------+
+Instrucción: [En este cuadro se colocará un listado de los atributos principales del actor, 
+por ejemplo para un actor "Cliente" podría ser: Nombre, Apellido, Número de Identificación (DNI), 
+y otros datos de interés].
+
+COMENTARIOS DEL ACTOR:
++----------------------------------------------------------------------------------------------+
+| Comentarios                                                                                  |
++----------------------------------------------------------------------------------------------+
+| [Aquí se incluirán comentarios adicionales sobre el actor]                                  |
++----------------------------------------------------------------------------------------------+
+
+
+================================================================================
+7. ESPECIFICACIÓN DE CASOS DE USO
+================================================================================
+
+Para cada uno de los casos de uso mostrados en los diagramas de caso de uso, se 
+completará la siguiente ficha, que es una especificación completa del mismo 
+(Denominada Especificación de Casos de Uso).
+
+La Especificación del caso de uso describe la forma en que el actor interactúa con 
+el sistema, listando las funciones o tareas realizadas, los datos de entrada, 
+información que necesita recibir el actor del sistema, información sobre eventos 
+o cambios inesperados, entre otros.
+
+El siguiente bloque [Nombre de Caso de Uso Nro. 1] y su correspondiente ficha 
+se repetirá para cuantos casos de uso se tengan en el modelo.
+
+--------------------------------------------------------------------------------
+7.1. [Nombre de Caso de Uso Nro. 1]
+--------------------------------------------------------------------------------
+
+7.1.1. FICHA GENERAL DEL CASO DE USO:
++-------------------+--------------------------------------------------------------------------+
+| ESPECIFICACIÓN DE CASO DE USO                                                                |
++-------------------+--------------------------------------------------------------------------+
+| Caso de Uso       | [Nombre del Caso de Uso]                                                 |
+| Identificador     | [Identificador del caso de uso]                                          |
++-------------------+--------------------------------------------------------------------------+
+| Actores           | [Listado de los actores que tienen participación en el caso de uso]      |
++-------------------+--------------------------------------------------------------------------+
+| Tipo              | [Tipo de caso de uso: primario, secundario, opcional]                    |
++-------------------+--------------------------------------------------------------------------+
+| Referencias       | [Requerimientos o funcionalidades incluidas en este caso de uso.         |
+|                   | Casos de uso relacionados.]                                              |
++-------------------+--------------------------------------------------------------------------+
+| Precondición      | [Condiciones sobre el estado del sistema que deben cumplirse para        |
+|                   | iniciar el caso de uso]                                                  |
++-------------------+--------------------------------------------------------------------------+
+| Postcondición     | [Efectos inmediatos que tiene la ejecución del caso de uso sobre el      |
+|                   | estado del sistema]                                                      |
++-------------------+--------------------------------------------------------------------------+
+| Descripción       | [Descripción del caso de uso]                                            |
++-------------------+--------------------------------------------------------------------------+
+| Resumen           | [Resumen de alto nivel del funcionamiento]                               |
++-------------------+--------------------------------------------------------------------------+
+
+7.1.2. CURSO NORMAL:
++------+-----------------------+---------------------------------------------------------------+
+| Nro. | Ejecutor              | Paso o Actividad                                              |
++------+-----------------------+---------------------------------------------------------------+
+| [N°] | [Actor / Sistema]     | [Descripción del paso o actividad ejecutado]                  |
++------+-----------------------+---------------------------------------------------------------+
+|      |                       |                                                               |
++------+-----------------------+---------------------------------------------------------------+
+|      |                       |                                                               |
++------+-----------------------+---------------------------------------------------------------+
+Instrucciones:
+- [Se describe el proceso o secuencia de pasos ejecutadas usando frases cortas].
+- [Cada paso del proceso puede ser ejecutado por los Actores o por el sistema].
+- [Se describe la secuencia de acciones realizadas por los actores y la secuencia de actividades 
+   realizada por el sistema como respuesta].
+
+7.1.3. CURSOS ALTERNOS:
++------+---------------------------------------------------------------------------------------+
+| Nro. | Descripción de acciones alternas                                                      |
++------+---------------------------------------------------------------------------------------+
+| [N°] | [Descripción de la secuencia de acciones alternas para el número de actividad         |
+|      | indicado. Debe hacer referencia al número de paso en el curso normal]                 |
++------+---------------------------------------------------------------------------------------+
+|      |                                                                                       |
++------+---------------------------------------------------------------------------------------+
+|      |                                                                                       |
++------+---------------------------------------------------------------------------------------+
+Instrucción:
+- [Cada paso descrito en el curso normal puede tener actividades alternas, según la distribución 
+   de escenarios que ocurra en el flujo de procesos. En esta ficha se completa para cada actividad 
+   (haciendo referencia a su número) las posibles secuencias alternas].
+
+================================================================================
+           La Oficina de Proyectos de Informática (http://www.pmoinformatica.com)
+================================================================================
