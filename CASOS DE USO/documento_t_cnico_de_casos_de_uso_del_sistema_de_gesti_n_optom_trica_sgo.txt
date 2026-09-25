@@ -3,7 +3,7 @@ DOCUMENTO TÉCNICO DE ESPECIFICACIÓN DE CASOS DE USO (CU)
 SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
 ================================================================================
 Proyecto:    Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
-Cliente:     Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Cliente:     Óptica de estudio — Riobamba, Chimborazo, Ecuador
 Referencia:  Especificación de Requisitos de Software (SRS v2.0 - IEEE 830 / ISO 25010)
 Insumo:      Transcripción de Sesión Real de Atención Integral Optométrica
 Fecha:       25 de Septiembre de 2026

@@ -21,7 +21,7 @@ LISTA DE IMÁGENES REQUERIDAS (CARPETA pictures/):
 1.  pictures/logo_espoch.png
     -> Logotipo oficial de la Escuela Superior Politécnica de Chimborazo.
 2.  pictures/logo_vista_vision.png
-    -> Logotipo de Óptica Vista Visión.
+    -> Logotipo de Óptica de estudio.
 3.  pictures/diagrama_general_paquetes.png
     -> Diagrama general de paquetes de casos de uso (M1 a M7).
 4.  pictures/diagrama_cu_seguridad_pacientes.png

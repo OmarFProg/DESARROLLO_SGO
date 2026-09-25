@@ -5,7 +5,7 @@
 **Autores / Investigadores:** Omar Santiago Figueroa Díaz & Alexander Rafael Villalva Dumancela  
 **Director / Scrum Master:** Ing. Jorge Ariel Menéndez Verdecia  
 **Revisión Técnica / Asesoría:** Ing. Julio Roberto Santillán Castillo  
-**Entorno de Aplicación:** Óptica Vista Visión (Riobamba, Provincia de Chimborazo, Ecuador)  
+**Entorno de Aplicación:** Óptica de estudio (Riobamba, Provincia de Chimborazo, Ecuador)  
 **Ubicación del Archivo:** `DESARROLLO_SGO/PLANIFICACION/contexChat11sep.txt` (y `contexChat11sep.md`)  
 
 ---
@@ -48,7 +48,7 @@ Alcance.txt                              informeFase2.txt                       
 - **Petición del Usuario:** Revisar el directorio `CASOS DE USO`, extraer del documento `Unidad II_Rq_2_CASOS_USO.pdf` la teoría pertinente para la elaboración de Casos de Uso respecto al Anteproyecto de Titulación, y almacenar `CasosUsoTeoria.txt` en el mismo directorio.
 - **Acciones Realizadas:**
   * Análisis de las 43 diapositivas del PDF: distinción Casos de Uso del Negocio (CUN) vs. Casos de Uso del Sistema (CUS), concepto de "Caja Negra", resultado observable de valor, métodos de identificación (por actores y por eventos), relaciones UML (`<<include>>`, `<<extend>>`, generalización), descomposición en paquetes/subsistemas y plantillas de especificación textual.
-  * Contextualización directa con el proyecto SGO de Óptica Vista Visión, los 5 módulos MVP y las subcaracterísticas de seguridad ISO/IEC 25010:2023.
+  * Contextualización directa con el proyecto SGO de Óptica de estudio, los 5 módulos MVP y las subcaracterísticas de seguridad ISO/IEC 25010:2023.
 - **Entregable Generado:** `DESARROLLO_SGO/CASOS DE USO/CasosUsoTeoria.txt` (31,230 bytes).
 
 ---
@@ -183,7 +183,7 @@ Las **Fases 1, 2 y 3** de la Ingeniería de Requisitos se encuentran **100% conc
 ### Próximos Pasos (Conforme a `plaDesarrolloRequisitos.txt` y `Orden_Metodologico_Implementacion_Sistema.txt`):
 1. **Ejecución de la Fase 4: Verificación, Validación y Gestión de Calidad de Requisitos**:
    - Conducción de las Revisiones Técnicas Formales (FBR) con el Director de Titulación (Ing. Jorge Menéndez) y Asesor Metodológico (Ing. Julio Santillán).
-   - Sesión de validación final (walkthrough) y firma de actas de aprobación con el Product Owner / Propietario de Óptica Vista Visión.
+   - Sesión de validación final (walkthrough) y firma de actas de aprobación con el Product Owner / Propietario de Óptica de estudio.
 2. **Ejecución de la Fase 5: Transición Metodológica al Entorno Scrum**:
    - Transformación de los 23 Requisitos Funcionales en Historias de Usuario con sintaxis formal (*Como / Quiero / Para*).
    - Formulación de Criterios de Aceptación bajo el estándar Gherkin (*Dado que / Cuando / Entonces*).

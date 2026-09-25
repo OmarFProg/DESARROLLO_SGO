@@ -22,7 +22,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf5.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -88,7 +88,7 @@ En proyectos de software asistencial que procesan información médica privada, 
 comprobantes fiscales con valor tributario e incorporan asistentes conversacionales basados 
 en inteligencia artificial, la viabilidad legal no es un apéndice accesorio, sino un 
 requisito sine qua non para blindar penal, civil, administrativa y fiscalmente a los 
-profesionales de Óptica Vista Visión, a los investigadores y a la ESPOCH.
+profesionales de Óptica de estudio, a los investigadores y a la ESPOCH.
 
 1.2 OBJETIVOS ESPECÍFICOS DE LA FASE 5
 1. Analizar la conformidad del sistema frente a la Ley Orgánica de Protección de Datos 
@@ -289,7 +289,7 @@ Electrónicos Esquema Offline Versión 1.1.0" publicada por el SRI:
     Omar Santiago Figueroa Díaz y Alexander Rafael Villalva Dumancela.
   * Los derechos patrimoniales y de explotación académica se comparten con la Escuela Superior 
     Politécnica de Chimborazo (ESPOCH) conforme a los estatutos de titulación vigentes.
-  * Se otorga a Óptica Vista Visión una licencia de uso perpetua, no exclusiva y gratuita 
+  * Se otorga a Óptica de estudio una licencia de uso perpetua, no exclusiva y gratuita 
     para la operación cotidiana de su establecimiento comercial y asistencial en Riobamba.
 
 6.2 COMPATIBILIDAD DEL ECOSISTEMA OPEN SOURCE

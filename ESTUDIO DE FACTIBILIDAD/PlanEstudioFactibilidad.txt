@@ -18,7 +18,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/PlanEstudioFactibilidad.txt
 Versión:         1.0 Definitiva y Aprobada
 Fecha:           Septiembre 2026 / Período Académico 2026 - 2027
@@ -128,7 +128,7 @@ debe articularse obligatoriamente en doce (12) secciones estructuradas:
 7. Factibilidad legal: Cumplimiento de LOPDP, normativas SRI (v1.1.0), Ley de Comercio Electrónico y MSP.
 8. Factibilidad de recursos: Materiales, talento humano y roles bajo el marco ágil Scrum.
 9. Factibilidad de mercado: Caracterización del sector optométrico local y estrategia de validación con el Owner.
-10. Factibilidad operacional: Grado de ajuste con los procesos de Óptica Vista Visión y gestión del cambio.
+10. Factibilidad operacional: Grado de ajuste con los procesos de Óptica de estudio y gestión del cambio.
 11. Factibilidad de tiempo: Estimación de plazos, cronograma de 4 Sprints quincenales y ruta crítica en 18 semanas.
 12. Recomendaciones y aprobación: Dictamen formal de viabilidad y protocolo de firmas.
 
@@ -220,7 +220,7 @@ El desarrollo del Estudio de Factibilidad se estructura en diez (10) fases crono
   1. Redacción de la Sección 2 (Antecedentes del Proyecto): contextualización de la problemática 
      optométrica en Riobamba y análisis del software legado MDI.
   2. Redacción de la Sección 3 (Descripción del Proyecto y Contexto): definición formal del 
-     propósito, caracterización de los 7 módulos y contexto organizacional de Óptica Vista Visión.
+     propósito, caracterización de los 7 módulos y contexto organizacional de Óptica de estudio.
   3. Redacción de la Sección 4 (Alcance del Estudio): delimitación de los resultados esperados, 
      actividades de evaluación y protocolo de validación académica.
 - Entregable de la Fase: Bloque preliminar (Secciones 2, 3 y 4) consolidado y validado.
@@ -276,7 +276,7 @@ El desarrollo del Estudio de Factibilidad se estructura en diez (10) fases crono
 --------------------------------------------------------------------------------
 - Actividades:
   1. Definición de la estructura de talento humano bajo metodología Scrum:
-     * Product Owner: Propietario / Optometrista Principal de Óptica Vista Visión.
+     * Product Owner: Propietario / Optometrista Principal de Óptica de estudio.
      * Scrum Master / Director: Ing. Jorge Ariel Menéndez Verdecia.
      * Revisor Técnico / Asesor Académico: Ing. Julio Roberto Santillán Castillo.
      * Development Team: Omar Santiago Figueroa Díaz (Backend/SRI) y Alexander Rafael Villalva Dumancela (Frontend/IA).
@@ -300,7 +300,7 @@ El desarrollo del Estudio de Factibilidad se estructura en diez (10) fases crono
 4.8 FASE 8: EVALUACIÓN DE FACTIBILIDAD OPERACIONAL Y DE PROCESOS DE NEGOCIO
 --------------------------------------------------------------------------------
 - Actividades:
-  1. Mapeo del ajuste procedimental entre el SGO y el flujo asistencial de Óptica Vista Visión: 
+  1. Mapeo del ajuste procedimental entre el SGO y el flujo asistencial de Óptica de estudio: 
      recepción -> examen refractivo -> selección de armazón/lunas -> orden a taller -> venta/cobro -> facturación SRI.
   2. Análisis de compatibilidad con la cultura organizacional de una microempresa de salud visual.
   3. Estrategia de gestión del cambio: plan de capacitación para el optometrista y asistente comercial, 
@@ -345,7 +345,7 @@ una de las doce secciones del estudio de factibilidad:
 - Objetivo: Proporcionar una visión integral, condensada y contundente sobre la viabilidad del proyecto.
 - Bases Documentales: Síntesis de las Secciones 2 a 12 del estudio.
 - Pre-Contenido Específico:
-  * Declaración del proyecto: desarrollo del sistema SGO para Óptica Vista Visión en Riobamba.
+  * Declaración del proyecto: desarrollo del sistema SGO para Óptica de estudio en Riobamba.
   * Resumen de factibilidad técnica: viabilidad comprobada mediante arquitectura desacoplada 
     (React + Laravel + NestJS + PostgreSQL), ejecución local de pruebas en equipo AMD Ryzen 5 9600X (16 GB RAM) 
     y previsión de despliegue en servidor VPS en la nube (`SERV_PRODUCCION`).
@@ -365,7 +365,7 @@ una de las doce secciones del estudio de factibilidad:
     obsoleto con arquitectura MDI) que sobreescriben recetas previas, carecen de trazabilidad, 
     no cumplen la LOPDP y ralentizan la atención al paciente.
   * Visión del proyecto: construir una solución mantenible, modular y escalable que perdure en 
-    el tiempo, automatice los flujos críticos de Óptica Vista Visión y se convierta en un activo 
+    el tiempo, automatice los flujos críticos de ÓÓptica de estudio y se convierta en un activo 
     tecnológico estratégico para el establecimiento de salud.
 
 --------------------------------------------------------------------------------
@@ -374,7 +374,7 @@ una de las doce secciones del estudio de factibilidad:
 - Objetivo: Delimitar el propósito, los entregables de software y el entorno de implantación.
 - Bases Documentales: `Especificacion de Requisitos_02.txt` (Módulos M1 a M7), `Anteproyecto.pdf` (pp. 8-11).
 - Pre-Contenido Específico:
-  * Propósito central: dotar a Óptica Vista Visión de una plataforma digital segura para gestión clínica y comercial.
+  * Propósito central: dotar a Óptica de estudio de una plataforma digital segura para gestión clínica y comercial.
   * Catálogo de Entregables Principales (7 Módulos Funcionales):
     1. Autenticación y RBAC (Admin, Optometrista, Asistente) y gestión segura JWT.
     2. Gestión de Pacientes con validador de cédula ecuatoriana M10 y soporte flexible de menores.
@@ -476,7 +476,7 @@ una de las doce secciones del estudio de factibilidad:
 - Bases Documentales: `Anteproyecto.pdf` (Sección 4.4.2.5 Scrum), `plaDesarrolloRequisitos.txt`.
 - Pre-Contenido Específico:
   * Estructura del Equipo de Proyecto (Marco Scrum):
-    - Product Owner: Propietario / Optometrista Principal de Óptica Vista Visión (validación de requerimientos clínicos y de negocio).
+    - Product Owner: Propietario / Optometrista Principal de Óptica de estudio (validación de requerimientos clínicos y de negocio).
     - Scrum Master: Ing. Jorge Ariel Menéndez Verdecia (supervisión metodológica, calidad de código y remoción de impedimentos).
     - Asesor Metodológico y Técnico: Ing. Julio Roberto Santillán Castillo (revisor de arquitectura, accesibilidad y normas ISO).
     - Equipo de Desarrollo (Developers):
@@ -574,7 +574,7 @@ una de las doce secciones del estudio de factibilidad:
 Leyenda RACI: R = Responsable de elaborar, A = Aprobador final, C = Consultado, I = Informado.
 - OF: Omar Santiago Figueroa Díaz
 - AV: Alexander Rafael Villalva Dumancela
-- Cli: Propietario / Optometrista (Óptica Vista Visión)
+- Cli: Propietario / Optometrista (Óptica de estudio)
 - JM: Ing. Jorge Ariel Menéndez Verdecia (Director / Scrum Master)
 - JS: Ing. Julio Roberto Santillán Castillo (Asesor Académico)
 

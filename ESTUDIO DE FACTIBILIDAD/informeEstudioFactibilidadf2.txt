@@ -23,7 +23,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudion (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf2.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -54,7 +54,7 @@ TABLA DE CONTENIDOS
        3.2.5 Módulo 5: Ventas, Cobros Transaccionales ACID y Arqueo Diario de Caja
        3.2.6 Módulo 6: Facturación Electrónica SRI (Firma XAdES-BES, SOAP y RIDE PDF)
        3.2.7 Módulo 7: Asistente Inteligente Operativo "Chatbot con los Datos" (Solo Lectura)
-   3.3 Contexto Organizacional y Cultural de Óptica Vista Visión
+   3.3 Contexto Organizacional y Cultural de ÓÓptica de estudio
        3.3.1 Perfil Operativo del Establecimiento de Estudio
        3.3.2 Flujo Asistencial y Rutina Cotidiana
        3.3.3 Dinámica Cultural y Transición hacia la Digitalización Segura
@@ -143,7 +143,7 @@ segura y rigurosamente afianzada a la realidad operativa de los centros optomét
 2.2 ANÁLISIS FORENSE Y DEFICIENCIAS ESTRUCTURALES DEL SOFTWARE LEGADO OFTALMOLÓGICO
 Para comprender las raíces técnicas que motivan el desarrollo del SGO, el equipo de 
 ingeniería ejecutó una auditoría forense sobre el aplicativo informático en uso dentro de 
-la unidad de estudio (Óptica Vista Visión). Dicho software, de origen peruano y arquitectura 
+la unidad de estudio (Óptica de estudio). Dicho software, de origen peruano y arquitectura 
 monolítica cliente-servidor de escritorio basada en ventanas MDI (Multiple Document Interface) 
 sobre SQL Server, evidenció cinco deficiencias críticas que paralizan la operación y amenazan 
 la seguridad del establecimiento:
@@ -166,7 +166,7 @@ establecida en la norma ISO/IEC 25010:2023.
 
 2.2.3 Desconexión Tributaria y Fricción Operativa con el SRI
 El software legado no contaba con integración electrónica con los Web Services del SRI. 
-Esto forzaba al personal de Óptica Vista Visión a una doble digitación agotadora: primero 
+Esto forzaba al personal de Óptica de estudio a una doble digitación agotadora: primero 
 registraban la venta en el sistema interno y posteriormente debían ingresar manualmente 
 al portal web "SRI y Yo en Línea" para digitar nuevamente la cédula del cliente, los 
 ítems comercializados, el subtotal y el IVA. Este proceso manual tomaba entre 8 y 12 minutos 
@@ -174,7 +174,7 @@ por paciente, formando filas de espera, provocando errores de digitación y aume
 el riesgo de sanciones tributarias por no emisión inmediata.
 
 2.2.4 Falta de Control de Estados en Talleres de Lentes Externos
-Óptica Vista Visión, al igual que la mayoría de ópticas de Riobamba, terceriza la talla, 
+Óptica de estudio, al igual que la mayoría de ópticas de Riobamba, terceriza la talla, 
 tratamiento antirreflejo y biselado de lentes oftálmicos con laboratorios industriales 
 radicados en Quito, Guayaquil y Riobamba. En el software legado, las órdenes se enviaban 
 mediante notas manuscritas en papel o mensajes informales de mensajería instantánea. 
@@ -198,7 +198,7 @@ Frente a las deficiencias del pasado, la visión del proyecto SGO se fundamenta 
   afectar el núcleo transaccional clínico (demostrado fehacientemente con la integración armónica 
   del microservicio de Facturación Electrónica SRI y el motor conversacional de Inteligencia Artificial).
 - Activo Estratégico Empresarial: Convertir al SGO en el corazón operativo y activo intangible 
-  más valioso de Óptica Vista Visión, automatizando sus procesos críticos, garantizando 
+  más valioso de Óptica de estudio, automatizando sus procesos críticos, garantizando 
   inmutabilidad legal y clínica, y posicionando al centro visual como un referente de modernidad y seguridad en Riobamba.
 
 
@@ -301,10 +301,10 @@ Requisitos Funcionales (RF-01 a RF-31):
     enrutador léxico-sintáctico determinístico) y Modo Aumentado Online (conexión a LLM), registrando 
     cada consulta en la tabla inmutable `audit_logs` (RF-31).
 
-3.3 CONTEXTO ORGANIZACIONAL Y CULTURAL DE ÓPTICA VISTA VISIÓN
+3.3 CONTEXTO ORGANIZACIONAL Y CULTURAL DE Óptica de estudio
 Para garantizar la pertinencia del diseño, el estudio de factibilidad se contextualiza en la realidad 
 del establecimiento beneficiario:
-- Identificación: Óptica Vista Visión, establecimiento privado de salud visual ubicado en el sector 
+- Identificación: Óptica de estudio, establecimiento privado de salud visual ubicado en el sector 
   comercial céntrico de Riobamba.
 - Perfil Asistencial y Carga Operativa:
   * Atiende un promedio de 5 a 10 pacientes diarios (entre 150 y 250 atenciones al mes).
@@ -356,7 +356,7 @@ Los resultados específicos que se obtienen del estudio comprenden:
 4. Blindaje Jurídico: Evidenciar que la arquitectura disociada cumple con la LOPDP y que el módulo SRI 
    satisface la normativa de comprobantes electrónicos v1.1.0, descartando litigios o sanciones fiscales.
 5. Autorización Formal del Proyecto: Servir de documento habilitante y base contractual vinculante 
-   para la aprobación del inicio de los Sprints de desarrollo por parte de la ESPOCH y Óptica Vista Visión.
+   para la aprobación del inicio de los Sprints de desarrollo por parte de la ESPOCH y Óptica de estudio.
 
 4.2 ACTIVIDADES METODOLÓGICAS PRINCIPALES
 Para alcanzar los resultados esperados, el estudio de factibilidad ejecuta las siguientes actividades:
@@ -387,7 +387,7 @@ El Estudio de Factibilidad se somete al siguiente protocolo formal de aprobació
 1. La Fase 2 ha sido completada en su totalidad, desarrollando con exhaustivo rigor académico y 
    técnico las Secciones 2 (Antecedentes), 3 (Descripción del Proyecto y Contexto) y 4 (Alcance 
    del Estudio de Factibilidad) del formato institucional de la ESPOCH.
-2. La caracterización de los antecedentes evidencia que la problemática de Óptica Vista Visión 
+2. La caracterización de los antecedentes evidencia que la problemática de Óptica de estudio 
    no es un caso aislado, sino el reflejo de una deficiencia estructural en el sector optométrico 
    de Riobamba provocada por el uso de sistemas legados obsoletos que destruyen la historia clínica del paciente.
 3. La descripción de los 7 módulos funcionales integra de forma armónica la Facturación Electrónica 

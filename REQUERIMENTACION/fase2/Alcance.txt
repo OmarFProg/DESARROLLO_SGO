@@ -22,7 +22,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Seguridad)
                  - Villalva Dumancela, Alexander Rafael (Frontend / Usabilidad)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Establecimiento: Óptica Vista Visión (Riobamba, Provincia de Chimborazo, Ecuador)
+Establecimiento: Óptica de estudio (Riobamba, Provincia de Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/REQUERIMENTACION/fase2/Alcance.txt
                  (Espejo en DESARROLLO_SGO/fase2/Alcance.txt)
 Fecha:           Septiembre 2026 / Período Académico 2026
@@ -198,7 +198,7 @@ forma estratégica e inteligente siguiendo la lógica S.M.A.R.T.
 
 3.2 FORMULACIÓN Y DESGLOSE BAJO LA LÓGICA S.M.A.R.T.
 - S (Specific - Específico):
-  Construir e implementar el sistema SGO para Óptica Vista Visión, circunscrito a 5 módulos 
+  Construir e implementar el sistema SGO para Óptica de estudio, circunscrito a 5 módulos 
   del MVP (Autenticación RBAC, Pacientes, Historia Clínica, Pedidos a Laboratorio y Ventas/Cobros) 
   con validaciones clínicas estrictas e inmutabilidad de registros.
 - M (Measurable - Medible):
@@ -314,14 +314,14 @@ El proyecto cuenta con un equipo multidisciplinario balanceado:
     aseguramiento de la calidad académica.
 - Ing. Julio Roberto Santillán Castillo (Asesor Técnico):
   * Rol: Validación de arquitectura de software, transaccionalidad y modelo metodológico.
-- Propietario / Optometrista (Óptica Vista Visión / Experto de Dominio):
+- Propietario / Optometrista (Óptica de estudio / Experto de Dominio):
   * Rol: Validación de usabilidad clínica, verificación de notaciones y pruebas funcionales.
 
 5.2 INFRAESTRUCTURA, HERRAMIENTAS Y STACK TECNOLÓGICO CONFIRMADO
 - Lenguaje y Framework Backend: PHP 8.2+ con Laravel 10/11 (Arquitectura en capas, robusta y madura).
 - Lenguaje y Framework Frontend: JavaScript / TypeScript con React 18+ y TailwindCSS (Componentes reactivos y ligeros).
 - Motor de Base de Datos: PostgreSQL 15+ (Garantía de transacciones ACID, integridad referencial y tipos JSONB para auditoría).
-- Entorno de Ejecución Local: Servidor web en red local (LAN/WLAN) de Óptica Vista Visión.
+- Entorno de Ejecución Local: Servidor web en red local (LAN/WLAN) de Óptica de estudio.
 - Despliegue de Pruebas: Google Cloud Platform (GCP) / VPS para revisiones remotas del Product Owner y Directores.
 - Herramientas de Gestión: GitHub para control de versiones y tablero Scrum para seguimiento del Backlog.
 
@@ -389,7 +389,7 @@ Durante la elicitación y negociación de alcance se tomaron decisiones preventi
    consensuada las fronteras técnicas y funcionales del Sistema Informático de Gestión 
    Clínica y Comercial Optométrica (SGO).
 2. Se ha cumplido a cabalidad con la instrucción de desarrollar los 5 pasos metodológicos 
-   de la guía `ALCANCE DE UN PROYECTO.pdf`, articulando las necesidades de Óptica Vista Visión, 
+   de la guía `ALCANCE DE UN PROYECTO.pdf`, articulando las necesidades de Óptica de estudio, 
    los objetivos del anteproyecto de titulación y las actividades que resuelven el problema.
 3. Este documento, en conjunto con `informeFase1.txt`, `Especificacion de Requisitos_01.txt` 
    y `CasosUsoTeoria.txt`, constituye el insumo directo e inalterable para elaborar el 

@@ -23,7 +23,7 @@ Verificado Departamento de Calidad / Asesoría Técnica ESPOCH:
 Documento formalmente validado por las partes:
 Por el cliente / Beneficiario:
   Fdo. Propietario / Optometrista Principal
-  Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+  Óptica de estudio — Riobamba, Chimborazo, Ecuador
 
 Por la empresa suministradora / Equipo de Desarrollo:
   Fdo. Figueroa Díaz, Omar Santiago       Fdo. Villalva Dumancela, Alexander Rafael
@@ -93,7 +93,7 @@ La presente Especificación de Requisitos de Software (SRS v2.0) formaliza de ma
 rigurosa, estructurada y verificable el conjunto de capacidades funcionales, 
 atributos de calidad y restricciones operativas del Sistema Informático de Gestión 
 Clínica y Comercial Optométrica (SGO), desarrollado para el establecimiento de salud 
-visual Óptica Vista Visión, radicado en la ciudad de Riobamba, Provincia de Chimborazo.
+visual Óptica de estudio, radicado en la ciudad de Riobamba, Provincia de Chimborazo.
 
 1.1 PROPÓSITO
 El propósito de este documento es:
@@ -109,7 +109,7 @@ c) Consolidar formalmente los dos nuevos requisitos estratégicos aprobados:
 d) Establecer los criterios formales de verificación de seguridad conforme al estándar 
    ISO/IEC 25010:2023 y el marco Secure Scrum (Pohl y Hof, 2015).
 Audiencia: Tribunal académico de titulación de la ESPOCH, director y asesor del proyecto, 
-equipo de desarrollo (backend/frontend) y personal directivo de Óptica Vista Visión.
+equipo de desarrollo (backend/frontend) y personal directivo de Óptica de estudio.
 
 1.2 ALCANCE
 - Denominación del producto: Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO).
@@ -140,7 +140,7 @@ equipo de desarrollo (backend/frontend) y personal directivo de Óptica Vista Vi
 | Menéndez Verdecia     | Grado / Scrum Master| Titular Auxiliar FIE | supervisión de calidad y BD   | Telf: 0983689403                  |
 | Ing. Julio Roberto    | Revisor Técnico /   | Docente Titular      | Asesoría técnica en seguridad,| julio.santillan@espoch.edu.ec     |
 | Santillán Castillo    | Asesor Académico    | Agregado FIE         | criptografía, PWA y factibil. | Telf: FIE-ESPOCH                  |
-| Propietario /         | Stakeholder         | Licenciado en        | Validación de procesos de     | Óptica Vista Visión               |
+| Propietario /         | Stakeholder         | Licenciado en        | Validación de procesos de     | ÓÓptica de estudio               |
 | Optometrista Principal| Principal / Cliente | Optometría           | óptica, requerimientos y tests| Riobamba, Ecuador                 |
 +-----------------------+---------------------+----------------------+-------------------------------+-----------------------------------+
 
@@ -190,7 +190,7 @@ presenta los apéndices de trazabilidad bidireccional, catálogo de requisitos f
 
 2.1 PERSPECTIVA DEL PRODUCTO
 El Sistema de Gestión Optométrica (SGO) es una solución integral, autónoma y distribuida 
-diseñada para modernizar y blindar operacionalmente a Óptica Vista Visión. Su arquitectura 
+diseñada para modernizar y blindar operacionalmente a Óptica de estudio. Su arquitectura 
 se organiza en servicios especializados y desacoplados:
 - Capa de Presentación (Frontend): Single Page Application (SPA) responsiva en React con Vite, 
   diseñada bajo criterios de ergonomía clínica y equipada con un widget interactivo para el asistente de IA.
@@ -619,7 +619,7 @@ A continuación se detalla cada requisito funcional conforme a la plantilla esta
 | DESCRIPCIÓN:                                                                 |
 | El sistema debe generar documentos PDF listos para imprimir: Receta Óptica   |
 | para el paciente y Certificado de Aptitud Visual Laboral/Ocupacional, con    |
-| membrete de Óptica Vista Visión, datos del profesional y firma digitalizada. |
+| membrete de Óptica de estudio, datos del profesional y firma digitalizada. |
 | ENTRADAS:                                                                    |
 | - Solicitud de impresión desde el expediente clínico guardado.               |
 | PROCESO:                                                                     |

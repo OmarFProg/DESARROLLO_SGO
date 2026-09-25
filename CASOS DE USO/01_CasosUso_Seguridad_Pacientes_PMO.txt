@@ -4,7 +4,7 @@ PAQUETES 1 Y 2: GESTIÓN DE ACCESO Y SEGURIDAD (M1) Y DEMOGRÁFICA DE PACIENTES 
 ================================================================================
 Documento:       Fase 1 — Especificación de Casos de Uso (M1: Seguridad y M2: Pacientes)
 Proyecto:        Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
-Cliente:         Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Cliente:         Óptica de estudio — Riobamba, Chimborazo, Ecuador
 Marco Académico: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
 Metodología:     PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
 Referencia:      PlanDocumentacionCasosUso.txt (Fase 1) / SRS v2.0 / Audio Clínico
@@ -60,10 +60,10 @@ TABLA DE CONTENIDO
 2. INFORMACIÓN DEL PROYECTO
 ================================================================================
 
-Empresa / Organización:                   Óptica Vista Visión
+Empresa / Organización:                   Óptica de estudio
 Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
 Fecha de Preparación:                     25 de Septiembre de 2026
-Cliente:                                  Óptica Vista Visión — Riobamba, Ecuador
+Cliente:                                  Óptica de estudio — Riobamba, Ecuador
 Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
 Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
 Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
@@ -80,7 +80,7 @@ Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
 | Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
 | Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
 | Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
-| Representante Vista Visión     | Propietario / Optometrista | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
+| Representante Vista Visión     | Propietario / Optometrista | Óptica de estudio   | 25/09/2026 | [Aprobado] |
 +--------------------------------+----------------------------+-----------------------+------------+------------+
 
 
@@ -90,7 +90,7 @@ Director / Tutor Académico:               Ing. Jorge Ariel Menéndez Verdecia
 
 4.1 PROCESOS Y ESCENARIOS DE NEGOCIO CUBIERTOS
 El presente documento describe los procesos iniciales y transversales de interacción con 
-el sistema SGO dentro del establecimiento Óptica Vista Visión:
+el sistema SGO dentro del establecimiento Óptica de estudio:
 1. Control de Acceso y Salvaguarda de la Identidad: Acceso biométrico o mediante credenciales 
    criptográficas protegidas, discriminación de funciones por perfil (Control de Acceso Basado 
    en Roles - RBAC) y caducidad de sesión por inactividad operativa para mitigar la fuga de 

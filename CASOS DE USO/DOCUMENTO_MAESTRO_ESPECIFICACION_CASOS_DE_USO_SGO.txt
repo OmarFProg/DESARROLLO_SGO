@@ -9,7 +9,7 @@
 
                         Fecha de Emisión: 25/09/2026
                         Versión: 1.0 Definitiva Consolidada
-     Beneficiario: Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+     Beneficiario: Óptica de estudio — Riobamba, Chimborazo, Ecuador
      Marco: Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo
      Autores: Figueroa Díaz Omar Santiago, Villalva Dumancela Alexander Rafael
      Director / Tutor: Ing. Jorge Ariel Menéndez Verdecia
@@ -95,10 +95,10 @@ TABLA DE CONTENIDO
 2. INFORMACIÓN INTEGRAL DEL PROYECTO
 ================================================================================
 
-Empresa / Organización:                   Óptica Vista Visión
+Empresa / Organización:                   Óptica de estudio
 Proyecto:                                 Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
 Fecha de Preparación:                     25 de Septiembre de 2026
-Cliente:                                  Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Cliente:                                  Óptica de estudio — Riobamba, Chimborazo, Ecuador
 Patrocinador Principal:                   Dirección de Carrera de Ingeniería de Software — ESPOCH
 Gerente / Líder de Proyecto:              Alexander Rafael Villalva Dumancela
 Gerente / Líder de Desarrollo de Software: Omar Santiago Figueroa Díaz
@@ -118,7 +118,7 @@ para la implementación del software SGO, contando con la validación académica
 | Ing. Jorge Menéndez Verdecia   | Director de Trabajo Titul. | Carrera Softw. ESPOCH | 25/09/2026 | [Aprobado] |
 | Alexander Villalva Dumancela   | Investigador / Líder Proy. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
 | Omar Santiago Figueroa Díaz    | Investigador / Líder Soft. | Equipo Desarrollador  | 25/09/2026 | [Aprobado] |
-| Lic. Optom. Representante      | Propietario / Optometrista | Óptica Vista Visión   | 25/09/2026 | [Aprobado] |
+| Lic. Optom. Representante      | Propietario / Optometrista | Óptica de estudio   | 25/09/2026 | [Aprobado] |
 +--------------------------------+----------------------------+-----------------------+------------+------------+
 
 
@@ -321,7 +321,7 @@ Atributos Específicos:
 +-------------------+---------------------------------------------------+--------------------+
 | Nombre Atributo   | Descripción Funcional                             | Tipo de Dato       |
 +-------------------+---------------------------------------------------+--------------------+
-| ruc_contribuyente | RUC de Óptica Vista Visión                        | Varchar(13)        |
+| ruc_contribuyente | RUC de Óptica de estudio                        | Varchar(13)        |
 | pin_autorizacion  | Clave maestra encriptada para reversiones ACID    | Varchar(255)       |
 | email_notificac   | Correo corporativo para alertas críticas          | Varchar(100)       |
 +-------------------+---------------------------------------------------+--------------------+
@@ -1152,7 +1152,7 @@ CURSO NORMAL (Flujo Básico):
 |      |                       | - Material: Policarbonato de alto índice.                       |
 |      |                       | - Tratamiento: Filtro de Luz Azul con antirreflejo multicapa.   |
 | 6    | Optometrista Clínico  | Pulsa "Generar e Imprimir Receta".                              |
-| 7    | Sistema SGO           | Genera el PDF con membrete institucional de Óptica Vista Visión,|
+| 7    | Sistema SGO           | Genera el PDF con membrete institucional de Óptica de estudio,|
 |      |                       | código QR verificador, firma digitalizada y sello del MSP.      |
 | 8    | Sistema SGO           | [<<include>>] Inserta registro inmutable en `audit_logs`.       |
 | 9    | Sistema SGO           | Envía el documento a la impresora física predeterminada.        |
@@ -1469,7 +1469,7 @@ Postcondición:      1. Documento RIDE generado en formato PDF conforme al está
                     3. Correo electrónico despachado al cliente con el PDF y el XML adjuntos.
                     4. Registro de despacho exitoso en la tabla `notificaciones_tributarias`.
 Descripción:        Construye la Representación Impresa del Documento Electrónico (RIDE) en 
-                    formato PDF, integrando el logotipo de Óptica Vista Visión, los datos 
+                    formato PDF, integrando el logotipo de Óptica de estudio, los datos 
                     fiscales, el desglose de productos/lunas, el número de autorización fiscal y 
                     el código de barras Code128 de alta resolución. Automáticamente despacha un 
                     correo electrónico transaccional vía SMTP al paciente con ambos comprobantes.
@@ -1488,7 +1488,7 @@ CURSO NORMAL (Flujo Básico):
 | 5    | Microservicio API-SRI | Almacena el PDF en el servidor local de archivos seguros.       |
 | 6    | Microservicio API-SRI | Obtiene el correo electrónico del cliente desde la ficha M2.    |
 | 7    | Microservicio API-SRI | Ensambla el correo SMTP con plantilla institucional:            |
-|      |                       | - Asunto: "Comprobante Electrónico — Óptica Vista Visión".      |
+|      |                       | - Asunto: "Comprobante Electrónico — Óptica de estudio".      |
 |      |                       | - Archivos Adjuntos: Factura.pdf (RIDE) y Factura.xml (SRI).    |
 | 8    | Microservicio API-SRI | Envía el correo mediante el servidor SMTP corporativo.          |
 | 9    | Microservicio API-SRI | Registra en base de datos: `notificacion_enviada = TRUE`.       |

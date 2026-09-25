@@ -7,7 +7,7 @@ PROYECTO: SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SG
 ================================================================================
 GLOSARIO TÉCNICO DE DEFINICIONES Y CONCEPTUALIZACIÓN APLICADA
 Documento complementario al Estudio de Factibilidad (EstudioFactibilidad_SGO.txt)
-Beneficiario: Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario: Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Autores: Omar Santiago Figueroa Díaz | Alexander Rafael Villalva Dumancela
 ================================================================================
 
@@ -157,7 +157,7 @@ validadas con su aplicación directa en el contexto del sistema a implementar.
     ocurre una falla eléctrica o una caída del servidor.
 - Contexto y Aplicación en el SGO:
   En el Módulo 5 (Ventas y Cobros Locales, RF-20 a RF-23), la actividad comercial de 
-  Óptica Vista Visión involucra ventas por lotes de armazones, cobro de anticipos 
+  Óptica de estudio involucra ventas por lotes de armazones, cobro de anticipos 
   (e.g., 50% al ordenar) y cobro de saldos al entregar el trabajo, aceptando pagos 
   mixtos (efectivo, tarjeta o transferencia). El SGO encapsula estas operaciones en 
   bloques transaccionales ACID sobre PostgreSQL 16: el registro del pago, la 
@@ -238,7 +238,7 @@ validadas con su aplicación directa en el contexto del sistema a implementar.
   En el Estudio de Factibilidad (Sección 6.1 y 6.2), el costo total de construcción 
   del software ($10,752.50 USD) es asumido y autofinanciado al 100% por los dos 
   estudiantes investigadores como trabajo de graduación de la ESPOCH. Para la entidad 
-  beneficiaria (Óptica Vista Visión), la inversión operativa directa para entrar a 
+  beneficiaria (Óptica de estudio), la inversión operativa directa para entrar a 
   producción en el Año 1 es mínima: únicamente **~$250.00 USD - $264.00 USD**, 
   desglosados en: certificado digital de firma electrónica .p12 de Security Data 
   ($30.00 USD), provisión anual de rollos de papel térmico para tickets POS ($114.00 
@@ -255,7 +255,7 @@ validadas con su aplicación directa en el contexto del sistema a implementar.
   $$ROI = \frac{\text{Beneficio Neto Operativo Anual}}{\text{Inversión Directa Realizada}} \times 100\%$$
 - Contexto y Aplicación en el SGO:
   En la Sección 6.3 del estudio, se cuantificó que el SGO produce un ahorro operativo 
-  anual de **$2,824.00 USD** para Óptica Vista Visión:
+  anual de **$2,824.00 USD** para ÓÓptica de estudio:
   * Ahorro de 31.6 horas/mes por automatización de facturación SRI: $1,444.00 USD/año.
   * Eliminación de pérdidas por recetas erróneas a talleres externos: $1,080.00 USD/año.
   * Ahorro en papelería física, talonarios y notas carbón: $300.00 USD/año.
@@ -347,7 +347,7 @@ validadas con su aplicación directa en el contexto del sistema a implementar.
 - Contexto y Aplicación en el SGO:
   Adoptada para la Capa de Presentación (Frontend, Sección 5.2) construida con 
   React 18, Vite, Tailwind CSS y TypeScript. La arquitectura PWA permite instalar el 
-  SGO directamente en los equipos del consultorio y mostrador de Óptica Vista Visión, 
+  SGO directamente en los equipos del consultorio y mostrador de Óptica de estudio, 
   ejecutándose en ventanas independientes sin barras de navegador web, garantizando 
   carga casi instantánea de vistas, renderizado reactivo de graduaciones visuales y 
   plena operabilidad en tabletas o laptops durante jornadas médicas visuales.

@@ -22,7 +22,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf9.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -139,7 +139,7 @@ TABLA 1: DESGLOSE MACRO-TEMPORAL POR ETAPAS DEL PROYECTO (18 SEMANAS)
 +----------+---------------------------------------------+-----------------+---------------------------------------------+
 | Etapa IV | Aseguramiento de Calidad ISO/IEC 25010:2023,| Semanas 14 a 15 | - Informe de Pruebas de Ciberseguridad.     |
 |          | Auditoría de Ciberseguridad y Shadow Testing| (Diciembre)     | - Shadow Testing (10 días) en consultorio.  |
-|          | en Óptica Vista Visión                      |                 | - Matriz de trazabilidad 100% verificada.   |
+|          | en Óptica de estudio                      |                 | - Matriz de trazabilidad 100% verificada.   |
 +----------+---------------------------------------------+-----------------+---------------------------------------------+
 | Etapa V  | Despliegue en Producción, Transferencia     | Semana 16       | - Sistema instalado en LAN de la óptica.    |
 |          | Tecnológica y Capacitación de Usuarios      | (Enero)         | - 12 horas de capacitación completadas.     |
@@ -263,7 +263,7 @@ TABLA 2: CRONOGRAMA MAESTRO DETALLADO SEMANA A SEMANA (18 SEMANAS)
 +----+----------------------------------------------+---------+--------------------+------------------------+
 | S# | DESCRIPCIÓN DE ACTIVIDADES PRINCIPALES       | ETAPA   | RESPONSABLES       | HITO DE CONTROL        |
 +----+----------------------------------------------+---------+--------------------+------------------------+
-| S1 | Elicitación en Óptica Vista Visión, análisis | Etapa I | Figueroa, Villalva,| Fichas de entrevistas  |
+| S1 | Elicitación en Óptica de estudio, análisis | Etapa I | Figueroa, Villalva,| Fichas de entrevistas  |
 |    | de sistema legado y auditoría preliminar.    |         | Menéndez, PO       | consolidadas.          |
 | S2 | Formulación del Plan de Requisitos v2.0,     | Etapa I | Figueroa, Villalva,| SRS v2.0 IEEE 830      |
 |    | especificación formal de 31 RFs y 11 RNFs.   |         | Santillán, Menéndez| formalizada.           |
@@ -292,7 +292,7 @@ TABLA 2: CRONOGRAMA MAESTRO DETALLADO SEMANA A SEMANA (18 SEMANAS)
 | S14| Auditoría de Seguridad ISO 25010 (S-Tags)    | Etapa IV| Figueroa, Villalva,| Informe de calidad y   |
 |    | y corrección de observaciones periciales.    |         | Santillán          | seguridad aprobado.    |
 | S15| Pruebas de campo piloto (Shadow Testing de   | Etapa IV| Figueroa, Villalva,| 10 días de prueba con  |
-|    | 10 días laborables) en Óptica Vista Visión.  |         | PO (Optometrista)  | pacientes reales.      |
+|    | 10 días laborables) en Óptica de estudio.  |         | PO (Optometrista)  | pacientes reales.      |
 | S16| Despliegue en red LAN local, configuración   | Etapa V | Figueroa, Villalva,| Acta de Entrega y      |
 |    | de periféricos y 12 h de capacitación.       |         | PO, Asistente      | Aprobación Definitiva. |
 | S17| Redacción final de la Memoria Técnica de     | Etapa VI| Figueroa, Villalva,| Documento de tesis     |

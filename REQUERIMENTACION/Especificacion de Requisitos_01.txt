@@ -23,7 +23,7 @@ Verificado Departamento de Calidad / Asesoría Técnica:
 Documento validado por las partes en fecha: 03/06/2026
 Por el cliente:
   Fdo. Propietario / Optometrista Principal
-  Óptica Vista Visión — Riobamba, Ecuador
+  Óptica de estudio — Riobamba, Ecuador
 
 Por la empresa suministradora / Equipo de Desarrollo:
   Fdo. Figueroa Díaz, Omar Santiago       Fdo. Villalva Dumancela, Alexander Rafael
@@ -81,7 +81,7 @@ CONTENIDO
 La presente Especificación de Requisitos de Software (SRS) formaliza el conjunto de
 necesidades, restricciones y capacidades funcionales y no funcionales que debe
 satisfacer el Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO),
-desarrollado para el establecimiento de salud visual Óptica Vista Visión en la
+desarrollado para el establecimiento de salud visual Óptica de estudio en la
 ciudad de Riobamba.
 
 1.1 PROPÓSITO
@@ -90,7 +90,7 @@ ambigüedades los requisitos del sistema SGO para:
 a) Guiar el desarrollo técnico del equipo de ingeniería de software en el diseño
    arquitectónico, modelado de base de datos relacional y codificación frontend/backend.
 b) Servir de contrato técnico y base de validación entre el equipo de desarrollo, el
-   cliente (Óptica Vista Visión) y el tribunal evaluador de la ESPOCH.
+   cliente (Óptica de estudio) y el tribunal evaluador de la ESPOCH.
 c) Facilitar la planificación del Product Backlog, la delimitación de Sprints bajo
    metodología Scrum y la verificación de criterios de aceptación de seguridad bajo
    el estándar ISO/IEC 25010:2023 y el marco Secure Scrum.
@@ -132,7 +132,7 @@ revisores técnicos del tribunal académico y personal administrativo del establ
 | Menéndez Verdecia     | Grado / Scrum Master| Titular Auxiliar FIE | supervisión de calidad y BD   | Telf: 0983689403                  |            |
 | Ing. Julio Roberto    | Revisor Técnico /   | Docente Titular      | Asesoría técnica en seguridad,| julio.santillan@espoch.edu.ec     | Sí         |
 | Santillán Castillo    | Asesor Académico    | Agregado FIE         | accesibilidad web y PWA       | Telf: FIE-ESPOCH                  |            |
-| Propietario /         | Stakeholder         | Licenciado en        | Definición de procesos,       | Óptica Vista Visión               | Sí         |
+| Propietario /         | Stakeholder         | Licenciado en        | Definición de procesos,       | Óptica de estudio               | Sí         |
 | Optometrista Principal| Principal / Cliente | Optometría           | validación clínica y pruebas  | Riobamba, Ecuador                 |            |
 +-----------------------+---------------------+----------------------+-------------------------------+-----------------------------------+------------+
 
@@ -181,7 +181,7 @@ en tablas formalizadas; y la Sección 4 contiene los apéndices de trazabilidad 
 2.1 PERSPECTIVA DEL PRODUCTO
 El Sistema de Gestión Optométrica (SGO) es un producto de software nuevo, autónomo e
 independiente, concebido para reemplazar la aplicación de escritorio monolítica legada
-de la Óptica Vista Visión. Se estructura bajo una moderna arquitectura web cliente-servidor
+de la Óptica de estudio. Se estructura bajo una moderna arquitectura web cliente-servidor
 desacoplada:
 - Capa Cliente (Frontend): Single Page Application (SPA) responsiva desarrollada en React.
 - Capa de Servicios (Backend): API RESTful desarrollada sobre el framework Laravel.

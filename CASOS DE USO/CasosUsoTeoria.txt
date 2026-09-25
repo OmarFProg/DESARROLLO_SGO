@@ -114,7 +114,7 @@ de uso, distinción imprescindible para el proyecto SGO:
 - Define los límites del software (System Boundary) y cómo los actores del sistema 
   interactúan a través de interfaces visuales o servicios con las capacidades automáticas.
 
-2.3 MAPEO CUN -> CUS EN EL ESTABLECIMIENTO OPTOMÉTRICO (ÓPTICA VISTA VISIÓN)
+2.3 MAPEO CUN -> CUS EN EL ESTABLECIMIENTO OPTOMÉTRICO (Óptica de estudio)
 El flujo manual original de la óptica se transforma en casos de uso del sistema SGO:
 
 +-------------------------------------+----------------------------------------+

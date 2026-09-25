@@ -16,7 +16,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Documentos base: - informeEntrevistasConsolidado.txt (Entrevistas de Elicitación)
                  - Especificacion de Requisitos_01.txt (Línea Base Inicial IEEE 830)
                  - InformeImplementacionAppFacturacionElectronica.txt (API SRI NestJS)
@@ -169,7 +169,7 @@ Asimismo, actúa como INSUMO DIRECTO para el ESTUDIO DE FACTIBILIDAD en sus dime
   consumo de tokens de IA y retorno de inversión por optimización operativa.
 - Factibilidad Legal: Cumplimiento de la Ley Orgánica de Protección de Datos Personales (LOPDP), 
   Ley de Comercio Electrónico y Resoluciones Tributarias del SRI para comprobantes electrónicos.
-- Factibilidad Operativa y de Mercado: Adopción por parte del personal de Óptica Vista Visión 
+- Factibilidad Operativa y de Mercado: Adopción por parte del personal de Óptica de estudio 
   y diferenciación competitiva frente a soluciones existentes en el mercado de Riobamba.
 
 
@@ -241,7 +241,7 @@ rige la evolución de todo el proyecto:
 ================================================================================
 
 3.1 FUENTES PRIMARIAS DE INFORMACIÓN Y STAKEHOLDERS
-- Stakeholder Primario: Propietario de Óptica Vista Visión / Optometrista Principal (experto de dominio).
+- Stakeholder Primario: Propietario de Óptica de estudio / Optometrista Principal (experto de dominio).
 - Stakeholder Secundario: Asistente comercial y auxiliar de recepción de la óptica.
 - Stakeholder Técnico: Ing. Jorge Menéndez Verdecia (Director de Titulación / Scrum Master).
 - Asesor Metodológico: Ing. Julio Santillán Castillo (Revisor Académico).
@@ -502,7 +502,7 @@ Habilita de forma secuencial y coordinada:
 Leyenda:
 - OF: Omar Figueroa (Backend / Ciberseguridad / API SRI)
 - AV: Alexander Villalva (Frontend / UX / Asistente IA)
-- Cli: Product Owner / Optometrista (Óptica Vista Visión)
+- Cli: Product Owner / Optometrista (Óptica de estudio)
 - JM: Ing. Jorge Menéndez (Director de Titulación / Scrum Master)
 - JS: Ing. Julio Santillán (Asesor Académico y Metodológico)
 

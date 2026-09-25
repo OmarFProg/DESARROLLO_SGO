@@ -22,7 +22,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf4.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -51,7 +51,7 @@ TABLA DE CONTENIDOS
        2.3.3 Liquidación del Bloque II con Margen de Contingencia (15 %)
    2.4 Consolidación Presupuestaria General del Proyecto
    2.5 Estructura y Esquema de Autofinanciamiento Equitativo (50 % por Autor)
-3. ANÁLISIS DETALLADO COSTO-BENEFICIO (ACB) PARA ÓPTICA VISTA VISIÓN
+3. ANÁLISIS DETALLADO COSTO-BENEFICIO (ACB) PARA Óptica de estudio
    3.1 Identificación y Cuantificación de Beneficios Tangibles (Ahorros Directos)
        3.1.1 Ahorro en Horas Operativas de Facturación Electrónica SRI
        3.1.2 Erradicación de Pérdidas por Rectificación de Lunas Mal Confeccionadas
@@ -62,7 +62,7 @@ TABLA DE CONTENIDOS
        3.2.2 Blindaje Jurídico y Pericial por Trazabilidad Inmutable (Audit Log)
        3.2.3 Fidelización de Pacientes e Imagen de Innovación Tecnológica
        3.2.4 Agilidad en la Toma de Decisiones mediante el Asistente Inteligente
-   3.3 Inversión Operativa Requerida por Óptica Vista Visión
+   3.3 Inversión Operativa Requerida por Óptica de estudio
 4. MODELADO DE INDICADORES FINANCIEROS DE RENTABILIDAD Y VIABILIDAD
    4.1 Retorno sobre la Inversión (ROI) para el Establecimiento Beneficiario
    4.2 Período de Recuperación de la Inversión (Payback Period)
@@ -87,7 +87,7 @@ La factibilidad económica tiene como propósito fundamental contrastar la total
 costos directos e indirectos requeridos para construir, desplegar y mantener el Sistema 
 Informático de Gestión Clínica y Comercial Optométrica (SGO), frente a los beneficios 
 económicos, operativos y cualitativos que el sistema reporta a la organización beneficiaria 
-(Óptica Vista Visión) y a los proponentes. Esta evaluación actualiza el presupuesto original 
+(Óptica de estudio) y a los proponentes. Esta evaluación actualiza el presupuesto original 
 del Anteproyecto de Titulación para incorporar formalmente los costos asociados a los dos 
 nuevos módulos aprobados: Facturación Electrónica con el SRI y Asistente Inteligente 
 Operativo ("Chatbot con los datos"), demostrando la absoluta viabilidad financiera del proyecto.
@@ -99,7 +99,7 @@ Operativo ("Chatbot con los datos"), demostrando la absoluta viabilidad financie
    el Certificado de Firma Electrónica PKCS#12 (.p12) y el servidor cloud en producción (`SERV_PRODUCCION`).
 3. Ratificar el modelo de autofinanciamiento integral del 100% distribuido de forma equitativa 
    (50% para Omar Figueroa y 50% para Alexander Villalva).
-4. Desarrollar un Análisis Costo-Beneficio (ACB) formal para Óptica Vista Visión, 
+4. Desarrollar un Análisis Costo-Beneficio (ACB) formal para Óptica de estudio, 
    cuantificando ahorros en horas laborales, disminución de mermas por rectificaciones de lunas 
    y supresión de papelería física.
 5. Calcular los indicadores financieros de rentabilidad (ROI, Payback y Flujo de Caja Proyectado a 3 años) 
@@ -166,7 +166,7 @@ investigadores durante el ciclo de vida del proyecto:
 
 2.2.5 Gastos Logísticos y Materiales de Campo
 - Papelería, formatos de prueba, impresiones y encuadernados: $60.00 USD.
-- Movilización y transporte para visitas a Óptica Vista Visión (8 visitas x $5.00 USD): $40.00 USD.
+- Movilización y transporte para visitas a Óptica de estudio (8 visitas x $5.00 USD): $40.00 USD.
 - Viáticos y refrigerios de campo (2 desarrolladores x 4 meses): $120.00 USD.
 - Subtotal Gastos Logísticos: $220.00 USD.
 
@@ -233,7 +233,7 @@ directamente dichos rubros mediante su trabajo presencial y el uso de sus propio
 
 
 ================================================================================
-3. ANÁLISIS DETALLADO COSTO-BENEFICIO (ACB) PARA ÓPTICA VISTA VISIÓN
+3. ANÁLISIS DETALLADO COSTO-BENEFICIO (ACB) PARA Óptica de estudio
 ================================================================================
 
 Para sustentar la viabilidad económica desde la perspectiva del beneficiario, se formula 
@@ -256,7 +256,7 @@ microempresa de salud visual:
 3.1.2 Erradicación de Pérdidas por Rectificación de Lunas Mal Confeccionadas
 - Situación Previa: El ingreso manual de prescripciones ópticas sin validaciones algebraicas 
   provocaba errores de signo (+/-), confusión en cilindros negativos o ejes invertidos. 
-  Óptica Vista Visión reportaba un promedio de 3 trabajos mensuales rechazados por pacientes 
+  Óptica de estudio reportaba un promedio de 3 trabajos mensuales rechazados por pacientes 
   o devueltos por el laboratorio externo.
 - Costo Asumido por la Óptica: El laboratorio cobra la reposición del cristal tallado 
   a un costo promedio de $30.00 USD por par de lunas monofocales/progresivas.
@@ -276,7 +276,7 @@ microempresa de salud visual:
 
 3.1.4 Consolidación de Ahorros Tangibles para la Óptica:
 
-TABLA 3: CONSOLIDACIÓN DE AHORROS TANGIBLES ANUALES PARA ÓPTICA VISTA VISIÓN
+TABLA 3: CONSOLIDACIÓN DE AHORROS TANGIBLES ANUALES PARA Óptica de estudio
 +-----+-----------------------------------------------------+-----------------------+
 | N°  | FUENTE DE AHORRO TANGIBLE                           | AHORRO ANUAL (USD)    |
 +-----+-----------------------------------------------------+-----------------------+
@@ -306,10 +306,10 @@ Además de los ahorros cuantificables, el sistema aporta beneficios estratégico
    El propietario consulta el estado financiero de caja diaria y pedidos pendientes de taller 
    en segundos mediante lenguaje natural, optimizando el tiempo gerencial de la microempresa.
 
-3.3 INVERSIÓN OPERATIVA REQUERIDA POR ÓPTICA VISTA VISIÓN
+3.3 INVERSIÓN OPERATIVA REQUERIDA POR Óptica de estudio
 Dado que el desarrollo es un trabajo de titulación académica cuyos costos de construcción 
 ($10,752.50 USD) son íntegramente absorbidos por los investigadores egresados, la inversión 
-financiera directa requerida por Óptica Vista Visión para operar el sistema se limita a:
+financiera directa requerida por Óptica de estudio para operar el sistema se limita a:
 - Adquisición del Certificado de Firma Electrónica (.p12) anual: $30.00 USD.
 - Servidor VPS Cloud anual (`SERV_PRODUCCION`): $120.00 USD.
 - Insumos operativos menores iniciales (rollos térmicos POS): $50.00 USD.
@@ -321,7 +321,7 @@ financiera directa requerida por Óptica Vista Visión para operar el sistema se
 ================================================================================
 
 4.1 RETORNO SOBRE LA INVERSIÓN (ROI) PARA EL ESTABLECIMIENTO BENEFICIARIO
-Se evalúa el rendimiento del capital operativo desembolsado por Óptica Vista Visión en el primer año:
+Se evalúa el rendimiento del capital operativo desembolsado por Óptica de estudio en el primer año:
 $$ROI = \frac{\text{Beneficio Neto Anual} - \text{Inversión Operativa}}{\text{Inversión Operativa}} \times 100\%$$
 - Beneficio Bruto Anual: $2,824.00 USD.
 - Costos de Mantenimiento y Renovación Anual (VPS $120 + Firma $30): $150.00 USD.
@@ -345,7 +345,7 @@ a partir de los cuales todo el ahorro se traduce en excedente operativo directo.
 4.3 FLUJO DE CAJA PROYECTADO A TRES AÑOS (HORIZONTE 2026 - 2029)
 Considerando una tasa de descuento social del 8% anual:
 
-TABLA 4: FLUJO DE CAJA PROYECTADO PARA ÓPTICA VISTA VISIÓN (3 AÑOS)
+TABLA 4: FLUJO DE CAJA PROYECTADO PARA Óptica de estudio (3 AÑOS)
 +-----------------------------------+---------------+---------------+---------------+---------------+
 | CONCEPTO FINANCIERO               | AÑO 0         | AÑO 1 (2027)  | AÑO 2 (2028)  | AÑO 3 (2029)  |
 +-----------------------------------+---------------+---------------+---------------+---------------+
@@ -400,7 +400,7 @@ TABLA 5: COMPARATIVA TÉCNICO-ECONÓMICA FRENTE A ALTERNATIVAS COMERCIALES
 1. El presupuesto general consolidado de **$11,724.25 USD** se encuentra rigurosamente 
    justificado, desglosado al centavo y garantizado al 100% bajo el modelo de autofinanciamiento 
    equitativo entre los dos proponentes ($5,862.13 USD por autor).
-2. El análisis costo-beneficio para Óptica Vista Visión demuestra que la solución genera 
+2. El análisis costo-beneficio para Óptica de estudio demuestra que la solución genera 
    ahorros directos tangibles de **$2,824.00 USD anuales**, amortizando la inversión operativa 
    en apenas **34 días de funcionamiento** y arrojando un ROI del **969.6 %** en su primer año.
 3. Se certifica formalmente la **VIABILIDAD ECONÓMICA ABSOLUTA** del proyecto SGO, 

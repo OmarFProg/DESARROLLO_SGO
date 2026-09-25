@@ -20,7 +20,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (C.I. 1803391968, Código: 7253
                  - Villalva Dumancela, Alexander Rafael (C.I. 0605351899, Código: 7135)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Provincia de Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Provincia de Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/REQUERIMENTACION/fase3/informeFase3.txt
                  (Espejo en DESARROLLO_SGO/fase3/informeFase3.txt)
 Fecha:           Septiembre 2026 / Período Académico 2026

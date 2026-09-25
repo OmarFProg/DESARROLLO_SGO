@@ -23,7 +23,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf10.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -55,7 +55,7 @@ TABLA DE CONTENIDOS
        - Recomendación 3: Blindaje de Solo Lectura (Read-Only Guard) en el Chatbot con IA
        - Recomendación 4: Disciplina de Validación Preventiva Dióptrica OD/OI
        - Recomendación 5: Rigor en las Ceremonias Scrum Quincenales y Security DoD
-   3.3 Factores Críticos de Éxito para la Adopción en Óptica Vista Visión
+   3.3 Factores Críticos de Éxito para la Adopción en Óptica de estudio
    3.4 Acta Formal de Aprobación Institucional del Estudio de Factibilidad (Pliego de Firmas)
 4. MATRIZ MAESTRA DE CONSOLIDACIÓN Y TRAZABILIDAD DOCUMENTAL
    4.1 Índice de Correspondencia entre Fases de Ejecución y Secciones del Formato ESPOCH
@@ -116,7 +116,7 @@ de salud visual", surge como una respuesta científica y de ingeniería a las cr
 tecnológicas, operativas y legales que experimentan los consultorios optométricos independientes 
 en la ciudad de Riobamba y la Región Central del Ecuador.
 
-El propósito estratégico del Sistema SGO es diseñar, construir e implantar en *Óptica Vista Visión* 
+El propósito estratégico del Sistema SGO es diseñar, construir e implantar en *Óptica de estudio* 
 una plataforma web progresiva (PWA) de alto rendimiento, mantenible y escalable, que unifique 
 en un flujo continuo la gestión demográfica de pacientes, la historia clínica refractiva 
 especializada (OD/OI), la confección técnica de recetas y certificados CIE-10, la emisión 
@@ -181,7 +181,7 @@ robusta de 7 módulos funcionales debidamente especificados bajo el estándar IE
   y contingencia del 15%) y Bloque II: Explotación ($971.75 USD para infraestructura VPS, soporte y contingencia).
 - **Autofinanciamiento:** El proyecto es 100% autofinanciado por los dos autores ($5,862.13 USD c/u) 
   como parte de su titulación de grado, requiriendo de la óptica una inversión operativa de solo ~$250.00 USD.
-- **Análisis Costo-Beneficio para Óptica Vista Visión:**
+- **Análisis Costo-Beneficio para Óptica de estudio:**
   * Ahorros Tangibles Cuantificados: **$2,824.00 USD/año** ($1,444.00 en tiempo de facturación SRI, 
     $1,080.00 en eliminación de lunas fallidas por rectificación y $300.00 en papelería física).
   * Indicadores Financieros Sobresalientes: **ROI = 969.6%** en el primer año; **Período de Recuperación 
@@ -201,7 +201,7 @@ robusta de 7 módulos funcionales debidamente especificados bajo el estándar IE
   codificación de patologías. Dictamen: Cero conflictos jurídicos; blindaje legal integral.
 
 2.7 SÍNTESIS DE LA FACTIBILIDAD DE RECURSOS Y ORGANIZACIÓN SCRUM
-- **Scrum Team del Proyecto:** Product Owner (Propietario / Optometrista de Óptica Vista Visión), 
+- **Scrum Team del Proyecto:** Product Owner (Propietario / Optometrista de Óptica de estudio), 
   Scrum Master (Ing. Jorge Ariel Menéndez Verdecia), Asesor Metodológico (Ing. Julio Roberto Santillán Castillo) 
   y Developers (Omar Figueroa Díaz - Backend/SRI/Seguridad y Alexander Villalva Dumancela - Frontend/UX/IA).
 - **Suficiencia y Capacidad:** Velocity proyectada de 25 a 30 SP por Sprint. El equipo es **100% autosuficiente**; 
@@ -272,7 +272,7 @@ del ciclo de vida de desarrollo, el equipo de ingeniería y los directores formu
      Terminado con Seguridad (Security Definition of Done - DoD), que incluye validación de inputs, logs 
      de auditoría y protección RBAC.
 
-3.3 FACTORES CRÍTICOS DE ÉXITO PARA LA ADOPCIÓN EN ÓPTICA VISTA VISIÓN
+3.3 FACTORES CRÍTICOS DE ÉXITO PARA LA ADOPCIÓN EN Óptica de estudio
 - Capacitación práctica temprana durante los Sprint Reviews para que el optometrista y la asistente 
   desarrollen memoria muscular con las pantallas del sistema antes del despliegue final.
 - Ejecución rigurosa de los 10 días de *Shadow Testing* en paralelo con el sistema legado para afinar la impresión térmica POS.
@@ -304,7 +304,7 @@ FACULTAD DE INFORMÁTICA Y ELECTRÓNICA - ESPOCH          FACULTAD DE INFORMÁTI
 
 -------------------------------------------------
 PROPIETARIO / OPTOMETRISTA PRINCIPAL
-ÓPTICA VISTA VISIÓN (RIOBAMBA)
+Óptica de estudio (RIOBAMBA)
 PRODUCT OWNER / BENEFICIARIO DEL PROYECTO
 
 

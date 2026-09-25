@@ -22,7 +22,7 @@ Revisión Técnica y Asesoría Metodológica:
 - Ing. Santillán Castillo, Julio Roberto
 
 Institución Beneficiaria / Caso de Estudio:
-- Óptica Vista Visión (Riobamba, Provincia de Chimborazo, Ecuador)
+- Óptica de estudio (Riobamba, Provincia de Chimborazo, Ecuador)
 
 Fecha de Consolidación: Mayo - Junio 2026 / Vigencia Período Académico 2026
 Versión: 1.0 Definitiva Consolidada
@@ -37,7 +37,7 @@ El propósito central de este documento es integrar coherentemente los hallazgos
 obtenidos a partir de tres fuentes de elicitación primaria:
 
 1. Primera Entrevista Semi-estructurada con el Propietario / Optometrista de
-   la Óptica Vista Visión, enfocada en la comprensión global del negocio, los
+   la Óptica de estudio, enfocada en la comprensión global del negocio, los
    flujos de atención diaria y los dolores operativos inmediatos.
 2. Análisis Técnico Demostrativo del Sistema Legado Oftalmológico, realizado
    mediante inspección directa de la aplicación de escritorio en uso,
@@ -66,7 +66,7 @@ sesiones ejecutadas:
 2.1 Sesión 1: Entrevista Semi-estructurada Inicial
 - Fecha: Primer contacto de relevamiento (Mayo 2026)
 - Participantes: Omar Figueroa, Alexander Villalva (Entrevistadores);
-  Propietario y Optometrista Principal de Óptica Vista Visión (Entrevistado).
+  Propietario y Optometrista Principal de Óptica de estudio (Entrevistado).
 - Instrumento: Guion semi-estructurado de preguntas abiertas sobre operación,
   volumen de pacientes, proveedores de lunas, facturación y catálogo de productos.
 - Enfoque: Mapeo del modelo de negocio, cadena de valor y experiencia de usuario.
@@ -94,7 +94,7 @@ sesiones ejecutadas:
 
 3. CARACTERIZACIÓN DEL NEGOCIO Y MODELO OPERATIVO DE LA ÓPTICA
 --------------------------------------------------------------------------------
-Óptica Vista Visión es un establecimiento de salud visual primaria radicado en
+Óptica de estudio es un establecimiento de salud visual primaria radicado en
 la ciudad de Riobamba, provincia de Chimborazo, con cuatro años de trayectoria en
 el mercado local. Su dinámica operativa presenta las siguientes características:
 

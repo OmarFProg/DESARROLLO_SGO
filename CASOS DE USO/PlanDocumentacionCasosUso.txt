@@ -3,7 +3,7 @@ PLAN MAESTRO DE DOCUMENTACIÓN DE CASOS DE USO POR FASES
 SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
 ================================================================================
 Proyecto:           Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
-Organización:       Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Organización:       Óptica de estudio — Riobamba, Chimborazo, Ecuador
 Marco Académico:    Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
 Metodología:        Scrum / Secure Scrum integrado con Estándar UML 2.5 e ISO/IEC 25010:2023
 Plantilla Guía:     PMOInformatica — Plantilla Estándar de Especificación de Casos de Uso
@@ -63,7 +63,7 @@ Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO).
 El plan organiza la documentación en FASES PROGRESIVAS Y ARTICULADAS con el marco de 
 trabajo ágil Scrum, garantizando que el 100% de los requisitos funcionales del sistema 
 (SRS v2.0) y los hallazgos operativos extraídos de la práctica clínica real (audio de 
-atención en Óptica Vista Visión) queden rigurosamente especificados conforme a las 
+atención en Óptica de estudio) queden rigurosamente especificados conforme a las 
 directrices de la "Plantilla de Casos de Uso de PMOInformatica".
 
 1.2 OBJETIVOS ESPECÍFICOS
@@ -108,10 +108,10 @@ forma estricta las secciones normadas por la plantilla de PMOInformatica:
 2. Historial de Versiones:
    - Tabla con: Fecha | Versión | Autor | Organización | Descripción de Cambios.
 3. Información del Proyecto:
-   - Empresa / Organización: Óptica Vista Visión.
+   - Empresa / Organización: Óptica de estudio.
    - Proyecto: Sistema de Gestión Optométrica (SGO).
    - Fecha de Preparación: Septiembre 2026.
-   - Cliente: Propietario / Optometrista Titular de Óptica Vista Visión.
+   - Cliente: Propietario / Optometrista Titular de Óptica de estudio.
    - Patrocinador Principal: ESPOCH / Dirección de Titulación.
    - Líder de Proyecto / Líder de Desarrollo: Autores del Software.
 4. Aprobaciones:
@@ -405,7 +405,7 @@ El cronograma considera una dedicación técnica distribuida a lo largo de 6 sem
 5.2 HITOS CRÍTICOS DE ENTREGA Y CRITERIOS DE TRANSICIÓN
 - HITO 1 (Fin Semana 1): Catálogo de Actores y Plantilla Homologada aprobados por el Tutor.
 - HITO 2 (Fin Semana 3): Especificación de Refracción Clínica y Pruebas Ambulatorias validadas 
-  por el Optometrista Titular de Óptica Vista Visión.
+  por el Optometrista Titular de Óptica de estudio.
 - HITO 3 (Fin Semana 4): Flujo completo de Órdenes de Retiro, Anticipos y Cotizaciones de 
   Taller validado por el personal de Mostrador.
 - HITO 4 (Fin Semana 5): Especificación del ciclo de firma y autorización SRI validada contra 
@@ -462,7 +462,7 @@ Para considerar que un Caso de Uso está "DOCUMENTADO Y TERMINADO" (Done), debe 
 - Revisión por Pares (Peer Review): Todo caso de uso redactado por uno de los autores del 
   software debe ser revisado y aprobado por el otro autor antes de remitirse al cliente.
 - Homologación Clínica: Los casos de uso del módulo clínico (M3) y taller (M4) se revisarán en 
-  sesiones presenciales de 45 minutos con el Optometrista de Óptica Vista Visión para certificar 
+  sesiones presenciales de 45 minutos con el Optometrista de Óptica de estudio para certificar 
   que reflejan la realidad médica y el confort visual del paciente.
 
 

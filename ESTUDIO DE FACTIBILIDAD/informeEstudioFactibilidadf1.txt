@@ -20,7 +20,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf1.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -49,7 +49,7 @@ TABLA DE CONTENIDOS
    4.2 Cuantificación Financiera de los Nuevos Módulos (SRI y Chatbot IA)
    4.3 Tabla de Presupuesto Consolidado: Bloque I (Construcción) y Bloque II (Explotación)
    4.4 Estructura de Autofinanciamiento Equitativo (50% por Autor)
-   4.5 Análisis Cuantitativo de Ahorros e Impacto Operativo para Óptica Vista Visión
+   4.5 Análisis Cuantitativo de Ahorros e Impacto Operativo para Óptica de estudio
    4.6 Estimación Preliminar de Retorno de Inversión (ROI) y Payback
 5. CONSOLIDACIÓN DEL MARCO NORMATIVO Y EVIDENCIAS LEGALES
    5.1 Ley Orgánica de Protección de Datos Personales (LOPDP Ecuador)
@@ -58,7 +58,7 @@ TABLA DE CONTENIDOS
    5.4 Normativa Sanitaria del MSP y Código Orgánico de la Salud
    5.5 Matriz de Conformidad Legal y Ausencia de Conflictos
 6. LEVANTAMIENTO DE DATOS DEL ENTORNO OPERATIVO Y DE MERCADO
-   6.1 Caracterización del Entorno Asistencial y Comercial de Óptica Vista Visión
+   6.1 Caracterización del Entorno Asistencial y Comercial de Óptica de estudio
    6.2 Diagnóstico del Parque de Software en los Centros Optométricos de Riobamba
    6.3 Estrategia de Validación Iterativa y Despliegue Demostrativo con el Owner
 7. MATRIZ DE TRAZABILIDAD INTEGRAL DE INSUMOS DE LA FASE 1
@@ -374,7 +374,7 @@ TABLA 3: RESUMEN PRESUPUESTARIO CONSOLIDADO Y FINANCIAMIENTO
 | TOTAL AUTOFINANCIADO POR LOS AUTORES    | 100.0 %                 | $ 11.724,25           |
 +-----------------------------------------+-------------------------+-----------------------+
 
-4.5 ANÁLISIS CUANTITATIVO DE AHORROS PARA ÓPTICA VISTA VISIÓN:
+4.5 ANÁLISIS CUANTITATIVO DE AHORROS PARA Óptica de estudio:
 La implementación del sistema genera ahorros tangibles cuantificables para el establecimiento:
 1. Automatización de Facturación Electrónica SRI:
    - Tiempo manual en portal SRI: ~10 minutos por comprobante.
@@ -443,8 +443,8 @@ La implementación del sistema genera ahorros tangibles cuantificables para el e
 6. LEVANTAMIENTO DE DATOS DEL ENTORNO OPERATIVO Y DE MERCADO
 ================================================================================
 
-6.1 CARACTERIZACIÓN DEL ENTORNO EN ÓPTICA VISTA VISIÓN
-- Unidad de Análisis: Óptica Vista Visión, ubicada en el centro urbano de Riobamba.
+6.1 CARACTERIZACIÓN DEL ENTORNO EN Óptica de estudio
+- Unidad de Análisis: Óptica de estudio, ubicada en el centro urbano de Riobamba.
 - Capacidad Asistencial: Promedio de 5 a 10 pacientes diarios (150 a 250 pacientes/mes).
 - Personal Operativo: 2 profesionales de salud visual (Propietario / Optometrista Administrador y Optometrista Auxiliar).
 - Servicios Ofrecidos: Refracción computarizada, prescripción y adaptación de lentes monofocales y progresivos, 
@@ -507,7 +507,7 @@ en la Fase 1 y las secciones del Estudio de Factibilidad que alimentarán:
    orquestar los microservicios y el motor de IA local sin colapsos de memoria ni latencia.
 3. El presupuesto actualizado de $11,724.25 USD se encuentra plenamente justificado, 
    incorporando los costos obligatorios de la firma digital SRI y demostrando un retorno 
-   de inversión positivo y medible para Óptica Vista Visión.
+   de inversión positivo y medible para Óptica de estudio.
 4. Se declara formalmente concluida y aprobada la FASE 1, quedando habilitado de forma 
    inmediata el desarrollo secuencial de las siguientes fases del Estudio de Factibilidad.
 

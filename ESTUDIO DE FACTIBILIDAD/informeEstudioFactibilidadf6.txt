@@ -22,7 +22,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf6.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -37,7 +37,7 @@ TABLA DE CONTENIDOS
    1.3 Criterios de Evaluación bajo el Marco Ágil Scrum
 2. ESTRUCTURA DEL TALENTO HUMANO Y ORGANIZACIÓN BAJO EL MARCO SCRUM
    2.1 Definición del Scrum Team del Proyecto SGO
-       - Product Owner (Propietario y Optometrista Principal de Óptica Vista Visión)
+       - Product Owner (Propietario y Optometrista Principal de Óptica de estudio)
        - Scrum Master (Ing. Jorge Ariel Menéndez Verdecia - Director de Titulación)
        - Revisor Técnico y Asesor Metodológico (Ing. Julio Roberto Santillán Castillo)
        - Developers / Equipo de Desarrollo (Omar Figueroa Díaz y Alexander Villalva Dumancela)
@@ -49,7 +49,7 @@ TABLA DE CONTENIDOS
 4. INVENTARIO Y DISPONIBILIDAD DE RECURSOS MATERIALES, LOGÍSTICOS Y FÍSICOS
    4.1 Infraestructura Física e Instalaciones Disponibles
    4.2 Recursos Materiales de Cómputo y Conectividad
-   4.3 Periféricos y Dispositivos de Validación de Campo en Óptica Vista Visión
+   4.3 Periféricos y Dispositivos de Validación de Campo en Óptica de estudio
    4.4 Herramientas de Gestión de Proyecto y Acceso a Bases Científicas (ESPOCH)
 5. DINÁMICA OPERATIVA DEL SCRUM TEAM: CEREMONIAS Y GESTIÓN DE ARTEFACTOS
    5.1 Gestión de Artefactos: Product Backlog, Security Backlog e Incremento Potencialmente Desplegable
@@ -112,7 +112,7 @@ pp. 12-14), el proyecto adopta la estructura de un Scrum Team unificado y multid
 
 2.1 DEFINICIÓN DEL SCRUM TEAM DEL PROYECTO SGO
 
-1. Product Owner (PO) — Propietario / Optometrista Principal de Óptica Vista Visión:
+1. Product Owner (PO) — Propietario / Optometrista Principal de Óptica de estudio:
    - Rol y Responsabilidades: Máximo responsable de optimizar el valor del producto clínico-comercial. 
      Define los requerimientos del dominio optométrico, valida los flujos de refracción OD/OI, 
      establece las prioridades del Product Backlog, aprueba los criterios de aceptación en cada 
@@ -195,7 +195,7 @@ TABLA 1: MATRIZ RACI DEL PROYECTO SGO
 Leyenda RACI: R = Responsable directo de ejecución, A = Aprobador final, C = Consultado técnico, I = Informado.
 - OF: Omar Santiago Figueroa Díaz
 - AV: Alexander Rafael Villalva Dumancela
-- Cli: Product Owner / Optometrista (Óptica Vista Visión)
+- Cli: Product Owner / Optometrista (Óptica de estudio)
 - JM: Ing. Jorge Ariel Menéndez Verdecia (Scrum Master / Director Titulación)
 - JS: Ing. Julio Roberto Santillán Castillo (Asesor Académico / Revisor)
 
@@ -207,7 +207,7 @@ Leyenda RACI: R = Responsable directo de ejecución, A = Aprobador final, C = Co
 4.1 INFRAESTRUCTURA FÍSICA E INSTALACIONES DISPONIBLES
 - Laboratorio de Ingeniería de Software (FIE-ESPOCH): Espacio académico dotado de mobiliario 
   ergonómico, suministro eléctrico estabilizado y conexión directa al backbone universitario.
-- Consultorio de Óptica Vista Visión: Instalación comercial y asistencial en Riobamba disponible 
+- Consultorio de Óptica de estudio: Instalación comercial y asistencial en Riobamba disponible 
   para sesiones de observación de campo, pruebas de usabilidad clínica con pacientes reales y 
   verificación de interfaces en mostrador.
 
@@ -220,7 +220,7 @@ Leyenda RACI: R = Responsable directo de ejecución, A = Aprobador final, C = Co
   * Intel Core i5-7200U (4 hilos, 3.1 GHz), 12 GB RAM DDR4, SSD SATA III, Windows 10 Home.
   * Función: Estación de ingeniería backend Laravel, modelado relacional PostgreSQL y API-SRI.
 - Conectividad a Internet: Enlace simétrico de fibra óptica en estaciones de trabajo y red privada 
-  en Óptica Vista Visión (ancho de banda > 100 Mbps).
+  en Óptica de estudio (ancho de banda > 100 Mbps).
 
 4.3 PERIFÉRICOS Y DISPOSITIVOS DE VALIDACIÓN DE CAMPO EN LA ÓPTICA
 - Dispositivo Móvil de Consulta: Tableta táctil de 10 pulgadas (resolución 1280x800, Android 11+ con Chrome) 
@@ -260,7 +260,7 @@ El ciclo operativo se organiza en Sprints de dos semanas (10 días laborables):
   * Reunión de sincronización técnica entre Omar Figueroa y Alexander Villalva para responder: 
     ¿Qué se completó ayer? ¿Qué se construirá hoy? ¿Existen impedimentos técnicos?
 - Sprint Review (Viernes de cierre de Sprint, 2 horas):
-  * Demostración funcional en vivo ante el Product Owner en las instalaciones de Óptica Vista Visión 
+  * Demostración funcional en vivo ante el Product Owner en las instalaciones de Óptica de estudio 
     o mediante acceso remoto al servidor de Staging.
   * El PO inspecciona el incremento y valida el cumplimiento de los criterios de aceptación.
 - Sprint Retrospective (Viernes de cierre, 1 hora):

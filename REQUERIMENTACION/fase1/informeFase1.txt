@@ -19,7 +19,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (C.I. 1803391968, Código: 7253
                  - Villalva Dumancela, Alexander Rafael (C.I. 0605351899, Código: 7135)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Establecimiento: Óptica Vista Visión (Riobamba, Provincia de Chimborazo, Ecuador)
+Establecimiento: Óptica de estudio (Riobamba, Provincia de Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/REQUERIMENTACION/fase1/informeFase1.txt
                  (Espejo en DESARROLLO_SGO/fase1/informeFase1.txt)
 Fecha:           Septiembre 2026 / Período Académico 2026
@@ -155,7 +155,7 @@ sesiones formales de levantamiento complementadas con trabajo de campo:
 
 3.1 SESIÓN 1: ENTREVISTA SEMI-ESTRUCTURADA EXPLORATORIA
 - Fecha: Mayo 2026.
-- Objetivo: Mapear el modelo de negocio de Óptica Vista Visión, su volumen de trabajo, 
+- Objetivo: Mapear el modelo de negocio de Óptica de estudio, su volumen de trabajo, 
   su cadena de valor y las principales frustraciones del personal.
 - Hallazgos generales:
   * 4 años de operación en el mercado de Riobamba.
@@ -256,7 +256,7 @@ sesiones formales de levantamiento complementadas con trabajo de campo:
 ================================================================================
 
 Del trabajo de campo y entrevistas se extrajeron los 5 flujos operativos nucleares 
-que definen el día a día en Óptica Vista Visión:
+que definen el día a día en Óptica de estudio:
 
 5.1 FLUJO 1: RECEPCIÓN, FILIACIÓN Y MANEJO DE PACIENTES
 1. El paciente acude al local por consulta visual, renovación de lentes o compra de accesorios.
@@ -500,7 +500,7 @@ con el Product Owner y el Optometrista durante las mesas de trabajo de la Fase 2
 1. La Fase 1 de Elicitación y Levantamiento de Requisitos ha sido ejecutada de manera 
    rigurosa, estructurada y conforme a las mejores prácticas de la ingeniería de software 
    y los estándares académicos de la ESPOCH.
-2. Se cuenta con un entendimiento profundo del modelo operativo de Óptica Vista Visión, 
+2. Se cuenta con un entendimiento profundo del modelo operativo de Óptica de estudio, 
    sus limitantes tecnológicas pasadas y los requerimientos funcionales y de seguridad 
    necesarios para el nuevo sistema SGO.
 3. Se declara formalmente que este informe `informeFase1.txt` queda aprobado y cerrado 

@@ -15,12 +15,12 @@ Proyecto:           Desarrollo de un sistema informático de gestión clínica
                     la seguridad de los datos de salud visual.
 Documento:          Informe de Análisis, Cruce de Información y Cartera de 
                     Propuestas de Innovación para el Product Owner y Stakeholder Técnico.
-Destinatarios:      - Product Owner / Beneficiario: Propietario de Óptica Vista Visión
+Destinatarios:      - Product Owner / Beneficiario: Propietario de Óptica de estudio
                     - Stakeholder Técnico / Scrum Master: Ing. Jorge Menéndez Verdecia
                     - Asesor Técnico / Revisor: Ing. Julio Santillán Castillo
 Autores / Devs:     - Villalva Dumancela, Alexander Rafael (C.I. 0605351899, Cód. 7135)
                     - Figueroa Díaz, Omar Santiago (C.I. 1803391968, Cód. 7253)
-Contexto Operativo: Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Contexto Operativo: Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Fecha de Emisión:   Septiembre 2026 / Período Académico 2026 - 2027
 Archivo Destino:    DESARROLLO_SGO/INNOVACION/informePropuestasInnovacion.txt
 Versión:            1.0 Final Aprobada
@@ -159,7 +159,7 @@ estructura en 5 módulos obligatorios que integran 23 Requisitos Funcionales (RF
 - Equipo de trabajo: 2 ingenieros de software en formación (investigadores).
 - Duración total del proyecto: 18 semanas (septiembre 2026 a enero 2027).
 - Tiempo de desarrollo efectivo: 4 sprints quincenales (8 semanas calendario).
-- Entorno de operación: Red de área local (LAN) en Óptica Vista Visión, Riobamba.
+- Entorno de operación: Red de área local (LAN) en Óptica de estudio, Riobamba.
 - Resiliencia requerida: Autonomía operativa del 99.5% sin internet (el sistema no 
   debe bloquearse si se cae la conexión externa de banda ancha).
 - Fronteras estrictas (Fuera de Alcance / Out-of-Scope según Documento de Alcance):
@@ -280,7 +280,7 @@ reales del proyecto de titulación, toda propuesta debe acatar cuatro principios
    en un software de punta que despunte con respecto a los sistemas oftalmológicos 
    legados de escritorio existentes en Riobamba y la región central del país.
 2. Principio de Interés para el Negocio: Debe resolver problemas operativos o clínicos 
-   tangibles de Óptica Vista Visión, incrementando la productividad, fidelizando 
+   tangibles de Óptica de estudio, incrementando la productividad, fidelizando 
    al paciente o evitando pérdidas financieras por mermas y errores técnicos.
 3. Principio de Alineación Normativa ISO 25010: Debe reforzar de manera directa 
    uno o más atributos de calidad del proyecto: Autenticidad, Integridad, 
@@ -934,7 +934,7 @@ SPRINT 4: VENTAS, ARQUEO Y BLINDAJE DE CIBERSEGURIDAD (SEMANAS 7 - 8)
 4. DECLARACIÓN DE PERTINENCIA:
    Las soluciones propuestas respetan al 100% las fronteras del sistema, no 
    dependen de servicios pagos de internet, garantizan la autonomía en red local 
-   de Óptica Vista Visión y constituyen una contribución científica y práctica de 
+   de Óptica de estudio y constituyen una contribución científica y práctica de 
    alto valor para la carrera de Software de la ESPOCH.
 
 ================================================================================

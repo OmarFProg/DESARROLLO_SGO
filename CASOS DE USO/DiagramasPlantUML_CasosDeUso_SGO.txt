@@ -3,7 +3,7 @@ CATÁLOGO OFICIAL DE DIAGRAMAS DE CASOS DE USO EN PLANTUML (ESTÁNDAR UML 2.5)
 SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
 ================================================================================
 Proyecto:           Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)
-Organización:       Óptica Vista Visión — Riobamba, Chimborazo, Ecuador
+Organización:       Óptica de estudio — Riobamba, Chimborazo, Ecuador
 Marco Académico:    Trabajo de Titulación — Escuela Superior Politécnica de Chimborazo (ESPOCH)
 Metodología:        PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:2023
 Autores:            Figueroa Díaz Omar Santiago, Villalva Dumancela Alexander Rafael

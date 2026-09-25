@@ -22,7 +22,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf8.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -54,7 +54,7 @@ TABLA DE CONTENIDOS
    3.2 Diagrama de Flujo Asistencial y Comercial To-Be (Notación Estándar)
    3.3 Puntos de Control, Validaciones Automáticas y Transiciones de Estado
 4. EVALUACIÓN DE COMPATIBILIDAD CON LA CULTURA ORGANIZACIONAL
-   4.1 Perfil de los Usuarios Finales y Clima Laboral en Óptica Vista Visión
+   4.1 Perfil de los Usuarios Finales y Clima Laboral en Óptica de estudio
    4.2 Análisis de Barreras Psicológicas y Temores ante la Digitalización
        - Temor a la ralentización de la consulta médica por uso del teclado
        - Temor a la complejidad tributaria y bloqueo por fallas del SRI o Internet
@@ -91,7 +91,7 @@ intachable, pero si entra en colisión con las costumbres laborales del personal
 la atención al paciente o si demanda destrezas informáticas ajenas a los profesionales de la 
 salud, el proyecto fracasará inevitablemente en su fase de implantación.
 
-En el contexto de *Óptica Vista Visión*, la factibilidad operacional se enfoca en demostrar 
+En el contexto de *Óptica de estudio*, la factibilidad operacional se enfoca en demostrar 
 que el Sistema de Gestión Optométrica (SGO) no impone una carga burocrática adicional, sino que 
 simplifica radicalmente las tareas de consulta refractiva, confección de recetas, despacho de 
 lunas al taller, cobros transaccionales y facturación ante el SRI, garantizando un acoplamiento 
@@ -102,7 +102,7 @@ armónico y fluido con la dinámica de atención clínica y comercial del establ
    y reingenierizado (To-Be) que implementa el SGO, identificando la erradicación de cuellos de botella.
 2. Modelar formalmente la cadena de valor asistencial y comercial en notación estandarizada BPMN 
    (Business Process Model and Notation), definiendo las responsabilidades de cada carril operativo.
-3. Evaluar la compatibilidad cultural y humana del personal de Óptica Vista Visión frente a la 
+3. Evaluar la compatibilidad cultural y humana del personal de Óptica de estudio frente a la 
    herramienta, estructurando un plan de gestión del cambio bajo el modelo ADKAR.
 4. Diseñar el programa de capacitación práctica por roles (Optometrista, Asistente, Administrador) 
    y definir los materiales de soporte ergonómico (ayudas contextuales y guías rápidas).
@@ -212,7 +212,7 @@ El flujo de valor global del consultorio se distribuye en una Piscina Principal 
 
 ```
 +-------------------------------------------------------------------------------------------------------------------------------+
-| POOL: GESTIÓN INTEGRAL CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO) - ÓPTICA VISTA VISIÓN                                           |
+| POOL: GESTIÓN INTEGRAL CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO) - Óptica de estudio                                           |
 +-------------------+-----------------------------------------------------------------------------------------------------------+
 | 1. PACIENTE       | (Inicio) -> [Solicita Atención] -----------------------------------------------------> [Recibe Lentes/RIDE] -> (Fin)
 +-------------------+-----------------------------------------------------------------------------------------------------------+
@@ -254,8 +254,8 @@ El flujo de valor global del consultorio se distribuye en una Piscina Principal 
 4. EVALUACIÓN DE COMPATIBILIDAD CON LA CULTURA ORGANIZACIONAL
 ================================================================================
 
-4.1 PERFIL DE LOS USUARIOS FINALES Y CLIMA LABORAL EN ÓPTICA VISTA VISIÓN
-Óptica Vista Visión opera como una microempresa de salud visual familiar y profesional, integrada por:
+4.1 PERFIL DE LOS USUARIOS FINALES Y CLIMA LABORAL EN Óptica de estudio
+Óptica de estudio opera como una microempresa de salud visual familiar y profesional, integrada por:
 - Usuario 1: Optometrista Principal y Propietario (Profesional de la salud visual con más de 10 años de 
   experiencia, habituado a la exploración diagnóstica física, con destrezas informáticas intermedias).
 - Usuario 2: Asistente de Mostrador y Ventas (Personal comercial y administrativo encargado del cobro, 
@@ -280,7 +280,7 @@ Para asegurar una transición exitosa, se estructura el proceso de cambio según
 
 TABLA 1: MATRIZ DE GESTIÓN DEL CAMBIO ORGANIZACIONAL (MODELO ADKAR)
 +---------------+-----------------------------------------------------------------------------------------------+
-| ETAPA ADKAR   | ACCIÓN ESPECÍFICA EN ÓPTICA VISTA VISIÓN                                                      |
+| ETAPA ADKAR   | ACCIÓN ESPECÍFICA EN Óptica de estudio                                                      |
 +---------------+-----------------------------------------------------------------------------------------------+
 | Awareness     | Demostración directa al propietario y asistente de los graves riesgos legales (LOPDP y SRI)  |
 | (Conciencia)  | y las pérdidas económicas ($2,824/año) que produce el esquema manual y el sistema legado.    |
@@ -415,7 +415,7 @@ TABLA 3: MATRIZ COMPARATIVA DE RENDIMIENTO OPERACIONAL (AS-IS VS. TO-BE)
 Con base en el análisis minucioso de compatibilidad procedimental, reingeniería de procesos 
 y evaluación humana:
 
-1. El Sistema SGO digitaliza y optimiza exactamente la cadena de valor real de Óptica Vista Visión, 
+1. El Sistema SGO digitaliza y optimiza exactamente la cadena de valor real de Óptica de estudio, 
    reduciendo el tiempo total de ciclo operativo por paciente de 32.5 a 5.5 minutos, lo que representa 
    una MEJORA DE EFICIENCIA GLOBAL DEL 83.1%.
 2. Se erradica por completo la sobreescritura destructiva de historiales clínicos, la dispersión de 

@@ -111,7 +111,7 @@ Chimborazo, se determinó que la gran mayoría de consultorios y establecimiento
 independientes utilizan sistemas de gestión inadecuados, desactualizados o derechamente 
 informales (fichas manuales en cartulina y hojas de cálculo no estandarizadas). 
 
-En el caso específico de *Óptica Vista Visión*, se utilizaba una aplicación de escritorio 
+En el caso específico de *Óptica de estudio*, se utilizaba una aplicación de escritorio 
 legada basada en el modelo de interfaces múltiples (MDI), importada del extranjero, que adolecía 
 de fallas estructurales:
 - Sobreescritura destructiva de recetas anteriores, perdiendo la evolución clínica de la agudeza visual.
@@ -127,7 +127,7 @@ aplicación web mantenible, modular y escalable, construida bajo el marco ágil 
 prácticas de arquitectura por capas. La visión se fundamenta en:
 - Que la solución perdure a través de nuevas actualizaciones tecnológicas sin obsolescencia temprana.
 - Que crezca orgánicamente en funcionalidades, adaptándose a la realidad operativa del negocio.
-- Que se convierta en un activo tecnológico y estratégico para Óptica Vista Visión, eliminando 
+- Que se convierta en un activo tecnológico y estratégico para Óptica de estudio, eliminando 
   la dependencia de suscripciones extranjeras y blindando la seguridad pericial de los datos clínicos.
 
 
@@ -162,7 +162,7 @@ SRI de forma nativa y proporcione soporte analítico a la toma de decisiones med
   local, con blindaje estricto de solo lectura (`GRANT SELECT`).
 
 3. Contexto Organizacional y Cultural:
-Óptica Vista Visión opera como un centro de salud visual primaria fundado hace más de cuatro años en 
+Óptica de estudio opera como un centro de salud visual primaria fundado hace más de cuatro años en 
 Riobamba. Su cultura laboral se caracteriza por una atención personalizada al paciente, operada por 
 dos profesionales: el Optometrista/Propietario y la Asistente Comercial. El sistema se desenvuelve 
 en un entorno donde la rapidez de respuesta, la claridad visual de las prescripciones y la estabilidad 
@@ -246,7 +246,7 @@ Se seleccionó un stack de código abierto, altamente probado y con cero costo d
 - Componente de IA: Enrutador local determinístico de intenciones en Node.js/PHP con conexión de solo lectura.
 
 3. Estimación de Cargas de Cómputo y Volumetría:
-- Volumen de atención en Óptica Vista Visión: 5 a 10 pacientes diarios (máximo 300 transacciones/mes).
+- Volumen de atención en Óptica de estudio: 5 a 10 pacientes diarios (máximo 300 transacciones/mes).
 - Generación y sellado de XML con XAdES-BES: Demanda ~250 ms en el microservicio NestJS.
 - Generación de comprobante RIDE PDF: Demanda ~1,200 ms mediante Puppeteer headless.
 - Consultas analíticas al Chatbot Operativo: Ejecución en <500 ms sobre PostgreSQL relacional indexado.
@@ -297,7 +297,7 @@ TABLA 2: PRESUPUESTO INTEGRAL DEL PROYECTO SGO (CONSTRUCCIÓN Y EXPLOTACIÓN)
 El proyecto es 100% autofinanciado por los investigadores como requisito de graduación ($5,862.13 USD cada uno). 
 La óptica beneficiaria asume únicamente el costo directo de consumibles y certificado digital (~$250.00 USD).
 
-3. Análisis Costo-Beneficio (ACB) para Óptica Vista Visión:
+3. Análisis Costo-Beneficio (ACB) para Óptica de estudio:
 - Ahorros Tangibles Anuales Cuantificados:
   * Ahorro en tiempo de facturación SRI: reducción de 9.5 min por factura x 200 facturas/mes = 31.6 h/mes = **$1,444.00 USD/año**.
   * Eliminación de pérdidas por fallas en pedidos a taller: reducción de 3 lunas/mes x $30 = **$1,080.00 USD/año**.
@@ -377,7 +377,7 @@ Leyenda: R = Responsable, A = Aprobador, C = Consultado, I = Informado.
 
 2. Inventario de Recursos Materiales y Tecnológicos:
 - Estación Staging AMD Ryzen 5 9600X (16 GB DDR5) y Estación Backend Intel Core i5-7200U (12 GB).
-- Consultorio clínico en Óptica Vista Visión, red local cableada y Wi-Fi 5 GHz, mini-UPS de respaldo.
+- Consultorio clínico en Óptica de estudio, red local cableada y Wi-Fi 5 GHz, mini-UPS de respaldo.
 - Periféricos de prueba: Impresora térmica de tickets POS de 80 mm e impresora láser monocromática.
 - Repositorio privado en GitHub con integración continua y licenciamiento de software libre (Docker, Node, PHP).
 
@@ -443,7 +443,7 @@ Piscina "Atención Integral en Salud Visual" dividida en 6 carriles:
 - Etapa I (Sem 1-3): Elicitación, Requisitos y Estudio de Factibilidad.
 - Etapa II (Sem 4-5): Arquitectura, Base de Datos PostgreSQL y Entorno Staging Docker con túnel Cloudflare.
 - Etapa III (Sem 6-13): Construcción ágil en Scrum (4 Sprints quincenales / 8 semanas efectivas).
-- Etapa IV (Sem 14-15): Auditoría de seguridad ISO 25010 y Shadow Testing (10 días) en Óptica Vista Visión.
+- Etapa IV (Sem 14-15): Auditoría de seguridad ISO 25010 y Shadow Testing (10 días) en Óptica de estudio.
 - Etapa V (Sem 16): Despliegue definitivo en LAN, configuración de periféricos y capacitación.
 - Etapa VI (Sem 17-18): Memoria técnica de grado, revisión docente y sustentación pública.
 
@@ -517,7 +517,7 @@ FACULTAD DE INFORMÁTICA Y ELECTRÓNICA - ESPOCH          FACULTAD DE INFORMÁTI
 
 -------------------------------------------------
 PROPIETARIO / OPTOMETRISTA PRINCIPAL
-ÓPTICA VISTA VISIÓN (RIOBAMBA)
+Óptica de estudio (RIOBAMBA)
 PRODUCT OWNER / BENEFICIARIO DEL PROYECTO
 
 ================================================================================

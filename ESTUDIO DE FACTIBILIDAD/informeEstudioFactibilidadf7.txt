@@ -22,7 +22,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf7.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -42,7 +42,7 @@ TABLA DE CONTENIDOS
        - La ineficiencia de los sistemas contables genéricos frente a datos refractivos
        - La inadecuación legal y tributaria del software extranjero importado
    2.3 Segmentación del Mercado Objetivo y Definición del Perfil de Adopción
-       - Segmento Primario: Microempresas y Consultorios Clínicos Independientes (Caso Piloto: Óptica Vista Visión)
+       - Segmento Primario: Microempresas y Consultorios Clínicos Independientes (Caso Piloto: Óptica de estudio)
        - Segmento Secundario: Cadenas y Consultorios Multisede Regionales
        - Segmento Terciario: Gabinetes Universitarios y Fundaciones de Asistencia Visual
 3. BENCHMARKING COMPETITIVO Y ANÁLISIS DEL ESTADO DEL ARTE
@@ -74,7 +74,7 @@ TABLA DE CONTENIDOS
    6.3 Ciclo Rápido de Retroalimentación Clínica y Comercial (Feedback Loop)
    6.4 Pruebas Piloto de Campo con Pacientes Reales en Consultorio
 7. MODELO DE IMPLANTACIÓN, ADOPCIÓN Y TRANSFERENCIA TECNOLÓGICA
-   7.1 Plan de Despliegue en Óptica Vista Visión y Garantía de Continuidad
+   7.1 Plan de Despliegue en Óptica de estudio y Garantía de Continuidad
    7.2 Viabilidad de Replicabilidad Comercial y Transferibilidad al Gremio Optométrico
    7.3 Estrategia de Mitigación de la Resistencia al Cambio y Retención de Usuarios
 8. DICTAMEN CONCLUYENTE SOBRE LA FACTIBILIDAD DE MERCADO Y DECLARACIÓN DE CIERRE
@@ -120,7 +120,7 @@ La presente fase se articula de manera directa con los lineamientos fijados en:
 - `FORMATO DE ESTUDIO DE FACTIBILIDAD DE UN PROYECTO INFORMÁTICO.pdf` (Sección 9: Factibilidad de Mercado).
 - `directrices.txt` (Líneas 81 a 86: insumo Marco Teórico del Anteproyecto, estrategia de abordaje a consumidores potenciales mediante entregables constantes de validación y acceso remoto a versiones del sistema).
 - `Anteproyecto.pdf` (Justificación, Marco Teórico y Planteamiento del Problema).
-- `informeEntrevistasConsolidado.txt` (Diagnóstico del sistema legado y caracterización operativa de Óptica Vista Visión).
+- `informeEntrevistasConsolidado.txt` (Diagnóstico del sistema legado y caracterización operativa de Óptica de estudio).
 - `informePropuestasInnovacion.txt` (Cruce de información de software de vanguardia y propuesta de valor).
 
 
@@ -140,7 +140,7 @@ Estos establecimientos se dividen en dos categorías operativas:
    Cuentan con software corporativo propietario cerrado y centralizado, inaccesible para 
    ópticas independientes debido a sus costos privativos de desarrollo y mantenimiento.
 2. Consultorios optométricos independientes y microempresas de salud visual (más del 75% 
-   del total de locales en Riobamba, entre los cuales se ubica Óptica Vista Visión): 
+   del total de locales en Riobamba, entre los cuales se ubica Óptica de estudio): 
    Negocios gestionados directamente por optometristas titulados o familias profesionales, 
    que carecen de departamentos de tecnología y requieren soluciones eficientes, económicas, 
    autónomas y de fácil adopción.
@@ -184,7 +184,7 @@ TABLA 1: SEGMENTACIÓN DEL MERCADO META PARA EL SISTEMA SGO
 +-----------------------+---------------------------------------+---------------------------------------------+
 | SEGMENTO              | POBLACIÓN OBJETIVO EN LA REGIÓN       | CARACTERÍSTICAS OPERATIVAS Y PERFIL         |
 +-----------------------+---------------------------------------+---------------------------------------------+
-| Segmento Primario     | Óptica Vista Visión y ~35 consultorios| - 1 a 2 consultorios por establecimiento.   |
+| Segmento Primario     | Óptica de estudio y ~35 consultorios| - 1 a 2 consultorios por establecimiento.   |
 | (Nicho Inmediato /    | optométricos independientes de la     | - 5 a 15 pacientes diarios.                 |
 | Caso Piloto)          | ciudad de Riobamba y Chimborazo.      | - Personal reducido (1 Optometrista + 1 Aux)|
 |                       |                                       | - Urgencia de unificar refracción y SRI.    |
@@ -249,7 +249,7 @@ TABLA 2: MATRIZ DE BENCHMARKING COMPARATIVO MULTIDIMENSIONAL
 | (Opera sin conexión a Internet)    |               | Internet 100%)     | (Se bloquea)     | (Sincroniza)  |
 +------------------------------------+---------------+--------------------+------------------+---------------+
 | Costo de Licenciamiento Mensual    | $0.00         | $25.00 - $60.00/mes| $35.00 - $80/mes | $0.00         |
-| para Óptica Vista Visión           |               |                    |                  | (Propiedad)   |
+| para Óptica de estudio           |               |                    |                  | (Propiedad)   |
 +------------------------------------+---------------+--------------------+------------------+---------------+
 | Soporte Local y Personalización    | Nulo          | Remoto genérico    | Remoto extranjero| Directo       |
 | en la Ciudad de Riobamba           |               |                    |                  | (Desarrollad.)|
@@ -367,7 +367,7 @@ TABLA 4: MATRIZ DE ESTRATEGIAS CRUZADAS (IMPACTO ESTRATÉGICO)
 
 6.1 MECANISMO DE VALIDACIÓN ITERATIVA EN SPRINTS QUINCENALES
 Conforme a la metodología Scrum adoptada y a las directrices de `directrices.txt` (líneas 81-86), 
-la interacción con el Product Owner (propietario y optometrista de Óptica Vista Visión) se 
+la interacción con el Product Owner (propietario y optometrista de Óptica de estudio) se 
 estructura en ciclos cortos de inspección y adaptación cada dos semanas (14 días calendario):
 
 1. Sesiones de Sprint Planning:
@@ -425,7 +425,7 @@ acceso remoto se procesan bajo el siguiente protocolo de ingeniería:
 
 6.4 PRUEBAS PILOTO DE CAMPO CON PACIENTES REALES EN CONSULTORIO
 Previo a la liberación final del software, se contempla una ventana de 10 días laborables de 
-pruebas en paralelo (Shadow Testing) en las instalaciones de Óptica Vista Visión:
+pruebas en paralelo (Shadow Testing) en las instalaciones de Óptica de estudio:
 - El optometrista atiende al paciente registrando la consulta simultáneamente en el sistema tradicional 
   y en el nuevo Sistema SGO.
 - Se cronometra la velocidad de digitación de la fórmula dióptrica, se verifica la impresión 
@@ -437,7 +437,7 @@ pruebas en paralelo (Shadow Testing) en las instalaciones de Óptica Vista Visi�
 7. MODELO DE IMPLANTACIÓN, ADOPCIÓN Y TRANSFERENCIA TECNOLÓGICA
 ================================================================================
 
-7.1 PLAN DE DESPLIEGUE EN ÓPTICA VISTA VISIÓN Y GARANTÍA DE CONTINUIDAD
+7.1 PLAN DE DESPLIEGUE EN Óptica de estudio Y GARANTÍA DE CONTINUIDAD
 El modelo de adopción propuesto garantiza la soberanía del establecimiento y elimina 
 la dependencia perpetua de proveedores externos:
 1. Entrega del Producto: Se suministra el código fuente completo, contenedores Docker parametrizados, 
@@ -448,7 +448,7 @@ la dependencia perpetua de proveedores externos:
    de 30 días laborables para soporte in situ, resolución de dudas operativas y afinamiento de periféricos.
 
 7.2 VIABILIDAD DE REPLICABILIDAD COMERCIAL Y TRANSFERIBILIDAD AL GREMIO OPTOMÉTRICO
-Aunque el presente proyecto se desarrolla y valida en Óptica Vista Visión como caso piloto de titulación, 
+Aunque el presente proyecto se desarrolla y valida en Óptica de estudio como caso piloto de titulación, 
 el estudio de mercado confirma un alto potencial de replicabilidad:
 - Existe un mercado latente de más de 35 ópticas en Riobamba y más de 300 en la Zona Central del país 
   que sufren idénticas carencias tecnológicas.

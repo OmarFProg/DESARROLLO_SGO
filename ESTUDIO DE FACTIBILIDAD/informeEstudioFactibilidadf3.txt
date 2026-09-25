@@ -22,7 +22,7 @@ Autores:         - Figueroa Díaz, Omar Santiago (Backend / Ciberseguridad / API
                  - Villalva Dumancela, Alexander Rafael (Frontend / UX / Asistente IA)
 Director/Tutor:  Ing. Menéndez Verdecia, Jorge Ariel (Director / Scrum Master)
 Asesor Técnico:  Ing. Santillán Castillo, Julio Roberto (Revisor Metodológico)
-Beneficiario:    Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+Beneficiario:    Óptica de estudio (Riobamba, Chimborazo, Ecuador)
 Ubicación:       DESARROLLO_SGO/ESTUDIO DE FACTIBILIDAD/informeEstudioFactibilidadf3.txt
 Fecha:           21 de Septiembre de 2026 / Período Académico 2026 - 2027
 Versión:         1.0 Definitiva y Aprobada
@@ -47,7 +47,7 @@ TABLA DE CONTENIDOS
        - Gráficos Integrados Intel HD Graphics 620 y Sistema Operativo Windows 10 Home
    2.3 Cuadro Comparativo de Benchmarking y Asignación Formal de Roles Técnicos
    2.4 Justificación de la Designación del Entorno Local de Staging y Pruebas Intensivas
-   2.5 Especificación del Hardware en el Entorno Operativo de Óptica Vista Visión
+   2.5 Especificación del Hardware en el Entorno Operativo de Óptica de estudio
 3. EVALUACIÓN DE LA PILA TECNOLÓGICA Y ARQUITECTURA DE SOFTWARE
    3.1 Capa de Presentación (Frontend): React 18, TypeScript, Vite, Tailwind CSS y PWA
    3.2 Capa Transaccional Núcleo (Backend Core): Laravel 10+, PHP 8.2 y Eloquent ORM
@@ -207,7 +207,7 @@ La designación de la estación DESKTOP-MO7Q55S se fundamenta científicamente e
 3. Velocidad de E/S en Disco: El SSD NVMe PCIe 4.0 reduce en un 85% los tiempos de compilación 
    de bundles de Vite (React) y las migraciones masivas de TypeORM y Laravel Eloquent.
 
-2.5 ESPECIFICACIÓN DEL HARDWARE EN ÓPTICA VISTA VISIÓN (CLIENTES FINALES)
+2.5 ESPECIFICACIÓN DEL HARDWARE EN Óptica de estudio (CLIENTES FINALES)
 Para garantizar la viabilidad en el punto de operación, se auditaron los dispositivos del consultorio:
 - Terminal de Consultorio (Refracción): PC de escritorio existente (Intel Core i3 8va Gen, 8 GB RAM, 
   monitor 1920x1080), apto para cargar la SPA en navegador web moderno.
@@ -335,9 +335,9 @@ tres escenarios de despliegue:
     - Contenedor `sgo-api-sri`: Node.js 20 + NestJS en puerto 3001.
     - Contenedor `sgo-database`: PostgreSQL 16 en puerto 5432.
   * Acceso Demostrativo Remoto: Habilitación de túnel cifrado (Cloudflare Tunnel / Ngrok) 
-    para que el Propietario de Óptica Vista Visión acceda desde su tableta fuera del laboratorio politécnico.
+    para que el Propietario de Óptica de estudio acceda desde su tableta fuera del laboratorio politécnico.
 
-5.2 ESCENARIO 2: OPERACIÓN LOCAL AUTÓNOMA EN ÓPTICA VISTA VISIÓN (INTRANET LAN)
+5.2 ESCENARIO 2: OPERACIÓN LOCAL AUTÓNOMA EN Óptica de estudio (INTRANET LAN)
 - Propósito: Operación cotidiana en el consultorio con tolerancia total a cortes de banda ancha.
 - Esquema de Implementación:
   * Servidor Local de Consultorio: PC de consultorio conectada a Switch Gigabit LAN.
