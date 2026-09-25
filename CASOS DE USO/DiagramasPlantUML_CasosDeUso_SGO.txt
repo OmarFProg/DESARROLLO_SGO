@@ -9,7 +9,7 @@ Metodología:        PMOInformatica / UML 2.5 / Secure Scrum / ISO/IEC 25010:202
 Autores:            Figueroa Díaz Omar Santiago, Villalva Dumancela Alexander Rafael
 Tutor / Director:   Ing. Jorge Ariel Menéndez Verdecia
 Fecha:              25 de Septiembre de 2026
-Versión:            2.0 Estricta UML (Actores "Hombre de Palo", Límites y Elipses)
+Versión:            2.1 Estricta UML (Alineada con documento_final_casos_de_uso_sgo.tex)
 Archivo:            CASOS DE USO/DiagramasPlantUML_CasosDeUso_SGO.txt
 ================================================================================
 
@@ -38,42 +38,45 @@ CONFORMIDAD CON NORMAS DE CASOS DE USO UML:
    (Hijo -up-|> Padre) y especializaciones de casos de uso.
 
 ================================================================================
-ÍNDICE DE DIAGRAMAS EN PLANTUML
+ÍNDICE DE DIAGRAMAS EN PLANTUML (CORRESPONDENCIA CON OVERLEAF / LATEX)
 ================================================================================
-GRÁFICO 01: Diagrama General de Casos de Uso del Sistema SGO (Macro-Alcance)
+GRÁFICO 01: Diagrama General de Paquetes de Casos de Uso del Sistema SGO (M1 a M7)
             -> Nombre imagen Overleaf: pictures/diagrama_general_paquetes.png
-GRÁFICO 02: Diagrama de Jerarquía y Herencia de Actores del Sistema SGO
+GRÁFICO 02: Modelo y Jerarquía de Actores del Sistema SGO (Capítulo 2)
             -> Nombre imagen Overleaf: pictures/diagrama_actores_sistema.png
-GRÁFICO 03: Diagrama de Casos de Uso — Paquete 1: Acceso y Seguridad RBAC (M1)
+GRÁFICO 03: Diagrama de Casos de Uso — Paquete 1: Gestión de Acceso y Seguridad RBAC (M1)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_m1_seguridad.png
-GRÁFICO 04: Diagrama de Casos de Uso — Paquete 2: Demografía de Pacientes (M2)
+GRÁFICO 04: Diagrama de Casos de Uso — Paquete 2: Demografía y Registro de Pacientes (M2)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_m2_pacientes.png
-GRÁFICO 05: Diagrama Combinado de Casos de Uso — Seguridad y Pacientes (M1 y M2)
+GRÁFICO 05: Diagrama Combinado — Acceso, Seguridad (M1) y Demografía de Pacientes (M2)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_seguridad_pacientes.png
-GRÁFICO 06: Diagrama de Casos de Uso — Paquete 3: Atención Clínica y Refracción (M3)
+GRÁFICO 06: Diagrama de Casos de Uso — Paquete 3: Núcleo Clínico y Refracción Subjetiva (M3)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_clinico.png
 GRÁFICO 07: Diagrama de Casos de Uso — Paquete 4: Taller y Laboratorio Óptico (M4)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_m4_taller.png
-GRÁFICO 08: Diagrama de Casos de Uso — Ciclo de Control y Estados de Pedidos de Taller (M4)
+GRÁFICO 08: Máquina de Estados Finita del Ciclo de Vida del Pedido de Taller Óptico (M4)
             -> Nombre imagen Overleaf: pictures/maquina_estados_taller.png
-GRÁFICO 09: Diagrama de Casos de Uso — Paquete 5: Ventas, Caja y Mostrador (M5)
+GRÁFICO 09: Diagrama de Casos de Uso — Paquete 5: Ventas, Caja y Facturación en Mostrador (M5)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_m5_ventas.png
-GRÁFICO 10: Diagrama Combinado de Casos de Uso — Taller Óptico y Ventas en Mostrador (M4 y M5)
+GRÁFICO 10: Diagrama Combinado — Producción en Taller (M4) y Ventas en Mostrador (M5)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_taller_ventas.png
 GRÁFICO 11: Diagrama de Casos de Uso — Paquete 6: Facturación Electrónica SRI (M6)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_sri.png
-GRÁFICO 12: Diagrama de Casos de Uso — Contingencia Offline y Despacho Tributario SRI (M6)
+GRÁFICO 12: Diagrama de Casos de Uso — Gestión de Contingencia y Despacho Fiscal SRI (M6)
             -> Nombre imagen Overleaf: pictures/ciclo_vida_sri.png
 GRÁFICO 13: Diagrama de Casos de Uso — Paquete 7: Asistente IA y Auditoría Inmutable (M7)
             -> Nombre imagen Overleaf: pictures/diagrama_cu_ia_auditoria.png
-GRÁFICO 14: Diagrama de Casos de Uso — Seguridad y Contención Read-Only Guard en IA (M7)
+GRÁFICO 14: Diagrama Combinado — Facturación Electrónica SRI (M6) y Asistente IA (M7)
+            -> Nombre imagen Overleaf: pictures/diagrama_cu_sri_ia.png
+GRÁFICO 15: Arquitectura de Blindaje de Seguridad Read-Only Guard para el Asistente IA (M7)
             -> Nombre imagen Overleaf: pictures/arquitectura_readonly_guard.png
 ================================================================================
 
 
 ' ==============================================================================
-' GRÁFICO 01: DIAGRAMA GENERAL DE CASOS DE USO DEL SISTEMA SGO (MACRO-ALCANCE)
+' GRÁFICO 01: DIAGRAMA GENERAL DE PAQUETES DE CASOS DE USO DEL SISTEMA SGO (M1 A M7)
 ' Archivo imagen en Overleaf: pictures/diagrama_general_paquetes.png
+' Referencia LaTeX: \caption{Diagrama General de Paquetes de Casos de Uso del Sistema SGO (M1 a M7).}
 ' ==============================================================================
 @startuml diagrama_general_paquetes
 !theme plain
@@ -97,15 +100,15 @@ skinparam usecase {
     ArrowColor #184C78
 }
 
-title DIAGRAMA GENERAL DE CASOS DE USO — SISTEMA DE GESTIÓN OPTOMÉTRICA (SGO)
+title DIAGRAMA GENERAL DE PAQUETES DE CASOS DE USO DEL SISTEMA SGO (M1 A M7)
 
 ' Definición de Actores (Hombres de Palo)
-:ACT-01: Administrador / Propietario: as Admin
-:ACT-02: Optometrista Clínico: as Optom
-:ACT-03: Asistente Comercial / Mostrador: as Asist
-:ACT-04: Web Services SRI: as SRI <<Sistema Externo>>
-:ACT-05: Taller Óptico Externo: as Taller <<Proveedor Técnico>>
-:ACT-NEG-01: Paciente / Cliente: as Paciente <<Beneficiario>>
+actor "ACT-01: Administrador / Propietario" as Admin
+actor "ACT-02: Optometrista Clínico" as Optom
+actor "ACT-03: Asistente Comercial / Recepcionista" as Asist
+actor "ACT-04: Web Services SRI" as SRI <<Sistema Externo>>
+actor "ACT-05: Taller Óptico Externo" as Taller <<Proveedor Técnico>>
+actor "ACT-NEG-01: Paciente / Cliente" as Paciente <<Beneficiario Pasivo>>
 
 ' Límite del Sistema (System Boundary)
 rectangle "Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)" as SGO_System {
@@ -118,30 +121,30 @@ rectangle "Sistema Informático de Gestión Clínica y Comercial Optométrica (S
     (CU-PAC-03: Búsqueda Predictiva de Pacientes) as CU_BUSQ
     
     ' M3: Clínica
-    (CU-CLI-01: Registrar Anamnesis y Motivo Consulta) as CU_CLI1
-    (CU-CLI-02: Registrar Lensometría de Gafas Previas) as CU_CLI2
-    (CU-CLI-04: Realizar Examen Refractivo y Confort en Marcha) as CU_CLI4
-    (CU-CLI-05: Emitir Receta Óptica Digital con Código QR) as CU_CLI5
+    (CU-CLI-01: Registrar Anamnesis y Motivo de Consulta) as CU_CLI1
+    (CU-CLI-02: Registrar Lensometría y Estado de Gafas Previas) as CU_CLI2
+    (CU-CLI-04: Examen Refractivo y Confort Ambulatorio en Marcha) as CU_CLI4
+    (CU-CLI-05: Emitir Receta Óptica Digital y Certificado Visual) as CU_CLI5
     
     ' M4: Taller
-    (CU-LAB-01: Generar Orden Técnica con Reducción Biselado) as CU_LAB1
-    (CU-LAB-02: Gestionar Ciclo de Estados de Pedido Taller) as CU_LAB2
+    (CU-LAB-01: Generar Orden Técnica de Taller con Parámetros Geométricos) as CU_LAB1
+    (CU-LAB-02: Gestionar Ciclo de Estados del Pedido de Laboratorio) as CU_LAB2
     
     ' M5: Ventas
-    (CU-VEN-02: Cotizar y Aplicar Combo Promocional $99) as CU_VEN2
-    (CU-VEN-03: Cobrar Anticipo y Emitir Orden de Retiro) as CU_VEN3
-    (CU-VEN-04: Cobrar Saldo y Entregar Producto Terminado) as CU_VEN4
-    (CU-VEN-05: Realizar Cierre Diario y Arqueo de Caja) as CU_VEN5
+    (CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales) as CU_VEN2
+    (CU-VEN-03: Registrar Cobro de Anticipo y Generar Orden de Retiro) as CU_VEN3
+    (CU-VEN-04: Registrar Cobro de Saldo y Entrega de Producto) as CU_VEN4
+    (CU-VEN-05: Realizar Cierre Diario y Arqueo Consolidado de Caja) as CU_VEN5
     (CU-VEN-06: Anular Venta con Reversión Atómica ACID) as CU_VEN6
     
     ' M6: Facturación SRI
-    (CU-SRI-01: Generar Factura XML v1.1.0 y Clave 49 M11) as CU_SRI1
-    (CU-SRI-02: Firmar Digitalmente Factura PKCS#12) as CU_SRI2
-    (CU-SRI-03: Transmitir y Consultar ante WS SRI Offline) as CU_SRI3
+    (CU-SRI-01: Generar Factura XML v1.1.0 y Clave de Acceso M11) as CU_SRI1
+    (CU-SRI-02: Firmar Digitalmente Factura con Certificado PKCS#12) as CU_SRI2
+    (CU-SRI-03: Transmitir y Consultar Comprobante ante Web Services SRI) as CU_SRI3
     
     ' M7: IA y Auditoría
-    (CU-IA-01: Consultar Métricas en Lenguaje Natural) as CU_IA1
-    (CU-AUD-01: Registro Transversal de Auditoría Hash Chain) as CU_AUD
+    (CU-IA-01: Consultar Métricas y Existencias en Lenguaje Natural) as CU_IA1
+    (CU-AUD-01: Registro Transversal Inmutable de Auditoría Criptográfica) as CU_AUD
 }
 
 ' Asociaciones de Actores con Casos de Uso (Líneas Sólidas)
@@ -191,8 +194,9 @@ CU_CLI4 .> CU_CLI5 : <<trigger>>
 
 
 ' ==============================================================================
-' GRÁFICO 02: DIAGRAMA DE JERARQUÍA Y HERENCIA DE ACTORES DEL SISTEMA SGO
+' GRÁFICO 02: MODELO Y JERARQUÍA DE ACTORES DEL SISTEMA SGO (CAPÍTULO 2)
 ' Archivo imagen en Overleaf: pictures/diagrama_actores_sistema.png
+' Referencia LaTeX: Capítulo 2: Catálogo Maestro de Actores del Sistema
 ' ==============================================================================
 @startuml diagrama_actores_sistema
 !theme plain
@@ -207,20 +211,20 @@ skinparam actor {
     FontStyle bold
 }
 
-title MODELO Y JERARQUÍA DE ACTORES (HOMRES DE PALO) — ESTÁNDAR UML 2.5
+title MODELO Y JERARQUÍA DE ACTORES (HOMBRES DE PALO) — ESTÁNDAR UML 2.5
 
 ' Actor Abstracto Base (Hombre de Palo)
-:ACT-00: Usuario Autenticado\n<<Abstracto / Sesión JWT>>: as ACT00 #D4E6F1
+actor "ACT-00: Usuario Autenticado\n<<Abstracto / Sesión JWT>>" as ACT00 #D4E6F1
 
 ' Actores Especializados Herederos (Hombres de Palo)
-:ACT-01: Administrador / Propietario\n(Control Global y Reversión): as ACT01
-:ACT-02: Optometrista Clínico\n(Diagnóstico y Refracción): as ACT02
-:ACT-03: Asistente Comercial\n(Mostrador, POS y Caja): as ACT03
+actor "ACT-01: Administrador / Propietario\n(Control Global y Reversión)" as ACT01
+actor "ACT-02: Optometrista Clínico\n(Diagnóstico y Refracción)" as ACT02
+actor "ACT-03: Asistente Comercial / Recepcionista\n(Mostrador, POS y Caja)" as ACT03
 
 ' Actores Externos y de Negocio (Hombres de Palo)
-:ACT-04: Web Services SRI\n<<Servidor Externo SOAP>>: as ACT04 #FADBD8
-:ACT-05: Taller Óptico Externo\n<<Laboratorio de Biselado>>: as ACT05 #FCF3CF
-:ACT-NEG-01: Paciente / Cliente\n<<Beneficiario / Titular LOPDP>>: as ACTNEG #EAFAF1
+actor "ACT-04: Web Services SRI\n<<Servidor Externo SOAP>>" as ACT04 #FADBD8
+actor "ACT-05: Taller Óptico Externo\n<<Laboratorio de Biselado>>" as ACT05 #FCF3CF
+actor "ACT-NEG-01: Paciente / Cliente\n<<Beneficiario Pasivo / Titular LOPDP>>" as ACTNEG #EAFAF1
 
 ' Relaciones de Herencia Formal (Flecha Triangular Cerrada)
 ACT01 -up-|> ACT00
@@ -259,8 +263,9 @@ end note
 
 
 ' ==============================================================================
-' GRÁFICO 03: CASOS DE USO — PAQUETE 1: ACCESO Y SEGURIDAD RBAC (M1)
+' GRÁFICO 03: PAQUETE 1: GESTIÓN DE ACCESO Y SEGURIDAD RBAC (M1)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_m1_seguridad.png
+' Referencia LaTeX: Sección 4.1: Paquete 1: Gestión de Acceso y Seguridad RBAC (M1)
 ' ==============================================================================
 @startuml diagrama_cu_m1_seguridad
 !theme plain
@@ -283,7 +288,7 @@ skinparam usecase {
 
 title PAQUETE 1: GESTIÓN DE ACCESO Y SEGURIDAD RBAC (M1)
 
-:ACT-00: Usuario Autenticado\n(Admin / Optom / Asist): as User
+actor "ACT-00: Usuario Autenticado\n(Admin / Optom / Asist)" as User
 :Temporizador de Inactividad\n<<Servicio del Sistema>>: as Timer
 
 rectangle "Límite del Subsistema de Seguridad (M1)" {
@@ -311,8 +316,9 @@ CUSEG02 .> UC_Audit : <<include>>
 
 
 ' ==============================================================================
-' GRÁFICO 04: CASOS DE USO — PAQUETE 2: DEMOGRAFÍA DE PACIENTES (M2)
+' GRÁFICO 04: PAQUETE 2: DEMOGRAFÍA Y REGISTRO DE PACIENTES (M2)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_m2_pacientes.png
+' Referencia LaTeX: Sección 4.2: Paquete 2: Demografía y Registro de Pacientes (M2)
 ' ==============================================================================
 @startuml diagrama_cu_m2_pacientes
 !theme plain
@@ -333,15 +339,15 @@ skinparam usecase {
     ArrowColor #184C78
 }
 
-title PAQUETE 2: GESTIÓN DEMOGRÁFICA DE PACIENTES (M2)
+title PAQUETE 2: DEMOGRAFÍA Y REGISTRO DE PACIENTES (M2)
 
-:ACT-03: Asistente Comercial\n(Mostrador / Recepción): as Asist
-:ACT-02: Optometrista Clínico: as Optom
+actor "ACT-03: Asistente Comercial / Recepcionista\n(Mostrador / Recepción)" as Asist
+actor "ACT-02: Optometrista Clínico" as Optom
 
 rectangle "Límite del Subsistema de Pacientes (M2)" {
     (CU-PAC-01:\nRegistrar Paciente con\nValidación Módulo 10) as CUPAC01
-    (CU-PAC-02:\nRegistrar Menor de Edad\nsin Documento Identidad) as CUPAC02
-    (CU-PAC-03:\nBúsqueda Predictiva\nde Pacientes sub-200ms) as CUPAC03
+    (CU-PAC-02:\nRegistrar Menor de Edad\nsin Documento de Identidad) as CUPAC02
+    (CU-PAC-03:\nBúsqueda Predictiva\nde Pacientes) as CUPAC03
     
     (Validar Algoritmo Módulo 10\ny Código Provincial) as UC_M10
     (Generar Código Sintético\nMEN-YYYYMMDD-XXXX) as UC_Sint
@@ -365,6 +371,7 @@ CUPAC01 .> CUPAC03 : <<extend>>\n(Alta si no existe)
 ' ==============================================================================
 ' GRÁFICO 05: DIAGRAMA COMBINADO — SEGURIDAD Y PACIENTES (M1 Y M2)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_seguridad_pacientes.png
+' Referencia LaTeX: \caption{Diagrama de Casos de Uso de Acceso, Seguridad (M1) y Demografía de Pacientes (M2).}
 ' ==============================================================================
 @startuml diagrama_cu_seguridad_pacientes
 !theme plain
@@ -385,24 +392,25 @@ skinparam usecase {
     ArrowColor #184C78
 }
 
-title DIAGRAMA COMBINADO: MÓDULOS BASE (M1 Y M2)
+title DIAGRAMA DE CASOS DE USO DE ACCESO, SEGURIDAD (M1) Y DEMOGRAFÍA DE PACIENTES (M2)
 
-:ACT-00: Usuario Autenticado: as User
-:ACT-03: Asistente Comercial: as Asist
+actor "ACT-00: Usuario Autenticado" as User
+actor "ACT-03: Asistente Comercial / Recepcionista" as Asist
+actor "ACT-02: Optometrista Clínico" as Optom
 
 rectangle "Límite del Sistema SGO (Módulos Base M1 y M2)" {
     
     ' M1
-    (CU-SEG-01: Iniciar Sesión RBAC) as CUS1
-    (CU-SEG-02: Cerrar Sesión Inactividad) as CUS2
+    (CU-SEG-01: Iniciar Sesión y Validar Credenciales RBAC) as CUS1
+    (CU-SEG-02: Cerrar Sesión por Inactividad o Petición) as CUS2
     
     ' M2
-    (CU-PAC-01: Registrar Paciente M10) as CUP1
-    (CU-PAC-02: Registrar Menor sin Cédula) as CUP2
-    (CU-PAC-03: Búsqueda Predictiva) as CUP3
+    (CU-PAC-01: Registrar Paciente con Validación Módulo 10) as CUP1
+    (CU-PAC-02: Registrar Menor de Edad sin Documento de Identidad) as CUP2
+    (CU-PAC-03: Búsqueda Predictiva de Pacientes) as CUP3
     
     (Validar Cédula Módulo 10) as UCM10
-    (Auditar Transacción) as UCAud
+    (Auditar Transacción Criptográfica) as UCAud
 }
 
 User -- CUS1
@@ -411,6 +419,7 @@ User -- CUP3
 
 Asist -- CUP1
 Asist -- CUP3
+Optom -- CUP3
 
 CUS1 .> UCAud : <<include>>
 CUP1 .> UCM10 : <<include>>
@@ -422,8 +431,9 @@ CUP1 .> CUP3 : <<extend>>
 
 
 ' ==============================================================================
-' GRÁFICO 06: CASOS DE USO — PAQUETE 3: ATENCIÓN CLÍNICA Y REFRACCIÓN (M3)
+' GRÁFICO 06: DIAGRAMA DE CASOS DE USO — NÚCLEO CLÍNICO Y REFRACCIÓN (M3)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_clinico.png
+' Referencia LaTeX: \caption{Diagrama de Casos de Uso del Gabinete Clínico y Refracción Subjetiva (M3).}
 ' ==============================================================================
 @startuml diagrama_cu_clinico
 !theme plain
@@ -444,25 +454,25 @@ skinparam usecase {
     ArrowColor #184C78
 }
 
-title PAQUETE 3: ATENCIÓN CLÍNICA Y REFRACCIÓN INTEGRAL (M3)
+title DIAGRAMA DE CASOS DE USO DEL GABINETE CLÍNICO Y REFRACCIÓN SUBJETIVA (M3)
 
-:ACT-02: Optometrista Clínico: as Optom
-:ACT-NEG-01: Paciente / Cliente: as Paciente
+actor "ACT-02: Optometrista Clínico" as Optom
+actor "ACT-NEG-01: Paciente / Cliente" as Paciente
 
 rectangle "Límite del Gabinete Clínico Optométrico (M3)" {
     (CU-CLI-01:\nRegistrar Anamnesis y\nMotivo de Consulta) as CUCLI01
     
-    (CU-CLI-02:\nRegistrar Lensometría y\nEstado Gafas Previas\n[AUDIO: +1.75/-1.50 Astillada]) as CUCLI02 #D5F5E3
+    (CU-CLI-02:\nRegistrar Lensometría y\nEstado de Gafas Previas\n[AUDIO REAL: +1.75/-1.50]) as CUCLI02 #D5F5E3
     
-    (CU-CLI-03:\nRegistrar Pruebas Objetivas\ny Queratometría K1/K2\n[AUDIO: Astigmatismo Corneal]) as CUCLI03 #D5F5E3
+    (CU-CLI-03:\nRegistrar Pruebas Objetivas\ny Queratometría\n[AUDIO REAL: Astigmatismo Corneal]) as CUCLI03 #D5F5E3
     
-    (CU-CLI-04:\nRealizar Examen Refractivo\ny Confort en Marcha\n[AUDIO: Piso Plano sin Mareo]) as CUCLI04 #D5F5E3
+    (CU-CLI-04:\nExamen Refractivo y Confort\nAmbulatorio en Marcha\n[AUDIO REAL: Piso Plano sin Mareo]) as CUCLI04 #D5F5E3
     
-    (CU-CLI-05:\nEmitir Receta Óptica Digital\ncon Código QR y CIE-10) as CUCLI05
+    (CU-CLI-05:\nEmitir Receta Óptica Digital\ny Certificado Visual) as CUCLI05
     
-    (CU-CLI-06:\nEvaluación Polo Anterior\ny Seguimiento Pterigión\n[AUDIO: Filtro UV400]) as CUCLI06 #D5F5E3
+    (CU-CLI-06:\nEvaluación de Polo Anterior y\nSeguimiento Patológico\n[AUDIO REAL: Filtro UV400]) as CUCLI06 #D5F5E3
     
-    (Validar Cilindro Negativo (-)\ny Pasos de 0.25 D) as UC_ValCil
+    usecase "Validar Cilindro Negativo (-)\ny Pasos de 0.25 D" as UC_ValCil
     (Sellado Inmutable SHA-256\ncon Soft Delete) as UC_Sha
     (Alertar Progresión\nAnormal > 1.50 D) as UC_Alert
     (Derivación Quirúrgica\nOftalmología Grado III) as UC_Deriv
@@ -488,8 +498,9 @@ UC_Deriv .> CUCLI06 : <<extend>>\n(Compromiso pupilar)
 
 
 ' ==============================================================================
-' GRÁFICO 07: CASOS DE USO — PAQUETE 4: TALLER Y LABORATORIO ÓPTICO (M4)
+' GRÁFICO 07: PAQUETE 4: TALLER Y LABORATORIO ÓPTICO (M4)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_m4_taller.png
+' Referencia LaTeX: Sección 4.4: Paquete 4: Taller y Laboratorio Óptico (M4)
 ' ==============================================================================
 @startuml diagrama_cu_m4_taller
 !theme plain
@@ -512,16 +523,16 @@ skinparam usecase {
 
 title PAQUETE 4: TALLER Y LABORATORIO ÓPTICO (M4)
 
-:ACT-02: Optometrista Clínico: as Optom
-:ACT-03: Asistente Comercial: as Asist
-:ACT-05: Taller Óptico Externo\n<<Laboratorio de Biselado>>: as Taller
+actor "ACT-02: Optometrista Clínico" as Optom
+actor "ACT-03: Asistente Comercial / Recepcionista" as Asist
+actor "ACT-05: Taller Óptico Externo\n<<Laboratorio de Biselado>>" as Taller
 
 rectangle "Límite del Subsistema de Taller Óptico (M4)" {
-    (CU-LAB-01:\nGenerar Orden Técnica de Taller\ncon Parámetros Geométricos\n[AUDIO: Corte 38 a 27 mm]) as CULAB01 #D5F5E3
+    (CU-LAB-01:\nGenerar Orden Técnica de Taller\ncon Parámetros Geométricos\n[AUDIO REAL: Biselado 38 a 27 mm]) as CULAB01 #D5F5E3
     
     (CU-LAB-02:\nGestionar Ciclo de Estados\ndel Pedido de Laboratorio) as CULAB02
     
-    (CU-LAB-03:\nRegistrar Incidencia o\nGarantía Técnica a Costo $0) as CULAB03
+    (CU-LAB-03:\nRegistrar Incidencia o\nGarantía Técnica) as CULAB03
     
     (Disociar Datos Médicos Sensibles\nAislamiento LOPDP) as UC_Disoc
     (Control Calidad con Lensómetro\ny Calibración Milimétrica) as UC_Calidad
@@ -543,8 +554,9 @@ CULAB02 -- Taller : <<reporte de estado>>
 
 
 ' ==============================================================================
-' GRÁFICO 08: CASOS DE USO — CONTROL Y ESTADOS DE PEDIDOS DE TALLER (M4)
+' GRÁFICO 08: MÁQUINA DE ESTADOS DEL PEDIDO DE TALLER ÓPTICO (M4)
 ' Archivo imagen en Overleaf: pictures/maquina_estados_taller.png
+' Referencia LaTeX: \caption{Máquina de Estados Finita del Ciclo de Vida del Pedido de Taller Óptico.}
 ' ==============================================================================
 @startuml maquina_estados_taller
 !theme plain
@@ -565,11 +577,11 @@ skinparam usecase {
     ArrowColor #184C78
 }
 
-title CASOS DE USO: CONTROL DEL CICLO DE VIDA DEL PEDIDO DE TALLER (M4)
+title MÁQUINA DE ESTADOS FINITA DEL CICLO DE VIDA DEL PEDIDO DE TALLER ÓPTICO
 
-:ACT-03: Asistente de Mostrador: as Asist
-:ACT-05: Taller Óptico Externo: as Taller
-:ACT-NEG-01: Paciente / Cliente: as Paciente
+actor "ACT-03: Asistente Comercial / Recepcionista" as Asist
+actor "ACT-05: Taller Óptico Externo" as Taller
+actor "ACT-NEG-01: Paciente / Cliente" as Paciente
 
 rectangle "Límite del Control de Estados de Fabricación (M4)" {
     (Emitir Orden y Pasar a Estado 'ENVIADO') as UC_Env
@@ -601,8 +613,9 @@ UC_Ent -- Paciente
 
 
 ' ==============================================================================
-' GRÁFICO 09: CASOS DE USO — PAQUETE 5: VENTAS, CAJA Y MOSTRADOR (M5)
+' GRÁFICO 09: PAQUETE 5: VENTAS, CAJA Y FACTURACIÓN EN MOSTRADOR (M5)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_m5_ventas.png
+' Referencia LaTeX: Sección 4.5: Paquete 5: Ventas, Caja y Facturación en Mostrador (M5)
 ' ==============================================================================
 @startuml diagrama_cu_m5_ventas
 !theme plain
@@ -623,22 +636,22 @@ skinparam usecase {
     ArrowColor #184C78
 }
 
-title PAQUETE 5: VENTAS, CAJA Y MOSTRADOR (M5)
+title PAQUETE 5: VENTAS, CAJA Y FACTURACIÓN EN MOSTRADOR (M5)
 
-:ACT-03: Asistente Comercial\n(Terminal POS): as Asist
-:ACT-01: Administrador / Propietario: as Admin
-:ACT-NEG-01: Paciente / Cliente: as Cliente
+actor "ACT-03: Asistente Comercial / Recepcionista\n(Terminal POS)" as Asist
+actor "ACT-01: Administrador / Propietario" as Admin
+actor "ACT-NEG-01: Paciente / Cliente" as Cliente
 
 rectangle "Límite del Subsistema Comercial y de Caja (M5)" {
-    (CU-VEN-01:\nRegistrar Venta con\nDescuento Híbrido Stock) as CUVEN01
+    (CU-VEN-01:\nRegistrar Venta con\nDescuento Híbrido de Inventario) as CUVEN01
     
-    (CU-VEN-02:\nCotizar y Aplicar Combo\nPromocional Mensual\n[AUDIO: Tarifa Plana $99]) as CUVEN02 #D5F5E3
+    (CU-VEN-02:\nCotizar y Aplicar Paquetes\nPromocionales\n[AUDIO REAL: Tarifa Plana $99]) as CUVEN02 #D5F5E3
     
-    (CU-VEN-03:\nRegistrar Cobro de Anticipo\ny Generar Orden de Retiro\n[AUDIO: Ticket 2 Días]) as CUVEN03 #D5F5E3
+    (CU-VEN-03:\nRegistrar Cobro de Anticipo\ny Generar Orden de Retiro\n[AUDIO REAL: Anticipo $50]) as CUVEN03 #D5F5E3
     
     (CU-VEN-04:\nRegistrar Cobro de Saldo\ny Entrega de Producto) as CUVEN04
     
-    (CU-VEN-05:\nRealizar Cierre Diario\ny Arqueo Ciego de Caja) as CUVEN05
+    (CU-VEN-05:\nRealizar Cierre Diario y\nArqueo Consolidado de Caja) as CUVEN05
     
     (CU-VEN-06:\nAnular Venta con\nReversión Atómica ACID) as CUVEN06
     
@@ -669,6 +682,7 @@ CUVEN06 .> UC_ACID : <<include>>
 ' ==============================================================================
 ' GRÁFICO 10: DIAGRAMA COMBINADO — TALLER Y VENTAS (M4 Y M5)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_taller_ventas.png
+' Referencia LaTeX: \caption{Diagrama de Casos de Uso de Producción en Taller (M4) y Ventas en Mostrador (M5).}
 ' ==============================================================================
 @startuml diagrama_cu_taller_ventas
 !theme plain
@@ -689,22 +703,22 @@ skinparam usecase {
     ArrowColor #184C78
 }
 
-title INTEGRACIÓN TRANSACCIONAL: TALLER (M4) Y VENTAS (M5)
+title DIAGRAMA DE CASOS DE USO DE PRODUCCIÓN EN TALLER (M4) Y VENTAS EN MOSTRADOR (M5)
 
-:ACT-03: Asistente Comercial: as Asist
-:ACT-05: Taller Óptico: as Taller
-:ACT-NEG-01: Paciente / Cliente: as Cliente
+actor "ACT-03: Asistente Comercial / Recepcionista" as Asist
+actor "ACT-05: Taller Óptico Externo" as Taller
+actor "ACT-NEG-01: Paciente / Cliente" as Cliente
 
-rectangle "Límite del Sistema SGO (Taller y Ventas)" {
+rectangle "Límite del Sistema SGO (Taller Óptico y Ventas en Mostrador)" {
     
     ' Ventas
-    (CU-VEN-02: Cotizar Combo $99) as CUV2
-    (CU-VEN-03: Cobro Anticipo y Ticket Retiro) as CUV3
-    (CU-VEN-04: Cobro Saldo y Entrega) as CUV4
+    (CU-VEN-02: Cotizar y Aplicar Paquetes Promocionales [AUDIO REAL]) as CUV2
+    (CU-VEN-03: Registrar Cobro de Anticipo y Generar Orden de Retiro [AUDIO REAL]) as CUV3
+    (CU-VEN-04: Registrar Cobro de Saldo y Entrega de Producto) as CUV4
     
     ' Taller
-    (CU-LAB-01: Orden Taller Reducción 38 a 27mm) as CUL1
-    (CU-LAB-02: Estados del Pedido Taller) as CUL2
+    (CU-LAB-01: Generar Orden Técnica con Parámetros Geométricos [AUDIO REAL]) as CUL1
+    (CU-LAB-02: Gestionar Ciclo de Estados del Pedido de Laboratorio) as CUL2
 }
 
 Asist -- CUV2
@@ -712,10 +726,10 @@ Asist -- CUV3
 Asist -- CUL2
 Asist -- CUV4
 
-CUV3 -- Cliente : <<abono $50 y ticket>>
-CUV4 -- Cliente : <<pago saldo $49 y lentes>>
+CUV3 -- Cliente : <<abono $50 y ticket de retiro>>
+CUV4 -- Cliente : <<pago saldo $49 y entrega de lentes>>
 
-CUL1 -- Taller : <<montura y medidas>>
+CUL1 -- Taller : <<montura y medidas biselado>>
 CUL2 -- Taller : <<gafas terminadas>>
 
 CUV3 .> CUL1 : <<trigger>>\n(Pase a fabricación)
@@ -725,8 +739,9 @@ CUL2 .> CUV4 : <<trigger>>\n(Habilita entrega)
 
 
 ' ==============================================================================
-' GRÁFICO 11: CASOS DE USO — PAQUETE 6: FACTURACIÓN ELECTRÓNICA SRI (M6)
+' GRÁFICO 11: PAQUETE 6: FACTURACIÓN ELECTRÓNICA SRI (M6)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_sri.png
+' Referencia LaTeX: Sección 4.6: Paquete 6: Facturación Electrónica SRI (M6)
 ' ==============================================================================
 @startuml diagrama_cu_sri
 !theme plain
@@ -749,17 +764,17 @@ skinparam usecase {
 
 title PAQUETE 6: FACTURACIÓN ELECTRÓNICA SRI (M6)
 
-:ACT-03: Asistente Comercial\n(Emisor POS 001): as Asist
+actor "ACT-03: Asistente Comercial / Recepcionista\n(Emisor POS 001)" as Asist
 :Microservicio API-SRI\n<<Servicio Backend NestJS>>: as APISRI
-:ACT-04: Web Services SRI\n<<Servidor Externo Fiscal>>: as SRI
-:ACT-NEG-01: Paciente / Adquirente: as Cliente
+actor "ACT-04: Web Services SRI\n<<Servidor Externo Fiscal>>" as SRI
+actor "ACT-NEG-01: Paciente / Cliente\n<<Receptor Fiscal>>" as Cliente
 
 rectangle "Límite de Facturación Electrónica SRI (M6)" {
     (CU-SRI-01:\nGenerar Factura XML v1.1.0\ny Clave de Acceso M11) as CUSRI01
     
     (CU-SRI-02:\nFirmar Digitalmente Factura\ncon Certificado PKCS#12) as CUSRI02
     
-    (CU-SRI-03:\nTransmitir y Consultar ante\nWeb Services SRI Offline) as CUSRI03
+    (CU-SRI-03:\nTransmitir y Consultar Comprobante\nante Web Services SRI) as CUSRI03
     
     (CU-SRI-04:\nGenerar RIDE PDF Code128\ny Despachar por Correo SMTP) as CUSRI04
     
@@ -789,8 +804,9 @@ CUSRI04 -- Cliente : <<email con RIDE PDF y XML>>
 
 
 ' ==============================================================================
-' GRÁFICO 12: CASOS DE USO — CONTINGENCIA Y DESPACHO TRIBUTARIO SRI (M6)
+' GRÁFICO 12: GESTIÓN DE CONTINGENCIA Y DESPACHO FISCAL SRI (M6)
 ' Archivo imagen en Overleaf: pictures/ciclo_vida_sri.png
+' Referencia LaTeX: Sección 4.6.3: CU-SRI-03 / Flujo de Contingencia Offline
 ' ==============================================================================
 @startuml ciclo_vida_sri
 !theme plain
@@ -813,10 +829,10 @@ skinparam usecase {
 
 title CASOS DE USO: GESTIÓN DE CONTINGENCIA Y DESPACHO FISCAL SRI (M6)
 
-:ACT-03: Asistente en Mostrador: as Asist
+actor "ACT-03: Asistente Comercial / Recepcionista" as Asist
 :Daemon de Contingencia SRI\n<<Tarea Cron de Fondo>>: as CronSRI
-:ACT-04: Servidores Web SRI: as SRI
-:ACT-NEG-01: Paciente / Cliente: as Paciente
+actor "ACT-04: Web Services SRI" as SRI
+actor "ACT-NEG-01: Paciente / Cliente" as Paciente
 
 rectangle "Límite del Subsistema de Contingencia Fiscal (M6)" {
     (Despachar Venta Local Offline\nsin Bloquear Mostrador) as UC_DespOff
@@ -843,8 +859,9 @@ UC_Print -- Paciente
 
 
 ' ==============================================================================
-' GRÁFICO 13: CASOS DE USO — PAQUETE 7: ASISTENTE IA Y AUDITORÍA (M7)
+' GRÁFICO 13: PAQUETE 7: ASISTENTE IA Y AUDITORÍA INMUTABLE (M7)
 ' Archivo imagen en Overleaf: pictures/diagrama_cu_ia_auditoria.png
+' Referencia LaTeX: Sección 4.7: Paquete 7: Asistente IA y Auditoría Inmutable (M7)
 ' ==============================================================================
 @startuml diagrama_cu_ia_auditoria
 !theme plain
@@ -867,13 +884,13 @@ skinparam usecase {
 
 title PAQUETE 7: ASISTENTE IA Y AUDITORÍA INMUTABLE (M7)
 
-:ACT-00: Usuario Autenticado\n(Admin / Optom / Asist): as User
-:ACT-01: Administrador / Propietario: as Admin
+actor "ACT-00: Usuario Autenticado\n(Admin / Optom / Asist)" as User
+actor "ACT-01: Administrador / Propietario" as Admin
 :Motor IA / Read-Only Guard\n<<Servicio Interno>>: as MotorIA
 :Sistema SGO\n<<Automático Transversal>>: as Sys
 
 rectangle "Límite de Analítica y Auditoría (M7)" {
-    (CU-IA-01:\nConsultar Métricas y Existencias\nen Lenguaje Natural) as CUIA01
+    (CU-IA-01:\nConsultar Métricas y Existencias\nen Lenguaje Natural\n[Read-Only Guard]) as CUIA01
     
     (CU-AUD-01:\nRegistro Transversal Inmutable\nde Auditoría Criptográfica) as CUAUD01
     
@@ -898,8 +915,87 @@ Admin -- CUAUD01 : <<auditoría forense>>
 
 
 ' ==============================================================================
-' GRÁFICO 14: CASOS DE USO — SEGURIDAD Y CONTENCIÓN READ-ONLY GUARD EN IA (M7)
+' GRÁFICO 14: DIAGRAMA COMBINADO — FACTURACIÓN SRI (M6) E INTELIGENCIA ARTIFICIAL (M7)
+' Archivo imagen en Overleaf: pictures/diagrama_cu_sri_ia.png
+' Referencia LaTeX: \caption{Diagrama de Casos de Uso de Facturación Electrónica SRI (M6) y Asistente IA (M7).}
+' ==============================================================================
+@startuml diagrama_cu_sri_ia
+!theme plain
+left to right direction
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam actorStyle stickman
+
+skinparam actor {
+    BackgroundColor #FFFFFF
+    BorderColor #184C78
+    FontColor #184C78
+}
+
+skinparam usecase {
+    BackgroundColor #EBF5FB
+    BorderColor #184C78
+    FontColor #184C78
+    ArrowColor #184C78
+}
+
+title DIAGRAMA DE CASOS DE USO DE FACTURACIÓN ELECTRÓNICA SRI (M6) Y ASISTENTE IA (M7)
+
+actor "ACT-01: Administrador / Propietario" as Admin
+actor "ACT-03: Asistente Comercial / Recepcionista" as Asist
+actor "ACT-04: Web Services SRI" as SRI <<Servidor Externo Fiscal>>
+actor "ACT-NEG-01: Paciente / Cliente" as Cliente <<Receptor Fiscal>>
+:Microservicio API-SRI\n<<Servicio Backend NestJS>>: as APISRI
+:Motor IA / Read-Only Guard\n<<Servicio Interno>>: as MotorIA
+:Sistema SGO\n<<Automático Transversal>>: as Sys
+
+rectangle "Límite del Sistema SGO (Facturación Electrónica SRI y Asistente IA)" {
+    
+    ' Paquete 6: Facturación SRI
+    rectangle "Paquete 6: Facturación Electrónica SRI (M6)" {
+        (CU-SRI-01:\nGenerar Factura XML v1.1.0\ny Clave de Acceso M11) as CUSRI01
+        (CU-SRI-02:\nFirmar Digitalmente Factura\ncon Certificado PKCS#12) as CUSRI02
+        (CU-SRI-03:\nTransmitir y Consultar Comprobante\nante Web Services SRI) as CUSRI03
+        (CU-SRI-04:\nGenerar RIDE PDF Code128\ny Despachar por Correo SMTP) as CUSRI04
+    }
+    
+    ' Paquete 7: Asistente IA y Auditoría
+    rectangle "Paquete 7: Asistente IA y Auditoría Inmutable (M7)" {
+        (CU-IA-01:\nConsultar Métricas y Existencias\nen Lenguaje Natural\n[Read-Only Guard]) as CUIA01
+        (CU-AUD-01:\nRegistro Transversal Inmutable\nde Auditoría Criptográfica) as CUAUD01
+    }
+}
+
+' Asociaciones M6
+Asist -- CUSRI01
+APISRI -- CUSRI02
+APISRI -- CUSRI03
+APISRI -- CUSRI04
+Admin -- CUSRI02 : <<gestión certificado digital>>
+
+CUSRI01 .> CUSRI02 : <<include>>
+CUSRI02 .> CUSRI03 : <<include>>
+CUSRI03 -- SRI : <<SOAP: validar / autorizar>>
+CUSRI03 .> CUSRI04 : <<include>>\n(Estado AUTORIZADO)
+CUSRI04 -- Cliente : <<email con RIDE y XML>>
+
+' Asociaciones M7
+Asist -- CUIA01
+Admin -- CUIA01
+MotorIA -- CUIA01
+Sys -- CUAUD01
+Admin -- CUAUD01 : <<auditoría forense>>
+
+CUIA01 .> CUAUD01 : <<include>>\n(Log de Consulta)
+CUSRI01 .> CUAUD01 : <<include>>\n(Auditoría Fiscal)
+
+@enduml
+
+
+' ==============================================================================
+' GRÁFICO 15: ARQUITECTURA READ-ONLY GUARD EN ASISTENTE IA (M7)
 ' Archivo imagen en Overleaf: pictures/arquitectura_readonly_guard.png
+' Referencia LaTeX: \caption{Arquitectura de Blindaje de Seguridad Read-Only Guard para el Asistente IA.}
 ' ==============================================================================
 @startuml arquitectura_readonly_guard
 !theme plain
@@ -920,7 +1016,7 @@ skinparam usecase {
     ArrowColor #184C78
 }
 
-title CASOS DE USO: CONTENCIÓN READ-ONLY GUARD EN ASISTENTE IA (M7)
+title ARQUITECTURA DE BLINDAJE DE SEGURIDAD READ-ONLY GUARD PARA EL ASISTENTE IA (M7)
 
 :Usuario del Sistema\n(En Dashboard): as User
 :Read-Only Guard\n<<Motor de Contención>>: as ROGuard
