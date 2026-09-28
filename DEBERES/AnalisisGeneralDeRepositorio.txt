@@ -1,0 +1,296 @@
+====================================================================================================
+INFORME DE AUDITORÍA Y ANÁLISIS INTEGRAL DEL REPOSITORIO
+PROYECTO: SISTEMA DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+AUTORES: OMAR SANTIAGO FIGUEROA DÍAZ Y ALEXANDER RAFAEL VILLALVA DUMANCELA
+INSTITUCIÓN: ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO (ESPOCH) - CARRERA DE SOFTWARE
+FECHA DE EVALUACIÓN: SEPTIEMBRE 2026
+ARCHIVO GENERADO: DEBERES\AnalisisGeneralDeRepositorio.txt
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+1. RESPUESTA DIRECTA A LA PREGUNTA PRINCIPAL: ¿EXISTEN CONTRADICCIONES?
+----------------------------------------------------------------------------------------------------
+SÍ, EXISTEN CONTRADICCIONES SIGNIFICATIVAS EN EL REPOSITORIO.
+
+El análisis exhaustivo de los 68 documentos (archivos .txt, .docx, .pdf, .xlsx y .md) revela que el 
+repositorio contiene dos capas documentales superpuestas que corresponden a dos momentos evolutivos 
+del proyecto que no han sido armonizados entre sí:
+
+  Capa A (Versión Original / Anteproyecto de Titulación ESPOCH):
+    - Alcance acotado a 5 módulos (M1 a M5).
+    - Facturación Electrónica SRI e Inteligencia Artificial catalogadas explícitamente como "FUERA DEL ALCANCE" (Out-of-Scope / Trabajo Futuro).
+    - Presupuesto de $11,551.75 USD (o $10,752.50 USD en el documento de alcance de deberes).
+    - Período de ejecución: mayo 2026 - septiembre 2026 (defensa prevista para septiembre de 2026).
+    - Stack tecnológico: Laravel (PHP) + React + PostgreSQL en arquitectura monolítica/modular API REST.
+
+  Capa B (Versión Extendida / Aplicaciones Informáticas II - Fases de Factibilidad y Casos de Uso):
+    - Alcance ampliado a 7 módulos (M1 a M7), incorporando formalmente M6 (Facturación SRI) y M7 (Asistente Inteligente IA "Chatbot de Datos").
+    - Presupuesto ajustado a $11,724.25 USD (e incluso $12,415.75 USD en el plan de factibilidad).
+    - Período de ejecución: septiembre 2026 - enero 2027 (18 semanas académicas).
+    - Stack tecnológico híbrido: introducción de microservicios en Node.js / NestJS / Express para SRI y firma XAdES-BES, coexistiendo o compitiendo con Laravel.
+
+A continuación se detalla el análisis punto por punto de todo el repositorio, sus inconsistencias, sus fortalezas y el catálogo detallado de contradicciones.
+
+====================================================================================================
+2. INVENTARIO Y ESTRUCTURA DE LA INFORMACIÓN ANALIZADA
+====================================================================================================
+El repositorio consta de 13 carpetas principales con la siguiente distribución temático-funcional:
+
+1. ANTEPROYECTO:
+   - Archivos: 'Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.docx' y '.pdf' (con copia en 'Respaldo').
+   - Contenido: Documento formal de grado aprobado en la ESPOCH con marco teórico, metodología Scrum, presupuesto de $11,551.75 USD, 4 sprints entre mayo y septiembre 2026, y delimitación formal de 5 módulos.
+
+2. DEBERES:
+   - Archivos: 'Documento_Alcance_SGO.docx'.
+   - Contenido: Definición formal de alcance (18 semanas, septiembre 2026 - enero 2027). Establece taxativamente que SRI, WhatsApp, IA y hardware están FUERA DEL ALCANCE (Out-of-Scope).
+
+3. CASOS DE USO:
+   - Archivos: 'DOCUMENTO_MAESTRO_ESPECIFICACION_CASOS_DE_USO_SGO.docx' (.pdf, .txt, .tex), fases 00 a 06 en .txt, diagramas PlantUML, diagramas PNG.
+   - Contenido: Especificación detallada bajo estándar PMO de 23 Casos de Uso estructurados en 7 paquetes (M1 Seguridad, M2 Pacientes, M3 Clínica/Refracción, M4 Taller, M5 Ventas, M6 SRI, M7 IA).
+
+4. ESTUDIO DE FACTIBILIDAD:
+   - Archivos: 'EstudioFactibilidad_SGO.txt', 'PlanEstudioFactibilidad.txt', 10 informes por fases ('informeEstudioFactibilidadf1.txt' a 'f10.txt'), 'definiciones.txt', 'directrices.txt', formato PDF.
+   - Contenido: Evaluación multidimensional (técnica, económica, operativa, legal, ambiental). Presupuesto consolidado de $11,724.25 USD, VAN de $6,958.42 USD, TIR alta, Payback operativo de la óptica inmediato.
+
+5. REQUERIMENTACION:
+   - Archivos: 'Especificacion de Requisitos_01.txt' (23 RFs, M1 a M5), 'Especificacion de Requisitos_02.txt' (31 RFs, M1 a M7), 'plaDesarrolloRequisitos.txt', informes de fase 1, 2 y 3.
+   - Contenido: Especificación formal según estándar IEEE 830 y adaptación PMO. Muestra la transición directa de 5 a 7 módulos.
+
+6. FACTURACION ELECTRONICA:
+   - Archivos: 'InformeImplementacionAppFacturacionElectronica.txt', 'DescripcionArquitectura_v1.txt', 'informeImplementacionBDf6.txt'.
+   - Contenido: Diseño e implementación técnica de la facturación electrónica SRI en Ecuador: esquemas XSD, firma XAdES-BES, claves de 49 dígitos, WebServices SOAP y servicios desacoplados en Node.js / Express / NestJS.
+
+7. INNOVACION:
+   - Archivos: 'informePropuestasInnovacion.txt', 'InnovacionesV1.txt', 'V2.txt', 'V3.txt', 'AnalisisInnovacion.txt', informes de enlaces 1 a 4, sílabo en PDF.
+   - Contenido: Investigación de tecnologías emergentes: Inteligencia Artificial para análisis refractivo, asistentes LLM para consulta sobre base de datos, algoritmos de recomendación de armazones y visión artificial.
+
+8. ENTREVISTAS:
+   - Archivos: 'Informe_Entrevista_1_OpticaVistaVision.docx', 'InformeTecnico_Entrevista2.docx', 'Informe_Tecnico_Sistema_Legado_Oftalmologico.docx', 'informeEntrevistasConsolidado.txt', 'requisitosDetectados.txt'.
+   - Contenido: Elicitación de campo en Óptica Vista Visión (Riobamba) y benchmarking sobre un software legado peruano. Se detectan las necesidades críticas (inmutabilidad de historial, control de taller externo, cobros por anticipo).
+
+9. PLANIFICACION:
+   - Archivos: 'roles_scrum_profesores (1).txt', 'contexChat11sep.txt', 'Orden_Metodologico_Implementacion_Sistema.txt', 'organizacionTrabajo.txt', 'CRONOGRAMA\Gantt_SistemaGestionClinicaOptometrica.xlsx', 'UML_Teoria.txt'.
+   - Contenido: Asignación de roles entre directores y estudiantes, alineación metodológica Scrum y cronogramas de trabajo.
+
+10. CRONOGRAMA:
+    - Archivos: 'Gantt_SistemaGestionClinicaOptometrica.xlsx'.
+    - Contenido: Planificación temporal en hoja de cálculo de las tareas y fases del sistema.
+
+11. EQUIPOS:
+    - Archivos: Diagnósticos de hardware de los desarrolladores ('DESKTOP-ML70LGD.txt' para Omar Figueroa, 'DESKTOP-MO7Q55S.txt' para Alexander Villalva, 'DxDiag.txt', 'DxDiagPcOmar.txt').
+    - Contenido: Verificación de capacidad de cómputo para desarrollo local y Docker.
+
+12. PLANTILLAS:
+    - Archivos: 'PMOInformatica Plantilla de Casos de Uso.doc' y '.txt', 'plantilla_formato_ieee830.doc'.
+    - Contenido: Formatos base para redacción de requisitos y casos de uso.
+
+13. Alcance del Proyecto:
+    - Archivos: 'ALCANCE DE UN PROYECTO.pdf', 'instruccion.txt'.
+    - Contenido: Guía metodológica institucional para la formulación de alcances.
+
+====================================================================================================
+3. CATÁLOGO DETALLADO DE CONTRADICCIONES DETECTADAS
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+CONTRADICCIÓN 1: ALCANCE DEL SISTEMA Y NÚMERO DE MÓDULOS (5 MÓDULOS VS. 7 MÓDULOS)
+----------------------------------------------------------------------------------------------------
+* Ubicación de la contradicción:
+  - Grupo A (5 módulos):
+    * 'ANTEPROYECTO\Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.docx' (pp. 14, 22-24, 28)
+    * 'DEBERES\Documento_Alcance_SGO.docx' (Sección: "Fronteras del Sistema: Lo que está Dentro vs. Fuera del Alcance", p. 4)
+    * 'REQUERIMENTACION\Especificacion de Requisitos_01.txt'
+    * 'ENTREVISTAS\requisitosDetectados.txt'
+  - Grupo B (7 módulos):
+    * 'CASOS DE USO\DOCUMENTO_MAESTRO_ESPECIFICACION_CASOS_DE_USO_SGO.docx' y '.txt'
+    * 'CASOS DE USO\04_CasosUso_Facturacion_SRI_PMO.txt' y '05_CasosUso_IA_Auditoria_PMO.txt'
+    * 'REQUERIMENTACION\Especificacion de Requisitos_02.txt'
+    * 'ESTUDIO DE FACTIBILIDAD\EstudioFactibilidad_SGO.txt'
+    * Carpeta 'FACTURACION ELECTRONICA' e 'INNOVACION'
+
+* Descripción exacta del conflicto:
+  En el Anteproyecto y en el 'Documento_Alcance_SGO.docx' de la carpeta DEBERES se define formalmente:
+  "DENTRO DEL ALCANCE: M1 (Autenticación), M2 (Pacientes), M3 (Historia Clínica/Graduación), M4 (Laboratorio Óptico) y M5 (Ventas y Cobros)."
+  Y se declara expresamente como FUERA DEL ALCANCE (Out-of-Scope / Trabajo Futuro):
+    - Facturación Electrónica SRI en línea con WebService (RF-FUT-01). Se argumenta textualmente:
+      "la integración directa con el sistema de facturación electrónica del SRI queda fuera del alcance del Producto Mínimo Viable (MVP)... decisión sustentada en el análisis de riesgo que cataloga dicha dependencia burocrática como crítica para la continuidad de los sprints".
+    - Inteligencia Artificial / Asistente Virtual: No contemplado en el MVP.
+
+  Por el contrario, en los documentos de Casos de Uso, Requisitos 02 y Factibilidad:
+    - Se incorporan de lleno como requisitos obligatorios del sistema:
+      * MÓDULO 6: Facturación Electrónica e Integración SRI (CU-FAC-01 a CU-FAC-04, RF-24 a RF-27), incluyendo firma XAdES-BES, generación XML, autorización SRI y RIDE PDF.
+      * MÓDULO 7: Asistente Inteligente Conversacional / IA y Auditoría Inmutable (CU-IA-01 a CU-IA-03, RF-28 a RF-31), con interacción LLM y auditoría especializada.
+
+* Impacto:
+  Existe una contradicción directa entre lo que los autores se comprometieron a entregar según el documento de alcance de titulación frente a lo que se modeló en Casos de Uso y Factibilidad. Si un evaluador revisa el Anteproyecto o el Documento de Alcance, entenderá que el SRI y la IA están descartados; pero si revisa Casos de Uso o Facturación Electrónica, verá que son módulos centrales.
+
+----------------------------------------------------------------------------------------------------
+CONTRADICCIÓN 2: STACK TECNOLÓGICO Y ARQUITECTURA (LARAVEL MONOLÍTICO VS. NODE.JS/NESTJS MICROSERVICIOS)
+----------------------------------------------------------------------------------------------------
+* Ubicación de la contradicción:
+  - Laravel / Monolito API REST:
+    * 'ANTEPROYECTO\Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.docx'
+    * 'DEBERES\Documento_Alcance_SGO.docx'
+    * 'REQUERIMENTACION\Especificacion de Requisitos_01.txt' y '02.txt'
+  - Node.js / Express / NestJS / Microservicios:
+    * 'FACTURACION ELECTRONICA\DescripcionArquitectura_v1.txt'
+    * 'FACTURACION ELECTRONICA\InformeImplementacionAppFacturacionElectronica.txt'
+    * 'FACTURACION ELECTRONICA\informeImplementacionBDf6.txt'
+    * 'CASOS DE USO\documento_t_cnico_de_casos_de_uso_del_sistema_de_gesti_n_optom_trica_sgo.txt'
+  - Frontend React vs. Angular:
+    * React predomina en la mayoría de textos.
+    * 'REQUERIMENTACION\fase2\Alcance.txt' y 'CASOS DE USO\CasosUsoTeoria.txt' mencionan Angular.
+
+* Descripción exacta del conflicto:
+  - En los documentos base de software se establece que el Backend transaccional se desarrollará en PHP utilizando el Framework Laravel con Eloquent ORM.
+  - En la carpeta de Facturación Electrónica y en documentos técnicos de Casos de Uso, la arquitectura cambia hacia JavaScript/TypeScript sobre Node.js utilizando NestJS o Express con Prisma/TypeORM, o se plantea un microservicio satélite independiente para la comunicación con el SRI.
+  - No queda explícitamente delimitado si el sistema es un Monolito Laravel que consume una librería PHP para firma digital, o si es una arquitectura desacoplada orientada a microservicios donde coexisten Laravel y NestJS en contenedores Docker independientes.
+
+* Impacto:
+  Genera confusión técnica sobre las tecnologías a desplegar en el servidor de producción y las competencias evaluadas en la construcción del software.
+
+----------------------------------------------------------------------------------------------------
+CONTRADICCIÓN 3: PRESUPUESTO Y COSTOS TOTALES DEL PROYECTO
+----------------------------------------------------------------------------------------------------
+* Ubicación de la contradicción:
+  - Cifra 1 ($10,718.00 USD): Anteproyecto (Bloque I subtotal construcción) e 'informeEstudioFactibilidadf1.txt'.
+  - Cifra 2 ($10,752.50 USD): 'DEBERES\Documento_Alcance_SGO.docx' (Secciones 6.1, 6.2 y Resumen de Costos).
+  - Cifra 3 ($11,551.75 USD): 'ANTEPROYECTO' (Presupuesto total = $10,718.00 Bloque I + $833.75 Bloque II) e 'informeEstudioFactibilidadf4.txt'.
+  - Cifra 4 ($11,724.25 USD): 'ESTUDIO DE FACTIBILIDAD\EstudioFactibilidad_SGO.txt' e 'informeEstudioFactibilidadf10.txt' ($10,890.50 Bloque I + $833.75 Bloque II, es decir, $5,862.13 USD por autor).
+  - Cifra 5 ($12,415.75 USD): 'ESTUDIO DE FACTIBILIDAD\PlanEstudioFactibilidad.txt'.
+  - Inversión operativa de la Óptica: Se cita como $250.00 USD en algunos textos y como $264.00 USD en otros.
+
+* Descripción exacta del conflicto:
+  Coexisten 5 cifras distintas para el costo total del proyecto sin que exista una nota de conciliación presupuestaria que explique las diferencias:
+    - En el Anteproyecto original: $11,551.75 USD.
+    - En el documento de alcance entregado en DEBERES: $10,752.50 USD.
+    - En el Estudio de Factibilidad definitivo: $11,724.25 USD (un incremento de $172.50 USD atribuible al ajuste de costos de hardware o contingencia).
+    - En el Plan preliminar de Factibilidad: $12,415.75 USD.
+
+* Impacto:
+  Inconsistencia en auditorías financieras y de proyectos de titulación. El tribunal evaluador detectará discrepancias en las tablas de inversión inicial y en el cálculo del VAN y la amortización.
+
+----------------------------------------------------------------------------------------------------
+CONTRADICCIÓN 4: CRONOGRAMA, FECHAS DE EJECUCIÓN Y DISTRIBUCIÓN DE SPRINTS
+----------------------------------------------------------------------------------------------------
+* Ubicación de la contradicción:
+  - Cronograma Mayo - Septiembre 2026:
+    * 'ANTEPROYECTO\Alexander Villalva_Omar_Figueroa_Trabajo_de_Titulacion_Anteproyecto.docx'
+  - Cronograma Septiembre 2026 - Enero 2027:
+    * 'DEBERES\Documento_Alcance_SGO.docx'
+    * 'ESTUDIO DE FACTIBILIDAD\EstudioFactibilidad_SGO.txt'
+    * 'REQUERIMENTACION\plaDesarrolloRequisitos.txt'
+
+* Descripción exacta del conflicto:
+  - En el Anteproyecto aprobado:
+    * Fecha de presentación: 08/05/2026.
+    * Duración: Mayo a Septiembre 2026.
+    * Inicio: 11/05/2026. Defensa final: 16/09/2026.
+    * Sprints:
+      - Sprint 1 (15/06/2026 a 02/07/2026): M1 (Auth) + M2 (Pacientes).
+      - Sprint 2 (02/07/2026 a 20/07/2026): M3 (Historia Clínica Refractiva).
+      - Sprint 3 (20/07/2026 a 06/08/2026): M4 (Laboratorio) + M5 (Ventas).
+      - Sprint 4 (06/08/2026 a 24/08/2026): M5 (Reportes) + Pruebas.
+  - En el Documento de Alcance (DEBERES) y Estudio de Factibilidad:
+    * Período Académico: Septiembre 2026 - Enero 2027 (18 semanas académicas, del 13 de septiembre de 2026 al 8 de enero de 2027).
+    * Contradicción interna en 'Documento_Alcance_SGO.docx': Aunque en la carátula dice "septiembre de 2026 - enero 2027", en el cuerpo del texto (p. 8) dice que se ejecuta en el "período académico mayo–septiembre 2026".
+    * Contenido de Sprints en Factibilidad y Requisitos 02:
+      - Sprint 1: M1 (Auth) + M2 (Pacientes).
+      - Sprint 2: M3 (Historia) + M4 (Lab).
+      - Sprint 3: M5 (Ventas) + M6 (Facturación SRI).
+      - Sprint 4: M7 (Asistente IA) + Pruebas/Cierre.
+
+* Impacto:
+  Descoordinación temporal severa entre los documentos de planificación de grado frente a los deberes e informes de la asignatura de desarrollo.
+
+----------------------------------------------------------------------------------------------------
+CONTRADICCIÓN 5: ROLES METODOLÓGICOS Y GOBERNANZA (SCRUM VS. ROLES TRADICIONALES EN CASCADA)
+----------------------------------------------------------------------------------------------------
+* Ubicación de la contradicción:
+  - 'PLANIFICACION\ROLES\roles_scrum_profesores (1).txt'
+  - 'CASOS DE USO\DOCUMENTO_MAESTRO_ESPECIFICACION_CASOS_DE_USO_SGO.txt'
+  - 'ESTUDIO DE FACTIBILIDAD\EstudioFactibilidad_SGO.txt'
+  - 'ANTEPROYECTO'
+
+* Descripción exacta del conflicto:
+  - En la metodología Scrum pura del Anteproyecto:
+    * El Product Owner es el Propietario/Optometrista de la óptica.
+    * Los investigadores (Omar Figueroa y Alexander Villalva) son el Scrum Development Team.
+    * Sin embargo, en 'roles_scrum_profesores (1).txt' y Factibilidad se asigna al Director de Titulación (Ing. Jorge Menéndez) el rol de Scrum Master (2 h/semana), lo cual es metodológicamente inusual dado que un tutor académico funge típicamente como evaluador o asesor externo y no como facilitador operativo diario del equipo Scrum.
+    * En el mismo documento de roles se reconoce explícitamente: "La Tabla 5-2 del anteproyecto no registra al Ing. Santillán como participante del proyecto, lo que generaba una contradicción con su rol como docente revisor".
+  - En 'CASOS DE USO\DOCUMENTO_MAESTRO':
+    * Se introducen títulos no ágiles / jerárquicos: Alexander Villalva figura como "Gerente / Líder de Proyecto" y Omar Figueroa como "Gerente / Líder de Desarrollo de Software", entrando en contradicción con el marco ágil de Scrum donde no existen jerarquías de gestión de proyecto.
+
+----------------------------------------------------------------------------------------------------
+CONTRADICCIÓN 6: IDENTIDAD DEL BENEFICIARIO (ANONIMIZACIÓN VS. NOMBRE COMERCIAL REAL)
+----------------------------------------------------------------------------------------------------
+* Ubicación de la contradicción:
+  - En 'ANTEPROYECTO': Se utiliza consistentemente "Óptica de estudio" o "Óptica en estudio" (para preservar el anonimato comercial y la confidencialidad médica en el trámite institucional de titulación).
+  - En 'ENTREVISTAS', 'CASOS DE USO', 'DEBERES' y 'REQUERIMENTACION': Se identifica explícitamente a la empresa: "Óptica Vista Visión", ubicada en Riobamba, Chimborazo.
+  - En 'ESTUDIO DE FACTIBILIDAD\informeEstudioFactibilidadf7.txt': Se menciona adicionalmente a "Óptica Los Andes" en tablas comparativas.
+
+* Impacto:
+  Falta de uniformidad institucional. Debe definirse si el trabajo final mantendrá el nombre real de Óptica Vista Visión con autorización de uso de marca o si se manejará anonimizado bajo convenio de confidencialidad.
+
+----------------------------------------------------------------------------------------------------
+CONTRADICCIÓN 7: NUMERACIÓN Y FORMALIZACIÓN DE REQUISITOS (RF Y ETIQUETAS DE SEGURIDAD)
+----------------------------------------------------------------------------------------------------
+* Ubicación de la contradicción:
+  - 'REQUERIMENTACION\Especificacion de Requisitos_01.txt': 23 Requisitos Funcionales (RF-01 a RF-23). Etiquetas con formato 'SEC-AUT-01', 'SEC-INT-01', 'SEC-RES-01'.
+  - 'REQUERIMENTACION\Especificacion de Requisitos_02.txt': 31 Requisitos Funcionales (RF-01 a RF-31). Etiquetas migradas al formato 'S-TAG-AUTH-01', 'S-TAG-INT-01', 'S-TAG-RES-01'.
+  - 'CASOS DE USO\DOCUMENTO_MAESTRO': 23 Casos de Uso (CU-SEG-01 a CU-IA-03) que mapean a los 31 RFs, pero sin numeración coincidente 1 a 1.
+
+* Descripción exacta del conflicto:
+  Existe un desfase nomenclatural entre la primera entrega de requisitos (que concuerda con el Anteproyecto de 5 módulos) y la segunda entrega (que incorpora SRI e IA). Si se cotejan documentos cruzados, las referencias a los códigos RF quedan desalineadas.
+
+====================================================================================================
+4. CONSISTENCIAS, PUNTOS DE ACUERDO Y FORTALEZAS DEL REPOSITORIO
+====================================================================================================
+A pesar de las discrepancias en alcance y fechas derivadas de la evolución del proyecto, existe un 
+núcleo técnico y clínico sólido y altamente consistente en todo el repositorio:
+
+1. Base de Datos Relacional Unificada:
+   - Todos los documentos coinciden en el uso de PostgreSQL como motor principal de base de datos relacional transaccional, destacando el uso de tipos de datos JSONB, constraints numéricos para dioptrías, triggers para auditoría inmutable y soft deletes para cumplimiento normativo.
+
+2. Marco Normativo Clínico y Protección de Datos:
+   - Cumplimiento estricto del Formulario 024 del Ministerio de Salud Pública (MSP) para la Historia Clínica Optométrica.
+   - Alineación rigurosa con la Ley Orgánica de Protección de Datos Personales (LOPDP Ecuador) y regulaciones del ACESS: aislamiento de la receta de trabajo para el taller óptico externo (eliminando diagnósticos médicos y datos sensibles del paciente).
+
+3. Lógica Clínica Optométrica:
+   - Consistencia matemática en todas las especificaciones:
+     * Rango de Esfera (Sph): -25.00 D a +25.00 D en pasos de 0.25 D.
+     * Rango de Cilindro (Cyl): -10.00 D a 0.00 D (notación de cilindro negativo) en pasos de 0.25 D.
+     * Eje (Axis): 0° a 180° (grados enteros).
+     * Adición (Add): +0.75 D a +4.00 D, con validación de simetría obligatoria (OD = OI) conforme a la práctica optométrica estándar.
+     * Distancia Pupilar (DNP): 20 mm a 40 mm por ojo.
+
+4. Algoritmos Transversales:
+   - Validación del décimo dígito de cédula ecuatoriana (Algoritmo Módulo 10).
+   - Generación de claves de acceso de 49 dígitos con ponderación Módulo 11 (para los documentos que contemplan SRI).
+
+5. Modelo de Autofinanciamiento:
+   - Todos los documentos coinciden en que el desarrollo del software es autofinanciado al 100% por los dos estudiantes investigadores (Omar Figueroa y Alexander Villalva), cediendo una licencia de uso a la óptica a cambio de servir como caso de estudio y validación operativa.
+
+====================================================================================================
+5. RECOMENDACIONES DE ARMONIZACIÓN PARA LOS AUTORES
+====================================================================================================
+Para presentar este proyecto de forma impecable tanto para la titulación en la ESPOCH como para la 
+asignatura de Aplicaciones Informáticas II, se recomienda adoptar las siguientes medidas:
+
+1. Unificar la Declaración de Alcance:
+   - Adoptar oficialmente una de las dos posturas:
+     * Opción 1 (Modularidad Formal en 2 Fases): Declarar que el MVP de Titulación de Grado abarca formalmente los Módulos M1 a M5 (como reza el Anteproyecto y el Documento de Alcance), y que los Módulos M6 (SRI) y M7 (IA) constituyen el "Bloque de Innovación y Extensión Avanzada" desarrollado para la asignatura de Aplicaciones Informáticas II.
+     * Opción 2 (Adenda de Titulación): Si se desea que M6 y M7 formen parte de la tesis de grado, solicitar una actualización formal de alcance al director de titulación y al tribunal para que el Anteproyecto y el documento de alcance reflejen los 7 módulos y los 31 RFs.
+
+2. Armonizar el Cronograma y el Período Académico:
+   - Corregir el 'Documento_Alcance_SGO.docx' eliminando la mención residual a "mayo-septiembre 2026" si la vigencia del proyecto es "septiembre 2026 - enero 2027", o aclarar la fase de diseño (mayo-agosto) frente a la fase de construcción e implementación (septiembre-enero).
+
+3. Establecer una Cifra Única de Presupuesto:
+   - Estandarizar la tabla de costos en todos los documentos adoptando la cifra consolidada final del Estudio de Factibilidad ($11,724.25 USD) e incluyendo una nota al pie que aclare que la cifra anterior de $11,551.75 USD correspondía a la versión preliminar del Anteproyecto antes de incluir la ampliación de licencias y contingencias.
+
+4. Estandarizar la Nomenclatura de Roles:
+   - En Casos de Uso, sustituir los términos "Gerente de Proyecto" y "Gerente de Software" por la nomenclatura ágil Scrum ("Developer - Líder Frontend / UX" y "Developer - Líder Backend / Ciberseguridad") para mantener la coherencia metodológica con Scrum.
+
+====================================================================================================
+FIN DEL INFORME DE ANÁLISIS GENERAL DE REPOSITORIO
+====================================================================================================
