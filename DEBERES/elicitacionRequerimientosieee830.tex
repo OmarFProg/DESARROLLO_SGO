@@ -1,0 +1,763 @@
+\documentclass[12pt,a4paper]{report}
+
+% ==============================================================================
+% PAQUETES Y CONFIGURACIÓN GENERAL (ESTÁNDAR IEEE Std 830-1998)
+% ==============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=3.0cm, right=2.5cm}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+
+% Definición de tipos de columna para Tabularx
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% Paleta de colores institucionales y técnicos
+\definecolor{primaryBlue}{RGB}{24, 76, 120}
+\definecolor{secondaryBlue}{RGB}{41, 128, 185}
+\definecolor{darkGray}{RGB}{60, 64, 67}
+\definecolor{lightGray}{RGB}{245, 247, 250}
+\definecolor{borderGray}{RGB}{209, 213, 219}
+\definecolor{alertRed}{RGB}{192, 57, 43}
+\definecolor{accentGreen}{RGB}{39, 174, 96}
+\definecolor{tagBlue}{RGB}{235, 245, 255}
+
+% Configuración de hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryBlue,
+    citecolor=secondaryBlue,
+    filecolor=primaryBlue,
+    urlcolor=secondaryBlue,
+    pdftitle={Especificación de Requisitos de Software IEEE 830 - SGO},
+    pdfauthor={Omar Santiago Figueroa Díaz, Alexander Rafael Villalva Dumancela},
+    pdfsubject={Ingeniería de Requisitos de Software - ESPOCH},
+    pdfkeywords={IEEE 830, SRS, Requisitos de Software, SGO, Optometría, Facturación SRI, Inteligencia Artificial, ISO 25010}
+}
+
+% Encabezados y pies de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{darkGray}Sistema de Gestión Optométrica (SGO) --- SRS IEEE 830}
+\fancyhead[R]{\small\color{darkGray}ESPOCH --- Carrera de Software}
+\fancyfoot[L]{\small\color{darkGray}Óptica Vista Visión --- Riobamba}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+% Formato de capítulos y secciones
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{primaryBlue}}
+  {\filleft\Large\textsf{\chaptertitlename\ \thechapter}}
+  {1ex}
+  {\titlerule[1.5pt]\vspace{1.5ex}\Huge\textsf}
+  [\vspace{1ex}{\titlerule[0.5pt]}]
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{primaryBlue}}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{secondaryBlue}}{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{darkGray}}{\thesubsubsection}{1em}{}
+
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+
+% Comando personalizado para caja de requisito IEEE 830
+\newcommand{\requisitoTabla}[8]{
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|L{3.8cm}|X|}
+\hline
+\rowcolor{primaryBlue}\multicolumn{2}{|c|}{\color{white}\textbf{ESPECIFICACIÓN FORMAL DE REQUISITO FUNCIONAL --- IEEE Std 830-1998}} \\
+\hline
+\rowcolor{lightGray}\textbf{Número de Requisito:} & \textbf{#1} \\
+\hline
+\textbf{Nombre de Requisito:} & \textbf{#2} \\
+\hline
+\rowcolor{lightGray}\textbf{Tipo de Requisito:} & #3 \\
+\hline
+\textbf{Fuente del Requisito:} & #4 \\
+\hline
+\rowcolor{lightGray}\textbf{Prioridad del Requisito:} & \textbf{#5} \\
+\hline
+\multicolumn{2}{|p{0.96\textwidth}|}{\textbf{Descripción:} \newline #6} \\
+\hline
+\multicolumn{2}{|p{0.96\textwidth}|}{\textbf{Entradas y Precondiciones:} \newline #7} \\
+\hline
+\multicolumn{2}{|p{0.96\textwidth}|}{\textbf{Proceso, Salidas y Criterio de Verificación:} \newline #8} \\
+\hline
+\end{tabularx}
+\caption{Requisito Funcional #1: #2.}
+\label{rf:#1}
+\end{table}
+}
+
+% ==============================================================================
+% INICIO DEL DOCUMENTO
+% ==============================================================================
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PORTADA INSTITUCIONAL
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{0.5cm}
+    {\Huge\textbf{\textsf{ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO}}}\\[0.4cm]
+    {\LARGE\textbf{\textsf{FACULTAD DE INFORMÁTICA Y ELECTRÓNICA}}}\\[0.3cm]
+    {\Large\textsf{CARRERA DE SOFTWARE}}\\[1.2cm]
+
+    \begin{center}
+        \line(1,0){420}\\[0.4cm]
+        {\huge\bfseries\color{primaryBlue} ESPECIFICACIÓN DE REQUISITOS DEL SOFTWARE (SRS)}\\[0.3cm]
+        {\Large\textbf{Estándar IEEE Std 830-1998}}\\[0.2cm]
+        {\large\bfseries Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)}\\[0.2cm]
+        {\normalsize\textit{Incorporando Integración Fiscal Nativa SRI y Asistencia Inteligente Operativa (IA)}}\\[0.2cm]
+        \line(1,0){420}
+    \end{center}
+
+    \vspace{1.5cm}
+
+    \begin{minipage}{0.48\textwidth}
+        \textbf{Autores / Desarrolladores:} \\
+        Figueroa Díaz, Omar Santiago \\
+        \small{\textit{C.I. 1803391968 --- Código: 7253}} \\[0.2cm]
+        Villalva Dumancela, Alexander Rafael \\
+        \small{\textit{C.I. 0605351899 --- Código: 7135}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \raggedleft
+        \textbf{Director / Tutor Académico:} \\
+        Ing. Menéndez Verdecia, Jorge Ariel, Mgs. \\[0.2cm]
+        \textbf{Asesor Metodológico / Técnico:} \\
+        Ing. Santillán Castillo, Julio Roberto, Ph.D. \\[0.2cm]
+        \textbf{Beneficiario / Caso de Estudio:} \\
+        Óptica Vista Visión (Riobamba)
+    \end{minipage}
+
+    \vfill
+
+    {\large\textsf{Asignatura: Aplicaciones Informáticas II / Trabajo de Titulación de Grado}}\\[0.2cm]
+    {\normalsize Período Académico: Septiembre 2026 --- Enero 2027}\\[0.2cm]
+    {\normalsize Riobamba, Ecuador --- 2026}
+\end{titlepage}
+
+% ------------------------------------------------------------------------------
+% FICHA DEL DOCUMENTO Y CONTROL DE VERSIONES
+% ------------------------------------------------------------------------------
+\newpage
+\chapter*{Control de Versiones y Aprobaciones}
+\addcontentsline{toc}{chapter}{Control de Versiones y Aprobaciones}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|c|c|L{3.5cm}|L{3.0cm}|X|}
+\hline
+\rowcolor{primaryBlue}\color{white}\textbf{Fecha} & \rowcolor{primaryBlue}\color{white}\textbf{Versión} & \rowcolor{primaryBlue}\color{white}\textbf{Autor(es)} & \rowcolor{primaryBlue}\color{white}\textbf{Organización} & \rowcolor{primaryBlue}\color{white}\textbf{Descripción del Cambio} \\
+\hline
+15/05/2026 & 1.0 & Figueroa O., Villalva A. & ESPOCH / SGO & Versión inicial preliminar basada en Anteproyecto ESPOCH (Módulos M1 a M5, 23 RFs). \\
+\hline
+12/09/2026 & 1.5 & Figueroa O., Villalva A. & ESPOCH / SGO & Refinamiento de requerimientos con entrevistas de campo en Óptica Vista Visión. Incorporación de S-Tags de seguridad. \\
+\hline
+27/09/2026 & 2.0 & Figueroa O., Villalva A. & ESPOCH / SGO & \textbf{Versión definitiva consolidada según plantilla IEEE 830.} Incorporación formal de Módulo 6 (Facturación Electrónica SRI: XAdES-BES, SOAP, RIDE) y Módulo 7 (Asistente Inteligente Conversacional IA). Total: 31 RFs y 11 RNFs. \\
+\hline
+\end{tabularx}
+\caption{Historial formal de revisiones del documento SRS.}
+\end{table}
+
+\vspace{0.8cm}
+\section*{Firmas Formales de Aprobación}
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|L{4.2cm}|L{4.5cm}|c|c|}
+\hline
+\rowcolor{primaryBlue}\color{white}\textbf{Nombre y Apellidos} & \rowcolor{primaryBlue}\color{white}\textbf{Cargo / Función} & \rowcolor{primaryBlue}\color{white}\textbf{Fecha} & \rowcolor{primaryBlue}\color{white}\textbf{Firma / Estado} \\
+\hline
+Ing. Jorge A. Menéndez Verdecia & Director de Titulación & 27/09/2026 & \textbf{[Aprobado]} \\
+\hline
+Ing. Julio R. Santillán Castillo & Asesor Técnico Metodológico & 27/09/2026 & \textbf{[Aprobado]} \\
+\hline
+Optometrista Principal & Product Owner (Óptica Vista Visión) & 27/09/2026 & \textbf{[Aprobado]} \\
+\hline
+Omar Santiago Figueroa Díaz & Desarrollador Líder Backend / SRI / Seg. & 27/09/2026 & \textbf{[Aprobado]} \\
+\hline
+Alexander Rafael Villalva D. & Desarrollador Líder Frontend / UX / IA & 27/09/2026 & \textbf{[Aprobado]} \\
+\hline
+\end{tabularx}
+\caption{Registro de aprobaciones del documento de requisitos.}
+\end{table}
+
+% ------------------------------------------------------------------------------
+% TABLA DE CONTENIDOS
+% ------------------------------------------------------------------------------
+\newpage
+\tableofcontents
+\newpage
+
+% ==============================================================================
+% CAPÍTULO 1: INTRODUCCIÓN
+% ==============================================================================
+\chapter{Introducción}
+
+\section{Propósito}
+El presente documento constituye la \textbf{Especificación de Requisitos de Software (SRS)} formal y rigurosa para el desarrollo del \textbf{Sistema Informático de Gestión Clínica y Comercial Optométrica (SGO)}, concebido de conformidad con el estándar internacional \textbf{IEEE Std 830-1998} y complementado bajo los principios de aseguramiento de calidad del estándar \textbf{ISO/IEC 25010:2023}.
+
+El propósito fundamental de este instrumento técnico es:
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Definir la línea base contractual y funcional:} Establecer con absoluta precisión, exhaustividad y sin ambigüedades el catálogo completo de funcionalidades (31 Requisitos Funcionales), atributos de calidad (11 Requisitos No Funcionales) y restricciones operativas que gobernarán el ciclo de vida del producto software.
+    \item \textbf{Integración fiscal formal con el SRI:} Formalizar la arquitectura y requerimientos del \textbf{Módulo de Facturación Electrónica Nativa (M6)}, que procesa comprobantes fiscales digitales bajo la Ficha Técnica v2.21 del Servicio de Rentas Internas del Ecuador, incorporando generación de XML canónico v1.1.0, firma digital avanzada XAdES-BES y enlaces asíncronos vía Web Services SOAP.
+    \item \textbf{Incorporación del componente de innovación tecnológica:} Formalizar los requerimientos del \textbf{Asistente Inteligente Conversacional (M7)}, una solución asistida por Inteligencia Artificial y Procesamiento de Lenguaje Natural (PLN) para la exploración interactiva y analítica de datos comerciales, inventarios y estados de laboratorio bajo un esquema inviolable de \textit{Read-Only Guard} y filtrado estricto por roles.
+    \item \textbf{Soporte para el aseguramiento de la calidad y pruebas:} Proveer los criterios verificables, precondiciones, entradas, secuencias algorítmicas y salidas esperadas para la formulación del Plan de Pruebas del Sistema, Pruebas de Aceptación del Usuario (UAT) y auditoría forense de seguridad mediante etiquetas S-TAG.
+\end{enumerate}
+
+Este documento está dirigido al Tribunal de Titulación de la Escuela Superior Politécnica de Chimborazo (ESPOCH), al Director y Asesor Metodológico del proyecto, al equipo de desarrollo de software y al personal clínico-administrativo de la óptica beneficiaria.
+
+\section{Alcance}
+\subsection{Identificación del Producto Software}
+El producto se denomina formalmente: \textbf{Sistema de Gestión Optométrica (SGO)}, versión 2.0.
+
+\subsection{Descripción General del Alcance del Sistema}
+El SGO es una solución informática integral cliente-servidor concebida para modernizar, blindar y agilizar los procesos médicos, logísticos y comerciales en establecimientos de salud visual del Ecuador. El software erradica de forma definitiva las vulnerabilidades identificadas en el sistema legado oftalmológico (pérdida de historial de refracción por sobreescritura ciega, ausencia de trazabilidad con talleres externos de manufactura de lunas y fuga de datos personales sensibles).
+
+El alcance del sistema cubre de forma rigurosa siete (7) módulos operativos completamente integrados:
+\begin{itemize}
+    \item \textbf{Módulo 1 (M1) --- Autenticación y Control de Acceso Granular:} Autenticación segura mediante JSON Web Tokens (JWT) y Control de Acceso Basado en Roles (RBAC) con tres perfiles operativos: Administrador, Optometrista Clínico y Asistente Comercial.
+    \item \textbf{Módulo 2 (M2) --- Gestión Demográfica de Pacientes:} Padrón maestro de historias con validación algorítmica de cédula ecuatoriana (Módulo 10), expediente de antecedentes clínicos y repositorio digital de archivos adjuntos (topografías y recetas externas).
+    \item \textbf{Módulo 3 (M3) --- Atención Clínica y Graduación Refractiva:} Registro estandarizado según el Formulario 024 del MSP / ACESS, cálculo automático de refracción binocular (Esfera, Cilindro en notación negativa, Eje, Distancia Nasopupilar y regla obligatoria de Adición simétrica OD = OI), historial inmutable con \textit{soft-delete} y emisión de receta médica con código QR de verificación antifraude.
+    \item \textbf{Módulo 4 (M4) --- Logística y Pedidos al Taller Óptico Externo:} Gestión y trazabilidad del ciclo de vida de pedidos a laboratorios de biselado (estados: Registrado, En Taller, Recibido, Notificado y Entregado). Implementa aislamiento riguroso de datos personales bajo la LOPDP mediante una orden técnica ciega.
+    \item \textbf{Módulo 5 (M5) --- Ventas, Caja Mostrador e Inventario:} Registro de ventas vinculadas a órdenes de trabajo, esquemas de pago mixto (anticipos y cancelación contra entrega), control de stock de armazones por lotes y código de barras, y arqueo diario ciego de caja transaccional.
+    \item \textbf{Módulo 6 (M6) --- Facturación Electrónica Nativa con el SRI:} Generación de XML según esquema XSD oficial, cálculo de Clave de Acceso de 49 dígitos ponderada por Módulo 11, firma digital avanzada XAdES-BES mediante certificado PKCS\#12 (.p12), transmisión asíncrona a Web Services SOAP (\texttt{RecepcionComprobantesOffline} y \texttt{AutorizacionComprobantesOffline}), generación de RIDE en PDF con código Code128 y despacho automatizado por correo SMTP.
+    \item \textbf{Módulo 7 (M7) --- Asistente Inteligente Conversacional (IA) y Analítica Operativa:} Interfaz de consulta en lenguaje natural para la consulta ágil de saldos de caja, stock de lunas/armazones y tiempos de demora de órdenes de laboratorio, con blindaje estricto de solo lectura (`Read-Only Guard` con \texttt{GRANT SELECT}), filtrado de respuestas por rol (RBAC) y modo de resiliencia local LAN offline.
+\end{itemize}
+
+\section{Personal Involucrado}
+En la Tabla \ref{tab:personal} se detalla el equipo humano involucrado en la especificación, desarrollo y validación del sistema SGO.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|L{3.8cm}|L{3.2cm}|L{3.2cm}|X|}
+\hline
+\rowcolor{primaryBlue}\color{white}\textbf{Nombre} & \rowcolor{primaryBlue}\color{white}\textbf{Rol en el Proyecto} & \rowcolor{primaryBlue}\color{white}\textbf{Categoría / Entidad} & \rowcolor{primaryBlue}\color{white}\textbf{Responsabilidades Principales} \\
+\hline
+Omar Santiago Figueroa Díaz & Desarrollador Líder / Investigador & Estudiante Titulación / Carrera Software ESPOCH & Arquitectura del backend transaccional, diseño del esquema PostgreSQL, motor de firma XAdES-BES, integración SOAP SRI, seguridad y auditoría. \\
+\hline
+Alexander Rafael Villalva Dumancela & Desarrollador Líder / Investigador & Estudiante Titulación / Carrera Software ESPOCH & Diseño de experiencia de usuario (UX/UI), interfaz cliente React/PWA, lógica de refracción clínica, módulo conversacional IA y pruebas UAT. \\
+\hline
+Ing. Jorge Ariel Menéndez Verdecia, Mgs. & Director de Proyecto / Scrum Master & Docente Titular / FIE ESPOCH & Dirección metodológica ágil, facilitación de impedimentos, revisión de calidad académica y cumplimiento del cronograma institucional. \\
+\hline
+Ing. Julio Roberto Santillán Castillo, Ph.D. & Asesor Metodológico y Técnico & Docente Investigador / FIE ESPOCH & Asesoría en rigor experimental, modelado formal de requisitos, validación arquitectónica y cumplimiento del estándar ISO/IEC 25010. \\
+\hline
+Optometrista Principal & Product Owner / Beneficiario & Propietario / Óptica Vista Visión & Proveedor de requerimientos de negocio clínico y comercial, validación de flujos de taller y pruebas de aceptación final en entorno real. \\
+\hline
+\end{tabularx}
+\caption{Personal clave involucrado en la especificación del sistema.}
+\label{tab:personal}
+\end{table}
+
+\section{Definiciones, Acrónimos y Abreviaturas}
+Para garantizar una interpretación técnica uniforme del presente documento, se definen los siguientes términos:
+\begin{itemize}
+    \item \textbf{ACESS:} Agencia de Aseguramiento de la Calidad de los Servicios de Salud y Medicina Prepagada (Ecuador).
+    \item \textbf{Adición (Add):} Potencia dióptrica positiva añadida a la graduación de lejos para compensar la presbicia en visión cercana. Requiere simetría binocular obligatoria ($OD = OI$).
+    \item \textbf{Agudeza Visual (AV):} Capacidad discriminatoria angular del ojo evaluada típicamente con la cartilla de Snellen (ej. 20/20, 20/40).
+    \item \textbf{CIE-10:} Clasificación Internacional de Enfermedades, décima edición, utilizada para codificar diagnósticos optométricos (ej. H52.1 Miopía, H52.2 Astigmatismo).
+    \item \textbf{Clave de Acceso SRI:} Secuencia numérica obligatoria de 49 dígitos que identifica unívocamente a cada comprobante tributario electrónico en Ecuador, protegida por algoritmo Módulo 11.
+    \item \textbf{DNP (Distancia Nasopupilar):} Distancia milimétrica medida desde el eje sagital nasal hasta el centro pupilar de cada ojo (rango anatómico: 20 mm a 40 mm).
+    \item \textbf{JWT (JSON Web Token):} Estándar abierto (RFC 7519) para la transmisión segura y compacta de información autenticada y permisos entre cliente y servidor.
+    \item \textbf{LOPDP:} Ley Orgánica de Protección de Datos Personales del Ecuador (Registro Oficial Suplemento 459, 2021).
+    \item \textbf{MSP:} Ministerio de Salud Pública del Ecuador.
+    \item \textbf{Read-Only Guard:} Mecanismo de ciberseguridad que restringe las consultas del agente de Inteligencia Artificial exclusivamente al operador \texttt{SELECT}, imposibilitando mutaciones o inyecciones de datos en la base relacional.
+    \item \textbf{RIDE:} Representación Impresa del Documento Electrónico generada en formato PDF de conformidad con los lineamientos del SRI.
+    \item \textbf{SRI:} Servicio de Rentas Internas del Ecuador.
+    \item \textbf{S-TAG (Security Tag):} Etiqueta formal de trazabilidad de seguridad que vincula requisitos de software con subcaracterísticas de ISO/IEC 25010:2023.
+    \item \textbf{XAdES-BES:} \textit{XML Advanced Electronic Signatures - Basic Electronic Signature}, estándar criptográfico de firma digital exigido por la autoridad fiscal ecuatoriana.
+\end{itemize}
+
+\section{Referencias Documentales y Normativas}
+En la Tabla \ref{tab:referencias} se listan las fuentes normativas, estándares de ingeniería y documentos técnicos del repositorio utilizados como base para esta especificación.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|L{2.5cm}|L{4.2cm}|L{3.5cm}|c|X|}
+\hline
+\rowcolor{primaryBlue}\color{white}\textbf{Referencia} & \rowcolor{primaryBlue}\color{white}\textbf{Título del Documento} & \rowcolor{primaryBlue}\color{white}\textbf{Ruta / Enlace} & \rowcolor{primaryBlue}\color{white}\textbf{Fecha} & \rowcolor{primaryBlue}\color{white}\textbf{Autor / Organización} \\
+\hline
+IEEE-830 & Recommended Practice for Software Requirements Specifications & IEEE Std 830-1998 & 1998 & IEEE Computer Society \\
+\hline
+ISO-25010 & Systems and software engineering --- SQuaRE & ISO/IEC 25010:2023 & 2023 & ISO/IEC JTC 1/SC 7 \\
+\hline
+SRI-FICH22 & Ficha Técnica de Comprobantes Electrónicos Esquema Offline & Portales SRI Ecuador & 2023 & Servicio de Rentas Internas \\
+\hline
+MSP-024 & Formulario 024: Registro de Atención y Examen Optométrico & Sistema Nacional Salud & 2020 & Ministerio Salud Pública \\
+\hline
+LOPDP-2021 & Ley Orgánica de Protección de Datos Personales & R.O. Supl. 459 & 2021 & Asamblea Nacional Ecuador \\
+\hline
+DOC-LEGADO & Informe Técnico Sistema Legado Oftalmológico & ENTREVISTAS/Informe\_* & Mayo 2026 & Figueroa O. / Villalva A. \\
+\hline
+DOC-MAESTRO & Documento Maestro Casos de Uso SGO v1.0 & CASOS DE USO/DOCUMENTO* & Sep 2026 & Figueroa O. / Villalva A. \\
+\hline
+DOC-FACTUR & Informe Implementación Facturación Electrónica & FACTURACION ELECTRONICA/ & Sep 2026 & Figueroa O. / Villalva A. \\
+\hline
+DOC-INNOVA & Informe de Propuestas de Innovación y Chatbot IA & INNOVACION/informe* & Sep 2026 & Figueroa O. / Villalva A. \\
+\hline
+\end{tabularx}
+\caption{Relación completa de documentos de referencia técnica y legal.}
+\label{tab:referencias}
+\end{table}
+
+\section{Resumen y Organización del Documento}
+El documento se encuentra organizado en cuatro capítulos conforme al estándar IEEE 830:
+\begin{itemize}
+    \item \textbf{Capítulo 1 --- Introducción:} Define el propósito, alcance, personal involucrado, definiciones, referencias normativas y visión del sistema.
+    \item \textbf{Capítulo 2 --- Descripción General:} Modela la perspectiva arquitectónica del producto, funcionalidades principales, perfiles de usuario, restricciones de desarrollo, supuestos y evolución previsible.
+    \item \textbf{Capítulo 3 --- Requisitos Específicos:} Núcleo central que detalla los requisitos comunes de interfaz (hardware, software, usuario, comunicación), las fichas formales de los 31 Requisitos Funcionales distribuidos en los 7 módulos (incluyendo Facturación SRI e Inteligencia Artificial), los Requisitos No Funcionales bajo ISO 25010 y requisitos legales.
+    \item \textbf{Capítulo 4 --- Apéndices:} Incorpora la matriz de trazabilidad integral de requisitos, catálogo de requisitos futuros y el glosario especializado.
+\end{itemize}
+
+% ==============================================================================
+% CAPÍTULO 2: DESCRIPCIÓN GENERAL
+% ==============================================================================
+\chapter{Descripción General}
+
+\section{Perspectiva del Producto}
+El Sistema de Gestión Optométrica (SGO) es una solución de software independiente (\textit{standalone client-server}) que opera bajo un modelo de aplicación web enriquecida y responsiva (SPA/PWA). El sistema interactúa de forma directa con servicios públicos externos regulados, como se visualiza conceptualmente en la Figura \ref{fig:perspectiva}.
+
+\begin{figure}[H]
+\centering
+\begin{tcolorbox}[colback=white,colframe=primaryBlue,title=\textbf{Arquitectura Conceptual y Límites Operativos del Sistema SGO},width=0.98\textwidth]
+\centering
+\small
+\begin{verbatim}
++-----------------------------------------------------------------------------+
+|                      CLIENTES WEB / DISPOSITIVOS OPTOMETRÍA                  |
+|  [Recepción / Caja (M1,M2,M5)]  [Consultorio Clínico (M3)]  [Taller (M4)]   |
++-----------------------------------------------------------------------------+
+                                      |  (HTTPS / TLS 1.3 / REST API / JWT)
+                                      v
++-----------------------------------------------------------------------------+
+|                           SERVIDOR CENTRAL DE APLICACIÓN                    |
+|  +---------------------+  +----------------------+  +---------------------+ |
+|  | Core Monolito Mod.  |  | Servicio Satélite    |  | Asistente IA (M7)   | |
+|  | Laravel 11 / API    |  | Facturación SRI (M6) |  | Read-Only Guard     | |
+|  | (Auth, Pacientes,   |  | Node.js / XAdES-BES  |  | Intent Router NLP   | |
+|  | Clinica, Ventas)    |  | SOAP WebServices     |  | Resiliencia LAN     | |
+|  +---------------------+  +----------------------+  +---------------------+ |
++-----------------------------------------------------------------------------+
+               |                                             |
+               v (SQL / ACID / Triggers)                     v (SOAP / HTTPS)
++------------------------------------+      +---------------------------------+
+|   BASE DE DATOS: PostgreSQL 15+    |      |  SERVICIOS WEB EXTERNOS SRI     |
+| - Historial Clínico Inmutable      |      | - RecepcionComprobantesOffline  |
+| - Bitácora Inmutable (audit\_logs)  |      | - AutorizacionComprobantesOffl. |
+| - Claves de Acceso y Facturas XML  |      +---------------------------------+
++------------------------------------+
+\end{verbatim}
+\end{tcolorbox}
+\caption{Diagrama de bloques de la perspectiva del sistema SGO y conexiones externas.}
+\label{fig:perspectiva}
+\end{figure}
+
+El sistema desacopla los procesos críticos: mientras el núcleo asistencial y comercial garantiza transacciones inmediatas bajo red local LAN (incluso ante contingencias de pérdida de internet), el módulo fiscal se comunica asíncronamente con los servidores del SRI mediante colas de despacho y reintentos automáticos.
+
+\section{Funcionalidad del Producto}
+El sistema consolida las siguientes grandes funciones de negocio:
+\begin{enumerate}
+    \item \textbf{Gestión de Seguridad y Usuarios (M1):} Control perimetral, tokens JWT, revocación por inactividad y trazabilidad estricta de cada acción.
+    \item \textbf{Gestión Integral de Pacientes (M2):} Apertura y mantenimiento de historias clínicas con validación automática de documentos de identidad nacional.
+    \item \textbf{Refracción Clínica y Consulta Especializada (M3):} Registro normalizado de parámetros dioptricos, prevención de sobreescritura histórica, transposición automática de cilindros y recetas PDF con código QR verificador.
+    \item \textbf{Gestión de Órdenes a Taller de Biselado (M4):} Emisión de órdenes técnicas ciegas para laboratorios industriales externos cumpliendo la LOPDP, con seguimiento en tiempo real.
+    \item \textbf{Control Comercial, Cobros y Caja (M5):} Facturación interna, soporte de pagos mixtos, anticipos de confección de lentes y balance ciego de caja al cierre de jornada.
+    \item \textbf{Emisión Fiscal SRI (M6):} Generación y validación de comprobantes XML v1.1.0, firmado criptográfico con certificados digitales .p12, envío a los servidores tributarios del SRI, consulta de autorización y generación de RIDE con código Code128.
+    \item \textbf{Asistencia Inteligente de Negocio (M7):} Respuestas interactivas sobre stock de armazones, demoras en laboratorio y métricas de caja, operando exclusivamente mediante consultas \texttt{SELECT} blindadas que impiden cualquier alteración maliciosa o accidental de datos.
+\end{enumerate}
+
+\section{Características de los Usuarios}
+En la Tabla \ref{tab:usuarios} se definen los tipos de usuario que interactuarán con el sistema SGO.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|L{2.8cm}|L{3.0cm}|L{3.5cm}|X|}
+\hline
+\rowcolor{primaryBlue}\color{white}\textbf{Tipo de Usuario} & \rowcolor{primaryBlue}\color{white}\textbf{Formación} & \rowcolor{primaryBlue}\color{white}\textbf{Habilidades Técnicas} & \rowcolor{primaryBlue}\color{white}\textbf{Actividades Habituales en el SGO} \\
+\hline
+Administrador & Educación Superior en Gestión o Sistemas & Manejo avanzado de sistemas web, seguridad y auditoría & Configuración del sistema, auditoría de logs inmutables, gestión de usuarios, emisión y anulación fiscal, arqueos globales de caja y consultas globales con el Asistente IA. \\
+\hline
+Optometrista Clínico & Licenciatura / Tecnología en Optometría & Conocimiento experto en salud visual; ofimática media & Evaluación refractiva, registro de anamnesis Formulario 024 MSP, emisión de recetas ópticas QR, solicitud de lunas a taller y consulta asistida de historiales. \\
+\hline
+Asistente Comercial / Cajero & Bachillerato o Educación Técnica en Ventas & Manejo fluido de navegadores web y terminales de punto de venta & Recepción de pacientes, registro demográfico con cédula, emisión de ventas, cobro de anticipos, emisión de facturas electrónicas SRI, entrega de lentes y consultas de inventario. \\
+\hline
+Técnico de Taller Externo & Técnico en Biselado y Óptica Oftálmica & Manejo básico de dispositivos móviles o navegador & Recepción de orden técnica ciega (sin datos personales del paciente), actualización del estado del lente (En Proceso, Calibrado, Despachado). \\
+\hline
+Paciente / Cliente & Nivel educacional heterogéneo & Uso habitual de smartphones y lectura de códigos QR & Beneficiario de la atención visual; escaneo del código QR de la receta física para validar vigencia y recepción del RIDE/XML en su correo. \\
+\hline
+\end{tabularx}
+\caption{Caracterización formal de los usuarios del sistema.}
+\label{tab:usuarios}
+\end{table}
+
+\section{Restricciones de Diseño e Implementación}
+El desarrollo del sistema está sujeto a las siguientes restricciones no negociables:
+\begin{itemize}
+    \item \textbf{Metodología de Desarrollo:} Uso mandatorio del marco ágil \textbf{Scrum} adaptado con ingeniería de seguridad (Secure Scrum), planificado en sprints quincenales bajo entregables verificables (Definition of Done con criterios S-TAG).
+    \item \textbf{Lenguajes y Frameworks:}
+        \begin{itemize}
+            \item Backend transaccional central: \textbf{PHP 8.2+ con Framework Laravel 11}, utilizando Eloquent ORM y arquitectura RESTful modular.
+            \item Servicio de Integración Tributaria: \textbf{Node.js con TypeScript y Express/NestJS}, utilizando bibliotecas criptográficas nativas (\texttt{node-forge} y \texttt{xml-crypto}) para garantizar la firma XAdES-BES sin dependencias externas pesadas.
+            \item Frontend de Usuario: \textbf{React 18+ con TypeScript, Vite y TailwindCSS}, garantizando renderizado del lado del cliente altamente fluido y diseño responsivo PWA.
+        \end{itemize}
+    \item \textbf{Motor de Base de Datos:} \textbf{PostgreSQL versión 15 o superior}, requerido por su estricto cumplimiento ACID, robustez en constraints matemáticos, soporte nativo de tipos JSONB para parámetros clínicos dinámicos y funciones triggers en PL/pgSQL para auditoría inmutable forense.
+    \item \textbf{Restricciones de Despliegue:} Contenedores \textbf{Docker} orquestados mediante Docker Compose, habilitando despliegue tanto en infraestructura local LAN de la óptica como en servidores virtuales privados (VPS).
+    \item \textbf{Cumplimiento Tributario y Legal Obligatorio:}
+        \begin{itemize}
+            \item Ficha Técnica de Comprobantes Electrónicos v2.21 del SRI (Esquema Offline).
+            \item Ley Orgánica de Protección de Datos Personales del Ecuador (Registro Oficial 459, 2021).
+            \item Formulario 024 de Registro Clínico de Optometría del Ministerio de Salud Pública.
+        \end{itemize}
+\end{itemize}
+
+\section{Suposiciones y Dependencias}
+Las siguientes asunciones condicionan la validez de los requerimientos especificados:
+\begin{itemize}
+    \item \textbf{Disponibilidad del Certificado Digital:} Se asume que el establecimiento óptico dispone de un certificado digital de firma electrónica vigente emitido por una Autoridad de Certificación acreditada en Ecuador (Banco Central del Ecuador, Security Data, Consejo de la Judicatura o ANF AC), en formato PKCS\#12 (.p12/.pfx).
+    \item \textbf{Servicios Web del SRI:} Se asume que los Web Services del SRI (`celcer.sri.gob.ec` en pruebas y `cel.sri.gob.ec` en producción) mantendrán disponibilidad operativa razonable. No obstante, el sistema incorpora arquitectura asíncrona tolerante a desconexiones transitorias de los servidores fiscales.
+    \item \textbf{Infraestructura de Red en la Óptica:} Se asume la disponibilidad de una red de área local (LAN) cableada o Wi-Fi segura con protocolo WPA2/WPA3 que permita la comunicación fluida entre el consultorio optométrico, la caja de cobro y el servidor local de base de datos.
+    \item \textbf{Hardware Mínimo de Estación:} Se asume que las terminales clientes cuentan con navegadores web modernos basados en Chromium (Google Chrome, Microsoft Edge, Brave) o Firefox, con soporte habilitado de JavaScript y almacenamiento local (LocalStorage / IndexedDB).
+\end{itemize}
+
+\section{Evolución Previsible del Sistema}
+Para versiones futuras (v3.0+) y trabajos posteriores de extensión de ingeniería, se identifican las siguientes evoluciones:
+\begin{itemize}
+    \item \textbf{RF-FUT-01 (Despacho Automatizado por WhatsApp Business Cloud API):} Envío de notificaciones inmediatas al paciente al momento en que sus lentes han llegado del taller externo de biselado y recordatorios automáticos de control anual preventivo.
+    \item \textbf{RF-FUT-02 (Pipeline ETL de Migración Masiva de Base Legada):} Rutina de extracción, transformación y limpieza automática para importar el historial histórico de pacientes almacenado en archivos .BAK de Microsoft SQL Server del sistema anterior.
+    \item \textbf{RF-FUT-03 (Módulo Web de Turnos y Agendamiento en Línea):} Portal para que los pacientes agenden sus consultas visuales a través de internet con confirmación por correo electrónico.
+    \item \textbf{RF-FUT-04 (Interconexión Directa con Auto-refractómetros Físicos):} Integración mediante interfaz serie (RS-232) o protocolo DICOM/HL7 para transferir automáticamente las lecturas de los equipos de diagnóstico visual a la historia clínica.
+\end{itemize}
+
+% ==============================================================================
+% CAPÍTULO 3: REQUISITOS ESPECÍFICOS
+% ==============================================================================
+\chapter{Requisitos Específicos}
+
+\section{Requisitos Comunes de las Interfaces}
+
+\subsection{Interfaces de Usuario}
+La interfaz de usuario del sistema SGO se rige bajo los siguientes lineamientos:
+\begin{itemize}
+    \item \textbf{Diseño y Ergonomía Visual:} Construida sobre React y TailwindCSS, adoptando una paleta de colores médicos profesionales (azules profundos y grises neutros) con alto contraste que previene la fatiga ocular de los operadores durante jornadas prolongadas, conforme a las pautas de accesibilidad \textbf{WCAG 2.1 nivel AA}.
+    \item \textbf{Fórmula Óptica en Cuadrícula Dual OD/OI:} La captura y visualización de la graduación óptica se estructura en una tabla sinóptica con separación clara de Ojo Derecho (OD) y Ojo Izquierdo (OI), con validación interactiva que resalta en verde valores válidos y bloquea valores anómalos o fuera de escala.
+    \item \textbf{Widget Conversacional Flotante del Asistente IA:} Ventana de chat desplegable en el cuadrante inferior derecho del panel administrativo, con renderizado de burbujas de diálogo y tarjetas interactivas de datos tabulares.
+    \item \textbf{Diseño Adaptativo (Mobile-First / Desktop-First):} Vistas optimizadas para monitores de escritorio en consultorio (1920x1080 o 1366x768) y adaptables a tablets para consultas asistenciales rápidas.
+\end{itemize}
+
+\subsection{Interfaces de Hardware}
+\begin{itemize}
+    \item \textbf{Estaciones de Trabajo Clientes:} Computadores de escritorio o portátiles con procesadores Intel Core i3 / AMD Ryzen 3 o superior, 4 GB de memoria RAM mínima y monitores con resolución mínima de 1280x720 píxeles.
+    \item \textbf{Lector de Código de Barras:} Conexión estándar USB o inalámbrica con emulación de teclado para la lectura instantánea de etiquetas Code128 de armazones y accesorios en mostrador.
+    \item \textbf{Impresora Térmica de Recibos y Tickets:} Interfaz USB/Ethernet con soporte de comandos ESC/POS y ancho de papel de 58 mm o 80 mm para la impresión de tickets de pedido, anticipos y comprobantes de retiro de lentes.
+    \item \textbf{Impresora Láser / Inyección de Tinta:} Impresora de oficina en formato estándar A4 para la impresión de la Receta Óptica con código QR antifraude y los documentos RIDE oficiales del SRI.
+\end{itemize}
+
+\subsection{Interfaces de Software}
+\begin{itemize}
+    \item \textbf{Sistema Operativo de Servidor:} Compatible con distribuciones GNU/Linux basadas en Debian (Ubuntu Server 22.04 LTS o Debian 12) y Microsoft Windows Server 2019/2022 o Windows 10/11 Pro (mediante subsistema WSL2 o Docker Engine).
+    \item \textbf{Motor de Base de Datos:} PostgreSQL versión 15 o superior, requiriendo las extensiones \texttt{pgcrypto} para funciones criptográficas y \texttt{uuid-ossp} para generación de identificadores únicos universales.
+    \item \textbf{Entorno de Ejecución:} PHP versión 8.2+ con módulos \texttt{pdo\_pgsql}, `mbstring`, `openssl`, `bcmath` y `xml`; Node.js versión 18 LTS o 20 LTS para el microservicio de firma y WebServices SRI.
+    \item \textbf{Servidor de Correo Electrónico SMTP:} Interfaz con servidores de transporte seguro TLS/SSL (puertos 465 o 587) para el envío automático de comprobantes RIDE (PDF) y XML autorizados a las cuentas de correo de los adquirentes.
+\end{itemize}
+
+\subsection{Interfaces de Comunicación}
+\begin{itemize}
+    \item \textbf{Protocolo Cliente-Servidor Interno:} Todas las comunicaciones entre el frontend React y la API transaccional operan mediante el protocolo seguro \textbf{HTTPS sobre TLS 1.3}, transmitiendo cargas útiles formateadas en JSON bajo codificación UTF-8.
+    \item \textbf{Protocolo de Comunicación con el SRI:} Intercambio de mensajes mediante llamadas \textbf{SOAP 1.1 y 1.2} sobre HTTPS hacia los endpoints oficiales de recepción y autorización:
+        \begin{itemize}
+            \item Recepción: \url{https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl}
+            \item Autorización: \url{https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl}
+        \end{itemize}
+    \item \textbf{Sincronización en Tiempo Real:} Implementación de WebSockets (o Server-Sent Events) para actualizar de forma inmediata en las pantallas de recepción y caja el cambio de estado de los trabajos de laboratorio exterior.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% REQUISITOS FUNCIONALES FORMALES (RF-01 A RF-31)
+% ------------------------------------------------------------------------------
+\section{Requisitos Funcionales}
+A continuación se especifican rigurosamente los treinta y un (31) Requisitos Funcionales del sistema, desglosados en sus siete módulos.
+
+\subsection{Módulo 1: Autenticación y Gestión de Usuarios (M1)}
+
+\requisitoTabla{RF-01}{Control de Acceso Basado en Roles (RBAC)}{Requisito de Seguridad / Autorización}{Entrevistas 1 y 2, Anteproyecto ESPOCH}{Alta / Esencial (Must Have)}{El sistema debe autenticar a los usuarios mediante credenciales seguras y restringir el acceso a módulos, vistas y endpoints de API según tres roles formales: Administrador (acceso total a configuración, auditoría, caja y fiscalidad), Optometrista (acceso a historias clínicas, pacientes, refracción y órdenes de taller) y Asistente (acceso a registro de pacientes, ventas, cobros y entregas).}{Entradas: Nombre de usuario / correo institucional y contraseña en texto plano. Precondición: Cuenta de usuario activa en el sistema.}{Proceso: Validación de contraseña con algoritmo bcrypt (factor de coste 12); generación de token JWT firmado digitalmente con claims de rol y permisos; intercepción en middleware de rutas y controladores de API. \newline Salidas: Token JWT firmado (almacenado en memoria/cookie HttpOnly) o código HTTP 403 Forbidden. \newline Verificación: [S-TAG-AUTH-01] Bloqueo irrestricto de rutas para roles no autorizados tanto en cliente como en servidor.}
+
+\requisitoTabla{RF-02}{Gestión Segura de Sesiones y Expiración por Inactividad}{Requisito de Seguridad / Sesiones}{Entrevista 2 (Decisiones Técnicas), plaDesarrolloRequisitos}{Alta / Esencial (Must Have)}{El sistema debe gestionar las sesiones de trabajo de forma que expiren automáticamente tras un período máximo de 20 minutos continuos de inactividad de teclado o mouse, protegiendo las estaciones del consultorio médico contra accesos no supervisados.}{Entradas: Eventos continuos del DOM (mousemove, keydown) o temporizador de inactividad.}{Proceso: El cliente computa el tiempo sin eventos; al alcanzar 20 minutos, emite petición de revocación al endpoint `/api/logout`, purga el token JWT del almacenamiento local y revoca la validez en la lista negra del backend. \newline Salidas: Destrucción de la sesión activa y redirección forzosa a la pantalla de Login con mensaje informativo. \newline Verificación: [S-TAG-AUTH-02] Expiración verificada cronométricamente a los 20 minutos exactos.}
+
+\subsection{Módulo 2: Gestión Demográfica de Pacientes (M2)}
+
+\requisitoTabla{RF-03}{Validación Algorítmica de Cédula Ecuatoriana}{Requisito Funcional / Integridad}{Normativa Registro Civil Ecuador, plaDesarrolloRequisitos}{Alta / Esencial (Must Have)}{El sistema debe validar automáticamente la estructura formal y el dígito verificador de las cédulas de identidad ecuatorianas (10 dígitos) mediante el algoritmo matemático de Módulo 10, impidiendo el registro de identificaciones ficticias o duplicadas.}{Entradas: Cadena de texto que representa el número de documento de identificación.}{Proceso: Comprobación de longitud (10 dígitos numéricos); validación del código de provincia (01 a 24 o 30); ponderación de los primeros 9 dígitos por coeficientes alternados [2, 1, 2, 1, 2, 1, 2, 1, 2] con resta de 9 a productos $\ge 10$; suma de residuos; cálculo del dígito verificador respecto a la decena superior y cotejo con el décimo dígito. \newline Salidas: Estado de validación (Válido / Inválido) con alerta inmediata en interfaz. \newline Verificación: [S-TAG-INT-01] Bloqueo estricto del botón de guardado si el Módulo 10 no es conforme.}
+
+\requisitoTabla{RF-04}{Registro Demográfico y Ficha de Contacto Clínico}{Requisito Funcional / Datos Maestros}{Entrevistas 1 y 2, Formulario 024 MSP}{Alta / Esencial (Must Have)}{El sistema debe permitir registrar y actualizar la información demográfica fundamental del paciente: Nombres completos, Apellidos, Tipo y Número de Documento, Fecha de Nacimiento (con cálculo dinámico de edad), Ocupación (relevante para ergonomía visual), Teléfono principal, Correo electrónico y Dirección de residencia.}{Entradas: Formulario demográfico completado por el operador.}{Proceso: Sanitización de entradas contra inyecciones XSS; verificación de unicidad de cédula en la tabla `pacientes`; cálculo automático de edad cronológica a la fecha actual; persistencia transaccional. \newline Salidas: Registro del paciente guardado en base de datos y emisión del identificador único del expediente. \newline Verificación: Inserción confirmada con timestamp y clave foránea de usuario registrador.}
+
+\requisitoTabla{RF-05}{Búsqueda Indexada Multicriterio y Paginación Server-Side}{Requisito Funcional / Usabilidad y Rendimiento}{Entrevistas 1 y 2, Especificación Requisitos v1.0}{Alta / Esencial (Must Have)}{El sistema debe proveer un motor de búsqueda ágil e indexado que permita localizar pacientes por: Apellidos, Nombres, Número de Cédula o Número de Historia Clínica, con resultados paginados en el servidor para evitar sobrecarga de memoria en el navegador.}{Entradas: Término de búsqueda (mínimo 2 caracteres) ingresado en la barra superior.}{Proceso: Consulta SQL optimizada mediante índices trigram (pg\_trgm) o índices B-tree sobre campos clave; aplicación de paginación mediante \texttt{LIMIT} y \texttt{OFFSET} (20 registros por página). \newline Salidas: Tabla dinámica de resultados con tiempo de respuesta inferior a 300 ms. \newline Verificación: [S-TAG-INT-01] Coincidencia precisa de registros sin degradación de velocidad ante más de 10,000 registros.}
+
+\requisitoTabla{RF-06}{Repositorio Digital de Adjuntos Clínicos y Archivos Externos}{Requisito Funcional / Gestión Documental}{Entrevista 2, plaDesarrolloRequisitos}{Media / Deseado (Should Have)}{El sistema debe permitir asociar a la ficha del paciente archivos digitalizados de estudios externos (topografías corneales, retinografías, recetas médicas de otros centros o exámenes oftalmológicos previos) en formatos PDF, PNG o JPEG, con límite de tamaño por archivo de 5 MB.}{Entradas: Archivo binario seleccionado por el usuario y etiqueta descriptiva del documento.}{Proceso: Validación MIME-type en servidor; análisis de cabeceras binarias (evitando scripts ejecutables); renombrado con UUID aleatorio; almacenamiento en directorio seguro no navegable; registro de metadatos en tabla \texttt{paciente\_adjuntos}. \newline Salidas: Archivo persistido de forma segura y visualizable en el visor del expediente clínico. \newline Verificación: [S-TAG-INT-02] Aislamiento del archivo contra descargas no autenticadas.}
+
+\subsection{Módulo 3: Historia Clínica y Graduación Refractiva (M3)}
+
+\requisitoTabla{RF-07}{Validación Estricta de Rangos Dióptricos}{Requisito Funcional / Integridad Clínica}{Formulario 024 MSP, Entrevista 2, Directrices Clínicas}{Alta / Esencial (Must Have)}{El sistema debe validar de manera estricta que los valores de refracción ingresados por el optometrista se encuentren dentro de los rangos fisiológicos y técnicos válidos en pasos discretos de 0.25 Dioptrías (D): Esfera (Sph) entre -25.00 D y +25.00 D; Cilindro (Cyl) entre -10.00 D y 0.00 D; y Eje (Axis) entre 0° y 180° en valores enteros.}{Entradas: Valores numéricos de Esfera, Cilindro y Eje para Ojo Derecho (OD) y Ojo Izquierdo (OI).}{Proceso: El sistema evalúa los campos mediante expresiones regulares y reglas de restricción \texttt{CHECK} en PostgreSQL. Valores con decimales distintos a .00, .25, .50 o .75 son rechazados automáticamente. \newline Salidas: Aceptación del dato o bloqueo inmediato del campo con borde rojo y mensaje de error específico. \newline Verificación: [S-TAG-INT-01] Imposibilidad absoluta de persistir valores fuera del rango clínico estándar.}
+
+\requisitoTabla{RF-08}{Formateo y Normalización Numérica Decimal Dióptrica}{Requisito Funcional / Calidad de Datos}{Especificación Requisitos v1.0, plaDesarrolloRequisitos}{Alta / Esencial (Must Have)}{El sistema debe normalizar y formatear automáticamente los valores dióptricos ingresados por el usuario añadiendo el signo correspondiente (+ o -) y dos posiciones decimales obligatorias (ej. si el usuario digita `2`, el sistema lo transforma en `+2.00`; si digita `-1.5`, se formatea a `-1.50`).}{Entradas: Entrada numérica o textual digitada por el profesional.}{Proceso: Función de intercepción en evento \texttt{onBlur} y mutador de modelo en backend que parsea a flotante de precisión fija y aplica máscara de formato con signo explícito. \newline Salidas: Cadena normalizada con formato exacto `+X.XX` o `-X.XX` persistida de forma homogénea. \newline Verificación: [S-TAG-INT-01] Homogeneidad total de datos en base de datos relacional.}
+
+\requisitoTabla{RF-09}{Notación Estándar de Cilindro Negativo (Transposición Óptica)}{Requisito Funcional / Algoritmo Médico}{Práctica Optométrica Estándar, Formulario 024 MSP}{Alta / Esencial (Must Have)}{El sistema debe forzar el registro de la corrección astigmática exclusivamente en notación de cilindro negativo. Si el optometrista ingresa una fórmula en cilindro positivo, el sistema debe proveer una función automática de transposición óptica aplicando la fórmula clínica: $Esfera_{nueva} = Esfera_{orig} + Cilindro_{orig}$; $Cilindro_{nuevo} = -Cilindro_{orig}$; y $Eje_{nuevo} = (Eje_{orig} \pm 90^\circ) \pmod{180^\circ}$.}{Entradas: Fórmula óptica ingresada accidentalmente con cilindro positivo ($Cyl > 0$).}{Proceso: Detección del signo positivo; notificación interactiva con propuesta de transposición; recálculo instantáneo de Esfera, inversión de signo del Cilindro y compensación perpendicular del Eje. \newline Salidas: Fórmula transpuesta a cilindro negativo aceptada por el usuario. \newline Verificación: Conversión matemática exacta conforme a la física óptica.}
+
+\requisitoTabla{RF-10}{Validación de Distancia Nasopupilar (DNP) y Altura Focal}{Requisito Funcional / Centrado Óptico}{Entrevistas 1 y 2, Guías de Biselado de Lentes}{Alta / Esencial (Must Have)}{El sistema debe exigir y validar el registro de la Distancia Nasopupilar (DNP) individual para cada ojo (OD y OI) en un rango válido de 20.0 mm a 40.0 mm (o Distancia Interpupilar DIP total entre 40.0 mm y 80.0 mm), y la Altura Focal en milímetros cuando se seleccionen lentes bifocales o progresivos.}{Entradas: Medidas milimétricas de DNP OD, DNP OI y Altura Focal.}{Proceso: Verificación de cotas fisiológicas; cálculo automático de DIP como $DNP_{OD} + DNP_{OI}$; validación obligatoria de campo Altura si el tipo de luna requiere centrado vertical. \newline Salidas: Campos validados y consolidados para la orden de taller. \newline Verificación: [S-TAG-INT-01] Alerta bloqueante si la DNP de un ojo es asimétrica fuera de rango.}
+
+\requisitoTabla{RF-11}{Regla Óptica de Adición Esférica y Simetría Binocular}{Requisito Funcional / Regla de Negocio Clínico}{Entrevista 2, Práctica Clínica en Presbicia}{Alta / Esencial (Must Have)}{El sistema debe controlar que el valor de Adición (Add) para pacientes présbitas se ubique en el rango estándar de +0.75 D a +4.00 D en pasos de 0.25 D, y forzar la regla médica de simetría binocular obligatoria ($Add_{OD} = Add_{OI}$), replicando automáticamente el valor de un ojo en el otro para evitar astenopia inducida.}{Entradas: Valor de Adición ingresado en el campo del ojo derecho.}{Proceso: Validación de rango positivo; actualización reactiva instantánea en el campo del ojo izquierdo; restricción de edición diferencial salvo justificación médica explícita documentada en observaciones. \newline Salidas: Ambos ojos con idéntico poder de adición para visión cercana. \newline Verificación: [S-TAG-INT-02] Igualdad estricta de valores de Adición en la base de datos.}
+
+\requisitoTabla{RF-12}{Comparativa Dióptrica Evolutiva y Análisis de Progresión}{Requisito Funcional / Diagnóstico Clínico}{Entrevistas 1 y 2, Propuestas de Innovación}{Media / Deseado (Should Have)}{El sistema debe presentar una vista comparativa visual entre la refracción actual del paciente y sus graduaciones históricas precedentes, calculando automáticamente el diferencial dióptrico ($\Delta Sph$, $\Delta Cyl$) para asistir al profesional en el diagnóstico de progresión miópica o avance de astigmatismo.}{Entradas: Selección de historia clínica actual y solicitud de comparativa.}{Proceso: Consulta de los últimos registros refractivos del paciente; sustracción algebraica de poderes esféricos y cilíndricos; renderizado de gráfica evolutiva temporal. \newline Salidas: Panel gráfico y tabla diferencial que destaca cambios de graduación superiores a $\pm 0.50$ D. \newline Verificación: [S-TAG-INT-02] Cálculo matemático exacto de la evolución refractiva.}
+
+\requisitoTabla{RF-13}{Registro Clínico Estructurado según Formulario 024 MSP / ACESS}{Requisito Funcional / Marco Sanitario}{Formulario 024 MSP, ACESS Ecuador}{Alta / Esencial (Must Have)}{El sistema debe estructurar la consulta oftalmológica/optométrica completa en estricto apego al Formulario 024 del MSP: Anamnesis y Motivo de Consulta, Agudeza Visual sin corrección (Snellen), Agudeza Visual con corrección habitual, Examen refractivo objetivo y subjetivo, Examen de estructuras oculares externas y anexos, y Diagnósticos clínicos codificados bajo la norma internacional CIE-10.}{Entradas: Campos clínicos del examen físico y refractivo completados por el optometrista.}{Proceso: Estructuración en campos tipificados; catálogo desplegable de códigos CIE-10 con búsqueda predictiva (ej. H52.1, H52.2, H52.4); validación de completitud de campos obligatorios. \newline Salidas: Historia clínica completa y consolidada vinculada al expediente del paciente. \newline Verificación: Integridad formal de datos conforme a requerimientos de auditoría sanitaria ACESS.}
+
+\requisitoTabla{RF-14}{Emisión de Receta Óptica Impresa con Código QR Verificador Antifraude}{Requisito Funcional / Documentación y Seguridad}{Entrevista 2, Documento Maestro Casos de Uso}{Alta / Esencial (Must Have)}{El sistema debe generar un documento PDF de alta fidelidad estética para la Receta Óptica de Graduación, incorporando un código QR criptográfico que contiene un enlace único firmado o token para que el paciente o el laboratorio verifiquen la autenticidad, fecha de emisión y vigencia de la receta, evitando falsificaciones.}{Entradas: Orden de refracción guardada y comando de impresión de receta.}{Proceso: Generación de token HMAC-SHA256 con ID de examen y secreto de servidor; compilación de código QR bidimensional; renderizado de plantilla PDF tamaño A5/A4 con membrete formal y firma digitalizada. \newline Salidas: Documento PDF generado y listo para impresión o descarga. \newline Verificación: Escaneo del QR redirige a vista de validación de autenticidad pública del sistema.}
+
+\requisitoTabla{RF-15}{Inmutabilidad de Consultas Previas y Preservación Histórica (Soft-Delete)}{Requisito de Seguridad / Integridad Forense}{Entrevista 1, LOPDP, Formulario 024 MSP}{Alta / Esencial (Must Have)}{El sistema debe garantizar de forma inviolable la inmutabilidad de las historias clínicas previamente guardadas. Queda estrictamente prohibida la sobreescritura, edición destructiva o borrado físico (\texttt{DELETE}) de exámenes visuales anteriores. Si se requiere anular un registro por error material, se aplicará borrado lógico (`soft-delete`) requiriendo motivo formal y firma del Administrador.}{Entradas: Solicitud de anulación o intento de modificación de historia clínica cerrada.}{Proceso: El backend rechaza peticiones \texttt{PUT/PATCH} sobre registros con más de 24 horas de antigüedad; el borrado lógico actualiza el campo \texttt{deleted\_at}, \texttt{deleted\_by} y el motivo en \texttt{audit\_logs} sin eliminar la tupla física de PostgreSQL. \newline Salidas: Preservación integral del historial histórico del paciente. \newline Verificación: [S-TAG-INT-03] Comprobación de existencia de tuplas históricas intactas en PostgreSQL.}
+
+\subsection{Módulo 4: Pedidos al Laboratorio / Taller Óptico (M4)}
+
+\requisitoTabla{RF-16}{Aislamiento de Datos Clínicos y Cumplimiento LOPDP en Órdenes de Taller}{Requisito de Seguridad / Privacidad LOPDP}{LOPDP Ecuador Art. 10 y 21, plaDesarrolloRequisitos}{Alta / Esencial (Must Have)}{El sistema debe generar la orden de trabajo para el taller o laboratorio de biselado externo aislando categóricamente la identidad y datos personales del paciente (orden técnica ciega). La orden solo incluirá: ID correlativo de orden, parámetros de biselado (Sph, Cyl, Axis, DNP, Altura), tipo de lente, material, tratamientos y fecha estimada, sin nombres, cédulas ni diagnósticos médicos.}{Entradas: Selección de la prescripción óptica para manufactura externa.}{Proceso: Desacoplamiento de entidades en base de datos; la vista y el PDF de orden de taller omiten cualquier clave foránea que exponga datos identificativos del paciente, protegiendo el secreto médico. \newline Salidas: Ticket de orden de taller disociado conforme a la LOPDP. \newline Verificación: [S-TAG-INT-01] Inspección de la carga útil del reporte confirmando ausencia de datos personales.}
+
+\requisitoTabla{RF-17}{Catálogo Técnico de Materiales y Tratamientos de Lunas}{Requisito Funcional / Parámetros Ópticos}{Entrevistas 1 y 2, Informe Técnico Taller}{Alta / Esencial (Must Have)}{El sistema debe proveer un catálogo técnico configurable para especificar en cada pedido al laboratorio: Tipo de lente (Monofocal, Bifocal Flat-Top, Bifocal Invisible, Progresivo), Material (Mineral, CR-39, Policarbonato, Alto Índice 1.67/1.74) y Tratamientos adicionales (Antirreflejo básico/premium, BlueBlock, Fotocromático/Transitions, Tinturado, Polarizado).}{Entradas: Selección de combinaciones técnicas desde controles de selección enlazados.}{Proceso: Validación de compatibilidad entre material y tratamientos; cálculo del costo estimado de laboratorio y tiempo estándar de manufactura según matriz de proveedores. \newline Salidas: Especificación técnica precisa asociada a la orden de trabajo. \newline Verificación: Coherencia de los atributos técnicos en la orden de manufactura.}
+
+\requisitoTabla{RF-18}{Trazabilidad Integral del Ciclo de Vida del Pedido de Taller}{Requisito Funcional / Gestión Logística}{Entrevistas 1 y 2, Documento Maestro Casos de Uso}{Alta / Esencial (Must Have)}{El sistema debe gestionar el ciclo de vida completo de cada orden de taller mediante una máquina de estados determinística: \texttt{REGISTRADO} $\rightarrow$ \texttt{ENVIADO\_TALLER} $\rightarrow$ \texttt{EN\_PROCESO} $\rightarrow$ \texttt{RECIBIDO\_CONFORME} $\rightarrow$ \texttt{CONTROL\_CALIDAD\_OK} $\rightarrow$ \texttt{NOTIFICADO} $\rightarrow$ \texttt{ENTREGADO\_PACIENTE}, impidiendo saltos de estado ilógicos y registrando operador y fecha de cada transición.}{Entradas: Evento de cambio de estado accionado por el personal de taller o mostrador.}{Proceso: Verificación de precondiciones de la máquina de estados; inserción de registro histórico en la tabla \texttt{taller\_trazabilidad}; actualización del estado actual de la orden. \newline Salidas: Tablero Kanban / listado operativo actualizado en tiempo real. \newline Verificación: [S-TAG-RES-01] Registro cronológico secuencial verificable para cada orden de trabajo.}
+
+\requisitoTabla{RF-19}{Registro de Devoluciones y Control de Incidencias con Taller Externo}{Requisito Funcional / Aseguramiento de Calidad}{Entrevista 2, Especificación Requisitos v2.0}{Media / Deseado (Should Have)}{El sistema debe permitir registrar incidencias y devoluciones de lentes al laboratorio si el control de calidad interno revela defectos (ejes descalibrados, aberraciones, ralladuras o alturas incorrectas), asignando el estado \texttt{DEVUELTO\_A\_TALLER}, documentando el motivo formal y controlando los días de penalización en la entrega final.}{Entradas: Reporte de no conformidad en control de calidad con motivo y descripción.}{Proceso: Retorno del pedido al estado de manufactura; generación de comprobante de re-ingreso a taller sin costo adicional para el paciente; registro del retraso logístico. \newline Salidas: Alerta en panel de control sobre trabajos demorados o con incidencias abiertas. \newline Verificación: [S-TAG-RES-01] Auditoría de incidencias por proveedor de laboratorio óptico.}
+
+\subsection{Módulo 5: Ventas, Cobros y Caja Mostrador (M5)}
+
+\requisitoTabla{RF-20}{Comprobante Interno con Anticipo y Saldo Pendiente}{Requisito Funcional / Operaciones Comerciales}{Entrevistas 1 y 2, plaDesarrolloRequisitos}{Alta / Esencial (Must Have)}{El sistema debe emitir comprobantes internos numerados de venta y cobro que soporten pagos mixtos y liquidación en dos etapas (anticipo al encargar los lentes y liquidación del saldo pendiente al momento del retiro), generando tickets impresos donde conste claramente el anticipo recibido, el saldo adeudado y la fecha estimada de entrega.}{Entradas: Datos del paciente, orden de trabajo, ítems adicionales y monto del anticipo entregado.}{Proceso: Creación de registro transaccional; cálculo de `Saldo = Total - Anticipo`; validación de que el saldo no sea negativo; generación del ticket térmico con código de barras de retiro. \newline Salidas: Ticket de cobro emitido y actualización del saldo pendiente en el expediente de venta. \newline Verificación: Coherencia contable estricta en el arqueo diario de caja.}
+
+\requisitoTabla{RF-21}{Gestión Híbrida de Inventario de Armazones y Accesorios}{Requisito Funcional / Control de Stock}{Entrevista 2, Especificación Requisitos v2.0}{Alta / Esencial (Must Have)}{El sistema debe soportar un esquema de inventario flexible para armazones, estuches, líquidos de limpieza y accesorios: control estricto por código de barras / SKU unitario para marcas de alta gama, y registro por lote para mercadería de rotación rápida, descontando el stock automáticamente en tiempo real al confirmar la venta.}{Entradas: Lectura de código de barras o selección manual de ítem y cantidad en mostrador.}{Proceso: Verificación de disponibilidad de stock en PostgreSQL con bloqueo de fila (`SELECT ... FOR UPDATE`); deducción de unidades; alerta visual de stock crítico si la cantidad desciende del mínimo. \newline Salidas: Stock actualizado en almacén e ítem cargado al detalle de venta. \newline Verificación: [S-TAG-INT-02] Prevención de ventas duplicadas o saldo negativo de existencias.}
+
+\requisitoTabla{RF-22}{Protocolo Estricto de Anulación de Ventas y Reintegro de Stock}{Requisito de Seguridad / Control Financiero}{Entrevistas 1 y 2, plaDesarrolloRequisitos}{Alta / Esencial (Must Have)}{El sistema debe restringir la anulación de ventas y devoluciones de cobros exclusivamente a usuarios con rol de Administrador, requiriendo el ingreso de una justificación textual formal. Al confirmarse la anulación, el sistema debe revertir automáticamente el stock al inventario y marcar la transacción como \texttt{ANULADA} sin eliminar la tupla contable.}{Entradas: Identificador de la venta, clave de autorización del Administrador y motivo de anulación.}{Proceso: Verificación de permisos y credencial de Administrador; ejecución de transacción ACID que repone las existencias en `inventario`, genera movimiento contable de contrasiento y registra la traza en auditoría. \newline Salidas: Comprobante de anulación emitido y estado de venta marcado como Anulado. \newline Verificación: [S-TAG-INT-02] Integridad de auditoría: no repudio y conservación del historial financiero.}
+
+\requisitoTabla{RF-23}{Cuadre Diario de Caja y Arqueo Ciego Transaccional}{Requisito Funcional / Auditoría de Caja}{Entrevistas 1 y 2, Documento Maestro Casos de Uso}{Alta / Esencial (Must Have)}{El sistema debe implementar un protocolo de arqueo ciego diario de caja: el cajero debe ingresar los montos físicos contados por tipo de medio de pago (efectivo desglosado por billetes/monedas, transferencias bancarias y vouchers) sin visualizar el saldo teórico del sistema. Tras el ingreso, el sistema genera el reporte de cierre (Z) comparando ambos valores y resaltando diferencias.}{Entradas: Desglose manual de valores físicos en caja ingresados por el asistente.}{Proceso: Comparación algorítmica entre la suma física ingresada y la sumatoria de ventas registradas en la jornada; cómputo del sobrante o faltante; cierre definitivo de la sesión de caja. \newline Salidas: Reporte de Arqueo Diario de Caja (Cierre Z) con balance auditado y firma del operador. \newline Verificación: Cierre inmutable de caja que bloquea nuevos cobros en la sesión cerrada.}
+
+\subsection{Módulo 6: Facturación Electrónica SRI (M6) --- [Incorporación Actualizada]}
+
+\requisitoTabla{RF-24}{Generación Canónica de Factura XML v1.1.0 y Clave de Acceso Módulo 11}{Requisito Funcional / Fiscalidad SRI}{Ficha Técnica SRI v2.21, Informe Arquitectura SRI v1}{Alta / Esencial (Must Have)}{El sistema debe construir el archivo XML oficial de la Factura de venta de conformidad con el esquema XSD v1.1.0 del SRI y generar la Clave de Acceso única de 49 dígitos aplicando el algoritmo Módulo 11 ponderado (factores de 2 a 7 de derecha a izquierda), asegurando que ventas a Consumidor Final no superen el límite legal de \$40.00 USD.}{Entradas: Datos de la transacción de venta, datos del cliente (RUC, Cédula, Pasaporte o Consumidor Final), detalle de productos/servicios y desglose de IVA (15\% y 0\%).}{Proceso: Generación de bloques `\texttt{<infoTributaria>}`, `\texttt{<infoFactura>}` y `\texttt{<detalles>}`; concatenación de los primeros 48 dígitos (Fecha, Tipo Comprobante, RUC, Ambiente, Serie, Secuencial, Código Numérico y Tipo Emisión); cálculo del residuo Módulo 11 para obtener el dígito 49. Validación bloqueante si Consumidor Final supera \$40.00 USD. \newline Salidas: Documento XML canónico v1.1.0 estructurado con clave de acceso válida de 49 dígitos. \newline Verificación: [S-TAG-INT-04] Conformidad del XML frente al esquema XSD oficial del SRI.}
+
+\requisitoTabla{RF-25}{Firma Digital Avanzada XAdES-BES Enveloped}{Requisito de Seguridad / Criptografía y No Repudio}{Ley de Comercio Electrónico Ecuador, Ficha Técnica SRI}{Alta / Esencial (Must Have)}{El sistema debe firmar digitalmente el documento XML de la factura bajo el estándar criptográfico XAdES-BES (enveloped) utilizando un certificado digital válido de persona natural o jurídica en formato PKCS\#12 (.p12/.pfx) con algoritmo RSA-SHA1 y canonicalización XML-C14N, incrustando el nodo `\texttt{<ds:Signature>}` completo en el archivo.}{Entradas: Archivo de certificado digital (.p12), contraseña de la llave privada y XML canónico generado.}{Proceso: Desempaquetado del archivo .p12 en memoria volátil; extracción del certificado X.509 y llave privada; cálculo de resúmenes criptográficos SHA-1 del documento y de los nodos `\texttt{<SignedProperties>}`; firma con llave privada RSA; estructuración de `\texttt{<ds:SignatureValue>}` y ensamble del XML firmado. \newline Salidas: Archivo XML firmado digitalmente, listo para despacho hacia el SRI. \newline Verificación: [S-TAG-AUTH-03] [S-TAG-RES-02] Verificación criptográfica de firma válida y no repudio legal.}
+
+\requisitoTabla{RF-26}{Transmisión y Consulta Asíncrona SOAP ante Web Services del SRI}{Requisito Funcional / Interoperabilidad Tributaria}{Web Services SRI Ecuador, Informe Implementación SRI}{Alta / Esencial (Must Have)}{El sistema debe transmitir el XML firmado en Base64 al Web Service \texttt{RecepcionComprobantesOffline} del SRI y, ante una respuesta de estado \texttt{RECIBIDA}, consultar el estado en \texttt{AutorizacionComprobantesOffline} hasta obtener la respuesta formal (\texttt{AUTORIZADO}, \texttt{DEVUELTA} o \texttt{NO AUTORIZADO}), soportando encolamiento y reintentos ante intermitencias.}{Entradas: XML firmado digitalmente y Clave de Acceso de 49 dígitos.}{Proceso: Invocación SOAP asíncrona mediante protocolo HTTPS; si el comprobante es devuelto por errores de validación tributaria, se parsean los mensajes y se notifican al usuario; si el servicio responde con saturación, el comprobante se almacena con estado \texttt{PENDIENTE\_AUTORIZACION} en cola para sondeo periódico. \newline Salidas: Factura actualizada con Número de Autorización, Fecha y Hora oficial del SRI en base de datos. \newline Verificación: [S-TAG-INT-05] Persistencia inmutable del XML autorizado y respuesta oficial en PostgreSQL.}
+
+\requisitoTabla{RF-27}{Generación de RIDE (PDF Code128) y Despacho Automatizado por Correo}{Requisito Funcional / Notificación y Salidas}{Resolución NAC-DGERCGC14-00790 SRI, Informe API-SRI}{Alta / Esencial (Must Have)}{Tras la autorización formal del SRI, el sistema debe compilar automáticamente la Representación Impresa del Documento Electrónico (RIDE) en formato PDF renderizando el código de barras Code128 de la clave de 49 dígitos, y despachar un correo electrónico al adquirente mediante transporte SMTP seguro conteniendo el PDF y el XML autorizados como adjuntos.}{Entradas: Factura con estado \texttt{AUTORIZADO} y dirección de correo electrónico del cliente.}{Proceso: Renderizado de la plantilla oficial Handlebars/Puppeteer con desglose de impuestos y datos del emisor; generación del código de barras Code128; ensamble de correo electrónico multipart mediante Nodemailer con adjuntos XML y PDF; despacho vía SMTP. \newline Salidas: Archivo RIDE PDF persistido y notificación por correo enviada con éxito. \newline Verificación: Confirmación de entrega SMTP y verificación de legibilidad del código de barras con escáner.}
+
+\subsection{Módulo 7: Asistente Inteligente Conversacional / IA "Chatbot con los Datos" (M7) --- [Incorporación Actualizada]}
+
+\requisitoTabla{RF-28}{Interfaz Conversacional y Enrutamiento Determinístico de Intenciones}{Requisito Funcional / Innovación Tecnológica (IA)}{informePropuestasInnovacion.txt, InnovacionesV3.txt}{Alta / Esencial (Must Have)}{El sistema debe proveer una interfaz conversacional integrada en el Dashboard del SGO que permita al personal formular consultas en lenguaje natural en idioma español acerca de: métricas de ventas y cobros del día, existencias de armazones en inventario, y tiempos de demora y estados de órdenes de laboratorio, enrutando las intenciones de forma ágil sin requerir navegación por múltiples menús.}{Entradas: Pregunta o texto formulado por el usuario en el widget del chat (ej. "¿Cuántos armazones de acetato quedan?" o "¿Qué órdenes de taller están demoradas?").}{Proceso: Procesamiento léxico-sintáctico mediante expresiones regulares y clasificador de intenciones (Intent Router); extracción de entidades clave (fechas, marcas, estados de taller, rangos de precio); derivación a la rutina de consulta correspondiente. \newline Salidas: Respuesta interactiva en lenguaje natural acompañada de tarjetas estructuradas de datos. \newline Verificación: Latencia de clasificación inferior a 1 segundo para intenciones operativas comunes.}
+
+\requisitoTabla{RF-29}{Ejecución Segura de Consultas con Blindaje de Solo Lectura (Read-Only Guard)}{Requisito de Seguridad / Integridad de Datos}{Directrices Ciberseguridad ESPOCH, InnovacionesV3.txt}{Alta / Esencial (Must Have)}{El motor del asistente inteligente debe operar bajo un blindaje estricto de solo lectura (\textit{Read-Only Guard}), ejecutando sus consultas contra la base de datos PostgreSQL utilizando un usuario técnico de conexión que posea de manera exclusiva privilegios \texttt{GRANT SELECT}, imposibilitando cualquier alteración, borrado o inyección maliciosa (\texttt{INSERT}, \texttt{UPDATE}, \texttt{DELETE}, \texttt{DROP}).}{Entradas: Intención clasificada y parámetros de consulta validados.}{Proceso: Invocación exclusiva de consultas parametrizadas o vistas precompiladas de solo lectura; intercepción y rechazo categórico de cualquier sentencia que contenga palabras clave DDL/DML de mutación, generando una alerta de seguridad si se detecta un intento de inyección SQL. \newline Salidas: Dataset de datos puros entregado al generador de respuestas del chat. \newline Verificación: [S-TAG-INT-06] Imposibilidad técnica y matemática de alterar datos en la base vía chat.}
+
+\requisitoTabla{RF-30}{Control de Acceso Estricto RBAC en Respuestas del Asistente}{Requisito de Seguridad / Autorización y Privacidad}{informePropuestasInnovacion.txt, plaDesarrolloRequisitos}{Alta / Esencial (Must Have)}{El chatbot inteligente debe aplicar un filtro estricto de autorización conforme al rol autenticado del usuario (RBAC): el Asistente Comercial tiene expresamente denegado consultar utilidades globales, balances de caja consolidados o historiales clínicos confidenciales de pacientes; el Optometrista solo accede a datos clínicos, taller y stock; y el Administrador posee acceso a métricas globales.}{Entradas: Token JWT del usuario remitente y categoría temática de la intención consultada.}{Proceso: Evaluación de políticas de control de acceso en el middleware del asistente inteligente; si el rol carece de privilegios para la consulta solicitada, el sistema emite una denegación respetuosa indicando que la información excede su nivel de autorización. \newline Salidas: Datos desplegados únicamente si el perfil cuenta con autorización formal en el sistema. \newline Verificación: [S-TAG-AUTH-04] Prevención absoluta de fuga de información financiera y médica confidencial.}
+
+\requisitoTabla{RF-31}{Modo Híbrido Resiliente (LAN Offline / Online) y Bitácora de Chat}{Requisito Funcional / Resiliencia y Auditoría}{Propuestas de Innovación ESPOCH, plaDesarrolloRequisitos}{Alta / Esencial (Must Have)}{El asistente inteligente debe soportar funcionamiento dual: modo autónomo local LAN (100\% determinístico sin conexión a internet mediante mapeo de intenciones y plantillas SQL) y modo enriquecido online (conexión opcional a API de LLM para redacción avanzada); y persistir inmutablemente cada interacción en la tabla \texttt{audit\_logs} con usuario, pregunta, intención detectada y timestamp.}{Entradas: Mensaje del usuario y verificación de conectividad externa a internet.}{Proceso: Conmutación transparente: si no hay salida a internet, la consulta se resuelve íntegramente en la LAN local; inserción asíncrona de la tupla de auditoría en la tabla \texttt{audit\_logs} de PostgreSQL. \newline Salidas: Continuidad operativa sin fallos por corte de internet y trazabilidad forense de interacciones. \newline Verificación: [S-TAG-RES-03] Disponibilidad demostrada del chat ante desconexión total del cable WAN.}
+
+% ------------------------------------------------------------------------------
+% REQUISITOS NO FUNCIONALES (ISO/IEC 25010:2023)
+% ------------------------------------------------------------------------------
+\section{Requisitos No Funcionales}
+Los requisitos no funcionales se formulan bajo el marco de calidad \textbf{ISO/IEC 25010:2023} y las directrices de ciberseguridad para datos de salud visual.
+
+\subsection{Requisitos de Rendimiento (Eficiencia de Desempeño)}
+\begin{itemize}
+    \item \textbf{RNF-08.1 (Tiempo de Respuesta en Consultas):} El 95\% de las consultas transaccionales de búsqueda de pacientes, carga de expedientes clínicos y registro de ventas deben responder en un tiempo inferior a \textbf{1.5 segundos} en condiciones normales de operación bajo red local LAN.
+    \item \textbf{RNF-08.2 (Latencia de la Interfaz Conversacional IA):} El motor de enrutamiento y respuesta del Asistente Inteligente en modo local LAN debe entregar la respuesta en un tiempo inferior a \textbf{1.0 segundo}.
+    \item \textbf{RNF-08.3 (Tiempo de Generación Criptográfica y RIDE):} El proceso de canonización XML, firmado digital XAdES-BES y generación del documento PDF RIDE debe ejecutarse en menos de \textbf{2.0 segundos} por comprobante.
+    \item \textbf{RNF-08.4 (Concurrencia Operativa):} El sistema debe soportar al menos \textbf{15 usuarios simultáneos} interactuando en la red local sin experimentar degradación superior al 10\% en los tiempos de respuesta.
+\end{itemize}
+
+\subsection{Seguridad de la Información (Confidencialidad, Integridad y No Repudio)}
+\begin{itemize}
+    \item \textbf{RNF-01 [S-TAG-AUTH-01] (Control de Acceso Estricto):} Todos los endpoints de la API deben estar protegidos mediante middleware de autenticación que verifique la validez, firma y permisos del token JWT.
+    \item \textbf{RNF-02 [S-TAG-AUTH-02] (Cifrado de Credenciales y Sesiones):} Las contraseñas deben ser almacenadas con hash irreversible \textbf{bcrypt} con factor de coste no menor a 12. Los tokens JWT deben emplear algoritmo de firma \textbf{HMAC-SHA256} con clave secreta criptográfica de al menos 256 bits custodiada en variables de entorno.
+    \item \textbf{RNF-03 [S-TAG-INT-01] (Validación Dióptrica a Nivel de Base de Datos):} La base de datos PostgreSQL debe implementar constraints de comprobación (\texttt{CHECK}) para impedir que anomalías en el cliente inserten graduaciones incoherentes.
+    \item \textbf{RNF-04 [S-TAG-INT-02] (Transaccionalidad ACID en Caja e Inventario):} Toda operación que involucre ventas, cobro de anticipos o anulación de productos debe ejecutarse dentro de un bloque transaccional ACID (`BEGIN ... COMMIT / ROLLBACK`), garantizando que la deducción de inventario y el registro de pago sean atómicos.
+    \item \textbf{RNF-05 [S-TAG-INT-03] (Inmutabilidad Histórica):} Implementación de reglas a nivel de motor de base de datos que revoquen privilegios de \texttt{UPDATE} sobre tuplas de refracciones clínicas cerradas, forzando la creación de nuevas versiones ante revisiones médicas subsiguientes.
+    \item \textbf{RNF-06 [S-TAG-RES-01] (Bitácora Inmutable de Auditoría):} Toda operación de inserción, actualización de estado de taller, anulación comercial o consulta administrativa debe disparar un trigger que inserte un registro inmutable en la tabla \texttt{audit\_logs} conteniendo: `id`, `user\_id`, `ip\_address`, `accion`, `tabla\_afectada`, `registro\_id`, `valores\_anteriores (JSONB)`, `valores\_nuevos (JSONB)` y `timestamp` del servidor.
+    \item \textbf{RNF-10 [S-TAG-AUTH-03] (Custodia Criptográfica de la Firma Electrónica):} El archivo binario de certificado PKCS\#12 (.p12) y su contraseña deben custodiarse cifrados en el servidor mediante algoritmo \textbf{AES-256-GCM}; la clave de cifrado maestro no debe almacenarse en el código fuente.
+    \item \textbf{RNF-11 [S-TAG-INT-06] (Aislamiento de Solo Lectura para IA):} El servicio del asistente conversacional debe autenticarse contra PostgreSQL con un usuario que carezca formalmente de privilegios de escritura (`NO INSERT, NO UPDATE, NO DELETE`).
+\end{itemize}
+
+\subsection{Fiabilidad y Tolerancia a Fallos}
+\begin{itemize}
+    \item \textbf{RNF-09 (Resiliencia Asíncrona y Tolerancia a Caídas del SRI):} En caso de indisponibilidad temporal o caída de los Web Services del SRI, el sistema debe almacenar el comprobante firmado en la tabla de facturas con estado \texttt{PENDIENTE\_ENVIO} y continuar con las operaciones de cobro y despacho sin paralizar la atención en la óptica. Una tarea programada (\textit{cron job}) reintentará la transmisión una vez reestablecido el servicio tributario.
+    \item \textbf{RNF-09.2 (Integridad de Respaldos de Base de Datos):} El sistema debe proveer scripts automatizados de volcado lógico (\texttt{pg\_dump}) programados diariamente para generar respaldos cifrados comprimidos en almacenamiento secundario o en la nube.
+\end{itemize}
+
+\subsection{Disponibilidad}
+\begin{itemize}
+    \item El sistema debe presentar una disponibilidad operacional no menor al \textbf{99.5\%} durante el horario comercial y asistencial de la óptica (lunes a sábado de 08:00 a 19:00).
+    \item Los períodos planificados de mantenimiento técnico o actualización de versiones de software deben ejecutarse fuera del horario de atención al público.
+\end{itemize}
+
+\subsection{Mantenibilidad}
+\begin{itemize}
+    \item \textbf{Modularidad de Código:} El backend debe estructurarse conforme a principios de arquitectura limpia o monolito modular, separando estrictamente: Controladores, Servicios de Negocio, Repositorios de Acceso a Datos y Modelos de Dominio.
+    \item \textbf{Documentación de API:} Todos los endpoints del sistema deben estar documentados bajo el estándar OpenAPI 3.0 (Swagger), especificando esquemas de entrada, códigos de error y respuestas esperadas.
+    \item \textbf{Manejabilidad de Dependencias:} Uso de gestores oficiales de paquetes (Composer para PHP/Laravel y npm/pnpm para Node.js y React), con bloqueo estricto de versiones en archivos \texttt{composer.lock} y \texttt{package-lock.json}.
+\end{itemize}
+
+\subsection{Portabilidad y Usabilidad}
+\begin{itemize}
+    \item \textbf{RNF-07 (Compatibilidad Multiplataforma):} La interfaz web debe ser plenamente operativa en los navegadores modernos: Google Chrome versión 110+, Microsoft Edge versión 110+, Mozilla Firefox versión 110+ y Safari 16+.
+    \item \textbf{Contenerización Docker:} Todo el entorno de desarrollo y despliegue (Backend, Frontend, PostgreSQL, Worker de Firma) debe estar parametrizado en manifiestos `Dockerfile` y \texttt{docker-compose.yml}, habilitando su clonación y despliegue en un nuevo servidor en menos de 30 minutos.
+\end{itemize}
+
+\section{Otros Requisitos}
+
+\subsection{Requisitos Legales y Normativos}
+\begin{itemize}
+    \item \textbf{Cumplimiento LOPDP (Ecuador):} El sistema debe incorporar consentimiento informado explícito para el tratamiento de datos de salud y garantizar el ejercicio de los derechos de acceso, rectificación y eliminación de conformidad con la Ley Orgánica de Protección de Datos Personales.
+    \item \textbf{Normativa de Salud MSP / ACESS:} El diseño de las fichas clínicas debe cumplir los estándares técnicos y legales de historia clínica única exigidos por los auditores de ACESS en inspecciones sanitarias periódicas.
+    \item \textbf{Resolución Tributaria SRI NAC-DGERCGC14-00790:} Todo comprobante fiscal emitido debe respetar la codificación de impuestos y porcentajes de IVA vigentes en la legislación tributaria ecuatoriana (15\% de tarifa general según reforma de 2024, y 0\% para insumos médicos/oftálmicos tipificados).
+\end{itemize}
+
+\subsection{Requisitos Culturales y Organizacionales}
+\begin{itemize}
+    \item \textbf{Idioma y Localización:} La totalidad de las pantallas, mensajes de validación, tickets impresos, manuales de usuario y documentación técnica deben formularse en idioma español, utilizando terminología optométrica regional y formato de moneda en Dólares de los Estados Unidos de América (\$ USD).
+    \item \textbf{Curva de Aprendizaje Acelerada:} La interfaz de caja y refracción debe diseñarse para que un nuevo asistente u optometrista domine el registro completo de una atención en un tiempo de capacitación inferior a dos (2) horas.
+\end{itemize}
+
+% ==============================================================================
+% CAPÍTULO 4: APÉNDICES
+% ==============================================================================
+\chapter{Apéndices}
+
+\section*{Apéndice A: Matriz de Trazabilidad Integral de Requisitos}
+\addcontentsline{toc}{section}{Apéndice A: Matriz de Trazabilidad Integral de Requisitos}
+En la Tabla \ref{tab:trazabilidad} se establece la correspondencia formal entre los 31 Requisitos Funcionales, los Requisitos No Funcionales, las etiquetas de seguridad S-TAG, la norma ISO/IEC 25010:2023 y los Casos de Uso del sistema.
+
+\begin{longtable}{|c|L{4.2cm}|c|c|L{3.2cm}|c|}
+\hline
+\rowcolor{primaryBlue}\color{white}\textbf{Código} & \rowcolor{primaryBlue}\color{white}\textbf{Nombre del Requisito} & \rowcolor{primaryBlue}\color{white}\textbf{Módulo} & \rowcolor{primaryBlue}\color{white}\textbf{S-TAG} & \rowcolor{primaryBlue}\color{white}\textbf{Norma ISO 25010} & \rowcolor{primaryBlue}\color{white}\textbf{Caso de Uso} \\
+\hline
+\endhead
+RF-01 & Control Acceso Roles (RBAC) & M1 & S-TAG-AUTH-01 & Autenticidad / Seg. & CU-SEG-01 \\
+\hline
+RF-02 & Gestión Sesiones JWT Expiración & M1 & S-TAG-AUTH-02 & Confidencialidad & CU-SEG-02 \\
+\hline
+RF-03 & Validación Cédula Módulo 10 & M2 & S-TAG-INT-01 & Integridad de Datos & CU-PAC-01 \\
+\hline
+RF-04 & Registro Demográfico Paciente & M2 & --- & Adecuación Funcional & CU-PAC-01 \\
+\hline
+RF-05 & Búsqueda Indexada Pacientes & M2 & S-TAG-INT-01 & Eficiencia Desempeño & CU-PAC-02 \\
+\hline
+RF-06 & Repositorio Adjuntos Clínicos & M2 & S-TAG-INT-02 & Integridad / Seg. & CU-PAC-03 \\
+\hline
+RF-07 & Validación Rangos Dióptricos & M3 & S-TAG-INT-01 & Exactitud / Integridad & CU-CLI-01 \\
+\hline
+RF-08 & Formateo Decimal Dioptrías & M3 & S-TAG-INT-01 & Exactitud Numérica & CU-CLI-01 \\
+\hline
+RF-09 & Notación Cilindro Negativo & M3 & --- & Idoneidad Clínica & CU-CLI-01 \\
+\hline
+RF-10 & Validación DNP y Altura Focal & M3 & S-TAG-INT-01 & Exactitud Clínica & CU-CLI-02 \\
+\hline
+RF-11 & Regla Adición Simétrica OD=OI & M3 & S-TAG-INT-02 & Integridad Médica & CU-CLI-02 \\
+\hline
+RF-12 & Comparativa Dióptrica Progresión& M3 & S-TAG-INT-02 & Analítica Médica & CU-CLI-03 \\
+\hline
+RF-13 & Registro Formulario 024 MSP & M3 & --- & Cumplimiento Legal & CU-CLI-04 \\
+\hline
+RF-14 & Receta Óptica con Código QR & M3 & --- & Autenticidad Documental & CU-CLI-05 \\
+\hline
+RF-15 & Inmutabilidad y Soft-Delete & M3 & S-TAG-INT-03 & Integridad / No Repudio & CU-CLI-06 \\
+\hline
+RF-16 & Aislamiento Datos Taller LOPDP & M4 & S-TAG-INT-01 & Privacidad / LOPDP & CU-TAL-01 \\
+\hline
+RF-17 & Catálogo Lunas y Tratamientos & M4 & --- & Adecuación Funcional & CU-TAL-02 \\
+\hline
+RF-18 & Trazabilidad Pedidos Taller & M4 & S-TAG-RES-01 & Responsabilidad & CU-TAL-03 \\
+\hline
+RF-19 & Devoluciones e Incidencias Taller & M4 & S-TAG-RES-01 & Calidad y Fiabilidad & CU-TAL-04 \\
+\hline
+RF-20 & Comprobante Anticipo y Saldo & M5 & --- & Exactitud Financiera & CU-VEN-01 \\
+\hline
+RF-21 & Inventario Híbrido Armazones & M5 & S-TAG-INT-02 & Transaccionalidad ACID & CU-VEN-02 \\
+\hline
+RF-22 & Anulación Ventas y Reintegro & M5 & S-TAG-INT-02 & Integridad / Auditoría & CU-VEN-03 \\
+\hline
+RF-23 & Arqueo Ciego Diario de Caja & M5 & --- & Control y Auditoría & CU-VEN-04 \\
+\hline
+\rowcolor{tagBlue} RF-24 & Generación Factura XML M11 & M6 & S-TAG-INT-04 & Conformidad Fiscal SRI & CU-FAC-01 \\
+\hline
+\rowcolor{tagBlue} RF-25 & Firma Digital XAdES-BES & M6 & S-TAG-AUTH-03 & Criptografía / No Repudio & CU-FAC-02 \\
+\hline
+\rowcolor{tagBlue} RF-26 & SOAP Web Services SRI & M6 & S-TAG-INT-05 & Fiabilidad / Resiliencia & CU-FAC-03 \\
+\hline
+\rowcolor{tagBlue} RF-27 & RIDE PDF Code128 y Correo & M6 & --- & Notificación / Entrega & CU-FAC-04 \\
+\hline
+\rowcolor{tagBlue} RF-28 & Interfaz Conversacional PLN & M7 & --- & Innovación Tecnológica & CU-IA-01 \\
+\hline
+\rowcolor{tagBlue} RF-29 & Consultas Read-Only Guard & M7 & S-TAG-INT-06 & Seguridad / Integridad & CU-IA-02 \\
+\hline
+\rowcolor{tagBlue} RF-30 & Filtro RBAC en Chatbot IA & M7 & S-TAG-AUTH-04 & Confidencialidad / RBAC & CU-IA-02 \\
+\hline
+\rowcolor{tagBlue} RF-31 & Modo Dual LAN / Bitácora Audit& M7 & S-TAG-RES-03 & Resiliencia / Trazabilidad& CU-IA-03 \\
+\hline
+\caption{Matriz de trazabilidad integral de requisitos del sistema SGO.}
+\label{tab:trazabilidad}
+\end{longtable}
+
+\section*{Apéndice B: Catálogo de Requisitos Futuros (Out-of-Scope v2.0)}
+\addcontentsline{toc}{section}{Apéndice B: Catálogo de Requisitos Futuros}
+A continuación se documentan los requisitos diferidos formalmente para versiones posteriores (v3.0+):
+\begin{itemize}
+    \item \textbf{RF-FUT-01 (Notificaciones Automatizadas por WhatsApp Business Cloud API):} Envío de mensajes estructurados mediante la API de Meta para notificar al paciente cuando sus lunas están listas y enviar recordatorios de chequeo preventivo anual.
+    \item \textbf{RF-FUT-02 (Pipeline ETL de Migración Masiva de Base Legada):} Rutina de extracción y saneamiento automático para importar historias clínicas desde copias de seguridad (.BAK) de SQL Server del software legado oftalmológico.
+    \item \textbf{RF-FUT-03 (Módulo Integral de Citas y Turnos Web en Línea):} Portal para que los pacientes seleccionen fecha y horario disponible de consulta mediante internet.
+    \item \textbf{RF-FUT-04 (Pasarelas de Pago Electrónico con Tarjetas en Línea):} Integración con procesadores de pago digital (Datafast, Place to Pay o Stripe) para el cobro anticipado de citas o ventas web.
+\end{itemize}
+
+\section*{Apéndice C: Glosario Técnico Extendido}
+\addcontentsline{toc}{section}{Apéndice C: Glosario Técnico Extendido}
+\begin{itemize}
+    \item \textbf{ACID:} Acrónimo de Atomicidad, Consistencia, Aislamiento (\textit{Isolation}) y Durabilidad, propiedades esenciales de un motor de base de datos relacional para garantizar transacciones financieras seguras.
+    \item \textbf{Anamnesis:} Entrevista inicial conducida por el profesional de salud visual para recopilar síntomas, molestias principales, antecedentes patológicos personales y antecedentes oftalmológicos familiares.
+    \item \textbf{Astigmatismo:} Defecto de refracción en el que los rayos luminosos no convergen en un único foco en la retina debido a una curvatura desigual de la córnea o el cristalino.
+    \item \textbf{Biselado:} Proceso mecánico-oftálmico de corte y desgaste del borde de una luna oftálmica para que encaje con precisión milimétrica en el bisel de la montura o armazón.
+    \item \textbf{Canonicalización (C14N):} Proceso algorítmico que normaliza las diferencias físicas irrelevantes de un documento XML (espacios en blanco, orden de atributos, codificación de caracteres) para permitir la verificación determinística de su firma criptográfica.
+    \item \textbf{Dioptría (D):} Unidad de medida del poder de refracción de una lente equivalente a la inversa de su distancia focal expresada en metros ($D = 1/f$).
+    \item \textbf{Esfera (Sph):} Potencia de una lente que corrige la miopía (valores negativos) o la hipermetropía (valores positivos), con el mismo poder de refracción en todos sus meridianos.
+    \item \textbf{Módulo 10:} Algoritmo de suma ponderada alternada utilizado en Ecuador para validar el décimo dígito de verificación de la cédula de ciudadanía y pasaportes oficiales.
+    \item \textbf{Módulo 11:} Algoritmo aritmético de ponderación cíclica (factores del 2 al 7) aplicado sobre los primeros 48 caracteres de la Clave de Acceso del SRI para calcular el cuadragésimo noveno dígito de seguridad antifraude.
+    \item \textbf{Notación Snellen:} Fracción óptica estandarizada que cuantifica la agudeza visual relativa comparando la distancia a la que una letra es leída por el paciente frente a la distancia estándar de un ojo emétrope normal (ej. 20/20).
+    \item \textbf{Presbicia:} Pérdida fisiológica progresiva de la capacidad de acomodación del cristalino ligada a la edad, que dificulta el enfoque de objetos cercanos a partir de los 40 años.
+    \item \textbf{RIDE:} Representación Impresa del Documento Electrónico exigida por el SRI, la cual contiene información tributaria, códigos de barras Code128 y la leyenda legal del estado de autorización fiscal.
+    \item \textbf{Soft-Delete:} Técnica de base de datos consistente en marcar un registro con una marca de tiempo en una columna \texttt{deleted\_at} para retirarlo de las vistas operativas sin destruir físicamente la fila en el almacenamiento, preservando la trazabilidad forense.
+    \item \textbf{XAdES-BES:} Perfil de firma electrónica avanzada para documentos XML definido por el estándar ETSI TS 101 903, que incorpora metadatos de firma, certificados y marcas de tiempo asegurando la no alterabilidad del documento.
+\end{itemize}
+
+\end{document}

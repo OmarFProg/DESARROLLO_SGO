@@ -1,0 +1,1288 @@
+====================================================================================================
+ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO (ESPOCH)
+FACULTAD DE INFORMÁTICA Y ELECTRÓNICA - CARRERA DE SOFTWARE
+PROYECTO: SISTEMA INFORMÁTICO DE GESTIÓN CLÍNICA Y COMERCIAL OPTOMÉTRICA (SGO)
+DOCUMENTO: ESPECIFICACIÓN FORMAL DE REQUISITOS (RF / RNF) E HISTORIAS DE USUARIO (HU / US)
+====================================================================================================
+
+METADATOS DEL PROYECTO:
+----------------------------------------------------------------------------------------------------
+- Denominación Oficial: Sistema de Gestión Optométrica (SGO), Versión 2.0
+- Autores / Investigadores:
+    * Figueroa Díaz, Omar Santiago (C.I. 1803391968 - Código: 7253)
+    * Villalva Dumancela, Alexander Rafael (C.I. 0605351899 - Código: 7135)
+- Dirección y Asesoría Académica:
+    * Ing. Menéndez Verdecia, Jorge Ariel, Mgs. (Director de Proyecto / Scrum Master)
+    * Ing. Santillán Castillo, Julio Roberto, Ph.D. (Asesor Técnico y Metodológico)
+- Entidad Beneficiaria / Caso de Estudio:
+    * Óptica Vista Visión (Riobamba, Chimborazo, Ecuador)
+- Período Académico: Septiembre 2026 - Enero 2027
+- Enfoque Metodológico: Marco Ágil Scrum + Ingeniería de Ciberseguridad (Secure Scrum / S-Tags)
+- Estándares de Referencia: IEEE Std 830-1998, ISO/IEC 25010:2023, Ficha Técnica SRI v2.21, MSP 024
+
+====================================================================================================
+TABLA DE CONTENIDOS DEL DOCUMENTO
+====================================================================================================
+1. INTRODUCCIÓN Y CONTEXTO DEL ALCANCE ACTUALIZADO
+2. CATÁLOGO COMPLETO DE REQUISITOS FUNCIONALES (RF-01 AL RF-31)
+   2.1 Módulo 1: Autenticación y Control de Acceso Granular (RF-01, RF-02)
+   2.2 Módulo 2: Gestión Demográfica de Pacientes (RF-03 al RF-06)
+   2.3 Módulo 3: Historia Clínica y Graduación Refractiva (RF-07 al RF-15)
+   2.4 Módulo 4: Pedidos y Logística de Taller Óptico Externo (RF-16 al RF-19)
+   2.5 Módulo 5: Ventas, Cobros y Caja Mostrador (RF-20 al RF-23)
+   2.6 Módulo 6: Facturación Electrónica Nativa SRI [ACTUALIZADO] (RF-24 al RF-27)
+   2.7 Módulo 7: Asistente Inteligente Conversacional / IA [ACTUALIZADO] (RF-28 al RF-31)
+3. CATÁLOGO COMPLETO DE REQUISITOS NO FUNCIONALES (RNF-01 AL RNF-11 - ISO/IEC 25010:2023)
+   3.1 Seguridad de la Información (Autenticidad, Confidencialidad, Integridad y No Repudio)
+   3.2 Eficiencia de Desempeño y Rendimiento
+   3.3 Fiabilidad, Tolerancia a Fallos y Disponibilidad
+   3.4 Mantenibilidad, Modularidad y Portabilidad
+   3.5 Requisitos Legales y Regulatorios
+4. CATÁLOGO INTEGRAL DE HISTORIAS DE USUARIO (HU-01 A HU-31) CON CRITERIOS BDD (GIVEN-WHEN-THEN)
+   4.1 Historias del Módulo 1: Seguridad y Usuarios (HU-01, HU-02)
+   4.2 Historias del Módulo 2: Pacientes y Demografía (HU-03 al HU-06)
+   4.3 Historias del Módulo 3: Refracción Clínica y Consulta (HU-07 al HU-15)
+   4.4 Historias del Módulo 4: Taller y Laboratorio Externo (HU-16 al HU-19)
+   4.5 Historias del Módulo 5: Ventas, Pagos Mixtos y Caja (HU-20 al HU-23)
+   4.6 Historias del Módulo 6: Facturación Electrónica SRI (HU-24 al HU-27)
+   4.7 Historias del Módulo 7: Asistente Inteligente IA y Auditoría (HU-28 al HU-31)
+5. MATRIZ DE TRAZABILIDAD INTEGRAL BIDIRECCIONAL (RF <-> HU <-> RNF <-> S-TAG <-> SPRINT)
+
+
+====================================================================================================
+1. INTRODUCCIÓN Y CONTEXTO DEL ALCANCE ACTUALIZADO
+====================================================================================================
+El presente documento consolida la línea base de requerimientos de ingeniería de software para el 
+desarrollo del Sistema de Gestión Optométrica (SGO v2.0). A diferencia de las versiones preliminares 
+acotadas a un MVP básico, el presente instrumento integra formalmente:
+
+1. Facturación Electrónica Nativa con el Servicio de Rentas Internas (SRI):
+   - Soporte para emisión de Facturas XML bajo el esquema oficial v1.1.0 (XSD).
+   - Generación algorítmica de Clave de Acceso única de 49 dígitos con ponderación Módulo 11.
+   - Firma criptográfica avanzada XAdES-BES Enveloped mediante certificados digitales PKCS#12 (.p12/.pfx).
+   - Comunicación asíncrona mediante Web Services SOAP hacia los endpoints de Recepción y Autorización.
+   - Generación automatizada de RIDE en PDF con código de barras Code128 y despacho por correo SMTP.
+
+2. Componente de Innovación Tecnológica: Asistente Inteligente Operativo ("Chatbot con los Datos"):
+   - Interfaz conversacional en lenguaje natural integrada en el Dashboard del sistema.
+   - Enrutador determinístico de intenciones (Intent Router) para ventas, inventarios y taller.
+   - Mecanismo de seguridad Read-Only Guard: ejecución exclusiva bajo usuario SQL con privilegios 
+     GRANT SELECT en PostgreSQL, imposibilitando cualquier mutación, borrado o inyección de datos.
+   - Filtrado estricto por roles (RBAC) en respuestas para evitar fuga de información confidencial.
+   - Resiliencia híbrida con conmutación autónoma en red local LAN offline sin depender de internet.
+
+3. Stack Tecnológico Seleccionado:
+   - Backend Transaccional Central: PHP 8.2+ con Framework Laravel 11 (API RESTful modular).
+   - Microservicio de Facturación y Criptografía: Node.js 20 LTS (TypeScript, node-forge, xml-crypto).
+   - Base de Datos: PostgreSQL 15+ (cumplimiento ACID, triggers PL/pgSQL y audit_logs inmutable).
+   - Frontend de Usuario: React 18+ (TypeScript, Vite, TailwindCSS y soporte PWA).
+   - Despliegue: Contenedores Docker multi-etapa orquestados con Docker Compose.
+
+
+====================================================================================================
+2. CATÁLOGO COMPLETO DE REQUISITOS FUNCIONALES (RF-01 AL RF-31)
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+2.1 MÓDULO 1: AUTENTICACIÓN Y CONTROL DE ACCESO GRANULAR (M1)
+----------------------------------------------------------------------------------------------------
+
+[RF-01] Control de Acceso Basado en Roles (RBAC)
+- Tipo: Requisito de Seguridad / Autorización
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / Anteproyecto ESPOCH
+- Módulo: M1 (Seguridad y Acceso)
+- S-Tag: [S-TAG-AUTH-01]
+- Descripción: El sistema debe autenticar a los operadores del establecimiento y restringir el acceso 
+  a módulos, vistas de interfaz y endpoints de la API REST según tres perfiles formales:
+  * Administrador: Acceso total a configuración, catálogos, auditoría forense, caja y fiscalidad.
+  * Optometrista: Acceso a pacientes, consultas visuales, refracción, recetas y órdenes de taller.
+  * Asistente Comercial: Acceso a registro demográfico, ventas, cobro de anticipos, arqueo y entregas.
+- Entradas: Nombre de usuario / correo institucional y contraseña en texto plano.
+- Proceso: Verificación criptográfica de contraseña mediante hash bcrypt con factor de coste 12; 
+  validación de estado activo del usuario; generación de token JWT firmado digitalmente con claims 
+  de rol y permisos específicos; intercepción por middleware en frontend y backend ante cada petición.
+- Salidas: Sesión autorizada con token JWT o código HTTP 403 Forbidden ante intentos no autorizados.
+- Criterio de Verificación: Intentos de navegación manual a URLs administrativas desde cuentas de 
+  asistente u optometrista son bloqueados y registrados en auditoría.
+
+[RF-02] Gestión Segura de Sesiones y Expiración por Inactividad
+- Tipo: Requisito de Seguridad / Sesiones
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevista 2 / Decisiones de Ciberseguridad ESPOCH
+- Módulo: M1 (Seguridad y Acceso)
+- S-Tag: [S-TAG-AUTH-02]
+- Descripción: El sistema debe gestionar las sesiones web mediante tokens JWT firmados (SHA-256), 
+  forzando la expiración y revocación automática de la sesión tras 20 minutos continuos de inactividad 
+  de teclado o mouse en el cliente, protegiendo las estaciones ante descuidos del personal.
+- Entradas: Detección continua de eventos del DOM (mousemove, keydown) o temporizador de inactividad.
+- Proceso: El cliente computa el tiempo sin interacción; al transcurrir 20 minutos sin eventos, 
+  solicita la inclusión del token en la lista negra (blacklist) del servidor y purga el token de memoria.
+- Salidas: Destrucción de la sesión en cliente y redirección forzosa al Login con notificación visual.
+- Criterio de Verificación: Una estación sin actividad durante 20:01 minutos queda bloqueada y exige 
+  re-autenticación obligatoria.
+
+----------------------------------------------------------------------------------------------------
+2.2 MÓDULO 2: GESTIÓN DEMOGRÁFICA DE PACIENTES (M2)
+----------------------------------------------------------------------------------------------------
+
+[RF-03] Validación Algorítmica de Cédula Ecuatoriana (Módulo 10)
+- Tipo: Requisito Funcional / Integridad de Datos
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Registro Civil del Ecuador / plaDesarrolloRequisitos
+- Módulo: M2 (Gestión de Pacientes)
+- S-Tag: [S-TAG-INT-01]
+- Descripción: El sistema debe validar automáticamente la estructura formal y el dígito verificador 
+  de las cédulas de identidad ecuatorianas mediante el algoritmo matemático de Módulo 10, impidiendo 
+  el ingreso de documentos ficticios o duplicados en el padrón de pacientes.
+- Entradas: Número de identificación (10 dígitos numéricos).
+- Proceso: Comprobación de longitud exacta; verificación del código de provincia (01 a 24 o 30); 
+  multiplicación de los primeros 9 dígitos por coeficientes alternados [2, 1, 2, 1, 2, 1, 2, 1, 2] con 
+  resta de 9 a productos >= 10; suma total; cálculo de residuo frente a decena superior y cotejo estricto 
+  con el décimo dígito.
+- Salidas: Estado de validación (Válido / Inválido) con alerta visual en la interfaz en tiempo real.
+- Criterio de Verificación: El botón de guardado permanece deshabilitado si la cédula no supera el Módulo 10.
+
+[RF-04] Registro Demográfico y Ficha de Contacto Clínico
+- Tipo: Requisito Funcional / Maestros
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / Formulario 024 MSP
+- Módulo: M2 (Gestión de Pacientes)
+- S-Tag: ---
+- Descripción: El sistema debe registrar y administrar los datos demográficos completos del paciente: 
+  Nombres completos, Apellidos, Tipo y Número de Documento, Fecha de Nacimiento (con cálculo dinámico 
+  de edad cronológica), Ocupación (clave para ergonomía visual), Teléfono principal, Correo y Dirección.
+- Entradas: Formulario demográfico completado por el operador.
+- Proceso: Sanitización de entradas contra XSS; validación de unicidad de cédula en la tabla `pacientes`; 
+  cálculo dinámico de edad en años, meses y días; persistencia transaccional con timestamp y usuario autor.
+- Salidas: Ficha del paciente creada con identificador único de expediente clínico (UUID).
+- Criterio de Verificación: Registro exitoso visible en el catálogo de pacientes y trazado en auditoría.
+
+[RF-05] Búsqueda Indexada Multicriterio y Paginación Server-Side
+- Tipo: Requisito Funcional / Usabilidad y Desempeño
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / Especificación v1.0
+- Módulo: M2 (Gestión de Pacientes)
+- S-Tag: [S-TAG-INT-01]
+- Descripción: El sistema debe ofrecer un motor de búsqueda indexado que permita localizar pacientes 
+  por Apellidos, Nombres, Cédula o Número de Historia Clínica con resultados paginados en el servidor.
+- Entradas: Cadena de búsqueda (mínimo 2 caracteres) digitada en la barra de consulta.
+- Proceso: Ejecución de consulta optimizada mediante índices B-Tree y trigram (pg_trgm) sobre campos clave; 
+  paginación server-side mediante LIMIT y OFFSET (20 registros por página).
+- Salidas: Listado interactivo paginado con tiempo de respuesta inferior a 300 milisegundos.
+- Criterio de Verificación: Búsqueda instantánea demostrada con volumen superior a 10,000 registros.
+
+[RF-06] Repositorio Digital de Adjuntos Clínicos y Archivos Externos
+- Tipo: Requisito Funcional / Gestión Documental
+- Prioridad: Media / Deseado (Should Have)
+- Fuente: Entrevista 2 / plaDesarrolloRequisitos
+- Módulo: M2 (Gestión de Pacientes)
+- S-Tag: [S-TAG-INT-02]
+- Descripción: El sistema debe permitir asociar a la ficha del paciente archivos digitalizados de estudios 
+  oftalmológicos externos (topografías, retinografías, recetas de otros centros o informes) en formatos 
+  PDF, PNG o JPEG, con límite de tamaño de 5 MB por archivo.
+- Entradas: Archivo binario seleccionado y etiqueta descriptiva del documento.
+- Proceso: Validación de tipo MIME y cabeceras binarias en servidor; renombrado con UUID aleatorio; 
+  almacenamiento en directorio no indexable ni navegable; registro de metadatos en tabla `paciente_adjuntos`.
+- Salidas: Archivo persistido de forma segura y visualizable en el visor del expediente del paciente.
+- Criterio de Verificación: Aislamiento del archivo contra descargas de usuarios no autenticados.
+
+----------------------------------------------------------------------------------------------------
+2.3 MÓDULO 3: HISTORIA CLÍNICA Y GRADUACIÓN REFRACTIVA (M3)
+----------------------------------------------------------------------------------------------------
+
+[RF-07] Validación Estricta de Rangos Dióptricos (OD/OI)
+- Tipo: Requisito Funcional / Integridad Médica
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Formulario 024 MSP / Entrevista 2
+- Módulo: M3 (Historia Clínica)
+- S-Tag: [S-TAG-INT-01]
+- Descripción: El sistema debe validar de manera estricta que los parámetros de refracción ingresados 
+  por el optometrista se ubiquen dentro de los rangos fisiológicos y técnicos válidos en pasos discretos 
+  de 0.25 Dioptrías (D):
+  * Esfera (Sph): -25.00 D a +25.00 D.
+  * Cilindro (Cyl): -10.00 D a 0.00 D (notación negativa).
+  * Eje (Axis): 0° a 180° (números enteros).
+- Entradas: Valores numéricos de Esfera, Cilindro y Eje para Ojo Derecho (OD) y Ojo Izquierdo (OI).
+- Proceso: Evaluación de expresiones regulares en cliente y constraints CHECK en PostgreSQL; rechazo 
+  automático de cualquier valor fraccionario no múltiplo de 0.25 D.
+- Salidas: Aceptación del valor o bloqueo visual del campo con borde rojo y mensaje de error específico.
+- Criterio de Verificación: Imposibilidad física de persistir una graduación con decimales no estándar.
+
+[RF-08] Formateo y Normalización Numérica Decimal Dióptrica
+- Tipo: Requisito Funcional / Calidad de Datos
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: plaDesarrolloRequisitos / Práctica Optométrica
+- Módulo: M3 (Historia Clínica)
+- S-Tag: [S-TAG-INT-01]
+- Descripción: El sistema debe normalizar y formatear automáticamente los valores dióptricos ingresados 
+  añadiendo el signo correspondiente (+ o -) y dos posiciones decimales obligatorias (ej. el ingreso 
+  de "2" se formatea como "+2.00"; "-1.5" se formatea como "-1.50").
+- Entradas: Cadena numérica digitada por el profesional.
+- Proceso: Función mutadora en backend y filtro en evento onBlur de React que parsea a punto flotante de 
+  precisión fija y aplica máscara con signo explícito.
+- Salidas: Valor estandarizado con formato exacto `+X.XX` o `-X.XX` persistido homogéneamente.
+- Criterio de Verificación: Homogeneidad del 100% de registros en la base de datos relacional.
+
+[RF-09] Notación Estándar de Cilindro Negativo (Transposición Óptica)
+- Tipo: Requisito Funcional / Física y Algoritmos Ópticos
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Formulario 024 MSP / Práctica Optométrica
+- Módulo: M3 (Historia Clínica)
+- S-Tag: ---
+- Descripción: El sistema debe exigir el registro del astigmatismo en notación de cilindro negativo. Si el 
+  optometrista ingresa una fórmula en cilindro positivo, el sistema proveerá una función automática 
+  de transposición aplicando la fórmula de óptica oftálmica:
+  * Esfera_nueva = Esfera_original + Cilindro_original
+  * Cilindro_nuevo = -Cilindro_original
+  * Eje_nuevo = (Eje_original +/- 90°) mod 180°
+- Entradas: Fórmula con valor de cilindro positivo digitada accidentalmente.
+- Proceso: Detección de signo positivo en Cyl; cálculo algebraico de nueva esfera, inversión de signo 
+  del cilindro y rotación ortogonal del eje con normalización entre 0° y 180°.
+- Salidas: Fórmula transpuesta a cilindro negativo con aceptación del usuario.
+- Criterio de Verificación: Conversión matemática exacta conforme a las leyes de la física óptica.
+
+[RF-10] Validación de Distancia Nasopupilar (DNP) y Altura Focal
+- Tipo: Requisito Funcional / Centrado Óptico
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / Normas de Biselado
+- Módulo: M3 (Historia Clínica)
+- S-Tag: [S-TAG-INT-01]
+- Descripción: El sistema debe exigir y validar el registro de la Distancia Nasopupilar (DNP) individual 
+  por ojo (OD y OI) en un rango fisiológico de 20.0 mm a 40.0 mm (o DIP total de 40 a 80 mm), y la 
+  Altura Focal en milímetros cuando se seleccionen lentes bifocales o multifocales progresivos.
+- Entradas: Valores milimétricos de DNP OD, DNP OI y Altura Focal.
+- Proceso: Verificación de límites fisiológicos; suma automática de DIP = DNP_OD + DNP_OI; campo Altura 
+  marcado como requerido si el tipo de luna seleccionado es progresivo o bifocal.
+- Salidas: Parámetros validados y consolidados para la orden técnica de taller.
+- Criterio de Verificación: Alerta bloqueante si se ingresa una DNP fuera del rango 20.0 - 40.0 mm.
+
+[RF-11] Regla Óptica de Adición Esférica y Simetría Binocular (OD = OI)
+- Tipo: Requisito Funcional / Regla Médica de Presbicia
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevista 2 / Guías Clínicas de Refracción
+- Módulo: M3 (Historia Clínica)
+- S-Tag: [S-TAG-INT-02]
+- Descripción: El sistema debe controlar que el valor de Adición (Add) para pacientes présbitas se 
+  encuentre en el rango de +0.75 D a +4.00 D en pasos de 0.25 D, y forzar la regla de simetría binocular 
+  médica obligatoria (Add_OD = Add_OI), replicando el valor de un ojo en el otro para prevenir astenopia.
+- Entradas: Valor de Adición seleccionado o digitado en el ojo derecho.
+- Proceso: Validación de rango positivo; actualización reactiva automática en el campo del ojo izquierdo; 
+  bloqueo de edición asimétrica salvo excepción médica documentada en observaciones clínicas.
+- Salidas: Ambos ojos con idéntico valor de Adición para visión cercana.
+- Criterio de Verificación: Igualdad matemática comprobada en la tupla de base de datos.
+
+[RF-12] Comparativa Dióptrica Evolutiva y Análisis de Progresión
+- Tipo: Requisito Funcional / Analítica Clínica
+- Prioridad: Media / Deseado (Should Have)
+- Fuente: Entrevistas 1 y 2 / Propuestas de Innovación
+- Módulo: M3 (Historia Clínica)
+- S-Tag: [S-TAG-INT-02]
+- Descripción: El sistema debe presentar una vista comparativa visual entre la refracción actual del 
+  paciente y sus graduaciones anteriores, calculando automáticamente el diferencial dióptrico 
+  (Delta Sph, Delta Cyl) para asistir al profesional en el seguimiento de progresión de miopía o astigmatismo.
+- Entradas: Historial de consultas previas del paciente en pantalla.
+- Proceso: Consulta de los últimos registros históricos; resta algebraica de valores esféricos y cilíndricos; 
+  renderizado de gráfica temporal de evolución refractiva.
+- Salidas: Panel gráfico y tabla comparativa que destaca variaciones superiores a +/- 0.50 D.
+- Criterio de Verificación: Cálculo algebraico exacto de los incrementos o decrementos de dioptrías.
+
+[RF-13] Registro Clínico Estructurado según Formulario 024 MSP / ACESS
+- Tipo: Requisito Funcional / Marco Sanitario Nacional
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Formulario 024 MSP / Normativa ACESS
+- Módulo: M3 (Historia Clínica)
+- S-Tag: ---
+- Descripción: El sistema debe estructurar la consulta oftalmológica/optométrica completa en apego estricto 
+  al Formulario 024 del MSP: Anamnesis y Motivo de Consulta, Agudeza Visual Snellen (lejos y cerca, con y sin 
+  corrección), Refracción objetiva y subjetiva, Examen de estructuras oculares y anexos, y Diagnósticos 
+  clínicos codificados mediante el catálogo oficial CIE-10 (ej. H52.1 Miopía, H52.2 Astigmatismo).
+- Entradas: Datos del examen visual ingresados por el optometrista.
+- Proceso: Validación de completitud de campos clínicos obligatorios; catálogo CIE-10 con autocompletado; 
+  asociación de la consulta a la historia clínica del paciente.
+- Salidas: Expediente de consulta consolidado y firmado electrónicamente/digitalmente por el profesional.
+- Criterio de Verificación: Conformidad del reporte para superar auditorías médicas sanitarias de ACESS.
+
+[RF-14] Emisión de Receta Óptica Impresa con Código QR Verificador Antifraude
+- Tipo: Requisito Funcional / Salidas Documentales y Seguridad
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevista 2 / Documento Maestro Casos de Uso
+- Módulo: M3 (Historia Clínica)
+- S-Tag: ---
+- Descripción: El sistema debe generar un documento PDF para la Receta Óptica de Graduación, incorporando 
+  un código QR criptográfico con un token firmado (HMAC-SHA256) que permita al paciente o al laboratorio 
+  escanear el código y verificar en línea la autenticidad, fecha de emisión y vigencia de la receta.
+- Entradas: Consulta refractiva finalizada y comando de emisión de receta.
+- Proceso: Generación de token firmado; compilación de código QR bidimensional; renderizado de plantilla PDF 
+  tamaño A5/A4 con membrete formal de Óptica Vista Visión, firma del optometrista y código QR.
+- Salidas: Archivo PDF generado y listo para impresión o envío digital.
+- Criterio de Verificación: El escaneo del QR redirige a la vista pública de validación confirmando autenticidad.
+
+[RF-15] Inmutabilidad de Consultas Previas y Preservación Histórica (Soft-Delete)
+- Tipo: Requisito de Seguridad / Integridad Forense
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevista 1 / LOPDP / Formulario 024 MSP
+- Módulo: M3 (Historia Clínica)
+- S-Tag: [S-TAG-INT-03]
+- Descripción: El sistema debe garantizar de forma inviolable la inmutabilidad de las historias clínicas 
+  cerradas. Queda estrictamente prohibida la sobreescritura, edición destructiva o borrado físico (DELETE) 
+  de exámenes anteriores. Si se requiere anular un registro por error material, se aplicará borrado lógico 
+  (soft-delete) requiriendo justificación formal y clave de Administrador.
+- Entradas: Petición de modificación o anulación sobre una historia clínica archivada.
+- Proceso: Rechazo de sentencias UPDATE/DELETE sobre consultas cerradas; el borrado lógico actualiza 
+  los campos `deleted_at`, `deleted_by` y el motivo en `audit_logs` sin eliminar la tupla de PostgreSQL.
+- Salidas: Preservación intacta del historial médico del paciente en base de datos.
+- Criterio de Verificación: Comprobación de existencia de tuplas históricas intactas en PostgreSQL.
+
+----------------------------------------------------------------------------------------------------
+2.4 MÓDULO 4: PEDIDOS Y LOGÍSTICA DE TALLER ÓPTICO EXTERNO (M4)
+----------------------------------------------------------------------------------------------------
+
+[RF-16] Aislamiento de Datos Clínicos y Cumplimiento LOPDP en Órdenes de Taller
+- Tipo: Requisito de Seguridad / Privacidad LOPDP
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: LOPDP Ecuador Art. 10 y 21 / plaDesarrolloRequisitos
+- Módulo: M4 (Taller Óptico)
+- S-Tag: [S-TAG-INT-01]
+- Descripción: El sistema debe generar la orden de trabajo para el taller de biselado externo aislando 
+  categóricamente la identidad del paciente (orden técnica ciega). La orden solo incluirá: ID de orden, 
+  parámetros ópticos de corte (Sph, Cyl, Axis, DNP, Altura), tipo de lente, material, tratamientos y 
+  fecha prometida, omitiendo nombres, cédulas y diagnósticos clínicos patológicos.
+- Entradas: Selección de la prescripción óptica para manufactura externa.
+- Proceso: Desacoplamiento de entidades en base de datos; la vista y el PDF del taller omiten claves foráneas 
+  a datos personales, protegiendo el secreto médico y la privacidad exigida por la ley.
+- Salidas: Ticket de orden técnica disociada conforme a la LOPDP.
+- Criterio de Verificación: Inspección del PDF confirmando ausencia absoluta de datos identificativos del paciente.
+
+[RF-17] Catálogo Técnico de Materiales y Tratamientos de Lunas
+- Tipo: Requisito Funcional / Gestión de Catálogos
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / Ficha Técnica de Biselado
+- Módulo: M4 (Taller Óptico)
+- S-Tag: ---
+- Descripción: El sistema debe proveer un catálogo técnico parametrizable para especificar en cada pedido: 
+  Tipo de lente (Monofocal, Bifocal Flat-Top, Bifocal Invisible, Progresivo), Material (Mineral, CR-39, 
+  Policarbonato, Alto Índice 1.67/1.74) y Tratamientos (Antirreflejo básico/verde/azul, BlueBlock, 
+  Fotocromático/Transitions, Tinturado, Polarizado).
+- Entradas: Selección de combinaciones técnicas desde listas desplegables dependientes.
+- Proceso: Validación de compatibilidad entre material y tratamientos; cálculo del costo estimado de 
+  taller y tiempo estándar de confección según matriz de proveedores de Quito y Guayaquil.
+- Salidas: Especificación técnica precisa ligada a la orden de trabajo.
+- Criterio de Verificación: Coherencia de los atributos técnicos en la orden de manufactura.
+
+[RF-18] Trazabilidad Integral del Ciclo de Vida del Pedido de Taller
+- Tipo: Requisito Funcional / Trazabilidad Logística
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / Documento Maestro Casos de Uso
+- Módulo: M4 (Taller Óptico)
+- S-Tag: [S-TAG-RES-01]
+- Descripción: El sistema debe gestionar el ciclo de vida completo de cada pedido de taller mediante una 
+  máquina de estados determinística: `REGISTRADO` -> `ENVIADO_TALLER` -> `EN_PROCESO` -> 
+  `RECIBIDO_CONFORME` -> `CONTROL_CALIDAD_OK` -> `NOTIFICADO` -> `ENTREGADO_PACIENTE`, impidiendo 
+  saltos ilógicos y registrando operador, fecha y hora de cada transición.
+- Entradas: Evento de cambio de estado accionado por el personal de mostrador o taller.
+- Proceso: Verificación de precondiciones de la máquina de estados; inserción de registro histórico en 
+  la tabla `taller_trazabilidad`; actualización del estado actual de la orden.
+- Salidas: Tablero Kanban de seguimiento logístico actualizado en tiempo real.
+- Criterio de Verificación: Registro cronológico secuencial verificable para cada orden de trabajo.
+
+[RF-19] Registro de Devoluciones y Control de Incidencias con Taller Externo
+- Tipo: Requisito Funcional / Aseguramiento de Calidad
+- Prioridad: Media / Deseado (Should Have)
+- Fuente: Entrevista 2 / Especificación v2.0
+- Módulo: M4 (Taller Óptico)
+- S-Tag: [S-TAG-RES-01]
+- Descripción: El sistema debe permitir registrar incidencias y devoluciones de lunas al taller externo si 
+  el control de calidad interno revela defectos (ejes descalibrados, aberraciones periféricas, rayas o 
+  alturas erróneas), asignando el estado `DEVUELTO_A_TALLER`, documentando el motivo formal y 
+  recalculando la fecha de entrega al paciente sin costo adicional.
+- Entradas: Reporte de no conformidad en control de calidad con motivo y descripción técnica.
+- Proceso: Retorno del trabajo a fase de manufactura; generación de comprobante de re-ingreso a taller; 
+  registro del indicador de falla por proveedor en base de datos.
+- Salidas: Alerta en panel de control sobre órdenes con incidencias abiertas o retraso logístico.
+- Criterio de Verificación: Historial de incidencias auditado por laboratorio óptico externo.
+
+----------------------------------------------------------------------------------------------------
+2.5 MÓDULO 5: VENTAS, COBROS Y CAJA MOSTRADOR (M5)
+----------------------------------------------------------------------------------------------------
+
+[RF-20] Comprobante Interno con Anticipo y Saldo Pendiente
+- Tipo: Requisito Funcional / Operaciones Comerciales
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / plaDesarrolloRequisitos
+- Módulo: M5 (Ventas y Caja)
+- S-Tag: ---
+- Descripción: El sistema debe emitir comprobantes internos numerados de venta y cobro que soporten 
+  modalidad mixta de pago en dos etapas: cobro de anticipo al encargar los lentes y liquidación del saldo 
+  pendiente al momento del retiro, generando tickets impresos con el anticipo, el saldo adeudado y la 
+  fecha estimada de entrega.
+- Entradas: Datos del paciente, orden de trabajo asociada, productos adicionales y monto del anticipo recibido.
+- Proceso: Transacción ACID en base de datos; cálculo automático de `Saldo = Total - Anticipo`; validación 
+  de que el saldo no sea negativo; generación del ticket térmico con código de barras de retiro.
+- Salidas: Ticket de cobro emitido y actualización del saldo pendiente en el expediente de venta.
+- Criterio de Verificación: Coherencia contable estricta en el arqueo diario de caja.
+
+[RF-21] Gestión Híbrida de Inventario de Armazones y Accesorios
+- Tipo: Requisito Funcional / Control de Stock
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevista 2 / Especificación v2.0
+- Módulo: M5 (Ventas y Caja)
+- S-Tag: [S-TAG-INT-02]
+- Descripción: El sistema debe gestionar el inventario de armazones, estuches, líquidos de limpieza y 
+  accesorios bajo un esquema híbrido: control unitario por código de barras / SKU para armazones de marca, 
+  y registro por lotes para accesorios de alta rotación, deduciendo el stock automáticamente en tiempo 
+  real al confirmar la transacción de venta.
+- Entradas: Lectura de código de barras con escáner o selección manual de ítem y cantidad en mostrador.
+- Proceso: Verificación de existencias en PostgreSQL con bloqueo de fila (`SELECT ... FOR UPDATE`); deducción 
+  de unidades; alerta visual de stock crítico si la cantidad desciende del mínimo parametrizado.
+- Salidas: Stock actualizado en almacén e ítem cargado al detalle de venta.
+- Criterio de Verificación: Prevención absoluta de ventas duplicadas o saldo negativo de existencias.
+
+[RF-22] Protocolo Estricto de Anulación de Ventas y Reintegro de Stock
+- Tipo: Requisito de Seguridad / Control Financiero
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / plaDesarrolloRequisitos
+- Módulo: M5 (Ventas y Caja)
+- S-Tag: [S-TAG-INT-02]
+- Descripción: El sistema debe restringir la anulación de ventas y notas de cobro exclusivamente a usuarios 
+  con rol de Administrador, requiriendo el ingreso obligatorio de una justificación textual. Al confirmarse, 
+  el sistema debe revertir automáticamente el stock al inventario y marcar la transacción como `ANULADA` 
+  sin eliminar físicamente el registro contable.
+- Entradas: Identificador de la venta, credenciales de Administrador y motivo formal de anulación.
+- Proceso: Verificación de privilegios de Administrador; ejecución de transacción ACID que repone existencias 
+  en `inventario`, registra el contrasiento contable y persiste la traza en `audit_logs`.
+- Salidas: Comprobante de anulación emitido y venta marcada con estado Anulado.
+- Criterio de Verificación: Conservación inmutable de la traza de auditoría de la venta anulada.
+
+[RF-23] Cuadre Diario de Caja y Arqueo Ciego Transaccional
+- Tipo: Requisito Funcional / Auditoría de Caja
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Entrevistas 1 y 2 / Documento Maestro Casos de Uso
+- Módulo: M5 (Ventas y Caja)
+- S-Tag: ---
+- Descripción: El sistema debe implementar un protocolo de arqueo ciego diario de caja: el cajero debe 
+  ingresar los montos físicos contados por tipo de medio de pago (efectivo desglosado por billetes/monedas, 
+  transferencias y comprobantes de tarjeta) sin visualizar el saldo teórico del sistema. Tras el ingreso, 
+  el sistema genera el reporte de cierre (Z) comparando ambos valores y resaltando diferencias.
+- Entradas: Desglose manual de valores físicos en caja ingresados por el asistente.
+- Proceso: Comparación matemática entre el dinero físico reportado y la sumatoria de cobros del turno; 
+  cálculo del sobrante o faltante; cierre formal e inmutable de la sesión de caja.
+- Salidas: Reporte de Arqueo Diario de Caja (Cierre Z) con balance auditado y firma del operador.
+- Criterio de Verificación: Bloqueo de nuevos registros de cobro en la sesión de caja cerrada.
+
+----------------------------------------------------------------------------------------------------
+2.6 MÓDULO 6: FACTURACIÓN ELECTRÓNICA NATIVA SRI (M6) [ACTUALIZADO]
+----------------------------------------------------------------------------------------------------
+
+[RF-24] Generación Canónica de Factura XML v1.1.0 y Clave de Acceso Módulo 11
+- Tipo: Requisito Funcional / Fiscalidad SRI
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Ficha Técnica SRI v2.21 / Informe Arquitectura SRI v1
+- Módulo: M6 (Facturación SRI)
+- S-Tag: [S-TAG-INT-04]
+- Descripción: El sistema debe construir el archivo XML oficial de la Factura de venta conforme al 
+  esquema XSD v1.1.0 del SRI y generar la Clave de Acceso única de 49 dígitos aplicando el algoritmo 
+  Módulo 11 ponderado (factores de 2 a 7 de derecha a izquierda), asegurando que ventas a Consumidor 
+  Final no excedan el límite legal de $40.00 USD.
+- Entradas: Datos de la venta, cliente (RUC, Cédula, Pasaporte o Consumidor Final), detalle de ítems e IVA (15% y 0%).
+- Proceso: Construcción de secciones `<infoTributaria>`, `<infoFactura>` y `<detalles>`; concatenación de los 
+  primeros 48 dígitos (Fecha, Tipo Comprobante, RUC, Ambiente, Serie, Secuencial, Código Numérico y Tipo Emisión); 
+  cálculo del residuo Módulo 11 para obtener el dígito 49. Validación bloqueante si Consumidor Final > $40.00 USD.
+- Salidas: Documento XML canónico v1.1.0 con clave de acceso válida de 49 dígitos.
+- Criterio de Verificación: Conformidad absoluta del XML frente al esquema XSD oficial del SRI.
+
+[RF-25] Firma Digital Avanzada XAdES-BES Enveloped
+- Tipo: Requisito de Seguridad / Criptografía y No Repudio
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Ley de Comercio Electrónico Ecuador / Ficha Técnica SRI
+- Módulo: M6 (Facturación SRI)
+- S-Tag: [S-TAG-AUTH-03] [S-TAG-RES-02]
+- Descripción: El sistema debe firmar digitalmente el XML de la factura bajo el estándar criptográfico 
+  XAdES-BES (enveloped) utilizando un certificado digital válido de persona natural o jurídica en formato 
+  PKCS#12 (.p12/.pfx) con algoritmo RSA-SHA1 y canonicalización XML-C14N, incrustando el nodo `<ds:Signature>`.
+- Entradas: Archivo binario de certificado (.p12), contraseña de la llave privada y XML canónico generado.
+- Proceso: Apertura del contenedor .p12 en memoria volátil; extracción del certificado X.509 y llave privada; 
+  cálculo de resúmenes criptográficos SHA-1 del documento y del bloque SignedProperties; firma con llave RSA; 
+  ensamble de la estructura de firma e inserción en el documento XML.
+- Salidas: Archivo XML firmado digitalmente, listo para despacho hacia los servidores del SRI.
+- Criterio de Verificación: Verificación criptográfica de firma válida y no repudio legal.
+
+[RF-26] Transmisión y Consulta Asíncrona SOAP ante Web Services del SRI
+- Tipo: Requisito Funcional / Interoperabilidad Tributaria
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Web Services SRI Ecuador / Informe Implementación SRI
+- Módulo: M6 (Facturación SRI)
+- S-Tag: [S-TAG-INT-05]
+- Descripción: El sistema debe transmitir el XML firmado en Base64 al Web Service `RecepcionComprobantesOffline` 
+  del SRI y, tras recibir el estado `RECIBIDA`, consultar el estado en `AutorizacionComprobantesOffline` hasta 
+  obtener la respuesta formal (`AUTORIZADO`, `DEVUELTA` o `NO AUTORIZADO`), gestionando encolamiento y reintentos.
+- Entradas: XML firmado digitalmente y Clave de Acceso de 49 dígitos.
+- Proceso: Invocación SOAP asíncrona mediante HTTPS; si el comprobante es devuelto por errores tributarios, 
+  se parsean los mensajes y se notifican al usuario; si el servicio responde con saturación, la factura se 
+  almacena con estado `PENDIENTE_AUTORIZACION` en cola para sondeo periódico.
+- Salidas: Factura actualizada con Número de Autorización, Fecha y Hora oficial del SRI en base de datos.
+- Criterio de Verificación: Persistencia inmutable del XML autorizado y respuesta oficial en PostgreSQL.
+
+[RF-27] Generación de RIDE (PDF Code128) y Despacho Automatizado por Correo
+- Tipo: Requisito Funcional / Notificación y Salidas
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Resolución NAC-DGERCGC14-00790 SRI / Informe API-SRI
+- Módulo: M6 (Facturación SRI)
+- S-Tag: ---
+- Descripción: Tras la autorización formal del SRI, el sistema debe compilar automáticamente la 
+  Representación Impresa del Documento Electrónico (RIDE) en formato PDF renderizando el código de barras 
+  Code128 de la clave de 49 dígitos, y despachar un correo electrónico al adquirente mediante transporte 
+  SMTP seguro conteniendo el PDF y el XML autorizados como adjuntos.
+- Entradas: Factura con estado `AUTORIZADO` y dirección de correo electrónico del cliente.
+- Proceso: Renderizado de la plantilla oficial Handlebars/Puppeteer con desglose de impuestos y datos del emisor; 
+  generación del código de barras Code128; ensamble de correo multipart mediante Nodemailer con adjuntos XML y PDF.
+- Salidas: Archivo RIDE PDF persistido y notificación por correo enviada con éxito.
+- Criterio de Verificación: Confirmación de entrega SMTP y verificación de legibilidad del código de barras.
+
+----------------------------------------------------------------------------------------------------
+2.7 MÓDULO 7: ASISTENTE INTELIGENTE CONVERSACIONAL / IA (M7) [ACTUALIZADO]
+----------------------------------------------------------------------------------------------------
+
+[RF-28] Interfaz Conversacional y Enrutamiento Determinístico de Intenciones
+- Tipo: Requisito Funcional / Innovación Tecnológica (IA)
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: informePropuestasInnovacion.txt / InnovacionesV3.txt
+- Módulo: M7 (Asistente IA)
+- S-Tag: ---
+- Descripción: El sistema debe proveer una interfaz conversacional integrada en el Dashboard que permita 
+  a los operadores formular consultas en lenguaje natural en idioma español acerca de: métricas de ventas 
+  y caja del día, existencias de armazones en inventario, y tiempos de demora y estados de órdenes de taller, 
+  enrutando las intenciones de forma ágil sin requerir navegación por múltiples menús.
+- Entradas: Pregunta o texto formulado por el usuario en el widget del chat.
+- Proceso: Análisis léxico-sintáctico mediante expresiones regulares y clasificador de intenciones (Intent Router); 
+  extracción de entidades clave (fechas, marcas, estados de taller, rangos de precio); derivación a la 
+  rutina de consulta correspondiente.
+- Salidas: Respuesta interactiva en lenguaje natural acompañada de tarjetas estructuradas de datos.
+- Criterio de Verificación: Latencia de clasificación inferior a 1 segundo para intenciones comunes.
+
+[RF-29] Ejecución Segura de Consultas con Blindaje de Solo Lectura (Read-Only Guard)
+- Tipo: Requisito de Seguridad / Integridad de Datos
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Directrices Ciberseguridad ESPOCH / InnovacionesV3.txt
+- Módulo: M7 (Asistente IA)
+- S-Tag: [S-TAG-INT-06]
+- Descripción: El motor del asistente inteligente debe operar bajo un blindaje estricto de solo lectura 
+  (Read-Only Guard), ejecutando sus consultas contra la base de datos PostgreSQL utilizando un usuario técnico 
+  de conexión que posea de manera exclusiva privilegios `GRANT SELECT`, imposibilitando cualquier alteración, 
+  borrado o inyección maliciosa (`INSERT`, `UPDATE`, `DELETE`, `DROP`).
+- Entradas: Intención clasificada y parámetros de consulta validados.
+- Proceso: Invocación exclusiva de consultas parametrizadas o vistas precompiladas de solo lectura; 
+  intercepción y rechazo categórico de cualquier sentencia que contenga palabras clave DDL/DML de mutación.
+- Salidas: Dataset de datos puros entregado al formateador de respuestas del chat.
+- Criterio de Verificación: Imposibilidad técnica y matemática de alterar datos en la base vía chat.
+
+[RF-30] Control de Acceso Estricto RBAC en Respuestas del Asistente
+- Tipo: Requisito de Seguridad / Autorización y Privacidad
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: informePropuestasInnovacion.txt / plaDesarrolloRequisitos
+- Módulo: M7 (Asistente IA)
+- S-Tag: [S-TAG-AUTH-04]
+- Descripción: El chatbot inteligente debe aplicar un filtro estricto de autorización conforme al rol 
+  autenticado del usuario (RBAC): el Asistente Comercial tiene expresamente denegado consultar utilidades 
+  globales, balances de caja consolidados o historiales clínicos confidenciales de pacientes; el Optometrista 
+  solo accede a datos clínicos, taller y stock; y el Administrador posee acceso a métricas globales.
+- Entradas: Token JWT del usuario remitente y categoría temática de la intención consultada.
+- Proceso: Evaluación de políticas de control de acceso en el middleware del asistente inteligente; si el 
+  rol carece de privilegios para la consulta solicitada, el sistema emite una denegación respetuosa.
+- Salidas: Datos desplegados únicamente si el perfil cuenta con autorización formal en el sistema.
+- Criterio de Verificación: Prevención absoluta de fuga de información financiera y médica confidencial.
+
+[RF-31] Modo Híbrido Resiliente (LAN Offline / Online) y Bitácora de Chat
+- Tipo: Requisito Funcional / Resiliencia y Auditoría
+- Prioridad: Alta / Esencial (Must Have)
+- Fuente: Propuestas de Innovación ESPOCH / plaDesarrolloRequisitos
+- Módulo: M7 (Asistente IA)
+- S-Tag: [S-TAG-RES-03]
+- Descripción: El asistente inteligente debe soportar funcionamiento dual: modo autónomo local LAN 
+  (100% determinístico sin conexión a internet mediante mapeo de intenciones y plantillas SQL) y modo 
+  enriquecido online (conexión opcional a API de LLM para redacción avanzada); y persistir inmutablemente 
+  cada interacción en la tabla `audit_logs` con usuario, pregunta, intención detectada y timestamp.
+- Entradas: Mensaje del usuario y verificación de conectividad externa a internet.
+- Proceso: Conmutación transparente: si no hay salida a internet, la consulta se resuelve íntegramente 
+  en la LAN local; inserción asíncrona de la tupla de auditoría en la tabla `audit_logs` de PostgreSQL.
+- Salidas: Continuidad operativa sin fallos por corte de internet y trazabilidad forense de interacciones.
+- Criterio de Verificación: Disponibilidad demostrada del chat ante desconexión total del cable WAN.
+
+
+====================================================================================================
+3. CATÁLOGO COMPLETO DE REQUISITOS NO FUNCIONALES (RNF-01 AL RNF-11)
+====================================================================================================
+Formulados bajo el estándar internacional ISO/IEC 25010:2023 y el marco de Secure Scrum (Pohl y Hof).
+
+----------------------------------------------------------------------------------------------------
+3.1 SEGURIDAD DE LA INFORMACIÓN (AUTENTICIDAD, CONFIDENCIALIDAD, INTEGRIDAD Y NO REPUDIO)
+----------------------------------------------------------------------------------------------------
+
+[RNF-01] Control de Acceso Estricto y Principio de Menor Privilegio (RBAC)
+- Subcaracterística ISO 25010: Autenticidad y Autorización
+- Etiqueta de Seguridad: [S-TAG-AUTH-01]
+- Métrica / Criterio: El 100% de las rutas de interfaz y endpoints de la API deben validar el rol y los 
+  claims del token JWT. La tasa de acceso indebido permitida a recursos no autorizados es 0.00%.
+
+[RNF-02] Cifrado Robusto de Credenciales y Sesiones Web
+- Subcaracterística ISO 25010: Confidencialidad
+- Etiqueta de Seguridad: [S-TAG-AUTH-02]
+- Métrica / Criterio: Las contraseñas deben cifrarse con hash irreversible bcrypt (factor de coste 12). 
+  Los tokens JWT deben firmarse con HMAC-SHA256 utilizando una clave secreta de 256 bits custodiada 
+  en variables de entorno seguras del servidor, con tiempo de expiración fijado en 20 minutos.
+
+[RNF-03] Validación Dióptrica a Nivel de Motor de Base de Datos
+- Subcaracterística ISO 25010: Integridad de Datos
+- Etiqueta de Seguridad: [S-TAG-INT-01]
+- Métrica / Criterio: La base de datos PostgreSQL debe implementar restricciones CHECK para impedir 
+  que valores de Esfera fuera de [-25.00, +25.00], Cilindro fuera de [-10.00, 0.00] o Eje fuera de [0, 180] 
+  puedan ser insertados mediante inyecciones o fallas en el cliente.
+
+[RNF-04] Transaccionalidad ACID en Operaciones de Caja e Inventario
+- Subcaracterística ISO 25010: Integridad y Fiabilidad
+- Etiqueta de Seguridad: [S-TAG-INT-02]
+- Métrica / Criterio: Toda venta, cobro de anticipo, anulación o ajuste de stock debe ejecutarse dentro 
+  de un bloque transaccional atómico (`BEGIN ... COMMIT / ROLLBACK`) con nivel de aislamiento READ COMMITTED. 
+  La tasa de inconsistencias contables tolerada en caja es 0.00%.
+
+[RNF-05] Inmutabilidad Histórica de Atenciones Médicas
+- Subcaracterística ISO 25010: Integridad y Responsabilidad
+- Etiqueta de Seguridad: [S-TAG-INT-03]
+- Métrica / Criterio: Se prohíbe la sentencia UPDATE sobre historias clínicas cerradas. La corrección 
+  de errores materiales solo se permite mediante borrado lógico (`soft-delete`) dejando constancia del 
+  usuario responsable, timestamp y motivo formal en la bitácora inmutable.
+
+[RNF-06] Bitácora Inmutable de Auditoría Forense (Audit Logs)
+- Subcaracterística ISO 25010: Responsabilidad y Trazabilidad (No Repudio)
+- Etiqueta de Seguridad: [S-TAG-RES-01]
+- Métrica / Criterio: Cada acción crítica (creación de paciente, cambio de estado de taller, cobro, 
+  anulación y consulta IA) debe registrarse automáticamente en la tabla `audit_logs` con `user_id`, `ip_address`, 
+  `accion`, `tabla_afectada`, `valores_anteriores (JSONB)`, `valores_nuevos (JSONB)` y marca temporal del servidor.
+
+[RNF-10] Custodia Criptográfica Segura de Certificados de Firma Electrónica (.p12)
+- Subcaracterística ISO 25010: Confidencialidad y No Repudio
+- Etiqueta de Seguridad: [S-TAG-AUTH-03]
+- Métrica / Criterio: El certificado digital PKCS#12 (.p12) y su contraseña de firma deben custodiarse 
+  cifrados en el servidor mediante algoritmo AES-256-GCM. La clave maestra de cifrado no debe estar hardcodeada 
+  en el código fuente.
+
+[RNF-11] Aislamiento Categórico de Solo Lectura para el Asistente IA
+- Subcaracterística ISO 25010: Integridad y Seguridad
+- Etiqueta de Seguridad: [S-TAG-INT-06]
+- Métrica / Criterio: El microservicio del chatbot debe conectarse a PostgreSQL mediante un usuario técnico 
+  con privilegio exclusivo `GRANT SELECT`. La ejecución de comandos DDL o DML de mutación es bloqueada 
+  en el 100% de los casos tanto a nivel de middleware como a nivel de base de datos.
+
+----------------------------------------------------------------------------------------------------
+3.2 EFICIENCIA DE DESEMPEÑO Y RENDIMIENTO
+----------------------------------------------------------------------------------------------------
+
+[RNF-08.1] Tiempo de Respuesta en Consultas Transaccionales
+- Subcaracterística ISO 25010: Comportamiento Temporal
+- Métrica / Criterio: El 95% de las peticiones HTTP de búsqueda de pacientes, carga de historias clínicas 
+  y registro de ventas deben procesarse y responder en un tiempo inferior a 1.5 segundos en la red local LAN.
+
+[RNF-08.2] Latencia de la Interfaz Conversacional del Asistente IA
+- Subcaracterística ISO 25010: Comportamiento Temporal
+- Métrica / Criterio: El motor de enrutamiento y respuesta del Asistente Inteligente en modo local LAN 
+  debe responder consultas operativas comunes en menos de 1.0 segundo.
+
+[RNF-08.3] Tiempo de Canonización, Firmado XAdES-BES y RIDE PDF
+- Subcaracterística ISO 25010: Capacidad y Rendimiento
+- Métrica / Criterio: La generación del XML, la firma digital con certificado .p12 y la compilación 
+  del RIDE en PDF con código Code128 debe tomar menos de 2.0 segundos por comprobante fiscal.
+
+----------------------------------------------------------------------------------------------------
+3.3 FIABILIDAD, TOLERANCIA A FALLOS Y DISPONIBILIDAD
+----------------------------------------------------------------------------------------------------
+
+[RNF-09] Resiliencia Asíncrona y Tolerancia a Caídas del SRI
+- Subcaracterística ISO 25010: Tolerancia a Fallos y Madurez
+- Métrica / Criterio: Ante indisponibilidad de los Web Services del SRI, el comprobante firmado se 
+  almacena con estado `PENDIENTE_ENVIO` en cola local de PostgreSQL. El sistema continúa operando las ventas 
+  y la entrega de lentes sin interrupciones. Un cron job reintenta la transmisión automáticamente.
+
+[RNF-09.2] Disponibilidad Operativa del Sistema
+- Subcaracterística ISO 25010: Disponibilidad
+- Métrica / Criterio: La disponibilidad del sistema en red local LAN durante el horario comercial de 
+  Óptica Vista Visión (lunes a sábado de 08:00 a 19:00) debe ser superior al 99.5%.
+
+----------------------------------------------------------------------------------------------------
+3.4 MANTENIBILIDAD, MODULARIDAD Y PORTABILIDAD
+----------------------------------------------------------------------------------------------------
+
+[RNF-07] Portabilidad y Compatibilidad Multiplataforma (PWA / Docker)
+- Subcaracterística ISO 25010: Portabilidad y Adaptabilidad
+- Métrica / Criterio: El frontend debe operar de forma homogénea en Google Chrome 110+, Microsoft Edge 110+ 
+  y Firefox 110+. La arquitectura completa debe desplegarse mediante Docker Compose en cualquier 
+  servidor Linux o Windows en menos de 30 minutos.
+
+[RNF-07.2] Modularidad y Documentación OpenAPI
+- Subcaracterística ISO 25010: Modularidad y Modificabilidad
+- Métrica / Criterio: El backend debe estructurarse en módulos independientes desacoplados y documentar 
+  la totalidad de sus endpoints bajo la especificación OpenAPI 3.0 (Swagger).
+
+
+====================================================================================================
+4. CATÁLOGO INTEGRAL DE HISTORIAS DE USUARIO (HU-01 A HU-31)
+====================================================================================================
+Formuladas bajo el marco ágil de Scrum, con criterios de aceptación en formato BDD (Dado que / Cuando / Entonces),
+estimación en Story Points (SP) y trazabilidad directa hacia los requisitos del sistema.
+
+----------------------------------------------------------------------------------------------------
+4.1 HISTORIAS DEL MÓDULO 1: SEGURIDAD Y USUARIOS (M1)
+----------------------------------------------------------------------------------------------------
+
+[HU-01] Inicio de Sesión y Control de Acceso por Rol (RBAC)
+- Título: Autenticación Segura y Acceso Basado en Perfiles
+- Requisitos Asociados: RF-01, RNF-01, RNF-02 | S-Tag: [S-TAG-AUTH-01]
+- Enunciado:
+    COMO operador del establecimiento (Administrador, Optometrista o Asistente),
+    QUIERO iniciar sesión con mis credenciales institucionales,
+    PARA acceder exclusivamente a las funciones y datos autorizados para mi rol laboral.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 1)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Autenticación exitosa con credenciales válidas
+        DADO QUE el usuario está registrado y activo en el sistema,
+        CUANDO ingresa su correo y contraseña correctos en el formulario de login,
+        ENTONCES el sistema genera un token JWT firmado, lo autentica y lo redirige a la vista 
+        principal correspondiente a su rol.
+    * Escenario 2: Intento de acceso con contraseña incorrecta
+        DADO QUE el usuario ingresa una contraseña errónea,
+        CUANDO presiona el botón de ingresar,
+        ENTONCES el sistema deniega el acceso con mensaje "Credenciales inválidas" y registra el intento fallido.
+    * Escenario 3: Bloqueo de acceso a rutas no autorizadas
+        DADO QUE un Asistente Comercial intenta acceder por URL directa a `/admin/auditoria`,
+        CUANDO el sistema intercepta la petición,
+        ENTONCES retorna un código HTTP 403 Forbidden y redirige al usuario a su dashboard comercial.
+
+[HU-02] Expiración Automática de Sesión por Inactividad
+- Título: Cierre Automático de Sesión por Descuidado de Terminal
+- Requisitos Asociados: RF-02, RNF-02 | S-Tag: [S-TAG-AUTH-02]
+- Enunciado:
+    COMO responsable de seguridad de la clínica optométrica,
+    QUIERO que las sesiones de usuario expiren tras 20 minutos de inactividad,
+    PARA evitar que personas no autorizadas manipulen datos clínicos o de caja en terminales desatendidas.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 1)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Estación inactiva durante 20 minutos
+        DADO QUE un usuario ha iniciado sesión pero no interactúa con el teclado o mouse,
+        CUANDO transcurren exactamente 20 minutos sin eventos de entrada,
+        ENTONCES el sistema purga el token JWT de la memoria, revoca la sesión y redirige a la pantalla de login.
+    * Escenario 2: Interacción continua del operador
+        DADO QUE un usuario se encuentra digitando una historia clínica a los 19 minutos,
+        CUANDO presiona una tecla o mueve el puntero,
+        ENTONCES el temporizador de inactividad se reinicia a cero sin interrumpir su trabajo.
+
+----------------------------------------------------------------------------------------------------
+4.2 HISTORIAS DEL MÓDULO 2: PACIENTES Y DEMOGRAFÍA (M2)
+----------------------------------------------------------------------------------------------------
+
+[HU-03] Validación de Cédula Ecuatoriana con Módulo 10
+- Título: Validación Algorítmica de Documento de Identidad
+- Requisitos Asociados: RF-03, RNF-03 | S-Tag: [S-TAG-INT-01]
+- Enunciado:
+    COMO Asistente Comercial en recepción,
+    QUIERO que el sistema verifique matemáticamente el número de cédula del paciente,
+    PARA asegurar que no se registren identificaciones falsas o equivocadas en el padrón.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 1)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Ingreso de cédula legítima
+        DADO QUE el asistente digita una cédula ecuatoriana de 10 dígitos válida,
+        CUANDO el cursor sale del campo de texto,
+        ENTONCES el sistema muestra un indicador verde de validación exitosa y habilita el guardado.
+    * Escenario 2: Ingreso de cédula inválida o ficticia
+        DADO QUE el asistente digita una cédula con dígito verificador incorrecto,
+        CUANDO el sistema ejecuta el algoritmo Módulo 10,
+        ENTONCES resalta el campo en rojo, emite la alerta "Cédula no válida" y bloquea el registro.
+
+[HU-04] Registro de Nuevo Paciente y Ficha de Contacto
+- Título: Apertura de Ficha Demográfica del Paciente
+- Requisitos Asociados: RF-04, RNF-01 | S-Tag: ---
+- Enunciado:
+    COMO Asistente Comercial,
+    QUIERO registrar los datos demográficos y de contacto de un nuevo paciente,
+    PARA abrir su expediente en la óptica y habilitar su atención clínica.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 1)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Registro completo de paciente
+        DADO QUE se completan los campos obligatorios (Nombres, Cédula válida, Fecha Nacimiento, Teléfono),
+        CUANDO el operador presiona "Guardar Paciente",
+        ENTONCES el sistema crea el registro con UUID único, calcula la edad y lo lista en el padrón.
+    * Escenario 2: Detección de paciente duplicado
+        DADO QUE se intenta registrar una cédula que ya existe en la base de datos,
+        CUANDO se procesa la solicitud,
+        ENTONCES el sistema detiene el registro y ofrece abrir la ficha existente del paciente.
+
+[HU-05] Búsqueda Rápida de Pacientes con Autocompletado
+- Título: Búsqueda Ágil en Recepción y Consultorio
+- Requisitos Asociados: RF-05, RNF-08.1 | S-Tag: [S-TAG-INT-01]
+- Enunciado:
+    COMO Optometrista o Asistente Comercial,
+    QUIERO buscar pacientes por cédula, apellidos o historia clínica en tiempo real,
+    PARA agilizar la atención en el mostrador y cargar su expediente de inmediato.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 1)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Búsqueda por coincidencia de apellido
+        DADO QUE existen 5,000 pacientes registrados,
+        CUANDO el usuario escribe al menos 3 letras en la barra de búsqueda,
+        ENTONCES el sistema despliega las coincidencias paginadas en menos de 300 milisegundos.
+
+[HU-06] Adjuntar Archivos Clínicos y Topografías al Expediente
+- Título: Almacenamiento Seguro de Exámenes Externos
+- Requisitos Asociados: RF-06, RNF-06 | S-Tag: [S-TAG-INT-02]
+- Enunciado:
+    COMO Optometrista,
+    QUIERO adjuntar archivos PDF o imágenes de exámenes visuales externos a la ficha del paciente,
+    PARA contar con el expediente oftalmológico completo en un solo lugar.
+- Estimación: 3 Story Points (SP) | Prioridad: Media / Deseado (Sprint 1)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Carga de archivo válido
+        DADO QUE el archivo seleccionado es un PDF o JPG de menos de 5 MB,
+        CUANDO el usuario confirma la subida con una descripción,
+        ENTONCES el archivo se almacena en el directorio seguro y se muestra en la galería del paciente.
+    * Escenario 2: Intento de subida de archivo ejecutable o mayor a 5 MB
+        DADO QUE el archivo seleccionado tiene extensión `.exe` o pesa 8 MB,
+        CUANDO se intenta la carga,
+        ENTONCES el sistema rechaza el archivo emitiendo una alerta de seguridad y tamaño máximo.
+
+----------------------------------------------------------------------------------------------------
+4.3 HISTORIAS DEL MÓDULO 3: REFRACCIÓN CLÍNICA Y CONSULTA (M3)
+----------------------------------------------------------------------------------------------------
+
+[HU-07] Validación Estricta de Graduación Dióptrica (OD/OI)
+- Título: Control de Rangos y Pasos Dióptricos en Consulta
+- Requisitos Asociados: RF-07, RNF-03 | S-Tag: [S-TAG-INT-01]
+- Enunciado:
+    COMO Optometrista Clínico,
+    QUIERO que el sistema valide que los valores de refracción se encuentren en pasos de 0.25 D,
+    PARA evitar errores de digitación en la prescripción de lentes correctivos.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Ingreso de graduación estándar válida
+        DADO QUE el profesional ingresa Sph: -2.25, Cyl: -1.00, Axis: 90 para el OD,
+        CUANDO presiona el siguiente campo,
+        ENTONCES el sistema valida la entrada y formatea los valores con signo explícito.
+    * Escenario 2: Ingreso de decimal no discretizado
+        DADO QUE el profesional digita accidentalmente -2.33 en la Esfera,
+        CUANDO sale del campo,
+        ENTONCES el sistema resalta el error indicando que solo se admiten múltiplos de 0.25 D.
+
+[HU-08] Transposición Automática a Cilindro Negativo
+- Título: Transposición Óptica de Astigmatismo
+- Requisitos Asociados: RF-09 | S-Tag: ---
+- Enunciado:
+    COMO Optometrista Clínico,
+    QUIERO que el sistema transponga automáticamente fórmulas ingresadas en cilindro positivo,
+    PARA mantener la historia clínica y las recetas en el estándar médico de cilindro negativo.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Ingreso de fórmula con cilindro positivo
+        DADO QUE el optometrista digita Esfera: +1.00, Cilindro: +1.50, Eje: 45°,
+        CUANDO activa la opción de transposición,
+        ENTONCES el sistema recalcula instantáneamente a Esfera: +2.50, Cilindro: -1.50, Eje: 135°.
+
+[HU-09] Validación de Distancia Nasopupilar y Alturas de Montaje
+- Título: Centrado Pupilar para Taller de Lunas
+- Requisitos Asociados: RF-10 | S-Tag: [S-TAG-INT-01]
+- Enunciado:
+    COMO Optometrista Clínico,
+    QUIERO registrar la DNP monocular y altura focal con validación de rangos anatómicos,
+    PARA asegurar que el laboratorio bisele el centro óptico en la posición exacta del paciente.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Ingreso de DNP anatómica correcta
+        DADO QUE se ingresa DNP OD: 31.5 mm y DNP OI: 32.0 mm,
+        CUANDO se calcula la DIP total,
+        ENTONCES el sistema computa 63.5 mm y valida que se encuentra en el rango 40-80 mm.
+
+[HU-10] Regla Médica de Simetría en Adición para Presbicia
+- Título: Forzado de Simetría Binocular en Adición
+- Requisitos Asociados: RF-11 | S-Tag: [S-TAG-INT-02]
+- Enunciado:
+    COMO Optometrista Clínico,
+    QUIERO que el valor de Adición se replique automáticamente de un ojo al otro,
+    PARA cumplir con la regla médica de simetría binocular y evitar molestias visuales al paciente.
+- Estimación: 2 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Ingreso de Adición en ojo derecho
+        DADO QUE el optometrista selecciona Add: +2.00 D en el OD,
+        CUANDO el valor cambia,
+        ENTONCES el sistema actualiza automáticamente el campo del OI a +2.00 D de forma simétrica.
+
+[HU-11] Visualización Comparativa de Evolución Dióptrica
+- Título: Gráfica de Progresión Refractiva
+- Requisitos Asociados: RF-12 | S-Tag: [S-TAG-INT-02]
+- Enunciado:
+    COMO Optometrista Clínico,
+    QUIERO comparar las graduaciones históricas del paciente en una gráfica evolutiva,
+    PARA diagnosticar el avance de su miopía o astigmatismo a lo largo de los años.
+- Estimación: 5 Story Points (SP) | Prioridad: Media / Deseado (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Consulta de paciente con múltiples atenciones
+        DADO QUE el paciente tiene 3 o más consultas registradas en años previos,
+        CUANDO el profesional abre la pestaña "Evolución Refractiva",
+        ENTONCES el sistema dibuja la curva de progresión de dioptrías y destaca cambios significativos.
+
+[HU-12] Registro Clínico Estructurado Formulario 024 MSP y CIE-10
+- Título: Registro de Consulta según Norma Sanitaria
+- Requisitos Asociados: RF-13 | S-Tag: ---
+- Enunciado:
+    COMO Optometrista Clínico,
+    QUIERO registrar la consulta conforme a las secciones del Formulario 024 del MSP,
+    PARA que la óptica cumpla las exigencias legales de auditoría médica del ACESS.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Guardado de consulta con diagnóstico CIE-10
+        DADO QUE se completa la anamnesis, agudeza visual Snellen y refracción,
+        CUANDO se busca y selecciona el código CIE-10 "H52.1 Miopía",
+        ENTONCES la consulta se guarda en la base de datos vinculada al historial del paciente.
+
+[HU-13] Emisión de Receta Óptica con Código QR Antifraude
+- Título: Generación de Receta Digital Segura para el Paciente
+- Requisitos Asociados: RF-14 | S-Tag: ---
+- Enunciado:
+    COMO Optometrista Clínico,
+    QUIERO emitir la receta óptica en formato PDF con un código QR de autenticidad,
+    PARA que el paciente reciba su graduación formal y se evite la falsificación de recetas.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Generación de PDF de receta
+        DADO QUE la consulta visual ha sido finalizada,
+        CUANDO el profesional presiona "Emitir Receta",
+        ENTONCES se genera un documento PDF A5/A4 con membrete formal, firma y código QR escaneable.
+
+[HU-14] Preservación Histórica Inmutable y Soft-Delete
+- Título: Protección contra Sobreescritura de Historias Clínicas
+- Requisitos Asociados: RF-15, RNF-05 | S-Tag: [S-TAG-INT-03]
+- Enunciado:
+    COMO Administrador de la clínica,
+    QUIERO que las historias clínicas guardadas nunca sean sobreescritas ni borradas físicamente,
+    PARA preservar la integridad médico-legal del historial del paciente a través del tiempo.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Nueva consulta de paciente recurrente
+        DADO QUE un paciente acude a una nueva cita un año después,
+        CUANDO el optometrista registra su nueva graduación,
+        ENTONCES se crea una nueva tupla en la base de datos manteniendo la anterior intacta.
+    * Escenario 2: Intento de anulación de consulta por error material
+        DADO QUE se requiere anular una consulta errónea,
+        CUANDO el Administrador confirma la anulación con motivo justificado,
+        ENTONCES el registro se marca con borrado lógico (`deleted_at`) sin destruirse de la base de datos.
+
+----------------------------------------------------------------------------------------------------
+4.4 HISTORIAS DEL MÓDULO 4: TALLER Y LABORATORIO EXTERNO (M4)
+----------------------------------------------------------------------------------------------------
+
+[HU-15] Aislamiento de Datos Clínicos en Órdenes de Taller (LOPDP)
+- Título: Orden Técnica de Biselado Disociada de Datos Personales
+- Requisitos Asociados: RF-16 | S-Tag: [S-TAG-INT-01]
+- Enunciado:
+    COMO Optometrista o Asistente,
+    QUIERO generar órdenes para laboratorios externos sin incluir nombres ni cédulas del paciente,
+    PARA proteger la privacidad médica del paciente y cumplir la Ley de Protección de Datos (LOPDP).
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Generación de ticket de taller
+        DADO QUE se confirma la manufactura de lunas con un laboratorio externo,
+        CUANDO el sistema genera el ticket de trabajo para el taller,
+        ENTONCES únicamente se imprimen el ID numérico de orden, parámetros de biselado y material, 
+        omitiendo cualquier dato identificativo del paciente.
+
+[HU-16] Catálogo Técnico de Materiales y Tratamientos de Lunas
+- Título: Configuración de Tipos de Lunas y Tratamientos
+- Requisitos Asociados: RF-17 | S-Tag: ---
+- Enunciado:
+    COMO Optometrista,
+    QUIERO seleccionar el tipo de lente, material y tratamientos de un catálogo estructurado,
+    PARA enviar especificaciones técnicas inequívocas al laboratorio de biselado.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Selección combinada de insumos
+        DADO QUE se prescribe un lente Progresivo en Policarbonato con tratamiento BlueBlock,
+        CUANDO el usuario elige las opciones en los selectores enlazados,
+        ENTONCES el sistema valida la compatibilidad y calcula el costo base estimado de laboratorio.
+
+[HU-17] Seguimiento y Trazabilidad del Estado de Pedidos de Taller
+- Título: Tablero Kanban de Estados de Laboratorio
+- Requisitos Asociados: RF-18, RNF-06 | S-Tag: [S-TAG-RES-01]
+- Enunciado:
+    COMO Asistente Comercial,
+    QUIERO visualizar y actualizar los estados de los pedidos de lunas en un tablero ágil,
+    PARA conocer de inmediato si los lentes están en taller, recibidos o listos para entrega.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Recepción de lentes desde el taller externo
+        DADO QUE llega un lote de trabajos desde el laboratorio de Quito,
+        CUANDO el asistente marca la orden como "Recibido de Taller",
+        ENTONCES el pedido avanza al estado correspondiente registrando fecha y usuario en auditoría.
+
+[HU-18] Control de Devoluciones e Incidencias con el Taller
+- Título: Registro de Garantías e Incidencias por Defectos de Biselado
+- Requisitos Asociados: RF-19 | S-Tag: [S-TAG-RES-01]
+- Enunciado:
+    COMO Optometrista,
+    QUIERO registrar devoluciones a taller cuando los lentes no superen el control de calidad,
+    PARA exigir la rectificación al proveedor y mantener informado al paciente sobre el retraso.
+- Estimación: 3 Story Points (SP) | Prioridad: Media / Deseado (Sprint 2)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Detección de eje óptico descalibrado
+        DADO QUE en el lensómetro el eje difiere en más de 5° de la receta prescrita,
+        CUANDO el optometrista registra la incidencia con motivo "Eje descalibrado",
+        ENTONCES el pedido cambia a estado "Devuelto a Taller" y reprograma la fecha estimada de entrega.
+
+----------------------------------------------------------------------------------------------------
+4.5 HISTORIAS DEL MÓDULO 5: VENTAS, PAGOS MIXTOS Y CAJA (M5)
+----------------------------------------------------------------------------------------------------
+
+[HU-19] Venta con Cobro de Anticipo y Saldo al Retiro
+- Título: Emisión de Comprobante Interno con Saldo Pendiente
+- Requisitos Asociados: RF-20 | S-Tag: ---
+- Enunciado:
+    COMO Asistente Comercial en caja,
+    QUIERO registrar ventas cobrando un anticipo inicial y dejando un saldo pendiente,
+    PARA asegurar el pago de la manufactura y liquidar el monto total cuando el cliente retire sus lentes.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 3)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Venta de lentes con anticipo del 50%
+        DADO QUE el total del trabajo es de $80.00 USD y el cliente entrega $40.00 USD en efectivo,
+        CUANDO el cajero confirma el anticipo,
+        ENTONCES el sistema emite el ticket térmico indicando: Total: $80.00, Anticipo: $40.00, Saldo: $40.00.
+    * Escenario 2: Liquidación de saldo al entregar los lentes
+        DADO QUE el paciente acude a retirar sus lentes con la orden de trabajo,
+        CUANDO cancela los $40.00 restantes,
+        ENTONCES el saldo se actualiza a $0.00 y la orden pasa a estado "Entregado".
+
+[HU-20] Control de Inventario Híbrido de Armazones y Accesorios
+- Título: Deducción Automática de Stock por Código de Barras
+- Requisitos Asociados: RF-21, RNF-04 | S-Tag: [S-TAG-INT-02]
+- Enunciado:
+    COMO Asistente Comercial,
+    QUIERO escanear el código de barras de un armazón al momento de la venta,
+    PARA que se descuente automáticamente del inventario y se prevenga la venta de stock agotado.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 3)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Venta de armazón con lector de barras
+        DADO QUE el armazón tiene 3 unidades en stock,
+        CUANDO el cajero lee el código de barras en mostrador y procesa la venta,
+        ENTONCES el inventario se actualiza a 2 unidades de forma atómica en PostgreSQL.
+
+[HU-21] Anulación Restringida de Ventas con Reintegro de Stock
+- Título: Anulación Controlada de Transacciones Comerciales
+- Requisitos Asociados: RF-22, RNF-04 | S-Tag: [S-TAG-INT-02]
+- Enunciado:
+    COMO Administrador,
+    QUIERO autorizar la anulación de comprobantes erróneos con justificación obligatoria,
+    PARA reponer el stock al almacén y mantener el cuadre contable sin repudio.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 3)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Anulación ejecutada por Administrador
+        DADO QUE una venta fue registrada con ítems erróneos,
+        CUANDO el Administrador ingresa su clave y motivo "Error en selección de montura",
+        ENTONCES la venta se marca como ANULADA, el stock se reincorpora al inventario y se audita el evento.
+
+[HU-22] Arqueo Ciego Diario y Cierre de Caja (Cierre Z)
+- Título: Arqueo Transaccional Ciego de Fin de Jornada
+- Requisitos Asociados: RF-23, RNF-04 | S-Tag: ---
+- Enunciado:
+    COMO Asistente Comercial / Cajero,
+    QUIERO ingresar el conteo físico del dinero recaudado sin ver el saldo teórico del sistema,
+    PARA realizar el arqueo ciego diario y garantizar la transparencia del cuadre de caja.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 3)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Cierre de turno sin descuadre
+        DADO QUE el cajero cuenta $250.00 USD en efectivo y el sistema recaudó exactamente $250.00 USD,
+        CUANDO el usuario ingresa su desglose y cierra caja,
+        ENTONCES el sistema genera el reporte de Cierre Z indicando diferencia cero ($0.00 USD).
+    * Escenario 2: Detección de faltante o sobrante
+        DADO QUE el conteo físico presenta un faltante de $5.00 USD frente a las ventas del día,
+        CUANDO se genera el reporte,
+        ENTONCES el sistema resalta el descuadre contable y exige la firma de conformidad del operador.
+
+----------------------------------------------------------------------------------------------------
+4.6 HISTORIAS DEL MÓDULO 6: FACTURACIÓN ELECTRÓNICA SRI (M6) [ACTUALIZADO]
+----------------------------------------------------------------------------------------------------
+
+[HU-23] Generación de Factura Canónica XML v1.1.0 y Clave Módulo 11
+- Título: Construcción del Archivo Fiscal XML según Ficha SRI
+- Requisitos Asociados: RF-24, RNF-08.3 | S-Tag: [S-TAG-INT-04]
+- Enunciado:
+    COMO Asistente Comercial o Administrador,
+    QUIERO generar la factura electrónica oficial en formato XML v1.1.0 con su clave de 49 dígitos,
+    PARA cumplir con las disposiciones tributarias del SRI en las ventas del establecimiento.
+- Estimación: 8 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 3)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Generación exitosa de XML y Clave de Acceso
+        DADO QUE se confirma una venta con datos de cliente y productos gravados con IVA 15% o 0%,
+        CUANDO se solicita la emisión electrónica,
+        ENTONCES el sistema genera el XML conforme al XSD v1.1.0 y calcula la clave de 49 dígitos 
+        mediante el algoritmo Módulo 11 ponderado.
+    * Escenario 2: Bloqueo de Consumidor Final mayor a $40.00 USD
+        DADO QUE el cliente está identificado como "Consumidor Final" y el total es de $55.00 USD,
+        CUANDO se intenta generar la factura,
+        ENTONCES el sistema bloquea la emisión y exige registrar cédula o RUC conforme a la ley tributaria.
+
+[HU-24] Firma Criptográfica XAdES-BES del XML con Certificado .p12
+- Título: Firmado Digital Avanzado de Comprobantes Fiscales
+- Requisitos Asociados: RF-25, RNF-10 | S-Tag: [S-TAG-AUTH-03] [S-TAG-RES-02]
+- Enunciado:
+    COMO responsable tributario de la óptica,
+    QUIERO que el sistema firme digitalmente el XML de la factura con el certificado PKCS#12,
+    PARA otorgar validez jurídica, autenticidad y no repudio legal al comprobante electrónico.
+- Estimación: 8 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 3)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Firma exitosa del documento
+        DADO QUE el certificado digital (.p12) y su contraseña están correctamente configurados,
+        CUANDO el microservicio de firma procesa el XML canónico,
+        ENTONCES incrusta el nodo `<ds:Signature>` completo con digest SHA-1 y firma RSA válida.
+
+[HU-25] Envío SOAP y Consulta de Autorización ante Servidores del SRI
+- Título: Conexión Asíncrona con los Web Services del SRI
+- Requisitos Asociados: RF-26, RNF-09 | S-Tag: [S-TAG-INT-05]
+- Enunciado:
+    COMO usuario del sistema comercial,
+    QUIERO que el comprobante firmado se envíe y autorice en los servicios web del SRI,
+    PARA que la factura quede legalmente sellada sin bloquear las ventas ante caídas del servidor tributario.
+- Estimación: 8 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 3)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Autorización inmediata del SRI
+        DADO QUE los servidores del SRI se encuentran operativos,
+        CUANDO el sistema envía el XML firmado al servicio `RecepcionComprobantesOffline`,
+        ENTONCES recibe estado "RECIBIDA", consulta `AutorizacionComprobantesOffline` y actualiza 
+        la factura con su Número de Autorización formal.
+    * Escenario 2: Caída o saturación de los servidores del SRI
+        DADO QUE los servidores del SRI responden con error de conexión o tiempo agotado,
+        CUANDO el sistema detecta la falla,
+        ENTONCES marca la factura como `PENDIENTE_ENVIO` en cola de reintentos y permite continuar 
+        atendiendo a otros clientes en la óptica sin congelar la pantalla.
+
+[HU-26] Generación de RIDE en PDF y Notificación Automática por Correo
+- Título: Emisión de RIDE con Código Code128 y Despacho SMTP
+- Requisitos Asociados: RF-27 | S-Tag: ---
+- Enunciado:
+    COMO paciente / cliente de Óptica Vista Visión,
+    QUIERO recibir mi factura electrónica autorizada en PDF y XML en mi correo electrónico,
+    PARA contar con mi comprobante formal para deducción de gastos médicos de salud visual.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 3)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Generación y despacho automático de RIDE
+        DADO QUE una factura ha sido declarada como "AUTORIZADO" por el SRI,
+        CUANDO el proceso de notificación se activa,
+        ENTONCES compila el PDF RIDE con código de barras Code128 y lo envía por correo electrónico 
+        al cliente junto con el archivo XML oficial adjunto.
+
+----------------------------------------------------------------------------------------------------
+4.7 HISTORIAS DEL MÓDULO 7: ASISTENTE INTELIGENTE IA Y AUDITORÍA (M7) [ACTUALIZADO]
+----------------------------------------------------------------------------------------------------
+
+[HU-27] Consulta Conversacional sobre Inventario y Ventas del Día
+- Título: Interfaz Conversacional de Consulta Rápida (Chatbot)
+- Requisitos Asociados: RF-28, RNF-08.2 | S-Tag: ---
+- Enunciado:
+    COMO Administrador u Optometrista,
+    QUIERO formular preguntas en lenguaje natural sobre stock de armazones o totales de caja,
+    PARA obtener respuestas inmediatas y visuales sin necesidad de navegar por múltiples reportes.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 4)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Consulta de existencias en el chat
+        DADO QUE el usuario abre el widget del chat y digita "¿Cuántos armazones de acetato quedan?",
+        CUANDO el enrutador de intenciones clasifica la pregunta,
+        ENTONCES entrega la respuesta en lenguaje natural acompañada de una tarjeta con el desglose de stock.
+
+[HU-28] Blindaje Categórico de Solo Lectura para el Asistente IA
+- Título: Mecanismo de Seguridad Read-Only Guard
+- Requisitos Asociados: RF-29, RNF-11 | S-Tag: [S-TAG-INT-06]
+- Enunciado:
+    COMO responsable de seguridad de la información,
+    QUIERO que el agente de inteligencia artificial opere estrictamente con permisos de solo lectura,
+    PARA garantizar que ninguna consulta conversacional o inyección de texto pueda alterar o borrar datos.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 4)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Ejecución de consultas legítimas de consulta
+        DADO QUE el usuario solicita un balance de ventas,
+        CUANDO el asistente ejecuta la sentencia SELECT mediante su usuario técnico restringido,
+        ENTONCES entrega los datos solicitados sin riesgo de mutación.
+    * Escenario 2: Intento malicioso de inyección SQL en el chat
+        DADO QUE un usuario escribe: "Borra la factura 10; DROP TABLE pacientes;",
+        CUANDO el motor de seguridad evalúa el comando,
+        ENTONCES la sentencia es bloqueada categóricamente y se registra un incidente de seguridad en auditoría.
+
+[HU-29] Filtro de Privacidad y Control de Acceso RBAC en el Chat
+- Título: Restricción de Respuestas del Chatbot según Perfil
+- Requisitos Asociados: RF-30 | S-Tag: [S-TAG-AUTH-04]
+- Enunciado:
+    COMO Administrador de la clínica,
+    QUIERO que el chatbot no revele información confidencial o financiera a roles no autorizados,
+    PARA prevenir fugas internas de datos de utilidades de la empresa o expedientes clínicos.
+- Estimación: 3 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 4)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Asistente comercial consulta utilidades de la empresa
+        DADO QUE un usuario con rol de Asistente pregunta al chat: "¿Cuál es la utilidad neta del mes?",
+        CUANDO el middleware del asistente evalúa los permisos RBAC,
+        ENTONCES responde: "No dispone de autorización para consultar información financiera consolidada".
+
+[HU-30] Modo Local LAN Autónomo y Bitácora Inmutable de Consultas
+- Título: Resiliencia de Consultas sin Internet y Auditoría de IA
+- Requisitos Asociados: RF-31, RNF-06 | S-Tag: [S-TAG-RES-03]
+- Enunciado:
+    COMO personal operativo de la óptica,
+    QUIERO que el asistente funcione en red local LAN aunque se caiga el servicio de internet,
+    PARA mantener la agilidad operativa y registrar cada interacción en la bitácora de auditoría.
+- Estimación: 5 Story Points (SP) | Prioridad: Alta / Esencial (Sprint 4)
+- Criterios de Aceptación (BDD):
+    * Escenario 1: Operación durante corte de internet
+        DADO QUE se interrumpe la conexión WAN de la óptica,
+        CUANDO el personal consulta estados de órdenes de taller en el chat,
+        ENTONCES el asistente resuelve la consulta localmente mediante PostgreSQL LAN sin presentar fallos.
+    * Escenario 2: Registro en bitácora inmutable
+        DADO QUE se procesa cualquier interacción en el chat,
+        CUANDO la respuesta es emitida,
+        ENTONCES se inserta una tupla en `audit_logs` con usuario, prompt, intención y timestamp del servidor.
+
+
+====================================================================================================
+5. MATRIZ DE TRAZABILIDAD INTEGRAL BIDIRECCIONAL
+====================================================================================================
+A continuación se detalla la correspondencia formal y bidireccional entre los Requisitos Funcionales, 
+las Historias de Usuario, los Requisitos No Funcionales, las etiquetas de seguridad S-TAG, la norma 
+ISO/IEC 25010:2023 y el Sprint de construcción asignado.
+
++-------+-------+------------------------------------------+--------+---------------+----------------------+--------+
+| REQ.  | HIST. | NOMBRE DESCRIPTIVO                       | MÓDULO | S-TAG SEGUR.  | NORMA ISO 25010      | SPRINT |
++-------+-------+------------------------------------------+--------+---------------+----------------------+--------+
+| RF-01 | HU-01 | Control de Acceso por Roles (RBAC)       | M1     | S-TAG-AUTH-01 | Autenticidad         | Sp 1   |
+| RF-02 | HU-02 | Expiración de Sesión por Inactividad     | M1     | S-TAG-AUTH-02 | Confidencialidad     | Sp 1   |
+| RF-03 | HU-03 | Validación Cédula Ecuatoriana Módulo 10  | M2     | S-TAG-INT-01  | Integridad de Datos  | Sp 1   |
+| RF-04 | HU-04 | Registro Demográfico del Paciente        | M2     | ---           | Adecuación Funcional | Sp 1   |
+| RF-05 | HU-05 | Búsqueda Indexada con Autocompletado     | M2     | S-TAG-INT-01  | Eficiencia Temporal  | Sp 1   |
+| RF-06 | HU-06 | Repositorio Digital de Adjuntos Clínicos | M2     | S-TAG-INT-02  | Integridad / Custodia| Sp 1   |
+| RF-07 | HU-07 | Validación de Rangos Dióptricos (OD/OI)  | M3     | S-TAG-INT-01  | Exactitud Clínica    | Sp 2   |
+| RF-08 | HU-07 | Formateo y Normalización Decimal         | M3     | S-TAG-INT-01  | Calidad de Datos     | Sp 2   |
+| RF-09 | HU-08 | Transposición Óptica a Cilindro Negativo | M3     | ---           | Idoneidad Médica     | Sp 2   |
+| RF-10 | HU-09 | Validación DNP y Alturas de Montaje      | M3     | S-TAG-INT-01  | Exactitud Óptica     | Sp 2   |
+| RF-11 | HU-10 | Simetría Binocular en Adición (OD = OI)  | M3     | S-TAG-INT-02  | Integridad Médica    | Sp 2   |
+| RF-12 | HU-11 | Comparativa y Progresión Dióptrica       | M3     | S-TAG-INT-02  | Analítica Clínica    | Sp 2   |
+| RF-13 | HU-12 | Registro Formulario 024 MSP y CIE-10     | M3     | ---           | Cumplimiento Legal   | Sp 2   |
+| RF-14 | HU-13 | Emisión Receta Óptica con Código QR      | M3     | ---           | Autenticidad Doc.    | Sp 2   |
+| RF-15 | HU-14 | Inmutabilidad Histórica y Soft-Delete    | M3     | S-TAG-INT-03  | Integridad / No Rep. | Sp 2   |
+| RF-16 | HU-15 | Aislamiento Datos de Taller (LOPDP)      | M4     | S-TAG-INT-01  | Privacidad / LOPDP   | Sp 2   |
+| RF-17 | HU-16 | Catálogo Técnico de Lunas y Tratamientos | M4     | ---           | Adecuación Funcional | Sp 2   |
+| RF-18 | HU-17 | Trazabilidad de Estados de Taller        | M4     | S-TAG-RES-01  | Responsabilidad      | Sp 2   |
+| RF-19 | HU-18 | Devoluciones e Incidencias con Taller    | M4     | S-TAG-RES-01  | Calidad y Fiabilidad | Sp 2   |
+| RF-20 | HU-19 | Comprobante Anticipo y Saldo al Retiro   | M5     | ---           | Exactitud Financiera | Sp 3   |
+| RF-21 | HU-20 | Control de Inventario por Código Barras   | M5     | S-TAG-INT-02  | Transaccionalidad    | Sp 3   |
+| RF-22 | HU-21 | Anulación Restringida y Reintegro Stock  | M5     | S-TAG-INT-02  | Integridad / Auditor. | Sp 3   |
+| RF-23 | HU-22 | Arqueo Ciego Diario de Caja (Cierre Z)   | M5     | ---           | Control Contable     | Sp 3   |
+| RF-24 | HU-23 | Factura XML v1.1.0 y Clave Módulo 11     | M6     | S-TAG-INT-04  | Fiscalidad SRI        | Sp 3   |
+| RF-25 | HU-24 | Firma Criptográfica XAdES-BES (.p12)     | M6     | S-TAG-AUTH-03  | No Repudio Legal      | Sp 3   |
+| RF-26 | HU-25 | Transmisión SOAP y Autorización SRI      | M6     | S-TAG-INT-05  | Resiliencia Fiscal    | Sp 3   |
+| RF-27 | HU-26 | Generación RIDE PDF Code128 y Correo SMTP| M6     | ---           | Notificación Formal   | Sp 3   |
+| RF-28 | HU-27 | Interfaz Conversacional del Asistente IA | M7     | ---           | Innovación Tecnológica| Sp 4   |
+| RF-29 | HU-28 | Blindaje Read-Only Guard (GRANT SELECT)   | M7     | S-TAG-INT-06  | Integridad Inviolable | Sp 4   |
+| RF-30 | HU-29 | Filtro de Privacidad RBAC en Chatbot     | M7     | S-TAG-AUTH-04  | Confidencialidad      | Sp 4   |
+| RF-31 | HU-30 | Modo Local LAN y Bitácora Inmutable Audit| M7     | S-TAG-RES-03  | Resiliencia Operativa | Sp 4   |
++-------+-------+------------------------------------------+--------+---------------+----------------------+--------+
+
+====================================================================================================
+FIN DEL DOCUMENTO DE ESPECIFICACIÓN DE REQUISITOS E HISTORIAS DE USUARIO (SGO)
+====================================================================================================
